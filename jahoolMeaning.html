@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>جَهُولًا · Jahūlā — The Deeply Unknowing | Quran Word Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#050d0b;
+  --ink2:#08150f;
+  --panel:rgba(255,255,255,.045);
+  --panel2:rgba(255,255,255,.07);
+  --stroke:rgba(232,199,102,.18);
+  --stroke2:rgba(232,199,102,.35);
+  --gold:#e8c766;
+  --gold-d:#c9a545;
+  --gold-l:#f7e6b0;
+  --em:#2fd3ab;
+  --em-d:#0e7f68;
+  --rose:#f08a7c;
+  --cream:#f6eedd;
+  --muted:rgba(246,238,221,.62);
+  --muted2:rgba(246,238,221,.42);
+  --r:22px;
+  --shadow:0 30px 80px -30px rgba(0,0,0,.85);
+  --ar:'Amiri',serif;
+  --ar2:'Scheherazade New',serif;
+  --dis:'Cormorant Garamond',serif;
+  --ui:'Outfit',system-ui,sans-serif;
+}
+html[data-theme="light"]{
+  --ink:#f7f3e8; --ink2:#efe8d6;
+  --panel:rgba(10,30,25,.045); --panel2:rgba(10,30,25,.07);
+  --stroke:rgba(20,60,50,.14); --stroke2:rgba(160,120,30,.4);
+  --gold:#8a6a12; --gold-d:#6d5310; --gold-l:#3c2f08;
+  --em:#0b7a63; --em-d:#0b7a63;
+  --cream:#12211c; --muted:rgba(18,33,28,.7); --muted2:rgba(18,33,28,.5);
+  --shadow:0 24px 60px -30px rgba(40,60,50,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--cream);
+  font-family:var(--ui); font-weight:300;
+  line-height:1.7; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  transition:background .6s ease,color .6s ease;
+}
+::selection{background:var(--gold);color:#08150f}
+
+/* ============ BACKDROP ============ */
+.bg{position:fixed;inset:0;z-index:-3;overflow:hidden}
+.bg::before{
+  content:'';position:absolute;inset:-20%;
+  background:
+    radial-gradient(50% 40% at 18% 8%, rgba(47,211,171,.13), transparent 60%),
+    radial-gradient(45% 45% at 85% 18%, rgba(232,199,102,.12), transparent 62%),
+    radial-gradient(60% 50% at 50% 105%, rgba(14,127,104,.16), transparent 65%);
+  animation:drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift{to{transform:translate3d(-4%,3%,0) scale(1.12)}}
+.bg svg{position:absolute;inset:0;width:100%;height:100%;opacity:.11}
+html[data-theme="light"] .bg svg{opacity:.16}
+.grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);z-index:-2;pointer-events:none;opacity:.4}
+.orb.a{width:420px;height:420px;background:#0e7f68;top:-120px;right:-100px;animation:float 18s ease-in-out infinite alternate}
+.orb.b{width:340px;height:340px;background:#7a5f14;bottom:10%;left:-120px;animation:float 22s ease-in-out infinite alternate-reverse}
+@keyframes float{to{transform:translate(40px,-50px)}}
+
+/* ============ CHROME ============ */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:100;
+  background:linear-gradient(90deg,var(--em),var(--gold),var(--rose));
+  box-shadow:0 0 14px var(--gold)}
+nav{position:fixed;top:0;left:0;right:0;z-index:90;
+  backdrop-filter:blur(22px) saturate(140%);
+  background:linear-gradient(to bottom,rgba(5,13,11,.82),rgba(5,13,11,.25));
+  border-bottom:1px solid var(--stroke);
+  transition:transform .4s ease}
+html[data-theme="light"] nav{background:linear-gradient(to bottom,rgba(247,243,232,.9),rgba(247,243,232,.4))}
+.navin{max-width:1240px;margin:auto;display:flex;align-items:center;gap:10px;padding:10px 20px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;cursor:pointer}
+.nq-mini-logo{width:30px;height:30px;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(232,199,102,.35))}
+.brand-text{display:flex;align-items:baseline;gap:8px}
+.brand b{font-family:var(--ar);font-size:1.4rem;color:var(--gold);font-weight:700;letter-spacing:.5px;line-height:1}
+.brand span{font-family:var(--dis);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.nlinks{display:flex;gap:2px;flex-wrap:wrap}
+.nlinks a{color:var(--muted);text-decoration:none;font-size:.76rem;letter-spacing:.13em;
+  text-transform:uppercase;padding:8px 11px;border-radius:99px;transition:.25s;white-space:nowrap}
+.nlinks a:hover,.nlinks a.on{color:var(--gold);background:var(--panel2)}
+.nq-hub-badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--gold);background:rgba(232,199,102,.09);border:1px solid var(--stroke);padding:6px 13px;border-radius:99px;transition:.25s;white-space:nowrap}
+.nq-hub-badge:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);box-shadow:0 0 14px rgba(232,199,102,.35)}
+.iconbtn{background:var(--panel);border:1px solid var(--stroke);color:var(--gold);
+  width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem;
+  display:grid;place-items:center;transition:.25s;flex:0 0 auto}
+.iconbtn:hover{background:var(--gold);color:var(--ink);transform:rotate(-12deg) scale(1.08)}
+.nq-footer-badge{text-align:center;padding:26px 16px 12px;border-top:1px solid var(--stroke);margin-top:32px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+@media(max-width:960px){.nlinks{display:none}}
+
+/* ============ LAYOUT ============ */
+section{max-width:1120px;margin:auto;padding:100px 24px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:400}
+.eyebrow::before{content:'';width:30px;height:1px;background:var(--gold);opacity:.6}
+h2{font-family:var(--dis);font-size:clamp(2rem,4.6vw,3.4rem);font-weight:400;
+  line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+h2 em{font-style:italic;color:var(--gold);position:relative}
+h3{font-family:var(--dis);font-size:1.45rem;font-weight:500;margin-bottom:10px;letter-spacing:-.01em}
+.lead{font-size:1.06rem;color:var(--muted);max-width:66ch;font-weight:300}
+.divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 8px}
+.divider i{display:block;width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.7}
+.divider span{height:1px;width:min(120px,20vw);background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding-top:120px}
+.hero-frame{position:relative;padding:clamp(24px,5vw,60px)}
+.hero-frame::before,.hero-frame::after{content:'';position:absolute;width:64px;height:64px;
+  border:1px solid var(--stroke2);opacity:.75}
+.hero-frame::before{top:0;left:0;border-right:0;border-bottom:0;border-radius:14px 0 0 0}
+.hero-frame::after{bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 14px 0}
+.bism{font-family:var(--ar2);font-size:1.3rem;color:var(--gold);opacity:.75;margin-bottom:34px;letter-spacing:1px}
+.bigword{font-family:var(--ar);font-weight:700;
+  font-size:clamp(4.6rem,20vw,13rem);line-height:.95;
+  background:linear-gradient(165deg,var(--gold-l) 0%,var(--gold) 34%,var(--gold-d) 62%,var(--gold-l) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 12px 44px rgba(232,199,102,.3));
+  direction:rtl;padding:0 .1em;cursor:default;
+  animation:sheen 7s ease-in-out infinite;background-size:200% 200%}
+@keyframes sheen{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.translit{font-family:var(--dis);font-style:italic;font-size:clamp(1.4rem,4vw,2.3rem);
+  color:var(--cream);letter-spacing:.05em;margin-top:6px}
+.gloss{font-size:.82rem;letter-spacing:.36em;text-transform:uppercase;color:var(--em);margin-top:14px}
+.hero-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.tag{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:8px 16px;
+  border:1px solid var(--stroke);border-radius:99px;color:var(--muted);background:var(--panel);
+  backdrop-filter:blur(8px);transition:.3s}
+.tag:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.tag b{color:var(--gold);font-weight:500}
+.scrollcue{margin-top:56px;font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--muted2);animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(9px);opacity:.5}}
+
+/* ============ CARDS ============ */
+.card{background:var(--panel);border:1px solid var(--stroke);border-radius:var(--r);
+  padding:28px;backdrop-filter:blur(16px);transition:.4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(232,199,102,.09),transparent 65%);
+  opacity:0;transition:opacity .4s}
+.card:hover{border-color:var(--stroke2);transform:translateY(-5px);box-shadow:var(--shadow)}
+.card:hover::after{opacity:1}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+
+/* ============ ROOT LETTERS ============ */
+.rootrow{display:flex;justify-content:center;gap:clamp(10px,3vw,26px);direction:rtl;margin:44px 0 30px;flex-wrap:wrap}
+.letter{width:clamp(96px,22vw,152px);aspect-ratio:1;border-radius:26px;
+  border:1px solid var(--stroke);background:var(--panel);display:grid;place-items:center;
+  cursor:pointer;transition:.45s cubic-bezier(.2,.9,.2,1);position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.letter span{font-family:var(--ar);font-size:clamp(3rem,9vw,5.4rem);color:var(--gold);
+  font-weight:700;transition:.45s;line-height:1}
+.letter small{position:absolute;bottom:9px;font-family:var(--ui);font-size:.62rem;
+  letter-spacing:.24em;color:var(--muted2);text-transform:uppercase}
+.letter::before{content:'';position:absolute;inset:0;background:linear-gradient(150deg,var(--gold),var(--em));opacity:0;transition:.45s}
+.letter:hover,.letter.on{transform:translateY(-10px) scale(1.05);border-color:var(--gold)}
+.letter:hover::before,.letter.on::before{opacity:.14}
+.letter:hover span,.letter.on span{transform:scale(1.1);color:var(--gold-l)}
+.rootinfo{min-height:96px;text-align:center;max-width:60ch;margin:auto;
+  padding:22px;border-radius:18px;background:var(--panel);border:1px dashed var(--stroke)}
+.rootinfo .ar{font-family:var(--ar);font-size:1.9rem;color:var(--gold);direction:rtl;display:block;margin-bottom:6px}
+.rootinfo p{color:var(--muted);font-size:.95rem}
+
+/* ============ MEANING PILLARS ============ */
+.pillar{position:relative;padding-top:46px}
+.pillar .num{position:absolute;top:0;left:0;font-family:var(--dis);font-size:3.2rem;
+  color:transparent;-webkit-text-stroke:1px var(--stroke2);line-height:1}
+.pillar .ar{font-family:var(--ar);font-size:2rem;color:var(--gold);direction:rtl;margin-bottom:6px;display:block}
+.pillar p{color:var(--muted);font-size:.95rem}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:36px 0}
+.vs .side{padding:26px;border-radius:20px;border:1px solid var(--stroke);background:var(--panel);text-align:center}
+.vs .side.a{border-color:rgba(47,211,171,.32)}
+.vs .side.b{border-color:rgba(240,138,124,.32)}
+.vs .side .ar{font-family:var(--ar);font-size:2.6rem;display:block;direction:rtl;line-height:1.2}
+.vs .side.a .ar{color:var(--em)}.vs .side.b .ar{color:var(--rose)}
+.vs .side b{display:block;font-family:var(--dis);font-size:1.15rem;font-weight:500;margin:8px 0 4px}
+.vs .side small{color:var(--muted);font-size:.85rem;line-height:1.6;display:block}
+.vs .x{font-family:var(--dis);font-size:1.5rem;color:var(--muted2);font-style:italic}
+@media(max-width:640px){.vs{grid-template-columns:1fr}.vs .x{display:none}}
+
+/* ============ INTENSITY METER ============ */
+.meter-wrap{padding:34px;border-radius:var(--r);border:1px solid var(--stroke);
+  background:linear-gradient(150deg,var(--panel2),transparent);backdrop-filter:blur(14px)}
+.meter-display{display:flex;align-items:center;justify-content:center;gap:clamp(16px,5vw,54px);
+  direction:rtl;margin-bottom:12px;flex-wrap:wrap;min-height:130px}
+.mw{text-align:center;transition:.5s cubic-bezier(.2,.9,.2,1)}
+.mw .ar{font-family:var(--ar);font-weight:700;color:var(--gold);display:block;line-height:1.1;direction:rtl}
+.mw .lbl{font-family:var(--dis);font-style:italic;font-size:.95rem;color:var(--muted);direction:ltr;margin-top:4px}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,var(--em),var(--gold),var(--rose));outline:none;margin:18px 0 8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:var(--gold);cursor:grab;border:3px solid var(--ink);box-shadow:0 0 0 1px var(--gold),0 0 22px var(--gold)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--gold);
+  cursor:grab;border:3px solid var(--ink)}
+.mscale{display:flex;justify-content:space-between;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted2)}
+.mnote{margin-top:20px;padding:16px 20px;border-radius:14px;background:var(--panel);
+  border-left:2px solid var(--gold);font-size:.94rem;color:var(--muted);min-height:60px}
+
+/* ============ PATTERN TABLE ============ */
+.ptable{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:.94rem}
+.ptable th{text-align:left;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted2);padding:0 16px 8px;font-weight:400}
+.ptable td{background:var(--panel);padding:15px 16px;border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);vertical-align:middle}
+.ptable tr td:first-child{border-left:1px solid var(--stroke);border-radius:14px 0 0 14px}
+.ptable tr td:last-child{border-right:1px solid var(--stroke);border-radius:0 14px 14px 0}
+.ptable tr{transition:.3s}
+.ptable tr:hover td{background:var(--panel2);border-color:var(--stroke2)}
+.ptable tr.hl td{background:rgba(232,199,102,.1);border-color:var(--stroke2)}
+.ptable .ar{font-family:var(--ar);font-size:1.7rem;color:var(--gold);direction:rtl;white-space:nowrap}
+.ptable .tl{font-family:var(--dis);font-style:italic;color:var(--cream)}
+.ptable small{color:var(--muted);font-size:.82rem}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+
+/* ============ AYAH ============ */
+.ayah-panel{padding:clamp(24px,5vw,52px);border-radius:28px;
+  background:linear-gradient(155deg,rgba(232,199,102,.07),var(--panel));
+  border:1px solid var(--stroke2);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.ayah-panel::before{content:'۞';position:absolute;top:-30px;right:-10px;font-size:11rem;
+  color:var(--gold);opacity:.05;font-family:var(--ar)}
+.ayah{direction:rtl;text-align:right;font-family:var(--ar2);
+  font-size:clamp(1.55rem,4.4vw,2.7rem);line-height:2.15;color:var(--cream);
+  display:flex;flex-wrap:wrap;gap:.25em;justify-content:flex-end}
+.w{cursor:pointer;padding:2px 6px;border-radius:9px;transition:.25s;position:relative}
+.w:hover{background:rgba(232,199,102,.15);color:var(--gold-l)}
+.w.on{background:var(--gold);color:#08150f}
+.w.key{color:var(--gold);text-shadow:0 0 26px rgba(232,199,102,.5)}
+.w.key.on{color:#08150f;text-shadow:none}
+.wbox{margin-top:26px;padding:22px;border-radius:18px;background:var(--panel2);
+  border:1px solid var(--stroke);min-height:104px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.wbox .lft{direction:rtl;font-family:var(--ar);font-size:2.4rem;color:var(--gold);min-width:110px;line-height:1.3}
+.wbox .rgt b{font-family:var(--dis);font-size:1.2rem;font-weight:500;display:block}
+.wbox .rgt i{color:var(--em);font-family:var(--dis);font-size:.95rem;display:block;margin-bottom:5px}
+.wbox .rgt small{color:var(--muted);font-size:.88rem;line-height:1.6}
+.trans{margin-top:24px;padding-top:22px;border-top:1px solid var(--stroke)}
+.trans p{font-family:var(--dis);font-size:clamp(1.05rem,2.3vw,1.35rem);font-style:italic;
+  color:var(--cream);line-height:1.65}
+.trans cite{display:block;margin-top:12px;font-family:var(--ui);font-style:normal;
+  font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+
+/* ============ TABS ============ */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;
+  padding:6px;border-radius:99px;background:var(--panel);border:1px solid var(--stroke);width:fit-content;max-width:100%}
+.tabs button{background:none;border:0;color:var(--muted);font-family:var(--ui);font-size:.76rem;
+  letter-spacing:.14em;text-transform:uppercase;padding:10px 18px;border-radius:99px;cursor:pointer;transition:.3s;white-space:nowrap}
+.tabs button.on{background:var(--gold);color:#08150f}
+.tabs button:hover:not(.on){color:var(--gold)}
+.pane{display:none;animation:fade .5s ease}
+.pane.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}}
+
+/* ============ VERSE LIST ============ */
+.vlist{display:grid;gap:14px}
+.vitem{padding:22px 24px;border-radius:18px;background:var(--panel);border:1px solid var(--stroke);
+  display:grid;gap:10px;transition:.35s;border-left:2px solid var(--em-d)}
+.vitem:hover{background:var(--panel2);border-left-color:var(--gold);transform:translateX(6px)}
+.vitem .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.vitem .ref{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.vitem .form{font-family:var(--ar);font-size:1.3rem;color:var(--em);direction:rtl}
+.vitem .ar{direction:rtl;text-align:right;font-family:var(--ar2);font-size:1.5rem;line-height:2;color:var(--cream)}
+.vitem .en{font-family:var(--dis);font-style:italic;color:var(--muted);font-size:1rem}
+
+/* ============ TAFSIR QUOTES ============ */
+.qwrap{display:grid;gap:18px}
+.quote{padding:28px;border-radius:20px;background:var(--panel);border:1px solid var(--stroke);position:relative}
+.quote::before{content:'"';position:absolute;top:6px;left:18px;font-family:var(--dis);font-size:5rem;color:var(--gold);opacity:.16;line-height:1}
+.quote p{font-family:var(--dis);font-size:1.1rem;font-style:italic;line-height:1.7;position:relative;z-index:1}
+.quote cite{display:block;margin-top:14px;font-family:var(--ui);font-style:normal;font-size:.7rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+/* ============ QUIZ ============ */
+.quiz{padding:clamp(24px,4vw,40px);border-radius:26px;border:1px solid var(--stroke2);
+  background:linear-gradient(160deg,rgba(47,211,171,.06),var(--panel))}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.qcount{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.qbar{height:3px;background:var(--panel2);border-radius:99px;overflow:hidden;margin-bottom:26px}
+.qbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--em),var(--gold));transition:.5s}
+.qq{font-family:var(--dis);font-size:clamp(1.2rem,2.8vw,1.6rem);margin-bottom:22px;line-height:1.4}
+.qq .ar{font-family:var(--ar);color:var(--gold);direction:rtl;display:inline-block}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;padding:16px 20px;border-radius:14px;background:var(--panel);
+  border:1px solid var(--stroke);color:var(--cream);font-family:var(--ui);font-size:.96rem;
+  font-weight:300;cursor:pointer;transition:.25s;display:flex;gap:12px;align-items:center}
+.opt:hover:not(:disabled){border-color:var(--gold);background:var(--panel2);transform:translateX(5px)}
+.opt .k{width:24px;height:24px;border-radius:7px;border:1px solid var(--stroke2);display:grid;
+  place-items:center;font-size:.7rem;color:var(--gold);flex:0 0 auto}
+.opt.right{border-color:var(--em);background:rgba(47,211,171,.14)}
+.opt.right .k{background:var(--em);color:#04120e;border-color:var(--em)}
+.opt.wrong{border-color:var(--rose);background:rgba(240,138,124,.12);opacity:.85}
+.opt:disabled{cursor:default}
+.qfb{margin-top:20px;padding:16px 20px;border-radius:14px;background:var(--panel2);
+  border-left:2px solid var(--gold);font-size:.94rem;color:var(--muted);display:none}
+.qfb.show{display:block;animation:fade .4s}
+.btn{margin-top:22px;background:var(--gold);color:#08150f;border:0;padding:13px 30px;border-radius:99px;
+  font-family:var(--ui);font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  cursor:pointer;transition:.3s}
+.btn:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--gold)}
+.btn.ghost{background:none;border:1px solid var(--stroke2);color:var(--gold)}
+.btn.ghost:hover{background:var(--panel2);box-shadow:none}
+.result{text-align:center;padding:20px}
+.result .score{font-family:var(--dis);font-size:4.5rem;color:var(--gold);line-height:1}
+
+/* ============ CLOSING ============ */
+.closing{text-align:center;padding:120px 24px 80px}
+.closing .ar{font-family:var(--ar2);font-size:clamp(1.5rem,4.6vw,2.6rem);color:var(--gold);
+  direction:rtl;line-height:2;margin-bottom:20px}
+footer{border-top:1px solid var(--stroke);padding:40px 24px;text-align:center;
+  font-size:.76rem;color:var(--muted2);line-height:2}
+footer b{color:var(--gold);font-weight:400}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--stroke2)}
+footer a:hover{color:var(--gold)}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}.rv{opacity:1;transform:none}}
+
+/* hide harakat toggle */
+body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="gp" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <path d="M5 0 L10 5 L5 10 L0 5 Z" fill="none" stroke="#e8c766" stroke-width=".22"/>
+        <circle cx="5" cy="5" r="1.7" fill="none" stroke="#2fd3ab" stroke-width=".16"/>
+        <path d="M0 0 L10 10 M10 0 L0 10" stroke="#e8c766" stroke-width=".08"/>
+      </pattern>
+    </defs>
+    <rect width="100" height="100" fill="url(#gp)"/>
+  </svg>
+</div>
+<div class="grain"></div>
+<div class="orb a"></div><div class="orb b"></div>
+<div class="progress" id="prog"></div>
+
+<nav id="nav">
+  <div class="navin">
+    <div class="brand" onclick="scrollTo({top:0,behavior:'smooth'})" title="NurulQuran · Jahūlā Word Study">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(232,199,102,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#08150f" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#08150f" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <div class="brand-text">
+        <b>جَهُولًا</b>
+        <span>NurulQuran · Jahūlā</span>
+      </div>
+    </div>
+    <div class="nlinks" id="nlinks">
+      <a href="#root">The Root</a>
+      <a href="#twin">Two Meanings</a>
+      <a href="#pattern">The Pattern</a>
+      <a href="#ayah">The Verse</a>
+      <a href="#family">Word Family</a>
+      <a href="#voices">Scholars</a>
+      <a href="#quiz">Test Me</a>
+    </div>
+    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Showcase Portal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Showcase</span>
+    </a>
+    <button class="iconbtn" id="hz" title="Toggle vowel marks (ḥarakāt)">◌ً</button>
+    <button class="iconbtn" id="th" title="Toggle light / dark">☾</button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-frame">
+    <p class="bism rv in">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <div class="bigword rv in d1" id="hw">جَهُولًا</div>
+    <p class="translit rv in d2">jahūlan</p>
+    <p class="gloss rv in d2">Deeply · Utterly · Unknowing</p>
+    <div class="hero-tags rv in d3">
+      <span class="tag">Root <b>ج · ه · ل</b></span>
+      <span class="tag">Pattern <b>فَعُول</b></span>
+      <span class="tag">Appears <b>1×</b> in the Qur'ān</span>
+      <span class="tag">Sūrah <b>Al-Aḥzāb 33:72</b></span>
+    </div>
+    <p class="scrollcue rv in d4">Scroll to unfold ↓</p>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section>
+  <div class="grid g2">
+    <div class="rv">
+      <span class="eyebrow">Start here</span>
+      <h2>One word. Spoken <em>once</em> in the whole Qur'ān.</h2>
+      <p class="lead">Some Qur'ānic words appear hundreds of times. <b style="color:var(--gold);font-weight:400">جَهُولًا</b>
+      appears exactly <b style="color:var(--gold);font-weight:400">one time</b> — in the very last portrait the Qur'ān
+      paints of the human being carrying God's Trust.</p>
+      <p class="lead" style="margin-top:16px">Because it is said only once, every letter is loaded. This app takes the word
+      apart slowly: its three-letter root, its intensive shape, its home verse, and its family across the Qur'ān — all in plain English.</p>
+    </div>
+    <div class="card rv d2">
+      <h3>The quickest possible answer</h3>
+      <p style="color:var(--muted);font-size:.96rem">
+      <b style="color:var(--gold);font-weight:400">جَهُولًا (jahūlan)</b> means:
+      <b style="color:var(--cream);font-weight:400">"someone who is <i>very</i> ignorant"</b> — not just a person who
+      happens not to know something, but a person whose <i>habit</i> is not knowing, and who acts recklessly because of it.</p>
+      <div style="margin-top:22px;padding-top:20px;border-top:1px dashed var(--stroke);display:grid;gap:12px">
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--ar);font-size:1.6rem;color:var(--gold);min-width:70px;text-align:right;direction:rtl">جَهِلَ</span><small style="color:var(--muted)">he did not know / he acted foolishly — <i>the verb</i></small></div>
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--ar);font-size:1.6rem;color:var(--gold);min-width:70px;text-align:right;direction:rtl">جَاهِل</span><small style="color:var(--muted)">an ignorant person — <i>plain description</i></small></div>
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--ar);font-size:1.6rem;color:var(--gold);min-width:70px;text-align:right;direction:rtl">جَهُول</span><small style="color:var(--cream)"><b style="font-weight:400">deeply, chronically ignorant</b> — <i>the intense form</i></small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROOT ============ -->
+<section id="root">
+  <div style="text-align:center" class="rv">
+    <span class="eyebrow">Chapter One</span>
+    <h2>The Root: <em>ج · ه · ل</em></h2>
+    <p class="lead" style="margin:auto">In Arabic, almost every word grows from a small root of usually three letters — like a seed.
+    Change the shape around the seed and you get a whole garden of related words. Tap each letter.</p>
+  </div>
+
+  <div class="rootrow rv d1" id="rootrow">
+    <div class="letter" data-k="j"><span>ج</span><small>Jīm</small></div>
+    <div class="letter" data-k="h"><span>ه</span><small>Hāʾ</small></div>
+    <div class="letter" data-k="l"><span>ل</span><small>Lām</small></div>
+  </div>
+  <div class="rootinfo rv d2" id="rootinfo">
+    <span class="ar">ج – ه – ل</span>
+    <p><b style="color:var(--cream);font-weight:400">j&nbsp;·&nbsp;h&nbsp;·&nbsp;l</b> — read right to left. Together they carry one core idea:
+    <b style="color:var(--gold);font-weight:400">not-knowing, and behaving badly because of it.</b> Tap a letter to hear how it is pronounced.</p>
+  </div>
+
+  <div class="grid g3" style="margin-top:44px">
+    <div class="card pillar rv"><span class="num">01</span>
+      <span class="ar">عَدَمُ الْعِلْم</span>
+      <h3>Not knowing</h3>
+      <p>The plainest sense: the absence of knowledge. <b style="color:var(--gold);font-weight:400">jahl</b> is the exact opposite of
+      <b style="color:var(--gold);font-weight:400">ʿilm</b> (knowledge). An empty cup where understanding should be.</p>
+    </div>
+    <div class="card pillar rv d1"><span class="num">02</span>
+      <span class="ar">السَّفَه وَالطَّيْش</span>
+      <h3>Acting foolishly</h3>
+      <p>Older Arabic (and pre-Islamic poetry) used <b style="color:var(--gold);font-weight:400">jahl</b> for hot-headed,
+      reckless, arrogant behaviour — the opposite of <b style="color:var(--gold);font-weight:400">ḥilm</b> (calm self-restraint).
+      Not an empty head, but an untamed temper.</p>
+    </div>
+    <div class="card pillar rv d2"><span class="num">03</span>
+      <span class="ar">الْجَاهِلِيَّة</span>
+      <h3>A whole way of life</h3>
+      <p>From the same root: <b style="color:var(--gold);font-weight:400">Jāhiliyyah</b>. In the Qur'ān it names not a date on a
+      calendar but a <i>mindset</i> — judging, thinking, dressing and raging as though revelation never arrived.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TWO RIVALS ============ -->
+<section id="twin">
+  <div class="rv">
+    <span class="eyebrow">Chapter Two</span>
+    <h2>Jahl has <em>two</em> opposites</h2>
+    <p class="lead">This is the single most useful thing to know about this root. Scholars have long noticed that
+    <b style="color:var(--gold);font-weight:400">jahl</b> stands against two different virtues — which is why English
+    "ignorance" never quite captures it.</p>
+  </div>
+
+  <div class="vs rv d1">
+    <div class="side a">
+      <span class="ar">عِلْم</span>
+      <b>ʿilm — Knowledge</b>
+      <small>If <i>jahl</i> is the opposite of <b>ʿilm</b>, then the <i>jāhil</i> is someone whose <b>mind</b> is empty.
+      The cure is learning.</small>
+    </div>
+    <div class="x">or</div>
+    <div class="side b">
+      <span class="ar">حِلْم</span>
+      <b>ḥilm — Forbearance</b>
+      <small>If <i>jahl</i> is the opposite of <b>ḥilm</b>, then the <i>jāhil</i> is someone whose <b>temper</b> is untamed —
+      rash, arrogant, violent. The cure is character.</small>
+    </div>
+  </div>
+
+  <div class="card rv d2" style="border-color:var(--stroke2)">
+    <h3 style="color:var(--gold)">Why this matters for جَهُولًا</h3>
+    <p style="color:var(--muted)">In <b style="color:var(--cream);font-weight:400">33:72</b> both senses fit at once, and most
+    commentators let both stand. The human being who picks up God's Trust is described as someone who
+    <b style="color:var(--gold);font-weight:400">does not truly grasp what he has taken on</b> (against <i>ʿilm</i>) —
+    <i>and</i> someone <b style="color:var(--gold);font-weight:400">rash enough to grab it anyway</b> (against <i>ḥilm</i>).
+    The mountains, by contrast, had the <i>ḥilm</i> to tremble.</p>
+    <p style="color:var(--muted2);font-size:.84rem;margin-top:16px">Note: Orientalists Goldziher and Izutsu emphasised the
+    <i>ḥilm</i> reading; Franz Rosenthal argued for the <i>ʿilm</i> reading; Peter Webb accepts that both are true in different
+    contexts. Classical Arabic lexicons carry both.</p>
+  </div>
+</section>
+
+<!-- ============ PATTERN ============ -->
+<section id="pattern">
+  <div class="rv">
+    <span class="eyebrow">Chapter Three</span>
+    <h2>The Pattern: <em>فَعُول</em> — the "extra-much" shape</h2>
+    <p class="lead">Arabic doesn't need the word "very." It <b style="color:var(--gold);font-weight:400">reshapes the word itself</b>.
+    Pour the root ج-ه-ل into the mould <b style="color:var(--gold);font-weight:400">فَعُول (faʿūl)</b> and you get
+    <b style="color:var(--gold);font-weight:400">جَهُول</b> — an <b>intensive</b> (<i>ṣīghat al-mubālaghah</i>): not "ignorant" but
+    "ignorant through and through."</p>
+  </div>
+
+  <!-- INTENSITY METER -->
+  <div class="meter-wrap rv d1" style="margin-top:38px">
+    <div style="font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Drag the intensity</div>
+    <div class="meter-display">
+      <div class="mw" id="mwA"><span class="ar" id="arA">جَاهِل</span><span class="lbl">jāhil</span></div>
+      <div class="mw" id="mwB"><span class="ar" id="arB">جَهُول</span><span class="lbl">jahūl</span></div>
+    </div>
+    <input type="range" id="slider" min="0" max="100" value="50" aria-label="Intensity slider" />
+    <div class="mscale"><span>Simply "not knowing"</span><span>Deep, settled ignorance</span></div>
+    <div class="mnote" id="mnote"></div>
+  </div>
+
+  <h3 class="rv d2" style="margin-top:56px">The same mould, other words you already know</h3>
+  <p class="lead rv d2" style="margin-bottom:22px">Here is the beautiful symmetry: <b style="color:var(--gold);font-weight:400">فَعُول</b>
+  is the mould the Qur'ān uses both for God's overflowing mercy <i>and</i> for the human being's overflowing flaws.</p>
+  <div class="scrollx rv d2">
+  <table class="ptable">
+    <thead><tr><th>Word</th><th>Reads as</th><th>Meaning — with the "extra-much"</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="ar">جَهُول</td><td class="tl">jahūl</td><td><small><b style="color:var(--gold);font-weight:400">our word</b> — profoundly, habitually unknowing</small></td></tr>
+      <tr><td class="ar">ظَلُوم</td><td class="tl">ẓalūm</td><td><small>its twin in the same verse — deeply unjust, a great wrongdoer</small></td></tr>
+      <tr><td class="ar">غَفُور</td><td class="tl">Ghafūr</td><td><small>a Name of Allah — <b>abundantly</b> forgiving, again and again</small></td></tr>
+      <tr><td class="ar">شَكُور</td><td class="tl">Shakūr</td><td><small>a Name of Allah — <b>immensely</b> appreciative of the smallest good</small></td></tr>
+      <tr><td class="ar">وَدُود</td><td class="tl">Wadūd</td><td><small>a Name of Allah — overflowing in love and affection</small></td></tr>
+      <tr><td class="ar">صَبُور</td><td class="tl">ṣabūr</td><td><small>enormously patient — patience as a permanent trait</small></td></tr>
+      <tr><td class="ar">كَفُور</td><td class="tl">kafūr</td><td><small>deeply ungrateful (Qur'ān 17:27, of Satan)</small></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="rv d3" style="margin-top:22px;color:var(--muted2);font-size:.88rem;max-width:70ch">
+  ✦ Notice: <b style="color:var(--gold);font-weight:400">Ghafūr</b> and <b style="color:var(--gold);font-weight:400">jahūl</b> are built
+  identically. God is intensely forgiving; we are intensely unaware. The grammar itself tells the story of the relationship.</p>
+
+  <!-- GRAMMAR CARD -->
+  <div class="grid g2 rv d3" style="margin-top:44px">
+    <div class="card">
+      <h3>Why the final <span style="font-family:var(--ar);color:var(--gold)">ـًا</span> (an)?</h3>
+      <p style="color:var(--muted);font-size:.95rem">The two little marks on the end are <b style="color:var(--gold);font-weight:400">tanwīn fatḥ</b>.
+      They do two jobs:</p>
+      <ul style="list-style:none;margin-top:14px;display:grid;gap:10px">
+        <li style="color:var(--muted);font-size:.93rem"><b style="color:var(--gold);font-weight:400">1.</b> <b style="color:var(--cream);font-weight:400">"a / an"</b> — the word is indefinite: <i>a</i> deeply ignorant one, not <i>the</i>.</li>
+        <li style="color:var(--muted);font-size:.93rem"><b style="color:var(--gold);font-weight:400">2.</b> <b style="color:var(--cream);font-weight:400">Accusative case (manṣūb)</b> — because it is the <i>predicate of</i> <span style="font-family:var(--ar);color:var(--gold)">كَانَ</span> (<i>khabar kāna</i>): "he <b>was / has ever been</b> … <b>jahūlan</b>."</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why <span style="font-family:var(--ar);color:var(--gold)">كَانَ</span> (kāna) matters</h3>
+      <p style="color:var(--muted);font-size:.95rem">English translators write "he <i>was</i> ignorant," which sounds like a
+      one-time event in the past. But here <span style="font-family:var(--ar);color:var(--gold)">كَانَ</span> plus an intensive
+      noun signals a <b style="color:var(--cream);font-weight:400">standing, timeless condition</b> — closer to:</p>
+      <p style="font-family:var(--dis);font-style:italic;font-size:1.2rem;color:var(--gold);margin-top:16px;line-height:1.5">
+      "He has always been, and remains, one utterly unjust and utterly unaware."</p>
+      <p style="color:var(--muted2);font-size:.85rem;margin-top:14px">This is why the verse reads as a description of humanity as such — not an accusation of one person.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE AYAH ============ -->
+<section id="ayah">
+  <div class="rv">
+    <span class="eyebrow">Chapter Four</span>
+    <h2>Its one and only home: <em>Sūrah Al-Aḥzāb 33:72</em></h2>
+    <p class="lead">Tap any word to open it up. The two golden words at the end are the intensives.</p>
+  </div>
+
+  <div class="ayah-panel rv d1" style="margin-top:34px">
+    <div class="ayah" id="ayahBox"></div>
+    <div class="wbox" id="wbox">
+      <div class="lft">جَهُولًا</div>
+      <div class="rgt">
+        <i>jahūlan</i>
+        <b>utterly, habitually ignorant</b>
+        <small>Root ج-ه-ل on the intensive pattern فَعُول. Appears only here in the entire Qur'ān. ← tap other words</small>
+      </div>
+    </div>
+    <div class="trans">
+      <p>"Indeed, We offered the Trust to the heavens and the earth and the mountains, and they declined to bear it and
+      feared it; but man undertook to bear it. Indeed, he was <b style="color:var(--gold);font-style:normal;font-weight:400">unjust</b>
+      and <b style="color:var(--gold);font-style:normal;font-weight:400">ignorant</b>."</p>
+      <cite>Ṣaḥīḥ International · Al-Aḥzāb 33:72</cite>
+    </div>
+  </div>
+
+  <div class="tabs rv d2" style="margin-top:46px" id="tabs">
+    <button class="on" data-p="p1">The scene</button>
+    <button data-p="p2">What is the Trust?</button>
+    <button data-p="p3">Is it an insult?</button>
+    <button data-p="p4">Translations compared</button>
+  </div>
+
+  <div class="rv d2">
+    <div class="pane on" id="p1">
+      <div class="card">
+        <h3>A cosmic offer, and one volunteer</h3>
+        <p style="color:var(--muted)">Picture it: the <b style="color:var(--gold);font-weight:400">heavens</b>, the
+        <b style="color:var(--gold);font-weight:400">earth</b>, and the <b style="color:var(--gold);font-weight:400">mountains</b> —
+        the largest, oldest, strongest things we can name — are shown the Trust. They <i>refuse</i>. Not out of rebellion, but out of
+        <span style="font-family:var(--ar);color:var(--gold)">أَشْفَقْنَ</span> (<i>ashfaqna</i>): a trembling awe, a fear born of understanding
+        exactly how heavy the thing is.</p>
+        <p style="color:var(--muted);margin-top:14px">Then the human being steps forward and takes it. And God comments, immediately:
+        <span style="font-family:var(--ar);color:var(--gold);font-size:1.3rem">إِنَّهُ كَانَ ظَلُومًا جَهُولًا</span>.</p>
+        <p style="color:var(--cream);margin-top:14px">The mountains understood and declined. The human did not fully understand — and accepted.
+        <b style="color:var(--gold);font-weight:400">That</b> is <i>jahūlan</i>.</p>
+      </div>
+    </div>
+    <div class="pane" id="p2">
+      <div class="card">
+        <h3>الأَمَانَة — al-Amānah, "the Trust"</h3>
+        <p style="color:var(--muted)">Commentators offer overlapping answers, and the majority view is broad. Abū Ḥayyān
+        (<i>al-Baḥr al-Muḥīṭ</i>) reports that the apparent meaning is <b style="color:var(--cream);font-weight:400">everything
+        one is entrusted with — every command, every prohibition, every matter of religion and worldly life</b>; and
+        <i>Tafsīr Maẓharī</i> states that the whole body of the Sharīʿah's obligations and prohibitions is the <i>amānah</i>.</p>
+        <div class="grid g2" style="margin-top:20px;gap:12px">
+          <div style="padding:16px;border-radius:14px;background:var(--panel2)"><b style="color:var(--gold);font-weight:400">Free will</b><br><small style="color:var(--muted)">the terrifying gift of genuine moral choice</small></div>
+          <div style="padding:16px;border-radius:14px;background:var(--panel2)"><b style="color:var(--gold);font-weight:400">Accountability</b><br><small style="color:var(--muted)">the duties of revelation, and answering for them</small></div>
+          <div style="padding:16px;border-radius:14px;background:var(--panel2)"><b style="color:var(--gold);font-weight:400">Stewardship</b><br><small style="color:var(--muted)">caretaking the earth, bodies, wealth, other people</small></div>
+          <div style="padding:16px;border-radius:14px;background:var(--panel2)"><b style="color:var(--gold);font-weight:400">Fidelity</b><br><small style="color:var(--muted)">keeping what is deposited with you — literally and morally</small></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.86rem;margin-top:18px">Ibn Kathīr cites the ḥadīth that <i>amānah</i> will be
+        lifted from hearts until "people trade but hardly anyone fulfils a trust," leaving only a trace "like a blister from a rolled coal."</p>
+      </div>
+    </div>
+    <div class="pane" id="p3">
+      <div class="card">
+        <h3>Not a curse — a diagnosis</h3>
+        <p style="color:var(--muted)">Read coldly, <i>ẓalūman jahūlan</i> sounds like contempt. Read in context, it is closer to a
+        <b style="color:var(--cream);font-weight:400">medical note attached to an extraordinary honour</b>.</p>
+        <ul style="list-style:none;display:grid;gap:14px;margin-top:18px">
+          <li style="color:var(--muted);font-size:.95rem;padding-left:20px;border-left:2px solid var(--em)">
+          <b style="color:var(--gold);font-weight:400">It explains the risk.</b> Only a creature who could fail this badly could
+          have anything meaningful to succeed at. The mountains cannot betray a trust; therefore they cannot keep one either.</li>
+          <li style="color:var(--muted);font-size:.95rem;padding-left:20px;border-left:2px solid var(--em)">
+          <b style="color:var(--gold);font-weight:400">It sets up the very next verse.</b> 33:73 immediately continues: God will
+          punish the hypocrites and idolaters, <i>and turn in mercy to the believing men and women</i>. The flaw named in 72 is the flaw mercy answers in 73.</li>
+          <li style="color:var(--muted);font-size:.95rem;padding-left:20px;border-left:2px solid var(--em)">
+          <b style="color:var(--gold);font-weight:400">It is the last word of the sūrah.</b> Al-Aḥzāb ends on humanity's weakness and
+          God's forgiveness held in the same breath.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pane" id="p4">
+      <div class="qwrap">
+        <div class="quote"><p>…he was unjust and <b style="font-style:normal;color:var(--gold);font-weight:400">ignorant</b>.</p><cite>Ṣaḥīḥ International</cite></div>
+        <div class="quote"><p>…they are truly wrongful to themselves and <b style="font-style:normal;color:var(--gold);font-weight:400">ignorant of the consequences</b>.</p><cite>Dr Mustafa Khattab · The Clear Qur'ān</cite></div>
+        <div class="quote"><p>Surely he is wrong-doing, <b style="font-style:normal;color:var(--gold);font-weight:400">ignorant</b>.</p><cite>Abul Aʿlā Mawdūdī · Tafhīm al-Qur'ān</cite></div>
+        <div class="quote"><p>…car il est très injuste envers lui-même et <b style="font-style:normal;color:var(--gold);font-weight:400">très ignorant</b>.</p><cite>French (Hamidullah) — note how French keeps the intensive with "très"</cite></div>
+        <div class="quote"><p>بے شک وہ بڑا ظالم اور <b style="font-style:normal;color:var(--gold);font-weight:400">جاہل</b> ہے</p><cite>Urdu (Mawdūdī) — "بڑا / baṛā" = great, carrying the intensity</cite></div>
+      </div>
+      <p style="margin-top:20px;color:var(--muted2);font-size:.88rem">Most English versions flatten <i>jahūlan</i> to plain
+      "ignorant" and lose the intensive. French and Urdu keep it. If you want the full flavour in English, read:
+      <b style="color:var(--gold);font-weight:400">"ever so deeply unknowing."</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAMILY ============ -->
+<section id="family">
+  <div class="rv">
+    <span class="eyebrow">Chapter Five</span>
+    <h2>The Word Family across the <em>Qur'ān</em></h2>
+    <p class="lead">The root ج-ه-ل and its derivatives occur roughly <b style="color:var(--gold);font-weight:400">24 times</b> in the
+    Qur'ān, spread over about 17 sūrahs (as counted in <i>al-Muʿjam al-Mufahras</i>). Here are the shapes it takes.</p>
+  </div>
+
+  <div class="grid g4 rv d1" style="margin-top:36px">
+    <div class="card" style="text-align:center"><span style="font-family:var(--ar);font-size:2.4rem;color:var(--gold);direction:rtl;display:block">جَهِلَ</span><b style="font-family:var(--dis);font-size:1.05rem;font-weight:500">jahila</b><br><small style="color:var(--muted)">verb · "he did not know / acted foolishly"</small></div>
+    <div class="card" style="text-align:center"><span style="font-family:var(--ar);font-size:2.4rem;color:var(--gold);direction:rtl;display:block">جَاهِل</span><b style="font-family:var(--dis);font-size:1.05rem;font-weight:500">jāhil</b><br><small style="color:var(--muted)">active participle · "an ignorant one" (pl. جَاهِلُون / جَاهِلِين)</small></div>
+    <div class="card" style="text-align:center"><span style="font-family:var(--ar);font-size:2.4rem;color:var(--gold);direction:rtl;display:block">جَهَالَة</span><b style="font-family:var(--dis);font-size:1.05rem;font-weight:500">jahālah</b><br><small style="color:var(--muted)">verbal noun · "a state of ignorance"</small></div>
+    <div class="card" style="text-align:center"><span style="font-family:var(--ar);font-size:2.4rem;color:var(--gold);direction:rtl;display:block">جَاهِلِيَّة</span><b style="font-family:var(--dis);font-size:1.05rem;font-weight:500">jāhiliyyah</b><br><small style="color:var(--muted)">abstract noun · "ignorance as a way of life" — 4×</small></div>
+    <div class="card" style="text-align:center;border-color:var(--stroke2);background:rgba(232,199,102,.07)"><span style="font-family:var(--ar);font-size:2.4rem;color:var(--gold);direction:rtl;display:block">جَهُول</span><b style="font-family:var(--dis);font-size:1.05rem;font-weight:500">jahūl</b><br><small style="color:var(--cream)">intensive · <b style="font-weight:400">our word</b> — 1× only</small></div>
+  </div>
+
+  <h3 class="rv d2" style="margin-top:56px">Verses to feel the range</h3>
+  <div class="vlist rv d2" style="margin-top:20px">
+    <div class="vitem">
+      <div class="top"><span class="ref">Al-Baqarah 2:67</span><span class="form">الْجَاهِلِين</span></div>
+      <div class="ar">أَعُوذُ بِٱللَّهِ أَنْ أَكُونَ مِنَ ٱلْجَٰهِلِينَ</div>
+      <div class="en">"I seek refuge in Allah from being among the ignorant." — Mūsā, refusing to mock his people. Ignorance is something a prophet actively seeks protection from.</div>
+    </div>
+    <div class="vitem">
+      <div class="top"><span class="ref">Al-Aʿrāf 7:199</span><span class="form">الْجَاهِلِين</span></div>
+      <div class="ar">وَأَعْرِضْ عَنِ ٱلْجَٰهِلِينَ</div>
+      <div class="en">"And turn away from the ignorant." Here <i>jāhil</i> clearly means the abusive and hot-headed — the <b>ḥilm</b> sense, not the <b>ʿilm</b> sense.</div>
+    </div>
+    <div class="vitem">
+      <div class="top"><span class="ref">Al-Furqān 25:63</span><span class="form">الْجَاهِلُون</span></div>
+      <div class="ar">وَإِذَا خَاطَبَهُمُ ٱلْجَٰهِلُونَ قَالُوا سَلَٰمًا</div>
+      <div class="en">"And when the ignorant address them, they say: peace." The believer's answer to <i>jahl</i> is not more <i>jahl</i> — it is <b>salām</b>.</div>
+    </div>
+    <div class="vitem">
+      <div class="top"><span class="ref">Al-Ḥujurāt 49:6</span><span class="form">جَهَالَة</span></div>
+      <div class="ar">أَن تُصِيبُوا قَوْمًا بِجَهَٰلَةٍ</div>
+      <div class="en">"…lest you harm a people out of ignorance." Verify news before acting — because <i>jahālah</i> is not just a private gap in knowledge, it damages other people.</div>
+    </div>
+    <div class="vitem">
+      <div class="top"><span class="ref">An-Nisāʾ 4:17</span><span class="form">جَهَالَة</span></div>
+      <div class="ar">لِلَّذِينَ يَعْمَلُونَ ٱلسُّوٓءَ بِجَهَٰلَةٍ ثُمَّ يَتُوبُونَ</div>
+      <div class="en">"…for those who do evil out of ignorance, then repent soon after." Ignorance is the <i>condition</i> repentance is designed for. Deeply hopeful.</div>
+    </div>
+    <div class="vitem">
+      <div class="top"><span class="ref">Āl ʿImrān 3:154</span><span class="form">الْجَاهِلِيَّة</span></div>
+      <div class="ar">يَظُنُّونَ بِٱللَّهِ غَيْرَ ٱلْحَقِّ ظَنَّ ٱلْجَٰهِلِيَّةِ</div>
+      <div class="en">"…thinking of Allah other than the truth — the thought of <i>jāhiliyyah</i>." Ignorance here is a way of <b>suspecting God</b>. One of the four <i>jāhiliyyah</i> verses (with 5:50, 33:33, 48:26).</div>
+    </div>
+    <div class="vitem" style="border-left-color:var(--gold)">
+      <div class="top"><span class="ref">Al-Aḥzāb 33:72</span><span class="form" style="color:var(--gold)">جَهُولًا</span></div>
+      <div class="ar">إِنَّهُۥ كَانَ ظَلُومًا جَهُولًا</div>
+      <div class="en">"Indeed he has ever been deeply unjust, deeply unknowing." The root's most concentrated form — the final verdict on the creature who carried the Trust.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOICES ============ -->
+<section id="voices">
+  <div class="rv">
+    <span class="eyebrow">Chapter Six</span>
+    <h2>How the <em>scholars</em> read it</h2>
+  </div>
+  <div class="grid g2 rv d1" style="margin-top:34px">
+    <div class="card">
+      <h3 style="color:var(--gold)">The lexical tradition</h3>
+      <p style="color:var(--muted);font-size:.95rem">Al-Khalīl ibn Aḥmad's <i>Kitāb al-ʿAyn</i> — the earliest surviving Arabic
+      dictionary — already frames the root by its opposition to <b style="color:var(--gold);font-weight:400">ʿilm</b>. Later
+      lexicographers (Ibn Qutayba, al-Azharī, and eventually Ibn Manẓūr in <i>Lisān al-ʿArab</i>) add the moral colouring:
+      recklessness, arrogance, rule of the strong over the weak.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold)">The tafsīr tradition</h3>
+      <p style="color:var(--muted);font-size:.95rem">On 33:72, <b style="color:var(--cream);font-weight:400">Ibn Kathīr</b> reads
+      the pair <i>ẓalūman jahūlan</i> as explaining <i>why</i> humanity so often fails the Trust; <b style="color:var(--cream);font-weight:400">al-Ṭabarī</b>
+      and <b style="color:var(--cream);font-weight:400">al-Qurṭubī</b> gather the reports on the offer to the heavens and mountains;
+      <b style="color:var(--cream);font-weight:400">Abū Ḥayyān</b> takes <i>amānah</i> in its widest sense — "all that one is entrusted with."</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold)">The modern debate</h3>
+      <p style="color:var(--muted);font-size:.95rem">Ignaz Goldziher and Toshihiko Izutsu, reading pre-Islamic poetry
+      (Imruʾ al-Qays uses the root eight times; al-Nābighah six), argued <i>jahl</i</i> there means <b>barbarism</b> — the antonym of
+      <i>ḥilm</i>. Franz Rosenthal argued it means <b>ignorance</b> — the antonym of <i>ʿilm</i>. Peter Webb accepts both,
+      depending on context.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold)">A ḥadīth worth knowing</h3>
+      <p style="color:var(--muted);font-size:.95rem">The Prophet ﷺ once told Abū Dharr, "you still have <i>jāhiliyyah</i> in you."
+      Asked, "the <i>jāhiliyyah</i> of disbelief or of Islam?" he answered: <b style="color:var(--cream);font-weight:400">"the
+      <i>jāhiliyyah</i> of disbelief."</b> The point stands either way: <i>jahl</i> is not a historical era safely behind us. It is a
+      residue that can live inside a believer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <div class="rv">
+    <span class="eyebrow">Chapter Seven</span>
+    <h2>Now <em>test</em> yourself</h2>
+    <p class="lead">Seven questions. No pressure — every answer explains itself.</p>
+  </div>
+  <div class="quiz rv d1" style="margin-top:34px" id="quizBox">
+    <div class="qhead">
+      <span class="qcount" id="qcount">Question 1 of 7</span>
+      <span class="qcount" id="qscore" style="color:var(--em)">Score 0</span>
+    </div>
+    <div class="qbar"><i id="qbar"></i></div>
+    <div id="qbody">
+      <div class="qq" id="qq"></div>
+      <div class="opts" id="opts"></div>
+      <div class="qfb" id="qfb"></div>
+      <button class="btn" id="qnext" style="display:none">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<div class="closing">
+  <div class="divider rv"><span></span><i></i><span></span></div>
+  <p class="ar rv d1">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
+  <p class="rv d1" style="font-family:var(--dis);font-style:italic;font-size:clamp(1.05rem,2.6vw,1.4rem);color:var(--cream)">
+  "And say: My Lord, increase me in knowledge."</p>
+  <p class="rv d2" style="font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-top:12px">Ṭā Hā 20:114</p>
+  <p class="rv d2" style="max-width:56ch;margin:30px auto 0;color:var(--muted);font-size:1rem">
+  The Qur'ān calls the human being <b style="color:var(--gold);font-weight:400">jahūlan</b> — and then hands him a duʿāʾ.
+  The diagnosis was never the end of the sentence.</p>
+  <div class="rv d3" style="margin-top:34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a class="btn" href="https://quran.com/33/72" target="_blank" rel="noopener" style="text-decoration:none">Listen at Quran.com ↗</a>
+    <button class="btn ghost" id="topbtn">Back to the top ↑</button>
+  </div>
+</div>
+
+<footer>
+  <p><b>جَهُولًا · Jahūlā</b> — an interactive word study</p>
+  <p style="max-width:74ch;margin:12px auto 0;font-size:.74rem">
+  Arabic text &amp; translations: <a href="https://quran.com/33/72" target="_blank" rel="noopener">Quran.com</a> (Ṣaḥīḥ International,
+  Dr Mustafa Khattab, Mawdūdī, Hamidullah). Morphology conventions: <a href="https://corpus.quran.com" target="_blank" rel="noopener">Quranic Arabic Corpus</a>.
+  Tafsīr material: Ibn Kathīr, Maʿārif al-Qurʾān, Tafsīr Maẓharī, al-Baḥr al-Muḥīṭ. Root-count (≈24 occurrences) per
+  <i>al-Muʿjam al-Mufahras</i>. Lexical &amp; academic history of <i>jahl / jāhiliyyah</i> per classical lexicons and the work of
+  Goldziher, Izutsu, Rosenthal and Webb.</p>
+  <p style="margin-top:14px;font-size:.72rem">For study and reflection. Please verify all points with a qualified teacher.</p>
+  <div class="nq-footer-badge">
+    <div class="nq-footer-logo-row">
+      <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(232,199,102,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#08150f" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#08150f" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+    </div>
+    <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+  </div>
+</footer>
+
+<script>
+/* ================= REVEAL ================= */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+
+/* ================= PROGRESS + NAV ================= */
+const prog=document.getElementById('prog');
+let lastY=0;
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  const y=h.scrollTop;
+  document.getElementById('nav').style.transform=(y>lastY&&y>500)?'translateY(-100%)':'none';
+  lastY=y;
+  // active link
+  document.querySelectorAll('#nlinks a').forEach(a=>{
+    const s=document.querySelector(a.getAttribute('href'));
+    if(!s)return;const r=s.getBoundingClientRect();
+    a.classList.toggle('on',r.top<220&&r.bottom>220);
+  });
+},{passive:true});
+
+/* ================= CARD SPOTLIGHT ================= */
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('pointermove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+
+/* ================= THEME ================= */
+const th=document.getElementById('th');
+th.onclick=()=>{
+  const cur=document.documentElement.getAttribute('data-theme')==='light';
+  document.documentElement.setAttribute('data-theme',cur?'dark':'light');
+  th.textContent=cur?'☾':'☀';
+};
+
+/* ================= HARAKAT TOGGLE ================= */
+const strip=s=>s.replace(/[\u064B-\u0652\u0670\u06D6-\u06ED]/g,'');
+const hz=document.getElementById('hz');
+let plain=false, cache=new WeakMap();
+hz.onclick=()=>{
+  plain=!plain; hz.style.opacity=plain?.45:1;
+  document.querySelectorAll('.ayah .w, .vitem .ar, .bigword, .rootinfo .ar, .pillar .ar, .ptable .ar, .closing .ar, .bism, .letter span, .mw .ar, .vitem .form, .wbox .lft')
+   .forEach(el=>{
+     if(!cache.has(el))cache.set(el,el.textContent);
+     el.textContent=plain?strip(cache.get(el)):cache.get(el);
+   });
+};
+
+/* ================= ROOT LETTERS ================= */
+const rootData={
+  j:{ar:'ج',t:'Jīm',txt:'Pronounced like the <b>j</b> in <b>“jam”</b>. In Arabic it is written with one dot underneath. It is the <b>first radical</b> — the letter that opens every word in this family: <i>jahila, jāhil, jahālah, jahūl</i>.'},
+  h:{ar:'ه',t:'Hāʾ',txt:'A soft, breathy <b>h</b> — like the <b>h</b> in <b>“hope”</b>, made at the very back of the throat with an open, relaxed breath. (Not the heavier ح <i>ḥāʾ</i>.) It is the <b>middle radical</b>.'},
+  l:{ar:'ل',t:'Lām',txt:'A clear <b>l</b>, as in <b>“leaf”</b>. It is the <b>final radical</b>, and it is the letter that gets lengthened in our word: <span style="font-family:Amiri,serif;color:var(--gold)">جَهُــول</span> — <i>ja-HOOL</i>, with the long <b>ū</b> sound landing right before it.'}
+};
+const rinfo=document.getElementById('rootinfo');
+document.querySelectorAll('.letter').forEach(l=>{
+  l.onclick=()=>{
+    document.querySelectorAll('.letter').forEach(x=>x.classList.remove('on'));
+    l.classList.add('on');
+    const d=rootData[l.dataset.k];
+    rinfo.innerHTML=`<span class="ar">${plain?strip(d.ar):d.ar}</span><p><b style="color:var(--gold);font-weight:400">${d.t}</b> — ${d.txt}</p>`;
+    rinfo.style.animation='none';rinfo.offsetHeight;rinfo.style.animation='fade .45s ease';
+  };
+});
+
+/* ================= INTENSITY METER ================= */
+const sl=document.getElementById('slider'),arA=document.getElementById('arA'),arB=document.getElementById('arB'),
+      mwA=document.getElementById('mwA'),mwB=document.getElementById('mwB'),mnote=document.getElementById('mnote');
+const notes=[
+ {v:12,t:'<b style="color:var(--em);font-weight:400">جَاهِل (jāhil)</b> — the ordinary word. “An ignorant person.” It simply reports a fact: this person does not know. It says nothing about how deep or how permanent.'},
+ {v:38,t:'Both words share the <b style="color:var(--gold);font-weight:400">same three letters</b> ج-ه-ل. Nothing has been added to the meaning — only the <b>shape</b> around the root has changed. That is how Arabic does emphasis.'},
+ {v:62,t:'Watch the <b style="color:var(--gold);font-weight:400">long ū</b> stretch out: <i>ja-HOOOL</i>. In Arabic, lengthening the sound lengthens the meaning. The mouth itself performs the excess.'},
+ {v:101,t:'<b style="color:var(--gold);font-weight:400">جَهُول (jahūl)</b> — the intensive (<i>ṣīghat al-mubālaghah</i>). Not “he doesn’t know,” but <b style="color:var(--cream);font-weight:400">“not-knowing is what he is like.”</b> A settled, defining trait — and this is the form the Qur’ān chooses in 33:72.'}
+];
+function drawMeter(){
+  const v=+sl.value, t=v/100;
+  arA.style.fontSize=(2.2+ (1-t)*2.6)+'rem';
+  arB.style.fontSize=(2.2+ t*2.9)+'rem';
+  mwA.style.opacity=(.32+(1-t)*.68).toFixed(2);
+  mwB.style.opacity=(.32+t*.68).toFixed(2);
+  arB.style.letterSpacing=(t*3).toFixed(1)+'px';
+  arB.style.filter=`drop-shadow(0 0 ${t*26}px rgba(232,199,102,${t*.6}))`;
+  mnote.innerHTML=notes.find(n=>v<n.v).t;
+}
+sl.oninput=drawMeter; drawMeter();
+
+/* ================= TABS ================= */
+document.querySelectorAll('#tabs button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');document.getElementById(b.dataset.p).classList.add('on');
+  };
+});
+
+/* ================= AYAH WORD-BY-WORD ================= */
+const words=[
+ {a:'إِنَّا',t:'innā',g:'Indeed, We',n:'إِنَّ (“indeed”) + نا (“we”). The verse opens with emphasis — this is a solemn declaration.'},
+ {a:'عَرَضْنَا',t:'ʿaraḍnā',g:'We offered / presented',n:'Root ع-ر-ض. To display something, to lay it out for someone to consider — an <i>offer</i>, not a command.'},
+ {a:'الْأَمَانَةَ',t:'al-amānah',g:'the Trust',n:'Root أ-م-ن — the same root as īmān (faith) and amān (safety). Something placed in your hands for safekeeping.'},
+ {a:'عَلَى',t:'ʿalā',g:'upon / to',n:'A preposition: “upon.”'},
+ {a:'السَّمَاوَاتِ',t:'as-samāwāt',g:'the heavens',n:'Plural of سَمَاء. Everything above — skies, cosmos.'},
+ {a:'وَالْأَرْضِ',t:'wal-arḍ',g:'and the earth',n:'وَ (and) + الأرض (the earth).'},
+ {a:'وَالْجِبَالِ',t:'wal-jibāl',g:'and the mountains',n:'Plural of جَبَل. The image of unmovable, immense strength.'},
+ {a:'فَأَبَيْنَ',t:'fa-abayna',g:'but they refused',n:'Root أ-ب-ي — to decline, to be unwilling. The ـنَ ending is feminine plural, agreeing with the heavens, earth and mountains.'},
+ {a:'أَن',t:'an',g:'to',n:'Particle introducing the verb that follows.'},
+ {a:'يَحْمِلْنَهَا',t:'yaḥmilnahā',g:'carry it',n:'Root ح-م-ل — to carry, to bear a load. Also the root for pregnancy: bearing something inside you.'},
+ {a:'وَأَشْفَقْنَ',t:'wa-ashfaqna',g:'and they were in awe / afraid',n:'Root ش-ف-ق — a fear mixed with tenderness and deep concern. Not terror; reverent apprehension. This is the mountains’ <i>ḥilm</i>.'},
+ {a:'مِنْهَا',t:'minhā',g:'of it',n:'مِن (from/of) + ها (it, feminine — referring to al-amānah).'},
+ {a:'وَحَمَلَهَا',t:'wa-ḥamalahā',g:'but he carried it',n:'Same root ح-م-ل as before — the deliberate echo. What they refused to carry, <i>he</i> carried.'},
+ {a:'الْإِنسَانُ',t:'al-insān',g:'the human being',n:'Not “a man” but humanity as a species — the creature, in its nature.'},
+ {a:'إِنَّهُ',t:'innahū',g:'Indeed he',n:'Emphasis again, introducing the verdict.'},
+ {a:'كَانَ',t:'kāna',g:'has ever been',n:'Past tense of “to be” — but with these intensive nouns it signals a <b>permanent, defining state</b>, not a single past moment.'},
+ {a:'ظَلُومًا',t:'ẓalūman',g:'deeply unjust',n:'Root ظ-ل-م on the intensive pattern فَعُول — a great wrongdoer, first of all against <i>himself</i>. Occurs only here in the Qur’ān.',k:1},
+ {a:'جَهُولًا',t:'jahūlan',g:'utterly, habitually ignorant',n:'Root ج-ه-ل on the intensive pattern فَعُول. Appears <b>only here</b> in the entire Qur’ān. Both an empty mind (vs ʿilm) and an untamed temper (vs ḥilm).',k:1}
+];
+const ab=document.getElementById('ayahBox'),wb=document.getElementById('wbox');
+words.forEach((w,i)=>{
+  const s=document.createElement('span');
+  s.className='w'+(w.k?' key':'');s.textContent=w.a;s.dataset.i=i;
+  if(i===17)s.classList.add('on');
+  s.onclick=()=>{
+    document.querySelectorAll('.ayah .w').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');
+    wb.innerHTML=`<div class="lft">${plain?strip(w.a):w.a}</div>
+      <div class="rgt"><i>${w.t}</i><b>${w.g}</b><small>${w.n}</small></div>`;
+    wb.style.animation='none';wb.offsetHeight;wb.style.animation='fade .4s ease';
+  };
+  ab.appendChild(s);
+});
+const num=document.createElement('span');
+num.style.cssText='font-family:Amiri,serif;color:var(--gold);opacity:.6';
+num.textContent='﴿٧٢﴾';ab.appendChild(num);
+
+/* ================= QUIZ ================= */
+const QS=[
+ {q:'What is the three-letter root of <span class="ar">جَهُولًا</span>?',
+  o:['ج · ه · ل','ح · م · ل','ظ · ل · م','ع · ل · م'],c:0,
+  f:'<b>ج-ه-ل (j-h-l)</b>. Read right to left: Jīm, Hāʾ, Lām. Every word in this family — <i>jahila, jāhil, jahālah, jāhiliyyah, jahūl</i> — grows from these three letters.'},
+ {q:'The pattern <span class="ar">فَعُول</span> does what to a word’s meaning?',
+  o:['Makes it a place-name','Makes it plural','Intensifies it — “very / abundantly”','Makes it past tense'],c:2,
+  f:'It is <b>ṣīghat al-mubālaghah</b>, the intensive form. So <i>jāhil</i> = “ignorant,” but <i>jahūl</i> = “ignorant through and through.” The same mould gives <b>Ghafūr</b> (abundantly forgiving) and <b>Shakūr</b> (immensely appreciative).'},
+ {q:'How many times does the exact word <span class="ar">جَهُولًا</span> appear in the Qur’ān?',
+  o:['Once','Four times','Twenty-four times','Ninety-nine times'],c:0,
+  f:'<b>Exactly once</b> — in Sūrah Al-Aḥzāb 33:72. (The wider root ج-ه-ل appears around 24 times; the word <i>jāhiliyyah</i> appears 4 times.)'},
+ {q:'<span class="ar">جَهْل</span> is the opposite of which <b>two</b> things?',
+  o:['ʿilm (knowledge) and ḥilm (forbearance)','ṣabr and shukr','īmān and islām','ẓulm and ʿadl'],c:0,
+  f:'This is the key insight. Against <b>ʿilm</b>, <i>jahl</i> = an empty mind. Against <b>ḥilm</b>, <i>jahl</i> = an untamed temper: rash, arrogant, hot-headed. Both senses live inside the word.'},
+ {q:'In 33:72, who <b>refused</b> to carry the Trust?',
+  o:['The angels','The heavens, the earth and the mountains','The jinn','The prophets'],c:1,
+  f:'The heavens, the earth and the mountains declined — and <span class="ar">أَشْفَقْنَ</span> (<i>ashfaqna</i>): they trembled in awe of it. Then the human being took it up anyway. That contrast is exactly what <i>jahūlan</i> is describing.'},
+ {q:'Grammatically, why does <span class="ar">جَهُولًا</span> end in <span class="ar">ـًا</span>?',
+  o:['It is a dual form','It is the subject of the sentence','It is accusative — the predicate of كَانَ','It is a command'],c:2,
+  f:'The <b>tanwīn fatḥ</b> marks it as (1) indefinite — “a” deeply ignorant one — and (2) <b>manṣūb</b> (accusative), because it is <i>khabar kāna</i>, the predicate of <span class="ar">كَانَ</span>.'},
+ {q:'Which word is built on the <b>same intensive pattern</b> as <span class="ar">جَهُول</span>?',
+  o:['مُسْلِم (muslim)','مَسْجِد (masjid)','غَفُور (Ghafūr)','عَالِم (ʿālim)'],c:2,
+  f:'<b>غَفُور (Ghafūr)</b> — “abundantly Forgiving,” a Name of Allah, on the identical mould فَعُول. The grammar itself holds the whole relationship: He is intensely forgiving; we are intensely unaware.'}
+];
+let qi=0,score=0,locked=false;
+const qq=document.getElementById('qq'),opts=document.getElementById('opts'),qfb=document.getElementById('qfb'),
+      qnext=document.getElementById('qnext'),qcount=document.getElementById('qcount'),
+      qscore=document.getElementById('qscore'),qbar=document.getElementById('qbar');
+function render(){
+  locked=false;const Q=QS[qi];
+  qcount.textContent=`Question ${qi+1} of ${QS.length}`;
+  qscore.textContent=`Score ${score}`;
+  qbar.style.width=(qi/QS.length*100)+'%';
+  qq.innerHTML=Q.q;opts.innerHTML='';qfb.className='qfb';qnext.style.display='none';
+  Q.o.forEach((o,i)=>{
+    const b=document.createElement('button');b.className='opt';
+    b.innerHTML=`<span class="k">${'ABCD'[i]}</span><span>${o}</span>`;
+    b.onclick=()=>{
+      if(locked)return;locked=true;
+      const btns=[...opts.children];
+      btns.forEach((x,j)=>{x.disabled=true;if(j===Q.c)x.classList.add('right');});
+      if(i!==Q.c)b.classList.add('wrong');else score++;
+      qscore.textContent=`Score ${score}`;
+      qfb.innerHTML=(i===Q.c?'✦ <b style="color:var(--em)">Correct.</b> ':'✦ <b style="color:var(--rose)">Not quite.</b> ')+Q.f;
+      qfb.className='qfb show';
+      qnext.style.display='inline-block';
+      qnext.textContent=qi===QS.length-1?'See my result →':'Next →';
+    };
+    opts.appendChild(b);
+  });
+}
+qnext.onclick=()=>{
+  if(qi<QS.length-1){qi++;render();document.getElementById('quizBox').scrollIntoView({behavior:'smooth',block:'center'});}
+  else{
+    qbar.style.width='100%';
+    const msgs=['Begin again — the whole point of the word is that we all start unknowing.','A solid start. Re-read Chapter Three and try again.','Good grasp. The root and the pattern are landing.','Excellent — you are reading the grammar, not just the gloss.','Masterful. You could teach this word.'];
+    const m=msgs[Math.min(4,Math.floor(score/QS.length*5))];
+    document.getElementById('qbody').innerHTML=
+      `<div class="result"><div class="score">${score}<span style="font-size:1.6rem;color:var(--muted2)">/${QS.length}</span></div>
+       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;margin:16px auto;max-width:44ch">${m}</p>
+       <p style="font-family:Amiri,serif;font-size:1.7rem;color:var(--gold);direction:rtl;margin:22px 0 6px">رَبِّ زِدْنِي عِلْمًا</p>
+       <p style="font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2)">Rabbi zidnī ʿilmā</p>
+       <button class="btn ghost" onclick="location.reload()">Try again ↺</button></div>`;
+  }
+};
+render();
+
+/* ================= MISC ================= */
+document.getElementById('topbtn').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+document.getElementById('hw').onclick=e=>{
+  e.currentTarget.style.animation='none';e.currentTarget.offsetHeight;
+  e.currentTarget.style.animation='sheen 1.4s ease-in-out 2, sheen 7s ease-in-out 1.4s infinite';
+};
+</script>
+</body>
+</html>

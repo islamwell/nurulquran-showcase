@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B8" />
+      <stop offset="35%" stop-color="#F5C97B" />
+      <stop offset="70%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#9A7B2C" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5EEAD4" />
+      <stop offset="50%" stop-color="#2DD4BF" />
+      <stop offset="100%" stop-color="#0F766E" />
+    </linearGradient>
+    <radialGradient id="glowRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5C97B" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#2DD4BF" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <circle cx="256" cy="256" r="230" fill="url(#glowRad)" />
+
+  <!-- Outer Octagram Star Ring -->
+  <g stroke="url(#goldGrad)" stroke-width="2.5" opacity="0.45" fill="none">
+    <rect x="86" y="86" width="340" height="340" rx="32" />
+    <rect x="86" y="86" width="340" height="340" rx="32" transform="rotate(45 256 256)" />
+  </g>
+
+  <g stroke="url(#tealGrad)" stroke-width="1.5" opacity="0.65" fill="none">
+    <circle cx="256" cy="256" r="190" />
+    <circle cx="256" cy="256" r="182" stroke-dasharray="3 6" />
+  </g>
+
+  <!-- Radiance Rays -->
+  <g stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round" opacity="0.8">
+    <line x1="256" y1="90" x2="256" y2="120" />
+    <line x1="256" y1="392" x2="256" y2="422" />
+    <line x1="90" y1="256" x2="120" y2="256" />
+    <line x1="392" y1="256" x2="422" y2="256" />
+    <line x1="138" y1="138" x2="160" y2="160" />
+    <line x1="352" y1="352" x2="374" y2="374" />
+    <line x1="374" y1="138" x2="352" y2="160" />
+    <line x1="160" y1="352" x2="138" y2="374" />
+  </g>
+
+  <!-- Central Emblem - Open Quran Book & Light -->
+  <!-- Left Page -->
+  <path d="M256 325 C220 300 160 305 130 318 C120 322 110 314 110 302 L110 200 C110 190 120 182 130 178 C165 164 220 170 256 195 Z" 
+        fill="#081418" stroke="url(#goldGrad)" stroke-width="3.5" filter="url(#glow)" />
+
+  <!-- Right Page -->
+  <path d="M256 325 C292 300 352 305 382 318 C392 322 402 314 402 302 L402 200 C402 190 392 182 382 178 C347 164 292 170 256 195 Z" 
+        fill="#081418" stroke="url(#goldGrad)" stroke-width="3.5" filter="url(#glow)" />
+
+  <!-- Book Spine & Binding Details -->
+  <path d="M256 195 L256 335" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round" />
+  <path d="M246 335 C252 342 260 342 266 335" fill="none" stroke="url(#goldGrad)" stroke-width="3" />
+
+  <!-- Inner Page Lines -->
+  <g stroke="url(#goldGrad)" stroke-width="1.8" stroke-linecap="round" opacity="0.75">
+    <line x1="145" y1="210" x2="225" y2="220" />
+    <line x1="140" y1="235" x2="225" y2="245" />
+    <line x1="145" y1="260" x2="225" y2="270" />
+    <line x1="150" y1="285" x2="225" y2="295" />
+
+    <line x1="287" y1="220" x2="367" y2="210" />
+    <line x1="287" y1="245" x2="372" y2="235" />
+    <line x1="287" y1="270" x2="367" y2="260" />
+    <line x1="287" y1="295" x2="362" y2="285" />
+  </g>
+
+  <!-- Crown / Noor Light Beam Rising from Center -->
+  <g fill="url(#goldGrad)">
+    <circle cx="256" cy="150" r="14" />
+    <polygon points="256,115 262,142 288,148 264,158 268,185 256,164 244,185 248,158 224,148 250,142" />
+  </g>
+</svg>

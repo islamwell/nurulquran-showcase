@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NurulQuran Showcase · Interactive Quranic & Prophetic Exhibits</title>
+<meta name="description" content="Explore a modern suite of interactive Quranic studies, Arabic linguistic visualizers, prophetic evidences, and behavioral sciences by NurulQuran." />
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & THEMING
+   ============================================================ */
+:root {
+  --bg-primary: #060913;
+  --bg-secondary: #0c1222;
+  --bg-tertiary: #131c33;
+  --card-bg: rgba(18, 26, 46, 0.65);
+  --card-hover: rgba(28, 40, 70, 0.75);
+  --card-border: rgba(245, 201, 123, 0.16);
+  --card-border-hover: rgba(245, 201, 123, 0.45);
+  
+  --gold-1: #FFF0B8;
+  --gold-2: #F5C97B;
+  --gold-3: #D4AF37;
+  --gold-4: #9A7B2C;
+  --teal-1: #5EEAD4;
+  --teal-2: #2DD4BF;
+  --teal-3: #0F766E;
+  --sky-1: #93C5FD;
+  --sky-2: #3B82F6;
+  --rose-1: #FDA4AF;
+  --rose-2: #F43F5E;
+  
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-arabic: 'Amiri', serif;
+  
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 12px 36px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 24px 60px -15px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 35px rgba(245, 201, 123, 0.18);
+  
+  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #F8F5EE;
+  --bg-secondary: #EFE9DC;
+  --bg-tertiary: #E3D9C4;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-hover: rgba(255, 255, 255, 0.98);
+  --card-border: rgba(180, 140, 50, 0.22);
+  --card-border-hover: rgba(180, 140, 50, 0.55);
+  
+  --gold-1: #78520A;
+  --gold-2: #996A14;
+  --gold-3: #B8860B;
+  --gold-4: #523805;
+  --teal-1: #0F766E;
+  --teal-2: #0D9488;
+  --teal-3: #115E59;
+  
+  --text-main: #1E293B;
+  --text-muted: #475569;
+  --text-dim: #64748B;
+  
+  --shadow-sm: 0 4px 16px rgba(100, 70, 20, 0.08);
+  --shadow-md: 0 12px 30px -10px rgba(100, 70, 20, 0.15);
+  --shadow-lg: 0 24px 50px -15px rgba(100, 70, 20, 0.25);
+  --shadow-glow: 0 0 30px rgba(184, 134, 11, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: var(--gold-2);
+  color: #060913;
+}
+
+/* ============================================================
+   BACKGROUND EFFECTS & GEOMETRY
+   ============================================================ */
+.bg-canvas-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  transition: opacity 0.5s ease;
+}
+
+.orb-1 {
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, #0F766E 0%, transparent 70%);
+  top: -20vw;
+  left: -15vw;
+  animation: orbDrift1 28s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, #1E3A8A 0%, transparent 70%);
+  bottom: -15vw;
+  right: -10vw;
+  animation: orbDrift2 32s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 0%, transparent 70%);
+  top: 35%;
+  left: 30%;
+  animation: orbDrift3 24s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8vw, 10vh) scale(1.15); }
+}
+@keyframes orbDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-8vw, -6vh) scale(1.08); }
+}
+@keyframes orbDrift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(6vw, -8vh) scale(1.12); }
+}
+
+.geometric-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: radial-gradient(var(--gold-2) 1px, transparent 1px), radial-gradient(var(--teal-2) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: 0 0, 24px 24px;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   NAVIGATION HEADER
+   ============================================================ */
+.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(6, 9, 19, 0.78);
+  border-bottom: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .nav-header {
+  background: rgba(248, 245, 238, 0.85);
+}
+
+.nav-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo-glow {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+.brand-logo-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 10px rgba(245, 201, 123, 0.45));
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+.brand-wrapper:hover .brand-logo-svg {
+  transform: rotate(15deg) scale(1.06);
+}
+
+.brand-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-2) 50%, var(--gold-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+
+.brand-tagline {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-arabic {
+  font-family: var(--font-arabic);
+  font-size: 0.85rem;
+  color: var(--gold-2);
+  direction: rtl;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.28);
+  color: var(--teal-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.btn-icon-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-icon-pill:hover {
+  background: var(--card-hover);
+  border-color: var(--gold-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(245, 201, 123, 0.25);
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero-section {
+  position: relative;
+  z-index: 10;
+  padding: 68px 24px 40px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.bismillah-hero {
+  font-family: var(--font-arabic);
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  color: var(--gold-2);
+  margin-bottom: 20px;
+  direction: rtl;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 20px rgba(245, 201, 123, 0.35);
+  animation: fadeIn 1s ease-out;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 201, 123, 0.08);
+  border: 1px solid rgba(245, 201, 123, 0.3);
+  color: var(--gold-2);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal-2);
+  box-shadow: 0 0 10px var(--teal-2);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+}
+
+.hero-title .grad-gold {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--gold-1) 30%, var(--gold-2) 65%, var(--teal-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-desc {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 780px;
+  margin: 0 auto 36px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-stats-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 4vw, 36px);
+  flex-wrap: wrap;
+  padding: 18px 28px;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  max-width: 860px;
+  margin: 0 auto 44px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--gold-2);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--card-border);
+}
+
+/* ============================================================
+   CONTROLS: SEARCH & FILTER BAR
+   ============================================================ */
+.controls-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 1320px;
+  margin: 0 auto 36px;
+  padding: 0 24px;
+}
+
+.controls-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-box-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.search-input-wrapper svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 18px 14px 48px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  backdrop-filter: blur(14px);
+  transition: all 0.25s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold-2);
+  box-shadow: 0 0 0 3px rgba(245, 201, 123, 0.15), var(--shadow-glow);
+  background: var(--card-hover);
+}
+
+.category-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.category-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-pill {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.cat-pill:hover {
+  background: var(--card-hover);
+  color: var(--text-main);
+  border-color: rgba(245, 201, 123, 0.35);
+}
+
+.cat-pill.active {
+  background: linear-gradient(135deg, rgba(245, 201, 123, 0.2), rgba(45, 212, 191, 0.15));
+  border-color: var(--gold-2);
+  color: var(--gold-2);
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(245, 201, 123, 0.2);
+}
+
+/* ============================================================
+   CARDS GRID & EXHIBIT CARDS
+   ============================================================ */
+.showcase-grid-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  flex: 1;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 440px) {
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-item {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.35s var(--transition-smooth);
+  overflow: hidden;
+}
+
+.card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-2), var(--teal-2), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--card-border-hover);
+  background: var(--card-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.card-item:hover::before {
+  opacity: 1;
+}
+
+.card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.card-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
+.cat-quran { background: rgba(245, 201, 123, 0.12); color: var(--gold-2); border: 1px solid rgba(245, 201, 123, 0.3); }
+.cat-prophet { background: rgba(59, 130, 246, 0.12); color: var(--sky-1); border: 1px solid rgba(59, 130, 246, 0.3); }
+.cat-linguistics { background: rgba(45, 212, 191, 0.12); color: var(--teal-2); border: 1px solid rgba(45, 212, 191, 0.3); }
+.cat-lifestyle { background: rgba(185, 140, 255, 0.12); color: #C4B5FD; border: 1px solid rgba(185, 140, 255, 0.3); }
+.cat-psychology { background: rgba(253, 164, 175, 0.12); color: var(--rose-1); border: 1px solid rgba(253, 164, 175, 0.3); }
+
+.card-arabic-motif {
+  font-family: var(--font-arabic);
+  font-size: 1.4rem;
+  color: var(--gold-2);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 22px;
+  flex: 1;
+}
+
+.card-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] .card-highlights {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+.card-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.card-highlight-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--teal-2);
+  flex-shrink: 0;
+}
+
+.card-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.btn-launch {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(245, 201, 123, 0.22), rgba(45, 212, 191, 0.18));
+  border: 1px solid var(--gold-2);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+}
+
+[data-theme="light"] .btn-launch {
+  color: #1E293B;
+  background: linear-gradient(135deg, rgba(180, 140, 50, 0.15), rgba(13, 148, 136, 0.15));
+}
+
+.btn-launch:hover {
+  background: linear-gradient(135deg, var(--gold-2), var(--teal-2));
+  color: #060913;
+  box-shadow: 0 4px 20px rgba(245, 201, 123, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-preview-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-preview-modal:hover {
+  border-color: var(--teal-2);
+  color: var(--teal-2);
+  background: rgba(45, 212, 191, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   LIVE PREVIEW MODAL / DIALOG
+   ============================================================ */
+.preview-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(3, 6, 12, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.preview-modal-backdrop.open {
+  display: grid;
+  opacity: 1;
+}
+
+.modal-dialog-box {
+  width: 100%;
+  max-width: 1200px;
+  height: 88vh;
+  background: #060913;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(0, 0, 0, 0.9);
+  transform: scale(0.96);
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+.preview-modal-backdrop.open .modal-dialog-box {
+  transform: scale(1);
+}
+
+.modal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(12, 18, 34, 0.95);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold-2);
+}
+
+.modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--gold-2);
+}
+
+.modal-btn-close {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #FDA4AF;
+}
+
+.modal-btn-close:hover {
+  background: rgba(244, 63, 94, 0.3);
+}
+
+.modal-iframe-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #000;
+}
+
+/* ============================================================
+   FOOTER SECTION
+   ============================================================ */
+.site-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--card-border);
+  background: rgba(6, 9, 19, 0.92);
+  padding: 60px 24px 36px;
+  margin-top: auto;
+}
+
+[data-theme="light"] .site-footer {
+  background: rgba(248, 245, 238, 0.95);
+}
+
+.footer-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 860px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.footer-brand-col p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  margin-bottom: 18px;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links-list a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links-list a:hover {
+  color: var(--gold-2);
+  transform: translateX(4px);
+}
+
+.footer-bottom-strip {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+[data-theme="light"] .footer-bottom-strip {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+.footer-version-tag {
+  font-family: monospace;
+  letter-spacing: 0.08em;
+  color: var(--gold-2);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 201, 123, 0.08);
+  border: 1px solid rgba(245, 201, 123, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Animated Canvas / Orbs / Geometry -->
+<div class="bg-canvas-wrap">
+  <div class="aurora-orb orb-1"></div>
+  <div class="aurora-orb orb-2"></div>
+  <div class="aurora-orb orb-3"></div>
+  <div class="geometric-grid"></div>
+  <div class="grain-overlay"></div>
+</div>
+
+<!-- TOP HEADER -->
+<header class="nav-header">
+  <div class="nav-container">
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-logo-glow">
+        <svg class="brand-logo-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)"/>
+          <g stroke="var(--gold-2)" stroke-width="12" opacity="0.75" fill="none">
+            <rect x="110" y="110" width="292" height="292" rx="28"/>
+            <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)"/>
+          </g>
+          <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#060913" stroke="var(--gold-2)" stroke-width="10"/>
+          <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#060913" stroke="var(--gold-2)" stroke-width="10"/>
+          <circle cx="256" cy="168" r="16" fill="var(--gold-2)"/>
+        </svg>
+      </div>
+      <div class="brand-title-group">
+        <span class="brand-name">NURULQURAN</span>
+        <span class="brand-tagline"><span class="brand-arabic">نُورُ القُرْآن</span> · Interactive Showcase Portal</span>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <div class="badge-counter">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+        <span>6 Exhibits Live</span>
+      </div>
+      <button class="btn-icon-pill" id="themeToggle" title="Toggle Dark / Light Theme" aria-label="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="bismillah-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div class="hero-badge">
+    <span class="hero-pulse-dot"></span>
+    <span>NurulQuran Digital Showcase</span>
+  </div>
+  <h1 class="hero-title">
+    Exploring Quranic Eloquence,<br>
+    <span class="grad-gold">Linguistic Depth & Prophetic Truth</span>
+  </h1>
+  <p class="hero-desc">
+    An immersive suite of single-file interactive web exhibits by NurulQuran. Unfold morphological syntax visualizers, historical evidences, cognitive psychology, and circadian chronobiology aligned with prophetic guidance.
+  </p>
+
+  <div class="hero-stats-strip">
+    <div class="stat-item">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Full Interactive Apps</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">Free & Open Access</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">0</span>
+      <span class="stat-label">External Dependencies</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">4+</span>
+      <span class="stat-label">Scientific Disciplines</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS & FILTER BAR -->
+<div class="controls-wrap">
+  <div class="controls-inner">
+    <div class="search-box-row">
+      <div class="search-input-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search exhibits by title, topic, Arabic keywords, or concepts..." autocomplete="off">
+      </div>
+    </div>
+
+    <div class="category-pills">
+      <button class="cat-pill active" data-cat="all">All Exhibits (6)</button>
+      <button class="cat-pill" data-cat="quran">Quranic Sciences</button>
+      <button class="cat-pill" data-cat="prophet">Prophetic Evidences</button>
+      <button class="cat-pill" data-cat="linguistics">Arabic & Morphology</button>
+      <button class="cat-pill" data-cat="lifestyle">Lifestyle & Health</button>
+      <button class="cat-pill" data-cat="psychology">Spiritual Psychology</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHOWCASE CARDS GRID -->
+<main class="showcase-grid-wrap">
+  <div class="showcase-grid" id="cardsGrid">
+    
+    <!-- CARD 1: MIRACLES OF QURAN -->
+    <article class="card-item" data-category="quran" data-keywords="miracles signs ijaz ayaat cosmic historical linguistic parting sea iron embryology">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-quran">Quranic Sciences</span>
+        <span class="card-arabic-motif">الآيات</span>
+      </div>
+      <h2 class="card-title">The Signs — Miracles of the Qur'ān</h2>
+      <p class="card-desc">
+        A deep, multi-layered interactive chronicle of the inimitability (Iʿjāz) and 12 profound signs described across the Holy Qur'an, with cosmic visual cards and tafsir reflections.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>12 Interactive 3D Sign Cards & Deep Dives</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Historical Chronicle & Linguistic Inimitability</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Dual Cosmic / Manuscript Color Themes</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="miraclesQuran.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('miraclesQuran.html', 'The Signs — Miracles of the Qur\'ān')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 2: PROOF OF MESSENGER -->
+    <article class="card-item" data-category="prophet" data-keywords="proof messenger prophethood muhammad ten reasons logic lab timeline textual criticism sira">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-prophet">Prophetic Evidences</span>
+        <span class="card-arabic-motif">محمد ﷺ</span>
+      </div>
+      <h2 class="card-title">Ten Reasons — The Case for Muhammad ﷺ</h2>
+      <p class="card-desc">
+        A rigorous, philosophical, and historical presentation of ten reasoned arguments for the prophethood of Muhammad ﷺ, equipped with an interactive Logic Hypothesis Lab.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Interactive 3-Hypothesis Logic Probability Lab</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Chronological Timeline & Textual Preservation</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Complete Counter-Arguments & Primary Sources</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="proofMessenger.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('proofMessenger.html', 'Ten Reasons — The Case for Muhammad ﷺ')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 3: JAHOOL MEANING -->
+    <article class="card-item" data-category="linguistics" data-keywords="jahool jahula unknowing ahzab amanah trust morphology faool root jhl tafsir quiz">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-linguistics">Quranic Word Study</span>
+        <span class="card-arabic-motif">جَهُولًا</span>
+      </div>
+      <h2 class="card-title">جَهُولًا · Jahūlā — The Deeply Unknowing</h2>
+      <p class="card-desc">
+        A deep linguistic and thematic exegesis of Surah Al-Ahzab (33:72), breaking down the intensive pattern فَعُول, the Amanah (Trust), classical lexicons, and an interactive quiz.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Root Morphological Breakdown (ج · ه · ل)</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Synthesis of Classical Exegesis & Lexical History</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Interactive Harakat Switcher & Knowledge Test</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="jahoolMeaning.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('jahoolMeaning.html', 'جَهُولًا · Jahūlā — The Deeply Unknowing')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 4: SHORT SENTENCE VERB -->
+    <article class="card-item" data-category="linguistics" data-keywords="twelve words quranic verb jumla fi'liyyah grammar syntax visualizer irab fail mafool">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-linguistics">Arabic Grammar & Eloquence</span>
+        <span class="card-arabic-motif">الجملة الفعلية</span>
+      </div>
+      <h2 class="card-title">Twelve Words · The Qur'anic Verb</h2>
+      <p class="card-desc">
+        Five shortest verbal sentences in the Qur'an covering 100% of the Arabic verb system. Featuring interactive grammatical role coloring (Fi'l, Fā'il, Maf'ūl, Hāl) and Atlas.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Interactive I'rāb Syntax Visualizer</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Past, Present, Imperative, Passive & Jussive</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Color-Coded Grammar Roles & 8-Question Quiz</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="shortSentenceVerb.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('shortSentenceVerb.html', 'Twelve Words · The Qur\'anic Verb')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 5: SLEEP ADVICE -->
+    <article class="card-item" data-category="lifestyle" data-keywords="sleep golden window chronobiology circadian melatonin sunnah night clock stages">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-lifestyle">Circadian Science & Sunnah</span>
+        <span class="card-arabic-motif">الليل والنهار</span>
+      </div>
+      <h2 class="card-title">The Golden Window — When Should You Sleep?</h2>
+      <p class="card-desc">
+        Circadian chronobiology aligned with prophetic routine. Discover why timing matters more than duration, with a scrollable real-time night sky clock simulator and sleep calculator.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Dynamic Scroll-Driven Night Sky & Clock Simulator</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Circadian Curve Visualizer (Melatonin, Temp, Alertness)</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>UK Biobank & Hadith Sleep Architecture Data</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="sleepAdvice.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('sleepAdvice.html', 'The Golden Window — Chronobiology of Sleep')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 6: ANGER CONTROL -->
+    <article class="card-item" data-category="psychology" data-keywords="anger control psychology breathing exercise prophetic hadith calmness dua">
+      <div class="card-top-row">
+        <span class="card-category-badge cat-psychology">Spiritual Psychology</span>
+        <span class="card-arabic-motif">الكاظمين الغيظ</span>
+      </div>
+      <h2 class="card-title">Allah Loves Those Who Control Anger</h2>
+      <p class="card-desc">
+        A practical, prophetic and cognitive toolkit to restrain anger in real-time. Includes an interactive visual breathing pacer, checklist, and copyable de-escalation statements.
+      </p>
+      <ul class="card-highlights">
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Interactive 4-In / 6-Out Breathing Pacer & Dua</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Prophetic 7-Step Action Progress Checklist</span>
+        </li>
+        <li class="card-highlight-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>One-Click Copyable Calm De-escalation Phrases</span>
+        </li>
+      </ul>
+      <div class="card-actions-row">
+        <a href="angerControl.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('angerControl.html', 'Allah Loves Those Who Control Anger')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<!-- LIVE PREVIEW MODAL -->
+<div class="preview-modal-backdrop" id="previewModal" onclick="closePreviewOnBackdrop(event)">
+  <div class="modal-dialog-box" onclick="event.stopPropagation()">
+    <div class="modal-header-bar">
+      <div class="modal-title-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span class="modal-title" id="modalTitle">Exhibit Preview</span>
+      </div>
+      <div class="modal-controls">
+        <a href="#" target="_blank" id="modalOpenTab" class="modal-btn">
+          <span>Open Full Page</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="modal-btn modal-btn-close" onclick="closePreview()">✕ Close</button>
+      </div>
+    </div>
+    <iframe class="modal-iframe-frame" id="modalIframe" src="" loading="lazy"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand-col">
+      <div class="brand-wrapper">
+        <div class="brand-logo-glow" style="width:36px;height:36px">
+          <svg class="brand-logo-svg" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)"/>
+            <g stroke="var(--gold-2)" stroke-width="12" opacity="0.75" fill="none">
+              <rect x="110" y="110" width="292" height="292" rx="28"/>
+              <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)"/>
+            </g>
+            <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#060913" stroke="var(--gold-2)" stroke-width="10"/>
+            <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#060913" stroke="var(--gold-2)" stroke-width="10"/>
+            <circle cx="256" cy="168" r="16" fill="var(--gold-2)"/>
+          </svg>
+        </div>
+        <span class="brand-name" style="font-size:1.05rem">NURULQURAN</span>
+      </div>
+      <p>
+        NurulQuran is dedicated to making the timeless light, linguistics, and guidance of the Holy Qur'an and Sunnah accessible, understandable, and deeply engaging through modern interactive digital exhibits.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="footer-col-title">Exhibits</h3>
+      <ul class="footer-links-list">
+        <li><a href="miraclesQuran.html">The Signs — Miracles of Qur'an</a></li>
+        <li><a href="proofMessenger.html">Ten Reasons for Muhammad ﷺ</a></li>
+        <li><a href="jahoolMeaning.html">جَهُولًا · Jahūlā Word Study</a></li>
+        <li><a href="shortSentenceVerb.html">Twelve Words · The Qur'anic Verb</a></li>
+        <li><a href="sleepAdvice.html">The Golden Window · Sleep Science</a></li>
+        <li><a href="angerControl.html">Controlling Anger Toolkit</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="footer-col-title">About NurulQuran</h3>
+      <ul class="footer-links-list">
+        <li><a href="https://www.nurulquran.com" target="_blank" rel="noopener">NurulQuran Official Website ↗</a></li>
+        <li><a href="https://quran.com" target="_blank" rel="noopener">Quran.com Explorer ↗</a></li>
+        <li><a href="https://corpus.quran.com" target="_blank" rel="noopener">Quranic Arabic Corpus ↗</a></li>
+        <li><a href="#cardsGrid">All Interactive Studies</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom-strip">
+    <div>
+      <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
+    </div>
+    <div class="footer-version-tag">
+      v1.0.0 (updated 2026-08-19 23:25)
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+const htmlRoot = document.documentElement;
+const themeBtn = document.getElementById('themeToggle');
+
+function setTheme(theme) {
+  htmlRoot.setAttribute('data-theme', theme);
+  localStorage.setItem('nq-theme', theme);
+  themeBtn.innerHTML = theme === 'light' 
+    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>'
+    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+}
+
+const savedTheme = localStorage.getItem('nq-theme') || 'dark';
+setTheme(savedTheme);
+
+themeBtn.addEventListener('click', () => {
+  const current = htmlRoot.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// ============================================================
+// SEARCH & CATEGORY FILTERING
+// ============================================================
+const searchInput = document.getElementById('searchInput');
+const catPills = document.querySelectorAll('.cat-pill');
+const cardItems = document.querySelectorAll('.card-item');
+
+let activeCategory = 'all';
+let searchQuery = '';
+
+function filterCards() {
+  cardItems.forEach(card => {
+    const cardCat = card.dataset.category;
+    const cardKeywords = (card.dataset.keywords + ' ' + card.innerText).toLowerCase();
+    
+    const matchesCat = activeCategory === 'all' || cardCat === activeCategory;
+    const matchesSearch = searchQuery === '' || cardKeywords.includes(searchQuery);
+    
+    if (matchesCat && matchesSearch) {
+      card.style.display = 'flex';
+      card.style.animation = 'fadeIn 0.4s ease forwards';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+catPills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    catPills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    activeCategory = pill.dataset.cat;
+    filterCards();
+  });
+});
+
+searchInput.addEventListener('input', (e) => {
+  searchQuery = e.target.value.toLowerCase().trim();
+  filterCards();
+});
+
+// ============================================================
+// PREVIEW MODAL
+// ============================================================
+const previewModal = document.getElementById('previewModal');
+const modalIframe = document.getElementById('modalIframe');
+const modalTitle = document.getElementById('modalTitle');
+const modalOpenTab = document.getElementById('modalOpenTab');
+
+function openPreview(url, title) {
+  modalTitle.textContent = title;
+  modalIframe.src = url;
+  modalOpenTab.href = url;
+  previewModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePreview() {
+  previewModal.classList.remove('open');
+  modalIframe.src = '';
+  document.body.style.overflow = '';
+}
+
+function closePreviewOnBackdrop(e) {
+  if (e.target === previewModal) {
+    closePreview();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && previewModal.classList.contains('open')) {
+    closePreview();
+  }
+});
+</script>
+
+</body>
+</html>

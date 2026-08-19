@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Allah Loves Those Who Control Anger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060911;
+  --card:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.10);
+  --gold:#F5C97B;
+  --mint:#7EE3C6;
+  --sky:#8FB6FF;
+  --rose:#FF9DB0;
+  --muted:#93A0B4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);color:#fff;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- BACKGROUND ---------- */
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(110px);opacity:.42}
+.b1{width:60vw;height:60vw;background:#0F7F6B;top:-22vw;left:-18vw;animation:d1 20s ease-in-out infinite}
+.b2{width:55vw;height:55vw;background:#2E4FD8;bottom:-25vw;right:-15vw;animation:d2 26s ease-in-out infinite}
+.b3{width:40vw;height:40vw;background:#8A5A1F;top:45%;left:35%;opacity:.28;animation:d1 32s ease-in-out infinite reverse}
+@keyframes d1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,7vw) scale(1.12)}}
+@keyframes d2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vw,-5vw) scale(1.08)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+.stars{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.5),transparent),
+  radial-gradient(1px 1px at 70% 15%,rgba(255,255,255,.35),transparent),
+  radial-gradient(1px 1px at 85% 60%,rgba(255,255,255,.4),transparent),
+  radial-gradient(1px 1px at 35% 80%,rgba(255,255,255,.3),transparent);}
+
+/* ---------- NURULQURAN BRAND BAR ---------- */
+.nq-global-bar{position:fixed;top:0;left:0;right:0;z-index:9990;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:rgba(6,10,17,.82);border-bottom:1px solid rgba(245,201,123,.22);padding:9px 18px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.nq-global-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nq-brand-tag{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:transform .2s ease}
+.nq-brand-tag:hover{transform:scale(1.02)}
+.nq-mini-logo{width:32px;height:32px;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(245,201,123,.3))}
+.nq-brand-text{display:flex;flex-direction:column;line-height:1.15}
+.nq-brand-name{font-size:.86rem;font-weight:700;letter-spacing:.18em;background:linear-gradient(135deg,#FFF2CC 0%,#F5C97B 50%,#D4AF37 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nq-brand-arabic{font-size:.74rem;letter-spacing:.04em;color:rgba(255,255,255,.65);font-family:'Amiri',serif;direction:rtl}
+.nq-bar-actions{display:flex;align-items:center;gap:8px}
+.nq-hub-link{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#F5C97B;background:rgba(245,201,123,.09);border:1px solid rgba(245,201,123,.28);padding:6px 14px;border-radius:99px;backdrop-filter:blur(8px);transition:all .25s ease}
+.nq-hub-link:hover{background:rgba(245,201,123,.22);border-color:#F5C97B;color:#fff;box-shadow:0 0 16px rgba(245,201,123,.3);transform:translateY(-1px)}
+.nq-footer-badge{text-align:center;padding:32px 16px 20px;border-top:1px solid rgba(245,201,123,.14);margin-top:40px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* ---------- LAYOUT ---------- */
+.wrap{position:relative;z-index:2;max-width:760px;margin:50px auto 0;padding:7vh 22px 90px}
+.reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- HERO ---------- */
+.pill{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--mint);padding:9px 18px;border-radius:99px;
+  border:1px solid rgba(126,227,198,.28);background:rgba(126,227,198,.06)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+
+h1{font-family:'Fraunces',serif;font-weight:900;letter-spacing:-.035em;
+  font-size:clamp(44px,10vw,88px);line-height:.98;margin:28px 0 0}
+.grad{background:linear-gradient(100deg,var(--gold) 0%,var(--mint) 55%,var(--sky) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:20px;font-size:18px;line-height:1.65;color:var(--muted);max-width:520px}
+
+/* ---------- AYAH ---------- */
+.ayah{position:relative;margin-top:40px;padding:40px 28px 32px;border-radius:28px;
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));
+  border:1px solid var(--line);backdrop-filter:blur(18px);overflow:hidden;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+.ayah::before{content:"";position:absolute;top:-60%;left:-30%;width:70%;height:220%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+  transform:rotate(18deg);animation:sh 7s linear infinite}
+@keyframes sh{0%{left:-40%}100%{left:120%}}
+.orn{text-align:center;color:var(--gold);opacity:.55;font-size:15px;letter-spacing:6px}
+.ar{font-family:'Amiri',serif;font-weight:700;direction:rtl;text-align:center;
+  font-size:clamp(25px,6.2vw,40px);line-height:2;color:#FFE8BC;margin:18px 0;
+  text-shadow:0 0 40px rgba(245,201,123,.18)}
+.tr{text-align:center;font-size:17px;line-height:1.7;color:#D5DEEA;font-style:italic}
+.ref{margin-top:16px;text-align:center;font-size:11px;letter-spacing:.28em;color:var(--mint)}
+
+/* ---------- BUTTON ---------- */
+.big{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+  margin-top:26px;padding:23px;border:none;cursor:pointer;border-radius:20px;
+  font-family:inherit;font-size:19px;font-weight:800;color:#050810;letter-spacing:-.01em;
+  background:linear-gradient(100deg,var(--gold),var(--mint));
+  box-shadow:0 16px 44px -14px rgba(126,227,198,.5);transition:.28s}
+.big:hover{transform:translateY(-3px);box-shadow:0 24px 55px -14px rgba(126,227,198,.65)}
+.big:active{transform:translateY(0)}
+
+/* ---------- TABS ---------- */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:60px 0 26px;
+  padding:7px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.tab{padding:15px 10px;border-radius:14px;border:none;cursor:pointer;background:transparent;
+  color:var(--muted);font-family:inherit;font-size:15px;font-weight:700;transition:.25s;line-height:1.3}
+.tab.act{background:linear-gradient(100deg,rgba(245,201,123,.16),rgba(126,227,198,.16));
+  color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.panel{display:none;animation:fade .45s ease}
+.panel.act{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ---------- HEADINGS ---------- */
+.h2{font-family:'Fraunces',serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+.h2s{font-size:14.5px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.label{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#6F7C90;margin:34px 0 14px}
+
+/* ---------- STEPS ---------- */
+.step{display:flex;gap:15px;align-items:flex-start;padding:18px 20px;margin-bottom:9px;
+  border-radius:18px;background:var(--card);border:1px solid var(--line);
+  cursor:pointer;transition:.22s}
+.step:hover{background:rgba(255,255,255,.085);transform:translateX(4px)}
+.box{width:26px;height:26px;flex:0 0 26px;border-radius:9px;border:2px solid rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:13px;color:transparent;transition:.22s;margin-top:1px}
+.step.on .box{background:var(--mint);border-color:var(--mint);color:#050810}
+.step.on .t{opacity:.4;text-decoration:line-through}
+.t{font-size:16.5px;font-weight:600;line-height:1.45}
+.t small{display:block;font-weight:400;font-size:13.5px;color:#96A3B5;margin-top:4px;text-decoration:none;line-height:1.55}
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:16px}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--mint));transition:.5s cubic-bezier(.2,.8,.2,1)}
+.msg{text-align:center;margin-top:14px;font-size:15px;color:var(--mint);font-weight:600;min-height:22px}
+
+/* ---------- DO / DONT ---------- */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+.col{padding:22px 20px;border-radius:22px;border:1px solid var(--line);background:var(--card)}
+.col.good{border-color:rgba(126,227,198,.28);background:linear-gradient(160deg,rgba(126,227,198,.09),rgba(255,255,255,.02))}
+.col.bad{border-color:rgba(255,157,176,.25);background:linear-gradient(160deg,rgba(255,157,176,.08),rgba(255,255,255,.02))}
+.col h4{font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.good h4{color:var(--mint)} .bad h4{color:var(--rose)}
+.col li{list-style:none;font-size:15px;line-height:1.55;padding:9px 0 9px 22px;position:relative;color:#DCE3ED}
+.good li::before{content:"✓";position:absolute;left:0;color:var(--mint);font-weight:700}
+.bad li::before{content:"✕";position:absolute;left:0;color:var(--rose);font-weight:700}
+
+/* ---------- SAY THIS ---------- */
+.say{padding:17px 20px;margin-bottom:9px;border-radius:16px;cursor:pointer;
+  background:rgba(143,182,255,.07);border:1px solid rgba(143,182,255,.22);
+  font-size:16.5px;transition:.22s;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.say:hover{background:rgba(143,182,255,.14)}
+.say span{font-size:11px;letter-spacing:.18em;color:var(--sky);white-space:nowrap;opacity:.75}
+
+/* ---------- NOTE ---------- */
+.note{margin-top:26px;padding:22px;border-radius:20px;
+  background:rgba(255,157,176,.07);border:1px solid rgba(255,157,176,.25)}
+.note b{color:var(--rose);display:block;margin-bottom:8px;font-size:14px;letter-spacing:.05em}
+.note p{font-size:15px;line-height:1.7;color:#E3D6DA}
+
+/* ---------- QUOTE ---------- */
+.quote{margin-top:46px;padding:30px 26px;border-radius:24px;text-align:center;
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+  border:1px solid var(--line)}
+.quote p{font-family:'Fraunces',serif;font-size:20px;line-height:1.6;color:#EFE3CB}
+.quote small{display:block;margin-top:14px;font-size:12px;letter-spacing:.2em;color:var(--muted)}
+
+/* ---------- MODAL ---------- */
+.modal{position:fixed;inset:0;z-index:99;background:rgba(4,7,14,.97);backdrop-filter:blur(8px);
+  display:none;place-items:center;text-align:center;padding:26px}
+.modal.show{display:grid;animation:fade .4s}
+.ring{width:210px;height:210px;border-radius:50%;margin:0 auto 36px;position:relative;
+  background:radial-gradient(circle,rgba(126,227,198,.32),rgba(126,227,198,.03) 70%);
+  border:2px solid rgba(126,227,198,.45);transition:transform 4s ease-in-out;
+  box-shadow:0 0 70px rgba(126,227,198,.25)}
+.ring.in{transform:scale(1.42)}
+#bt{font-family:'Fraunces',serif;font-size:32px;font-weight:600}
+#bs{margin-top:10px;color:var(--mint);font-size:13px;letter-spacing:.28em}
+.dua{margin-top:30px;font-family:'Amiri',serif;font-size:26px;color:#FFE8BC;direction:rtl}
+.duat{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.6}
+.close{margin-top:34px;padding:14px 34px;border-radius:99px;cursor:pointer;background:transparent;
+  border:1px solid rgba(255,255,255,.22);color:#fff;font-family:inherit;font-size:15px;transition:.22s}
+.close:hover{background:rgba(255,255,255,.1)}
+footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-height:1.9}
+</style>
+</head>
+<body>
+
+<nav class="nq-global-bar" aria-label="NurulQuran Global Navigation">
+  <div class="nq-global-inner">
+    <a href="index.html" class="nq-brand-tag" title="NurulQuran Showcase Portal">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.14)" />
+        <g stroke="#F5C97B" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#081418" stroke="#F5C97B" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#081418" stroke="#F5C97B" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="#F5C97B" />
+      </svg>
+      <div class="nq-brand-text">
+        <span class="nq-brand-name">NURULQURAN</span>
+        <span class="nq-brand-arabic">نُورُ القُرْآن</span>
+      </div>
+    </a>
+    <div class="nq-bar-actions">
+      <a href="index.html" class="nq-hub-link" title="Explore all interactive exhibits">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Showcase Hub</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="stars"></div><div class="grain"></div>
+
+<div class="wrap">
+
+  <div class="reveal">
+    <div class="pill"><span class="dot"></span>Remember this today</div>
+    <h1>Allah loves<br>those who<br><span class="grad">control anger.</span></h1>
+    <p class="sub">Not the ones who never feel it. The ones who feel it — and hold it back.</p>
+  </div>
+
+  <div class="ayah reveal">
+    <div class="orn">۞ ✦ ۞</div>
+    <div class="ar">وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ</div>
+    <div class="tr">“…those who restrain anger and pardon people.”</div>
+    <div class="ref">QURAN 3:134 — PART OF THE VERSE</div>
+  </div>
+
+  <button class="big reveal" onclick="openB()">🫧 I'm angry right now</button>
+
+  <div class="tabs reveal">
+    <button class="tab act" onclick="tab(0,this)">When I'm angry</button>
+    <button class="tab" onclick="tab(1,this)">When they're angry</button>
+  </div>
+
+  <!-- PANEL 1 -->
+  <div class="panel act" id="p0">
+    <div class="h2">Do this. In order.</div>
+    <p class="h2s">Tap each one when it's done.</p>
+    <div id="steps"></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <!-- PANEL 2 -->
+  <div class="panel" id="p1">
+    <div class="h2">When he's angry.</div>
+    <p class="h2s">You can't control him. You can control what happens next. Your goal right now is to lower the heat — not to win.</p>
+
+    <div class="two">
+      <div class="col good">
+        <h4>Do</h4>
+        <ul>
+          <li>Lower your voice below his</li>
+          <li>Let him finish. Don't cut in</li>
+          <li>Stay still — no pointing, no eye-rolling</li>
+          <li>Say his point back to him so he knows he was heard</li>
+          <li>Give space: “Let's talk in 20 minutes”</li>
+          <li>Bring water or tea. Small kindness cools fast</li>
+          <li>Fix the problem later, when he's calm</li>
+        </ul>
+      </div>
+      <div class="col bad">
+        <h4>Don't</h4>
+        <ul>
+          <li>Shout back — it doubles the fire</li>
+          <li>Say “calm down” or “you're crazy”</li>
+          <li>Bring up old fights</li>
+          <li>Involve his family or yours mid-fight</li>
+          <li>Demand answers while he's shouting</li>
+          <li>Threaten or slam doors</li>
+          <li>Try to prove you're right now</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="label">Say this — tap to copy</div>
+    <div id="says"></div>
+
+    <div class="label">Later, when he's calm</div>
+    <div class="col">
+      <ul>
+        <li style="padding-left:0">Pick a quiet time. Not at night, not when hungry.</li>
+        <li style="padding-left:0">Start with “I” not “you.” <em>“I felt scared when you shouted.”</em></li>
+        <li style="padding-left:0">One issue only. Don't stack them.</li>
+        <li style="padding-left:0">Ask what helps him: space, silence, a walk? Agree on a signal for next time.</li>
+        <li style="padding-left:0">Make du'a for him. Ask Allah to soften his heart.</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <b>⚠ Important</b>
+      <p>Controlling your response is not the same as accepting harm. If there is hitting, threats, or fear for your safety — that is not anger, that is abuse. Leave the situation, tell someone you trust, and get help. Islam never asks you to stay in danger.</p>
+    </div>
+  </div>
+
+  <div class="quote reveal">
+    <p>“The strong one is not the one who overpowers people. The strong one is the one who controls himself when he is angry.”</p>
+    <small>PROPHET MUHAMMAD ﷺ — BUKHARI</small>
+  </div>
+
+  <footer class="reveal">
+    <p>Anger passes. What you say in it does not.<br>Stay quiet for 60 seconds and you already won.</p>
+    <div class="nq-footer-badge">
+      <div class="nq-footer-logo-row">
+        <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)" />
+          <g stroke="#F5C97B" stroke-width="12" opacity="0.65" fill="none">
+            <rect x="110" y="110" width="292" height="292" rx="28" />
+            <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+          </g>
+          <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#081418" stroke="#F5C97B" stroke-width="10" />
+          <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#081418" stroke="#F5C97B" stroke-width="10" />
+          <circle cx="256" cy="168" r="16" fill="#F5C97B" />
+        </svg>
+        <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C97B">NURULQURAN · نُورُ القُرْآن</span>
+      </div>
+      <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+    </div>
+  </footer>
+</div>
+
+<!-- BREATHING -->
+<div class="modal" id="modal">
+  <div>
+    <div class="ring" id="ring"></div>
+    <div id="bt">Breathe in</div>
+    <div id="bs">4 SECONDS</div>
+    <div class="dua">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</div>
+    <div class="duat">A'udhu billahi min ash-shaytan ir-rajim<br>“I seek refuge in Allah from Shaytan” — say it now</div>
+    <button class="close" onclick="closeB()">I'm calm</button>
+  </div>
+</div>
+
+<script>
+/* steps */
+const data=[
+ ["Say: A'udhu billahi min ash-shaytan ir-rajim","The Prophet ﷺ taught this as the first move."],
+ ["Close your mouth. Say nothing.","Not one word. Silence costs you nothing."],
+ ["Change your position","Standing? Sit down. Sitting? Lie down."],
+ ["Leave the room","Walk out before you say what you can't take back."],
+ ["Water — drink it slow, or make wudu","Cold water on the face. Slow sips."],
+ ["Breathe in 4, out 6 — five times","Use the button above."],
+ ["Let it go and forgive","Allah loves the ones who pardon people."]
+];
+const c=document.getElementById('steps');
+data.forEach(d=>{
+  const e=document.createElement('div');e.className='step';
+  e.innerHTML=`<div class="box">✓</div><div class="t">${d[0]}<small>${d[1]}</small></div>`;
+  e.onclick=()=>{e.classList.toggle('on');upd()};c.appendChild(e);
+});
+function upd(){
+  const n=document.querySelectorAll('.step.on').length;
+  fill.style.width=(n/data.length*100)+'%';
+  msg.textContent=n===data.length?"Done. You held it back — and Allah loves that.":"";
+}
+
+/* say this */
+const lines=[
+ "“You're right, I hear you.”",
+ "“Give me a minute, I want to understand.”",
+ "“I'm not against you. I'm with you.”",
+ "“Let's sit down and eat first.”",
+ "“I don't want to fight with you.”",
+ "“Can we talk about this after Maghrib?”"
+];
+const sc=document.getElementById('says');
+lines.forEach(l=>{
+  const e=document.createElement('div');e.className='say';
+  e.innerHTML=`<div>${l}</div><span>COPY</span>`;
+  e.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(l.replace(/[“”]/g,''));
+    const s=e.querySelector('span');s.textContent="COPIED ✓";setTimeout(()=>s.textContent="COPY",1400)};
+  sc.appendChild(e);
+});
+
+/* tabs */
+function tab(i,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));el.classList.add('act');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('act'));
+  document.getElementById('p'+i).classList.add('act');
+}
+
+/* breathing */
+let timer;
+function openB(){
+  modal.classList.add('show');let ph=0;
+  (function run(){
+    if(ph===0){ring.classList.add('in');ring.style.transitionDuration="4s";bt.textContent="Breathe in";bs.textContent="4 SECONDS";timer=setTimeout(()=>{ph=1;run()},4000);}
+    else{ring.classList.remove('in');ring.style.transitionDuration="6s";bt.textContent="Breathe out";bs.textContent="6 SECONDS";timer=setTimeout(()=>{ph=0;run()},6000);}
+  })();
+}
+function closeB(){clearTimeout(timer);modal.classList.remove('show')}
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>

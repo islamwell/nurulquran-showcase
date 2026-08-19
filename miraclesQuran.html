@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Signs — Miracles of the Qur'ān</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@200;300;400;500;600&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+@property --ang { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@property --glow { syntax: '<number>'; initial-value: 0; inherits: false; }
+
+:root{
+  --gold:#e8c37a; --gold-2:#c79a52; --gold-3:#8d6427;
+  --emerald:#3fd0a8; --lapis:#4a6cf7;
+  --bg:#04060d; --bg-2:#080c18; --bg-3:#0d1striped;
+  --ink:#f0f3fa; --ink-2:#a8b2cc; --ink-3:#6b7590;
+  --line:rgba(232,195,122,.16);
+  --line-strong:rgba(232,195,122,.42);
+  --glass:rgba(255,255,255,.035);
+  --glass-2:rgba(255,255,255,.06);
+  --shadow:0 30px 90px -30px rgba(0,0,0,.9);
+  --star-op:1;
+  --f-display:"Cormorant Garamond",Georgia,serif;
+  --f-body:"Inter",system-ui,sans-serif;
+  --f-ar:"Amiri",serif;
+  --f-ar-display:"Aref Ruqaa",serif;
+  --f-kufi:"Reem Kufi",sans-serif;
+  --r:20px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,.05,.36,1);
+}
+[data-theme="manuscript"]{
+  --gold:#8a5e1e; --gold-2:#a37a33; --gold-3:#6d4813;
+  --emerald:#1f7a5f;
+  --bg:#f4ede0; --bg-2:#ece2cf; --bg-3:#e3d7c0;
+  --ink:#191408; --ink-2:#5c5040; --ink-3:#8c7f6b;
+  --line:rgba(109,72,19,.20);
+  --line-strong:rgba(109,72,19,.45);
+  --glass:rgba(255,255,255,.5);
+  --glass-2:rgba(255,255,255,.72);
+  --shadow:0 24px 70px -30px rgba(80,55,15,.4);
+  --star-op:0;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--f-body); font-weight:300;
+  line-height:1.65; overflow-x:hidden;
+  transition:background .8s var(--ease), color .8s var(--ease);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:#04060d}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:6px}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-3),var(--gold-2));border-radius:20px;border:3px solid var(--bg-2)}
+
+/* ============================================================
+   ATMOSPHERE
+   ============================================================ */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:var(--star-op);transition:opacity .8s var(--ease)}
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(90px);opacity:.7}
+.aurora i{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:drift 26s var(--ease-io) infinite alternate}
+[data-theme="manuscript"] .aurora i{mix-blend-mode:multiply;opacity:.5}
+.aurora i:nth-child(1){width:46vw;height:46vw;left:-8vw;top:2vh;background:radial-gradient(circle,rgba(74,108,247,.35),transparent 68%)}
+.aurora i:nth-child(2){width:40vw;height:40vw;right:-6vw;top:24vh;background:radial-gradient(circle,rgba(232,195,122,.28),transparent 68%);animation-delay:-9s}
+.aurora i:nth-child(3){width:52vw;height:52vw;left:22vw;bottom:-14vh;background:radial-gradient(circle,rgba(63,208,168,.18),transparent 70%);animation-delay:-16s}
+@keyframes drift{to{transform:translate3d(8vw,-6vh,0) scale(1.25)}}
+
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;mix-blend-mode:overlay}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 30%,transparent 40%,var(--bg) 100%)}
+
+/* geometric watermark */
+.geo-wm{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.055;
+  background-image:var(--geo);background-size:220px 220px}
+[data-theme="manuscript"] .geo-wm{opacity:.11}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+#loader{position:fixed;inset:0;z-index:200;background:var(--bg);
+  display:grid;place-items:center;gap:0;transition:opacity 1s var(--ease),visibility 1s}
+#loader.done{opacity:0;visibility:hidden}
+.loader-in{text-align:center}
+.loader-star{width:96px;height:96px;margin:0 auto 26px;animation:spin 9s linear infinite}
+.loader-star path{fill:none;stroke:var(--gold);stroke-width:1.1;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:draw 2.4s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bismillah{font-family:var(--f-ar-display);font-size:clamp(1.3rem,4vw,2.1rem);
+  color:var(--gold);direction:rtl;opacity:0;animation:fadeUp 1.4s .7s var(--ease) forwards}
+.loading-bar{width:150px;height:1px;background:var(--line);margin:26px auto 0;overflow:hidden}
+.loading-bar i{display:block;height:100%;width:100%;background:var(--gold);
+  transform:translateX(-100%);animation:sweep 2.4s .3s var(--ease) forwards}
+@keyframes sweep{to{transform:translateX(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   CURSOR
+   ============================================================ */
+.cur,.cur-r{position:fixed;top:0;left:0;z-index:150;pointer-events:none;border-radius:50%;
+  mix-blend-mode:difference;will-change:transform}
+.cur{width:6px;height:6px;background:#fff;margin:-3px 0 0 -3px}
+.cur-r{width:34px;height:34px;border:1px solid rgba(255,255,255,.6);margin:-17px 0 0 -17px;
+  transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),opacity .3s}
+body.hot .cur-r{width:64px;height:64px;margin:-32px 0 0 -32px;border-color:var(--gold)}
+@media (hover:none){.cur,.cur-r{display:none}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.progress{position:fixed;top:0;left:0;height:2px;z-index:100;width:0;
+  background:linear-gradient(90deg,var(--gold-3),var(--gold),#fff8e6);
+  box-shadow:0 0 16px var(--gold)}
+header.nav{position:fixed;top:0;left:0;right:0;z-index:90;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(16px,4vw,48px);
+  transition:background .5s var(--ease),backdrop-filter .5s,border-color .5s;
+  border-bottom:1px solid transparent}
+header.nav.stuck{background:color-mix(in srgb,var(--bg) 72%,transparent);
+  backdrop-filter:blur(18px) saturate(140%);border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:12px;letter-spacing:.2em;
+  font-size:.7rem;text-transform:uppercase;font-weight:600;color:var(--ink-2);text-decoration:none}
+.brand svg.nq-mini-logo{width:28px;height:28px;flex:none;filter:drop-shadow(0 2px 6px rgba(232,195,122,.35))}
+.brand b{color:var(--gold);letter-spacing:.18em}
+.nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+.nav-links a{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);position:relative;padding:6px 0;transition:color .35s;text-decoration:none}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--gold);transition:width .4s var(--ease)}
+.nav-links a:hover{color:var(--ink)}.nav-links a:hover::after{width:100%}
+.nq-hub-badge{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--gold);background:rgba(232,195,122,.09);border:1px solid var(--line);padding:5px 12px;border-radius:99px;transition:.3s}
+.nq-hub-badge:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);box-shadow:0 0 14px rgba(232,195,122,.4)}
+.nq-hub-badge::after{display:none!important}
+@media(max-width:860px){.nav-links a:not(.theme-btn):not(.nq-hub-badge){display:none}}
+.theme-btn{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;transition:.4s var(--ease);flex:none;background:transparent;cursor:pointer}
+.theme-btn:hover{border-color:var(--line-strong);transform:rotate(-25deg)}
+.theme-btn svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:1.4}
+.nq-footer-badge{text-align:center;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:28px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* side dots */
+.dots{position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);
+  z-index:80;display:flex;flex-direction:column;gap:14px}
+@media(max-width:900px){.dots{display:none}}
+.dots button{width:9px;height:9px;border-radius:50%;border:1px solid var(--line-strong);
+  transition:.4s var(--ease);position:relative}
+.dots button.on{background:var(--gold);box-shadow:0 0 12px var(--gold);transform:scale(1.35)}
+.dots button span{position:absolute;right:22px;top:50%;transform:translate(6px,-50%);
+  white-space:nowrap;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);opacity:0;transition:.4s var(--ease);pointer-events:none}
+.dots button:hover span{opacity:1;transform:translate(0,-50%)}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+main{position:relative;z-index:2}
+section{position:relative;padding:clamp(90px,13vh,170px) clamp(18px,5vw,64px)}
+.wrap{max-width:1220px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.63rem;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.eyebrow::before{content:'';width:38px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+h1,h2,h3{font-family:var(--f-display);font-weight:300;line-height:1.06;letter-spacing:-.02em}
+h2{font-size:clamp(2.1rem,5.6vw,4.2rem)}
+h3{font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.25}
+.lede{font-size:clamp(1rem,1.35vw,1.15rem);color:var(--ink-2);max-width:60ch;font-weight:300}
+.gold-t{background:linear-gradient(105deg,var(--gold-3),var(--gold) 38%,#fff6dd 52%,var(--gold) 66%,var(--gold-3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;
+  animation:shine 7s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);filter:blur(6px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);
+  transition-delay:var(--d,0ms)}
+.rv.in{opacity:1;transform:none;filter:blur(0)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;
+  padding-top:120px;overflow:hidden}
+.mandala{position:absolute;top:50%;left:50%;width:min(148vh,150vw);aspect-ratio:1;
+  transform:translate(-50%,-50%);opacity:.13;pointer-events:none}
+.mandala svg{width:100%;height:100%;animation:spin 150s linear infinite}
+.mandala path,.mandala circle,.mandala polygon{fill:none;stroke:var(--gold);stroke-width:.4}
+
+/* split moon */
+.moon-stage{position:relative;width:clamp(150px,22vw,240px);aspect-ratio:1;margin:0 auto 46px;
+  filter:drop-shadow(0 0 70px rgba(232,195,122,.4))}
+.mhalf{position:absolute;inset:0;border-radius:50%;
+  background:
+    radial-gradient(circle at 26px 22px,rgba(0,0,0,.16) 0 8px,transparent 9px),
+    radial-gradient(circle at 76% 62%,rgba(0,0,0,.13) 0 13px,transparent 14px),
+    radial-gradient(circle at 44% 80%,rgba(0,0,0,.1) 0 9px,transparent 10px),
+    radial-gradient(circle at 34% 30%,#fffdf6,#f0dcae 42%,#c9a濃 0),
+    radial-gradient(circle at 34% 30%,#fffdf6,#f2e0b6 45%,#c2a067 78%,#8e7440);
+  animation:brea 7s var(--ease-io) infinite alternate}
+.mhalf.l{clip-path:inset(0 50.2% 0 0);animation:splitL 3s 1.6s var(--ease) forwards,brea 7s var(--ease-io) infinite alternate}
+.mhalf.r{clip-path:inset(0 0 0 50.2%);animation:splitR 3s 1.6s var(--ease) forwards,brea 7s var(--ease-io) infinite alternate}
+@keyframes splitL{0%{transform:none}55%{transform:translateX(-15%) rotate(-7deg)}100%{transform:translateX(-7%) rotate(-3deg)}}
+@keyframes splitR{0%{transform:none}55%{transform:translateX(15%) rotate(7deg)}100%{transform:translateX(7%) rotate(3deg)}}
+@keyframes brea{to{filter:brightness(1.08)}}
+.seam{position:absolute;left:50%;top:-14%;width:2px;height:128%;transform:translateX(-50%);
+  background:linear-gradient(transparent,#fff,#fff,transparent);opacity:0;
+  animation:flash 3s 1.6s var(--ease) forwards}
+@keyframes flash{0%{opacity:0;filter:blur(0)}18%{opacity:1;filter:blur(3px)}100%{opacity:.16;filter:blur(2px)}}
+
+.hero-ar{font-family:var(--f-ar-display);direction:rtl;
+  font-size:clamp(2rem,7vw,4.6rem);line-height:1.5;margin-bottom:6px}
+.hero h1{font-size:clamp(2.6rem,9.5vw,7.4rem);margin:4px 0 22px}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w i{display:inline-block;font-style:normal;transform:translateY(105%);
+  transition:transform 1.2s var(--ease);transition-delay:var(--d)}
+.hero.go h1 .w i{transform:none}
+.hero .lede{margin:0 auto;text-align:center}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
+.chip{border:1px solid var(--line);border-radius:100px;padding:8px 17px;
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+  background:var(--glass);backdrop-filter:blur(10px);transition:.4s var(--ease)}
+.chip:hover{border-color:var(--line-strong);color:var(--ink);transform:translateY(-2px)}
+.scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-3)}
+.scroll-cue i{display:block;width:1px;height:52px;background:linear-gradient(var(--gold),transparent);
+  position:relative;overflow:hidden}
+.scroll-cue i::after{content:'';position:absolute;inset:0;background:var(--gold);
+  animation:cue 2.2s var(--ease-io) infinite}
+@keyframes cue{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marq{border-block:1px solid var(--line);padding:0;overflow:hidden;
+  background:var(--glass);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marq-t{display:flex;gap:0;width:max-content;animation:roll 42s linear infinite}
+.marq:hover .marq-t{animation-play-state:paused}
+.marq-t span{display:flex;align-items:center;gap:34px;padding:20px 34px;
+  font-family:var(--f-ar);direction:rtl;font-size:clamp(1rem,1.8vw,1.5rem);color:var(--ink-2);white-space:nowrap}
+.marq-t span::after{content:'✦';font-family:var(--f-body);color:var(--gold);font-size:.7em}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   IJAZ / STATS
+   ============================================================ */
+.ijaz{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,6vw,86px);align-items:center}
+@media(max-width:920px){.ijaz{grid-template-columns:1fr}}
+.mihrab{position:relative;padding:clamp(34px,5vw,58px) clamp(24px,4vw,46px);
+  border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(16px);
+  border-radius:200px 200px var(--r) var(--r);text-align:center;box-shadow:var(--shadow)}
+.mihrab::before{content:'';position:absolute;inset:9px;border:1px solid var(--line);
+  border-radius:190px 190px 12px 12px;pointer-events:none}
+.mihrab .ayah{font-family:var(--f-ar);direction:rtl;font-size:clamp(1.35rem,2.9vw,2.05rem);
+  line-height:2.15;color:var(--gold)}
+.mihrab .tr{font-family:var(--f-display);font-style:italic;font-size:1.05rem;
+  color:var(--ink-2);margin-top:22px;line-height:1.6}
+.mihrab .rf{margin-top:16px;font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-3)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px;border-radius:var(--r);overflow:hidden}
+.stat{background:var(--bg);padding:26px 18px;text-align:center;transition:background .4s}
+.stat:hover{background:var(--glass-2)}
+.stat b{display:block;font-family:var(--f-display);font-size:clamp(1.9rem,4vw,2.9rem);
+  font-weight:300;color:var(--gold);line-height:1}
+.stat small{display:block;margin-top:9px;font-size:.6rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--ink-3)}
+
+/* ============================================================
+   FILTERS + GRID
+   ============================================================ */
+.head-row{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;
+  justify-content:space-between;margin-bottom:52px}
+.pills{display:flex;flex-wrap:wrap;gap:9px}
+.pill{border:1px solid var(--line);border-radius:100px;padding:9px 18px;font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);transition:.4s var(--ease)}
+.pill:hover{color:var(--ink);border-color:var(--line-strong)}
+.pill.on{background:var(--gold);border-color:var(--gold);color:#05070f;font-weight:500}
+[data-theme="manuscript"] .pill.on{color:#fdf8ee}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:22px}
+.card{position:relative;border-radius:var(--r);padding:1px;overflow:hidden;
+  background:var(--line);transition:transform .7s var(--ease),opacity .5s var(--ease);
+  transform-style:preserve-3d;will-change:transform}
+.card.wide{grid-column:span 2}
+@media(max-width:700px){.card.wide{grid-column:span 1}}
+.card.hide{display:none}
+.card::before{content:'';position:absolute;inset:-40%;z-index:0;opacity:0;
+  background:conic-gradient(from var(--ang),transparent 0 62%,var(--gold-2) 76%,#fff8e0 82%,var(--gold-2) 88%,transparent 100%);
+  transition:opacity .6s;animation:rot 5s linear infinite paused}
+.card:hover::before{opacity:1;animation-play-state:running}
+@keyframes rot{to{--ang:360deg}}
+.card-in{position:relative;z-index:1;height:100%;border-radius:calc(var(--r) - 1px);
+  background:linear-gradient(165deg,var(--glass-2),var(--bg-2) 65%);
+  backdrop-filter:blur(20px);padding:clamp(24px,2.6vw,34px);
+  display:flex;flex-direction:column;gap:16px;overflow:hidden}
+[data-theme="manuscript"] .card-in{background:linear-gradient(165deg,#fffdf7,var(--bg-2))}
+.card-in::after{content:'';position:absolute;width:230px;height:230px;border-radius:50%;
+  top:-110px;right:-90px;background:radial-gradient(circle,rgba(232,195,122,.20),transparent 70%);
+  opacity:0;transition:opacity .7s var(--ease)}
+.card:hover .card-in::after{opacity:1}
+.c-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.c-num{font-family:var(--f-ar-display);font-size:1.9rem;color:var(--gold);line-height:1;opacity:.85}
+.c-ico{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;
+  display:grid;place-items:center;flex:none;transition:.5s var(--ease);background:var(--glass)}
+.card:hover .c-ico{border-color:var(--line-strong);transform:rotate(-8deg) scale(1.06);
+  box-shadow:0 0 26px -6px rgba(232,195,122,.4)}
+.c-ico svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.3;
+  stroke-linecap:round;stroke-linejoin:round}
+.c-ar{font-family:var(--f-ar-display);direction:rtl;font-size:1.28rem;color:var(--gold-2);line-height:1.7}
+.card h3{transition:color .4s}
+.card:hover h3{color:var(--gold)}
+.c-blurb{font-size:.9rem;color:var(--ink-2);flex:1}
+.c-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding-top:14px;border-top:1px solid var(--line);margin-top:auto}
+.c-ref{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+.c-go{display:flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);opacity:.55;transition:.4s var(--ease)}
+.card:hover .c-go{opacity:1;gap:14px}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.tl{position:relative;padding-left:clamp(28px,5vw,64px)}
+.tl::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.tl-fill{position:absolute;left:6px;top:8px;width:1px;background:linear-gradient(var(--gold),var(--emerald));
+  box-shadow:0 0 14px var(--gold);height:0;transition:height .2s linear}
+.tl-item{position:relative;padding:0 0 clamp(40px,6vh,66px)}
+.tl-item::before{content:'';position:absolute;left:calc(-1 * clamp(28px,5vw,64px) + 1px);top:9px;
+  width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--gold);
+  transition:.5s var(--ease)}
+.tl-item.in::before{background:var(--gold);box-shadow:0 0 16px var(--gold)}
+.tl-era{font-size:.6rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{color:var(--ink-2);font-size:.94rem;max-width:62ch}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:clamp(12px,3vw,42px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+.modal.on{opacity:1;visibility:visible}
+.modal-bg{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(26px) saturate(130%)}
+.sheet{position:relative;width:min(880px,100%);max-height:92svh;overflow-y:auto;
+  border:1px solid var(--line-strong);border-radius:var(--r);box-shadow:var(--shadow);
+  background:linear-gradient(170deg,var(--bg-2),var(--bg) 60%);
+  transform:translateY(40px) scale(.97);opacity:0;transition:.7s var(--ease)}
+[data-theme="manuscript"] .sheet{background:linear-gradient(170deg,#fffdf6,var(--bg-2))}
+.modal.on .sheet{transform:none;opacity:1}
+.sheet::-webkit-scrollbar{width:6px}
+.sheet-hd{position:relative;padding:clamp(34px,5vw,58px) clamp(24px,4.5vw,58px) 26px;
+  border-bottom:1px solid var(--line);overflow:hidden}
+.sheet-hd::after{content:'';position:absolute;inset:0;opacity:.1;
+  background-image:var(--geo);background-size:150px 150px;pointer-events:none}
+.sheet-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px;
+  font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.sheet-hd h2{font-size:clamp(1.85rem,4.6vw,3.1rem);margin-bottom:12px}
+.sheet-hd .who{font-family:var(--f-display);font-style:italic;color:var(--ink-2);font-size:1.05rem}
+.sheet-bd{padding:clamp(26px,4.5vw,52px)}
+.ayah-box{border:1px solid var(--line);border-radius:14px;padding:clamp(24px,4vw,42px);
+  background:var(--glass);text-align:center;margin-bottom:34px;position:relative}
+.ayah-box::before,.ayah-box::after{content:'❋';position:absolute;color:var(--gold);opacity:.5;font-size:.8rem}
+.ayah-box::before{top:10px;left:14px}.ayah-box::after{bottom:10px;right:14px}
+.ayah-box .ar{font-family:var(--f-ar);direction:rtl;font-size:clamp(1.3rem,3.1vw,1.95rem);
+  line-height:2.3;color:var(--gold)}
+.ayah-box .en{margin-top:22px;font-family:var(--f-display);font-size:1.1rem;font-style:italic;
+  color:var(--ink);line-height:1.65}
+.ayah-box .rf{margin-top:18px;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.sheet-bd p{color:var(--ink-2);margin-bottom:18px;font-size:.98rem}
+.pullq{border-left:2px solid var(--gold);padding:6px 0 6px 22px;margin:28px 0;
+  font-family:var(--f-display);font-size:1.2rem;font-style:italic;color:var(--ink);line-height:1.5}
+.sheet-ft{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:20px clamp(24px,4.5vw,58px);border-top:1px solid var(--line)}
+.navbtn{display:flex;align-items:center;gap:10px;font-size:.64rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-3);transition:color .35s}
+.navbtn:hover{color:var(--gold)}
+.closeb{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);display:grid;place-items:center;z-index:3;
+  background:var(--glass);backdrop-filter:blur(8px);transition:.4s var(--ease)}
+.closeb:hover{border-color:var(--gold);transform:rotate(90deg)}
+.closeb svg{width:15px;height:15px;stroke:var(--gold);stroke-width:1.6}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:clamp(56px,8vh,96px) clamp(18px,5vw,64px) 40px;
+  position:relative;z-index:2;background:var(--bg-2)}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;max-width:1220px;margin:0 auto}
+@media(max-width:800px){.f-grid{grid-template-columns:1fr}}
+footer h4{font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:18px;font-weight:500;font-family:var(--f-body)}
+footer p,footer li{font-size:.86rem;color:var(--ink-3);list-style:none}
+footer li{padding:5px 0;transition:color .3s}
+footer li:hover{color:var(--ink-2)}
+.f-ar{font-family:var(--f-ar-display);direction:rtl;font-size:1.7rem;color:var(--gold);margin-bottom:14px}
+.f-bot{max-width:1220px;margin:52px auto 0;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  font-size:.66rem;letter-spacing:.14em;color:var(--ink-3)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none;filter:none}
+  .hero h1 .w i{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-in">
+    <svg class="loader-star" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 4 61 28 87 17 76 43 100 50 76 57 87 83 61 72 50 96 39 72 13 83 24 57 0 50 24 43 13 17 39 28Z"/>
+      <path d="M50 16 58 34 77 26 69 45 87 50 69 55 77 74 58 66 50 84 42 66 23 74 31 55 13 50 31 45 23 26 42 34Z"/>
+    </svg>
+    <div class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+    <div class="loading-bar"><i></i></div>
+  </div>
+</div>
+
+<div class="cur"></div><div class="cur-r"></div>
+<div class="progress" id="prog"></div>
+
+<canvas id="stars"></canvas>
+<div class="aurora"><i></i><i></i><i></i></div>
+<div class="geo-wm"></div>
+<div class="vignette"></div>
+<svg class="grain" aria-hidden="true"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="index.html" class="brand" title="NurulQuran · The Signs">
+    <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="256" cy="256" r="230" fill="rgba(232,195,122,0.15)" />
+      <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+        <rect x="110" y="110" width="292" height="292" rx="28" />
+        <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+      </g>
+      <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#04060d" stroke="var(--gold)" stroke-width="10" />
+      <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#04060d" stroke="var(--gold)" stroke-width="10" />
+      <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+    </svg>
+    <span><b>NURULQURAN</b> · The Signs</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#ijaz">Iʿjāz</a>
+    <a href="#signs">The Twelve</a>
+    <a href="#chronicle">Chronicle</a>
+    <a href="#reflect">Reflect</a>
+    <a href="index.html" class="nq-hub-badge" title="Showcase Portal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Showcase</span>
+    </a>
+    <button class="theme-btn" id="theme" aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="mandala">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="196"/><circle cx="200" cy="200" r="160"/>
+        <circle cx="200" cy="200" r="118"/><circle cx="200" cy="200" r="74"/>
+        <g id="petals"></g>
+      </svg>
+    </div>
+    <div class="wrap" style="position:relative">
+      <div class="moon-stage" aria-hidden="true">
+        <div class="mhalf l"></div><div class="mhalf r"></div><div class="seam"></div>
+      </div>
+      <div class="hero-ar gold-t">مُعْجِزَاتُ الْقُرْآن</div>
+      <h1 id="h1"></h1>
+      <p class="lede">Twelve signs recorded in the Qurʾān — moments where the ordinary order of the world bent, so that a message might be believed. Each rendered here with its verse, its context, and its meaning.</p>
+      <div class="hero-meta">
+        <span class="chip">12 Signs</span>
+        <span class="chip">Verse · Tafsīr · Context</span>
+        <span class="chip">Arabic + Translation</span>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scroll</span><i></i></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marq" aria-hidden="true"><div class="marq-t" id="marq"></div></div>
+
+  <!-- IJAZ -->
+  <section id="ijaz">
+    <div class="wrap">
+      <div class="ijaz">
+        <div>
+          <div class="eyebrow rv">The Standing Miracle</div>
+          <h2 class="rv" style="--d:80ms">Every prophet was<br><span class="gold-t">given a sign.</span></h2>
+          <p class="lede rv" style="--d:160ms;margin-top:26px">
+            Mūsā had a staff. ʿĪsā healed the blind. But the final Prophet ﷺ was given something that would not fade with the generation that saw it — a text. Its miracle, called <em>iʿjāz</em>, is that it cannot be matched: not in structure, not in cadence, not in the seamless coherence of 6,236 verses revealed piecemeal across twenty‑three years.
+          </p>
+          <p class="lede rv" style="--d:240ms;margin-top:18px">
+            The Qurʾān makes that claim testable. It invites its critics — the finest poets of a civilisation built on poetry — to produce a single comparable chapter. The challenge has never been closed.
+          </p>
+          <div class="stats rv" style="--d:320ms">
+            <div class="stat"><b data-count="114">0</b><small>Sūrahs</small></div>
+            <div class="stat"><b data-count="6236">0</b><small>Āyāt</small></div>
+            <div class="stat"><b data-count="23">0</b><small>Years revealed</small></div>
+            <div class="stat"><b data-count="1400" data-suffix="+">0</b><small>Years preserved</small></div>
+          </div>
+        </div>
+        <figure class="mihrab rv" style="--d:180ms">
+          <p class="ayah" lang="ar" dir="rtl">قُلْ لَّئِنِ ٱجْتَمَعَتِ ٱلْإِنسُ وَٱلْجِنُّ عَلَىٰ أَن يَأْتُوا۟ بِمِثْلِ هَٰذَا ٱلْقُرْءَانِ لَا يَأْتُونَ بِمِثْلِهِ وَلَوْ كَانَ بَعْضُهُمْ لِبَعْضٍ ظَهِيرًا</p>
+          <p class="tr">“Say: if all mankind and the jinn gathered together to produce something like this Qurʾān, they could not produce its like — even if they backed one another.”</p>
+          <p class="rf">Sūrah al‑Isrāʾ · 17 : 88</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNS -->
+  <section id="signs">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <div class="eyebrow rv">The Collection</div>
+          <h2 class="rv" style="--d:80ms">Twelve <span class="gold-t">Signs</span></h2>
+        </div>
+        <div class="pills rv" style="--d:160ms" id="pills" role="tablist" aria-label="Filter by prophet"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- CHRONICLE -->
+  <section id="chronicle">
+    <div class="wrap">
+      <div class="eyebrow rv">Across Time</div>
+      <h2 class="rv" style="--d:80ms" style_="">A <span class="gold-t">chronicle</span> of signs</h2>
+      <p class="lede rv" style="--d:140ms;margin:22px 0 60px">The Qurʾān presents these events not as legend but as history — a single thread of guidance running from the first ark to the final revelation.</p>
+      <div class="tl" id="tl"><div class="tl-fill" id="tlFill"></div></div>
+    </div>
+  </section>
+
+  <!-- REFLECT -->
+  <section id="reflect" style="text-align:center">
+    <div class="wrap" style="max-width:900px">
+      <div class="eyebrow rv" style="justify-content:center">Closing</div>
+      <figure class="mihrab rv" style="--d:100ms;margin-top:14px">
+        <p class="ayah" lang="ar" dir="rtl">سَنُرِيهِمْ آيَاتِنَا فِى ٱلْآفَاقِ وَفِىٓ أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ ٱلْحَقُّ</p>
+          <p class="tr">“We shall show them Our signs in the horizons and within themselves, until it becomes clear to them that this is the truth.”</p>
+        <p class="rf">Sūrah Fuṣṣilat · 41 : 53</p>
+      </figure>
+      <p class="lede rv" style="--d:180ms;margin:44px auto 0;text-align:center">
+        A miracle, in the Qurʾānic vocabulary, is called an <em>āyah</em> — a <strong>sign</strong>. Not a spectacle to be consumed, but an arrow pointing beyond itself. The splitting moon, the parted sea, the cooled fire: each was temporary. The invitation they carried was not.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="f-grid">
+    <div>
+      <div class="f-ar">وَٱللَّهُ أَعْلَم</div>
+      <p style="max-width:44ch">An educational presentation of miracles (<em>muʿjizāt</em>) described in the Qurʾān. Translations are rendered in the spirit of Ṣaḥīḥ International and Dr. Mustafa Khattab's <em>Clear Qurʾān</em>; for study and rulings, please consult the Arabic original and qualified scholars.</p>
+    </div>
+    <div>
+      <h4>Primary sources</h4>
+      <ul>
+        <li>The Qurʾān — Arabic ʿUthmānī text</li>
+        <li>Tafsīr Ibn Kathīr</li>
+        <li>Maʿārif al‑Qurʾān</li>
+        <li>Ṣaḥīḥ al‑Bukhārī &amp; Ṣaḥīḥ Muslim</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#ijaz">The Standing Miracle</a></li>
+        <li><a href="#signs">The Twelve Signs</a></li>
+        <li><a href="#chronicle">Chronicle</a></li>
+        <li><a href="#reflect">Reflect</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bot">
+    <span>NURULQURAN · AL‑ĀYĀT · THE SIGNS</span>
+    <span>Built with care · صُنِعَ بِعِنَايَة</span>
+  </div>
+  <div class="nq-footer-badge">
+    <div class="nq-footer-logo-row">
+      <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(232,195,122,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#04060d" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#04060d" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+    </div>
+    <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal-bg" data-close></div>
+  <article class="sheet" id="sheet">
+    <button class="closeb" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <header class="sheet-hd">
+      <div class="sheet-eyebrow"><span id="mNum"></span><span id="mTag"></span></div>
+      <h2 id="mTitle"></h2>
+      <div class="who" id="mWho"></div>
+    </header>
+    <div class="sheet-bd">
+      <div class="ayah-box">
+        <p class="ar" id="mAr" lang="ar" dir="rtl"></p>
+        <p class="en" id="mEn"></p>
+        <p class="rf" id="mRf"></p>
+      </div>
+      <div id="mBody"></div>
+      <blockquote class="pullq" id="mPull"></blockquote>
+    </div>
+    <footer class="sheet-ft">
+      <button class="navbtn" id="mPrev">← Previous sign</button>
+      <button class="navbtn" id="mNext">Next sign →</button>
+    </footer>
+  </article>
+</div>
+
+<script>
+/* ============================================================
+   0 · GEOMETRIC PATTERN TOKEN
+   ============================================================ */
+const geo = `url("data:image/svg+xml,${encodeURIComponent(
+`<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%23e8c37a' stroke-width='1'><path d='M60 2 76 26 104 34 88 60 104 86 76 94 60 118 44 94 16 86 32 60 16 34 44 26Z'/><path d='M60 22 71 40 91 46 80 60 91 74 71 80 60 98 49 80 29 74 40 60 29 46 49 40Z'/><circle cx='60' cy='60' r='13'/><path d='M0 0h120v120H0z'/></g></svg>`)}")`;
+document.documentElement.style.setProperty('--geo', geo);
+
+/* mandala petals */
+(()=>{const g=document.getElementById('petals');let s='';
+for(let i=0;i<24;i++){const a=i*15;s+=`<path d="M200 200 C 240 140, 300 120, 200 20 C 100 120, 160 140, 200 200Z" transform="rotate(${a} 200 200)"/>`;}
+g.innerHTML=s;})();
+
+/* ============================================================
+   1 · DATA
+   ============================================================ */
+const SIGNS = [
+{ tag:'Muḥammad ﷺ', wide:true, icon:'book',
+  ar:'إِعْجَازُ الْقُرْآن', title:'The Inimitable Qurʾān', who:'Prophet Muḥammad ﷺ — the miracle that outlived its witnesses',
+  ref:'Al‑Baqarah 2:23', refFull:'Sūrah al‑Baqarah · 2 : 23',
+  ayahAr:'وَإِن كُنتُمْ فِى رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا۟ بِسُورَةٍ مِّن مِّثْلِهِ',
+  ayahEn:'“And if you are in doubt about what We have revealed to Our servant, then produce a single sūrah like it.”',
+  blurb:'A literary challenge issued to the greatest poets of Arabia — and never answered.',
+  body:`<p>The Arabs of the seventh century were a people of the tongue. Poetry was their archive, their law court and their pride; a single ode could raise a tribe or ruin it. Into that culture came a text that its own opponents could not classify — not poetry, not prose, not the rhymed oratory of their soothsayers.</p>
+        <p>The Qurʾān stakes its authenticity on this. It lowers the bar step by step: match the whole book, then ten chapters, then one chapter — some as short as three lines. The Prophet's ﷺ opponents held political power, financial means and every literary incentive to accept. Instead they chose boycott, exile and war.</p>
+        <p>Classical scholars catalogued the dimensions of this <em>iʿjāz</em>: its unmatched eloquence and word‑order (<em>naẓm</em>), its news of the unseen, its internal consistency despite twenty‑three years of piecemeal revelation, and — as Ibn ʿAṭiyyah observed — the sense that every word stands exactly where no other word could stand.</p>`,
+  pull:'“There is no prophet but he was given signs. That which I have been given is revelation.” — Ṣaḥīḥ al‑Bukhārī 7274' },
+
+{ tag:'Muḥammad ﷺ', wide:true, icon:'moon',
+  ar:'انْشِقَاقُ الْقَمَر', title:'The Splitting of the Moon', who:'Prophet Muḥammad ﷺ — Makkah, before the Hijrah',
+  ref:'Al‑Qamar 54:1', refFull:'Sūrah al‑Qamar · 54 : 1–2',
+  ayahAr:'ٱقْتَرَبَتِ ٱلسَّاعَةُ وَٱنشَقَّ ٱلْقَمَرُ ۝ وَإِن يَرَوْا۟ آيَةً يُعْرِضُوا۟ وَيَقُولُوا۟ سِحْرٌ مُّسْتَمِرٌّ',
+  ayahEn:'“The Hour has drawn near, and the moon was split in two. Yet if they see a sign they turn away and say: passing magic.”',
+  blurb:'The Quraysh demanded a sign in the sky. The moon answered — and they called it sorcery.',
+  body:`<p>The leaders of Makkah asked for something undeniable, something written across the heavens. According to the narration, the Prophet ﷺ pointed, and the moon appeared cleft in two — one part seen on either side of the mountain of Ḥirāʾ.</p>
+        <p>The reports reach us through independent chains from ʿAbdullāh ibn Masʿūd, Ibn ʿAbbās, Anas ibn Mālik, Ibn ʿUmar and Jubayr ibn Muṭʿim. Imāms al‑Ṭaḥāwī and Ibn Kathīr classified them as <em>mutawātir</em> — transmitted by so many independent narrators that collusion is inconceivable. It is recorded in both Ṣaḥīḥ al‑Bukhārī (3869) and Ṣaḥīḥ Muslim (2800).</p>
+        <p>The verse's second half is what scholars find most striking: it does not claim the sign converted anyone. It records refusal. A fabricated account would have reported triumph; revelation reported the human heart as it actually is.</p>`,
+  pull:'“The moon split into two parts in the lifetime of the Prophet ﷺ. He said: Bear witness.”' },
+
+{ tag:'Muḥammad ﷺ', wide:false, icon:'ascend',
+  ar:'الْإِسْرَاءُ وَالْمِعْرَاج', title:'The Night Journey & Ascension', who:'Prophet Muḥammad ﷺ — Makkah to Jerusalem to the heavens',
+  ref:'Al‑Isrāʾ 17:1', refFull:'Sūrah al‑Isrāʾ · 17 : 1',
+  ayahAr:'سُبْحَٰنَ ٱلَّذِى أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ ٱلْمَسْجِدِ ٱلْحَرَامِ إِلَى ٱلْمَسْجِدِ ٱلْأَقْصَى ٱلَّذِى بَٰرَكْنَا حَوْلَهُ',
+  ayahEn:'“Glory be to the One who took His servant by night from the Sacred Mosque to the Farthest Mosque, whose surroundings We have blessed.”',
+  blurb:'In a single night: Makkah, Jerusalem, and the seven heavens — after the hardest year of his life.',
+  body:`<p>It came at the lowest point. His wife Khadījah had died; his uncle and protector Abū Ṭālib had died; Ṭāʾif had rejected him and stoned him out. Then, in one night, he was carried to Jerusalem, led the prophets in prayer at al‑Aqṣā, and ascended through the heavens.</p>
+        <p>Two things came back with him. The first was the five daily prayers — the only pillar of Islam legislated above the earth rather than on it. The second was consolation: the ordering of the entire cosmos shown to a man the size of whose city had just closed its doors to him.</p>
+        <p>When he described Jerusalem to a sceptical Makkah, Abū Bakr's reply earned him the title <em>al‑Ṣiddīq</em>: “If he said it, he spoke the truth.”</p>`,
+  pull:'The journey answered despair with perspective — grief met not with an argument, but with the heavens.' },
+
+{ tag:'Mūsā', wide:false, icon:'waves',
+  ar:'فَلْقُ الْبَحْر', title:'The Parting of the Sea', who:'Prophet Mūsā (Moses) — the Exodus from Egypt',
+  ref:'Ash‑Shuʿarāʾ 26:63', refFull:'Sūrah ash‑Shuʿarāʾ · 26 : 63',
+  ayahAr:'فَأَوْحَيْنَا إِلَىٰ مُوسَىٰ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْبَحْرَ ۖ فَٱنفَلَقَ فَكَانَ كُلُّ فِرْقٍ كَٱلطَّوْدِ ٱلْعَظِيمِ',
+  ayahEn:'“So We inspired Mūsā: strike the sea with your staff. It parted, and each part stood like a towering mountain.”',
+  blurb:'Water stood upright like mountains — twelve dry paths through the deep.',
+  body:`<p>Trapped between Pharaoh's cavalry and open water, the Israelites despaired. The Qurʾān's phrasing is precise and unusual: the sea did not recede — each division stood <em>ka‑l‑ṭawd al‑ʿaẓīm</em>, like a colossal mountain. Vertical, held, waiting.</p>
+        <p>Then it closed. And in Sūrah Yūnus, Pharaoh's dying words are recorded — belief offered too late — followed by a promise that his body would be preserved as a sign (10:92). The discovery of the royal mummies of the New Kingdom gave that verse a strange second life in the modern era.</p>`,
+  pull:'“Do not fear — my Lord is with me, and He will guide me.” — al‑Shuʿarāʾ 26:62' },
+
+{ tag:'Mūsā', wide:false, icon:'staff',
+  ar:'عَصَا مُوسَى', title:'The Staff & the Nine Signs', who:'Prophet Mūsā (Moses) — in the court of Pharaoh',
+  ref:'Al‑Aʿrāf 7:107', refFull:'Sūrah al‑Aʿrāf · 7 : 107',
+  ayahAr:'فَأَلْقَىٰ عَصَاهُ فَإِذَا هِىَ ثُعْبَانٌ مُّبِينٌ',
+  ayahEn:'“So he threw down his staff, and at once it was a serpent, manifest.”',
+  blurb:'A shepherd\'s stick, a luminous hand, and nine signs delivered to the mightiest throne on earth.',
+  body:`<p>Mūsā was given a series of signs — the staff, the radiant hand, and the successive afflictions of Egypt — described in the Qurʾān as <em>nine clear signs</em> (17:101). The staff became a serpent that swallowed the illusions of Pharaoh's magicians.</p>
+        <p>The most telling detail is who believed. The magicians — the only people in the room professionally qualified to detect a trick — recognised immediately that this was not their craft, and prostrated. They accepted torture rather than retract. Expertise, the passage suggests, is its own kind of witness.</p>`,
+  pull:'“We believe in the Lord of the worlds — the Lord of Mūsā and Hārūn.” — al‑Aʿrāf 7:121–122' },
+
+{ tag:'Ibrāhīm', wide:false, icon:'flame',
+  ar:'بَرْدًا وَسَلَامًا', title:'The Fire Made Cool', who:'Prophet Ibrāhīm (Abraham) — cast into the furnace',
+  ref:'Al‑Anbiyāʾ 21:69', refFull:'Sūrah al‑Anbiyāʾ · 21 : 69',
+  ayahAr:'قُلْنَا يَٰنَارُ كُونِى بَرْدًا وَسَلَٰمًا عَلَىٰ إِبْرَٰهِيمَ',
+  ayahEn:'“We said: O fire, be coolness and safety for Ibrāhīm.”',
+  blurb:'They built the largest fire they could. It was commanded to become cool.',
+  body:`<p>Having broken his people's idols and out‑argued them in public, Ibrāhīm was sentenced to the flames. The Qurʾān does not say the fire was extinguished, nor that he was shielded from it. It says the fire itself was addressed and reassigned: <em>be coolness — and safety</em>.</p>
+        <p>Commentators dwell on that second word. Cold alone would have harmed him too. Divine precision, they note, includes the mercy that ordinary power forgets.</p>
+        <p>It is the archetypal Qurʾānic reversal: the instrument of destruction becomes the instrument of vindication, without changing hands.</p>`,
+  pull:'The fire did not lose its nature by accident. It was given a new instruction.' },
+
+{ tag:'Ibrāhīm', wide:false, icon:'birds',
+  ar:'إِحْيَاءُ الطَّيْر', title:'The Four Birds Restored', who:'Prophet Ibrāhīm (Abraham) — a request for certainty',
+  ref:'Al‑Baqarah 2:260', refFull:'Sūrah al‑Baqarah · 2 : 260',
+  ayahAr:'قَالَ رَبِّ أَرِنِى كَيْفَ تُحْىِ ٱلْمَوْتَىٰ ۖ قَالَ أَوَلَمْ تُؤْمِن ۖ قَالَ بَلَىٰ وَلَٰكِن لِّيَطْمَئِنَّ قَلْبِى',
+  ayahEn:'“My Lord, show me how You give life to the dead. He said: do you not believe? He said: yes, but so that my heart may be at rest.”',
+  blurb:'Not a request for proof — a request for peace. And it was granted.',
+  body:`<p>Ibrāhīm already believed. His question was not the sceptic's but the lover's: <em>li‑yaṭmaʾinna qalbī</em> — so that my heart may settle. He was told to take four birds, and they were restored to him from distant hilltops.</p>
+        <p>Scholars treat this verse as one of the most generous in the Qurʾān. It establishes that wanting to <em>see</em> is not a defect of faith. Certainty of the mind and tranquillity of the heart are two different needs, and God addressed both.</p>`,
+  pull:'“Do you not believe?” — “Yes. But so that my heart may be at rest.”' },
+
+{ tag:'ʿĪsā', wide:true, icon:'hand',
+  ar:'مُعْجِزَاتُ عِيسَى', title:'The Signs of ʿĪsā', who:'Prophet ʿĪsā (Jesus), son of Maryam — by the permission of God',
+  ref:'Al‑Māʾidah 5:110', refFull:'Sūrah al‑Māʾidah · 5 : 110',
+  ayahAr:'وَتُبْرِئُ ٱلْأَكْمَهَ وَٱلْأَبْرَصَ بِإِذْنِى ۖ وَإِذْ تُخْرِجُ ٱلْمَوْتَىٰ بِإِذْنِى',
+  ayahEn:'“And you healed the blind and the leper by My permission; and you brought forth the dead by My permission.”',
+  blurb:'Speech in the cradle, sight restored, clay birds given breath — each sealed with four words: by My permission.',
+  body:`<p>The Qurʾān records a remarkable cluster of signs for ʿĪsā: he spoke as an infant to defend his mother's honour (19:30), formed birds from clay that took flight, healed the blind and the leper, raised the dead, and knew what people concealed in their homes.</p>
+        <p>Every single one is qualified by the phrase <em>bi‑idhnī</em> — by My permission. The Qurʾān presents the miracles in full and then refuses the conclusion drawn from them: the power is delegated, never inherent. ʿĪsā is honoured as one of the mightiest of prophets and, in Islamic theology, precisely a prophet.</p>
+        <p>His birth is placed alongside Ādam's as a demonstration of the same divine ease (3:59): creation does not require a template.</p>`,
+  pull:'“I have come to you with a sign from your Lord.” — Āl ʿImrān 3:49' },
+
+{ tag:'Maryam', wide:false, icon:'palm',
+  ar:'نَخْلَةُ مَرْيَم', title:'The Palm and the Provision', who:'Maryam bint ʿImrān — alone, in labour, in the desert',
+  ref:'Maryam 19:25', refFull:'Sūrah Maryam · 19 : 25–26',
+  ayahAr:'وَهُزِّىٓ إِلَيْكِ بِجِذْعِ ٱلنَّخْلَةِ تُسَٰقِطْ عَلَيْكِ رُطَبًا جَنِيًّا',
+  ayahEn:'“And shake the trunk of the palm tree toward you: it will drop upon you fresh, ripe dates.”',
+  blurb:'A dry trunk yields fresh dates, and a stream opens at her feet.',
+  body:`<p>Maryam is the only woman named in the Qurʾān, and an entire sūrah carries her name. In her most desperate hour — alone, in pain, dreading her community's judgement — she was not simply rescued. She was fed, given water, and instructed in a dignified silence.</p>
+        <p>The detail scholars love: she was told to <em>shake</em> the trunk. Not to wait. Even in a miracle, she was invited to act — divine provision meeting human effort halfway.</p>
+        <p>Earlier, in her chamber, provision reached her out of season, and Zakariyyā asked where it came from. Her answer: “It is from God” (3:37).</p>`,
+  pull:'Even the miracle asked something of her hands.' },
+
+{ tag:'Sulaymān', wide:false, icon:'wind',
+  ar:'مُلْكُ سُلَيْمَان', title:'The Dominion of Sulaymān', who:'Prophet Sulaymān (Solomon) — king and prophet',
+  ref:'An‑Naml 27:16', refFull:'Sūrah an‑Naml · 27 : 16',
+  ayahAr:'وَقَالَ يَٰأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ وَأُوتِينَا مِن كُلِّ شَىْءٍ',
+  ayahEn:'“He said: O people, we have been taught the speech of birds, and we have been given of all things.”',
+  blurb:'The wind at his command, the speech of birds, the jinn in his service — and a throne moved across a kingdom.',
+  body:`<p>Sulaymān was granted a dominion unlike any other: the wind ran at his order (21:81), the jinn laboured for him, and he understood the languages of birds and ants. The hoopoe brought him intelligence from Sabaʾ; the throne of its queen was transported before she arrived.</p>
+        <p>Yet the narrative's centre of gravity is not power but posture. Overhearing an ant, he smiles and prays for the ability to be grateful (27:19). Faced with the throne, he says: “This is from the favour of my Lord — to test whether I am thankful or ungrateful.”</p>`,
+  pull:'“This is from the favour of my Lord — to test whether I am grateful.” — an‑Naml 27:40' },
+
+{ tag:'Others', wide:false, icon:'cave',
+  ar:'أَصْحَابُ الْكَهْف', title:'The People of the Cave', who:'Youths who fled a tyrant — and slept for three centuries',
+  ref:'Al‑Kahf 18:25', refFull:'Sūrah al‑Kahf · 18 : 25',
+  ayahAr:'وَلَبِثُوا۟ فِى كَهْفِهِمْ ثَلَٰثَ مِائَةٍ سِنِينَ وَٱزْدَادُوا۟ تِسْعًا',
+  ayahEn:'“And they remained in their cave three hundred years, and add nine.”',
+  blurb:'A handful of believers slept through the death of an empire.',
+  body:`<p>Young men who refused their city's idolatry took refuge in a cave and prayed for mercy. God suspended them in sleep for three hundred and nine years. They woke thinking a day had passed, sent one of their number for food — and found his coinage obsolete and their persecutor's empire gone.</p>
+        <p>The story is a meditation on time. The tyranny that seemed permanent was a footnote; the faith that seemed doomed outlasted it. The Qurʾān adds a note on how to speak about the unseen: never say “I will do this tomorrow” without saying <em>in shāʾ Allāh</em> (18:23–24).</p>`,
+  pull:'“Our Lord, grant us mercy from Yourself, and guide us rightly in our affair.” — al‑Kahf 18:10' },
+
+{ tag:'Others', wide:false, icon:'whale',
+  ar:'يُونُسُ وَالْحُوت', title:'Yūnus in the Depths', who:'Prophet Yūnus (Jonah) — in the belly of the great fish',
+  ref:'Al‑Anbiyāʾ 21:87', refFull:'Sūrah al‑Anbiyāʾ · 21 : 87',
+  ayahAr:'فَنَادَىٰ فِى ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبْحَٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّٰلِمِينَ',
+  ayahEn:'“So he called out in the depths of darkness: there is no god but You. Glory be to You. Indeed, I was among the wrongdoers.”',
+  blurb:'Swallowed by the sea, kept alive in the dark, and returned by a single sentence.',
+  body:`<p>Yūnus left his people before he was given leave to. Aboard a ship, cast into the water, he was swallowed by a great fish — and preserved alive inside it. The Qurʾān says that had he not been of those who glorify God, he would have remained there until the Day of Resurrection (37:143–144).</p>
+        <p>His supplication is among the most recited in Islam. It contains no request. It is pure acknowledgement — of God's perfection, and of his own fault — and the response was immediate deliverance.</p>
+        <p>His people, meanwhile, are the one nation in the Qurʾān whose destruction was lifted after they believed (10:98).</p>`,
+  pull:'A prayer with no petition in it — and it was answered.' }
+];
+
+const CHRON = [
+ {era:'The Deluge', t:'Nūḥ and the Ark', d:'A ship built on dry land while a nation laughed; springs burst from the earth and water fell from the sky. “We carried him on a construction of planks and nails.” — al‑Qamar 54:13'},
+ {era:'Ur & Canaan', t:'Ibrāhīm — fire and birds', d:'The furnace commanded to become coolness and safety; four birds restored from distant hills. The father of prophets, tested and vindicated.'},
+ {era:'Egypt', t:'Mūsā — staff, hand, and sea', d:'Nine clear signs delivered to Pharaoh\'s court; the sea standing like mountains; the magicians of Egypt prostrating before the God of Mūsā and Hārūn.'},
+ {era:'Thamūd & ʿĀd', t:'Ṣāliḥ and the she‑camel', d:'“This is the she‑camel of God — a sign for you.” A test of restraint that a nation failed. — al‑Aʿrāf 7:73'},
+ {era:'Jerusalem', t:'Dāwūd and Sulaymān', d:'Iron softened in the hands of Dāwūd, mountains and birds echoing his praise; then the wind, the jinn and the speech of birds for his son. — Sabaʾ 34:10'},
+ {era:'Bayt al‑Maqdis', t:'Maryam and ʿĪsā', d:'A birth without precedent, an infant who spoke, clay birds given flight, the blind made to see — every sign sealed with “by My permission.”'},
+ {era:'Makkah · 610 CE', t:'Muḥammad ﷺ — the final signs', d:'The moon split before the Quraysh; the Night Journey to Jerusalem and the heavens; and the Qurʾān itself — the one miracle deliberately left behind, still open to challenge.'}
+];
+
+const ICONS = {
+ book:'<path d="M3 5a2 2 0 012-2h5v18H5a2 2 0 01-2-2z"/><path d="M21 5a2 2 0 00-2-2h-5v18h5a2 2 0 002-2z"/><path d="M12 3v18"/>',
+ moon:'<path d="M12 3a9 9 0 000 18"/><path d="M12 3a9 9 0 010 18"/><path d="M12 1.5v21"/>',
+ ascend:'<path d="M12 21V6"/><path d="M7 11l5-5 5 5"/><path d="M4 3h16"/><circle cx="19" cy="8" r="1.4"/>',
+ waves:'<path d="M3 7c3-3 6 3 9 0s6 3 9 0"/><path d="M3 13c3-3 6 3 9 0s6 3 9 0"/><path d="M3 19c3-3 6 3 9 0s6 3 9 0"/>',
+ staff:'<path d="M7 21V5a2 2 0 014 0v12a2 2 0 004 0"/><path d="M15 9c2 0 3 1.4 3 3s-1 3-3 3"/><circle cx="9" cy="3.6" r="1"/>',
+ flame:'<path d="M12 22c4 0 6-2.6 6-6 0-4.5-6-11-6-11S6 11.5 6 16c0 3.4 2 6 6 6z"/><path d="M12 18c1.6 0 2.4-1 2.4-2.4 0-1.8-2.4-4.2-2.4-4.2s-2.4 2.4-2.4 4.2C9.6 17 10.4 18 12 18z"/>',
+ birds:'<path d="M3 9c2.5 0 4-1.6 5.5-3.2M8.5 5.8C10 7.4 11.5 9 14 9"/><path d="M10 16c2.5 0 4-1.6 5.5-3.2M15.5 12.8C17 14.4 18.5 16 21 16"/>',
+ hand:'<path d="M8 13V5.5a1.5 1.5 0 013 0V12"/><path d="M11 11.5V4a1.5 1.5 0 013 0v8"/><path d="M14 12V6.5a1.5 1.5 0 013 0V15c0 3.5-2.2 6-5.5 6C8 21 6 18.6 6 15v-2"/>',
+ palm:'<path d="M12 22V11"/><path d="M12 11C9 11 6 8.5 4 6c3-1 6 .5 8 5"/><path d="M12 11c3 0 6-2.5 8-5-3-1-6 .5-8 5"/><path d="M12 11c0-3.5 0-5.5 0-8"/>',
+ wind:'<path d="M3 8h11a3 3 0 100-6"/><path d="M3 14h8a3 3 0 110 6"/><path d="M3 20h5"/>',
+ cave:'<path d="M3 21V13a9 9 0 0118 0v8"/><path d="M9 21v-4a3 3 0 016 0v4"/>',
+ whale:'<path d="M2 14c4 4 9 5 13 3 3-1.5 5-4.5 7-9-3 1-5 1-7 0"/><path d="M15 8c1.5-2 3-3 5-3"/><circle cx="8" cy="13" r="1"/>'
+};
+
+/* ============================================================
+   2 · HERO TITLE — word/letter reveal
+   ============================================================ */
+(()=>{
+  const txt='Miracles of the Qurʾān';
+  const el=document.getElementById('h1');
+  el.innerHTML=txt.split(' ').map((w,wi)=>
+    `<span class="w"><i style="--d:${300+wi*130}ms">${w}</i></span>`).join(' ');
+})();
+
+/* marquee */
+(()=>{
+  const items=['ٱقْتَرَبَتِ ٱلسَّاعَةُ وَٱنشَقَّ ٱلْقَمَرُ','يَٰنَارُ كُونِى بَرْدًا وَسَلَٰمًا','فَٱنفَلَقَ فَكَانَ كُلُّ فِرْقٍ كَٱلطَّوْدِ ٱلْعَظِيمِ','لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبْحَٰنَكَ','عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ','سَنُرِيهِمْ آيَاتِنَا فِى ٱلْآفَاقِ'];
+  const row=items.map(t=>`<span>${t}</span>`).join('');
+  document.getElementById('marq').innerHTML=row+row;
+})();
+
+/* ============================================================
+   3 · CARDS
+   ============================================================ */
+const grid=document.getElementById('grid');
+const arNum=n=>n.toLocaleString('ar-EG');
+function renderCards(){
+  grid.innerHTML=SIGNS.map((s,i)=>`
+   <article class="card rv ${s.wide?'wide':''}" data-i="${i}" data-tag="${s.tag}" style="--d:${(i%4)*70}ms" tabindex="0" role="button" aria-label="Open: ${s.title}">
+     <div class="card-in">
+       <div class="c-top">
+         <span class="c-num">${arNum(i+1)}</span>
+         <span class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.icon]}</svg></span>
+       </div>
+       <div class="c-ar" lang="ar" dir="rtl">${s.ar}</div>
+       <h3>${s.title}</h3>
+       <p class="c-blurb">${s.blurb}</p>
+       <div class="c-foot"><span class="c-ref">${s.ref}</span><span class="c-go">Read <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 4h12M9 1l3 3-3 3"/></svg></span></div>
+     </div>
+   </article>`).join('');
+  bindCards();
+}
+function bindCards(){
+  document.querySelectorAll('.card').forEach(c=>{
+    const open=()=>openModal(+c.dataset.i);
+    c.addEventListener('click',open);
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+    if(!matchMedia('(hover:hover)').matches||reduced) return;
+    c.addEventListener('pointermove',e=>{
+      const r=c.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform=`perspective(1000px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-6px) scale(1.015)`;
+    });
+    c.addEventListener('pointerleave',()=>{c.style.transform='';});
+  });
+  observe();
+}
+const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* filter pills */
+(()=>{
+  const tags=['All',...new Set(SIGNS.map(s=>s.tag))];
+  const p=document.getElementById('pills');
+  p.innerHTML=tags.map((t,i)=>`<button class="pill ${i===0?'on':''}" data-t="${t}" role="tab" aria-selected="${i===0}">${t}</button>`).join('');
+  p.addEventListener('click',e=>{
+    const b=e.target.closest('.pill'); if(!b)return;
+    p.querySelectorAll('.pill').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
+    const t=b.dataset.t;
+    document.querySelectorAll('.card').forEach(c=>{
+      const show=t==='All'||c.dataset.tag===t;
+      c.classList.toggle('hide',!show);
+      if(show){c.classList.remove('in');requestAnimationFrame(()=>c.classList.add('in'));}
+    });
+  });
+})();
+
+/* ============================================================
+   4 · TIMELINE
+   ============================================================ */
+(()=>{
+  const tl=document.getElementById('tl');
+  tl.insertAdjacentHTML('beforeend',CHRON.map((c,i)=>`
+    <div class="tl-item rv" style="--d:${i*60}ms">
+      <div class="tl-era">${c.era}</div>
+      <h3>${c.t}</h3><p>${c.d}</p>
+    </div>`).join(''));
+})();
+
+/* ============================================================
+   5 · MODAL
+   ============================================================ */
+const modal=document.getElementById('modal');
+let cur=0, lastFocus=null;
+function openModal(i){
+  cur=(i+SIGNS.length)%SIGNS.length;
+  const s=SIGNS[cur];
+  lastFocus=document.activeElement;
+  document.getElementById('mNum').textContent='Sign '+arNum(cur+1);
+  document.getElementById('mTag').textContent='· '+s.tag;
+  document.getElementById('mTitle').innerHTML=`${s.title}<br><span class="gold-t" style="font-size:.62em">${s.ar}</span>`;
+  document.getElementById('mWho').textContent=s.who;
+  document.getElementById('mAr').textContent=s.ayahAr;
+  document.getElementById('mEn').textContent=s.ayahEn;
+  document.getElementById('mRf').textContent=s.refFull;
+  document.getElementById('mBody').innerHTML=s.body;
+  document.getElementById('mPull').textContent=s.pull;
+  modal.classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('sheet').scrollTop=0;
+  setTimeout(()=>modal.querySelector('.closeb').focus(),120);
+}
+function closeModal(){modal.classList.remove('on');document.body.style.overflow='';lastFocus&&lastFocus.focus();}
+modal.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeModal();});
+document.getElementById('mPrev').onclick=()=>openModal(cur-1);
+document.getElementById('mNext').onclick=()=>openModal(cur+1);
+addEventListener('keydown',e=>{
+  if(!modal.classList.contains('on'))return;
+  if(e.key==='Escape')closeModal();
+  if(e.key==='ArrowLeft')openModal(cur-1);
+  if(e.key==='ArrowRight')openModal(cur+1);
+});
+
+/* ============================================================
+   6 · REVEAL + COUNTERS + PROGRESS
+   ============================================================ */
+let io;
+function observe(){
+  io=io||new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+  }),{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+}
+observe();
+
+const cio=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return; cio.unobserve(en.target);
+  const el=en.target, end=+el.dataset.count, sfx=el.dataset.suffix||'';
+  const dur=1700, t0=performance.now();
+  const tick=t=>{const p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,4);
+    el.textContent=Math.round(end*e).toLocaleString('en-US')+(p===1?sfx:'');
+    if(p<1)requestAnimationFrame(tick);};
+  requestAnimationFrame(tick);
+}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+const prog=document.getElementById('prog'), nav=document.getElementById('nav'), tlFill=document.getElementById('tlFill');
+const secs=[...document.querySelectorAll('main section')];
+const dotsEl=document.getElementById('dots');
+dotsEl.innerHTML=secs.map(s=>`<button data-id="${s.id}" aria-label="Go to ${s.id}"><span>${s.id}</span></button>`).join('');
+dotsEl.addEventListener('click',e=>{const b=e.target.closest('button');if(b)document.getElementById(b.dataset.id).scrollIntoView({behavior:'smooth'});});
+const dotBtns=[...dotsEl.children];
+
+function onScroll(){
+  const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(y/h*100)+'%';
+  nav.classList.toggle('stuck',y>60);
+  const mid=y+innerHeight*.4;
+  secs.forEach((s,i)=>dotBtns[i].classList.toggle('on',mid>=s.offsetTop&&mid<s.offsetTop+s.offsetHeight));
+  const tl=document.getElementById('tl');
+  if(tl){const r=tl.getBoundingClientRect();
+    const p=Math.min(Math.max((innerHeight*.6-r.top)/r.height,0),1);
+    tlFill.style.height=(p*100)+'%';}
+  // hero parallax
+  const st=document.querySelector('.moon-stage');
+  if(st&&!reduced&&y<innerHeight)st.style.transform=`translateY(${y*.22}px) scale(${1-y/innerHeight*.08})`;
+}
+addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});
+
+/* ============================================================
+   7 · STARFIELD
+   ============================================================ */
+(()=>{
+  const cv=document.getElementById('stars'), ctx=cv.getContext('2d');
+  let w,h,stars=[],shoot=[],dpr=Math.min(devicePixelRatio||1,2);
+  function size(){w=cv.width=innerWidth*dpr;h=cv.height=innerHeight*dpr;
+    cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
+    stars=Array.from({length:Math.round(innerWidth*innerHeight/5200)},()=>({
+      x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.3+.25)*dpr,
+      a:Math.random(),s:Math.random()*.016+.004,z:Math.random()*.7+.3}));}
+  size();addEventListener('resize',size);
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    const off=scrollY*dpr*.14;
+    stars.forEach(s=>{
+      s.a+=s.s; const o=.28+Math.abs(Math.sin(s.a))*.72;
+      let y=(s.y-off*s.z)%h; if(y<0)y+=h;
+      ctx.beginPath();ctx.arc(s.x,y,s.r,0,7);
+      ctx.fillStyle=`rgba(${240+Math.round(s.z*15)},${235},${210},${o*s.z})`;ctx.fill();
+      if(s.r>1.1*dpr){ctx.beginPath();ctx.arc(s.x,y,s.r*3.5,0,7);
+        ctx.fillStyle=`rgba(232,195,122,${o*.07})`;ctx.fill();}
+    });
+    if(Math.random()<.0035&&shoot.length<2)
+      shoot.push({x:Math.random()*w*.7,y:Math.random()*h*.4,l:0,v:(9+Math.random()*7)*dpr});
+    shoot=shoot.filter(m=>{
+      m.l+=m.v; const g=ctx.createLinearGradient(m.x+m.l,m.y+m.l*.42,m.x+m.l-90*dpr,m.y+m.l*.42-38*dpr);
+      g.addColorStop(0,'rgba(255,248,225,.85)');g.addColorStop(1,'rgba(255,248,225,0)');
+      ctx.strokeStyle=g;ctx.lineWidth=1.4*dpr;ctx.beginPath();
+      ctx.moveTo(m.x+m.l,m.y+m.l*.42);ctx.lineTo(m.x+m.l-90*dpr,m.y+m.l*.42-38*dpr);ctx.stroke();
+      return m.l<Math.max(w,h)*1.1;});
+    requestAnimationFrame(draw);
+  }
+  if(!reduced)draw(); else {stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fillStyle='rgba(240,235,210,.6)';ctx.fill();});}
+})();
+
+/* ============================================================
+   8 · CURSOR + THEME + BOOT
+   ============================================================ */
+(()=>{
+  if(!matchMedia('(hover:hover)').matches)return;
+  const d=document.querySelector('.cur'), r=document.querySelector('.cur-r');
+  let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;
+    d.style.transform=`translate(${mx}px,${my}px)`;});
+  (function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
+    r.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(loop);})();
+  document.addEventListener('pointerover',e=>{
+    document.body.classList.toggle('hot',!!e.target.closest('a,button,.card'));});
+})();
+
+document.getElementById('theme').addEventListener('click',()=>{
+  const n=document.documentElement.dataset.theme==='night'?'manuscript':'night';
+  document.documentElement.dataset.theme=n;
+});
+
+renderCards();
+addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('done');
+    document.getElementById('hero').classList.add('go');
+    onScroll();
+  },2400);
+});
+setTimeout(()=>{document.getElementById('loader').classList.add('done');
+  document.getElementById('hero').classList.add('go');onScroll();},3600);
+</script>
+</body>
+</html>

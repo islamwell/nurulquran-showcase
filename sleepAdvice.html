@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Golden Window — When Should You Actually Sleep?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --top:#241548; --mid:#3a1f57; --bot:#120a26;
+  --glow:#b8517a; --ga:.28;
+  --gold:#f5c26b; --gold-soft:#f8dba6;
+  --ink:#efeaf6; --dim:#a79fbd;
+  --card:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.12);
+  --ser:'Fraunces',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink);
+  background:#08060f; overflow-x:hidden; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+/* ---------- SKY ---------- */
+#sky{position:fixed;inset:0;z-index:-3;
+  background:linear-gradient(180deg,var(--top) 0%,var(--mid) 45%,var(--bot) 100%);
+  transition:background .25s linear}
+#horizon{position:fixed;left:0;right:0;bottom:-10vh;height:60vh;z-index:-2;pointer-events:none;
+  background:radial-gradient(ellipse 120% 100% at 50% 100%,var(--glow) 0%,transparent 70%);
+  opacity:var(--ga);transition:opacity .3s linear,background .3s linear}
+#stars{position:fixed;inset:0;z-index:-2;pointer-events:none}
+#moon{position:fixed;width:64px;height:64px;border-radius:50%;z-index:-2;pointer-events:none;
+  background:radial-gradient(circle at 35% 32%,#fff9ec,#e8dcc0 55%,#c9b894);
+  box-shadow:0 0 40px 12px rgba(255,246,224,.22),0 0 120px 40px rgba(255,240,210,.10)}
+#grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* ---------- NURULQURAN BRAND BAR ---------- */
+.nq-global-bar{position:fixed;top:0;left:0;right:0;z-index:9990;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);background:rgba(8,6,15,.82);border-bottom:1px solid rgba(245,194,107,.22);padding:9px 18px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.nq-global-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nq-brand-tag{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:transform .2s ease}
+.nq-brand-tag:hover{transform:scale(1.02)}
+.nq-mini-logo{width:32px;height:32px;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(245,194,107,.3))}
+.nq-brand-text{display:flex;flex-direction:column;line-height:1.15}
+.nq-brand-name{font-size:.86rem;font-weight:700;letter-spacing:.18em;background:linear-gradient(135deg,#FFF2CC 0%,#F5C26B 50%,#D4AF37 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nq-brand-arabic{font-size:.74rem;letter-spacing:.04em;color:rgba(255,255,255,.65);font-family:'Amiri',serif;direction:rtl}
+.nq-bar-actions{display:flex;align-items:center;gap:8px}
+.nq-hub-link{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#F5C26B;background:rgba(245,194,107,.09);border:1px solid rgba(245,194,107,.28);padding:6px 14px;border-radius:99px;backdrop-filter:blur(8px);transition:all .25s ease}
+.nq-hub-link:hover{background:rgba(245,194,107,.22);border-color:#F5C26B;color:#fff;box-shadow:0 0 16px rgba(245,194,107,.3);transform:translateY(-1px)}
+.nq-footer-badge{text-align:center;padding:32px 16px 20px;border-top:1px solid rgba(245,194,107,.14);margin-top:40px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* ---------- NIGHT CLOCK ---------- */
+#nclock{position:fixed;top:62px;right:18px;z-index:50;display:flex;align-items:center;gap:10px;
+  padding:8px 14px 8px 10px;border-radius:100px;background:rgba(12,9,22,.5);
+  border:1px solid var(--line);backdrop-filter:blur(14px);font-size:13px;letter-spacing:.06em}
+#nclock svg{display:block}
+#nclock b{font-variant-numeric:tabular-nums;font-weight:500;font-size:15px}
+#nclock span{color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.14em}
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{position:relative;padding:110px 0}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--gold),transparent);opacity:.4}
+h1,h2,h3{font-family:var(--ser);font-weight:300;line-height:1.08;margin:0 0 18px}
+h1{font-size:clamp(2.9rem,8.5vw,6.2rem);letter-spacing:-.03em}
+h2{font-size:clamp(2rem,4.6vw,3.3rem);letter-spacing:-.02em}
+h3{font-size:1.35rem;letter-spacing:-.01em}
+p{color:#ddd6ea;max-width:64ch}
+.lead{font-size:1.14rem;color:#e6e0f2}
+em{font-style:italic;color:var(--gold-soft)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;
+  backdrop-filter:blur(16px)}
+.grid{display:grid;gap:18px}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+/* ---------- HERO ---------- */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px}
+#hero h1 span{display:block}
+#hero h1 .g{font-weight:500;background:linear-gradient(100deg,var(--gold-soft),var(--gold) 50%,#c98b5e);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hero-sub{font-size:1.2rem;color:#cfc7e0;max-width:52ch;margin-top:8px}
+.answer{margin-top:44px;display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:14px;
+  padding:22px 30px;border-radius:18px;border:1px solid rgba(245,194,107,.34);
+  background:linear-gradient(120deg,rgba(245,194,107,.13),rgba(245,194,107,.02));backdrop-filter:blur(10px)}
+.answer .lbl{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);width:100%}
+.answer .big{font-family:var(--ser);font-size:clamp(1.7rem,4.4vw,2.7rem);color:#fff}
+.answer .note{font-size:13.5px;color:var(--dim)}
+.scrollcue{margin-top:70px;display:flex;align-items:center;gap:14px;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.scrollcue i{display:block;width:1px;height:46px;background:linear-gradient(var(--gold),transparent);
+  animation:drop 2.2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}
+  56%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ---------- EVIDENCE BARS ---------- */
+.risk{display:grid;gap:10px;margin-top:26px}
+.risk-row{display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:14px;font-size:14px}
+.risk-row .t{color:var(--dim);font-variant-numeric:tabular-nums}
+.bar{height:30px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:8px;transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+  background:linear-gradient(90deg,rgba(255,255,255,.22),rgba(255,255,255,.42))}
+.risk-row.best .t{color:var(--gold-soft)}
+.risk-row.best .bar i{background:linear-gradient(90deg,var(--gold),#ffe6b8)}
+.risk-row .v{font-variant-numeric:tabular-nums;font-size:13px;color:#cdc5df;min-width:64px;text-align:right}
+/* ---------- DIAL ---------- */
+.dialwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center;margin-top:44px}
+#dial{width:100%;max-width:470px;margin:auto;display:block;cursor:grab;touch-action:none;user-select:none}
+#dial.drag{cursor:grabbing}
+#dial text{font-family:var(--sans);fill:var(--dim)}
+.hourbig{font-family:var(--ser)!important;fill:#fff!important;font-size:34px;letter-spacing:-1px}
+.phase{fill:var(--gold)!important;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase}
+.metrics{display:grid;gap:16px;margin:22px 0 26px}
+.m{font-size:12.5px}
+.m .top{display:flex;justify-content:space-between;margin-bottom:7px;color:var(--dim);
+  letter-spacing:.1em;text-transform:uppercase;font-size:10.5px}
+.m .track{height:6px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.m .fill{height:100%;border-radius:99px;transition:width .28s ease}
+.f1{background:linear-gradient(90deg,#7b6bd6,#b8a4ff)}
+.f2{background:linear-gradient(90deg,#d1674f,#ffb27a)}
+.f3{background:linear-gradient(90deg,#3f9f9a,#7fe6c8)}
+#hourText{min-height:112px;font-size:15.2px;color:#e3ddf0}
+.dctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.btn{font:inherit;font-size:12.5px;letter-spacing:.08em;color:var(--ink);cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:99px;padding:9px 18px;
+  transition:.2s}
+.btn:hover{background:rgba(245,194,107,.16);border-color:rgba(245,194,107,.4)}
+.btn.gold{background:linear-gradient(120deg,rgba(245,194,107,.9),rgba(245,194,107,.7));color:#241505;font-weight:500;border:none}
+.hint{font-size:11.5px;color:var(--dim);letter-spacing:.05em}
+/* ---------- CALCULATOR ---------- */
+.calc{display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:start}
+.field{margin-bottom:20px}
+label{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+input[type=time],select{width:100%;font:inherit;font-size:1.5rem;font-family:var(--ser);
+  background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:14px;
+  padding:12px 14px;color:#fff;color-scheme:dark}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.cyc{display:grid;gap:12px}
+.cyc-row{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+  padding:16px 20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  transition:.35s}
+.cyc-row.ideal{border-color:rgba(245,194,107,.45);background:linear-gradient(100deg,rgba(245,194,107,.13),rgba(245,194,107,.02))}
+.cyc-row .time{font-family:var(--ser);font-size:1.75rem;color:#fff;font-variant-numeric:tabular-nums;min-width:132px}
+.cyc-row .meta{font-size:12.5px;color:var(--dim)}
+.cyc-row .tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;
+  border-radius:99px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.cyc-row.ideal .tag{color:#2b1a05;background:var(--gold);border-color:transparent}
+.cyc-dots{display:flex;gap:4px;margin-top:6px}
+.cyc-dots i{width:16px;height:5px;border-radius:99px;background:rgba(255,255,255,.3)}
+.cyc-row.ideal .cyc-dots i{background:var(--gold)}
+#verdict{margin-top:18px;font-size:13.6px;color:var(--gold-soft)}
+/* ---------- HYPNOGRAM ---------- */
+#hyp{width:100%;display:block;touch-action:none}
+#hyp .gl{stroke:rgba(255,255,255,.10)}
+#hyp text{font-family:var(--sans);font-size:10px;fill:var(--dim);letter-spacing:.1em}
+#hypPath{fill:none;stroke:url(#hg);stroke-width:2.4;stroke-linejoin:round}
+#hypTip{font-size:12.5px;color:#e6e0f2;min-height:44px;margin-top:10px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);margin-top:14px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px}
+/* ---------- QUIZ ---------- */
+.q{padding:18px 0;border-bottom:1px solid var(--line)}
+.q:last-of-type{border-bottom:none}
+.q p{font-size:15px;margin:0 0 12px;color:#efeaf6}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:inherit;font-size:13px;cursor:pointer;padding:8px 15px;border-radius:99px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:#cfc7e0;transition:.18s}
+.opt:hover{border-color:rgba(245,194,107,.45);color:#fff}
+.opt.sel{background:var(--gold);color:#2b1a05;border-color:transparent;font-weight:500}
+#result{margin-top:24px;display:none}
+#result.on{display:block;animation:pop .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.rtop{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.rtop .emoji{font-size:54px;line-height:1}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:22px}
+.rgrid div{padding:15px 17px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.rgrid b{display:block;font-family:var(--ser);font-size:1.24rem;color:#fff;font-weight:400;margin-top:5px}
+.rgrid span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+/* ---------- JETLAG ---------- */
+.jl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;align-items:end}
+.jl input[type=time]{font-size:1.15rem}
+#jlOut{margin-top:24px;font-size:15px}
+#jlOut b{font-family:var(--ser);font-size:2.2rem;font-weight:400;color:var(--gold-soft);display:block}
+#jlBar{height:9px;border-radius:99px;background:rgba(255,255,255,.08);margin:16px 0 10px;overflow:hidden}
+#jlBar i{display:block;height:100%;width:0;border-radius:99px;transition:width .8s cubic-bezier(.2,.8,.2,1);
+  background:linear-gradient(90deg,#7fe6c8,var(--gold) 55%,#e5644f)}
+/* ---------- MYTHS ---------- */
+.myths{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.flip{height:210px;perspective:1200px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,.8,.2,1);
+  transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:26px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border:1px solid var(--line);background:var(--card);backdrop-filter:blur(14px)}
+.face.back{transform:rotateY(180deg);background:linear-gradient(140deg,rgba(245,194,107,.16),rgba(245,194,107,.03));
+  border-color:rgba(245,194,107,.32)}
+.face .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.face .body{font-family:var(--ser);font-size:1.16rem;line-height:1.36}
+.face.back .body{font-family:var(--sans);font-size:13.6px;line-height:1.6;color:#f0e9d9}
+.face .flipcue{font-size:10.5px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+/* ---------- RITUAL ---------- */
+.ritual{display:grid;grid-template-columns:150px 1fr;gap:36px;align-items:center}
+.ring{position:relative;width:150px;height:150px}
+.ring svg{transform:rotate(-90deg)}
+.ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--ser);font-size:1.9rem}
+.checks{display:grid;gap:9px}
+.chk{display:flex;gap:14px;align-items:flex-start;cursor:pointer;padding:12px 16px;border-radius:14px;
+  border:1px solid var(--line);background:rgba(255,255,255,.035);transition:.22s;font-size:14px}
+.chk:hover{background:rgba(255,255,255,.07)}
+.chk.on{border-color:rgba(245,194,107,.4);background:rgba(245,194,107,.09)}
+.box{flex:0 0 20px;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);
+  display:grid;place-items:center;margin-top:1px;transition:.22s}
+.chk.on .box{background:var(--gold);border-color:var(--gold)}
+.box svg{opacity:0;transition:.2s}
+.chk.on .box svg{opacity:1}
+.chk .when{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px}
+.chk.on .txt{color:#fff}
+/* ---------- FOOTER ---------- */
+footer{padding:80px 0 60px;border-top:1px solid var(--line);font-size:12.6px;color:var(--dim)}
+footer a{color:var(--gold-soft);text-decoration:none;border-bottom:1px solid rgba(245,194,107,.3)}
+footer h3{font-size:1rem;color:var(--ink)}
+.disclaimer{margin-top:26px;padding:16px 20px;border-left:2px solid rgba(245,194,107,.4);
+  background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;max-width:70ch}
+@media(max-width:860px){
+  .dialwrap,.calc,.ritual{grid-template-columns:1fr;gap:30px}
+  section{padding:80px 0}
+  .cyc-row{grid-template-columns:auto 1fr;row-gap:10px}
+  .cyc-row .tag{grid-column:1/-1;justify-self:start}
+  #nclock{top:58px;right:10px;padding:6px 11px 6px 8px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<nav class="nq-global-bar" aria-label="NurulQuran Global Navigation">
+  <div class="nq-global-inner">
+    <a href="index.html" class="nq-brand-tag" title="NurulQuran Showcase Portal">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(245,194,107,0.15)" />
+        <g stroke="#F5C26B" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#08060f" stroke="#F5C26B" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#08060f" stroke="#F5C26B" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="#F5C26B" />
+      </svg>
+      <div class="nq-brand-text">
+        <span class="nq-brand-name">NURULQURAN</span>
+        <span class="nq-brand-arabic">نُورُ القُرْآن</span>
+      </div>
+    </a>
+    <div class="nq-bar-actions">
+      <a href="index.html" class="nq-hub-link" title="Explore all interactive exhibits">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Showcase Hub</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div id="sky"></div>
+<canvas id="stars"></canvas>
+<div id="moon"></div>
+<div id="horizon"></div>
+<div id="grain"></div>
+
+<div id="nclock" title="Scroll the page to move through the night">
+  <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="11" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="2"/><circle id="ncArc" cx="13" cy="13" r="11" fill="none" stroke="#f5c26b" stroke-width="2" stroke-linecap="round" stroke-dasharray="69.1" stroke-dashoffset="69.1" transform="rotate(-90 13 13)"/></svg>
+  <div><span id="ncLabel">dusk</span><br><b id="ncTime">20:30</b></div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section id="hero"><div class="wrap">
+  <div class="eyebrow">A scrollable night · chronobiology</div>
+  <h1>
+    <span>The Golden</span>
+    <span class="g">Window</span>
+  </h1>
+  <p class="hero-sub lead">Your body doesn't care how many hours you sleep as much as it cares <em>when</em> you sleep them. Eight hours starting at 2&nbsp;a.m. is not the same eight hours as one starting at 10&nbsp;p.m. — not to your heart, your hormones, or your memory.</p>
+
+  <div class="answer">
+    <div class="lbl">The short answer, for most adults</div>
+    <div class="big">Lights out between 10:00&nbsp;&amp;&nbsp;11:00&nbsp;PM</div>
+    <div class="note">…then adjusted for your chronotype, and locked in place by a consistent wake-up time. The rest of this page is the <em>why</em> — and how to find your own number.</div>
+  </div>
+
+  <div class="scrollcue"><i></i> Scroll — you're about to live through one night</div>
+</div></section>
+
+<!-- ================= EVIDENCE ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">01 — The evidence</div>
+  <h2>Why 10&nbsp;to&nbsp;11 keeps showing up</h2>
+  <p class="lead">In 2021, researchers strapped wrist accelerometers to <strong>88,026 UK Biobank participants</strong> and tracked their cardiovascular health for roughly six years. They weren't measuring sleep <em>length</em>. They were measuring sleep <em>onset time</em>.</p>
+  <p>The relationship turned out to be U-shaped: falling asleep in the 10&nbsp;p.m.–11&nbsp;p.m. hour was associated with the lowest incidence of cardiovascular disease. Going to bed later was worse — and so was going to bed much earlier, which often signals a clock that has drifted out of alignment.</p>
+
+  <div class="card" style="margin-top:30px" id="riskCard">
+    <div style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Relative cardiovascular risk by sleep-onset hour</div>
+    <div class="risk">
+      <div class="risk-row"><div class="t">before 10:00 PM</div><div class="bar"><i data-w="83"></i></div><div class="v">+24%</div></div>
+      <div class="risk-row best"><div class="t">10:00 – 11:00 PM</div><div class="bar"><i data-w="67"></i></div><div class="v">baseline</div></div>
+      <div class="risk-row"><div class="t">11:00 – midnight</div><div class="bar"><i data-w="75"></i></div><div class="v">+12%</div></div>
+      <div class="risk-row"><div class="t">after midnight</div><div class="bar"><i data-w="84"></i></div><div class="v">+25%</div></div>
+    </div>
+    <p style="font-size:12.4px;color:var(--dim);margin:18px 0 0;max-width:none">Observational association, not proof of cause — night owls also tend to get less light, less exercise and more artificial light at night. But the signal is consistent, dose-dependent, and it lines up neatly with what we know about the biological clock.</p>
+  </div>
+</div></section>
+
+<!-- ================= DIAL ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">02 — Interactive · your 24-hour body</div>
+  <h2>Drag the hand around your clock</h2>
+  <p class="lead">Nothing about your body is constant. Melatonin, core temperature and alertness each run on their own daily wave — and bedtime works best at the exact moment all three line up. Grab the hand and see what your body is doing at any hour.</p>
+
+  <div class="dialwrap">
+    <svg id="dial" viewBox="0 0 400 400" role="img" aria-label="Interactive 24-hour circadian clock">
+      <defs>
+        <radialGradient id="core" cx="50%" cy="42%">
+          <stop offset="0%" stop-color="rgba(255,255,255,.10)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <linearGradient id="gwin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffe6b8"/><stop offset="100%" stop-color="#f5a95b"/>
+        </linearGradient>
+      </defs>
+      <circle cx="200" cy="200" r="176" fill="url(#core)"/>
+      <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+      <circle cx="200" cy="200" r="118" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <!-- arcs injected -->
+      <g id="arcs"></g>
+      <g id="ticks"></g>
+      <g id="labels"></g>
+      <!-- hand -->
+      <g id="hand">
+        <line x1="200" y1="200" x2="200" y2="62" stroke="#f5c26b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="200" cy="62" r="10" fill="#f5c26b"/>
+        <circle cx="200" cy="62" r="19" fill="rgba(245,194,107,.20)"/>
+      </g>
+      <circle cx="200" cy="200" r="4.5" fill="#fff"/>
+      <text id="dHour" class="hourbig" x="200" y="196" text-anchor="middle">10:00 PM</text>
+      <text id="dPhase" class="phase" x="200" y="218" text-anchor="middle">GOLDEN WINDOW</text>
+    </svg>
+
+    <div>
+      <div class="metrics">
+        <div class="m"><div class="top"><span>Melatonin</span><span id="v1">0%</span></div>
+          <div class="track"><div class="fill f1" id="b1" style="width:0"></div></div></div>
+        <div class="m"><div class="top"><span>Core body temperature</span><span id="v2">0%</span></div>
+          <div class="track"><div class="fill f2" id="b2" style="width:0"></div></div></div>
+        <div class="m"><div class="top"><span>Alertness</span><span id="v3">0%</span></div>
+          <div class="track"><div class="fill f3" id="b3" style="width:0"></div></div></div>
+      </div>
+      <div id="hourText"></div>
+      <div class="dctrl">
+        <button class="btn" id="dPlay">⏸ Pause sweep</button>
+        <button class="btn" id="dNow">Jump to now</button>
+        <span class="hint">or drag the gold handle</span>
+      </div>
+      <p style="font-size:12.6px;color:var(--dim);margin-top:22px">The gold arc is the <em>golden window</em>. The purple arc is your biological night — the hours melatonin is actually being produced. The small mark near 4:30 a.m. is your temperature minimum: the true bottom of your day.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= CALCULATOR ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">03 — Interactive · work backwards</div>
+  <h2>Set the alarm first. Then the bedtime.</h2>
+  <p class="lead">Sleep arrives in cycles of roughly 90 minutes, and waking mid-cycle — especially mid-deep-sleep — is what produces that concrete-in-the-skull feeling. So pick the hour you must be up, then count backwards in whole cycles.</p>
+
+  <div class="calc" style="margin-top:34px">
+    <div>
+      <div class="field">
+        <label for="wake">I must wake up at</label>
+        <input type="time" id="wake" value="07:00">
+      </div>
+      <div class="field">
+        <label for="lat">Minutes to fall asleep — <span id="latV">15</span></label>
+        <input type="range" id="lat" min="0" max="45" step="5" value="15">
+      </div>
+      <p style="font-size:12.4px;color:var(--dim)">Cycle length varies (70–120 min) and lengthens through the night, so treat these as targets, not timetables. Consistency beats precision every time.</p>
+    </div>
+    <div>
+      <div class="cyc" id="cyc"></div>
+      <div id="verdict"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= HYPNOGRAM ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">04 — Interactive · the shape of a night</div>
+  <h2>Not all hours of sleep are the same hours</h2>
+  <p class="lead">Deep sleep (N3) is front-loaded — it dominates the first half of the night, repairing the body and consolidating facts. REM sleep is back-loaded — it swells in the final cycles, doing emotional processing and creative recombination. Which means <em>trimming the end of your night doesn't trim sleep evenly. It disproportionately deletes your dreaming.</em></p>
+
+  <div class="card" style="margin-top:30px">
+    <svg id="hyp" viewBox="0 0 900 300" role="img" aria-label="Interactive hypnogram of one night's sleep">
+      <defs><linearGradient id="hg" x1="0" x2="1">
+        <stop offset="0%" stop-color="#b8a4ff"/><stop offset="50%" stop-color="#7fe6c8"/><stop offset="100%" stop-color="#f5c26b"/>
+      </linearGradient></defs>
+      <g id="hypGrid"></g>
+      <path id="hypPath"></path>
+      <g id="hypCursor" style="opacity:0">
+        <line y1="24" y2="238" stroke="#f5c26b" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <circle r="5" fill="#f5c26b"/>
+      </g>
+    </svg>
+    <div id="hypTip">Hover or drag across the chart to scrub through the night.</div>
+    <div class="legend">
+      <span><i style="background:#b8a4ff"></i>N3 · deep, slow-wave</span>
+      <span><i style="background:#7fe6c8"></i>N2 · light, memory sorting</span>
+      <span><i style="background:#f5c26b"></i>REM · dreaming</span>
+      <span><i style="background:rgba(255,255,255,.4)"></i>brief awakenings — normal</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- ================= CHRONOTYPE ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">05 — Interactive · find your own window</div>
+  <h2>The 10&nbsp;p.m. rule has exceptions. You might be one.</h2>
+  <p class="lead">Chronotype is largely genetic and shifts with age — teenagers run late, older adults run early. Six questions, adapted from the classic morningness–eveningness questionnaire, will place you on the spectrum.</p>
+
+  <div class="card" style="margin-top:30px">
+    <div id="quiz"></div>
+    <div style="margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <button class="btn gold" id="qGo">Reveal my chronotype</button>
+      <button class="btn" id="qReset">Reset</button>
+      <span class="hint" id="qCount">0 / 6 answered</span>
+    </div>
+    <div id="result"></div>
+  </div>
+</div></section>
+
+<!-- ================= SOCIAL JETLAG ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">06 — Interactive · the hidden cost</div>
+  <h2>Your Sunday-night jet lag</h2>
+  <p class="lead">Sleeping 1 a.m.–9 a.m. on weekends and 11 p.m.–6:30 a.m. on weekdays means you fly two time zones east every Monday — without ever leaving your bed. Chronobiologist Till Roenneberg named this <em>social jet lag</em>, and it tracks with worse mood, metabolism and performance.</p>
+
+  <div class="card" style="margin-top:30px">
+    <div class="jl">
+      <div><label for="wdS">Weekday sleep</label><input type="time" id="wdS" value="23:15"></div>
+      <div><label for="wdW">Weekday wake</label><input type="time" id="wdW" value="06:45"></div>
+      <div><label for="weS">Free-day sleep</label><input type="time" id="weS" value="01:00"></div>
+      <div><label for="weW">Free-day wake</label><input type="time" id="weW" value="09:30"></div>
+    </div>
+    <div id="jlBar"><i></i></div>
+    <div id="jlOut"></div>
+  </div>
+</div></section>
+
+<!-- ================= MYTHS ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">07 — Tap to flip</div>
+  <h2>Four things almost everyone gets wrong</h2>
+  <div class="grid myths" style="margin-top:30px" id="myths"></div>
+</div></section>
+
+<!-- ================= RITUAL ================= -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">08 — Interactive · tonight</div>
+  <h2>The landing sequence</h2>
+  <p class="lead">You can't will yourself asleep, but you can make the conditions inevitable. Tick off what you'll actually do — think of it as descending, not switching off.</p>
+
+  <div class="ritual" style="margin-top:34px">
+    <div class="ring">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="66" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="7"/>
+        <circle id="rArc" cx="75" cy="75" r="66" fill="none" stroke="#f5c26b" stroke-width="7"
+          stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"
+          style="transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)"/>
+      </svg>
+      <div class="pct" id="rPct">0%</div>
+    </div>
+    <div class="checks" id="checks"></div>
+  </div>
+</div></section>
+
+<!-- ================= CLOSE ================= -->
+<section><div class="wrap reveal" style="text-align:center">
+  <div class="eyebrow" style="justify-content:center">Dawn</div>
+  <h2 style="max-width:22ch;margin:0 auto 22px">The best time to sleep is the same time, tonight and tomorrow.</h2>
+  <p style="margin:0 auto;max-width:56ch">Ten p.m. is the population average. Your chronotype nudges it. But the single most powerful variable isn't the number on the clock at all — it's <em>regularity</em>. A steady wake-up time, morning light in your eyes, and darkness at night will do more for you than any perfectly-calculated bedtime you keep only twice a week.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <h3>Where this comes from</h3>
+  <p style="margin-bottom:14px">Sleep-onset timing &amp; cardiovascular outcomes — <a href="https://academic.oup.com/ehjdh" target="_blank" rel="noopener">European Heart Journal · Digital Health</a> (UK Biobank, n=88,026, 2021). Sleep architecture &amp; cycle structure — <a href="https://www.ncbi.nlm.nih.gov/books/NBK526132/" target="_blank" rel="noopener">StatPearls: Physiology, Sleep Stages</a> and the <a href="https://www.sleepfoundation.org/stages-of-sleep" target="_blank" rel="noopener">Sleep Foundation</a>. Circadian regulation, melatonin onset (DLMO) and sleep timing — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3008942/" target="_blank" rel="noopener">Frontiers in Neurology / PMC</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8800593/" target="_blank" rel="noopener">Sleep timing and the circadian clock in mammals</a>. Social jet lag &amp; chronotype — Roenneberg et&nbsp;al.; chronotype scoring adapted from the Horne–Östberg morningness–eveningness questionnaire.</p>
+  <div class="disclaimer">This page is science communication, not medical advice. Persistent insomnia, loud snoring with daytime sleepiness, or an inability to sleep at socially normal hours are worth taking to a doctor — sleep apnoea and circadian rhythm disorders are common and treatable.</div>
+  <div class="nq-footer-badge">
+    <div class="nq-footer-logo-row">
+      <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(245,194,107,0.15)" />
+        <g stroke="#F5C26B" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#08060f" stroke="#F5C26B" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#08060f" stroke="#F5C26B" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="#F5C26B" />
+      </svg>
+      <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C26B">NURULQURAN · نُورُ القُرْآن</span>
+    </div>
+    <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+  </div>
+  <p style="margin-top:30px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">Scroll back up to return to dusk ↑</p>
+</div></footer>
+
+<script>
+/* ============ helpers ============ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+function hex(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function mix(a,b,t){const A=hex(a),B=hex(b);return`rgb(${Math.round(lerp(A[0],B[0],t))},${Math.round(lerp(A[1],B[1],t))},${Math.round(lerp(A[2],B[2],t))})`;}
+function fmt(h){h=((h%24)+24)%24;let H=Math.floor(h),M=Math.round((h-H)*60);if(M===60){M=0;H=(H+1)%24;}
+  const ap=H<12?'AM':'PM';let h12=H%12;if(h12===0)h12=12;return `${h12}:${String(M).padStart(2,'0')} ${ap}`;}
+function fmt24(h){h=((h%24)+24)%24;let H=Math.floor(h),M=Math.round((h-H)*60);if(M===60){M=0;H=(H+1)%24;}
+  return `${String(H).padStart(2,'0')}:${String(M).padStart(2,'0')}`;}
+
+/* ============ SKY / SCROLL = ONE NIGHT ============ */
+const KF=[
+ {p:0,   top:'#241548',mid:'#3a1f57',bot:'#120a26',glow:'#b8517a',ga:.30,star:.5},
+ {p:.16, top:'#0e0d2a',mid:'#1a1240',bot:'#07061a',glow:'#4a2a6e',ga:.20,star:.95},
+ {p:.40, top:'#05060f',mid:'#0b0c22',bot:'#02030a',glow:'#1a2050',ga:.13,star:1},
+ {p:.62, top:'#070a1c',mid:'#101638',bot:'#04050f',glow:'#243a6b',ga:.17,star:.92},
+ {p:.80, top:'#191436',mid:'#3d2350',bot:'#0b0a1c',glow:'#8a4560',ga:.32,star:.42},
+ {p:.92, top:'#2a2149',mid:'#6b3b58',bot:'#160f28',glow:'#e08a5a',ga:.44,star:.14},
+ {p:1,   top:'#3b3168',mid:'#8d5364',bot:'#1d1430',glow:'#ffb072',ga:.52,star:0}
+];
+const sky=$('#sky'),horizon=$('#horizon'),moon=$('#moon'),root=document.documentElement;
+let starAlpha=.5, scrollP=0;
+function applySky(p){
+  let i=0; while(i<KF.length-2 && p>KF[i+1].p) i++;
+  const a=KF[i],b=KF[i+1],t=clamp((p-a.p)/(b.p-a.p),0,1);
+  root.style.setProperty('--top',mix(a.top,b.top,t));
+  root.style.setProperty('--mid',mix(a.mid,b.mid,t));
+  root.style.setProperty('--bot',mix(a.bot,b.bot,t));
+  root.style.setProperty('--glow',mix(a.glow,b.glow,t));
+  root.style.setProperty('--ga',lerp(a.ga,b.ga,t));
+  starAlpha=lerp(a.star,b.star,t);
+  // moon
+  const mx=lerp(6,88,p), my=26-16*Math.sin(Math.PI*clamp(p/0.9,0,1));
+  moon.style.left=mx+'vw'; moon.style.top=my+'vh';
+  moon.style.opacity=String(clamp((1-p)*3.2,0,1)*clamp(p*14,0,1));
+  moon.style.transform=`scale(${lerp(.85,1.05,Math.sin(Math.PI*clamp(p,0,1)))})`;
+  // night clock: 20:30 -> 08:00
+  const h=20.5+p*11.5;
+  $('#ncTime').textContent=fmt24(h);
+  const hh=((h%24)+24)%24;
+  $('#ncLabel').textContent = hh>=20||hh<0.5?'dusk':hh<3?'deep night':hh<5?'the low point':hh<6.5?'pre-dawn':hh<7.5?'dawn':'morning';
+  $('#ncArc').style.strokeDashoffset=String(69.1*(1-p));
+}
+function onScroll(){
+  const max=document.body.scrollHeight-innerHeight;
+  scrollP=clamp(max>0?scrollY/max:0,0,1);
+  applySky(scrollP);
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',onScroll);
+
+/* ============ STARFIELD ============ */
+const cv=$('#stars'),cx=cv.getContext('2d');
+let stars=[],W,H;
+function initStars(){
+  W=cv.width=innerWidth*devicePixelRatio; H=cv.height=innerHeight*devicePixelRatio;
+  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
+  const n=Math.round(innerWidth*innerHeight/5200);
+  stars=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H*.92,
+    r:(Math.random()*1.25+.35)*devicePixelRatio,ph:Math.random()*6.28,sp:.6+Math.random()*1.6,
+    warm:Math.random()<.22}));
+}
+initStars(); addEventListener('resize',initStars);
+let t0=0;
+function drawStars(ts){
+  const t=ts/1000; cx.clearRect(0,0,W,H);
+  if(starAlpha>0.01){
+    for(const s of stars){
+      const tw=.45+.55*Math.sin(t*s.sp+s.ph);
+      cx.globalAlpha=tw*starAlpha*.95;
+      cx.fillStyle=s.warm?'#ffe4bd':'#ffffff';
+      cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.2832);cx.fill();
+      if(s.r>1.4*devicePixelRatio){cx.globalAlpha=tw*starAlpha*.16;
+        cx.beginPath();cx.arc(s.x,s.y,s.r*3.2,0,6.2832);cx.fill();}
+    }
+  }
+  cx.globalAlpha=1;
+  requestAnimationFrame(drawStars);
+}
+requestAnimationFrame(drawStars);
+
+/* ============ REVEAL ============ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');
+    if(e.target.querySelector('#riskCard')||e.target.id==='riskCard'){
+      $$('#riskCard .bar i').forEach((b,i)=>setTimeout(()=>b.style.width=b.dataset.w+'%',i*140));
+    }
+    if(e.target.querySelector('#hyp')) drawHyp();
+    io.unobserve(e.target);}
+}),{threshold:.16});
+$$('.reveal').forEach(el=>io.observe(el));
+
+/* ============ CIRCADIAN CURVES ============ */
+function mel(h){let x=h<12?h+24:h;
+  if(x<20.5||x>31.5)return .02;
+  if(x<=27)return .02+.98*(.5-.5*Math.cos(Math.PI*(x-20.5)/6.5));
+  return .02+.98*(.5+.5*Math.cos(Math.PI*(x-27)/4.5));}
+function temp(h){
+  if(h>=4.5&&h<=19){const t=(h-4.5)/14.5;return .5-.5*Math.cos(Math.PI*t);}
+  const hh=h<4.5?h+24:h; const t=(hh-19)/9.5;return .5+.5*Math.cos(Math.PI*t);}
+function alert_(h){
+  const dip=.20*Math.exp(-Math.pow(h-14.3,2)/2.2);
+  const v=.92*temp(h)-.78*mel(h)-dip+.16;
+  return clamp(v,0,1);}
+
+const HOURS=[
+ ["Deep night","Melatonin is high and still climbing. If you fell asleep at 11, you're inside cycle two — the richest slow-wave sleep of the whole night. Growth hormone is pulsing; tissue repair is running at full tilt."],
+ ["Deep night","Peak slow-wave sleep. Cerebrospinal fluid is washing through the brain, clearing metabolic waste — a process that only really works at this depth. This is the hour you cannot borrow back later."],
+ ["Deep night","Melatonin near its maximum, blood pressure at its lowest. Memories from yesterday are being replayed and filed from the hippocampus into long-term cortical storage."],
+ ["Melatonin peak","Melatonin peaks around now. Wake here and you'll likely feel groggy and inexplicably bleak — the 3 a.m. despair is chemistry, not insight."],
+ ["Temperature minimum","≈4:30 a.m. is your core body temperature minimum — the floor of your entire 24 hours. Reaction time, mood and vigilance are at their worst. Statistically the most dangerous hour to be driving."],
+ ["REM-rich","Deep sleep is largely spent; REM now dominates. Dreams are longest, strangest and most emotional. This is the sleep you lose first when you cut a night short."],
+ ["Cortisol rise","The cortisol awakening response fires — a sharp hormonal surge that lifts blood pressure and heart rate and pre-loads you for the day. Your body starts waking before your alarm does."],
+ ["Wake-up","Melatonin secretion switches off around 7:30. Bright light in your eyes now is the single strongest anchor for tonight's bedtime. Ten minutes outdoors beats an hour of indoor lighting."],
+ ["Morning ramp","Cortisol is doing what caffeine claims to. Delaying coffee 60–90 minutes after waking is a small trick with a real payoff in afternoon energy."],
+ ["Rising","Alertness climbing steeply. Testosterone peaks. Cognitive machinery is warming into its best state of the day."],
+ ["Peak alertness","For most people this is the summit: working memory, focus and analytical reasoning at their highest. Guard this hour ruthlessly. Do not spend it on email."],
+ ["Peak alertness","Still near maximum. Hard problems, difficult writing and anything requiring sustained concentration belong here."],
+ ["Midday","Digestion ramps up; alertness begins a gentle decline. Insulin sensitivity is better now than it will be tonight — a real argument for making lunch the bigger meal."],
+ ["Afternoon dip","The dip is starting. It's circadian, not caused by your sandwich — a genuine trough built into the human clock, a vestige of biphasic sleep."],
+ ["Afternoon dip","The lowest daytime alertness. A 10–20 minute nap here is legitimate biology, not weakness. Keep it short and before 3 p.m. so it doesn't eat into tonight's sleep pressure."],
+ ["Rebound","Fastest reaction times and best hand–eye coordination, around 3:30 p.m. Alertness is climbing again. Caffeine after this point is a loan against tonight."],
+ ["Physical peak","Muscle strength, flexibility and lung function rising toward their daily best. Perceived effort is unusually low."],
+ ["Physical peak","≈5 p.m.: peak cardiovascular efficiency and muscle strength. Physiologically the best hour to train — and afternoon exercise deepens tonight's slow-wave sleep."],
+ ["Evening","Highest blood pressure of the day, around 6:30 p.m. Large or late meals from here on push your clock later and fragment your sleep."],
+ ["Evening","≈7 p.m.: highest core body temperature. Your temperature must now fall for sleep to arrive — which is why a warm bath works: it dumps heat afterwards."],
+ ["Wake maintenance zone","The 'forbidden zone for sleep' — paradoxically the hardest time of day to nod off. If you tried to sleep now, you'd probably fail. Wait for the gate to open."],
+ ["Biological night begins","Melatonin secretion begins around 9 p.m. in dim light. This is the true start of your biological night. Dim the lamps now — bright light here can delay the whole cascade by hours."],
+ ["Golden window","The window is open. Core temperature dropping, melatonin rising, sleep pressure high after ~16 hours awake. All three signals agree for the first time all day. This is the moment."],
+ ["Window closing","Still inside the window, but it's closing. Every hour later doesn't just shorten your night — it shifts your entire clock, and you'll pay for it tomorrow evening too."]
+];
+
+/* ============ DIAL ============ */
+const R=150;
+function pt(h,r){const a=(h/24)*2*Math.PI-Math.PI/2;return[200+r*Math.cos(a),200+r*Math.sin(a)];}
+function arcD(h1,h2,r){const[a,b]=pt(h1,r),[c,d]=pt(h2,r);
+  const span=((h2-h1)%24+24)%24;return `M${a.toFixed(2)} ${b.toFixed(2)} A${r} ${r} 0 ${span>12?1:0} 1 ${c.toFixed(2)} ${d.toFixed(2)}`;}
+(function buildDial(){
+  const arcs=$('#arcs');
+  const defs=[
+    {a:21,b:7.5,r:150,w:14,s:'rgba(140,120,220,.42)',cap:'butt'},   // biological night
+    {a:23,b:3,  r:150,w:14,s:'rgba(184,164,255,.75)',cap:'butt'},   // deep sleep heavy
+    {a:22,b:23, r:150,w:22,s:'url(#gwin)',cap:'butt'},              // golden window
+    {a:9,b:11.5,r:118,w:7, s:'rgba(127,230,200,.55)',cap:'round'},  // peak focus
+    {a:16.5,b:18,r:118,w:7,s:'rgba(255,178,122,.55)',cap:'round'}   // physical peak
+  ];
+  defs.forEach(d=>{
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',arcD(d.a,d.b,d.r));p.setAttribute('fill','none');
+    p.setAttribute('stroke',d.s);p.setAttribute('stroke-width',d.w);p.setAttribute('stroke-linecap',d.cap);
+    arcs.appendChild(p);
+  });
+  // temp-min marker
+  const [mx,my]=pt(4.5,150),[mx2,my2]=pt(4.5,134);
+  const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',mx);l.setAttribute('y1',my);l.setAttribute('x2',mx2);l.setAttribute('y2',my2);
+  l.setAttribute('stroke','#7fe6c8');l.setAttribute('stroke-width','2.4');arcs.appendChild(l);
+
+  const tg=$('#ticks');
+  for(let h=0;h<24;h+=.5){
+    const major=h%3===0;
+    const[x1,y1]=pt(h,major?168:164),[x2,y2]=pt(h,172);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','line');
+    t.setAttribute('x1',x1);t.setAttribute('y1',y1);t.setAttribute('x2',x2);t.setAttribute('y2',y2);
+    t.setAttribute('stroke',major?'rgba(255,255,255,.5)':'rgba(255,255,255,.16)');
+    t.setAttribute('stroke-width',major?1.6:1);tg.appendChild(t);
+  }
+  const lg=$('#labels');
+  [[0,'12a'],[3,'3a'],[6,'6a'],[9,'9a'],[12,'12p'],[15,'3p'],[18,'6p'],[21,'9p']].forEach(([h,s])=>{
+    const[x,y]=pt(h,188);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',x);t.setAttribute('y',y+4);t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-size','11');t.setAttribute('letter-spacing','1');t.textContent=s;lg.appendChild(t);
+  });
+})();
+
+let curH=22, sweeping=true, lastT=0;
+function setHour(h,fromUser){
+  curH=((h%24)+24)%24;
+  const a=(curH/24)*360;
+  $('#hand').setAttribute('transform',`rotate(${a} 200 200)`);
+  $('#dHour').textContent=fmt(curH);
+  const idx=Math.floor(curH);
+  $('#dPhase').textContent=HOURS[idx][0].toUpperCase();
+  $('#hourText').textContent=HOURS[idx][1];
+  const m=mel(curH),t=temp(curH),al=alert_(curH);
+  $('#b1').style.width=(m*100)+'%'; $('#v1').textContent=Math.round(m*100)+'%';
+  $('#b2').style.width=(t*100)+'%'; $('#v2').textContent=Math.round(t*100)+'%';
+  $('#b3').style.width=(al*100)+'%';$('#v3').textContent=Math.round(al*100)+'%';
+}
+setHour(22);
+function sweep(ts){
+  if(sweeping){ if(lastT) setHour(curH+(ts-lastT)/1000*1.4); lastT=ts; } else lastT=0;
+  requestAnimationFrame(sweep);
+}
+requestAnimationFrame(sweep);
+$('#dPlay').onclick=e=>{sweeping=!sweeping;e.target.textContent=sweeping?'⏸ Pause sweep':'▶ Resume sweep';};
+$('#dNow').onclick=()=>{sweeping=false;$('#dPlay').textContent='▶ Resume sweep';
+  const d=new Date();setHour(d.getHours()+d.getMinutes()/60);};
+
+const dial=$('#dial');
+let dragging=false;
+function angleFromEvent(e){
+  const r=dial.getBoundingClientRect();
+  const cxp=r.left+r.width/2, cyp=r.top+r.height/2;
+  const x=(e.touches?e.touches[0].clientX:e.clientX)-cxp;
+  const y=(e.touches?e.touches[0].clientY:e.clientY)-cyp;
+  let a=Math.atan2(y,x)+Math.PI/2; if(a<0)a+=2*Math.PI;
+  const h=a/(2*Math.PI)*24;
+  setHour(Math.round(h*4)/4);
+}
+function startDrag(e){dragging=true;sweeping=false;$('#dPlay').textContent='▶ Resume sweep';
+  dial.classList.add('drag');angleFromEvent(e);e.preventDefault();}
+dial.addEventListener('pointerdown',startDrag);
+addEventListener('pointermove',e=>{if(dragging)angleFromEvent(e);});
+addEventListener('pointerup',()=>{dragging=false;dial.classList.remove('drag');});
+
+/* ============ BEDTIME CALCULATOR ============ */
+function calc(){
+  const [wh,wm]=$('#wake').value.split(':').map(Number);
+  const lat=+$('#lat').value; $('#latV').textContent=lat;
+  const wake=wh+wm/60;
+  const rows=[6,5,4,7].sort((a,b)=>b-a);
+  const out=[];
+  let goldenHit=null;
+  rows.forEach(n=>{
+    const bed=((wake-(n*1.5)-lat/60)%24+24)%24;
+    const ideal=(n===5||n===6);
+    const inWin=(bed>=21.75&&bed<=23.25);
+    if(inWin&&!goldenHit)goldenHit={n,bed};
+    out.push(`<div class="cyc-row ${ideal?'ideal':''}">
+      <div><div class="time">${fmt(bed)}</div><div class="cyc-dots">${'<i></i>'.repeat(n)}</div></div>
+      <div class="meta">${n} cycles · ${n*1.5} hours of sleep${inWin?' · <span style="color:var(--gold-soft)">inside the golden window</span>':''}</div>
+      <div class="tag">${ideal?'recommended':(n>6?'long sleeper':'minimum')}</div>
+    </div>`);
+  });
+  $('#cyc').innerHTML=out.join('');
+  $('#verdict').innerHTML = goldenHit
+    ? `✦ Going to bed at <strong>${fmt(goldenHit.bed)}</strong> gives you ${goldenHit.n} full cycles <em>and</em> lands inside the 10–11&nbsp;p.m. window. That's the sweet spot for this alarm.`
+    : `✦ With a ${fmt(wake)} alarm, no whole-cycle bedtime lands in the 10–11&nbsp;p.m. window. If that's not negotiable, prioritise the cycle count and a consistent wake time — regularity matters more than hitting the population average.`;
+}
+$('#wake').oninput=calc; $('#lat').oninput=calc; calc();
+
+/* ============ HYPNOGRAM ============ */
+const STAGES={W:0,REM:1,N1:2,N2:3,N3:4};
+const NAMES={W:'Awake',REM:'REM · dreaming',N1:'N1 · drifting off',N2:'N2 · light sleep',N3:'N3 · deep sleep'};
+const NOTE={
+  W:'A brief arousal. Healthy sleepers wake many times a night and remember almost none of it.',
+  REM:'Eyes darting, body paralysed, brain nearly as active as waking. Emotional memories are being defanged and ideas recombined.',
+  N1:'The border. Muscles let go, thoughts fragment. Wake here and you may swear you were never asleep.',
+  N2:'Half your night lives here. Sleep spindles fire, transferring the day\'s learning into longer-term storage.',
+  N3:'Slow-wave sleep — the deepest, most restorative state. Growth hormone, immune repair, and brain waste clearance. Hardest to wake from.'
+};
+const SEG=[[10,'W'],[6,'N1'],[19,'N2'],[40,'N3'],[10,'N2'],[10,'REM'],
+ [16,'N2'],[34,'N3'],[9,'N2'],[22,'REM'],
+ [18,'N2'],[24,'N3'],[4,'W'],[16,'N2'],[28,'REM'],
+ [22,'N2'],[12,'N3'],[8,'N2'],[34,'REM'],
+ [20,'N2'],[26,'REM'],[14,'N2'],[8,'W']];
+const TOTAL=SEG.reduce((s,x)=>s+x[0],0);
+const HX=x=>60+(x/TOTAL)*(900-90), HY=s=>40+STAGES[s]*48;
+function drawHyp(){
+  const g=$('#hypGrid'); if(g.dataset.done)return; g.dataset.done=1;
+  let gh='';
+  Object.entries(STAGES).forEach(([k,v])=>{
+    const y=HY(k);
+    gh+=`<line class="gl" x1="60" y1="${y}" x2="870" y2="${y}"/>
+         <text x="54" y="${y+3.5}" text-anchor="end">${k}</text>`;
+  });
+  for(let m=0;m<=TOTAL;m+=60){
+    gh+=`<line class="gl" x1="${HX(m)}" y1="34" x2="${HX(m)}" y2="240" stroke-dasharray="2 5"/>
+         <text x="${HX(m)}" y="262" text-anchor="middle">${fmt24(23+m/60)}</text>`;
+  }
+  gh+=`<text x="60" y="288" fill="rgba(184,164,255,.85)">◀ deep sleep front-loaded</text>
+       <text x="870" y="288" text-anchor="end" fill="rgba(245,194,107,.9)">REM back-loaded ▶</text>`;
+  g.innerHTML=gh;
+  let d='',x=0;
+  SEG.forEach(([dur,s],i)=>{
+    const y=HY(s);
+    d+= i===0?`M${HX(0)} ${y}`:` L${HX(x)} ${y}`;
+    x+=dur; d+=` L${HX(x)} ${y}`;
+  });
+  const path=$('#hypPath'); path.setAttribute('d',d);
+  const len=path.getTotalLength();
+  path.style.strokeDasharray=len; path.style.strokeDashoffset=len;
+  path.animate([{strokeDashoffset:len},{strokeDashoffset:0}],{duration:2600,easing:'cubic-bezier(.3,.7,.2,1)',fill:'forwards'});
+}
+const hyp=$('#hyp');
+function scrub(e){
+  const r=hyp.getBoundingClientRect();
+  const px=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*900;
+  const m=clamp((px-60)/(810)*TOTAL,0,TOTAL);
+  let acc=0,st='W';
+  for(const [d,s] of SEG){ if(m<=acc+d){st=s;break;} acc+=d; }
+  const cur=$('#hypCursor');
+  cur.style.opacity=1;
+  cur.querySelector('line').setAttribute('x1',HX(m));cur.querySelector('line').setAttribute('x2',HX(m));
+  const c=cur.querySelector('circle'); c.setAttribute('cx',HX(m)); c.setAttribute('cy',HY(st));
+  $('#hypTip').innerHTML=`<strong style="color:#fff">${fmt(23+m/60)} · ${NAMES[st]}</strong> — ${NOTE[st]} <span style="color:var(--dim)">(${Math.round(m)} min in)</span>`;
+}
+hyp.addEventListener('pointermove',scrub);
+hyp.addEventListener('pointerdown',scrub);
+hyp.addEventListener('pointerleave',()=>{$('#hypCursor').style.opacity=0;});
+
+/* ============ CHRONOTYPE QUIZ ============ */
+const QS=[
+ {q:"If you were completely free to plan your day, what time would you get up?",
+  o:[["5:00 – 6:30 am",4],["6:30 – 7:45 am",3],["7:45 – 9:45 am",2],["after 9:45 am",1]]},
+ {q:"In the first half hour after waking, how do you feel?",
+  o:[["Very alert",4],["Fairly alert",3],["Fairly tired",2],["Very tired",1]]},
+ {q:"When do you naturally start feeling sleepy in the evening?",
+  o:[["8 – 9 pm",4],["9 – 10:15 pm",3],["10:15 pm – 12:30 am",2],["after 12:30 am",1]]},
+ {q:"At what time of day do you feel at your absolute best?",
+  o:[["5 – 8 am",4],["8 – 10 am",3],["10 am – 5 pm",2],["5 pm – late",1]]},
+ {q:"If you had to do two hours of hard physical work, when would you choose?",
+  o:[["8 – 10 am",4],["11 am – 1 pm",3],["3 – 5 pm",2],["7 – 9 pm",1]]},
+ {q:"Do you think of yourself as a morning or an evening person?",
+  o:[["Definitely morning",4],["More morning than evening",3],["More evening than morning",2],["Definitely evening",1]]}
+];
+const answers=new Array(QS.length).fill(null);
+$('#quiz').innerHTML=QS.map((Q,i)=>`<div class="q"><p><span style="color:var(--gold);font-variant-numeric:tabular-nums">${String(i+1).padStart(2,'0')}</span> &nbsp;${Q.q}</p>
+  <div class="opts">${Q.o.map((o,j)=>`<button class="opt" data-q="${i}" data-j="${j}" data-s="${o[1]}">${o[0]}</button>`).join('')}</div></div>`).join('');
+$('#quiz').addEventListener('click',e=>{
+  const b=e.target.closest('.opt'); if(!b)return;
+  const i=+b.dataset.q;
+  $$(`.opt[data-q="${i}"]`).forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); answers[i]=+b.dataset.s;
+  $('#qCount').textContent=`${answers.filter(a=>a!==null).length} / ${QS.length} answered`;
+});
+const TYPES=[
+ {min:22,emoji:'🦁',name:'The Lion',tag:'Strong morning type · ~15% of people',
+  bed:'9:30 – 10:30 pm',wake:'5:30 – 6:30 am',peak:'6 am – 11 am',
+  txt:"You wake before your alarm and you're at your sharpest before most of the world has finished its coffee. Your risk isn't oversleeping — it's the 4 pm crash, and letting evening social life erode the front of your night. Protect an early bedtime without apology, and treat your first three waking hours as the most valuable real estate in your week.",
+  tip:'Get bright light in the late afternoon to hold off an ever-earlier bedtime.'},
+ {min:17,emoji:'🐻',name:'The Bear',tag:'Solar / middle type · roughly half of people',
+  bed:'10:30 – 11:15 pm',wake:'6:45 – 7:30 am',peak:'10 am – 12 pm',
+  txt:"You run close to the sun, which means the standard advice was basically written for you: the 10–11 pm golden window fits your biology almost exactly. Your focus peaks mid-morning, dips hard around 2 pm, and rebounds early evening. Your main enemy is the weekend lie-in — an extra two hours on Sunday will make Monday morning feel like jet lag, because it is.",
+  tip:'Same wake time every day, ±30 minutes. That single habit does most of the work.'},
+ {min:12,emoji:'🐺',name:'The Wolf',tag:'Evening-leaning · ~15–20% of people',
+  bed:'12:00 – 1:00 am',wake:'7:45 – 9:00 am',peak:'12 pm – 2 pm, then again 6 – 9 pm',
+  txt:"Mornings are genuinely, physiologically harder for you — that's not a character flaw. Your second wind arrives when everyone else is winding down, which is a gift for creative work and a curse for 9 a.m. meetings. Your biggest lever isn't willpower at night, it's light in the morning: get outside within 30 minutes of waking and your whole clock will shift earlier over a couple of weeks.",
+  tip:'Hard cut-off on bright screens after 10 pm; sunlight on your face before 9 am.'},
+ {min:0,emoji:'🦉',name:'The Owl',tag:'Strong evening type',
+  bed:'1:00 – 2:00 am',wake:'9:00 – 10:00 am',peak:'late afternoon into night',
+  txt:"You sit at the far edge of the spectrum — a delayed sleep phase that puts you in constant conflict with school and office hours. You're not lazy; you're accumulating chronic sleep debt every weekday and repaying it on weekends, which keeps the cycle locked in. Shifting is possible but it takes structure: advance bedtime by 15 minutes every few days, add morning light, and keep the wake time fixed even when the sleep was bad.",
+  tip:"If early hours are non-negotiable and this feels impossible, ask a doctor about delayed sleep-wake phase disorder — it's a recognised, treatable condition."}
+];
+$('#qGo').onclick=()=>{
+  if(answers.some(a=>a===null)){ $('#qCount').textContent='Please answer all six ↑'; $('#qCount').style.color='#f5c26b'; return; }
+  const s=answers.reduce((a,b)=>a+b,0);
+  const T=TYPES.find(t=>s>=t.min);
+  const r=$('#result');
+  r.innerHTML=`<div style="height:1px;background:var(--line);margin:26px 0 24px"></div>
+   <div class="rtop"><div class="emoji">${T.emoji}</div>
+     <div><div style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)">${T.tag}</div>
+     <h3 style="margin:4px 0 0;font-size:2.1rem">${T.name}</h3>
+     <div style="font-size:12px;color:var(--dim)">Morningness score ${s} / 24</div></div></div>
+   <p style="margin-top:18px">${T.txt}</p>
+   <div class="rgrid">
+     <div><span>Target bedtime</span><b>${T.bed}</b></div>
+     <div><span>Target wake</span><b>${T.wake}</b></div>
+     <div><span>Cognitive peak</span><b style="font-size:1.05rem;line-height:1.35">${T.peak}</b></div>
+   </div>
+   <p style="margin-top:18px;font-size:13.4px;color:var(--gold-soft)">✦ ${T.tip}</p>`;
+  r.classList.add('on');
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+};
+$('#qReset').onclick=()=>{answers.fill(null);$$('.opt').forEach(o=>o.classList.remove('sel'));
+  $('#result').classList.remove('on');$('#qCount').style.color='';$('#qCount').textContent=`0 / ${QS.length} answered`;};
+
+/* ============ SOCIAL JET LAG ============ */
+function mid(sleep,wake){
+  let[a,b]=sleep.split(':').map(Number), [c,d]=wake.split(':').map(Number);
+  let s=a+b/60, w=c+d/60; if(w<=s)w+=24;
+  return {mid:(s+(w-s)/2)%24, dur:w-s};
+}
+function jl(){
+  const wd=mid($('#wdS').value,$('#wdW').value), we=mid($('#weS').value,$('#weW').value);
+  let diff=Math.abs(we.mid-wd.mid); if(diff>12)diff=24-diff;
+  const hrs=Math.floor(diff), mins=Math.round((diff-hrs)*60);
+  const debt=Math.max(0,we.dur-wd.dur);
+  let verdict,col;
+  if(diff<1){verdict="Excellent — your body clock barely notices the weekend. This is the single most underrated sleep habit there is.";col='#7fe6c8';}
+  else if(diff<2){verdict="Mild. Common and manageable, but worth trimming — try capping your weekend lie-in at one hour past your weekday alarm.";col='#f5c26b';}
+  else if(diff<3){verdict="Moderate. You're flying two time zones each week. This is associated with lower mood, worse metabolic markers and that unmistakable Monday fog.";col='#f0a05c';}
+  else{verdict="Substantial. Your biology and your calendar are living in different time zones. The fix isn't more weekend sleep — it's a smaller gap: shift weekday bedtime earlier and hold weekend wake time closer to weekdays.";col='#e5644f';}
+  $('#jlBar>i').style.width=clamp(diff/4*100,4,100)+'%';
+  $('#jlOut').innerHTML=`<b style="color:${col}">${hrs}h ${String(mins).padStart(2,'0')}m of social jet lag</b>
+    <div style="font-size:12px;color:var(--dim);margin:4px 0 12px">Weekday mid-sleep ${fmt(wd.mid)} · free-day mid-sleep ${fmt(we.mid)}${debt>0.4?` · you sleep ${debt.toFixed(1)}h longer on free days, which suggests weekday sleep debt`:''}</div>
+    ${verdict}`;
+}
+['#wdS','#wdW','#weS','#weW'].forEach(s=>$(s).oninput=jl); jl();
+
+/* ============ MYTHS ============ */
+const MYTHS=[
+ {m:"“I only need 5 hours — I've trained myself.”",
+  t:"Genuine short sleepers exist, but they're vanishingly rare (a handful of known gene variants). What almost everyone actually experiences is adaptation to feeling impaired: sleep-deprived people reliably rate their own performance as fine while objective tests keep falling."},
+ {m:"“I'll catch up on the weekend.”",
+  t:"You can repay some sleep debt, but not all of it — and the repayment itself shifts your clock later, so Monday starts in a hole. Lost deep sleep in particular is only partially recoverable."},
+ {m:"“A nightcap helps me sleep.”",
+  t:"Alcohol is a sedative, not a sleep aid. It speeds sleep onset then suppresses REM, fragments the second half of the night with micro-arousals, and worsens snoring. You'll sleep fast and wake unrestored."},
+ {m:"“Bedtime doesn't matter if I get 8 hours.”",
+  t:"Timing changes the composition of those hours. Sleep 2 a.m.–10 a.m. and you fight your circadian drive for deep sleep early and clip REM at the end. Same duration, different — and worse — sleep."}
+];
+$('#myths').innerHTML=MYTHS.map(x=>`<div class="flip"><div class="flip-in">
+  <div class="face"><div class="k">Myth</div><div class="body">${x.m}</div><div class="flipcue">Tap to flip ↻</div></div>
+  <div class="face back"><div class="k">What's actually true</div><div class="body">${x.t}</div><div class="flipcue">Tap to flip back ↺</div></div>
+</div></div>`).join('');
+$('#myths').addEventListener('click',e=>{const f=e.target.closest('.flip');if(f)f.classList.toggle('on');});
+
+/* ============ RITUAL CHECKLIST ============ */
+const RIT=[
+ ["3 hours before","Last big meal. Late eating raises core temperature and delays melatonin."],
+ ["2 hours before","Warm shower or bath. The post-bath heat dump drops core temperature — the physical trigger for sleep."],
+ ["90 minutes before","Lights down to lamp level. Bright overhead light at night can suppress melatonin for hours."],
+ ["60 minutes before","Screens away, or at least off your face. Write tomorrow's to-do list on paper to close the mental loops."],
+ ["30 minutes before","Bedroom cool (16–19°C), dark, quiet. Cold room, warm feet."],
+ ["At bedtime","Lie down only when sleepy. If you're still awake after ~20 minutes, get up and do something dull in dim light."],
+ ["Tomorrow, 7 am","Fixed wake time and daylight in your eyes within 30 minutes — the anchor that makes tonight repeatable."]
+];
+$('#checks').innerHTML=RIT.map((r,i)=>`<div class="chk" data-i="${i}">
+  <div class="box"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6.5 L4.6 9 L10 3" fill="none" stroke="#2b1a05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="txt"><span class="when">${r[0]}</span>${r[1]}</div></div>`).join('');
+$('#checks').addEventListener('click',e=>{
+  const c=e.target.closest('.chk'); if(!c)return;
+  c.classList.toggle('on');
+  const n=$$('.chk.on').length, p=n/RIT.length;
+  $('#rArc').style.strokeDashoffset=String(414.7*(1-p));
+  $('#rPct').textContent=Math.round(p*100)+'%';
+  $('#rPct').style.color = p===1?'#f5c26b':'';
+});
+
+onScroll();
+</script>
+</body>
+</html>

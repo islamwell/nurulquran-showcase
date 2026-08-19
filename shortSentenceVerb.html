@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twelve Words · The Qur'anic Verb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#080b10;
+  --bg-2:#0d1219;
+  --panel:rgba(255,255,255,.035);
+  --panel-2:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.16);
+  --text:#e9eff6;
+  --muted:#8fa0b3;
+  --gold:#e3b769;
+  --gold-2:#f5e0b4;
+  --verb:#43d6a0;
+  --subj:#5fa8ff;
+  --obj:#ff7fb2;
+  --hal:#b98cff;
+  --harf:#8095ab;
+  --ghost:#f2c74c;
+  --r:18px;
+  --maxw:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 600px at 12% -5%, rgba(227,183,105,.10), transparent 60%),
+    radial-gradient(800px 700px at 92% 8%, rgba(95,168,255,.09), transparent 62%),
+    radial-gradient(700px 700px at 50% 110%, rgba(67,214,160,.07), transparent 60%);
+}
+.ar{font-family:'Amiri',serif;direction:rtl}
+::selection{background:rgba(227,183,105,.3)}
+
+/* ============ TOP BAR ============ */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  backdrop-filter:blur(18px);
+  background:rgba(8,11,16,.72);
+  border-bottom:1px solid var(--line);
+}
+.bar-in{
+  max-width:var(--maxw);margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.02em;font-size:.94rem;text-decoration:none;color:inherit}
+.nq-mini-logo{width:28px;height:28px;flex:none;filter:drop-shadow(0 2px 6px rgba(227,183,105,.35))}
+.brand b{color:var(--gold);letter-spacing:.06em}
+.bar nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.bar nav a{
+  color:var(--muted);text-decoration:none;font-size:.8rem;padding:6px 11px;border-radius:9px;
+  transition:.2s;white-space:nowrap;
+}
+.bar nav a:hover{color:var(--gold-2);background:var(--panel-2)}
+.nq-hub-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--gold);background:rgba(227,183,105,.09);border:1px solid var(--line-2);padding:6px 13px;border-radius:99px;transition:.2s;white-space:nowrap}
+.nq-hub-badge:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);box-shadow:0 0 14px rgba(227,183,105,.4)}
+.tog{
+  display:flex;align-items:center;gap:7px;font-size:.74rem;color:var(--muted);
+  border:1px solid var(--line);padding:5px 10px;border-radius:999px;cursor:pointer;
+  user-select:none;transition:.2s;background:transparent;font-family:inherit;
+}
+.tog:hover{border-color:var(--line-2);color:var(--text)}
+.tog.on{color:#0a0d12;background:var(--gold);border-color:var(--gold);font-weight:600}
+.prog{height:2px;background:linear-gradient(90deg,var(--gold),var(--verb));width:0%;transition:width .12s linear}
+@media(max-width:880px){.bar nav{display:none}}
+.nq-footer-badge{text-align:center;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:28px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;
+  padding:150px 20px 70px;text-align:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;font-size:.7rem;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--gold);border:1px solid rgba(227,183,105,.3);
+  padding:7px 16px;border-radius:999px;background:rgba(227,183,105,.06);
+}
+h1{
+  font-size:clamp(2.5rem,7vw,4.6rem);line-height:1.04;font-weight:300;
+  margin:26px 0 0;letter-spacing:-.03em;
+}
+h1 b{
+  font-weight:700;
+  background:linear-gradient(120deg,var(--gold-2),var(--gold) 45%,#c9964a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-ar{
+  font-family:'Amiri',serif;direction:rtl;font-size:clamp(2rem,6vw,3.2rem);
+  color:var(--gold-2);margin:18px 0 6px;opacity:.9;
+}
+.lede{max-width:660px;margin:20px auto 0;color:var(--muted);font-size:1.03rem;font-weight:300}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+.stat{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:14px 22px;min-width:118px;
+}
+.stat b{display:block;font-size:1.7rem;font-weight:600;color:var(--gold-2);line-height:1.2}
+.stat span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* ============ LAYOUT ============ */
+main{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px 100px}
+section{margin:80px 0;scroll-margin-top:80px}
+.sec-head{margin-bottom:28px}
+.sec-kicker{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+h2{font-size:clamp(1.6rem,3.6vw,2.35rem);font-weight:600;letter-spacing:-.02em}
+h2 .ar{font-size:.85em;color:var(--gold-2);margin-right:8px}
+.sec-head p{color:var(--muted);max-width:720px;margin-top:10px;font-weight:300}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+
+/* criteria */
+.crit{counter-reset:c}
+.crit .card{position:relative;padding-left:60px}
+.crit .card::before{
+  counter-increment:c;content:counter(c,decimal-leading-zero);
+  position:absolute;left:22px;top:22px;font-size:.8rem;font-weight:700;color:var(--gold);
+  font-variant-numeric:tabular-nums;
+}
+.crit h4{font-size:.98rem;font-weight:600;margin-bottom:5px}
+.crit p{font-size:.86rem;color:var(--muted);font-weight:300}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:620px}
+th{
+  text-align:left;padding:13px 16px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap;
+}
+td{padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.022);color:var(--text)}
+td .ar{font-size:1.4rem;color:var(--gold-2);display:inline-block;line-height:1.9}
+.pill{
+  display:inline-block;font-size:.66rem;padding:3px 9px;border-radius:999px;
+  border:1px solid var(--line-2);color:var(--text);white-space:nowrap;
+}
+
+/* legend */
+.legend{display:flex;gap:10px;flex-wrap:wrap}
+.lg{
+  display:flex;align-items:center;gap:9px;padding:9px 15px;border-radius:12px;
+  border:1px solid var(--line);background:var(--panel);font-size:.8rem;
+}
+.lg i{width:11px;height:11px;border-radius:4px;display:block}
+.lg .ar{font-size:1.05rem;color:var(--gold-2)}
+.lg small{color:var(--muted)}
+
+/* ============ VERSE MODULE ============ */
+.verse{
+  border:1px solid var(--line);border-radius:26px;overflow:hidden;margin-bottom:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s;
+}
+.verse.in{opacity:1;transform:none}
+.v-head{
+  display:flex;align-items:center;gap:16px;padding:20px 26px;
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.v-num{
+  font-family:'Reem Kufi',sans-serif;font-size:1.5rem;color:var(--gold);
+  width:46px;height:46px;display:grid;place-items:center;border-radius:14px;
+  border:1px solid rgba(227,183,105,.32);background:rgba(227,183,105,.07);flex:none;
+}
+.v-title{font-size:1.12rem;font-weight:600;letter-spacing:-.01em}
+.v-ref{font-size:.76rem;color:var(--muted)}
+.v-tags{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap}
+.v-tag{font-size:.66rem;padding:4px 10px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
+.v-tag.hot{color:var(--gold);border-color:rgba(227,183,105,.32);background:rgba(227,183,105,.08)}
+
+.stage{padding:38px 26px 26px;text-align:center;position:relative}
+.stage::after{
+  content:attr(data-wm);position:absolute;inset:0;display:grid;place-items:center;
+  font-family:'Amiri',serif;font-size:clamp(6rem,22vw,13rem);color:rgba(255,255,255,.017);
+  pointer-events:none;user-select:none;
+}
+.ayah{
+  direction:rtl;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:10px;position:relative;z-index:1;
+}
+.chip{
+  font-family:'Amiri',serif;font-size:clamp(1.75rem,5.2vw,2.9rem);line-height:1.85;
+  padding:6px 18px;border-radius:16px;cursor:pointer;background:transparent;
+  border:1px solid transparent;color:var(--text);transition:.22s cubic-bezier(.4,0,.2,1);
+  font-family:'Amiri',serif;position:relative;
+}
+.chip:hover{transform:translateY(-3px)}
+.chip[data-role=fiil]{color:var(--verb)}
+.chip[data-role=fail],.chip[data-role=naib]{color:var(--subj)}
+.chip[data-role=mafool]{color:var(--obj)}
+.chip[data-role=hal]{color:var(--hal)}
+.chip[data-role=harf]{color:var(--harf);font-size:clamp(1.4rem,4vw,2.2rem)}
+.chip.ghost{
+  color:var(--ghost);border:1px dashed rgba(242,199,76,.45);opacity:.72;
+  font-size:clamp(1.1rem,3vw,1.6rem);
+}
+.chip.sel{
+  background:rgba(255,255,255,.06);border-color:currentColor;
+  box-shadow:0 0 0 1px currentColor,0 10px 30px -12px currentColor;
+}
+.tl{font-size:.78rem;color:var(--muted);letter-spacing:.05em;margin-top:16px;font-style:italic}
+.tr-en{font-size:1.12rem;margin-top:6px;color:var(--gold-2);font-weight:300}
+.ctx{
+  margin-top:16px;font-size:.78rem;color:var(--muted);border-top:1px dashed var(--line);
+  padding-top:14px;max-width:760px;margin-inline:auto;
+}
+.ctx .ar{font-size:1.2rem;color:#b9c6d4;display:block;margin-bottom:4px}
+
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;padding:0 26px 26px}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+
+.dpanel{background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:280px}
+.dhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.dword{font-family:'Amiri',serif;font-size:2.5rem;line-height:1.6}
+.drole{font-size:.68rem;padding:4px 11px;border-radius:999px;border:1px solid currentColor;opacity:.95}
+.dgloss{color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.feat{background:#0b1017;padding:10px 13px}
+.feat span{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.feat b{font-weight:500;font-size:.88rem}
+.feat b.ar{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold-2)}
+.irab{
+  background:rgba(227,183,105,.05);border:1px solid rgba(227,183,105,.18);border-radius:12px;
+  padding:12px 15px;margin-bottom:14px;
+}
+.irab span{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px}
+.irab .ar{font-size:1.25rem;line-height:1.9;color:var(--gold-2)}
+.note{font-size:.87rem;color:#c2cedb;font-weight:300}
+.note em{color:var(--gold-2);font-style:normal}
+
+.focus{background:rgba(67,214,160,.045);border:1px solid rgba(67,214,160,.2);border-radius:18px;padding:22px}
+.focus h5{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--verb);margin-bottom:12px}
+.focus .rule{font-family:'Amiri',serif;direction:rtl;font-size:1.5rem;color:var(--gold-2);margin-bottom:10px;line-height:1.9}
+.focus p{font-size:.87rem;color:#c2cedb;font-weight:300;margin-bottom:10px}
+.formula{
+  display:flex;gap:7px;flex-wrap:wrap;direction:rtl;justify-content:center;
+  margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,.1);
+}
+.formula i{
+  font-style:normal;font-family:'Amiri',serif;font-size:1rem;padding:5px 12px;border-radius:9px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);
+}
+
+/* LAB */
+.lab{border-top:1px solid var(--line);padding:24px 26px;background:rgba(0,0,0,.2)}
+.lab-h{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.lab-h b{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.lab-h span{font-size:.8rem;color:var(--muted)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.btn{
+  font-family:inherit;font-size:.8rem;padding:8px 15px;border-radius:11px;cursor:pointer;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--muted);transition:.2s;
+}
+.btn:hover{border-color:var(--line-2);color:var(--text)}
+.btn.on{background:var(--gold);border-color:var(--gold);color:#0a0d12;font-weight:600}
+.btn .ar{font-family:'Amiri',serif;font-size:1.05rem}
+.out{
+  background:#0b1017;border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center;min-height:96px;
+  display:flex;flex-direction:column;justify-content:center;gap:8px;
+}
+.out .big{font-family:'Amiri',serif;direction:rtl;font-size:clamp(1.7rem,5vw,2.5rem);color:var(--gold-2);line-height:1.8}
+.out .sm{font-size:.83rem;color:var(--muted);font-weight:300}
+.hl{color:var(--verb)}
+.hl2{color:var(--obj)}
+
+.ladder{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
+.rung{
+  flex:1;min-width:112px;text-align:center;padding:14px 8px;border-radius:14px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);transition:.22s;
+}
+.rung:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.rung.on{border-color:var(--gold);background:rgba(227,183,105,.1)}
+.rung .f{font-size:.62rem;letter-spacing:.14em;color:var(--gold);margin-bottom:6px}
+.rung .w{font-family:'Amiri',serif;font-size:1.5rem;color:var(--gold-2);line-height:1.7}
+.rung .m{font-size:.7rem;color:var(--muted);margin-top:3px}
+
+.conj{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden}
+.cell{background:#0b1017;padding:13px}
+.cell .p{font-family:'Amiri',serif;font-size:1.05rem;color:var(--muted);direction:rtl}
+.cell .v{font-family:'Amiri',serif;font-size:1.45rem;color:var(--gold-2);direction:rtl;line-height:1.8}
+.cell.mark{background:rgba(227,183,105,.1)}
+.cell.mark .v{color:var(--gold)}
+
+.flip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.fcard{
+  background:#0b1017;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;
+}
+.fcard .lbl{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fcard .w{font-family:'Amiri',serif;font-size:1.7rem;line-height:1.7;transition:.3s}
+.fcard .en{font-size:.72rem;color:var(--muted);margin-top:3px}
+
+/* ============ QUIZ ============ */
+.quiz{border:1px solid var(--line);border-radius:26px;padding:30px;background:var(--panel)}
+.q{border-bottom:1px solid var(--line);padding:20px 0}
+.q:first-of-type{padding-top:0}
+.q:last-of-type{border-bottom:none}
+.q .qh{display:flex;gap:12px;align-items:baseline;margin-bottom:14px}
+.q .qn{font-size:.7rem;color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+.q .qt{font-size:.98rem;font-weight:400}
+.q .qt .ar{font-size:1.35rem;color:var(--gold-2)}
+.opts{display:grid;gap:8px}
+.opt{
+  text-align:left;font-family:inherit;font-size:.87rem;padding:11px 15px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:.18s;
+}
+.opt:hover:not(:disabled){border-color:var(--line-2);color:var(--text);transform:translateX(4px)}
+.opt .ar{font-size:1.15rem;color:var(--gold-2)}
+.opt.right{background:rgba(67,214,160,.12);border-color:var(--verb);color:#d8fff0}
+.opt.wrong{background:rgba(255,127,178,.1);border-color:var(--obj);color:#ffd9e8}
+.opt:disabled{cursor:default}
+.expl{
+  margin-top:12px;font-size:.83rem;color:#c2cedb;padding:11px 15px;border-radius:11px;
+  background:rgba(227,183,105,.06);border-left:2px solid var(--gold);display:none;font-weight:300;
+}
+.expl.show{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(-5px)}to{opacity:1}}
+.score{
+  margin-top:24px;text-align:center;padding:22px;border-radius:18px;
+  border:1px solid var(--line);background:rgba(0,0,0,.25);
+}
+.score b{font-size:2.4rem;color:var(--gold-2);display:block;font-weight:600}
+.score span{font-size:.8rem;color:var(--muted)}
+
+footer{
+  border-top:1px solid var(--line);padding:44px 20px;text-align:center;
+  color:var(--muted);font-size:.8rem;position:relative;z-index:1;
+}
+footer .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-2);margin-bottom:10px}
+.hide-tl .tl{display:none}
+.hide-en .tr-en,.hide-en .dgloss,.hide-en .en{display:none}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <a href="index.html" class="brand" title="NurulQuran · The Qur'anic Verb">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(227,183,105,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <span><b>NURULQURAN</b> · Twelve Words</span>
+    </a>
+    <nav>
+      <a href="#method">Method</a>
+      <a href="#legend">Legend</a>
+      <a href="#lessons">The Five</a>
+      <a href="#atlas">Atlas</a>
+      <a href="#quiz">Test</a>
+    </nav>
+    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Showcase Portal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Showcase</span>
+    </a>
+    <button class="tog on" id="tTl">Translit</button>
+    <button class="tog on" id="tEn">English</button>
+  </div>
+  <div class="prog" id="prog"></div>
+</div>
+
+<header class="hero">
+  <div class="eyebrow">Deep Morphological Study</div>
+  <div class="hero-ar">اَلْجُمْلَةُ الْفِعْلِيَّة</div>
+  <h1>Five sentences.<br><b>The whole verb.</b></h1>
+  <p class="lede">The five shortest <em>complete</em> verbal sentences in the Qur'an — none longer than three words — chosen so that between them they contain every state an Arabic verb can enter: past, present, command, passive, and jussive.</p>
+  <div class="stats">
+    <div class="stat"><b>5</b><span>Sentences</span></div>
+    <div class="stat"><b>12</b><span>Total words</span></div>
+    <div class="stat"><b>6</b><span>Verbs</span></div>
+    <div class="stat"><b>100%</b><span>Verb system</span></div>
+  </div>
+</header>
+
+<main>
+
+<!-- METHOD -->
+<section id="method">
+  <div class="sec-head">
+    <div class="sec-kicker">01 — How the five were found</div>
+    <h2><span class="ar">اَلْمَنْهَج</span> Selection method</h2>
+    <p>A sentence is not a phrase. <span class="ar" style="color:var(--gold-2)">بِسْمِ اللَّهِ</span> is a phrase — beautiful, but it asserts nothing. A sentence must <em>claim</em> something that can be affirmed or denied. Four filters were applied to the entire text.</p>
+  </div>
+  <div class="grid g2 crit">
+    <div class="card"><h4>It must open with a verb</h4><p>A <span class="ar">جُمْلَة فِعْلِيَّة</span> begins with the <span class="ar">فِعْل</span>. Nominal sentences (<span class="ar">اللَّهُ نُورُ السَّمَاوَاتِ</span>) were excluded — they teach nouns, not verbs.</p></div>
+    <div class="card"><h4>It must be <span class="ar">مُفِيدَة</span> — self-sufficient</h4><p>Verb + doer at minimum: the <span class="ar">مُسْنَد</span> and <span class="ar">مُسْنَد إِلَيْه</span>. Conditional fragments like <span class="ar">إِذَا الشَّمْسُ كُوِّرَتْ</span> lean on a following clause and were rejected.</p></div>
+    <div class="card"><h4>Two or three words</h4><p>Counted as Arabic counts: prefixed particles (<span class="ar">فَ ، الْ ، سَ</span>) and suffixed pronouns (<span class="ar">ـنِي ، ـكُمْ</span>) belong to their host word. So <span class="ar">فَاذْكُرُونِي أَذْكُرْكُمْ</span> = two words.</p></div>
+    <div class="card"><h4>Maximum teaching yield</h4><p>Where two candidates tied in length, the winner was the one adding a <em>new</em> grammatical state. The final set covers all three tenses, both voices, and all three moods of the imperfect.</p></div>
+  </div>
+
+  <div class="sec-head" style="margin-top:44px">
+    <div class="sec-kicker">Shortlist</div>
+    <h2>The runners-up</h2>
+    <p>Every one of these is a genuine two-word Qur'anic sentence. They lost only because a chosen verse already taught the same lesson.</p>
+  </div>
+  <div class="tbl-wrap"><table id="runners"><thead><tr><th>Sentence</th><th>Ref</th><th>Meaning</th><th>Would have taught</th><th>Verdict</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<!-- LEGEND -->
+<section id="legend">
+  <div class="sec-head">
+    <div class="sec-kicker">02 — Reading the colours</div>
+    <h2><span class="ar">اَلْإِعْرَاب</span> The grammar key</h2>
+    <p>Every word below is colour-coded by the <em>job</em> it does in the sentence. Click any word to open its full morphological file.</p>
+  </div>
+  <div class="legend" id="legendBox"></div>
+</section>
+
+<!-- LESSONS -->
+<section id="lessons">
+  <div class="sec-head">
+    <div class="sec-kicker">03 — The curriculum</div>
+    <h2>The five sentences</h2>
+    <p>Read each one aloud. Then click each word. The ghost words <span style="color:var(--ghost)">in dashed outline</span> are pronouns that are <em>pronounced by no letter</em> — they live inside the verb itself.</p>
+  </div>
+  <div id="verses"></div>
+</section>
+
+<!-- ATLAS -->
+<section id="atlas">
+  <div class="sec-head">
+    <div class="sec-kicker">04 — Synthesis</div>
+    <h2><span class="ar">اَلْخُلَاصَة</span> The verb atlas</h2>
+    <p>Six verbs, twelve words — and the complete grid of the Arabic verb.</p>
+  </div>
+  <div class="tbl-wrap"><table id="atlasTbl"><thead><tr><th>Verb</th><th>Root</th><th>Form</th><th>Tense / Mood</th><th>Voice</th><th>Doer</th><th>Lesson</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="grid g4" style="margin-top:18px">
+    <div class="card"><div class="ar" style="font-size:1.7rem;color:var(--verb)">مَاضٍ</div><h4 style="margin:6px 0 4px">Past</h4><p style="font-size:.83rem;color:var(--muted)">Fixed ending, doer suffixed: <span class="ar">عَلَّمَ ، اقْتَرَبَتْ ، خُلِقَ</span></p></div>
+    <div class="card"><div class="ar" style="font-size:1.7rem;color:var(--subj)">مُضَارِع</div><h4 style="margin:6px 0 4px">Present</h4><p style="font-size:.83rem;color:var(--muted)">Always starts with <span class="ar">أ ن ي ت</span> and changes its ending: <span class="ar">يَكُونُ ، أَذْكُرْ</span></p></div>
+    <div class="card"><div class="ar" style="font-size:1.7rem;color:var(--obj)">أَمْر</div><h4 style="margin:6px 0 4px">Command</h4><p style="font-size:.83rem;color:var(--muted)">Built on stillness or the dropped <span class="ar">نون</span>: <span class="ar">كُنْ ، اذْكُرُوا</span></p></div>
+    <div class="card"><div class="ar" style="font-size:1.7rem;color:var(--hal)">مَجْهُول</div><h4 style="margin:6px 0 4px">Passive</h4><p style="font-size:.83rem;color:var(--muted)">The doer is deleted, the object is promoted: <span class="ar">خُلِقَ الْإِنسَانُ</span></p></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="sec-head">
+    <div class="sec-kicker">05 — Check yourself</div>
+    <h2><span class="ar">اِخْتِبَار</span> Eight questions</h2>
+    <p>Everything here was answered somewhere above.</p>
+  </div>
+  <div class="quiz"><div id="qBox"></div>
+    <div class="score"><b id="scoreN">0 / 8</b><span id="scoreT">Answer the questions to see your score</span></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ar">وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ</div>
+  <div>“And We have certainly made the Qur'an easy to remember.” — 54:17</div>
+  <div style="margin-top:14px;opacity:.6">Grammatical analysis follows classical <span class="ar">إِعْرَاب</span> conventions (Darwīsh, al-Ṣāfī). Built as a single static file.</div>
+  <div class="nq-footer-badge">
+    <div class="nq-footer-logo-row">
+      <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(227,183,105,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+    </div>
+    <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   DATA
+========================================================= */
+const ROLES = {
+  fiil:   {ar:'فِعْل',            en:'Verb',                 c:'var(--verb)'},
+  fail:   {ar:'فَاعِل',           en:'Doer / Subject',       c:'var(--subj)'},
+  naib:   {ar:'نَائِبُ الفَاعِل',  en:'Deputy subject',       c:'var(--subj)'},
+  mustatir:{ar:'ضَمِيرٌ مُسْتَتِر', en:'Hidden pronoun',       c:'var(--ghost)'},
+  mafool: {ar:'مَفْعُولٌ بِه',     en:'Object',               c:'var(--obj)'},
+  hal:    {ar:'حَال',             en:'State / circumstance', c:'var(--hal)'},
+  harf:   {ar:'حَرْف',            en:'Particle',             c:'var(--harf)'}
+};
+
+const VERSES = [
+{
+  id:'v1', n:'٠١', wm:'ع ل م',
+  title:'The doer who was never written',
+  ref:'Sūrat ar-Raḥmān 55:2', tags:['2 words','Past · مَاضٍ','Form II'],
+  translit:'ʿallama l-qurʾān',
+  english:'“He taught the Qur’an.”',
+  ctxAr:'اَلرَّحْمَٰنُ ۝ عَلَّمَ الْقُرْآنَ ۝ خَلَقَ الْإِنسَانَ',
+  ctxEn:'In context: “The Most Merciful — taught the Qur’an — created man…”',
+  words:[
+    {ar:'عَلَّمَ', tl:'ʿallama', role:'fiil', gloss:'he taught',
+     root:'ع · ل · م', wazn:'فَعَّلَ', form:'II', tense:'Past — مَاضٍ', voice:'Active — مَعْلُوم',
+     pgn:'3rd · masc. · sing.',
+     irab:'فِعْلٌ مَاضٍ مَبْنِيٌّ عَلَى الفَتْحِ',
+     note:'Form II doubles the middle root letter and turns a state into an act done <em>to someone else</em>. <span class="ar">عَلِمَ</span> = “he knew”; double the <span class="ar">ل</span> and it becomes <span class="ar">عَلَّمَ</span> = “he caused to know, he taught.” The whole theology of the sūrah sits in one shadda.'},
+    {ar:'(هُوَ)', tl:'huwa', role:'mustatir', ghost:true, gloss:'he — i.e. ar-Raḥmān',
+     irab:'ضَمِيرٌ مُسْتَتِرٌ جَوَازًا تَقْدِيرُهُ «هُوَ»',
+     note:'This is the single most important fact about Arabic verbs: <em>the doer is already inside the verb</em>. Nothing is written, nothing is pronounced, yet the sentence has a complete subject pointing back to <span class="ar">الرَّحْمَٰنُ</span> in the previous āyah. English cannot do this — it must say “he”.'},
+    {ar:'الْقُرْآنَ', tl:'al-qurʾāna', role:'mafool', gloss:'the Qur’an',
+     root:'ق · ر · أ', wazn:'فُعْلَان',
+     irab:'مَفْعُولٌ بِهِ مَنْصُوبٌ وَعَلَامَةُ نَصْبِهِ الفَتْحَةُ الظَّاهِرَة',
+     note:'Hear the final <em>-a</em>. That fatḥa is not decoration — it is the grammatical badge of the object. Change it to <em>-u</em> and the Qur’an becomes the teacher instead of the taught.'}
+  ],
+  focusRule:'اَلْفِعْلُ يَحْمِلُ فَاعِلَهُ فِي دَاخِلِه',
+  focusTitle:'Grammar focus · the invisible subject',
+  focusText:'Two written words, three grammatical elements. Arabic verbs are not bare actions — they are actions <em>already fused with their doer</em>. Every past-tense verb ending in a bare fatḥa means “he did it”.',
+  formula:['فِعْل','(فَاعِل مُسْتَتِر)','مَفْعُول بِه'],
+  lab:'ladder'
+},
+{
+  id:'v2', n:'٠٢', wm:'ق ر ب',
+  title:'A verb that changes shape for her',
+  ref:'Sūrat al-Qamar 54:1', tags:['2 words','Past · مَاضٍ','Form VIII','Agreement'],
+  translit:'iqtarabati s-sāʿah',
+  english:'“The Hour has drawn near.”',
+  ctxAr:'اقْتَرَبَتِ السَّاعَةُ وَانشَقَّ الْقَمَرُ',
+  ctxEn:'In context: “The Hour has drawn near and the moon has split.” — note that <span class="ar">وَانشَقَّ الْقَمَرُ</span> is itself a second two-word sentence.',
+  words:[
+    {ar:'اقْتَرَبَتِ', tl:'iqtarabati', role:'fiil', gloss:'has drawn near',
+     root:'ق · ر · ب', wazn:'اِفْتَعَلَ', form:'VIII', tense:'Past — مَاضٍ', voice:'Active — مَعْلُوم',
+     pgn:'3rd · fem. · sing.',
+     irab:'فِعْلٌ مَاضٍ مَبْنِيٌّ عَلَى الفَتْحِ، وَالتَّاءُ لِلتَّأْنِيثِ لَا مَحَلَّ لَهَا مِنَ الإِعْرَاب',
+     note:'Three lessons in one word. <em>(1)</em> Form VIII inserts a <span class="ar">ت</span> after the first root letter and makes the act reflexive-intensive: <span class="ar">قَرُبَ</span> “to be near” → <span class="ar">اقْتَرَبَ</span> “to bring itself near”. <em>(2)</em> The silent <span class="ar">تْ</span> at the end is <span class="ar">تَاءُ التَّأْنِيثِ السَّاكِنَة</span> — it exists only because the doer is feminine. <em>(3)</em> It is read <em>-ti</em> not <em>-t</em> because two sukūns cannot meet when <span class="ar">الـ</span> follows.'},
+    {ar:'السَّاعَةُ', tl:'as-sāʿatu', role:'fail', gloss:'the Hour',
+     root:'س · و · ع', wazn:'فَاعَلَة',
+     irab:'فَاعِلٌ مَرْفُوعٌ وَعَلَامَةُ رَفْعِهِ الضَّمَّةُ الظَّاهِرَة',
+     note:'The doer wears <em>-u</em> (ḍamma) — the case of the one who acts. Compare with <span class="ar">الْقُرْآنَ</span> in sentence 01, which wore <em>-a</em> because it was acted upon. One vowel decides who does what.'}
+  ],
+  focusRule:'إِذَا كَانَ الْفَاعِلُ مُؤَنَّثًا لَحِقَتِ الْفِعْلَ تَاءُ التَّأْنِيث',
+  focusTitle:'Grammar focus · agreement & rafʿ',
+  focusText:'The verb <em>reacts</em> to its doer. Feminine doer → the verb grows a <span class="ar">تْ</span>. And the doer, once written out loud, must be in the nominative <span class="ar">مَرْفُوع</span>. Notice too that a past-tense verb is used for an event still to come — the Arabic past of certainty: <em>it is as good as done</em>.',
+  formula:['فِعْل + تَاء التَّأْنِيث','فَاعِل مَرْفُوع'],
+  lab:'agree'
+},
+{
+  id:'v3', n:'٠٣', wm:'خ ل ق',
+  title:'When the doer is deliberately erased',
+  ref:'Sūrat an-Nisāʾ 4:28', tags:['3 words','Passive · مَجْهُول','Ḥāl'],
+  translit:'khuliqa l-insānu ḍaʿīfā',
+  english:'“Man was created weak.”',
+  ctxAr:'يُرِيدُ اللَّهُ أَن يُخَفِّفَ عَنكُمْ ۚ وَخُلِقَ الْإِنسَانُ ضَعِيفًا',
+  ctxEn:'In context: “Allah wishes to lighten [the burden] for you — and man was created weak.” (the verse begins with the conjunction <span class="ar">وَ</span>, dropped here to isolate the sentence).',
+  words:[
+    {ar:'خُلِقَ', tl:'khuliqa', role:'fiil', gloss:'was created',
+     root:'خ · ل · ق', wazn:'فُعِلَ', form:'I', tense:'Past — مَاضٍ', voice:'Passive — مَجْهُول',
+     pgn:'3rd · masc. · sing.',
+     irab:'فِعْلٌ مَاضٍ مَبْنِيٌّ لِلْمَجْهُولِ، مَبْنِيٌّ عَلَى الفَتْح',
+     note:'The active <span class="ar">خَلَقَ</span> (<em>kha-la-qa</em>) becomes passive by pure vowel surgery: <em>ḍamma on the first letter, kasra on the letter before the last</em> → <span class="ar">خُلِقَ</span> (<em>khu-li-qa</em>). No extra letters, no “was”, no “by”. The Creator is not named — the focus falls entirely on the creature and his frailty.'},
+    {ar:'الْإِنسَانُ', tl:'al-insānu', role:'naib', gloss:'man / the human being',
+     root:'أ · ن س', wazn:'فِعْلَان',
+     irab:'نَائِبُ فَاعِلٍ مَرْفُوعٌ وَعَلَامَةُ رَفْعِهِ الضَّمَّة',
+     note:'In the active sentence <span class="ar">خَلَقَ اللَّهُ الْإِنسَانَ</span>, “man” was the object in <em>naṣb</em> (<span class="ar">الْإِنسَانَ</span>). Delete the doer and the object is <em>promoted</em>: it takes the doer’s seat and the doer’s ḍamma, and is renamed <span class="ar">نَائِبُ الفَاعِل</span> — “the deputy of the doer”.'},
+    {ar:'ضَعِيفًا', tl:'ḍaʿīfan', role:'hal', gloss:'weak — in a state of weakness',
+     root:'ض · ع ف', wazn:'فَعِيل',
+     irab:'حَالٌ مَنْصُوبٌ وَعَلَامَةُ نَصْبِهِ الفَتْحَة',
+     note:'Not an adjective describing “man” in general — a <span class="ar">حَال</span>, the <em>condition he was in at the moment of the action</em>. The tanwīn fatḥa <em>-an</em> is its marker. Arabic packs an entire English clause (“…in a state of weakness”) into one word ending.'}
+  ],
+  focusRule:'خَلَقَ ← خُلِقَ : ضُمَّ أَوَّلُهُ وَكُسِرَ مَا قَبْلَ آخِرِه',
+  focusTitle:'Grammar focus · the passive machine',
+  focusText:'Arabic has no “to be + past participle”. The passive is made <em>inside</em> the word by re-vowelling it. Past: ḍamma first, kasra before the last. Present: ḍamma first, fatḥa before the last.',
+  formula:['فِعْل مَجْهُول','نَائِب فَاعِل مَرْفُوع','حَال مَنْصُوب'],
+  lab:'voice'
+},
+{
+  id:'v4', n:'٠٤', wm:'ك و ن',
+  title:'Two words that create',
+  ref:'Sūrat Yā-Sīn 36:82 · also 2:117, 3:47',
+  tags:['2 words','Command · أَمْر','Present · مُضَارِع','Hollow verb'],
+  translit:'kun fa-yakūn',
+  english:'“Be — and it is.”',
+  ctxAr:'إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ',
+  ctxEn:'In context: “His command, when He intends a thing, is only that He says to it: Be — and it is.”',
+  words:[
+    {ar:'كُنْ', tl:'kun', role:'fiil', gloss:'be!',
+     root:'ك · و · ن', wazn:'كَانَ / يَكُونُ', form:'I (hollow — أَجْوَف)', tense:'Command — أَمْر',
+     pgn:'2nd · masc. · sing.',
+     irab:'فِعْلُ أَمْرٍ مَبْنِيٌّ عَلَى السُّكُونِ، وَالفَاعِلُ ضَمِيرٌ مُسْتَتِرٌ وُجُوبًا تَقْدِيرُهُ «أَنْتَ»',
+     note:'Build the imperative from the jussive present: <span class="ar">يَكُونُ → لَمْ يَكُنْ → كُنْ</span>. The long <span class="ar">و</span> of the root <em>collapses</em> because the word now ends in sukūn and two silent sounds cannot meet. The most consequential command in the universe is two letters long.'},
+    {ar:'(أَنْتَ)', tl:'anta', role:'mustatir', ghost:true, gloss:'you — the thing addressed',
+     irab:'ضَمِيرٌ مُسْتَتِرٌ وُجُوبًا تَقْدِيرُهُ «أَنْتَ»',
+     note:'In an imperative the hidden “you” is <em>obligatorily</em> hidden (<span class="ar">وُجُوبًا</span>) — unlike sentence 01, you may never write it out. A command already knows who it is speaking to.'},
+    {ar:'فَ', tl:'fa-', role:'harf', gloss:'and then / so',
+     irab:'حَرْفُ عَطْفٍ يُفِيدُ التَّعْقِيبَ بِلَا مُهْلَة',
+     note:'<span class="ar">فَ</span> means “and immediately after, with no gap”. Not <span class="ar">ثُمَّ</span> (“then, later”). Between the command and the existence there is not even a pause.'},
+    {ar:'يَكُونُ', tl:'yakūnu', role:'fiil', gloss:'it is / it comes to be',
+     root:'ك · و · ن', wazn:'يَفْعُلُ', form:'I', tense:'Present — مُضَارِع', mood:'Marfūʿ — مَرْفُوع',
+     pgn:'3rd · masc. · sing.',
+     irab:'فِعْلٌ مُضَارِعٌ مَرْفُوعٌ وَعَلَامَةُ رَفْعِهِ الضَّمَّةُ، وَالفَاعِلُ ضَمِيرٌ مُسْتَتِرٌ تَقْدِيرُهُ «هُوَ»',
+     note:'Look at the ending: <em>-u</em>, not <em>-a</em> and not sukūn. It is <span class="ar">مَرْفُوع</span> — grammatically <em>independent</em>. The coming-into-being is not reported as a mere consequence hanging off the command; it is stated as a fact in its own right. Note also the <span class="ar">ي</span> prefix: every present-tense verb must begin with one of <span class="ar">أ · ن · ي · ت</span>.'}
+  ],
+  focusRule:'اَلْمُضَارِعُ يَبْدَأُ بِـ (أَنَيْتُ) وَيَتَغَيَّرُ آخِرُه',
+  focusTitle:'Grammar focus · command + present',
+  focusText:'The past is frozen; the present is alive. A <span class="ar">مُضَارِع</span> verb always begins with one of the four letters <span class="ar">أ ن ي ت</span> and its <em>ending</em> shifts with the grammar around it. The imperative is simply the jussive present stripped of its prefix.',
+  formula:['فِعْل أَمْر','(فَاعِل مُسْتَتِر وُجُوبًا)','فَ','مُضَارِع مَرْفُوع'],
+  lab:'kana'
+},
+{
+  id:'v5', n:'٠٥', wm:'ذ ك ر',
+  title:'A promise sealed by a vowel',
+  ref:'Sūrat al-Baqarah 2:152',
+  tags:['2 words','Command · أَمْر','Jussive · مَجْزُوم','Pronouns'],
+  translit:'fa-dhkurūnī adhkurkum',
+  english:'“So remember Me — I will remember you.”',
+  ctxAr:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ',
+  ctxEn:'In context: “So remember Me; I will remember you. And be grateful to Me and do not deny Me.”',
+  words:[
+    {ar:'فَ', tl:'fa-', role:'harf', gloss:'so / therefore',
+     irab:'اَلفَاءُ حَرْفٌ وَاقِعٌ فِي جَوَابِ شَرْطٍ مُقَدَّر',
+     note:'The <span class="ar">فَ</span> ties this command back to the promise just before it — “I am near you, <em>so</em> remember Me.”'},
+    {ar:'اذْكُرُو', tl:'udhkurū', role:'fiil', gloss:'remember (you all)!',
+     root:'ذ · ك · ر', wazn:'اُفْعُلُوا', form:'I', tense:'Command — أَمْر',
+     pgn:'2nd · masc. · plural',
+     irab:'فِعْلُ أَمْرٍ مَبْنِيٌّ عَلَى حَذْفِ النُّونِ لِأَنَّ مُضَارِعَهُ مِنَ الأَفْعَالِ الخَمْسَة',
+     note:'Its present is <span class="ar">تَذْكُرُونَ</span> — one of the <span class="ar">الأَفْعَال الخَمْسَة</span> (five verbs) that end in <span class="ar">نَ</span>. To command, you <em>drop that nūn</em>: <span class="ar">تَذْكُرُونَ → اذْكُرُوا</span>. The remaining <span class="ar">و</span> is not a letter of spelling — it is <span class="ar">وَاوُ الجَمَاعَة</span>, a real pronoun meaning “you all”, and it is the doer.'},
+    {ar:'نِي', tl:'-nī', role:'mafool', gloss:'…Me',
+     irab:'اَلنُّونُ لِلْوِقَايَةِ، وَاليَاءُ ضَمِيرٌ مُتَّصِلٌ مَبْنِيٌّ فِي مَحَلِّ نَصْبٍ مَفْعُولٌ بِه',
+     note:'The object glued to the verb. The extra <span class="ar">ن</span> is <span class="ar">نُونُ الوِقَايَة</span> — “the protecting nūn”, inserted purely to shield the verb’s ending from the <span class="ar">ي</span> of “me”. Arabic protects the shape of its verbs.'},
+    {ar:'أَذْكُرْ', tl:'adhkur', role:'fiil', gloss:'I will remember',
+     root:'ذ · ك · ر', wazn:'أَفْعُلُ', form:'I', tense:'Present — مُضَارِع', mood:'Jussive — مَجْزُوم',
+     pgn:'1st · sing.',
+     irab:'فِعْلٌ مُضَارِعٌ مَجْزُومٌ لِأَنَّهُ جَوَابُ الطَّلَبِ، وَعَلَامَةُ جَزْمِهِ السُّكُون',
+     note:'Why is it silent at the end instead of <span class="ar">أَذْكُرُ</span>? Because it is <span class="ar">جَوَابُ الطَّلَب</span> — the answer to a command. Arabic treats “remember Me and I <em>will</em> remember you” as if it were “<em>if</em> you remember Me, I will remember you.” The entire conditional promise is encoded in one missing vowel. Note the <span class="ar">أ</span> prefix = “I”.'},
+    {ar:'كُمْ', tl:'-kum', role:'mafool', gloss:'…you all',
+     irab:'ضَمِيرٌ مُتَّصِلٌ مَبْنِيٌّ فِي مَحَلِّ نَصْبٍ مَفْعُولٌ بِه',
+     note:'The mirror closes. You (plural) → Me (singular); I (singular) → you (plural). The reciprocity of the verse is written into the morphology itself.'}
+  ],
+  focusRule:'اَلْمُضَارِعُ الْوَاقِعُ جَوَابًا لِلطَّلَبِ يُجْزَم',
+  focusTitle:'Grammar focus · the three endings of the present',
+  focusText:'A present-tense verb has three possible endings, and each one <em>means</em> something: <span class="ar">-ُ</span> plain fact, <span class="ar">-َ</span> after “that / will not”, and <span class="ar">ـْ</span> after negation of the past or as the answer to a command.',
+  formula:['فَ','أَمْر + فَاعِل (و)','مَفْعُول (ـنِي)','مُضَارِع مَجْزُوم','مَفْعُول (ـكُمْ)'],
+  lab:'mood'
+}
+];
+
+const RUNNERS = [
+  ['عَبَسَ وَتَوَلَّىٰ','80:1','He frowned and turned away','Two 1-word sentences; Form V','Covered by 01 (hidden doer)'],
+  ['انشَقَّ الْقَمَرُ','54:1','The moon has split','Form VII (مُطَاوَعَة)','Same āyah as 02'],
+  ['قُتِلَ الْإِنسَانُ','80:17','Destroyed is man','Passive + deputy subject','Covered by 03'],
+  ['سَيُهْزَمُ الْجَمْعُ','54:45','The host will be routed','Future prefix سَ + passive','Two lessons already taught'],
+  ['جَاءَ الْحَقُّ','17:81','The truth has come','Hollow verb, past','Covered by 02 / 04'],
+  ['يُحْيِي وَيُمِيتُ','2:258','He gives life and death','Form IV, defective root','Present already in 04'],
+  ['أَتَىٰ أَمْرُ اللَّهِ','16:1','Allah’s command has come','3 words · iḍāfa subject','Adds a noun lesson, not a verb one'],
+  ['رَبِّ زِدْنِي عِلْمًا','20:114','My Lord, increase me in knowledge','3 words · double object','Vocative complicates the count'],
+  ['قَدْ أَفْلَحَ الْمُؤْمِنُونَ','23:1','The believers have succeeded','قَدْ + past emphasis','Sound plural doer already in 05'],
+  ['إِيَّاكَ نَعْبُدُ','1:5','You alone we worship','Fronted object for exclusivity','Word order lesson, saved for later']
+];
+
+const ATLAS = [
+  ['عَلَّمَ','ع ل م','II فَعَّلَ','Past · مَاضٍ','Active','Hidden هُوَ','Verbs contain their doer'],
+  ['اقْتَرَبَتْ','ق ر ب','VIII اِفْتَعَلَ','Past · مَاضٍ','Active','Explicit, fem.','Gender agreement + rafʿ'],
+  ['خُلِقَ','خ ل ق','I فُعِلَ','Past · مَاضٍ','<b style="color:var(--hal)">Passive</b>','Deputy subject','Passive by vowels alone'],
+  ['كُنْ','ك و ن','I (hollow)','Command · أَمْر','Active','Hidden أَنْتَ','Imperative from jussive'],
+  ['يَكُونُ','ك و ن','I','Present · مَرْفُوع','Active','Hidden هُوَ','Independent present'],
+  ['اذْكُرُوا','ذ ك ر','I','Command · أَمْر','Active','Suffixed و (plural)','Command by dropping نون'],
+  ['أَذْكُرْ','ذ ك ر','I','Present · <b style="color:var(--gold)">مَجْزُوم</b>','Active','Hidden أَنَا','Jussive = hidden condition']
+];
+
+const QUIZ = [
+  {q:'In <span class="ar">عَلَّمَ الْقُرْآنَ</span>, where is the doer of the verb?',
+   o:['It is <span class="ar">الْقُرْآنَ</span>','It is hidden inside the verb as <span class="ar">هُوَ</span>','The sentence has no doer','It appears in the next āyah'],
+   a:1, e:'The fāʿil is a <span class="ar">ضَمِير مُسْتَتِر</span> — an unwritten “he” referring to <span class="ar">الرَّحْمَٰنُ</span>. Arabic verbs always carry a doer, written or hidden.'},
+  {q:'Why does <span class="ar">اقْتَرَبَتْ</span> end in <span class="ar">تْ</span>?',
+   o:['It marks the past tense','It marks the plural','Because the doer <span class="ar">السَّاعَة</span> is feminine','It is part of the root'],
+   a:2, e:'It is <span class="ar">تَاءُ التَّأْنِيثِ السَّاكِنَة</span>, attached only because the doer is feminine. The root is <span class="ar">ق ر ب</span>.'},
+  {q:'How is the passive <span class="ar">خُلِقَ</span> formed from active <span class="ar">خَلَقَ</span>?',
+   o:['By adding a prefix','By ḍamma on the first letter and kasra before the last','By doubling the middle letter','By adding <span class="ar">تْ</span> at the end'],
+   a:1, e:'Arabic makes the passive by re-vowelling: <span class="ar">فَعَلَ → فُعِلَ</span>. No auxiliary verb is needed.'},
+  {q:'What is <span class="ar">الْإِنسَانُ</span> in <span class="ar">خُلِقَ الْإِنسَانُ ضَعِيفًا</span>?',
+   o:['<span class="ar">مَفْعُول بِه</span> — object','<span class="ar">مُبْتَدَأ</span> — topic','<span class="ar">نَائِب الفَاعِل</span> — deputy subject','<span class="ar">حَال</span> — state'],
+   a:2, e:'When the doer is deleted, the object is promoted to nominative and becomes the <span class="ar">نَائِب الفَاعِل</span>. That is why it carries a ḍamma.'},
+  {q:'<span class="ar">ضَعِيفًا</span> carries a tanwīn fatḥa. What does that tell us?',
+   o:['It is the object of the verb','It is a <span class="ar">حَال</span> — the state at the time of the action','It is the doer','It is a particle'],
+   a:1, e:'A <span class="ar">حَال</span> is always <span class="ar">مَنْصُوب</span>. It answers: <em>in what condition?</em> — “created <em>while weak</em>”.'},
+  {q:'Which four letters can begin a <span class="ar">مُضَارِع</span> (present-tense) verb?',
+   o:['<span class="ar">ا و ي ن</span>','<span class="ar">أ ن ي ت</span>','<span class="ar">س ت ف ي</span>','<span class="ar">ب ك ل و</span>'],
+   a:1, e:'Remembered as <span class="ar">أَنَيْتُ</span>: أ (I), ن (we), ي (he/they), ت (you/she).'},
+  {q:'Why does <span class="ar">أَذْكُرْ</span> end in a sukūn instead of <span class="ar">أَذْكُرُ</span>?',
+   o:['Because it is a command','Because it is passive','Because it is <span class="ar">مَجْزُوم</span> as the answer to a command','Because it is feminine'],
+   a:2, e:'<span class="ar">جَوَاب الطَّلَب</span>: “remember Me → I will remember you” carries a hidden <em>if</em>, and that conditional force cuts the final vowel.'},
+  {q:'<span class="ar">اذْكُرُوا</span> is built on <span class="ar">حَذْف النُّون</span>. What does that mean?',
+   o:['A letter was added to make it a command','The <span class="ar">نَ</span> of <span class="ar">تَذْكُرُونَ</span> was dropped to form the imperative','The nūn is silent','It is a passive form'],
+   a:1, e:'Verbs whose present ends in <span class="ar">نَ</span> (the five verbs) form their command and jussive by deleting that nūn; the remaining <span class="ar">و</span> is the plural doer.'}
+];
+
+/* =========================================================
+   RENDER
+========================================================= */
+const $ = s=>document.querySelector(s);
+
+/* legend */
+$('#legendBox').innerHTML = Object.entries(ROLES).map(([k,r])=>
+  `<div class="lg"><i style="background:${r.c}"></i><span class="ar">${r.ar}</span><small>${r.en}</small></div>`).join('');
+
+/* runners */
+$('#runners tbody').innerHTML = RUNNERS.map(r=>
+  `<tr><td><span class="ar">${r[0]}</span></td><td><span class="pill">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td style="opacity:.7">${r[4]}</td></tr>`).join('');
+
+/* atlas */
+$('#atlasTbl tbody').innerHTML = ATLAS.map(r=>
+  `<tr><td><span class="ar">${r[0]}</span></td><td><span class="ar" style="font-size:1.1rem">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td style="color:var(--text)">${r[6]}</td></tr>`).join('');
+
+/* verses */
+const vBox = $('#verses');
+VERSES.forEach(v=>{
+  const chips = v.words.map((w,i)=>
+    `<button class="chip${w.ghost?' ghost':''}" data-role="${w.role}" data-v="${v.id}" data-i="${i}">${w.ar}</button>`).join('');
+  const el = document.createElement('article');
+  el.className='verse'; el.id=v.id;
+  el.innerHTML = `
+    <div class="v-head">
+      <div class="v-num">${v.n}</div>
+      <div><div class="v-title">${v.title}</div><div class="v-ref">${v.ref}</div></div>
+      <div class="v-tags">${v.tags.map((t,i)=>`<span class="v-tag${i===0?' hot':''}">${t}</span>`).join('')}</div>
+    </div>
+    <div class="stage" data-wm="${v.wm}">
+      <div class="ayah">${chips}</div>
+      <div class="tl">${v.translit}</div>
+      <div class="tr-en">${v.english}</div>
+      <div class="ctx"><span class="ar">${v.ctxAr}</span>${v.ctxEn}</div>
+    </div>
+    <div class="split">
+      <div class="dpanel" id="d-${v.id}"></div>
+      <div class="focus">
+        <h5>${v.focusTitle}</h5>
+        <div class="rule">${v.focusRule}</div>
+        <p>${v.focusText}</p>
+        <div class="formula">${v.formula.map(f=>`<i>${f}</i>`).join('')}</div>
+      </div>
+    </div>
+    <div class="lab" id="l-${v.id}"></div>`;
+  vBox.appendChild(el);
+});
+
+/* word detail */
+function detail(vid,i){
+  const v = VERSES.find(x=>x.id===vid), w = v.words[i], r = ROLES[w.role];
+  const feats = [
+    ['Root', w.root, true],['Pattern', w.wazn, true],['Form', w.form],['Tense', w.tense],
+    ['Voice', w.voice],['Mood', w.mood],['Person', w.pgn]
+  ].filter(f=>f[1]).map(f=>
+    `<div class="feat"><span>${f[0]}</span><b class="${f[2]?'ar':''}">${f[1]}</b></div>`).join('');
+  $('#d-'+vid).innerHTML = `
+    <div class="dhead">
+      <span class="dword ar" style="color:${r.c}">${w.ar}</span>
+      <span class="drole" style="color:${r.c}"><span class="ar">${r.ar}</span> · ${r.en}</span>
+    </div>
+    <div class="dgloss">${w.tl?`<em>${w.tl}</em> — `:''}${w.gloss||''}</div>
+    ${feats?`<div class="feats">${feats}</div>`:''}
+    <div class="irab"><span>Iʿrāb · grammatical parsing</span><div class="ar">${w.irab}</div></div>
+    <div class="note">${w.note}</div>`;
+  document.querySelectorAll(`.chip[data-v="${vid}"]`).forEach(c=>c.classList.toggle('sel', +c.dataset.i===i));
+}
+document.addEventListener('click',e=>{
+  const c = e.target.closest('.chip'); if(!c) return;
+  detail(c.dataset.v, +c.dataset.i);
+});
+VERSES.forEach(v=>detail(v.id,0));
+
+/* =========================================================
+   LABS
+========================================================= */
+const LABS = {
+/* --- 1. FORM LADDER --- */
+ladder(id){
+  const D=[
+    {f:'I',w:'عَلِمَ',m:'he knew',x:'The bare root. A state inside one person.'},
+    {f:'II',w:'عَلَّمَ',m:'he taught',x:'Double the middle letter → you cause someone else to know. <b>This is the Qur’anic verse.</b>'},
+    {f:'IV',w:'أَعْلَمَ',m:'he informed',x:'Prefix a hamza → you transfer one piece of news, quickly.'},
+    {f:'V',w:'تَعَلَّمَ',m:'he learned',x:'Add تَ to Form II → the effect turns back on the doer himself.'},
+    {f:'VI',w:'تَعَالَمَ',m:'they knew one another',x:'Mutual exchange between two parties.'},
+    {f:'X',w:'اسْتَعْلَمَ',m:'he sought information',x:'اسْتَ = to request the meaning of the root.'}
+  ];
+  const box = $('#l-'+id);
+  box.innerHTML=`<div class="lab-h"><b>Lab · the form ladder</b><span>One root, ع ل م — six different verbs. Click each rung.</span></div>
+    <div class="ladder">${D.map((d,i)=>`<div class="rung${i===1?' on':''}" data-i="${i}"><div class="f">FORM ${d.f}</div><div class="w">${d.w}</div><div class="m en">${d.m}</div></div>`).join('')}</div>
+    <div class="out" style="margin-top:14px"><div class="big" id="lo-${id}"></div><div class="sm" id="ls-${id}"></div></div>`;
+  const show=i=>{$('#lo-'+id).innerHTML=D[i].w; $('#ls-'+id).innerHTML=`<b>Form ${D[i].f}</b> — ${D[i].m}. ${D[i].x}`;
+    box.querySelectorAll('.rung').forEach((r,j)=>r.classList.toggle('on',i===j));};
+  box.querySelectorAll('.rung').forEach(r=>r.onclick=()=>show(+r.dataset.i));
+  show(1);
+},
+
+/* --- 2. AGREEMENT --- */
+agree(id){
+  const D=[
+    {b:'Feminine singular',s:'اقْتَرَبَتِ <span class="hl2">السَّاعَةُ</span>',x:'Feminine doer → the verb takes <span class="ar">تْ</span>. <b>This is the verse.</b>'},
+    {b:'Masculine singular',s:'اقْتَرَبَ <span class="hl2">الْأَجَلُ</span>',x:'Masculine doer → no <span class="ar">تْ</span>. The verb is bare.'},
+    {b:'Human masc. plural',s:'اقْتَرَبَ <span class="hl2">الْمُؤْمِنُونَ</span>',x:'Surprise: the verb stays <b>singular</b>. When the doer is written after the verb, the verb never pluralises.'},
+    {b:'Non-human plural',s:'اقْتَرَبَتِ <span class="hl2">الْأَيَّامُ</span>',x:'Broken plurals of non-humans are treated as one feminine thing → the <span class="ar">تْ</span> returns.'}
+  ];
+  const box=$('#l-'+id);
+  box.innerHTML=`<div class="lab-h"><b>Lab · doer agreement</b><span>Change the doer and watch the verb react.</span></div>
+    <div class="btnrow">${D.map((d,i)=>`<button class="btn${i?'':' on'}" data-i="${i}">${d.b}</button>`).join('')}</div>
+    <div class="out"><div class="big" id="lo-${id}"></div><div class="sm" id="ls-${id}"></div></div>`;
+  const show=i=>{$('#lo-'+id).innerHTML=D[i].s; $('#ls-'+id).innerHTML=D[i].x;
+    box.querySelectorAll('.btn').forEach((b,j)=>b.classList.toggle('on',i===j));};
+  box.querySelectorAll('.btn').forEach(b=>b.onclick=()=>show(+b.dataset.i));
+  show(0);
+},
+
+/* --- 3. VOICE FLIPPER --- */
+voice(id){
+  const P=[
+    {a:'خَلَقَ',p:'خُلِقَ',ea:'he created',ep:'was created'},
+    {a:'نَصَرَ',p:'نُصِرَ',ea:'he helped',ep:'was helped'},
+    {a:'أَنْزَلَ',p:'أُنْزِلَ',ea:'he sent down',ep:'was sent down'},
+    {a:'قَالَ',p:'قِيلَ',ea:'he said',ep:'it was said'},
+    {a:'يَخْلُقُ',p:'يُخْلَقُ',ea:'he creates',ep:'is created'},
+    {a:'يَقُولُ',p:'يُقَالُ',ea:'he says',ep:'it is said'}
+  ];
+  const box=$('#l-'+id);
+  box.innerHTML=`<div class="lab-h"><b>Lab · the passive machine</b><span>Flip the switch and watch only the vowels move.</span></div>
+    <div class="btnrow"><button class="btn on" data-m="a"><span class="ar">مَعْلُوم</span> Active</button><button class="btn" data-m="p"><span class="ar">مَجْهُول</span> Passive</button></div>
+    <div class="flip">${P.map((p,i)=>`<div class="fcard"><div class="lbl" id="fl-${id}-${i}">Active</div><div class="w ar" id="fw-${id}-${i}"></div><div class="en" id="fe-${id}-${i}"></div></div>`).join('')}</div>
+    <div class="out" style="margin-top:14px"><div class="big" id="lo-${id}"></div><div class="sm" id="ls-${id}"></div></div>`;
+  const show=m=>{
+    P.forEach((p,i)=>{
+      $(`#fw-${id}-${i}`).innerHTML=m==='a'?p.a:p.p;
+      $(`#fw-${id}-${i}`).style.color = m==='a'?'var(--verb)':'var(--hal)';
+      $(`#fl-${id}-${i}`).textContent = m==='a'?'Active':'Passive';
+      $(`#fe-${id}-${i}`).textContent = m==='a'?p.ea:p.ep;
+    });
+    $('#lo-'+id).innerHTML = m==='a' ? 'خَلَقَ اللَّهُ الْإِنسَانَ' : 'خُلِقَ الْإِنسَانُ';
+    $('#ls-'+id).innerHTML = m==='a'
+      ? 'Active: the doer <span class="ar">اللَّهُ</span> is named and <span class="ar">الْإِنسَانَ</span> takes fatḥa as object.'
+      : 'Passive: the doer is deleted and <span class="ar">الْإِنسَانُ</span> is <b>promoted</b> — it now takes ḍamma as <span class="ar">نَائِب الفَاعِل</span>. Past rule: <b>ḍamma first, kasra before last</b>. Present rule: <b>ḍamma first, fatḥa before last</b>.';
+    box.querySelectorAll('.btn').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  };
+  box.querySelectorAll('.btn').forEach(b=>b.onclick=()=>show(b.dataset.m));
+  show('a');
+},
+
+/* --- 4. KANA CONJUGATION --- */
+kana(id){
+  const R=[['أَنَا','كُنْتُ','أَكُونُ','—'],['أَنْتَ','كُنْتَ','تَكُونُ','كُنْ'],['أَنْتِ','كُنْتِ','تَكُونِينَ','كُونِي'],
+           ['هُوَ','كَانَ','يَكُونُ','—'],['هِيَ','كَانَتْ','تَكُونُ','—'],['نَحْنُ','كُنَّا','نَكُونُ','—'],
+           ['أَنْتُمْ','كُنْتُمْ','تَكُونُونَ','كُونُوا'],['هُمْ','كَانُوا','يَكُونُونَ','—']];
+  const box=$('#l-'+id);
+  box.innerHTML=`<div class="lab-h"><b>Lab · the hollow verb <span class="ar">كَانَ</span></b><span>Gold cells are the two words of the verse.</span></div>
+    <div class="conj">
+      <div class="cell"><div class="p">الضَّمِير</div></div><div class="cell"><div class="p">مَاضٍ</div></div><div class="cell"><div class="p">مُضَارِع</div></div><div class="cell"><div class="p">أَمْر</div></div>
+      ${R.map(r=>r.map((c,i)=>{
+        const mark = (c==='كُنْ'||c==='يَكُونُ') ? ' mark':'';
+        return `<div class="cell${mark}"><div class="${i===0?'p':'v'}">${c}</div></div>`;}).join('')).join('')}
+    </div>
+    <div class="out" style="margin-top:14px">
+      <div class="big">يَكُونُ &nbsp;←&nbsp; لَمْ يَكُنْ &nbsp;←&nbsp; <span class="hl">كُنْ</span></div>
+      <div class="sm">How every imperative is built: take the present, put it in the jussive, strip the prefix. Here the long <span class="ar">و</span> of the root <b>vanishes</b> whenever the ending goes silent — that is what makes <span class="ar">كَانَ</span> a <span class="ar">فِعْل أَجْوَف</span>, a “hollow” verb.</div>
+    </div>`;
+},
+
+/* --- 5. MOOD + PRONOUN BUILDER --- */
+mood(id){
+  const M=[
+    {b:'<span class="ar">مَرْفُوع</span>',s:'أَذْكُرُ',x:'Default. Ends in <b>ḍamma</b>. A plain statement: “I remember.”'},
+    {b:'<span class="ar">مَنْصُوب</span>',s:'لَنْ أَذْكُرَ',x:'After <span class="ar">أَنْ ، لَنْ ، كَيْ ، لِـ</span> → ends in <b>fatḥa</b>: “I will never remember.”'},
+    {b:'<span class="ar">مَجْزُوم</span>',s:'لَمْ أَذْكُرْ',x:'After <span class="ar">لَمْ ، لَا النَّاهِيَة ، إِنْ</span> → ends in <b>sukūn</b>: “I did not remember.”'},
+    {b:'<span class="ar">جَوَاب الطَّلَب</span>',s:'اذْكُرُونِي أَذْكُرْكُمْ',x:'<b>The verse.</b> Also jussive — because a hidden “if” lives between the two verbs. The sukūn <em>is</em> the promise.'}
+  ];
+  const PR=[['ـكَ','أَذْكُرُكَ','you (m.)'],['ـكِ','أَذْكُرُكِ','you (f.)'],['ـهُ','أَذْكُرُهُ','him'],
+            ['ـهَا','أَذْكُرُهَا','her'],['ـكُمْ','أَذْكُرُكُمْ','you all'],['ـهُمْ','أَذْكُرُهُمْ','them'],['ـنِي','يَذْكُرُنِي','me']];
+  const box=$('#l-'+id);
+  box.innerHTML=`<div class="lab-h"><b>Lab · the three endings</b><span>The last vowel of a present verb carries the meaning.</span></div>
+    <div class="btnrow">${M.map((m,i)=>`<button class="btn${i===3?' on':''}" data-i="${i}">${m.b}</button>`).join('')}</div>
+    <div class="out"><div class="big" id="lo-${id}"></div><div class="sm" id="ls-${id}"></div></div>
+    <div class="lab-h" style="margin-top:22px"><b>Lab · gluing the object on</b><span>Objects are not separate words — they fuse to the verb.</span></div>
+    <div class="btnrow">${PR.map((p,i)=>`<button class="btn p${i===4?' on':''}" data-j="${i}"><span class="ar">${p[0]}</span></button>`).join('')}</div>
+    <div class="out"><div class="big" id="po-${id}"></div><div class="sm" id="ps-${id}"></div></div>`;
+  const show=i=>{$('#lo-'+id).innerHTML=M[i].s; $('#ls-'+id).innerHTML=M[i].x;
+    box.querySelectorAll('.btn:not(.p)').forEach((b,j)=>b.classList.toggle('on',i===j));};
+  const showP=j=>{$('#po-'+id).innerHTML=PR[j][1];
+    $('#ps-'+id).innerHTML=`“I remember <b>${PR[j][2]}</b>.” The pronoun <span class="ar">${PR[j][0]}</span> is <span class="ar">فِي مَحَلِّ نَصْبٍ مَفْعُولٌ بِه</span> — an object, even though it is only two letters long.`;
+    box.querySelectorAll('.btn.p').forEach((b,k)=>b.classList.toggle('on',j===k));};
+  box.querySelectorAll('.btn:not(.p)').forEach(b=>b.onclick=()=>show(+b.dataset.i));
+  box.querySelectorAll('.btn.p').forEach(b=>b.onclick=()=>showP(+b.dataset.j));
+  show(3); showP(4);
+}
+};
+VERSES.forEach(v=>LABS[v.lab](v.id));
+
+/* =========================================================
+   QUIZ
+========================================================= */
+let score=0, done=0;
+$('#qBox').innerHTML = QUIZ.map((q,i)=>`
+  <div class="q">
+    <div class="qh"><span class="qn">Q${String(i+1).padStart(2,'0')}</span><span class="qt">${q.q}</span></div>
+    <div class="opts">${q.o.map((o,j)=>`<button class="opt" data-q="${i}" data-o="${j}">${o}</button>`).join('')}</div>
+    <div class="expl" id="e-${i}"></div>
+  </div>`).join('');
+
+$('#qBox').addEventListener('click',e=>{
+  const b=e.target.closest('.opt'); if(!b||b.disabled) return;
+  const qi=+b.dataset.q, oi=+b.dataset.o, q=QUIZ[qi];
+  document.querySelectorAll(`.opt[data-q="${qi}"]`).forEach((o,j)=>{
+    o.disabled=true;
+    if(j===q.a) o.classList.add('right');
+    else if(j===oi) o.classList.add('wrong');
+  });
+  const ex=$('#e-'+qi);
+  ex.innerHTML = (oi===q.a?'<b style="color:var(--verb)">Correct. </b>':'<b style="color:var(--obj)">Not quite. </b>')+q.e;
+  ex.classList.add('show');
+  if(oi===q.a) score++;
+  done++;
+  $('#scoreN').textContent = `${score} / ${QUIZ.length}`;
+  $('#scoreT').textContent = done<QUIZ.length
+    ? `${QUIZ.length-done} question${QUIZ.length-done>1?'s':''} remaining`
+    : score===QUIZ.length ? 'Perfect — you have the whole verb system. مَا شَاءَ اللَّه'
+    : score>=6 ? 'Strong. Re-read the two labs you missed.'
+    : 'Go back through the five sentences slowly — click every word.';
+});
+
+/* =========================================================
+   UI
+========================================================= */
+const io = new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08});
+document.querySelectorAll('.verse').forEach(v=>io.observe(v));
+
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  $('#prog').style.width = (h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+
+$('#tTl').onclick=e=>{document.body.classList.toggle('hide-tl');e.target.classList.toggle('on')};
+$('#tEn').onclick=e=>{document.body.classList.toggle('hide-en');e.target.classList.toggle('on')};
+</script>
+</body>
+</html>

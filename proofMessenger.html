@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ten Reasons — The Case for Muhammad ﷺ · Reason · Logic · Evidence</title>
+<meta name="description" content="A rigorous, honest, interactive presentation of ten reasoned arguments for the prophethood of Muhammad ﷺ — built on logic, history, textual criticism, and evidence." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   0. TOKENS
+   ============================================================ */
+:root{
+  --gold:#d9b45b;   --gold-lt:#f4dfa4;  --gold-dp:#9c7c2e;
+  --teal:#2ec6b0;   --lapis:#4b7bec;    --rose:#e0709a;
+  --bg:#070a0f;     --bg2:#0b1017;      --panel:rgba(255,255,255,.035);
+  --line:rgba(217,180,91,.22);
+  --ink:#eef2f7;    --ink-2:#a9b6c6;    --ink-3:#6f7d8e;
+  --r:18px;         --maxw:1180px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);
+}
+html[data-theme="dawn"]{
+  --bg:#f6f2e9; --bg2:#efe8da; --panel:rgba(20,25,35,.04);
+  --ink:#141a22; --ink-2:#4a5666; --ink-3:#8a95a4;
+  --line:rgba(120,90,20,.22); --gold-lt:#8a6a1c; --shadow:0 30px 60px -34px rgba(60,45,10,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif; line-height:1.7;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+::selection{background:var(--gold);color:#0a0d12}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ============================================================
+   1. PRELOADER
+   ============================================================ */
+#preload{
+  position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:grid;place-items:center;transition:opacity .9s var(--ease),visibility .9s;
+}
+#preload.gone{opacity:0;visibility:hidden}
+.pl-inner{text-align:center}
+.pl-star{width:130px;height:130px;margin:0 auto 26px}
+.pl-star path,.pl-star circle,.pl-star line{
+  fill:none;stroke:var(--gold);stroke-width:1.1;
+  stroke-dasharray:1000;stroke-dashoffset:1000;
+  animation:draw 2.2s var(--ease) forwards;
+}
+.pl-star circle{animation-delay:.35s}
+.pl-star .in{animation-delay:.6s;stroke:var(--teal);opacity:.75}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pl-word{font-family:'Cormorant Garamond',serif;letter-spacing:.5em;
+  font-size:.78rem;text-transform:uppercase;color:var(--ink-3);
+  opacity:0;animation:fadeUp .9s 1.2s var(--ease) forwards}
+.pl-bar{width:190px;height:1px;background:var(--line);margin:20px auto 0;overflow:hidden}
+.pl-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,transparent,var(--gold));
+  animation:load 2.4s var(--ease) forwards}
+@keyframes load{to{width:100%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   2. BACKGROUND CANVAS + GRAIN
+   ============================================================ */
+#girih{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+.aura{position:fixed;border-radius:50%;filter:blur(120px);z-index:0;pointer-events:none;opacity:.4}
+.aura.a{width:52vw;height:52vw;background:radial-gradient(circle,rgba(217,180,91,.30),transparent 68%);top:-14vw;left:-10vw}
+.aura.b{width:46vw;height:46vw;background:radial-gradient(circle,rgba(46,198,176,.22),transparent 68%);bottom:6vw;right:-12vw}
+.aura.c{width:40vw;height:40vw;background:radial-gradient(circle,rgba(75,123,236,.18),transparent 70%);top:48%;left:38%}
+
+/* custom cursor */
+#cur,#cur2{position:fixed;z-index:9000;pointer-events:none;border-radius:50%;left:0;top:0}
+#cur{width:7px;height:7px;background:var(--gold)}
+#cur2{width:38px;height:38px;border:1px solid var(--line);transition:width .3s,height .3s,border-color .3s,opacity .3s}
+#cur2.hot{width:70px;height:70px;border-color:var(--gold);background:rgba(217,180,91,.06)}
+@media(hover:none){#cur,#cur2{display:none}}
+
+/* ============================================================
+   3. SHELL / NAV
+   ============================================================ */
+.wrap{position:relative;z-index:2}
+.container{width:min(100% - 2.5rem,var(--maxw));margin-inline:auto}
+#prog{position:fixed;top:0;left:0;height:2px;z-index:8000;
+  background:linear-gradient(90deg,var(--teal),var(--gold),var(--rose));width:0;
+  box-shadow:0 0 14px rgba(217,180,91,.7)}
+nav{position:fixed;top:0;left:0;right:0;z-index:7000;padding:16px 0;
+  transition:background .5s,backdrop-filter .5s,padding .5s,border-color .5s;border-bottom:1px solid transparent}
+nav.stuck{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(18px) saturate(150%);
+  padding:10px 0;border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.06rem;letter-spacing:.06em;text-decoration:none}
+.brand svg.nq-mini-logo{width:28px;height:28px;flex:none;filter:drop-shadow(0 2px 6px rgba(217,180,91,.35))}
+.brand b{color:var(--gold);font-weight:700;letter-spacing:.08em}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+  padding:8px 12px;border-radius:99px;transition:.3s;text-decoration:none}
+.nav-links a:hover{color:var(--ink);background:var(--panel)}
+.nq-hub-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--gold);background:rgba(217,180,91,.09);border:1px solid var(--line);padding:6px 14px;border-radius:99px;transition:.3s}
+.nq-hub-badge:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);box-shadow:0 0 14px rgba(217,180,91,.4)}
+.tbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:.35s}
+.tbtn:hover{border-color:var(--gold);transform:rotate(28deg)}
+@media(max-width:920px){.nav-links a:not(.nq-hub-badge){display:none}}
+.nq-footer-badge{text-align:center;padding:26px 16px 10px;border-top:1px solid var(--line);margin-top:28px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* ============================================================
+   4. TYPE
+   ============================================================ */
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--gold);opacity:.7}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.08;letter-spacing:-.015em}
+h1{font-size:clamp(2.9rem,8.4vw,6.6rem)}
+h2{font-size:clamp(2rem,4.6vw,3.5rem)}
+h3{font-size:clamp(1.3rem,2.4vw,1.85rem)}
+.lead{font-size:clamp(1.02rem,1.5vw,1.22rem);color:var(--ink-2);font-weight:300;max-width:62ch}
+.grad{background:linear-gradient(105deg,var(--gold-lt),var(--gold) 40%,var(--teal) 78%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+section{padding:clamp(80px,11vh,140px) 0;position:relative}
+
+/* ============================================================
+   5. HERO
+   ============================================================ */
+#hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding-top:90px;overflow:hidden}
+.hero-glyph{font-family:'Amiri',serif;font-size:clamp(4.5rem,15vw,11rem);line-height:1;
+  color:var(--gold);opacity:.95;text-shadow:0 0 60px rgba(217,180,91,.4);
+  animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.045);text-shadow:0 0 90px rgba(217,180,91,.6)}}
+.h1-line{display:block;overflow:hidden}
+.h1-line span{display:block;transform:translateY(110%);animation:rise 1.15s var(--ease) forwards}
+@keyframes rise{to{transform:none}}
+.hero-sub{margin:26px auto 0;opacity:0;animation:fadeUp 1s 1.1s var(--ease) forwards}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;
+  opacity:0;animation:fadeUp 1s 1.35s var(--ease) forwards}
+.btn{position:relative;padding:15px 30px;border-radius:99px;border:1px solid var(--line);
+  font-size:.79rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  overflow:hidden;cursor:pointer;background:transparent;color:var(--ink);transition:.4s var(--ease)}
+.btn.solid{background:linear-gradient(100deg,var(--gold),var(--gold-dp));color:#0a0d12;border-color:transparent}
+.btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.28),transparent 45%);opacity:0;transition:opacity .4s}
+.btn:hover::after{opacity:1}
+.btn:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 16px 40px -18px rgba(217,180,91,.7)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.3em;color:var(--ink-3);text-align:center}
+.scroll-hint i{display:block;width:1px;height:44px;background:linear-gradient(var(--gold),transparent);margin:10px auto 0;
+  animation:drop 1.9s ease-in-out infinite}
+@keyframes drop{0%,100%{transform:scaleY(.3);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+
+/* ============================================================
+   6. REVEAL SYSTEM
+   ============================================================ */
+.rv{opacity:0;transform:translateY(38px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.09s}.rv[data-d="2"]{transition-delay:.18s}
+.rv[data-d="3"]{transition-delay:.27s}.rv[data-d="4"]{transition-delay:.36s}
+.split span{display:inline-block;opacity:0;transform:translateY(.6em) rotate(4deg);
+  transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.split.in span{opacity:1;transform:none}
+
+/* ============================================================
+   7. METHOD CARDS
+   ============================================================ */
+.grid3{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));margin-top:52px}
+.mcard{padding:30px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);
+  position:relative;overflow:hidden;transition:.5s var(--ease)}
+.mcard:hover{transform:translateY(-6px);border-color:var(--gold)}
+.mcard b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:10px;color:var(--gold-lt)}
+.mcard p{font-size:.94rem;color:var(--ink-2)}
+.mcard .num{position:absolute;right:14px;top:4px;font-family:'Cormorant Garamond',serif;
+  font-size:4.6rem;color:var(--ink);opacity:.05}
+
+/* ============================================================
+   8. REASON CARDS
+   ============================================================ */
+.reasons{display:flex;flex-direction:column;gap:26px;margin-top:60px}
+.reason{
+  position:relative;border:1px solid var(--line);border-radius:24px;background:var(--panel);
+  padding:38px clamp(22px,4vw,48px);overflow:hidden;
+  transform-style:preserve-3d;transition:border-color .5s,box-shadow .6s,transform .3s var(--ease);
+}
+.reason::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;
+  background:radial-gradient(520px circle at var(--px,50%) var(--py,50%),rgba(217,180,91,.10),transparent 60%)}
+.reason:hover::before{opacity:1}
+.reason:hover{border-color:rgba(217,180,91,.55);box-shadow:var(--shadow)}
+.r-top{display:flex;gap:22px;align-items:flex-start}
+.r-num{flex:0 0 auto;width:70px;height:70px;border-radius:20px;display:grid;place-items:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;
+  background:linear-gradient(140deg,rgba(217,180,91,.18),rgba(46,198,176,.10));
+  border:1px solid var(--line);color:var(--gold-lt);position:relative;overflow:hidden}
+.r-num::after{content:'';position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(217,180,91,.5),transparent 40%);
+  animation:spin 6s linear infinite;opacity:0;transition:opacity .4s}
+.reason:hover .r-num::after{opacity:1}
+.r-head h3{margin-bottom:6px}
+.r-tag{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.r-body{margin-top:20px;display:grid;gap:18px;grid-template-columns:1.55fr .95fr}
+@media(max-width:860px){.r-body{grid-template-columns:1fr}.r-num{width:54px;height:54px;font-size:1.4rem;border-radius:15px}}
+.r-body p{color:var(--ink-2);font-size:.99rem}
+.r-body p+p{margin-top:12px}
+.sidecard{border-left:2px solid var(--gold);padding:16px 18px;background:rgba(217,180,91,.05);border-radius:0 14px 14px 0}
+.sidecard h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
+.sidecard p,.sidecard li{font-size:.86rem;color:var(--ink-2)}
+.sidecard ul{padding-left:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.09em;padding:6px 12px;
+  border-radius:99px;border:1px solid var(--line);color:var(--ink-3);transition:.3s;cursor:default}
+.chip:hover{color:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+.verse{margin-top:20px;padding:20px 24px;border-radius:16px;
+  background:linear-gradient(100deg,rgba(46,198,176,.07),rgba(217,180,91,.05));border:1px solid var(--line)}
+.verse .ar{font-family:'Amiri',serif;font-size:1.5rem;direction:rtl;text-align:right;line-height:2;color:var(--gold-lt)}
+.verse .tr{font-family:'Cormorant Garamond',serif;font-size:1.14rem;font-style:italic;color:var(--ink);margin-top:8px}
+.verse cite{display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.18em;color:var(--ink-3);font-style:normal}
+/* expandable */
+.disc{margin-top:22px;border-top:1px dashed var(--line);padding-top:16px}
+.disc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--teal);transition:.3s}
+.disc summary::-webkit-details-marker{display:none}
+.disc summary:hover{color:var(--gold)}
+.disc summary i{width:16px;height:16px;border:1px solid currentColor;border-radius:50%;
+  display:grid;place-items:center;font-style:normal;font-size:.7rem;transition:transform .4s}
+.disc[open] summary i{transform:rotate(135deg)}
+.disc .inner{padding-top:14px;font-size:.9rem;color:var(--ink-2);animation:fadeUp .55s var(--ease)}
+.disc .inner strong{color:var(--ink)}
+
+/* ============================================================
+   9. TRILEMMA WIDGET
+   ============================================================ */
+.tri{margin-top:46px;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel)}
+.tri-head{padding:26px 28px;border-bottom:1px solid var(--line)}
+.tri-grid{display:grid;grid-template-columns:1.1fr 1fr}
+@media(max-width:900px){.tri-grid{grid-template-columns:1fr}}
+.tri-obs{padding:26px 28px;border-right:1px solid var(--line)}
+.obs{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border-radius:13px;
+  border:1px solid transparent;cursor:pointer;transition:.35s;margin-bottom:8px}
+.obs:hover{background:rgba(217,180,91,.06)}
+.obs.on{border-color:var(--gold);background:rgba(217,180,91,.09)}
+.obs .box{flex:0 0 auto;width:19px;height:19px;border:1px solid var(--line);border-radius:6px;
+  display:grid;place-items:center;transition:.3s;margin-top:3px}
+.obs.on .box{background:var(--gold);border-color:var(--gold)}
+.obs .box svg{width:11px;height:11px;opacity:0;transition:.3s;stroke:#0a0d12;stroke-width:3;fill:none}
+.obs.on .box svg{opacity:1}
+.obs span{font-size:.9rem;color:var(--ink-2)}
+.obs.on span{color:var(--ink)}
+.tri-out{padding:26px 28px;display:flex;flex-direction:column;gap:20px;justify-content:center}
+.bar-row b{font-family:'Cormorant Garamond',serif;font-size:1.12rem;display:flex;justify-content:space-between;align-items:baseline}
+.bar-row b em{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-style:normal;color:var(--ink-3)}
+.bar{height:9px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0;border-radius:99px;transition:width 1s var(--ease)}
+.b1 i{background:linear-gradient(90deg,#e0709a,#c04a72)}
+.b2 i{background:linear-gradient(90deg,#4b7bec,#3a5fc0)}
+.b3 i{background:linear-gradient(90deg,var(--teal),var(--gold))}
+.bar-row p{font-size:.8rem;color:var(--ink-3);margin-top:7px}
+.tri-note{padding:16px 28px;border-top:1px solid var(--line);font-size:.78rem;color:var(--ink-3);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+
+/* ============================================================
+   10. STATS
+   ============================================================ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:52px}
+.stat{background:var(--bg);padding:32px 22px;text-align:center;transition:.45s}
+.stat:hover{background:rgba(217,180,91,.07)}
+.stat b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);
+  color:var(--gold-lt);line-height:1}
+.stat span{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-3);display:block;margin-top:9px}
+
+/* ============================================================
+   11. TIMELINE
+   ============================================================ */
+.tl{position:relative;margin-top:56px;padding-left:34px}
+.tl::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:1px;background:var(--line)}
+.tl .fill{position:absolute;left:9px;top:0;width:1px;height:0;
+  background:linear-gradient(var(--gold),var(--teal));box-shadow:0 0 12px var(--gold)}
+.tli{position:relative;padding:0 0 34px}
+.tli::before{content:'';position:absolute;left:-30px;top:9px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--gold);transition:.5s}
+.tli.in::before{background:var(--gold);box-shadow:0 0 0 5px rgba(217,180,91,.16)}
+.tli em{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--teal);font-style:normal}
+.tli h4{font-family:'Cormorant Garamond',serif;font-size:1.24rem;margin:4px 0 5px}
+.tli p{font-size:.92rem;color:var(--ink-2)}
+
+/* ============================================================
+   12. HONESTY PANEL / CONCLUSION / REFS
+   ============================================================ */
+.honest{border:1px solid rgba(224,112,154,.35);border-radius:24px;padding:clamp(26px,4vw,44px);
+  background:linear-gradient(140deg,rgba(224,112,154,.07),transparent 70%);margin-top:48px}
+.honest h3{color:var(--rose)}
+.honest ul{margin-top:18px;padding-left:20px;display:grid;gap:11px}
+.honest li{color:var(--ink-2);font-size:.96rem}
+.honest li strong{color:var(--ink)}
+.finale{text-align:center;padding:clamp(70px,12vh,150px) 0;position:relative}
+.finale .ring{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;opacity:.35}
+.finale .ring svg{width:min(72vw,620px);animation:spin 80s linear infinite}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:40px}
+.ref{border:1px solid var(--line);border-radius:14px;padding:17px 19px;background:var(--panel);transition:.4s}
+.ref:hover{border-color:var(--gold);transform:translateY(-3px)}
+.ref b{font-family:'Cormorant Garamond',serif;font-size:1.02rem;display:block;color:var(--gold-lt)}
+.ref span{font-size:.8rem;color:var(--ink-3)}
+footer{border-top:1px solid var(--line);padding:44px 0;text-align:center}
+footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
+.up{position:fixed;right:22px;bottom:22px;z-index:7000;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(10px);
+  color:var(--ink);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transition:.45s}
+.up.on{opacity:1;visibility:visible}
+.up:hover{border-color:var(--gold);transform:translateY(-4px)}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}.h1-line span{transform:none}.split span{opacity:1;transform:none}
+  #girih{display:none}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ===== PRELOADER ===== -->
+<div id="preload"><div class="pl-inner">
+  <svg class="pl-star" viewBox="0 0 100 100">
+    <path d="M50 4 60 26 84 16 74 40 96 50 74 60 84 84 60 74 50 96 40 74 16 84 26 60 4 50 26 40 16 16 40 26Z"/>
+    <circle cx="50" cy="50" r="30"/>
+    <path class="in" d="M50 22 66 34 78 50 66 66 50 78 34 66 22 50 34 34Z"/>
+  </svg>
+  <div class="pl-word">Reason · Evidence · Reflection</div>
+  <div class="pl-bar"><i></i></div>
+</div></div>
+
+<canvas id="girih"></canvas>
+<div class="grain"></div>
+<div class="aura a"></div><div class="aura b"></div><div class="aura c"></div>
+<div id="cur"></div><div id="cur2"></div>
+<div id="prog"></div>
+
+<nav id="nav"><div class="container nav-in">
+  <a class="brand" href="index.html" title="NurulQuran · Ten Reasons">
+    <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="256" cy="256" r="230" fill="rgba(217,180,91,0.15)" />
+      <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+        <rect x="110" y="110" width="292" height="292" rx="28" />
+        <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+      </g>
+      <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#070a0f" stroke="var(--gold)" stroke-width="10" />
+      <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#070a0f" stroke="var(--gold)" stroke-width="10" />
+      <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+    </svg>
+    <span><b>NURULQURAN</b> · Ten Reasons</span>
+  </a>
+  <div class="nav-links">
+    <a href="#method">Method</a><a href="#reasons">The Ten</a><a href="#logic">Logic Lab</a>
+    <a href="#timeline">Timeline</a><a href="#honesty">Caveats</a><a href="#refs">Sources</a>
+    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Showcase Portal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Showcase</span>
+    </a>
+  </div>
+  <button class="tbtn" id="theme" aria-label="Toggle light and dark theme">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ============ HERO ============ -->
+<header id="hero"><div class="container">
+  <div class="hero-glyph">ﷺ</div>
+  <h1 style="margin-top:14px">
+    <span class="h1-line"><span style="animation-delay:.25s">Ten Reasons</span></span>
+    <span class="h1-line"><span class="grad" style="animation-delay:.4s">to Believe</span></span>
+    <span class="h1-line"><span style="animation-delay:.55s;font-size:.42em;letter-spacing:.02em;padding-top:.5em">Muhammad was a true Messenger of Allah</span></span>
+  </h1>
+  <p class="lead hero-sub" style="margin-inline:auto;text-align:center">
+    Not appeals to emotion. Not appeals to authority. Ten arguments built from history,
+    textual criticism, logic, sociology and the discipline of asking:
+    <em>what explanation best accounts for the evidence we actually have?</em>
+  </p>
+  <div class="hero-cta">
+    <a href="#reasons" class="btn solid mag">Begin the argument</a>
+    <a href="#honesty" class="btn mag">Read the caveats first</a>
+  </div>
+  <div class="scroll-hint">SCROLL<i></i></div>
+</div></header>
+
+<!-- ============ METHOD ============ -->
+<section id="method"><div class="container">
+  <span class="eyebrow rv">00 — Ground Rules</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">How to judge a prophetic claim</h2>
+  <p class="lead rv" data-d="2" style="margin-top:20px">
+    A claim this large deserves a real test, not a slogan. So before the arguments, here is the
+    standard this page holds itself to — including the conditions under which it would <strong>fail</strong>.
+  </p>
+  <div class="grid3">
+    <div class="mcard rv" data-d="1"><span class="num">01</span>
+      <b>Inference to the best explanation</b>
+      <p>We do not claim mathematical proof. We compare rival hypotheses — deceiver, sincere but deluded, or genuinely receiving revelation — and ask which explains the total data with the fewest strained assumptions. This is how historians, forensic scientists and courts reason.</p>
+    </div>
+    <div class="mcard rv" data-d="2"><span class="num">02</span>
+      <b>Cumulative, not single-shot</b>
+      <p>No individual point below is a knock-down blow. Independent lines of evidence that all converge on one conclusion are far stronger than their sum — the same logic that convicts on circumstantial evidence or confirms a scientific theory.</p>
+    </div>
+    <div class="mcard rv" data-d="3"><span class="num">03</span>
+      <b>Falsifiability</b>
+      <p>This case would collapse if: the Qur'an's text were shown to be substantially rewritten after him; his biography's core were shown to be later fabrication; the Qur'an contained a confirmed self-contradiction; or a comparable literary rival to the Qur'an were produced in Arabic and acknowledged as such.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ THE TEN ============ -->
+<section id="reasons"><div class="container">
+  <span class="eyebrow rv">The Case</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">The <span class="grad">Ten Reasons</span></h2>
+  <p class="lead rv" data-d="2" style="margin-top:18px">Hover a card to focus it. Open “Examine the objection” on each to see the strongest counter-argument and the reply — because an argument you can't attack is an argument you don't understand.</p>
+
+  <div class="reasons">
+
+    <!-- 1 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">1</div><div class="r-head">
+        <span class="r-tag">Argument from Character · The Trilemma</span>
+        <h3>The profile of a fraud does not fit him</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Before he claimed anything, the people of Makkah nicknamed him <em>al-Amīn</em> — the Trustworthy. His most determined enemies accused him of sorcery, poetry and madness. They did not accuse him of dishonesty, because that charge would not have been believed.</p>
+          <p>Consider the incentive structure of a liar. A fabricator seeks power, wealth or sex. Muhammad ﷺ gained political authority late, after thirteen years of persecution he could have ended at any time by accepting Makkah's explicit offer of kingship and riches. He died owning almost nothing, having refused to let his family inherit state wealth, sleeping on a mat that marked his skin, repairing his own sandals. A man who ruled Arabia and left no treasury for his heirs is not behaving like an opportunist.</p>
+          <p>And a fraud does not choose the hardest possible path for the longest possible time with the lowest possible payoff. Ibn Taymiyyah's observation cuts cleanly: a man who claims prophethood is either among the very noblest of humanity or among the most wicked — and no observer of his daily conduct for twenty-three consecutive years placed him in the second category.</p>
+        </div>
+        <div class="sidecard"><h4>Evidence type</h4>
+          <ul><li>Hostile-source attestation (his enemies' accusations)</li><li>Behaviour inconsistent with stated motive</li><li>Continuous public life, not a hidden one</li></ul>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">al-Amīn</span><span class="chip">Makkah's bribe rejected</span><span class="chip">no personal estate</span><span class="chip">23-year consistency</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Sincere people can still be sincerely wrong — good character proves honesty, not accuracy.</p>
+        <p><strong>Reply:</strong> Correct, and this is why Reason 1 is only the first step. It eliminates the <em>deceiver</em> hypothesis, narrowing the field to "sincerely mistaken" or "genuinely receiving revelation." Reasons 2–7 are aimed precisely at the "mistaken" option, since delusion does not produce a text that outperforms every trained poet in the language, nor rebukes its own author, nor legislates a functioning civilisation.</p>
+      </div></details>
+    </article>
+
+    <!-- 2 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">2</div><div class="r-head">
+        <span class="r-tag">Literary Argument · I'jāz al-Qur'ān</span>
+        <h3>An open challenge that has never been met</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Seventh-century Arabia was a civilisation of oral poetry. Eloquence was its Olympic sport, its scientific prestige and its political weapon. Tribes rose on the reputation of a poet.</p>
+          <p>Into that arena the Qur'an issued a falsifiable dare: produce something like it. Then it lowered the bar — ten chapters. Then lower still — <em>one</em> chapter, the shortest of which is three lines. The challenge was addressed to the people with the strongest motive on earth to win it: opponents whose entire social order the message was dismantling, who had the resources, the linguistic mastery and years of opportunity.</p>
+          <p>They chose war instead. They tried assassination, boycott, exile and battlefields. Attempts at literary imitation were made and are recorded — and were dismissed as embarrassments even by fellow Arabs. The Qur'an's form belongs to no existing category: not <em>shi'r</em> (metrical poetry), not <em>saj'</em> (rhymed prose), not <em>khutba</em> (oration), yet judged superior to all three by the native experts of the language.</p>
+        </div>
+        <div class="sidecard"><h4>Why this is not circular</h4>
+          <p>The judgement was not made by Muslims about their own book. It was made by hostile native connoisseurs who conceded the aesthetic point and fought on other ground — the strongest possible form of testimony, because it runs against the witness's interest.</p>
+        </div>
+      </div>
+      <div class="verse">
+        <div class="ar">وَإِن كُنتُمْ فِى رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ</div>
+        <div class="tr">“And if you are in doubt about what We have sent down to Our servant, then produce a single chapter like it.”</div>
+        <cite>QUR'AN 2:23</cite>
+      </div>
+      <div class="chips"><span class="chip">falsifiable by design</span><span class="chip">1,400 years open</span><span class="chip">hostile expert concession</span><span class="chip">sui generis form</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Literary merit is subjective; and no neutral panel has ever adjudicated the challenge.</p>
+        <p><strong>Reply:</strong> Aesthetic judgement is not <em>arbitrary</em> — expert consensus in music, mathematics or poetry tracks something real, and near-unanimity among adversarial specialists is meaningful data. Note also the honest limit: this argument is strongest for those who read classical Arabic. It is offered as one converging line, not as a proof that a non-Arabic speaker can independently verify without study. That is precisely why nine other reasons follow.</p>
+      </div></details>
+    </article>
+
+    <!-- 3 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">3</div><div class="r-head">
+        <span class="r-tag">Argument from Discontinuity</span>
+        <h3>The forty silent years</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Genius leaves a trail. Poets compose before they are famous; philosophers argue before they publish; reformers agitate before they lead. Muhammad ﷺ produced <em>nothing</em> for forty years — no verse, no sermon, no treatise, no reputation as an orator or a scholar. He was a caretaker of livestock, then a merchant, unlettered in a society where writing was rare and literary training was a lifelong apprenticeship.</p>
+          <p>Then, abruptly, the most influential Arabic text in history begins arriving in fragments over twenty-three years, under wildly varying conditions — in hiding, in flight, in battle, in grief, in government — and coheres across all of it into a unified whole with a stable voice.</p>
+          <p>Add the sharpest detail: that voice is not his voice. His own recorded speech — thousands of preserved sayings — is beautiful but plainly distinguishable in register, structure and diction from Qur'anic Arabic. Arabs of the period could tell them apart instantly. A single author producing two consistently distinct idioms for twenty-three years, under stress, without slipping, is an extraordinary claim in itself.</p>
+        </div>
+        <div class="sidecard"><h4>The forgery problem</h4>
+          <p>Forgers pick easy targets. Composing 23 years of unrevisable public oral text — with no drafts, before a hostile audience memorising every word to catch you — is the hardest forgery imaginable. Any inconsistency would have been fatal, and his enemies were listening for one.</p>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">no prior corpus</span><span class="chip">two distinct registers</span><span class="chip">unrevisable oral delivery</span><span class="chip">23 years, no drift</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> He could have absorbed material from Jewish and Christian traders, or from monks such as Waraqa and Bahira.</p>
+        <p><strong>Reply:</strong> Casual conversation does not transmit literary mastery, and the Qur'an conspicuously <em>diverges</em> from the biblical and apocryphal versions of shared narratives rather than reproducing them — correcting them on theological points at cost, e.g. denying the crucifixion of Jesus and denying Solomon's alleged idolatry, positions no Christian or Jewish informant would supply. Borrowing explains overlap; it does not explain principled contradiction of one's own alleged sources.</p>
+      </div></details>
+    </article>
+
+    <!-- 4 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">4</div><div class="r-head">
+        <span class="r-tag">Criterion of Embarrassment</span>
+        <h3>The book corrects, rebukes and constrains him</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Historians use a well-known test: material that damages the interests of the person transmitting it is unlikely to be invented by him. The Qur'an is saturated with such material.</p>
+          <p>It publicly reprimands him — for turning away from a blind man because he was busy with tribal notables (80:1–10); for a decision on prisoners; for excusing hypocrites; for putting a legal matter ahead of divine instruction. It records his private domestic tensions. It tells him he has no power to guide anyone, cannot forgive sins, does not know the unseen, and will die like every other man. It warns him that if he fabricated anything against God, God would seize him and no one could help him (10:15; 17:73–75).</p>
+          <p>And it inserts long, awkward silences: when the Makkans demanded answers, revelation sometimes stopped for weeks, exposing him to public ridicule — the opposite of what an author in control of his own material would allow.</p>
+        </div>
+        <div class="sidecard"><h4>Compare the alternative</h4>
+          <p>Invented scriptures flatter their founders: divine status, unlimited authority, convenient exemptions. This text does the reverse. It calls him a servant, restricts him, corrects him in front of his followers, and forbids his own veneration.</p>
+        </div>
+      </div>
+      <div class="verse">
+        <div class="tr">“He frowned and turned away because the blind man came to him… but what would make you know? Perhaps he might be purified.”</div>
+        <cite>QUR'AN 80:1–3 — a public rebuke of the Prophet, preserved permanently in the text he recited</cite>
+      </div>
+      <div class="chips"><span class="chip">self-damaging testimony</span><span class="chip">no divine status claimed</span><span class="chip">revelation withheld</span><span class="chip">explicit limits on his power</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Self-criticism is a sophisticated credibility tactic — it builds trust precisely by appearing humble.</p>
+        <p><strong>Reply:</strong> This works as an explanation for one or two token admissions. It strains badly across a lifetime of rebukes delivered at the worst possible moments to the one person whose authority the whole project depended on, in an honour-shame culture where public correction was socially devastating. And it cannot explain the strategic silences, which offered no upside at all.</p>
+      </div></details>
+    </article>
+
+    <!-- 5 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">5</div><div class="r-head">
+        <span class="r-tag">Textual Criticism · Tawātur &amp; Manuscripts</span>
+        <h3>The message reaches us essentially unaltered</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Most ancient claims come to us through a fragile thread — a handful of manuscripts, centuries after the events, authors unknown. The Qur'an is a different kind of object.</p>
+          <p>It was designed to be transmitted through two independent channels simultaneously: mass memorisation and written record. <em>Tawātur</em> — transmission by so many independent narrators at every generation that coordinated fabrication becomes practically impossible — is not a devotional slogan; it is an epistemic mechanism, and it is why the recited text is uniform from Morocco to Indonesia today.</p>
+          <p>Physical evidence backs it. The Birmingham folios (radiocarbon-dated to a range that overlaps the Prophet's own lifetime or immediately after), the Sanaa palimpsest, the Topkapı and Samarkand codices, and the Cairo and Paris fragments all read — allowing for orthographic development — as the same text now recited. For a document from the 600s, this is an extraordinary evidentiary situation.</p>
+          <p>The same rigour was turned on his sayings: an entire science, <em>'ilm al-rijāl</em>, was built to audit the biography, birthplace, memory and moral reliability of every transmitter in every chain, and to reject reports that failed. Even sharply critical Western historians have granted that the <em>isnād</em> system gave Islamic historiography a professionalism without precedent in antiquity.</p>
+        </div>
+        <div class="sidecard"><h4>Why preservation matters to the argument</h4>
+          <p>Because it means we are evaluating <em>his</em> claim, not a legend about him. Many prophetic claims are unfalsifiable because the source text is unrecoverable. Here the primary evidence is on the table.</p>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">dual-channel transmission</span><span class="chip">1st-century manuscripts</span><span class="chip">isnād auditing</span><span class="chip">global recitational uniformity</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> The Sanaa palimpsest shows textual variants, and the caliph Uthman standardised the text — so it <em>was</em> edited.</p>
+        <p><strong>Reply:</strong> The variants documented are overwhelmingly orthographic, or reflect the recognised <em>qirā'āt</em> — parallel recitations transmitted from the Prophet himself — and no known variant alters a doctrine, a law or a narrative. Uthman's project was standardisation of <em>script and dialectal reading</em>, carried out within roughly twenty years, in public, before thousands of living memorisers who would have exposed any interpolation. That is not the profile of a redaction; it is the profile of an archival control measure with an enormous number of independent auditors.</p>
+      </div></details>
+    </article>
+
+    <!-- 6 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">6</div><div class="r-head">
+        <span class="r-tag">Predictive Content · Risk-Taking Claims</span>
+        <h3>Specific, dated, publicly recorded predictions</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Vague prophecy is worthless — it survives any outcome. What matters evidentially is a prediction that is <strong>specific, timed, publicly recorded before the event, and capable of humiliating its author.</strong> Several of his qualify.</p>
+          <p>In roughly 615 CE, Byzantium had just been shattered by Persia; Jerusalem had fallen, the Byzantine state was near collapse, and the Makkan pagans were openly celebrating the defeat of the Christians as a bad omen for the monotheists. At that low point the Qur'an announced that Rome, "defeated in the nearest land," would be victorious "within a few years" (<em>biḍ' sinīn</em>, idiomatically three to nine). A wager was publicly struck on it in Makkah. Around 624 CE, against expectation, Heraclius broke Persia. This was recorded in a text his enemies were memorising in order to attack — a prediction with a countdown clock attached.</p>
+          <p>Others in the same class: the conquest of Makkah announced while he was being turned away from it; the fall of both Persia and Byzantine Syria promised to a starving, besieged community digging a trench in Madinah; the fate of specific named individuals; and Suraqa ibn Malik being told he would one day wear the bracelets of the Persian emperor — a claim so absurd at the time that it functioned as a public liability until it happened.</p>
+        </div>
+        <div class="sidecard"><h4>The falsifiability test</h4>
+          <p>Each of these had a deadline and an audience. A failed one would have ended the movement. A guesser making this many high-risk, low-probability, time-bound calls should have been destroyed by the base rates.</p>
+        </div>
+      </div>
+      <div class="verse">
+        <div class="ar">غُلِبَتِ الرُّومُ فِى أَدْنَى الْأَرْضِ وَهُمْ مِّن بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ فِى بِضْعِ سِنِينَ</div>
+        <div class="tr">“The Romans have been defeated in the nearest land, but they will be victorious after their defeat — within a few years.”</div>
+        <cite>QUR'AN 30:2–4 — revealed at the nadir of Byzantine collapse</cite>
+      </div>
+      <div class="chips"><span class="chip">time-bounded</span><span class="chip">recorded pre-event</span><span class="chip">against expectation</span><span class="chip">publicly wagered on</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Empires oscillate; Byzantine recovery was a reasonable geopolitical bet, and hadith predictions were recorded after the fact.</p>
+        <p><strong>Reply:</strong> A fair challenge, and the strength varies by case, which is why they should be weighed by class. For 30:2–4 the manuscript and recitational tradition places it in the Makkan period, before 622, while the Persian ascendancy looked terminal — and the specific window is what makes it risky rather than the direction. For the hadith predictions, the honest position is that they carry force chiefly for those who accept the <em>isnād</em> dating, so they should be treated as supporting rather than load-bearing. This page deliberately does not rest on them.</p>
+      </div></details>
+    </article>
+
+    <!-- 7 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">7</div><div class="r-head">
+        <span class="r-tag">Science &amp; Epistemology · Handled Carefully</span>
+        <h3>A scripture that commands empirical inquiry — and dates its own errors none</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Here the honest argument is not the loud one. The loud version — "the Qur'an contains modern physics" — is often overstated by enthusiasts, and reading current science back into old texts is a fallacy that discredits the person doing it. So consider two claims that survive scrutiny instead.</p>
+          <p><strong>First: an epistemology.</strong> Hundreds of verses do something no other scripture of its era does with such insistence — they make observation of the natural world a religious duty. <em>Look</em> at the camel, the rain cycle, the mountains, the alternation of night and day, the honeybee, the stages of your own growth. It demands evidence from opponents ("bring your proof"), condemns following claims without knowledge, ridicules ancestral conformity, and treats reason as a faculty one is accountable for. That posture is why, historically, the civilisation this message produced built the first research hospitals with licensing exams, gave us algebra and algorithms, ibn al-Haytham's experimental optics — the ancestor of the scientific method — and Alhazen's insistence that authority yields to controlled observation. An ideology hostile to inquiry does not generate that.</p>
+          <p><strong>Second: the absence of the expected.</strong> This is the underrated point. Every 7th-century text of comparable length is a museum of its era's cosmology — Ptolemaic spheres, humoral medicine, a flat cosmos on pillars, celestial gods, world-egg myths. The Qur'an declines to encode the surrounding pseudoscience it would have inherited by default. It contains no zodiac fatalism, no astrology, no alchemy, no numerological cosmogony. That silence is itself a datum: an author of that time and place writing 6,236 verses about the natural world should have left dozens of dated fingerprints. Note the direction of this argument — it is <em>not</em> "the Qur'an anticipated science." It is "the Qur'an did not inherit the errors it should have."</p>
+        </div>
+        <div class="sidecard"><h4>Where we refuse to overclaim</h4>
+          <p>Verses on embryonic stages, the expanding heavens, mountains as stabilisers or the barrier between waters are <em>consistent with</em> modern findings and were striking to some specialists — but consistency is weaker than prediction, and several popular versions of these claims rest on selective translation. We list them as suggestive, never as proof. A case that needs exaggeration isn't a case.</p>
+        </div>
+      </div>
+      <div class="verse">
+        <div class="tr">“Say: bring your proof, if you are truthful.” · “Do not pursue what you have no knowledge of.” · “Say: are those who know equal to those who do not?”</div>
+        <cite>QUR'AN 2:111 · 17:36 · 39:9 — the demand for evidence, stated repeatedly as a religious obligation</cite>
+      </div>
+      <div class="chips"><span class="chip">evidentialist commands</span><span class="chip">no astrology or alchemy</span><span class="chip">absence-of-era-errors</span><span class="chip">generated an experimental tradition</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Critics argue the embryology derives from Galen, that "seven heavens" is ancient cosmology, and that hits are counted while misses are excused.</p>
+        <p><strong>Reply:</strong> This objection is largely <em>accepted</em> here, and it is why the page does not stake its case on scientific-miracle claims. Two notes remain. The Galenic-borrowing charge cuts both ways: Galen's actual scheme includes elements the Qur'an does not reproduce, and a borrower would ordinarily import the whole system, including its distinctive errors, which is what makes wholesale dependence hard to sustain. And methodologically, the argument from <em>absence</em> of era-specific error avoids the retrofitting fallacy entirely, because it makes no claim about what the text foresaw — only about what it declined to say.</p>
+      </div></details>
+    </article>
+
+    <!-- 8 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">8</div><div class="r-head">
+        <span class="r-tag">Sociology · Costly Signalling</span>
+        <h3>The early followers paid, and had nothing to gain</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Ask an economist's question: who bought in first, and what was the return on investment?</p>
+          <p>Not opportunists. His first believers were his own wife, who knew him most intimately and privately; his closest friend, who had the most to lose in reputation; and — critically — the powerless: enslaved people, foreigners, women, the young. For them the price was torture, social death, a three-year total boycott that starved families in a mountain valley, and exile to Abyssinia. The payoff, for over a decade, was <em>negative</em>.</p>
+          <p>In evolutionary and behavioural science this is called costly signalling: a signal is credible in proportion to how expensive it is to fake. Bilal was tortured on burning sand and would not recant. Sumayyah was killed. Others were mutilated. Meanwhile the people best positioned to expose a hoax — his household, who saw him at 3 a.m., and his uncle's clan, who knew his every private hour — were among the most convinced.</p>
+          <p>Then compare the two halves of his life. Persecuted refugee for thirteen years; head of state for ten. The behaviour didn't change. Given absolute power over the city that had tried to kill him, the recorded response at Makkah's conquest was a general amnesty rather than reprisals. Fraudsters change when the incentives change. He didn't.</p>
+        </div>
+        <div class="sidecard"><h4>Group-delusion doesn't fit</h4>
+          <p>Mass delusion typically needs isolation, charisma without scrutiny, and short duration. This movement grew under maximal hostile scrutiny, across decades, in the open, among people who cross-examined each other — and included hardened sceptics who converted <em>after</em> trying to refute it.</p>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">negative early ROI</span><span class="chip">closest witnesses convinced</span><span class="chip">power didn't corrupt behaviour</span><span class="chip">amnesty over revenge</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Martyrdom proves sincerity, not truth — many movements have devoted martyrs. Later expansion also brought worldly rewards.</p>
+        <p><strong>Reply:</strong> Agreed on both. The argument's target is narrower: it defeats the <em>conspiracy</em> hypothesis specifically. A conspiracy requires participants with something to gain and few enough to keep quiet; here the earliest cohort had everything to lose and included the very people who could have exposed him at any moment. Later material incentives are irrelevant to the credibility of the first thirteen years, which is where the claim was established.</p>
+      </div></details>
+    </article>
+
+    <!-- 9 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">9</div><div class="r-head">
+        <span class="r-tag">Legislative Argument · Measurable Reform</span>
+        <h3>Reforms that ran ahead of his environment, not with it</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>A man inventing a religion borrows his society's prejudices, because that is what sells. Test the hypothesis against the record: does his legislation flatter 7th-century Arabian norms, or attack them?</p>
+          <p>It abolished female infanticide and made it a crime. It gave women independent property rights, guaranteed inheritance shares, the right to contract their own marriage, to refuse it, to initiate divorce, to keep their own earnings and their own name — a legal package Europe reached in significant part only in the 19th and 20th centuries. It capped and regulated blood-vengeance, replacing endless tribal feud with adjudication. It made charity a compulsory annual tax on wealth, creating what functioned as a systematic welfare mechanism. It commanded the humane treatment of captives and animals, forbade the destruction of crops and trees in war, prohibited exploitative interest, and declared contracts and debts binding in writing before witnesses.</p>
+          <p>And on the deepest hierarchy of that world it was explicit: in his final sermon before roughly a hundred thousand people he declared no superiority of Arab over non-Arab, black over white — and elevated a formerly enslaved Black man, Bilal, to call the community to prayer from the top of the Ka'ba, the single most prestigious acoustic position in Arabia. That is not a concession to his culture. That is a direct assault on it.</p>
+        </div>
+        <div class="sidecard"><h4>The tell</h4>
+          <p>Every reform above cost him support among exactly the constituency an impostor needs: powerful tribal men. He legislated against his own political interest, repeatedly and structurally.</p>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">infanticide criminalised</span><span class="chip">women's property &amp; inheritance</span><span class="chip">racial equality declared</span><span class="chip">rules of war</span><span class="chip">compulsory welfare</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Some rulings look unjust by 21st-century standards — on slavery, warfare, or gender asymmetries in inheritance and testimony.</p>
+        <p><strong>Reply:</strong> The relevant comparison is not to 2024 but to 610, and against that baseline the movement is uniformly in one direction: toward restriction of violence and expansion of rights. Slavery, universal across every contemporary civilisation, was not romanticised but constrained and made expiable — manumission became the standard atonement, and freeing people the highest charity, dismantling the institution from the demand side in an economy built on it. Where asymmetries exist they sit inside a system that also assigned men unilateral financial liability for women's maintenance. One may still contest specific rulings; what cannot be contested is the vector, and the vector is what an argument about a reformer's origin turns on.</p>
+      </div></details>
+    </article>
+
+    <!-- 10 -->
+    <article class="reason rv tilt">
+      <div class="r-top"><div class="r-num">10</div><div class="r-head">
+        <span class="r-tag">Cumulative Case · Best Explanation</span>
+        <h3>Everything above needs one explanation, not ten</h3></div></div>
+      <div class="r-body">
+        <div>
+          <p>Set the data side by side. An unlettered forty-year-old with no literary history. A text that outclassed the world's most competitive poetic culture and survived its own open challenge. A message that rebuked its own bearer and limited his authority. A theology of one indivisible God with no intermediaries — coherent, non-anthropomorphic, and continuous with Abraham, Moses and Jesus rather than in rivalry with them. Time-bound predictions made in front of enemies. A preservation apparatus of unprecedented rigour. First followers who paid in blood for nothing. Legislation that attacked the interests of the powerful. A society transformed from tribal blood-feud to a literate, law-governed civilisation within a single lifetime — a rate of change with almost no parallel in recorded history.</p>
+          <p>Now try the alternatives. <strong>Deceiver?</strong> Contradicted by the self-damaging material, the rejected bribes, the empty estate and the unchanged behaviour after gaining power. <strong>Deluded?</strong> Delusion doesn't compose an unmatched literary corpus in a second register for twenty-three years, doesn't legislate a working civil order, doesn't make dated public bets and win them. <strong>Political genius who used religion instrumentally?</strong> Then explain why the instrument keeps stripping him of authority, exposing his errors publicly, and forbidding his own veneration.</p>
+          <p>Each objection can be patched individually. But every patch requires a new assumption, and Occam's razor counts assumptions. The hypothesis that requires the fewest — the one that accounts for the character, the text, the preservation, the predictions, the reforms and the transformation with a single premise — is the explanation he himself gave: that he did not author it, and was only its messenger.</p>
+        </div>
+        <div class="sidecard"><h4>What follows</h4>
+          <p>Reason cannot force conviction; it can only clear the road. The Qur'an's own claim is modest about this: signs are given, and then the choice belongs to you. <em>"There is no compulsion in religion."</em> (2:256)</p>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">convergence</span><span class="chip">Occam's razor</span><span class="chip">rival hypotheses tested</span><span class="chip">inference to best explanation</span></div>
+      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
+        <p><strong>Objection:</strong> Cumulative cases can stack weak arguments and feel strong — ten leaky buckets still hold no water.</p>
+        <p><strong>Reply:</strong> True when the buckets leak the same way. Convergence is only powerful when the lines of evidence are <em>independent</em> and would not be expected to align by chance — manuscript science, literary criticism, behavioural economics, legal history and historical sociology fail independently. The demand is therefore fair and specific: propose a single naturalistic account that handles all ten without inventing a new special assumption for each. That is the argument, and it stands or falls on whether such an account can be given.</p>
+      </div></details>
+    </article>
+
+  </div>
+</div></section>
+
+<!-- ============ LOGIC LAB ============ -->
+<section id="logic"><div class="container">
+  <span class="eyebrow rv">Interactive</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">The Logic Lab</h2>
+  <p class="lead rv" data-d="2" style="margin-top:18px">
+    Three hypotheses compete to explain the historical record. Toggle each observation on or off and watch how well
+    each hypothesis copes. This is a <em>reasoning aid</em> that visualises explanatory strain — not a probability calculation.
+  </p>
+
+  <div class="tri rv" data-d="2">
+    <div class="tri-head"><h3 style="font-size:1.35rem">Which hypothesis absorbs the evidence?</h3>
+      <p style="font-size:.88rem;color:var(--ink-3);margin-top:6px">Select the observations you accept as historically established.</p></div>
+    <div class="tri-grid">
+      <div class="tri-obs" id="obsList"></div>
+      <div class="tri-out">
+        <div class="bar-row b1"><b>H1 · Deliberate deceiver <em id="v1">—</em></b><div class="bar"><i id="i1"></i></div><p id="p1">Awaiting observations.</p></div>
+        <div class="bar-row b2"><b>H2 · Sincere but deluded <em id="v2">—</em></b><div class="bar"><i id="i2"></i></div><p id="p2">Awaiting observations.</p></div>
+        <div class="bar-row b3"><b>H3 · Genuine messenger <em id="v3">—</em></b><div class="bar"><i id="i3"></i></div><p id="p3">Awaiting observations.</p></div>
+      </div>
+    </div>
+    <div class="tri-note">▸ Bars show <strong>explanatory fit</strong>: how much ad-hoc patching a hypothesis needs to survive the selected data. Fewer patches = higher fit. Your own weighting may differ — that's the point of showing the mechanism instead of a conclusion.</div>
+  </div>
+
+  <div class="stats rv" data-d="1">
+    <div class="stat"><b data-count="23">0</b><span>years of revelation</span></div>
+    <div class="stat"><b data-count="114">0</b><span>chapters</span></div>
+    <div class="stat"><b data-count="6236">0</b><span>verses</span></div>
+    <div class="stat"><b data-count="1400" data-suf="+">0</b><span>years challenge open</span></div>
+    <div class="stat"><b data-count="0" data-lit="0">0</b><span>rivals conceded</span></div>
+  </div>
+</div></section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline"><div class="container">
+  <span class="eyebrow rv">Chronology</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">Twenty-three years, in public</h2>
+  <p class="lead rv" data-d="2" style="margin-top:18px">Every claim above is anchored to a datable, publicly witnessed sequence — the raw material any rival explanation must also account for.</p>
+  <div class="tl rv" data-d="1"><div class="fill" id="tlFill"></div>
+    <div class="tli"><em>c. 570 CE</em><h4>Born in Makkah</h4><p>Orphaned before birth and again at six. No schooling, no literary training, no religious office.</p></div>
+    <div class="tli"><em>c. 595–610</em><h4>Known as al-Amīn</h4><p>Two decades as a merchant with a public reputation for honesty — later cited even by his opponents.</p></div>
+    <div class="tli"><em>610</em><h4>First revelation</h4><p>At forty, in a cave outside the city. His first reaction is recorded as terror, not triumph — he fears he is ill or possessed.</p></div>
+    <div class="tli"><em>613–619</em><h4>Open preaching, persecution, boycott</h4><p>Followers tortured; a three-year total boycott starves his clan in a valley. He refuses offers of wealth and kingship to stop.</p></div>
+    <div class="tli"><em>c. 615</em><h4>The Byzantine prediction (30:2–4)</h4><p>Announced while Persia looked unstoppable; publicly wagered on in Makkah. Fulfilled c. 624.</p></div>
+    <div class="tli"><em>622</em><h4>Migration to Madinah</h4><p>A written constitution binds Muslims, Jewish tribes and others into one polity with defined mutual obligations — an early pluralist civic charter.</p></div>
+    <div class="tli"><em>624–628</em><h4>Statehood under pressure</h4><p>Badr, Uhud, the Trench, Hudaybiyyah. Revelation continues to rebuke him, restrict him, and withhold answers at the worst moments.</p></div>
+    <div class="tli"><em>630</em><h4>Makkah taken — general amnesty</h4><p>Absolute power over the city that tortured his companions and tried to kill him. The recorded outcome is pardon, not reprisal.</p></div>
+    <div class="tli"><em>632</em><h4>Farewell sermon, then death</h4><p>Declares racial equality, women's rights and the sanctity of life and property before a mass gathering. Dies leaving no wealth to heirs — and a text already memorised by thousands.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ HONESTY ============ -->
+<section id="honesty"><div class="container">
+  <span class="eyebrow rv">Integrity Clause</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">What this page does <span class="grad">not</span> claim</h2>
+  <div class="honest rv" data-d="1">
+    <h3>Five honest limits</h3>
+    <ul>
+      <li><strong>This is not a mathematical proof.</strong> No historical argument about a person can be. It is an argument about which explanation is most reasonable given the evidence — the same standard used in history, law and forensic science.</li>
+      <li><strong>Popular "scientific miracle" claims are frequently overstated.</strong> Retrofitting current science onto old texts is a real fallacy, and several widely circulated examples rely on selective translation. That is why Reason 7 argues from the <em>absence of era-specific error</em> and from an evidentialist epistemology instead.</li>
+      <li><strong>Serious scholars disagree with much of this,</strong> and their objections are printed above in their own strength rather than paraphrased into weakness. Reading only one side is not reasoning.</li>
+      <li><strong>Some arguments require expertise you may not have.</strong> The literary case (Reason 2) is genuinely strongest for those who read classical Arabic. Stated plainly rather than glossed over.</li>
+      <li><strong>Conviction is not compelled by argument alone.</strong> The Qur'an's own position is that evidence is presented and the choice remains free: <em>"There is no compulsion in religion"</em> (2:256). Anyone pressuring you past your own reasoning is departing from the text they claim to defend.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- ============ FINALE ============ -->
+<section class="finale"><div class="ring">
+  <svg viewBox="0 0 200 200" fill="none" stroke="var(--gold)" stroke-width=".4" opacity=".55">
+    <circle cx="100" cy="100" r="95"/><circle cx="100" cy="100" r="74"/><circle cx="100" cy="100" r="52"/>
+    <path d="M100 5 128 44 172 34 162 78 195 100 162 122 172 166 128 156 100 195 72 156 28 166 38 122 5 100 38 78 28 34 72 44Z"/>
+    <path d="M100 26 148 52 174 100 148 148 100 174 52 148 26 100 52 52Z"/>
+  </svg></div>
+  <div class="container">
+    <span class="eyebrow rv">Conclusion</span>
+    <h2 class="rv split" data-d="1" style="margin-top:18px;max-width:20ch;margin-inline:auto">One premise explains all ten</h2>
+    <p class="lead rv" data-d="2" style="margin:22px auto 0;text-align:center">
+      The invitation is not to abandon reason but to follow it further than comfort allows:
+      read the primary sources, weigh the objections, and ask honestly which account of these facts
+      requires the fewest assumptions.
+    </p>
+    <div class="hero-cta rv" data-d="3" style="animation:none;opacity:1">
+      <a href="#reasons" class="btn solid mag">Re-read the ten</a>
+      <a href="#refs" class="btn mag">Check the sources</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFS ============ -->
+<section id="refs"><div class="container">
+  <span class="eyebrow rv">Go Deeper</span>
+  <h2 class="rv split" data-d="1" style="margin-top:18px">Read the primary and opposing material</h2>
+  <p class="lead rv" data-d="2" style="margin-top:16px">Verify rather than trust. Sources below include both the case and its critics.</p>
+  <div class="refs">
+    <div class="ref rv" data-d="1"><b>The Qur'an</b><span>Start with translations by Abdel Haleem (fluent), Nasr's <em>Study Quran</em> (annotated), or Arberry (literary).</span></div>
+    <div class="ref rv" data-d="1"><b>Early biography (sīra)</b><span>Ibn Ishaq/Ibn Hisham; Ibn Sa'd's <em>Tabaqat</em>; al-Tabari's <em>History</em> — the primary layer, with their own transmission debates.</span></div>
+    <div class="ref rv" data-d="2"><b>Modern academic history</b><span>Montgomery Watt, <em>Muhammad at Mecca / at Medina</em>; Fred Donner, <em>Muhammad and the Believers</em>; Jonathan Brown, <em>Muhammad: A Very Short Introduction</em>.</span></div>
+    <div class="ref rv" data-d="2"><b>Hadith criticism</b><span>Jonathan A. C. Brown, <em>Hadith: Muhammad's Legacy</em> — on how the isnād system worked, and its real limits.</span></div>
+    <div class="ref rv" data-d="3"><b>Manuscript evidence</b><span>Birmingham Qur'an folios (Univ. of Birmingham); the Sanaa palimpsest studies of Behnam Sadeghi and Asma Hilali; the Corpus Coranicum project.</span></div>
+    <div class="ref rv" data-d="3"><b>Literary inimitability</b><span>Al-Baqillani, <em>I'jāz al-Qur'ān</em>; Navid Kermani, <em>God is Beautiful</em>; and the classical debate on <em>naẓm</em> in al-Jurjani.</span></div>
+    <div class="ref rv" data-d="4"><b>Character as evidence</b><span>Yaqeen Institute's research on the Prophet's character; Ibn Taymiyyah's argument on the two possible profiles of a prophethood claimant.</span></div>
+    <div class="ref rv" data-d="4"><b>The critical case</b><span>Patricia Crone &amp; Michael Cook, <em>Hagarism</em>; Tom Holland, <em>In the Shadow of the Sword</em>; and critiques of "scientific miracle" apologetics. Read these too.</span></div>
+  </div>
+</div></section>
+
+<footer><div class="container">
+  <p>Built as a reasoned invitation, not a polemic. Where these arguments are strong, examine them; where the objections are strong, they are printed alongside. Peace be upon him — and upon every sincere seeker of truth.</p>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;margin-top:14px">﴾ لَا إِكْرَاهَ فِى الدِّينِ ﴿ · &nbsp;NO COMPULSION IN RELIGION · 2:256</p>
+  <div class="nq-footer-badge">
+    <div class="nq-footer-logo-row">
+      <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(217,180,91,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#070a0f" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#070a0f" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+    </div>
+    <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.0 (updated 2026-08-19 23:25)</div>
+  </div>
+</div></footer>
+
+</div><!-- /wrap -->
+
+<button class="up" id="up" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   PRELOADER
+   ============================================================ */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('preload').classList.add('gone');
+    document.body.classList.remove('locked');},2400);
+});
+const RM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ============================================================
+   GIRIH CANVAS — animated islamic tessellation
+   ============================================================ */
+(function(){
+  if(RM) return;
+  const c=document.getElementById('girih'),x=c.getContext('2d');
+  let w,h,cells=[],dust=[],pt={x:-999,y:-999},t=0,S=118;
+  function size(){
+    w=c.width=innerWidth*devicePixelRatio; h=c.height=innerHeight*devicePixelRatio;
+    c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px';
+    x.scale(1,1); cells=[];
+    const s=S*devicePixelRatio;
+    for(let i=-1;i<w/s+1;i++)for(let j=-1;j<h/s+1;j++)
+      cells.push({x:i*s+s/2,y:j*s+s/2,r:Math.random()*Math.PI,ph:Math.random()*6.28});
+    dust=[];
+    for(let i=0;i<70;i++)dust.push({x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*1.6*devicePixelRatio+.4,vy:-(Math.random()*.25+.06),ph:Math.random()*6.28});
+  }
+  function star(cx,cy,R,rot,pts){
+    x.beginPath();
+    for(let i=0;i<pts*2;i++){
+      const a=rot+i*Math.PI/pts, rr=i%2?R*.42:R;
+      i?x.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):x.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);
+    } x.closePath();
+  }
+  function draw(){
+    t+=.004; x.clearRect(0,0,w,h);
+    const s=S*devicePixelRatio;
+    cells.forEach(c0=>{
+      const d=Math.hypot(c0.x-pt.x,c0.y-pt.y), near=Math.max(0,1-d/(330*devicePixelRatio));
+      const pulse=(Math.sin(t*1.7+c0.ph)+1)/2;
+      x.lineWidth=.55*devicePixelRatio;
+      x.strokeStyle=`rgba(217,180,91,${.055+pulse*.055+near*.42})`;
+      star(c0.x,c0.y,s*.40,c0.r+t*.22,8); x.stroke();
+      x.strokeStyle=`rgba(46,198,176,${.03+pulse*.035+near*.28})`;
+      star(c0.x,c0.y,s*.22,-c0.r-t*.34,4); x.stroke();
+      if(near>.35){
+        x.fillStyle=`rgba(217,180,91,${(near-.35)*.5})`;
+        x.beginPath();x.arc(c0.x,c0.y,1.6*devicePixelRatio,0,6.29);x.fill();
+      }
+    });
+    dust.forEach(p=>{
+      p.y+=p.vy*devicePixelRatio; p.x+=Math.sin(t*2+p.ph)*.22*devicePixelRatio;
+      if(p.y<-10)p.y=h+10;
+      x.fillStyle=`rgba(244,223,164,${.13+Math.sin(t*3+p.ph)*.1})`;
+      x.beginPath();x.arc(p.x,p.y,p.r,0,6.29);x.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',size);
+  addEventListener('pointermove',e=>{pt.x=e.clientX*devicePixelRatio;pt.y=e.clientY*devicePixelRatio;});
+  size();draw();
+})();
+
+/* ============================================================
+   CURSOR + MAGNETIC BUTTONS
+   ============================================================ */
+(function(){
+  if(matchMedia('(hover:none)').matches) return;
+  const a=document.getElementById('cur'),b=document.getElementById('cur2');
+  let mx=0,my=0,bx=0,by=0;
+  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;
+    a.style.transform=`translate(${mx-3.5}px,${my-3.5}px)`;});
+  (function loop(){bx+=(mx-bx)*.14;by+=(my-by)*.14;
+    b.style.transform=`translate(${bx-19}px,${by-19}px)`;requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.reason,summary,.obs').forEach(el=>{
+    el.addEventListener('mouseenter',()=>b.classList.add('hot'));
+    el.addEventListener('mouseleave',()=>b.classList.remove('hot'));
+  });
+  document.querySelectorAll('.mag').forEach(el=>{
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect();
+      el.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      el.style.setProperty('--my',(e.clientY-r.top)+'px');
+      if(!RM) el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.2-3}px)`;
+    });
+    el.addEventListener('pointerleave',()=>el.style.transform='');
+  });
+})();
+
+/* ============================================================
+   SCROLL: progress · nav · reveals · timeline · counters
+   ============================================================ */
+const prog=document.getElementById('prog'),nav=document.getElementById('nav'),up=document.getElementById('up');
+function onScroll(){
+  const sc=scrollY, max=document.body.scrollHeight-innerHeight;
+  prog.style.width=(sc/max*100)+'%';
+  nav.classList.toggle('stuck',sc>60);
+  up.classList.toggle('on',sc>700);
+  const tl=document.querySelector('.tl');
+  if(tl){const r=tl.getBoundingClientRect();
+    const p=Math.min(1,Math.max(0,(innerHeight*.7-r.top)/r.height));
+    document.getElementById('tlFill').style.height=(p*100)+'%';}
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+document.getElementById('up').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* split text into animated letters */
+document.querySelectorAll('.split').forEach(el=>{
+  const nodes=[...el.childNodes];el.innerHTML='';
+  nodes.forEach(n=>{
+    if(n.nodeType===3){
+      n.textContent.split('').forEach((ch,i)=>{
+        const s=document.createElement('span');
+        s.textContent=ch===' '?'\u00A0':ch;s.style.transitionDelay=(i*.026)+'s';el.appendChild(s);
+      });
+    } else {
+      const holder=document.createElement(n.tagName);holder.className=n.className;
+      n.textContent.split('').forEach((ch,i)=>{
+        const s=document.createElement('span');
+        s.textContent=ch===' '?'\u00A0':ch;s.style.transitionDelay=(.15+i*.026)+'s';holder.appendChild(s);
+      });el.appendChild(holder);
+    }
+  });
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');
+    if(e.target.dataset.count!==undefined)count(e.target);
+    io.unobserve(e.target);}
+}),{threshold:.14,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv,.split,.tli,[data-count]').forEach(el=>io.observe(el));
+
+function count(el){
+  const target=+el.dataset.count, suf=el.dataset.suf||'';
+  if(target===0){el.textContent='0'+suf;return;}
+  const dur=1500,st=performance.now();
+  (function tick(now){
+    const p=Math.min(1,(now-st)/dur), e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e).toLocaleString()+(p===1?suf:'');
+    if(p<1)requestAnimationFrame(tick);
+  })(st);
+}
+
+/* ============================================================
+   3D TILT + SPOTLIGHT ON REASON CARDS
+   ============================================================ */
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--px',(e.clientX-r.left)+'px');
+    card.style.setProperty('--py',(e.clientY-r.top)+'px');
+    if(RM)return;
+    const rx=((e.clientY-r.top)/r.height-.5)*-2.6, ry=((e.clientX-r.left)/r.width-.5)*2.6;
+    card.style.transform=`perspective(1400px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+  });
+  card.addEventListener('pointerleave',()=>card.style.transform='');
+});
+
+/* ============================================================
+   THEME
+   ============================================================ */
+document.getElementById('theme').onclick=()=>{
+  const r=document.documentElement;
+  r.dataset.theme = r.dataset.theme==='night'?'dawn':'night';
+};
+
+/* ============================================================
+   LOGIC LAB
+   ============================================================ */
+const OBS=[
+  {t:"He was universally known as truthful before, and never accused of lying by enemies",s:[-3,0,1]},
+  {t:"He refused wealth and kingship offered to stop, and died with no personal estate",s:[-3,0,1]},
+  {t:"The Qur'an publicly rebukes and restricts him, and withholds answers at critical moments",s:[-3,-2,2]},
+  {t:"The text outperformed the era's finest poets; its open challenge was never met",s:[-2,-3,2]},
+  {t:"He produced no literature for 40 years, then two consistently distinct registers for 23",s:[-2,-3,2]},
+  {t:"Specific, time-bounded predictions were recorded before the events and fulfilled",s:[-1,-3,2]},
+  {t:"Earliest followers were the powerless, paid in torture and exile, with no worldly return",s:[-3,-1,1]},
+  {t:"Legislation attacked the interests of the powerful men whose support he needed",s:[-3,-1,2]},
+  {t:"His behaviour was identical in powerlessness and in absolute power (amnesty at Makkah)",s:[-3,0,1]},
+  {t:"The text is preserved via mass memorisation plus 1st-century manuscripts, essentially unchanged",s:[-1,-1,2]}
+];
+const list=document.getElementById('obsList');
+OBS.forEach((o,i)=>{
+  const d=document.createElement('div');d.className='obs on';d.dataset.i=i;
+  d.innerHTML=`<span class="box"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></span><span>${o.t}</span>`;
+  d.onclick=()=>{d.classList.toggle('on');calc();};
+  list.appendChild(d);
+});
+const NOTE=[
+  ["Requires ever more ad-hoc motives: a liar with no payoff, damaging his own authority on purpose.",
+   "Strained: a deceiver who rejects power and self-sabotages.","Fits poorly with the selected data."],
+  ["Delusion cannot explain sustained literary mastery, correct dated predictions or working legislation.",
+   "Partially strained: sincerity fits, competence does not.","Fits some data, fails on output."],
+  ["Accounts for character, text, constraint, prediction and reform under a single premise.",
+   "Coherent with the selected data without added assumptions.","Requires accepting revelation as possible."]
+];
+function calc(){
+  const on=[...document.querySelectorAll('.obs.on')].map(e=>OBS[+e.dataset.i]);
+  const raw=[0,1,2].map(h=>on.reduce((a,o)=>a+o.s[h],0));
+  const maxPos=on.length*2, minNeg=-on.length*3;
+  for(let h=0;h<3;h++){
+    const pct = on.length? Math.round(((raw[h]-minNeg)/(maxPos-minNeg))*100) : 0;
+    document.getElementById('i'+(h+1)).style.width=pct+'%';
+    document.getElementById('v'+(h+1)).textContent=on.length?pct+'% fit':'—';
+    document.getElementById('p'+(h+1)).textContent=on.length
+      ? (pct<35?NOTE[h][0]:pct<65?NOTE[h][1]:NOTE[h][2])
+      : 'Select at least one observation.';
+  }
+}
+calc();
+</script>
+</body>
+</html>
