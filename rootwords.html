@@ -7,7 +7,7 @@
 <meta name="description" content="Learn Quranic Arabic root words (الجذر) through a living tree: interactive root explorer, patterns, ayah x-ray, quizzes and a teacher's toolkit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
 <style>
 /* ============ 1. TOKENS ============ */
 :root{
@@ -100,6 +100,16 @@ nav{position:sticky;top:0;z-index:55;background:rgba(5,9,7,.74);backdrop-filter:
 @media(max-width:980px){.navlinks{display:none}}
 .nq-footer-badge{text-align:center;padding:28px 16px 10px;border-top:1px solid var(--line);margin-top:32px}
 .nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* Language Switcher */
+.nq-lang-selector-wrap{margin:18px auto 10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.nq-lang-group{display:inline-flex;align-items:center;background:rgba(255,255,255,0.06);border:1px solid var(--line2);border-radius:999px;padding:4px;gap:5px}
+.nq-lang-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid transparent;color:var(--mut);font-family:var(--ff);font-weight:700;font-size:0.84rem;padding:6px 14px;border-radius:999px;cursor:pointer;transition:all 0.22s ease;user-select:none}
+.nq-lang-btn:hover{color:#fff;background:rgba(255,255,255,0.09)}
+.nq-lang-btn.on{color:#04140a;background:var(--leaf);border-color:var(--leaf);font-weight:800;box-shadow:0 0 16px rgba(125,220,149,0.38)}
+.round-flag{width:20px;height:20px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.4)}
+html[lang="ur"] .ur-text{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl}
+html[lang="ur"] .lead, html[lang="ur"] .mut, html[lang="ur"] .card p{font-size:1.06em;line-height:1.9}
 
 /* ============ 4. HERO ============ */
 .hero{min-height:min(100svh,940px);padding:0;display:grid;align-items:center;position:relative;overflow:hidden}
@@ -322,9 +332,9 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
       <a href="#find">Find the Root</a><a href="#patterns">Patterns</a><a href="#xray">Ayah X-Ray</a>
       <a href="#traps">Traps</a><a href="#benefits">Benefits</a><a href="#teach">For Teachers</a><a href="#quiz">Quiz</a>
     </div>
-    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Showcase Portal">
+    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Portal">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Showcase</span>
+      <span>Home</span>
     </a>
   </div>
 </nav>
@@ -808,6 +818,69 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
         <span style="font-weight:700;letter-spacing:0.12em;font-size:0.88rem;color:var(--leaf)">NURULQURAN · نُورُ القُرْآن</span>
       </div>
       <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+
+      <!-- Multi-Language Option: USA (English), Pakistan (Urdu), Norway (Norsk) -->
+      <div class="nq-lang-selector-wrap" id="langSelectorWrap">
+        <div style="font-size:0.76rem;font-weight:700;letter-spacing:0.08em;color:var(--mut);text-transform:uppercase">
+          <span>Language · زبان · Språk</span>
+        </div>
+        <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
+          <button type="button" class="nq-lang-btn on" id="btnLangEn" data-lang="en" role="radio" aria-checked="true" title="English (USA)">
+            <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+              <clipPath id="usRound"><circle cx="18" cy="18" r="18"/></clipPath>
+              <g clip-path="url(#usRound)">
+                <rect width="36" height="36" fill="#B22234"/>
+                <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+                <rect width="16" height="19.4" fill="#3C3B6E"/>
+                <g fill="#FFFFFF">
+                  <circle cx="3.8" cy="4" r="1"/>
+                  <circle cx="8" cy="4" r="1"/>
+                  <circle cx="12.2" cy="4" r="1"/>
+                  <circle cx="5.9" cy="7.2" r="1"/>
+                  <circle cx="10.1" cy="7.2" r="1"/>
+                  <circle cx="3.8" cy="10.4" r="1"/>
+                  <circle cx="8" cy="10.4" r="1"/>
+                  <circle cx="12.2" cy="10.4" r="1"/>
+                  <circle cx="5.9" cy="13.6" r="1"/>
+                  <circle cx="10.1" cy="13.6" r="1"/>
+                  <circle cx="3.8" cy="16.8" r="1"/>
+                  <circle cx="8" cy="16.8" r="1"/>
+                  <circle cx="12.2" cy="16.8" r="1"/>
+                </g>
+              </g>
+            </svg>
+            <span>English</span>
+          </button>
+          
+          <button type="button" class="nq-lang-btn" id="btnLangUr" data-lang="ur" role="radio" aria-checked="false" title="اردو (Pakistan)">
+            <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+              <clipPath id="pkRound"><circle cx="18" cy="18" r="18"/></clipPath>
+              <g clip-path="url(#pkRound)">
+                <rect width="36" height="36" fill="#01411C"/>
+                <rect width="9" height="36" fill="#FFFFFF"/>
+                <path d="M24.5 13.5 a8 8 0 1 0 2.2 11.2 a7 7 0 1 1 -4.4 -11.8 z" fill="#FFFFFF"/>
+                <polygon points="26.5,12 27.4,14 29.5,14.3 27.9,15.7 28.4,17.8 26.5,16.6 24.6,17.8 25.1,15.7 23.5,14.3 25.6,14" fill="#FFFFFF"/>
+              </g>
+            </svg>
+            <span style="font-family:'Noto Naskh Arabic',serif;font-size:0.95rem">اردو</span>
+          </button>
+
+          <button type="button" class="nq-lang-btn" id="btnLangNo" data-lang="no" role="radio" aria-checked="false" title="Norsk (Norge)">
+            <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+              <clipPath id="noRound"><circle cx="18" cy="18" r="18"/></clipPath>
+              <g clip-path="url(#noRound)">
+                <rect width="36" height="36" fill="#BA0C2F"/>
+                <rect x="10" y="0" width="7" height="36" fill="#FFFFFF"/>
+                <rect x="0" y="14.5" width="36" height="7" fill="#FFFFFF"/>
+                <rect x="11.75" y="0" width="3.5" height="36" fill="#00205B"/>
+                <rect x="0" y="16.25" width="36" height="3.5" fill="#00205B"/>
+              </g>
+            </svg>
+            <span>Norsk</span>
+          </button>
+        </div>
+      </div>
+
       <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.2 (updated 2026-08-22 06:35)</div>
     </div>
   </div>
@@ -815,138 +888,356 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
 
 <script>
 /* =====================================================================
-   0. UTILITIES
+   0. MULTILINGUAL DICTIONARIES & UTILITIES
 ===================================================================== */
 const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 let UID=0;
+let LANG = localStorage.getItem('nq-rootwords-lang') || 'en';
+
+const I18N_UI = {
+  en: {
+    title: "شَجَرَةُ الجُذُور · The Root Tree — Quranic Arabic Root Words",
+    home: "Home",
+    nav: ['Why Roots','Anatomy','Root Tree','Find the Root','Patterns','Ayah X-Ray','Traps','Benefits','For Teachers','Quiz'],
+    heroKicker: 'Quranic Arabic · Morphology for Teens',
+    heroHead: 'One root. A whole tree of words.',
+    heroLead: 'Arabic is not a pile of separate words — it is a <b>forest of trees</b>. Three letters go into the soil, and dozens of words grow out of them. Learn the root, and the Qur\'ān starts opening itself to you, page after page.',
+    heroAyah: '“…like a good tree: its <b>root</b> (أَصْل) is firm and its <b>branch</b> (فَرْع) is in the sky.” <span class="mut">— Ibrāhīm 14:24</span>',
+    heroBtn1: '🌱 Grow a root tree',
+    heroBtn2: '🔍 Test yourself',
+    heroTip: 'Tip: the glowing leaves on the tree are real Qur\'ānic words — hover them.',
+    whyKicker: 'The Big Idea',
+    whyHead: 'Stop memorising words.<br><span class="grad">Start planting roots.</span>',
+    whyLead: 'A <b class="ar">جَذْر</b> (root) is normally <b>three consonants</b> carrying one core idea. Arabic then pours those three letters into fixed moulds called <b class="ar">أَوْزَان</b> (patterns) to make verbs, doers, places, tools and qualities. That is why Arabic feels <em>infinite</em> yet is completely <em>predictable</em>.',
+    whyCards: [
+      { badge: 'The Multiplier', title: '1 root ➜ 10–30 words', desc: 'From <b class="ar">ك ت ب</b> (writing) you instantly own: كَتَبَ · كِتَاب · كُتُب · كَاتِب · مَكْتُوب · مَكْتَب · مَكْتَبَة · مُكَاتَبَة. One deposit, endless withdrawals.' },
+      { badge: 'The Shortcut', title: 'Roots are the 80/20 of the Qur\'ān', desc: 'Roughly <b>300–500 high-frequency roots</b> cover about <b>80%</b> of the words of the Qur\'ān. That is a realistic target for one school year.' },
+      { badge: 'The Depth', title: 'Roots carry hidden imagery', desc: '<b class="ar">رَحْمَة</b> (mercy) shares its root with <b class="ar">رَحِم</b> (womb) — mercy that <em>wraps and nourishes</em>. Suddenly translation is not enough; you <em>feel</em> the word.' }
+    ],
+    stats: ['words in the Qur\'ān', 'unique word-forms', 'distinct roots in the Qur\'ān', 'of the text from ~300–500 roots'],
+    anatomyKicker: 'Anatomy · تَشْرِيحُ الشَّجَرَة',
+    anatomyHead: 'Every Arabic word is a <span class="grad">tree with parts</span>',
+    anatomyLead: 'Arabic grammarians literally use tree language: <b class="ar">أَصْل</b> (root/origin), <b class="ar">فَرْع</b> (branch), <b class="ar">اِشْتِقَاق</b> (derivation — from “splitting off”). Tap the glowing numbers on the tree.',
+    boardSketchTitle: "Teacher's board sketch",
+    boardSketchText: "Draw this exact tree on the whiteboard once, and reuse it all year: <b>3 letters in the soil → trunk = core meaning → branches = patterns → leaves = words → fruit = tadabbur & action.</b>",
+    explorerKicker: 'Interactive · المُسْتَكْشِف',
+    explorerHead: 'The Root Tree <span class="grad">Explorer</span>',
+    explorerLead: "Pick a seed. Watch its root system push into the soil and its branches climb. Every <b>bright leaf is a real Qur'ānic word</b> from that root — hover or tap it. Press <b>Regrow</b> and the tree grows differently every single time, like real trees do.",
+    regrowBtn: '🌿 Regrow this tree',
+    surpriseBtn: '🎲 Surprise me',
+    leafLabel: 'Leaves: <b id="leafCount">0</b> Qur\'ānic words on this tree',
+    rootFreqLabel: 'Approx. occurrences in the Qur\'ān',
+    peelKicker: 'Find the Root · اسْتِخْرَاجُ الجَذْر',
+    peelHead: 'The Peeling Lab:<br><span class="grad">strip the prefixes & suffixes</span>',
+    peelLead: 'Qur\'ānic words look long and intimidating because Arabic glues pronouns, conjunctions and prepositions directly onto the root. Peel them off one by one.',
+    peelNextBtn: 'Peel next piece →',
+    peelResetBtn: '↺ Reset word',
+    patternsKicker: 'Patterns & Mīzān · الأَوْزَانُ الصَّرْفِيَّة',
+    patternsHead: 'The <span class="grad">Mīzān Machine</span>',
+    patternsLead: 'Arabic uses the template <b class="ar">ف–ع–ل</b> as a scale (مِيزَان). Change the vowels, insert letters, and watch how the meaning transforms.',
+    xrayKicker: 'Ayah X-Ray · تَشْرِيحُ الآيَة',
+    xrayHead: 'See the roots <span class="grad">inside one āyah</span>',
+    xrayLead: 'Surah Ibrāhīm 14:24 — the verse of the good tree. Tap every word to reveal its 3-letter root and its family of siblings.',
+    trapsKicker: 'Warning · مَزَالِقُ الجُذُور',
+    trapsHead: 'Four traps that fool <span class="grad">every beginner</span>',
+    trapsLead: 'Teach these early. They turn “I can\'t find the root” into “ah, it\'s a weak root”.',
+    benefitsKicker: 'Benefits · فَوَائِدُ الجُذُور',
+    benefitsHead: 'What your students actually <span class="grad">gain</span>',
+    benefitsLead: 'Nine outcomes you can promise them — and measure.',
+    teachKicker: 'For the Teacher · حَقِيبَةُ المُعَلِّم',
+    teachHead: 'Your <span class="grad">classroom toolkit</span>',
+    teachLead: 'Eight activities that work with teenagers, a ready 45-minute lesson shape, and a printable Seed Bank page.',
+    quizKicker: 'Challenge · المُحَقِّقُ اللُّغَوِيّ',
+    quizHead: 'Root Detective:<br><span class="grad">grow your own tree</span>',
+    quizLead: 'Ten words. Strip each one down and choose the correct root. Every correct answer makes a leaf appear on your sapling.'
+  },
+  ur: {
+    title: "شَجَرَةُ الجُذُور · شجرۂ الجذر — قرآنی عربی الفاظ کے بنیادی جذور",
+    home: "مرکز",
+    nav: ['جذور کیوں؟','ساخت','شجرۂ الجذر','جذر تلاش کریں','اوزان','آیت ایکسرے','مغالطے','فوائد','اساتذہ کیلئے','کوئز'],
+    heroKicker: 'قرآنی عربی · علم الصرف اور فہمِ قرآن',
+    heroHead: 'ایک جذر۔ الفاظ کا پورا درخت۔',
+    heroLead: 'عربی زبان الگ تھلگ الفاظ کا ڈھیر نہیں بلکہ <b>درختوں کا ایک گھنا جنگل</b> ہے۔ تین حروف مٹی میں بوئے جاتے ہیں اور ان سے درجنوں بامعنی الفاظ پھوٹتے ہیں۔ ایک بار جذر کو سمجھ لیجیے، قرآن کے معانی کے در آپ پر کھلتے چلے جائیں گے۔',
+    heroAyah: '“…ایک پاکیزہ درخت کی طرح: اس کی <b>جڑ</b> (أَصْل) مضبوط ہے اور اس کی <b>شاخیں</b> (فَرْع) آسمان میں ہیں۔” <span class="mut">— سورۃ ابراہیم 14:24</span>',
+    heroBtn1: '🌱 درخت اگائیں',
+    heroBtn2: '🔍 خود کو آزمائیں',
+    heroTip: 'رہنمائی: درخت پر چمکتے ہوئے پتے قرآن مجید کے حقیقی الفاظ ہیں — ان پر کلک کریں۔',
+    whyKicker: 'بنیادی تصور',
+    whyHead: 'الفاظ رٹنا بند کریں۔<br><span class="grad">جڑوں کو بونا شروع کریں۔</span>',
+    whyLead: 'ایک <b class="ar">جَذْر</b> (روٹ) عام طور پر <b>تین حروف</b> پر مشتمل ہوتا ہے جو ایک بنیادی معنی رکھتے ہیں۔ پھر عربی زبان ان تین حروف کو مخصوص سانچوں یعنی <b class="ar">أَوْزَان</b> میں ڈھال کر افعال، اسمِ فاعل، اسمِ مفعول، اسمِ ظرف اور صفات بناتی ہے۔ اسی لیے عربی بیک وقت <em>لامحدود</em> بھی ہے اور <em>مکمل طور پر منظم</em> بھی۔',
+    whyCards: [
+      { badge: 'الفاظ کا اضافہ', title: '1 جذر ➜ 10 سے 30 الفاظ', desc: 'صرف <b class="ar">ك ت ب</b> (لکھنا) جان کر آپ بیک وقت حاصل کرتے ہیں: كَتَبَ · كِتَاب · كُتُب · كَاتِب · مَكْتُوب · مَكْتَب · مَكْتَبَة۔ ایک بیج لگائیں، پھلوں کی بہار پائیں۔' },
+      { badge: 'سب سے آسان راستہ', title: 'جذور قرآن کا 80/20 فارمولا ہیں', desc: 'صرف <b>300 سے 500 عام استعمال ہونے والے جذور</b> قرآن مجید کے تقریباً <b>80% الفاظ</b> کا احاطہ کر لیتے ہیں۔ یہ ایک تعلیمی سال کا انتہائی آسان اور قابلِ حصول ہدف ہے۔' },
+      { badge: 'معنوی گہرائی', title: 'جذور میں چھپی خوبصورت تمثیلیں', desc: '<b class="ar">رَحْمَة</b> (رحمت) کا وہی جذر ہے جو <b class="ar">رَحِم</b> (ماں کی کوکھ) کا ہے — ایسی رحمت جو <em>ہر طرف سے لپیٹ لے اور پرورش کرے</em>۔ اب لفظ محض ترجمہ نہیں رہتا بلکہ دل میں اتر جاتا ہے۔' }
+    ],
+    stats: ['قرآن مجید کے کل الفاظ', 'منفرد لغوی اشکال', 'قرآن کے کل مختلف جذور', 'متن کا 80% حصہ صرف 300-500 جذور سے'],
+    anatomyKicker: 'ساخت · تَشْرِيحُ الشَّجَرَة',
+    anatomyHead: 'ہر عربی لفظ ایک <span class="grad">مکمل درخت</span> ہے',
+    anatomyLead: 'عربی نحوی و صرفی ائمہ دراصل درخت ہی کی اصطلاحات استعمال کرتے ہیں: <b class="ar">أَصْل</b> (جڑ/بنیاد)، <b class="ar">فَرْع</b> (شاخ)، <b class="ar">اِشْتِقَاق</b> (شاخوں کا پھوٹنا)۔ درخت پر چمکتے ہوئے نمبروں پر کلک کریں۔',
+    boardSketchTitle: 'اساتذہ کیلئے خاکہ',
+    boardSketchText: 'وائٹ بورڈ پر یہ درخت ایک بار بنائیے اور سال بھر استعمال کیجیے: <b>مٹی میں 3 حروف → تنا = بنیادی معنی → شاخیں = اوزان → پتے = الفاظ → پھل = تدبر اور عمل۔</b>',
+    explorerKicker: 'انٹرایکٹو ایکسپلورر · المُسْتَكْشِف',
+    explorerHead: 'شجرۂ الجذر <span class="grad">ایکسپلورر</span>',
+    explorerLead: 'کوئی بھی بیج چنیے۔ دیکھیے کس طرح اس کی جڑیں مٹی میں اترتی ہیں اور شاخیں بلندی کو چھوتی ہیں۔ ہر <b>چمکتا ہوا پتہ قرآن کریم کا ایک حقیقی لفظ</b> ہے — اس پر کلک کیجیے۔',
+    regrowBtn: '🌿 دوبارہ اگائیں',
+    surpriseBtn: '🎲 اگلا جذر',
+    leafLabel: 'پتے: اس درخت پر <b id="leafCount">0</b> قرآنی الفاظ',
+    rootFreqLabel: 'قرآن کریم میں تقریبی تکرار',
+    peelKicker: 'جذر تلاش کریں · اسْتِخْرَاجُ الجَذْر',
+    peelHead: 'پیئلنگ لیب:<br><span class="grad">سابقے اور لاحقے الگ کیجیے</span>',
+    peelLead: 'قرآنی الفاظ اس لیے لمبے لگتے ہیں کیونکہ عربی میں ضمائر، حروفِ عطف اور حروفِ جار اصل لفظ کے ساتھ جڑے ہوتے ہیں۔ ان سب کو ایک ایک کر کے ہٹائیے۔',
+    peelNextBtn: 'اگلا ٹکڑا ہٹائیں →',
+    peelResetBtn: '↺ لفظ دوبارہ لائیں',
+    patternsKicker: 'اوزان اور میزان · الأَوْزَانُ الصَّرْفِيَّة',
+    patternsHead: 'میزان مشین <span class="grad">صرفی ترازو</span>',
+    patternsLead: 'عربی زبان <b class="ar">ف–ع–ل</b> کے سانچے کو ترازو (مِيزَان) کے طور پر استعمال کرتی ہے۔ حرکات بدلیں، حروف بڑھائیں اور دیکھیں معنی کیسے نکھرتا ہے۔',
+    xrayKicker: 'آیت ایکسرے · تَشْرِيحُ الآيَة',
+    xrayHead: 'ایک ہی آیت میں <span class="grad">جذور کا مشاہدہ</span>',
+    xrayLead: 'سورۃ ابراہیم 14:24 — شجرۂ طیبہ کی آیت۔ ہر لفظ پر کلک کر کے اس کے 3 حروفِ اصلیہ اور اس کے خاندان کے دیگر قرآنی الفاظ دیکھیے۔',
+    trapsKicker: 'تنبیہ · مَزَالِقُ الجُذُور',
+    trapsHead: 'چار مغالطے جو <span class="grad">ہر مبتدی کو دھوکہ دیتے ہیں</span>',
+    trapsLead: 'طلبہ کو یہ ابتدا میں ہی سکھا دیجیے تاکہ وہ کبھی کمزور یا مشدد حروف میں الجھن کا شکار نہ ہوں۔',
+    benefitsKicker: 'فوائد · فَوَائِدُ الجُذُور',
+    benefitsHead: 'طلبہ اس سے <span class="grad">کیا حاصل کرتے ہیں</span>',
+    benefitsLead: 'نو ٹھوس فوائد جن کا آپ وعدہ کر سکتے ہیں اور پیمائش بھی۔',
+    teachKicker: 'اساتذہ کا کٹ · حَقِيبَةُ المُعَلِّم',
+    teachHead: 'کلاس روم کیلئے <span class="grad">عملی ٹول کٹ</span>',
+    teachLead: 'نوجوانوں کے لیے آٹھ دلچسپ سرگرمیاں، 45 منٹ کے سبق کا مکمل خاکہ، اور پرنٹ کے قابل ورک شیٹ۔',
+    quizKicker: 'چیلنج کوئز · المُحَقِّقُ اللُّغَوِيّ',
+    quizHead: 'جذر کے جاسوس:<br><span class="grad">اپنا پودا اگائیں</span>',
+    quizLead: 'دس الفاظ۔ ہر لفظ کے زائد حروف اتاریں اور درست جذر منتخب کریں۔ ہر صحیح جواب پر آپ کے پودے پر ایک نیا پتہ کھل اٹھے گا۔'
+  },
+  no: {
+    title: "شَجَرَةُ الجُذُور · The Root Tree — Koransk arabiske rotord",
+    home: "Hjem",
+    nav: ['Hvorfor røtter','Anatomi','Rottre','Finn roten','Mønstre','Ayah Røntgen','Feller','Fordeler','For lærere','Quiz'],
+    heroKicker: 'Koran-arabisk · Morfologi for ungdom og studenter',
+    heroHead: 'Én rot. Et helt tre av ord.',
+    heroLead: 'Arabisk er ikke en samling løse ord – det er en <b>skog av trær</b>. Tre konsonanter plantes i jorden, og dusinvis av ord vokser ut av dem. Lær roten, og Koranen begynner å åpne seg for deg, side for side.',
+    heroAyah: '“…som et godt tre: dets <b>rot</b> (أَصْل) står støtt og dets <b>gren</b> (فَرْع) er i himmelen.” <span class="mut">— Ibrahim 14:24</span>',
+    heroBtn1: '🌱 Dyrk et rottre',
+    heroBtn2: '🔍 Test deg selv',
+    heroTip: 'Tips: De glødende bladene på treet er virkelige koranske ord – hold pekeren over dem.',
+    whyKicker: 'Hovedideen',
+    whyHead: 'Slutt å pugge enkeltord.<br><span class="grad">Begynn å plante røtter.</span>',
+    whyLead: 'En <b class="ar">جَذْر</b> (rot) består normalt av <b>tre konsonanter</b> som bærer én kjerneidé. Arabisk støper deretter disse tre bokstavene i faste former kalt <b class="ar">أَوْزَان</b> (mønstre) for å danne verb, handlende, steder, verktøy og egenskaper. Derfor føles arabisk <em>uendelig</em> men er likevel helt <em>forutsigbart</em>.',
+    whyCards: [
+      { badge: 'Multiplikatoren', title: '1 rot ➜ 10–30 ord', desc: 'Fra <b class="ar">ك ت ب</b> (skriving) forstår du straks: كَتَبَ · كِتَاب · كُتُب · كَاتِب · مَكْتُوب · مَكْتَب · مَكْتَبَة · مُكَاتَبَة. Én investering, uendelig utbytte.' },
+      { badge: 'Snarveien', title: 'Røtter er Koranens 80/20-regel', desc: 'Omtrent <b>300–500 høyfrekvente røtter</b> dekker rundt <b>80%</b> av ordene i Koranen. Dette er et realistisk mål for ett skoleår.' },
+      { badge: 'Dybden', title: 'Røtter bærer levende metaforer', desc: '<b class="ar">رَحْمَة</b> (barmhjertighet) deler rot med <b class="ar">رَحِم</b> (livmor) – en nåde som <em>omfavner og nærer</em>. Oversettelsen er ikke lenger bare ord; du <em>føler</em> betydningen.' }
+    ],
+    stats: ['ord i Koranen', 'unike ordformer', 'ulike røtter i Koranen', 'av teksten fra ~300–500 røtter'],
+    anatomyKicker: 'Anatomi · تَشْرِيحُ الشَّجَرَة',
+    anatomyHead: 'Hvert arabisk ord er et <span class="grad">tre med deler</span>',
+    anatomyLead: 'Arabiske grammatikere bruker bokstavelig talt tre-språk: <b class="ar">أَصْل</b> (rot/opprinnelse), <b class="ar">فَرْع</b> (gren), <b class="ar">اِشْتِقَاق</b> (avledning). Trykk på de lysende tallene på treet.',
+    boardSketchTitle: 'Lærerens tavleskisse',
+    boardSketchText: 'Tegn dette treet på tavlen én gang, og gjenbruk det hele året: <b>3 bokstaver i jorden → stamme = kjerneidé → grener = mønstre → blader = ord → frukt = tadabbur og handling.</b>',
+    explorerKicker: 'Interaktiv · المُسْتَكْشِف',
+    explorerHead: 'Rottre-<span class="grad">utforskeren</span>',
+    explorerLead: 'Velg et frø. Se rotsystemet trenge ned i jorden og grenene vokse opp. Hvert <b>lysende blad er et ekte koransk ord</b> – pek eller trykk på det.',
+    regrowBtn: '🌿 Dyrk på nytt',
+    surpriseBtn: '🎲 Tilfeldig rot',
+    leafLabel: 'Blader: <b id="leafCount">0</b> koranske ord på dette treet',
+    rootFreqLabel: 'Omtrentlige forekomster i Koranen',
+    peelKicker: 'Finn roten · اسْتِخْرَاجُ الجَذْر',
+    peelHead: 'Skrelle-laboratoriet:<br><span class="grad">fjern forstavelser og endelser</span>',
+    peelLead: 'Koranske ord kan virke lange fordi arabisk fester pronomen, bindeord og preposisjoner direkte på roten. Skrell dem av bit for bit.',
+    peelNextBtn: 'Skrell neste del →',
+    peelResetBtn: '↺ Tilbakestill ord',
+    patternsKicker: 'Mønstre & Vekt · الأَوْزَانُ الصَّرْفِيَّة',
+    patternsHead: 'Mīzān-<span class="grad">maskinen</span>',
+    patternsLead: 'Arabisk bruker malen <b class="ar">ف–ع–ل</b> som en vekt (مِيزَان). Endre vokalene og tilfør bokstaver for å se hvordan betydningen formes.',
+    xrayKicker: 'Ayah Røntgen · تَشْرِيحُ الآيَة',
+    xrayHead: 'Se røttene <span class="grad">i ett vers</span>',
+    xrayLead: 'Surah Ibrahim 14:24 – verset om det gode treet. Trykk på hvert ord for å avdekke dets 3-bokstavers rot og ordets søsken.',
+    trapsKicker: 'Advarsel · مَزَالِقُ الجُذُور',
+    trapsHead: 'Fire feller som lurer <span class="grad">nybegynnere</span>',
+    trapsLead: 'Lær disse tidlig for å forstå svake og doblede røtter.',
+    benefitsKicker: 'Fordeler · فَوَائِدُ الجُذُور',
+    benefitsHead: 'Hva elevene dine faktisk <span class="grad">oppnår</span>',
+    benefitsLead: 'Ni målbare læringsutbytter.',
+    teachKicker: 'For læreren · حَقِيبَةُ المُعَلِّم',
+    teachHead: 'Verktøykasse for <span class="grad">klasserommet</span>',
+    teachLead: 'Åtte aktiviteter for ungdom, et ferdig 45-minutters leksjonsopplegg og utskriftsvennlig oppgaveark.',
+    quizKicker: 'Utfordring · المُحَقِّقُ اللُّغَوِيّ',
+    quizHead: 'Rotdetektiven:<br><span class="grad">dyrk ditt eget tre</span>',
+    quizLead: 'Ti ord. Skrell av tilleggene og velg riktig rot. Hvert riktige svar får et nytt blad til å spire på treet ditt.'
+  }
+};
 
 /* =====================================================================
-   1. ROOT DATA  (Qur'ānic words, simplified glosses for teens)
+   1. ROOT DATA  (Qur'ānic words, multilingual glosses)
 ===================================================================== */
 const ROOTS=[
 {id:'ktb',letters:'ك ت ب',tr:'k–t–b',hue:196,accent:'#69c8ff',freq:319,
- core:'writing · recording · decreeing',
- soil:'Making a lasting mark so it can be read later — from ink on a page to a decree written by Allah.',
+ core_en:'writing · recording · decreeing',
+ core_ur:'لکھنا · ریکارڈ کرنا · فیصلہ کرنا',
+ core_no:'å skrive · nedtegne · fastsette',
+ soil_en:'Making a lasting mark so it can be read later — from ink on a page to a decree written by Allah.',
+ soil_ur:'ایسا دیرپا نشان لگانا جسے بعد میں پڑھا جا سکے — صفحے پر سیاہی سے لے کر اللہ کے فیصلے تک۔',
+ soil_no:'Å sette et varig merke som kan leses senere – fra blekk på en side til en guddommelig bestemmelse.',
  words:[
- {ar:'كَتَبَ',tr:'kataba',en:'he wrote / he decreed',form:'فَعَلَ · Form I verb',ref:'2:183',q:'كُتِبَ عَلَيْكُمُ الصِّيَامُ',qen:'“Fasting has been written (prescribed) upon you.”'},
- {ar:'كِتَاب',tr:'kitāb',en:'book, scripture, record',form:'فِعَال · noun',ref:'2:2',q:'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ',qen:'“This is the Book, in which there is no doubt.”'},
- {ar:'كَاتِب',tr:'kātib',en:'writer, scribe',form:'فَاعِل · the doer',ref:'2:282',q:'وَلْيَكْتُبْ بَيْنَكُمْ كَاتِبٌ بِالْعَدْلِ',qen:'“Let a scribe write it between you in justice.”'},
- {ar:'مَكْتُوب',tr:'maktūb',en:'written, inscribed',form:'مَفْعُول · the done-to',ref:'7:157',q:'يَجِدُونَهُ مَكْتُوبًا عِندَهُمْ',qen:'“…whom they find written with them.”'},
- {ar:'كُتُب',tr:'kutub',en:'books (plural)',form:'فُعُل · broken plural',ref:'2:285',q:'وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ',qen:'“…His angels, His Books and His Messengers.”'},
- {ar:'مَكْتَب',tr:'maktab',en:'desk, office — a place of writing',form:'مَفْعَل · place',ref:'Modern Arabic',tag:'modern'},
- {ar:'مَكْتَبَة',tr:'maktabah',en:'library, bookshop',form:'مَفْعَلَة · place',ref:'Modern Arabic',tag:'modern'}]},
+ {ar:'كَتَبَ',tr:'kataba',en:'he wrote / he decreed',ur:'اس نے لکھا / فیصلہ کیا',no:'han skrev / han bestemte',form:'فَعَلَ · Form I verb',ref:'2:183',q:'كُتِبَ عَلَيْكُمُ الصِّيَامُ',qen:'“Fasting has been written (prescribed) upon you.”',qur:'“تم پر روزے فرض (لکھے) کیے گئے ہیں۔”',qno:'“Fasten er foreskrevet for dere.”'},
+ {ar:'كِتَاب',tr:'kitāb',en:'book, scripture, record',ur:'کتاب، صحیفہ، دستاویز',no:'bok, skrift, opptegnelse',form:'فِعَال · noun',ref:'2:2',q:'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ',qen:'“This is the Book, in which there is no doubt.”',qur:'“یہ وہ کتاب ہے جس میں کوئی شک نہیں۔”',qno:'“Dette er Boken, hvori det ikke er tvil.”'},
+ {ar:'كَاتِب',tr:'kātib',en:'writer, scribe',ur:'لکھنے والا، کاتب',no:'skriver, forfatter',form:'فَاعِل · the doer',ref:'2:282',q:'وَلْيَكْتُبْ بَيْنَكُمْ كَاتِبٌ بِالْعَدْلِ',qen:'“Let a scribe write it between you in justice.”',qur:'“اور چاہیے کہ لکھنے والا تمہارے درمیان انصاف سے لکھے۔”',qno:'“La en skriver skrive det ned med rettferdighet.”'},
+ {ar:'مَكْتُوب',tr:'maktūb',en:'written, inscribed',ur:'لکھا ہوا، مکتوب',no:'skrevet, nedtegnet',form:'مَفْعُول · the done-to',ref:'7:157',q:'يَجِدُونَهُ مَكْتُوبًا عِندَهُمْ',qen:'“…whom they find written with them.”',qur:'“…جسے وہ اپنے پاس لکھا ہوا پاتے ہیں۔”',qno:'“…som de finner skrevet hos seg.”'},
+ {ar:'كُتُب',tr:'kutub',en:'books (plural)',ur:'کتابیں (جمع)',no:'bøker (flertall)',form:'فُعُل · broken plural',ref:'2:285',q:'وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ',qen:'“…His angels, His Books and His Messengers.”',qur:'“…اس کے فرشتے، اس کی کتابیں اور اس کے رسول۔”',qno:'“…Hans engler, Bøker og sendebud.”'},
+ {ar:'مَكْتَب',tr:'maktab',en:'desk, office — a place of writing',ur:'دفتر، میز (لکھنے کی جگہ)',no:'kontor, skrivebord (skrivested)',form:'مَفْعَل · place',ref:'Modern Arabic',tag:'modern'},
+ {ar:'مَكْتَبَة',tr:'maktabah',en:'library, bookshop',ur:'کتب خانہ، لائبریری',no:'bibliotek, bokhandel',form:'مَفْعَلَة · place',ref:'Modern Arabic',tag:'modern'}]},
 
 {id:'ilm',letters:'ع ل م',tr:'ʿ–l–m',hue:45,accent:'#f5bf5f',freq:854,
- core:'knowing · the marks that lead to knowledge',
- soil:'A عَلَامَة is a signpost. Knowledge is following the signs until you truly know.',
+ core_en:'knowing · the marks that lead to knowledge',
+ core_ur:'جاننا · وہ نشانات جو علم تک لے جائیں',
+ core_no:'å vite · tegnene som leder til kunnskap',
+ soil_en:'A عَلَامَة is a signpost. Knowledge is following the signs until you truly know.',
+ soil_ur:'عَلَامَة رہنمائی کا نشان ہے۔ علم نشانات کی پیروی کرنا ہے یہاں تک کہ آپ حقیقت جان لیں۔',
+ soil_no:'Et عَلَامَة er et veimerke. Kunnskap er å følge tegnene til man virkelig forstår.',
  words:[
- {ar:'عَلِمَ',tr:'ʿalima',en:'he knew',form:'فَعَلَ · Form I',ref:'2:187',q:'عَلِمَ اللَّهُ أَنَّكُمْ',qen:'“Allah knew that you…”'},
- {ar:'عِلْم',tr:'ʿilm',en:'knowledge',form:'فِعْل · abstract noun',ref:'2:32',q:'لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا',qen:'“We have no knowledge except what You taught us.”'},
- {ar:'عَلَّمَ',tr:'ʿallama',en:'he taught (made someone know)',form:'فَعَّلَ · Form II',ref:'55:2',q:'عَلَّمَ الْقُرْآنَ',qen:'“He taught the Qur’ān.”'},
- {ar:'عُلَمَاء',tr:'ʿulamāʾ',en:'scholars, those who know',form:'فَاعِل → plural',ref:'35:28',q:'إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ',qen:'“Only the scholars truly fear Allah.”'},
- {ar:'عَلِيم',tr:'ʿalīm',en:'All-Knowing (deep, lasting knowledge)',form:'فَعِيل · quality',ref:'2:32',q:'إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ',qen:'“You are the All-Knowing, the All-Wise.”'},
- {ar:'مَعْلُوم',tr:'maʿlūm',en:'known, appointed',form:'مَفْعُول',ref:'15:38',q:'إِلَى يَوْمِ الْوَقْتِ الْمَعْلُومِ',qen:'“…until the Day of the appointed time.”'},
- {ar:'عَالَمِين',tr:'ʿālamīn',en:'the worlds — all that makes Him known',form:'فَاعَل → plural',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise to Allah, Lord of the worlds.”'},
- {ar:'عَلَامَات',tr:'ʿalāmāt',en:'signposts, landmarks',form:'noun of sign',ref:'16:16',q:'وَعَلَامَاتٍ وَبِالنَّجْمِ هُمْ يَهْتَدُونَ',qen:'“…and landmarks; and by the stars they are guided.”'},
- {ar:'مُعَلِّم',tr:'muʿallim',en:'teacher',form:'مُفَعِّل · doer of II',ref:'classical / modern',tag:'modern'}]},
+ {ar:'عَلِمَ',tr:'ʿalima',en:'he knew',ur:'اس نے جانا',no:'han visste',form:'فَعَلَ · Form I',ref:'2:187',q:'عَلِمَ اللَّهُ أَنَّكُمْ',qen:'“Allah knew that you…”',qur:'“اللہ نے جان لیا کہ تم…”',qno:'“Allah visste at dere…”'},
+ {ar:'عِلْم',tr:'ʿilm',en:'knowledge',ur:'علم، فہم',no:'kunnskap',form:'فِعْل · abstract noun',ref:'2:32',q:'لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا',qen:'“We have no knowledge except what You taught us.”',qur:'“ہمیں کوئی علم نہیں سوائے اس کے جو تو نے سکھایا۔”',qno:'“Vi har ingen kunnskap utenom det Du har lært oss.”'},
+ {ar:'عَلَّمَ',tr:'ʿallama',en:'he taught (made someone know)',ur:'اس نے سکھایا (دوسرے کو علم دیا)',no:'han lærte bort',form:'فَعَّلَ · Form II',ref:'55:2',q:'عَلَّمَ الْقُرْآنَ',qen:'“He taught the Qur’ān.”',qur:'“اس نے قرآن سکھایا۔”',qno:'“Han lærte bort Koranen.”'},
+ {ar:'عُلَمَاء',tr:'ʿulamāʾ',en:'scholars, those who know',ur:'علماء، جاننے والے',no:'lærde, de som vet',form:'فَاعِل → plural',ref:'35:28',q:'إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ',qen:'“Only the scholars truly fear Allah.”',qur:'“اللہ سے اس کے بندوں میں سے صرف علماء ہی ڈرتے ہیں۔”',qno:'“Kun de lærde blant Hans tjenere frykter Allah.”'},
+ {ar:'عَلِيم',tr:'ʿalīm',en:'All-Knowing (deep, lasting knowledge)',ur:'سب کچھ جاننے والا (ہمیشہ کا مکمل علم)',no:'Den Allvitende',form:'فَعِيل · quality',ref:'2:32',q:'إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ',qen:'“You are the All-Knowing, the All-Wise.”',qur:'“بے شک تو ہی سب جاننے والا، حکمت والا ہے۔”',qno:'“Du er Den Allvitende, Den Allvise.”'},
+ {ar:'مَعْلُوم',tr:'maʿlūm',en:'known, appointed',ur:'معلوم، مقرر شدہ',no:'kjent, fastsatt',form:'مَفْعُول',ref:'15:38',q:'إِلَى يَوْمِ الْوَقْتِ الْمَعْلُومِ',qen:'“…until the Day of the appointed time.”',qur:'“…معلوم وقت کے دن تک۔”',qno:'“…til den fastsatte tids dag.”'},
+ {ar:'عَالَمِين',tr:'ʿālamīn',en:'the worlds — all that makes Him known',ur:'تمام جہان — وہ سب جو اللہ کا پتہ دیتے ہیں',no:'verdenene – alt som gjør Ham kjent',form:'فَاعَل → plural',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise to Allah, Lord of the worlds.”',qur:'“تمام تعریفیں اللہ کے لیے ہیں جو تمام جہانوں کا رب ہے۔”',qno:'“All lovprisning tilhører Allah, Herren over alle verdener.”'},
+ {ar:'عَلَامَات',tr:'ʿalāmāt',en:'signposts, landmarks',ur:'نشانات، راستے کے علامات',no:'veimerker, landemerker',form:'noun of sign',ref:'16:16',q:'وَعَلَامَاتٍ وَبِالنَّجْمِ هُمْ يَهْتَدُونَ',qen:'“…and landmarks; and by the stars they are guided.”',qur:'“…اور نشانات؛ اور ستاروں سے وہ رہنمائی پاتے ہیں۔”',qno:'“…og landemerker; og ved stjernene veiledes de.”'},
+ {ar:'مُعَلِّم',tr:'muʿallim',en:'teacher',ur:'استاد، سکھانے والا',no:'lærer',form:'مُفَعِّل · doer of II',ref:'classical / modern',tag:'modern'}]},
 
 {id:'rhm',letters:'ر ح م',hue:345,tr:'r–ḥ–m',accent:'#ff9db3',freq:339,
- core:'mercy that wraps and nourishes',
- soil:'Same root as رَحِم, the womb: total protection, feeding, warmth — given before it is ever asked for.',
+ core_en:'mercy that wraps and nourishes',
+ core_ur:'رحمت جو لپیٹ میں لے اور پرورش کرے',
+ core_no:'barmhjertighet som omfavner og nærer',
+ soil_en:'Same root as رَحِم, the womb: total protection, feeding, warmth — given before it is ever asked for.',
+ soil_ur:'رَحِم (ماں کی کوکھ) کا بھی یہی جذر ہے: مکمل حفاظت، غذا، اور گرم جوشی — مانگے بغیر عطا کی گئی رحمت۔',
+ soil_no:'Samme rot som رَحِم (livmor): total beskyttelse, næring, varme – gitt før det noensinne bes om.',
  words:[
- {ar:'رَحْمَة',tr:'raḥmah',en:'mercy',form:'فَعْلَة · noun',ref:'7:156',q:'وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ',qen:'“My mercy encompasses all things.”'},
- {ar:'الرَّحْمَٰن',tr:'ar-Raḥmān',en:'The Most Merciful — overflowing, to all',form:'فَعْلَان · intensity',ref:'1:1',q:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',qen:'“In the name of Allah, the Most Merciful…”'},
- {ar:'الرَّحِيم',tr:'ar-Raḥīm',en:'The Ever-Merciful — constant, to the believers',form:'فَعِيل · permanence',ref:'1:1',q:'الرَّحْمَٰنِ الرَّحِيمِ',qen:'“…the Especially Merciful.”'},
- {ar:'أَرْحَام',tr:'arḥām',en:'wombs, ties of kinship',form:'أَفْعَال · plural',ref:'4:1',q:'وَاتَّقُوا اللَّهَ الَّذِي تَسَاءَلُونَ بِهِ وَالْأَرْحَامَ',qen:'“…and be mindful of family ties.”'},
- {ar:'الرَّاحِمِين',tr:'ar-rāḥimīn',en:'those who show mercy',form:'فَاعِل → plural',ref:'7:151',q:'وَأَنتَ أَرْحَمُ الرَّاحِمِينَ',qen:'“And You are the Most Merciful of the merciful.”'},
- {ar:'مَرْحَمَة',tr:'marḥamah',en:'compassion',form:'مَفْعَلَة',ref:'90:17',q:'وَتَوَاصَوْا بِالْمَرْحَمَةِ',qen:'“…and urged one another to compassion.”'}]},
+ {ar:'رَحْمَة',tr:'raḥmah',en:'mercy',ur:'رحمت',no:'barmhjertighet',form:'فَعْلَة · noun',ref:'7:156',q:'وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ',qen:'“My mercy encompasses all things.”',qur:'“اور میری رحمت ہر چیز کو گھیرے ہوئے ہے۔”',qno:'“Og Min barmhjertighet omfatter alle ting.”'},
+ {ar:'الرَّحْمَٰن',tr:'ar-Raḥmān',en:'The Most Merciful — overflowing, to all',ur:'نہایت مہربان — جوش مارتی عام رحمت',no:'Den Nåderike – overstrømmende barmhjertighet',form:'فَعْلَان · intensity',ref:'1:1',q:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',qen:'“In the name of Allah, the Most Merciful…”',qur:'“اللہ کے نام سے جو نہایت مہربان ہے…”',qno:'“I Allahs navn, Den Nåderike…”'},
+ {ar:'الرَّحِيم',tr:'ar-Raḥīm',en:'The Ever-Merciful — constant, to the believers',ur:'ہمیشہ رحم فرمانے والا — مومنین پر مسلسل رحمت',no:'Den Barmhjertige – uavbrutt til de troende',form:'فَعِيل · permanence',ref:'1:1',q:'الرَّحْمَٰنِ الرَّحِيمِ',qen:'“…the Especially Merciful.”',qur:'“…نہایت رحم فرمانے والا۔”',qno:'“…Den Barmhjertige.”'},
+ {ar:'أَرْحَام',tr:'arḥām',en:'wombs, ties of kinship',ur:'کوکھیں، قرابت داریاں',no:'livmødre, slektsbånd',form:'أَفْعَال · plural',ref:'4:1',q:'وَاتَّقُوا اللَّهَ الَّذِي تَسَاءَلُونَ بِهِ وَالْأَرْحَامَ',qen:'“…and be mindful of family ties.”',qur:'“…اور رشتہ داریوں کے حقوق کا خیال رکھو۔”',qno:'“…og vokt slektsbåndene.”'},
+ {ar:'الرَّاحِمِين',tr:'ar-rāḥimīn',en:'those who show mercy',ur:'رحم کرنے والے',no:'de som viser barmhjertighet',form:'فَاعِل → plural',ref:'7:151',q:'وَأَنتَ أَرْحَمُ الرَّاحِمِينَ',qen:'“And You are the Most Merciful of the merciful.”',qur:'“اور تو سب سے بہتر رحم فرمانے والا ہے۔”',qno:'“Og Du er den mest barmhjertige av de barmhjertige.”'},
+ {ar:'مَرْحَمَة',tr:'marḥamah',en:'compassion',ur:'ہمدردی، شفقت',no:'medfølelse',form:'مَفْعَلَة',ref:'90:17',q:'وَتَوَاصَوْا بِالْمَرْحَمَةِ',qen:'“…and urged one another to compassion.”',qur:'“…اور ایک دوسرے کو رحم کی تلقین کرتے ہیں۔”',qno:'“…og oppfordret til barmhjertighet.”'}]},
 
 {id:'slm',letters:'س ل م',tr:'s–l–m',hue:168,accent:'#58e0c8',freq:140,
- core:'wholeness · soundness · safety',
- soil:'To be free of defect and danger. Islām = handing yourself over whole, and finding safety there.',
+ core_en:'wholeness · soundness · safety',
+ core_ur:'سلامتی · بے عیبی · امن',
+ core_no:'helhet · sunnhet · trygghet',
+ soil_en:'To be free of defect and danger. Islām = handing yourself over whole, and finding safety there.',
+ soil_ur:'عیب اور خطرے سے پاک ہونا۔ اسلام = خود کو مکمل سپرد کر دینا اور امن و سلامتی پانا۔',
+ soil_no:'Å være fri for mangler og fare. Islam = å overgi seg fullstendig, og finne fred der.',
  words:[
- {ar:'سَلَام',tr:'salām',en:'peace, wholeness',form:'فَعَال',ref:'36:58',q:'سَلَامٌ قَوْلًا مِّن رَّبٍّ رَّحِيمٍ',qen:'“Peace — a word from a Merciful Lord.”'},
- {ar:'إِسْلَام',tr:'islām',en:'submitting yourself whole',form:'إِفْعَال · Form IV noun',ref:'3:19',q:'إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ',qen:'“Indeed, the religion with Allah is Islām.”'},
- {ar:'مُسْلِم',tr:'muslim',en:'one who submits',form:'مُفْعِل · doer of IV',ref:'3:67',q:'وَلَٰكِن كَانَ حَنِيفًا مُّسْلِمًا',qen:'“…but he was upright, a Muslim.”'},
- {ar:'أَسْلَمَ',tr:'aslama',en:'he submitted',form:'أَفْعَلَ · Form IV',ref:'2:131',q:'أَسْلَمْتُ لِرَبِّ الْعَالَمِينَ',qen:'“I have submitted to the Lord of the worlds.”'},
- {ar:'سَلِيم',tr:'salīm',en:'sound, unblemished (a heart)',form:'فَعِيل',ref:'26:89',q:'إِلَّا مَنْ أَتَى اللَّهَ بِقَلْبٍ سَلِيمٍ',qen:'“…except one who comes to Allah with a sound heart.”'},
- {ar:'تَسْلِيم',tr:'taslīm',en:'full, willing acceptance',form:'تَفْعِيل · Form II noun',ref:'4:65',q:'وَيُسَلِّمُوا تَسْلِيمًا',qen:'“…and submit with full submission.”'},
- {ar:'سُلَّم',tr:'sullam',en:'a ladder — the safe way up',form:'فُعَّل',ref:'52:38',q:'أَمْ لَهُمْ سُلَّمٌ يَسْتَمِعُونَ فِيهِ',qen:'“Or do they have a ladder by which they listen?”'}]},
+ {ar:'سَلَام',tr:'salām',en:'peace, wholeness',ur:'سلامتی، امن',no:'fred, helhet',form:'فَعَال',ref:'36:58',q:'سَلَامٌ قَوْلًا مِّن رَّبٍّ رَّحِيمٍ',qen:'“Peace — a word from a Merciful Lord.”',qur:'“سلام — نہایت مہربان رب کی طرف سے فرمان۔”',qno:'“Fred – et ord fra en Nåderik Herre.”'},
+ {ar:'إِسْلَام',tr:'islām',en:'submitting yourself whole',ur:'خود کو مکمل سپرد کرنا',no:'å overgi seg fullstendig',form:'إِفْعَال · Form IV noun',ref:'3:19',q:'إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ',qen:'“Indeed, the religion with Allah is Islām.”',qur:'“بے شک اللہ کے نزدیک پسندیدہ دین اسلام ہے۔”',qno:'“Sannelig er religionen hos Allah Islam.”'},
+ {ar:'مُسْلِم',tr:'muslim',en:'one who submits',ur:'فرمانبردار، سر تسلیم خم کرنے والا',no:'en som overgir seg (muslim)',form:'مُفْعِل · doer of IV',ref:'3:67',q:'وَلَٰكِن كَانَ حَنِيفًا مُّسْلِمًا',qen:'“…but he was upright, a Muslim.”',qur:'“…بلکہ وہ ایک طرفہ یکسو، مسلم تھا۔”',qno:'“…men han var oppriktig, en muslim.”'},
+ {ar:'أَسْلَمَ',tr:'aslama',en:'he submitted',ur:'اس نے سر جھکا دیا',no:'han underkastet seg',form:'أَفْعَلَ · Form IV',ref:'2:131',q:'أَسْلَمْتُ لِرَبِّ الْعَالَمِينَ',qen:'“I have submitted to the Lord of the worlds.”',qur:'“میں نے تمام جہانوں کے رب کے آگے سر جھکا دیا۔”',qno:'“Jeg har underkastet meg Herren over alle verdener.”'},
+ {ar:'سَلِيم',tr:'salīm',en:'sound, unblemished (a heart)',ur:'صحیح سالم، پاکیزہ دل',no:'sunt, plettfritt hjerte',form:'فَعِيل',ref:'26:89',q:'إِلَّا مَنْ أَتَى اللَّهَ بِقَلْبٍ سَلِيمٍ',qen:'“…except one who comes to Allah with a sound heart.”',qur:'“…سوائے اس کے جو قلب سلیم لے کر آئے۔”',qno:'“…unntatt den som kommer med et rent hjerte.”'},
+ {ar:'تَسْلِيم',tr:'taslīm',en:'full, willing acceptance',ur:'مکمل دلی قبولیت',no:'fullstendig aksept',form:'تَفْعِيل · Form II noun',ref:'4:65',q:'وَيُسَلِّمُوا تَسْلِيمًا',qen:'“…and submit with full submission.”',qur:'“…اور پورے طور پر تسلیم کر لیں۔”',qno:'“…og overgir seg fullstendig.”'},
+ {ar:'سُلَّم',tr:'sullam',en:'a ladder — the safe way up',ur:'سیڑھی — محفوظ راستہ',no:'stige – trygg vei opp',form:'فُعَّل',ref:'52:38',q:'أَمْ لَهُمْ سُلَّمٌ يَسْتَمِعُونَ فِيهِ',qen:'“Or do they have a ladder by which they listen?”',qur:'“یا ان کے پاس کوئی سیڑھی ہے جس پر چڑھ کر سنتے ہیں؟”',qno:'“Eller har de en stige som de lytter ved?”'}]},
 
 {id:'hmd',letters:'ح م د',tr:'ḥ–m–d',hue:32,accent:'#f09231',freq:68,
- core:'praise freely given, out of love',
- soil:'Not flattery, not payment — praise for beauty and goodness, offered because the one praised deserves it.',
+ core_en:'praise freely given, out of love',
+ core_ur:'محبت اور عقیدت سے کی جانے والی تعریف',
+ core_no:'lovprisning gitt av kjærlighet og beundring',
+ soil_en:'Not flattery, not payment — praise for beauty and goodness, offered because the one praised deserves it.',
+ soil_ur:'یہ خوشامد یا معاوضہ نہیں — بلکہ حسن و کمال کی وہ تعریف ہے جو حقیقی حقدار کے لیے کی جائے۔',
+ soil_no:'Ikke smiger, ikke betaling – lovprisning for skjønnhet og godhet fordi mottakeren fortjener det.',
  words:[
- {ar:'الْحَمْد',tr:'al-ḥamd',en:'all praise (the thing itself)',form:'فَعْل',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise belongs to Allah, Lord of the worlds.”'},
- {ar:'حَمِيد',tr:'ḥamīd',en:'Praiseworthy — always, by nature',form:'فَعِيل',ref:'14:1',q:'إِلَىٰ صِرَاطِ الْعَزِيزِ الْحَمِيدِ',qen:'“…to the path of the Mighty, the Praiseworthy.”'},
- {ar:'مَحْمُود',tr:'maḥmūd',en:'praised (by others)',form:'مَفْعُول',ref:'17:79',q:'عَسَىٰ أَن يَبْعَثَكَ رَبُّكَ مَقَامًا مَّحْمُودًا',qen:'“…a praised station.”'},
- {ar:'مُحَمَّد',tr:'Muḥammad',en:'the one praised again and again',form:'مُفَعَّل · Form II',ref:'48:29',q:'مُّحَمَّدٌ رَّسُولُ اللَّهِ',qen:'“Muḥammad is the Messenger of Allah.”'},
- {ar:'أَحْمَد',tr:'Aḥmad',en:'the most praising / most praised',form:'أَفْعَل · comparative',ref:'61:6',q:'اسْمُهُ أَحْمَدُ',qen:'“…whose name is Aḥmad.”'},
- {ar:'الْحَامِدُون',tr:'al-ḥāmidūn',en:'those who praise',form:'فَاعِل → plural',ref:'9:112',q:'التَّائِبُونَ الْعَابِدُونَ الْحَامِدُونَ',qen:'“Those who repent, worship and praise.”'}]},
+ {ar:'الْحَمْد',tr:'al-ḥamd',en:'all praise (the thing itself)',ur:'تمام تعریفیں اور شکر',no:'all lovprisning',form:'فَعْل',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise belongs to Allah, Lord of the worlds.”',qur:'“تمام تعریفیں اللہ کے لیے ہیں جو رب العالمین ہے۔”',qno:'“All lovprisning tilhører Allah, Herren over alle verdener.”'},
+ {ar:'حَمِيد',tr:'ḥamīd',en:'Praiseworthy — always, by nature',ur:'ہمیشہ قابلِ ستائش',no:'Den Lovpriste (av natur)',form:'فَعِيل',ref:'14:1',q:'إِلَىٰ صِرَاطِ الْعَزِيزِ الْحَمِيدِ',qen:'“…to the path of the Mighty, the Praiseworthy.”',qur:'“…غالب اور قابل ستائش ذات کے راستے کی طرف۔”',qno:'“…til den Mektiges, den Lovpristes vei.”'},
+ {ar:'مَحْمُود',tr:'maḥmūd',en:'praised (by others)',ur:'جس کی تعریف کی گئی ہو',no:'priset (av andre)',form:'مَفْعُول',ref:'17:79',q:'عَسَىٰ أَن يَبْعَثَكَ رَبُّكَ مَقَامًا مَّحْمُودًا',qen:'“…a praised station.”',qur:'“…مقام محمود پر کھڑا کرے۔”',qno:'“…et prisverdig sted.”'},
+ {ar:'مُحَمَّد',tr:'Muḥammad',en:'the one praised again and again',ur:'جس کی بار بار اور بے انتہا تعریف کی جائے ﷺ',no:'den som lovprises igjen og igjen ﷺ',form:'مُفَعَّل · Form II',ref:'48:29',q:'مُّحَمَّدٌ رَّسُولُ اللَّهِ',qen:'“Muḥammad is the Messenger of Allah.”',qur:'“محمد ﷺ اللہ کے رسول ہیں۔”',qno:'“Muhammad er Allahs sendebud.”'},
+ {ar:'أَحْمَد',tr:'Aḥmad',en:'the most praising / most praised',ur:'سب سے زیادہ تعریف کرنے والا / قابلِ تعریف',no:'den mest prisende / mest prisede',form:'أَفْعَل · comparative',ref:'61:6',q:'اسْمُهُ أَحْمَدُ',qen:'“…whose name is Aḥmad.”',qur:'“…جس کا نام احمد ہے۔”',qno:'“…hvis navn er Ahmad.”'},
+ {ar:'الْحَامِدُون',tr:'al-ḥāmidūn',en:'those who praise',ur:'اللہ کی تعریف کرنے والے',no:'de som lovpriser',form:'فَاعِل → plural',ref:'9:112',q:'التَّائِبُونَ الْعَابِدُونَ الْحَامِدُونَ',qen:'“Those who repent, worship and praise.”',qur:'“توبہ کرنے والے، عبادت کرنے والے، حمد کرنے والے۔”',qno:'“De som vender om, tilber og lovpriser.”'}]},
 
 {id:'qwl',letters:'ق و ل',tr:'q–w–l',hue:268,accent:'#b6a4ff',freq:1722,
- core:'saying · speech · a statement',
- soil:'The Qur’ān’s most frequent root. Notice the hidden و — it hides in قَالَ but shows up in يَقُولُ and قَوْل.',
+ core_en:'saying · speech · a statement',
+ core_ur:'کہنا · بات چیت · قول',
+ core_no:'å si · tale · utsagn',
+ soil_en:'The Qur’ān’s most frequent root. Notice the hidden و — it hides in قَالَ but shows up in يَقُولُ and قَوْل.',
+ soil_ur:'قرآن کا سب سے زیادہ تکرار والا جذر۔ چھپے ہوئے و پر غور کریں جو قَالَ میں چھپتا ہے مگر يَقُولُ اور قَوْل میں ظاہر ہوتا ہے۔',
+ soil_no:'Koranens hyppigste rot. Legg merke til den skjulte و – den gjemmer seg i قَالَ men dukker opp i يَقُولُ og قَوْل.',
  words:[
- {ar:'قَالَ',tr:'qāla',en:'he said (the و is hiding!)',form:'فَعَلَ · weak root',ref:'2:30',q:'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ',qen:'“And when your Lord said to the angels…”'},
- {ar:'يَقُولُ',tr:'yaqūlu',en:'he says (و reappears)',form:'يَفْعُلُ',ref:'2:8',q:'وَمِنَ النَّاسِ مَن يَقُولُ',qen:'“And among the people are those who say…”'},
- {ar:'قَوْل',tr:'qawl',en:'a saying, a statement',form:'فَعْل',ref:'33:70',q:'وَقُولُوا قَوْلًا سَدِيدًا',qen:'“And speak a straight, upright word.”'},
- {ar:'قِيل',tr:'qīla',en:'it was said (passive)',form:'فِيلَ · passive',ref:'2:11',q:'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا',qen:'“And when it is said to them: do not cause corruption…”'},
- {ar:'قَائِل',tr:'qāʾil',en:'a speaker, the one saying it',form:'فَاعِل',ref:'23:100',q:'كَلِمَةٌ هُوَ قَائِلُهَا',qen:'“…a word he is (merely) saying.”'},
- {ar:'تَقَوَّلَ',tr:'taqawwala',en:'to invent speech falsely',form:'تَفَعَّلَ · Form V',ref:'69:44',q:'وَلَوْ تَقَوَّلَ عَلَيْنَا',qen:'“And if he had invented (words) against Us…”'}]},
+ {ar:'قَالَ',tr:'qāla',en:'he said (the و is hiding!)',ur:'اس نے کہا (و چھپا ہوا ہے)',no:'han sa (skjult و)',form:'فَعَلَ · weak root',ref:'2:30',q:'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ',qen:'“And when your Lord said to the angels…”',qur:'“اور جب آپ کے رب نے فرشتوں سے کہا…”',qno:'“Og da din Herre sa til englene…”'},
+ {ar:'يَقُولُ',tr:'yaqūlu',en:'he says (و reappears)',ur:'وہ کہتا ہے',no:'han sier',form:'يَفْعُلُ',ref:'2:8',q:'وَمِنَ النَّاسِ مَن يَقُولُ',qen:'“And among the people are those who say…”',qur:'“اور لوگوں میں سے وہ بھی ہیں جو کہتے ہیں…”',qno:'“Og blant menneskene er de som sier…”'},
+ {ar:'قَوْل',tr:'qawl',en:'a saying, a statement',ur:'بات، قول، فرمان',no:'ord, utsagn',form:'فَعْل',ref:'33:70',q:'وَقُولُوا قَوْلًا سَدِيدًا',qen:'“And speak a straight, upright word.”',qur:'“اور سیدھی، درست بات کہا کرو۔”',qno:'“Og si et rett og oppriktig ord.”'},
+ {ar:'قِيل',tr:'qīla',en:'it was said (passive)',ur:'کہا گیا (مجہول)',no:'det ble sagt (passiv)',form:'فِيلَ · passive',ref:'2:11',q:'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا',qen:'“And when it is said to them: do not cause corruption…”',qur:'“اور جب ان سے کہا جاتا ہے کہ فساد نہ کرو…”',qno:'“Og når det sies til dem: Skap ikke ufred…”'},
+ {ar:'قَائِل',tr:'qāʾil',en:'a speaker, the one saying it',ur:'کہنے والا',no:'en taler',form:'فَاعِل',ref:'23:100',q:'كَلِمَةٌ هُوَ قَائِلُهَا',qen:'“…a word he is (merely) saying.”',qur:'“…ایک بات ہے جو وہ کہہ رہا ہے۔”',qno:'“…et ord han bare sier.”'},
+ {ar:'تَقَوَّلَ',tr:'taqawwala',en:'to invent speech falsely',ur:'جھوٹی بات گھڑنا',no:'å dikte opp ord falskt',form:'تَفَعَّلَ · Form V',ref:'69:44',q:'وَلَوْ تَقَوَّلَ عَلَيْنَا',qen:'“And if he had invented (words) against Us…”',qur:'“اور اگر وہ ہم پر کوئی بات گھڑ لیتے…”',qno:'“Og hvis han hadde diktet opp ord mot Oss…”'}]},
 
 {id:'sbr',letters:'ص ب ر',tr:'ṣ–b–r',hue:130,accent:'#7ddc95',freq:103,
- core:'holding firm · restraining yourself',
- soil:'Not passive waiting. It is gripping tight and refusing to collapse — like a tree standing through a drought.',
+ core_en:'holding firm · restraining yourself',
+ core_ur:'ثابت قدم رہنا · نفس پر قابو پانا',
+ core_no:'å stå fast · tålmodighet og selvkontroll',
+ soil_en:'Not passive waiting. It is gripping tight and refusing to collapse — like a tree standing through a drought.',
+ soil_ur:'یہ بے بسی کا انتظار نہیں بلکہ مضبوطی سے جمے رہنا ہے — جیسے قحط میں ثابت قدم کھڑا درخت۔',
+ soil_no:'Ikke passiv venting. Det er å holde fast og nekte å kollapse – som et tre i tørketid.',
  words:[
- {ar:'صَبَرَ',tr:'ṣabara',en:'he held firm, he endured',form:'فَعَلَ',ref:'16:126',q:'وَلَئِن صَبَرْتُمْ لَهُوَ خَيْرٌ لِّلصَّابِرِينَ',qen:'“But if you are patient, it is better for the patient.”'},
- {ar:'صَبْر',tr:'ṣabr',en:'steadfastness',form:'فَعْل',ref:'2:45',q:'وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ',qen:'“Seek help through patience and prayer.”'},
- {ar:'الصَّابِرِين',tr:'aṣ-ṣābirīn',en:'the steadfast ones',form:'فَاعِل → plural',ref:'2:153',q:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',qen:'“Indeed Allah is with the patient.”'},
- {ar:'الصَّابِرَات',tr:'aṣ-ṣābirāt',en:'the steadfast women',form:'فَاعِلَات',ref:'33:35',q:'وَالصَّابِرِينَ وَالصَّابِرَاتِ',qen:'“…the patient men and the patient women.”'},
- {ar:'اصْطَبِرْ',tr:'iṣṭabir',en:'persevere with real effort',form:'اِفْتَعَلَ · Form VIII',ref:'19:65',q:'فَاعْبُدْهُ وَاصْطَبِرْ لِعِبَادَتِهِ',qen:'“So worship Him, and persevere in His worship.”'}]},
+ {ar:'صَبَرَ',tr:'ṣabara',en:'he held firm, he endured',ur:'اس نے صبر کیا، ثابت قدم رہا',no:'han holdt ut, var tålmodig',form:'فَعَلَ',ref:'16:126',q:'وَلَئِن صَبَرْتُمْ لَهُوَ خَيْرٌ لِّلصَّابِرِينَ',qen:'“But if you are patient, it is better for the patient.”',qur:'“اور اگر تم صبر کرو تو یہ صبر کرنے والوں کے لیے بہتر ہے۔”',qno:'“Men hvis dere er tålmodige, er det bedre for de tålmodige.”'},
+ {ar:'صَبْر',tr:'ṣabr',en:'steadfastness',ur:'صبر، استقامت',no:'tålmodighet, utholdenhet',form:'فَعْل',ref:'2:45',q:'وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ',qen:'“Seek help through patience and prayer.”',qur:'“اور صبر اور نماز کے ذریعے مدد طلب کرو۔”',qno:'“Søk hjelp gjennom tålmodighet og bønn.”'},
+ {ar:'الصَّابِرِين',tr:'aṣ-ṣābirīn',en:'the steadfast ones',ur:'صبر کرنے والے',no:'de tålmodige',form:'فَاعِل → plural',ref:'2:153',q:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',qen:'“Indeed Allah is with the patient.”',qur:'“بے شک اللہ صبر کرنے والوں کے ساتھ ہے۔”',qno:'“Sannelig er Allah med de tålmodige.”'},
+ {ar:'الصَّابِرَات',tr:'aṣ-ṣābirāt',en:'the steadfast women',ur:'صبر کرنے والی خواتین',no:'de tålmodige kvinnene',form:'فَاعِلَات',ref:'33:35',q:'وَالصَّابِرِينَ وَالصَّابِرَاتِ',qen:'“…the patient men and the patient women.”',qur:'“…صبر کرنے والے مرد اور صبر کرنے والی عورتیں۔”',qno:'“…tålmodige menn og kvinner.”'},
+ {ar:'اصْطَبِرْ',tr:'iṣṭabir',en:'persevere with real effort',ur:'پوری محنت اور لگن سے جمے رہو',no:'hold ut med oppriktig innsats',form:'اِفْتَعَلَ · Form VIII',ref:'19:65',q:'فَاعْبُدْهُ وَاصْطَبِرْ لِعِبَادَتِهِ',qen:'“So worship Him, and persevere in His worship.”',qur:'“پس اسی کی بندگی کرو اور اس کی بندگی پر جمے رہو۔”',qno:'“Så tilbe Ham og vær utholdende i tilbedelsen.”'}]},
 
 {id:'dkr',letters:'ذ ك ر',tr:'dh–k–r',hue:188,accent:'#6fe3ff',freq:292,
- core:'remembering · mentioning · reminding',
- soil:'To bring something to your mind AND to your tongue. Remembrance you can hear.',
+ core_en:'remembering · mentioning · reminding',
+ core_ur:'یاد کرنا · ذکر کرنا · یاد دہانی',
+ core_no:'å huske · nevne · påminne',
+ soil_en:'To bring something to your mind AND to your tongue. Remembrance you can hear.',
+ soil_ur:'کسی بات کو ذہن میں لانا اور زبان پر جاری کرنا — وہ ذکر جو سنا جا سکے۔',
+ soil_no:'Å bringe noe til sinnet OG på tungen. Påminnelse du kan høre.',
  words:[
- {ar:'ذَكَرَ',tr:'dhakara',en:'he remembered / mentioned',form:'فَعَلَ',ref:'2:152',q:'فَاذْكُرُونِي أَذْكُرْكُمْ',qen:'“So remember Me and I will remember you.”'},
- {ar:'ذِكْر',tr:'dhikr',en:'remembrance; the Reminder (Qur’ān)',form:'فِعْل',ref:'15:9',q:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ',qen:'“Indeed We have sent down the Reminder.”'},
- {ar:'ذِكْرَىٰ',tr:'dhikrā',en:'a reminder, a lesson',form:'فِعْلَىٰ',ref:'6:69',q:'وَلَٰكِن ذِكْرَىٰ لَعَلَّهُمْ يَتَّقُونَ',qen:'“…but as a reminder, so they may be mindful.”'},
- {ar:'الذَّاكِرِين',tr:'adh-dhākirīn',en:'those who remember',form:'فَاعِل → plural',ref:'33:35',q:'وَالذَّاكِرِينَ اللَّهَ كَثِيرًا',qen:'“…and the men who remember Allah much.”'},
- {ar:'مَذْكُور',tr:'madhkūr',en:'mentioned, remembered',form:'مَفْعُول',ref:'76:1',q:'لَمْ يَكُن شَيْئًا مَّذْكُورًا',qen:'“…he was not a thing mentioned.”'},
- {ar:'تَذْكِرَة',tr:'tadhkirah',en:'a reminder (given to others)',form:'تَفْعِلَة · Form II',ref:'20:3',q:'إِلَّا تَذْكِرَةً لِّمَن يَخْشَىٰ',qen:'“…only as a reminder to whoever fears.”'},
- {ar:'مُذَكِّر',tr:'mudhakkir',en:'one who reminds',form:'مُفَعِّل',ref:'88:21',q:'فَذَكِّرْ إِنَّمَا أَنتَ مُذَكِّرٌ',qen:'“So remind — you are only a reminder.”'}]},
+ {ar:'ذَكَرَ',tr:'dhakara',en:'he remembered / mentioned',ur:'اس نے یاد کیا / ذکر کیا',no:'han husket / nevnte',form:'فَعَلَ',ref:'2:152',q:'فَاذْكُرُونِي أَذْكُرْكُمْ',qen:'“So remember Me and I will remember you.”',qur:'“تم مجھے یاد کرو، میں تمہیں یاد رکھوں گا۔”',qno:'“Så kom Meg i hu, og Jeg vil huske dere.”'},
+ {ar:'ذِكْر',tr:'dhikr',en:'remembrance; the Reminder (Qur’ān)',ur:'ذکر؛ نصیحت (قرآن کریم)',no:'påminnelse; Koranen',form:'فِعْل',ref:'15:9',q:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ',qen:'“Indeed We have sent down the Reminder.”',qur:'“بے شک ہم ہی نے اس ذکر کو نازل کیا ہے۔”',qno:'“Sannelig har Vi sendt ned Påminnelsen.”'},
+ {ar:'ذِكْرَىٰ',tr:'dhikrā',en:'a reminder, a lesson',ur:'یاد دہانی، عبرت و نصیحت',no:'en påminnelse, lærdom',form:'فِعْلَىٰ',ref:'6:69',q:'وَلَٰكِن ذِكْرَىٰ لَعَلَّهُمْ يَتَّقُونَ',qen:'“…but as a reminder, so they may be mindful.”',qur:'“…بلکہ یہ یاد دہانی ہے تاکہ وہ تقویٰ اختیار کریں۔”',qno:'“…men som en påminnelse så de må frykte Allah.”'},
+ {ar:'الذَّاكِرِين',tr:'adh-dhākirīn',en:'those who remember',ur:'کثرت سے یاد کرنے والے',no:'de som husker mye',form:'فَاعِل → plural',ref:'33:35',q:'وَالذَّاكِرِينَ اللَّهَ كَثِيرًا',qen:'“…and the men who remember Allah much.”',qur:'“…اور اللہ کو کثرت سے یاد کرنے والے مرد۔”',qno:'“…og menn som husker Allah mye.”'},
+ {ar:'مَذْكُور',tr:'madhkūr',en:'mentioned, remembered',ur:'جس کا تذکرہ کیا گیا ہو',no:'nevnt, husket',form:'مَفْعُول',ref:'76:1',q:'لَمْ يَكُن شَيْئًا مَّذْكُورًا',qen:'“…he was not a thing mentioned.”',qur:'“…وہ کوئی قابلِ ذکر چیز نہ تھا۔”',qno:'“…han var intet nevneverdig.”'},
+ {ar:'تَذْكِرَة',tr:'tadhkirah',en:'a reminder (given to others)',ur:'دوسروں کے لیے نصیحت و یاد دہانی',no:'en påminnelse til andre',form:'تَفْعِلَة · Form II',ref:'20:3',q:'إِلَّا تَذْكِرَةً لِّمَن يَخْشَىٰ',qen:'“…only as a reminder to whoever fears.”',qur:'“…مگر اس کے لیے نصیحت جو ڈرتا ہے۔”',qno:'“…kun som en påminnelse for den som frykter.”'},
+ {ar:'مُذَكِّر',tr:'mudhakkir',en:'one who reminds',ur:'یاد دہانی کرانے والا',no:'en som påminner',form:'مُفَعِّل',ref:'88:21',q:'فَذَكِّرْ إِنَّمَا أَنتَ مُذَكِّرٌ',qen:'“So remind — you are only a reminder.”',qur:'“پس نصیحت کیجیے، آپ تو صرف نصیحت کرنے والے ہیں۔”',qno:'“Så påminn – du er kun en påminner.”'}]},
 
 {id:'nsr',letters:'ن ص ر',tr:'n–ṣ–r',hue:22,accent:'#ff9f5a',freq:158,
- core:'coming to the aid of the pressured',
- soil:'Help given to someone under attack — help that ends in victory. Never “help” with the shopping!',
+ core_en:'coming to the aid of the pressured',
+ core_ur:'مظلوم کی مدد کرنا اور فتح دلانا',
+ core_no:'å komme den trengende til unnsetning',
+ soil_en:'Help given to someone under attack — help that ends in victory. Never “help” with the shopping!',
+ soil_ur:'کسی مظلوم کی ایسی نصرت جو کامیابی پر ختم ہو — یہ عام مدد نہیں بلکہ نصرتِ الٰہی ہے۔',
+ soil_no:'Hjelp gitt til noen under press – hjelp som leder til seier.',
  words:[
- {ar:'نَصَرَ',tr:'naṣara',en:'he helped (to victory)',form:'فَعَلَ',ref:'3:123',q:'وَلَقَدْ نَصَرَكُمُ اللَّهُ بِبَدْرٍ',qen:'“Allah surely helped you at Badr.”'},
- {ar:'نَصْر',tr:'naṣr',en:'victory, help',form:'فَعْل',ref:'110:1',q:'إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ',qen:'“When the help of Allah and victory come…”'},
- {ar:'النَّاصِرِين',tr:'an-nāṣirīn',en:'the helpers',form:'فَاعِل → plural',ref:'3:150',q:'وَهُوَ خَيْرُ النَّاصِرِينَ',qen:'“And He is the best of helpers.”'},
- {ar:'نَصِير',tr:'naṣīr',en:'a constant helper',form:'فَعِيل',ref:'4:45',q:'وَكَفَىٰ بِاللَّهِ نَصِيرًا',qen:'“And sufficient is Allah as a helper.”'},
- {ar:'أَنْصَار',tr:'anṣār',en:'the helpers (a group)',form:'أَفْعَال',ref:'3:52',q:'نَحْنُ أَنصَارُ اللَّهِ',qen:'“We are the helpers of Allah.”'},
- {ar:'مَنْصُور',tr:'manṣūr',en:'aided, given victory',form:'مَفْعُول',ref:'17:33',q:'إِنَّهُ كَانَ مَنصُورًا',qen:'“Indeed he is (divinely) aided.”'},
- {ar:'اسْتَنْصَرَ',tr:'istanṣara',en:'he called for help',form:'اِسْتَفْعَلَ · Form X',ref:'28:18',q:'فَإِذَا الَّذِي اسْتَنصَرَهُ بِالْأَمْسِ',qen:'“…the one who sought his help the day before.”'},
- {ar:'تَنَاصَرُ',tr:'tanāṣur',en:'helping one another',form:'تَفَاعَل · Form VI',ref:'37:25',q:'مَا لَكُمْ لَا تَنَاصَرُونَ',qen:'“What is wrong with you — you do not help one another?”'}]},
+ {ar:'نَصَرَ',tr:'naṣara',en:'he helped (to victory)',ur:'اس نے مدد فرمائی (فتح دی)',no:'han hjalp (til seier)',form:'فَعَلَ',ref:'3:123',q:'وَلَقَدْ نَصَرَكُمُ اللَّهُ بِبَدْرٍ',qen:'“Allah surely helped you at Badr.”',qur:'“اور یقیناً اللہ نے بدر میں تمہاری مدد فرمائی۔”',qno:'“Allah hjalp dere sannelig ved Badr.”'},
+ {ar:'نَصْر',tr:'naṣr',en:'victory, help',ur:'فتح، نصرت',no:'seier, hjelp',form:'فَعْل',ref:'110:1',q:'إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ',qen:'“When the help of Allah and victory come…”',qur:'“جب اللہ کی مدد اور فتح آ پہنچے…”',qno:'“Når Allahs hjelp og seieren kommer…”'},
+ {ar:'النَّاصِرِين',tr:'an-nāṣirīn',en:'the helpers',ur:'مددگار',no:'hjelperne',form:'فَاعِل → plural',ref:'3:150',q:'وَهُوَ خَيْرُ النَّاصِرِينَ',qen:'“And He is the best of helpers.”',qur:'“اور وہ سب سے بہتر مددگار ہے۔”',qno:'“Og Han er den beste av hjelpere.”'},
+ {ar:'نَصِير',tr:'naṣīr',en:'a constant helper',ur:'دائمی مددگار',no:'en trofast hjelper',form:'فَعِيل',ref:'4:45',q:'وَكَفَىٰ بِاللَّهِ نَصِيرًا',qen:'“And sufficient is Allah as a helper.”',qur:'“اور اللہ کافی مددگار ہے۔”',qno:'“Og Allah er tilstrekkelig som hjelper.”'},
+ {ar:'أَنْصَار',tr:'anṣār',en:'the helpers (a group)',ur:'مددگار جماعت (انصار)',no:'hjelperne (ansar)',form:'أَفْعَال',ref:'3:52',q:'نَحْنُ أَنصَارُ اللَّهِ',qen:'“We are the helpers of Allah.”',qur:'“ہم اللہ کے مددگار ہیں۔”',qno:'“Vi er Allahs hjelpere.”'},
+ {ar:'مَنْصُور',tr:'manṣūr',en:'aided, given victory',ur:'جس کی غیبی مدد کی گئی ہو',no:'guddommelig hjulpet',form:'مَفْعُول',ref:'17:33',q:'إِنَّهُ كَانَ مَنصُورًا',qen:'“Indeed he is (divinely) aided.”',qur:'“بے شک اس کی غیبی مدد کی جائے گی۔”',qno:'“Sannelig er han hjulpet.”'},
+ {ar:'اسْتَنْصَرَ',tr:'istanṣara',en:'he called for help',ur:'اس نے مدد طلب کی',no:'han ba om hjelp',form:'اِسْتَفْعَلَ · Form X',ref:'28:18',q:'فَإِذَا الَّذِي اسْتَنصَرَهُ بِالْأَمْسِ',qen:'“…the one who sought his help the day before.”',qur:'“…جس نے کل اس سے مدد مانگی تھی۔”',qno:'“…den som søkte hans hjelp dagen før.”'},
+ {ar:'تَنَاصَرُ',tr:'tanāṣur',en:'helping one another',ur:'ایک دوسرے کی مدد کرنا',no:'å hjelpe hverandre',form:'تَفَاعَل · Form VI',ref:'37:25',q:'مَا لَكُمْ لَا تَنَاصَرُونَ',qen:'“What is wrong with you — you do not help one another?”',qur:'“تمہیں کیا ہو گیا ہے کہ تم ایک دوسرے کی مدد نہیں کرتے؟”',qno:'“Hva feiler dere – hjelper dere ikke hverandre?”'}]},
 
 {id:'kfr',letters:'ك ف ر',tr:'k–f–r',hue:210,accent:'#9fb0bd',freq:525,
- core:'to cover · to bury · to conceal',
- soil:'The physical image comes first: covering something up. Cover the truth = kufr. Cover a sin = kaffārah. A farmer covering seed with soil is also a كَافِر!',
+ core_en:'to cover · to bury · to conceal',
+ core_ur:'ڈھانپنا · چھپانا · حق کو پوشیدہ کرنا',
+ core_no:'å dekke over · begrave · skjule',
+ soil_en:'The physical image comes first: covering something up. Cover the truth = kufr. Cover a sin = kaffārah. A farmer covering seed with soil is also a كَافِر!',
+ soil_ur:'بنیادی تصور کسی چیز کو ڈھانپنے کا ہے۔ سچائی کو چھپانا = کفر۔ گناہ کو ڈھانپنا = کفارہ۔ اور زمین میں بیج چھپانے والا کسان بھی كَافِر کہلاتا ہے!',
+ soil_no:'Det opprinnelige bildet er å dekke over noe. Å skjule sannheten = kufr. Å dekke over en synd = kaffarah. En bonde som dekker frø med jord kalles også كَافِر!',
  words:[
- {ar:'كَفَرَ',tr:'kafara',en:'he covered up / denied the truth',form:'فَعَلَ',ref:'2:6',q:'إِنَّ الَّذِينَ كَفَرُوا',qen:'“Indeed those who disbelieved…”'},
- {ar:'كُفْر',tr:'kufr',en:'concealing the truth',form:'فُعْل',ref:'14:28',q:'بَدَّلُوا نِعْمَتَ اللَّهِ كُفْرًا',qen:'“They exchanged Allah’s favour for ingratitude.”'},
- {ar:'الْكُفَّار',tr:'al-kuffār',en:'coverers — and also: farmers who cover seed!',form:'فُعَّال · plural',ref:'57:20',q:'كَمَثَلِ غَيْثٍ أَعْجَبَ الْكُفَّارَ نَبَاتُهُ',qen:'“…like rain whose growth pleases the tillers.” — same root, literal sense!'},
- {ar:'كَفَّارَة',tr:'kaffārah',en:'expiation — a covering-over of sin',form:'فَعَّالَة',ref:'5:45',q:'فَهُوَ كَفَّارَةٌ لَّهُ',qen:'“…that is an expiation for him.”'},
- {ar:'كَفَّرَ',tr:'kaffara',en:'He covered over (wiped out) sins',form:'فَعَّلَ · Form II',ref:'3:195',q:'لَأُكَفِّرَنَّ عَنْهُمْ سَيِّئَاتِهِمْ',qen:'“I will surely wipe away their sins.”'},
- {ar:'كَفُور',tr:'kafūr',en:'utterly ungrateful',form:'فَعُول · intensity',ref:'17:67',q:'وَكَانَ الْإِنسَانُ كَفُورًا',qen:'“And man is ever ungrateful.”'},
- {ar:'كَافُور',tr:'kāfūr',en:'camphor — a covering fragrance',form:'فَاعُول',ref:'76:5',q:'كَأْسٍ كَانَ مِزَاجُهَا كَافُورًا',qen:'“…a cup mixed with camphor.”'}]}
+ {ar:'كَفَرَ',tr:'kafara',en:'he covered up / denied the truth',ur:'اس نے انکار کیا / سچائی کو چھپایا',no:'han dekket over / fornektet sannheten',form:'فَعَلَ',ref:'2:6',q:'إِنَّ الَّذِينَ كَفَرُوا',qen:'“Indeed those who disbelieved…”',qur:'“بے شک جن لوگوں نے کفر کیا…”',qno:'“Sannelig de som fornektet…”'},
+ {ar:'كُفْر',tr:'kufr',en:'concealing the truth',ur:'حق پوشی، ناشکری',no:'fornektelse, utakknemlighet',form:'فُعْل',ref:'14:28',q:'بَدَّلُوا نِعْمَتَ اللَّهِ كُفْرًا',qen:'“They exchanged Allah’s favour for ingratitude.”',qur:'“انہوں نے اللہ کی نعمت کو ناشکری سے بدل ڈالا۔”',qno:'“De byttet ut Allahs velsignelse med vantro.”'},
+ {ar:'الْكُفَّار',tr:'al-kuffār',en:'coverers — and also: farmers who cover seed!',ur:'حق چھپانے والے — اور کسان جو بیج ڈھانپتے ہیں!',no:'fornektere – og også bønder som sår!',form:'فُعَّال · plural',ref:'57:20',q:'كَمَثَلِ غَيْثٍ أَعْجَبَ الْكُفَّارَ نَبَاتُهُ',qen:'“…like rain whose growth pleases the tillers.”',qur:'“…جیسے بارش کی پیداوار کسانوں کو خوش کرتی ہے۔”',qno:'“…som regn hvis vekst gleder bøndene.”'},
+ {ar:'كَفَّارَة',tr:'kaffārah',en:'expiation — a covering-over of sin',ur:'کفارہ — گناہ کو مٹانے اور ڈھانپنے والا عمل',no:'soning – som dekker over synd',form:'فَعَّالَة',ref:'5:45',q:'فَهُوَ كَفَّارَةٌ لَّهُ',qen:'“…that is an expiation for him.”',qur:'“…پس وہ اس کے لیے کفارہ ہے۔”',qno:'“…det er en soning for ham.”'},
+ {ar:'كَفَّرَ',tr:'kaffara',en:'He covered over (wiped out) sins',ur:'اس نے گناہوں کو مٹا دیا / ڈھانپ دیا',no:'Han slettet / dekket over synder',form:'فَعَّلَ · Form II',ref:'3:195',q:'لَأُكَفِّرَنَّ عَنْهُمْ سَيِّئَاتِهِمْ',qen:'“I will surely wipe away their sins.”',qur:'“میں ضرور ان کے گناہ معاف کر دوں گا۔”',qno:'“Jeg vil sannelig slette deres synder.”'},
+ {ar:'كَفُور',tr:'kafūr',en:'utterly ungrateful',ur:'انتہائی ناشکرا',no:'ytterst utakknemlig',form:'فَعُول · intensity',ref:'17:67',q:'وَكَانَ الْإِنسَانُ كَفُورًا',qen:'“And man is ever ungrateful.”',qur:'“اور انسان بڑا ہی ناشکرا ہے۔”',qno:'“Og mennesket er evig utakknemlig.”'},
+ {ar:'كَافُور',tr:'kāfūr',en:'camphor — a covering fragrance',ur:'کافور — خوشبودار ڈھانپنے والا مادہ',no:'kamfer – en dekkende vellukt',form:'فَاعُول',ref:'76:5',q:'كَأْسٍ كَانَ مِزَاجُهَا كَافُورًا',qen:'“…a cup mixed with camphor.”',qur:'“…ایسا جام جس کی آمیزش کافور ہوگی۔”',qno:'“…et beger blandet med kamfer.”'}]}
 ];
 
+/* Helper to get localized word string */
+function getWordEn(w){ return (LANG==='ur' && w.ur) ? w.ur : ((LANG==='no' && w.no) ? w.no : w.en); }
+function getWordQen(w){ return (LANG==='ur' && w.qur) ? w.qur : ((LANG==='no' && w.qno) ? w.qno : w.qen); }
+function getRootCore(r){ return (LANG==='ur' && r.core_ur) ? r.core_ur : ((LANG==='no' && r.core_no) ? r.core_no : r.core_en); }
+function getRootSoil(r){ return (LANG==='ur' && r.soil_ur) ? r.soil_ur : ((LANG==='no' && r.soil_no) ? r.soil_no : r.soil_en); }
+
 /* =====================================================================
-   2. PROCEDURAL TREE ENGINE  (organic tapered limbs + foliage)
+   2. PROCEDURAL TREE ENGINE
 ===================================================================== */
 function leafPalette(hue){
   const h=118+(hue-118)*0.3;
@@ -1034,14 +1325,12 @@ function svgDefs(id,pal,accent,hue){
    <mask id="gm${id}"><circle cx="${0}" cy="${0}" r="0" fill="#fff" class="gmc"/></mask>
   </defs>`;
 }
-/* Build a full tree scene. cfg: {vbw,vbh,bx,by,depth,len,wid,spread,hue,accent,words,rootLetters,fruit,scale} */
 function buildScene(cfg){
   const id='s'+(++UID), rnd=mulberry32(cfg.seed||((Math.random()*1e9)|0));
   const pal=leafPalette(cfg.hue);
   const up=skeleton(rnd,{x:cfg.bx,y:cfg.by,ang:-90+(rnd()-.5)*6,len:cfg.len,wid:cfg.wid,depth:cfg.depth,spread:cfg.spread});
   const dn=cfg.roots?skeleton(rnd,{x:cfg.bx,y:cfg.by+4,ang:90+(rnd()-.5)*10,len:cfg.len*.58,wid:cfg.wid*.72,depth:Math.max(3,cfg.depth-2),spread:cfg.spread+16}):{br:[],tips:[]};
   const fol=foliage(rnd,up.tips,pal,cfg.scale||1);
-  /* distant blurred trees for depth of field */
   let far='';
   (cfg.far||[]).forEach(f=>{
     const s=skeleton(mulberry32(f.seed),{x:f.x,y:f.y,ang:-90,len:f.len,wid:f.wid,depth:5,spread:cfg.spread});
@@ -1049,7 +1338,6 @@ function buildScene(cfg){
     far+=`<g filter="url(#blr${id})" opacity="${f.op||.5}">
       <g fill="#120c07">${s.br.map(b=>`<path d="${taper(b)}"/>`).join('')}</g>${ff.back}${ff.front}</g>`;
   });
-  /* word leaves placed on well-spaced outer tips */
   let wleaves='',placed=[];
   if(cfg.words&&cfg.words.length){
     const cand=up.tips.filter(t=>t.y<cfg.by-cfg.len*1.1).sort(()=>rnd()-.5);
@@ -1063,7 +1351,7 @@ function buildScene(cfg){
       const w=cfg.words[i]; if(!w) return;
       const W=Math.max(112,w.ar.length*19+56), H=54, rot=(rnd()-.5)*13;
       const tx=Math.min(cfg.vbw-W/2-8,Math.max(W/2+8,t.x)), ty=Math.max(H/2+10,t.y-14);
-      wleaves+=`<g class="wleaf" data-i="${i}" tabindex="0" role="button" aria-label="${w.tr}: ${w.en}"
+      wleaves+=`<g class="wleaf" data-i="${i}" tabindex="0" role="button" aria-label="${w.tr}: ${getWordEn(w)}"
           transform="translate(${tx.toFixed(1)},${ty.toFixed(1)})" style="transition-delay:${(1.5+i*.11).toFixed(2)}s">
         <path d="M0,0 L${(t.x-tx).toFixed(1)},${(t.y-ty+16).toFixed(1)}" stroke="#5d4229" stroke-width="2.6" stroke-linecap="round"/>
         <g transform="rotate(${rot.toFixed(1)})" filter="url(#ds${id})">
@@ -1080,7 +1368,6 @@ function buildScene(cfg){
         </g></g>`;
     });
   }
-  /* fruit */
   let fruit='';
   if(cfg.fruit){
     const ft=up.tips.filter(t=>t.y<cfg.by-cfg.len).sort(()=>rnd()-.5).slice(0,cfg.fruit);
@@ -1092,7 +1379,6 @@ function buildScene(cfg){
         <ellipse cx="${-r*.3}" cy="${-r*.4}" rx="${r*.3}" ry="${r*.2}" fill="#fff" opacity=".33"/></g>`;
     });
   }
-  /* grass + fallen leaves */
   let grass='';
   for(let i=0;i<70;i++){
     const gx=cfg.bx+(rnd()-.5)*cfg.vbw*.95, h=6+rnd()*22, lean=(rnd()-.5)*13;
@@ -1108,7 +1394,6 @@ function buildScene(cfg){
   const svg=`<svg viewBox="0 0 ${cfg.vbw} ${cfg.vbh}" preserveAspectRatio="${cfg.par||'xMidYMid meet'}" role="img" aria-label="${cfg.label||'tree'}">
    ${svgDefs(id,pal,cfg.accent,cfg.hue).replace(`<mask id="gm${id}"><circle cx="0" cy="0" r="0"`,`<mask id="gm${id}"><circle cx="${cfg.bx}" cy="${cfg.by}" r="0"`)}
    <radialGradient id="fr${id}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffd98a"/><stop offset=".55" stop-color="#e8952c"/><stop offset="1" stop-color="#8c4a10"/></radialGradient>
-   <!-- sky glow + rays + mist -->
    <ellipse cx="${cfg.vbw*.78}" cy="${cfg.vbh*.12}" rx="${cfg.vbw*.42}" ry="${cfg.vbh*.3}" fill="url(#glow${id})" opacity=".7"/>
    <g opacity=".13" filter="url(#sft${id})">
      <polygon points="${cfg.vbw*.72},0 ${cfg.vbw*.86},0 ${cfg.vbw*.4},${cfg.vbh} ${cfg.vbw*.22},${cfg.vbh}" fill="${cfg.accent}"/>
@@ -1116,7 +1401,6 @@ function buildScene(cfg){
    </g>
    ${far}
    <ellipse cx="${cfg.bx}" cy="${cfg.by+cfg.vbh*.06}" rx="${cfg.vbw*.55}" ry="${cfg.vbh*.09}" fill="#000" opacity=".55" filter="url(#sft${id})"/>
-   <!-- underground -->
    <rect x="0" y="${cfg.by}" width="${cfg.vbw}" height="${cfg.vbh-cfg.by}" fill="url(#soil${id})"/>
    <path d="M0,${cfg.by} Q${cfg.vbw*.3},${cfg.by-7} ${cfg.vbw*.5},${cfg.by} T${cfg.vbw},${cfg.by-3} L${cfg.vbw},${cfg.by+8} L0,${cfg.by+8}Z"
      fill="#2a1d13" opacity=".9"/>
@@ -1150,10 +1434,10 @@ function animateGrowth(host,id,maxR){
 ===================================================================== */
 (function heroTree(){
   const host=$('#heroTree');
-  const teaser=[{ar:'كِتَاب',tr:'kitāb',en:'book'},{ar:'عِلْم',tr:'ʿilm',en:'knowledge'},
-    {ar:'رَحْمَة',tr:'raḥmah',en:'mercy'},{ar:'سَلَام',tr:'salām',en:'peace'},
-    {ar:'حَمْد',tr:'ḥamd',en:'praise'},{ar:'ذِكْر',tr:'dhikr',en:'remembrance'},
-    {ar:'صَبْر',tr:'ṣabr',en:'patience'},{ar:'نَصْر',tr:'naṣr',en:'victory'}];
+  const teaser=[{ar:'كِتَاب',tr:'kitāb',en:'book',ur:'کتاب',no:'bok'},{ar:'عِلْم',tr:'ʿilm',en:'knowledge',ur:'علم',no:'kunnskap'},
+    {ar:'رَحْمَة',tr:'raḥmah',en:'mercy',ur:'رحمت',no:'barmhjertighet'},{ar:'سَلَام',tr:'salām',en:'peace',ur:'سلامتی',no:'fred'},
+    {ar:'حَمْد',tr:'ḥamd',en:'praise',ur:'حمد',no:'lovprisning'},{ar:'ذِكْر',tr:'dhikr',en:'remembrance',ur:'ذکر',no:'påminnelse'},
+    {ar:'صَبْر',tr:'ṣabr',en:'patience',ur:'صبر',no:'tålmodighet'},{ar:'نَصْر',tr:'naṣr',en:'victory',ur:'فتح و نصرت',no:'seier'}];
   const sc=buildScene({vbw:1500,vbh:940,bx:1080,by:790,len:178,wid:62,depth:8,spread:26,
     hue:120,accent:'#7ddc95',words:teaser,roots:true,fruit:6,scale:1.05,par:'xMidYMax slice',
     label:'A realistic tree whose leaves are Arabic words',
@@ -1165,7 +1449,7 @@ function animateGrowth(host,id,maxR){
   host.querySelectorAll('.wleaf').forEach(g=>{
     const w=teaser[+g.dataset.i];
     g.addEventListener('mouseenter',e=>{
-      tip.innerHTML=`<b>${w.ar}</b><span style="color:#f5bf5f;font-weight:800">${w.tr}</span> — ${w.en}`;
+      tip.innerHTML=`<b>${w.ar}</b><span style="color:#f5bf5f;font-weight:800">${w.tr}</span> — ${getWordEn(w)}`;
       tip.classList.add('on');
     });
     g.addEventListener('mousemove',e=>{
@@ -1181,14 +1465,55 @@ function animateGrowth(host,id,maxR){
    4. ANATOMY TREE + HOTSPOTS
 ===================================================================== */
 const ANAT=[
- {n:1,t:'التُّرَاب · The Soil',h:'Context (السِّيَاق)',b:'A root only means something inside a real sentence. The same three letters can lean warm or harsh depending on the āyah around them. Never teach a root without its āyah.'},
- {n:2,t:'الجَذْر · The Root',h:'3 consonants = the core idea',b:'Three letters in a fixed order carrying one core sense. It is buried, invisible in speech — you only ever hear its branches. This is the DNA of the word.'},
- {n:3,t:'السَّاق · The Trunk',h:'The bare verb — Form I (فَعَلَ)',b:'The simplest form: he did it. Everything else in the language is a modification of this trunk. Teach the trunk first, always.'},
- {n:4,t:'الفُرُوع · The Branches',h:'Patterns & the ten forms (الأَوْزَان)',b:'Each branch bends the meaning in a known direction: intensify, cause, do-with-someone, do-to-yourself, seek. The branch tells you the meaning before the dictionary does.'},
- {n:5,t:'الأَوْرَاق · The Leaves',h:'The actual words you meet',b:'كَاتِب، مَكْتُوب، مَكْتَبَة… Leaves are what you actually read on the page. They look many; they are one root wearing many moulds.'},
- {n:6,t:'الثَّمَر · The Fruit',h:'Tadabbur, duʿāʾ and action',b:'The point of all this is not grammar marks. It is that when you say يَا غَفُور in duʿāʾ, you know you are asking the One who covers over what you cannot fix.'}
+ {n:1,t:'التُّرَاب · The Soil',
+  h_en:'Context (السِّيَاق)',h_ur:'سیاق و سباق (السِّيَاق)',h_no:'Kontekst (السِّيَاق)',
+  b_en:'A root only means something inside a real sentence. The same three letters can lean warm or harsh depending on the āyah around them. Never teach a root without its āyah.',
+  b_ur:'جذر کا اصل مفہوم جملے کے سیاق و سباق میں واضح ہوتا ہے۔ ایک ہی تین حروف گرد و پیش کی آیت کی مناسبت سے مختلف پہلو اجاگر کرتے ہیں۔ جذر کو ہمیشہ آیت کے ساتھ سیکھیں۔',
+  b_no:'En rot har bare full mening i en virkelig setning. De samme tre bokstavene kan ha ulik nyanse avhengig av verset rundt dem.'},
+ {n:2,t:'الجَذْر · The Root',
+  h_en:'3 consonants = the core idea',h_ur:'3 حروفِ اصلیہ = بنیادی مفہوم کا ڈی این اے',h_no:'3 konsonanter = kjerneideen',
+  b_en:'Three letters in a fixed order carrying one core sense. It is buried, invisible in speech — you only ever hear its branches. This is the DNA of the word.',
+  b_ur:'مخصوص ترتیب کے ساتھ تین حروف جو ایک بنیادی معنی رکھتے ہیں۔ یہ گفتگو میں چھپا ہوتا ہے اور صرف اس کی شاخیں سنائی دیتی ہیں۔ یہ لفظ کا ڈی این اے ہے۔',
+  b_no:'Tre konsonanter i fast rekkefølge som bærer én kjerneidé. Dette er ordets DNA.'},
+ {n:3,t:'السَّاق · The Trunk',
+  h_en:'The bare verb — Form I (فَعَلَ)',h_ur:'سادہ فعل — باب مجرد (فَعَلَ)',h_no:'Det enkle verbet – Form I (فَعَلَ)',
+  b_en:'The simplest form: he did it. Everything else in the language is a modification of this trunk. Teach the trunk first, always.',
+  b_ur:'سب سے سادہ شکل: اس نے کیا۔ زبان کی باقی تمام اشکال اسی تنے سے پھوٹتی ہیں۔ ہمیشہ سب سے پہلے تنے کو سمجھیے۔',
+  b_no:'Den enkleste formen: han gjorde det. Alt annet i språket er en videreføring av denne stammen.'},
+ {n:4,t:'الفُرُوع · The Branches',
+  h_en:'Patterns & the ten forms (الأَوْزَان)',h_ur:'سانچے اور دس ابواب (الأَوْزَان)',h_no:'Mønstre og de ti formene (الأَوْزَان)',
+  b_en:'Each branch bends the meaning in a known direction: intensify, cause, do-with-someone, do-to-yourself, seek. The branch tells you the meaning before the dictionary does.',
+  b_ur:'ہر شاخ معنی کو ایک مخصوص رخ دیتی ہے: شدت، سبب بننا، مل کر کرنا، خود پر اثر ڈالنا، یا طلب کرنا۔ شاخ لغت سے پہلے معنی بتا دیتی ہے۔',
+  b_no:'Hver gren bøyer betydningen i en kjent retning: forsterke, forårsake, gjøre sammen, søke.'},
+ {n:5,t:'الأَوْرَاق · The Leaves',
+  h_en:'The actual words you meet',h_ur:'وہ الفاظ جو آپ تلاوت میں پاتے ہیں',h_no:'De faktiske ordene du møter',
+  b_en:'كَاتِب، مَكْتُوب، مَكْتَبَة… Leaves are what you actually read on the page. They look many; they are one root wearing many moulds.',
+  b_ur:'كَاتِب، مَكْتُوب، مَكْتَبَة… پتے وہ الفاظ ہیں جو آپ صفحے پر پڑھتے ہیں۔ وہ بظاہر بہت سے ہیں مگر اصل میں ایک ہی جذر کے مختلف روپ ہیں۔',
+  b_no:'كَاتِب، مَكْتُوب، مَكْتَبَة… Bladene er det du faktisk leser. De ser mange ut, men er én rot i ulike drakter.'},
+ {n:6,t:'الثَّمَر · The Fruit',
+  h_en:'Tadabbur, duʿāʾ and action',h_ur:'تدبر، دعا اور عملی زندگی',h_no:'Tadabbur, bønn og handling',
+  b_en:'The point of all this is not grammar marks. It is that when you say يَا غَفُور in duʿāʾ, you know you are asking the One who covers over what you cannot fix.',
+  b_ur:'اس سب کا مقصد محض قواعد یاد کرنا نہیں، بلکہ جب آپ دعا میں کہیں يَا غَفُور تو آپ کے دل کو معلوم ہو کہ آپ اس ہستی کو پکار رہے ہیں جو تمام عیوب کو ڈھانپ لیتی ہے۔',
+  b_no:'Målet er at når du sier يَا غَفُور i bønn, vet hjertet at du ber til Den som dekker over det du ikke kan rette opp.'}
 ];
-(function anatomy(){
+
+let curAnatomyIdx = 1;
+function updateAnatomyCard(i){
+  curAnatomyIdx = i;
+  const a=ANAT[i];
+  const card=$('#anatomyCard');
+  if(!card) return;
+  const partLbl = LANG==='ur' ? `حصہ ${a.n} از 6` : (LANG==='no' ? `Del ${a.n} av 6` : `Part ${a.n} of 6`);
+  const hText = (LANG==='ur' ? a.h_ur : (LANG==='no' ? a.h_no : a.h_en));
+  const bText = (LANG==='ur' ? a.b_ur : (LANG==='no' ? a.b_no : a.b_en));
+  card.innerHTML=`<div class="badge gold">${partLbl}</div>
+    <h3 class="ar" style="font-size:clamp(26px,3vw,38px);margin:14px 0 4px;direction:rtl;text-align:right">${a.t.split(' · ')[0]}</h3>
+    <p style="font-weight:800;font-size:1.15rem;margin:0 0 10px;color:var(--gold)">${hText}</p>
+    <p class="mut" style="margin:0">${bText}</p>`;
+  $$('#anatomyStage .hot').forEach(h=>h.style.opacity=(+h.dataset.a===i)?1:.55);
+}
+
+(function initAnatomy(){
   const host=$('#anatomyStage'); const bx=520,by=560;
   const spots=[[bx-235,by+16],[bx,by+118],[bx+16,by-96],[bx+150,by-300],[bx-190,by-400],[bx+215,by-380]];
   const extra=spots.map((p,i)=>`<g class="hot" data-a="${i}" tabindex="0" role="button" aria-label="${ANAT[i].t}">
@@ -1198,306 +1523,408 @@ const ANAT=[
   const sc=buildScene({vbw:1040,vbh:760,bx,by,len:150,wid:52,depth:7,spread:27,hue:120,accent:'#f5bf5f',
     roots:true,fruit:5,scale:.95,extra,label:'Labelled anatomy of a word tree'});
   host.innerHTML=sc.svg; animateGrowth(host,sc.id,sc.maxR);
-  const card=$('#anatomyCard');
-  function show(i){
-    const a=ANAT[i];
-    card.innerHTML=`<div class="badge gold">Part ${a.n} of 6</div>
-      <h3 class="ar" style="font-size:clamp(26px,3vw,38px);margin:14px 0 4px;direction:rtl;text-align:right">${a.t.split(' · ')[0]}</h3>
-      <p style="font-weight:800;font-size:1.15rem;margin:0 0 10px;color:var(--gold)">${a.h}</p>
-      <p class="mut" style="margin:0">${a.b}</p>`;
-    host.querySelectorAll('.hot').forEach(h=>h.style.opacity=(+h.dataset.a===i)?1:.55);
-  }
   host.querySelectorAll('.hot').forEach(h=>{
-    h.addEventListener('click',()=>show(+h.dataset.a));
-    h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(+h.dataset.a);}});
+    h.addEventListener('click',()=>updateAnatomyCard(+h.dataset.a));
+    h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();updateAnatomyCard(+h.dataset.a);}});
   });
-  show(1);
+  updateAnatomyCard(1);
 })();
 
 /* =====================================================================
    5. ROOT EXPLORER
 ===================================================================== */
-(function explorer(){
-  const shelf=$('#seedShelf'),stage=$('#stage'),tip=$('#tip');
-  let cur=0,scene=null;
-  shelf.innerHTML=ROOTS.map((r,i)=>`<button class="seed" data-i="${i}" aria-pressed="${i===0}" style="--sc:${r.accent}">
-      <span class="sl">${r.letters}</span><span class="sg">${r.core.split(' · ')[0]}</span></button>`).join('');
-  function rootLetterSVG(r,bx,by,accent){
-    const L=r.letters.split(' ');
-    const pos=[[bx+150,by+92],[bx,by+134],[bx-150,by+92]]; // rtl: first letter to the right
-    return pos.map((p,i)=>`<g class="rootorb">
-       <circle cx="${p[0]}" cy="${p[1]}" r="42" fill="${accent}" opacity=".16"/>
-       <circle cx="${p[0]}" cy="${p[1]}" r="29" fill="#0a1310" stroke="${accent}" stroke-width="2.4"/>
-       <text x="${p[0]}" y="${p[1]+12}" text-anchor="middle" font-size="32" fill="#fff">${L[i]}</text></g>`).join('')
-      +`<text x="${bx}" y="${by+192}" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800"
-         font-size="14" letter-spacing="3" fill="${accent}" opacity=".9">THE ROOT · الجَذْر</text>`;
-  }
-  function paint(i,seed){
-    cur=i; const r=ROOTS[i];
-    document.documentElement.style.setProperty('--sc',r.accent);
-    $$('.seed',shelf).forEach(b=>b.setAttribute('aria-pressed',(+b.dataset.i===i)));
-    const bx=550,by=580;
-    scene=buildScene({vbw:1100,vbh:840,bx,by,len:152,wid:50,depth:7,spread:27,hue:r.hue,accent:r.accent,
-      words:r.words,roots:true,fruit:0,scale:.95,seed,rootLetters:rootLetterSVG(r,bx,by,r.accent),
-      label:'Tree of the root '+r.tr});
-    stage.innerHTML=scene.svg; stage.appendChild(tip);
-    animateGrowth(stage,scene.id,scene.maxR);
-    $('#leafCount').textContent=Math.min(r.words.length,scene.placed.length);
-    /* root card */
-    $('#rootCard').innerHTML=`<p class="rootbig" style="color:${r.accent}">${r.letters}</p>
-      <p style="font-weight:800;letter-spacing:.08em;margin:0;color:var(--gold)">${r.tr}</p>
-      <p style="font-size:1.3rem;font-weight:800;margin:12px 0 4px">${r.core}</p>
-      <p class="mut" style="margin:0 0 16px">${r.soil}</p>
-      <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:800">
-        <span>Approx. occurrences in the Qur'ān</span><span style="color:${r.accent}">≈ ${r.freq}</span></div>
-      <div class="freqbar"><i style="width:${Math.min(100,(r.freq/1722)*100).toFixed(1)}%;background:linear-gradient(90deg,${r.accent},#fff3)"></i></div>`;
-    /* chips */
-    $('#chipBox').innerHTML=r.words.map((w,k)=>`<button class="chip" data-k="${k}" style="--sc:${r.accent}">${w.ar}</button>`).join('');
-    $$('#chipBox .chip').forEach(c=>c.addEventListener('click',()=>select(+c.dataset.k)));
-    /* leaves events */
-    stage.querySelectorAll('.wleaf').forEach(g=>{
-      const k=+g.dataset.i, w=r.words[k];
-      g.addEventListener('click',()=>select(k));
-      g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(k);}});
-      g.addEventListener('mouseenter',()=>{tip.innerHTML=`<b>${w.ar}</b><span style="color:${r.accent};font-weight:800">${w.form}</span><br>${w.en}`;tip.classList.add('on');});
-      g.addEventListener('mousemove',e=>{const b=stage.getBoundingClientRect();
-        tip.style.left=Math.min(b.width-286,Math.max(8,e.clientX-b.left+14))+'px';
-        tip.style.top=Math.max(8,e.clientY-b.top-84)+'px';});
-      g.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+let explorerCur = 0, explorerScene = null, explorerCurWord = 0;
+
+function rootLetterSVG(r,bx,by,accent){
+  const L=r.letters.split(' ');
+  const pos=[[bx+150,by+92],[bx,by+134],[bx-150,by+92]];
+  const rootLbl = LANG==='ur' ? 'الجَذْر · بنیادی جڑ' : (LANG==='no' ? 'ROTEN · الجَذْر' : 'THE ROOT · الجَذْر');
+  return pos.map((p,i)=>`<g class="rootorb">
+     <circle cx="${p[0]}" cy="${p[1]}" r="42" fill="${accent}" opacity=".16"/>
+     <circle cx="${p[0]}" cy="${p[1]}" r="29" fill="#0a1310" stroke="${accent}" stroke-width="2.4"/>
+     <text x="${p[0]}" y="${p[1]+12}" text-anchor="middle" font-size="32" fill="#fff">${L[i]}</text></g>`).join('')
+    +`<text x="${bx}" y="${by+192}" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800"
+       font-size="14" letter-spacing="3" fill="${accent}" opacity=".9">${rootLbl}</text>`;
+}
+
+function selectExplorerWord(k){
+  explorerCurWord = k;
+  const r=ROOTS[explorerCur], w=r.words[k]; if(!w) return;
+  $$('#chipBox .chip').forEach(c=>c.classList.toggle('on',+c.dataset.k===k));
+  $('#stage').querySelectorAll('.wleaf').forEach(g=>g.classList.toggle('sel',+g.dataset.i===k));
+  
+  const wMeaning = getWordEn(w);
+  const qTrans = getWordQen(w);
+  const coreVal = getRootCore(r);
+  const tagText = w.tag==='modern' 
+    ? (LANG==='ur' ? '<span class="badge sky">جدید عربی میں بھی مستعمل</span>' : (LANG==='no' ? '<span class="badge sky">også i moderne arabisk</span>' : '<span class="badge sky">also modern Arabic</span>'))
+    : (LANG==='ur' ? '<span class="badge gold">قرآن مجید '+w.ref+'</span>' : (LANG==='no' ? '<span class="badge gold">Koranen '+w.ref+'</span>' : '<span class="badge gold">Qur\'ān '+w.ref+'</span>'));
+  
+  const notQuranText = LANG==='ur' 
+    ? `<p class="mut" style="margin:0">یہ لفظ قرآن میں نہیں آیا مگر اسی جذر سے نکلا ہے — جو اس بات کا ثبوت ہے کہ یہ زبان آج بھی زندہ ہے۔</p>`
+    : (LANG==='no' ? `<p class="mut" style="margin:0">Ikke et koransk ord, men bygget fra nøyaktig samme rot – et bevis på at språket lever.</p>`
+    : `<p class="mut" style="margin:0">Not a Qur'ānic word, but built from the very same root — proof the language is still alive and still growing.</p>`);
+    
+  const askText = LANG==='ur' 
+    ? `جذر <b style="color:${r.accent}">${r.letters}</b> کا بنیادی مفہوم: ${coreVal}۔ طلبہ سے پوچھیں: <em>یہ مفہوم اس لفظ میں کیسے ظاہر ہو رہا ہے؟</em>`
+    : (LANG==='no' ? `Kjerneidé for <b style="color:${r.accent}">${r.letters}</b>: ${coreVal}. Spør elevene: <em>hvordan kommer denne roten til syne i ordet?</em>`
+    : `Core sense of <b style="color:${r.accent}">${r.letters}</b>: ${coreVal}. Ask your students: <em>how does that core show up in this word?</em>`);
+
+  $('#wordCard').innerHTML=`
+    <p class="w" style="color:#fff">${w.ar}</p>
+    <p class="tr" style="margin:0">${w.tr}</p>
+    <p class="en">${wMeaning}</p>
+    <div class="metaline"><span class="badge" style="background:${r.accent}22;color:${r.accent};border-color:${r.accent}55">${w.form}</span>
+      ${tagText}</div>
+    ${w.q?`<div class="qref"><p class="q">${w.q}</p><p style="margin:0;font-size:.98rem;color:#ffeecd">${qTrans}</p>
+      <small>— ${w.ref}</small></div>`:notQuranText}
+    <p class="mut" style="margin:14px 0 0;font-size:.94rem">${askText}</p>`;
+}
+
+function paintExplorer(i,seed){
+  explorerCur = i; const r=ROOTS[i];
+  document.documentElement.style.setProperty('--sc',r.accent);
+  $$('.seed', $('#seedShelf')).forEach(b=>b.setAttribute('aria-pressed',(+b.dataset.i===i)));
+  const bx=550,by=580;
+  explorerScene=buildScene({vbw:1100,vbh:840,bx,by,len:152,wid:50,depth:7,spread:27,hue:r.hue,accent:r.accent,
+    words:r.words,roots:true,fruit:0,scale:.95,seed,rootLetters:rootLetterSVG(r,bx,by,r.accent),
+    label:'Tree of the root '+r.tr});
+  const stage=$('#stage'), tip=$('#tip');
+  stage.innerHTML=explorerScene.svg; stage.appendChild(tip);
+  animateGrowth(stage,explorerScene.id,explorerScene.maxR);
+  $('#leafCount').textContent=Math.min(r.words.length,explorerScene.placed.length);
+  
+  const freqLabel = (I18N_UI[LANG]||I18N_UI.en).rootFreqLabel;
+  const coreVal = getRootCore(r);
+  const soilVal = getRootSoil(r);
+  
+  $('#rootCard').innerHTML=`<p class="rootbig" style="color:${r.accent}">${r.letters}</p>
+    <p style="font-weight:800;letter-spacing:.08em;margin:0;color:var(--gold)">${r.tr}</p>
+    <p style="font-size:1.3rem;font-weight:800;margin:12px 0 4px">${coreVal}</p>
+    <p class="mut" style="margin:0 0 16px">${soilVal}</p>
+    <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:800">
+      <span>${freqLabel}</span><span style="color:${r.accent}">≈ ${r.freq}</span></div>
+    <div class="freqbar"><i style="width:${Math.min(100,(r.freq/1722)*100).toFixed(1)}%;background:linear-gradient(90deg,${r.accent},#fff3)"></i></div>`;
+    
+  $('#chipBox').innerHTML=r.words.map((w,k)=>`<button class="chip" data-k="${k}" style="--sc:${r.accent}">${w.ar}</button>`).join('');
+  $$('#chipBox .chip').forEach(c=>c.addEventListener('click',()=>selectExplorerWord(+c.dataset.k)));
+  
+  stage.querySelectorAll('.wleaf').forEach(g=>{
+    const k=+g.dataset.i, w=r.words[k];
+    g.addEventListener('click',()=>selectExplorerWord(k));
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectExplorerWord(k);}});
+    g.addEventListener('mouseenter',()=>{
+      tip.innerHTML=`<b>${w.ar}</b><span style="color:${r.accent};font-weight:800">${w.form}</span><br>${getWordEn(w)}`;
+      tip.classList.add('on');
     });
-    select(0);
-  }
-  function select(k){
-    const r=ROOTS[cur], w=r.words[k]; if(!w) return;
-    $$('#chipBox .chip').forEach(c=>c.classList.toggle('on',+c.dataset.k===k));
-    stage.querySelectorAll('.wleaf').forEach(g=>g.classList.toggle('sel',+g.dataset.i===k));
-    $('#wordCard').innerHTML=`
-      <p class="w" style="color:#fff">${w.ar}</p>
-      <p class="tr" style="margin:0">${w.tr}</p>
-      <p class="en">${w.en}</p>
-      <div class="metaline"><span class="badge" style="background:${r.accent}22;color:${r.accent};border-color:${r.accent}55">${w.form}</span>
-        ${w.tag==='modern'?'<span class="badge sky">also modern Arabic</span>':'<span class="badge gold">Qur\'ān '+w.ref+'</span>'}</div>
-      ${w.q?`<div class="qref"><p class="q">${w.q}</p><p style="margin:0;font-size:.98rem;color:#ffeecd">${w.qen}</p>
-        <small>— ${w.ref}</small></div>`:`<p class="mut" style="margin:0">Not a Qur'ānic word, but built from the very
-        same root — proof the language is still alive and still growing from these three letters.</p>`}
-      <p class="mut" style="margin:14px 0 0;font-size:.94rem">Core sense of <b style="color:${r.accent}">${r.letters}</b>:
-        ${r.core}. Ask your students: <em>how does that core show up in this word?</em></p>`;
-  }
-  shelf.addEventListener('click',e=>{const b=e.target.closest('.seed');if(b)paint(+b.dataset.i);});
-  $('#regrow').addEventListener('click',()=>paint(cur,(Math.random()*1e9)|0));
-  $('#nextRoot').addEventListener('click',()=>paint((cur+1+((Math.random()*(ROOTS.length-1))|0))%ROOTS.length));
-  paint(0,20250101);
+    g.addEventListener('mousemove',e=>{const b=stage.getBoundingClientRect();
+      tip.style.left=Math.min(b.width-286,Math.max(8,e.clientX-b.left+14))+'px';
+      tip.style.top=Math.max(8,e.clientY-b.top-84)+'px';});
+    g.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+  });
+  selectExplorerWord(0);
+}
+
+function updateSeedShelf(){
+  const shelf=$('#seedShelf');
+  shelf.innerHTML=ROOTS.map((r,i)=>`<button class="seed" data-i="${i}" aria-pressed="${i===explorerCur}" style="--sc:${r.accent}">
+      <span class="sl">${r.letters}</span><span class="sg">${getRootCore(r).split(' · ')[0]}</span></button>`).join('');
+}
+
+(function initExplorer(){
+  updateSeedShelf();
+  $('#seedShelf').addEventListener('click',e=>{const b=e.target.closest('.seed');if(b)paintExplorer(+b.dataset.i);});
+  $('#regrow').addEventListener('click',()=>paintExplorer(explorerCur,(Math.random()*1e9)|0));
+  $('#nextRoot').addEventListener('click',()=>paintExplorer((explorerCur+1+((Math.random()*(ROOTS.length-1))|0))%ROOTS.length));
+  paintExplorer(0,20250101);
 })();
 
 /* =====================================================================
    6. PEELING LAB
 ===================================================================== */
 const PEEL=[
- {title:'وَالْمُسْتَغْفِرِينَ',root:'غ ف ر',rmean:'covering / forgiving',
-  gloss:'“…and those who seek forgiveness” (Āl ʿImrān 3:17)',
-  segs:[{t:'وَ',k:'prefix',l:'and'},{t:'الْ',k:'prefix',l:'the'},{t:'مُسْتَ',k:'shell',l:'Form X doer'},
-        {t:'غ',k:'root'},{t:'ف',k:'root'},{t:'ر',k:'root'},{t:'ينَ',k:'suffix',l:'masc. plural'}]},
- {title:'أَفَلَا يَتَذَكَّرُونَ',root:'ذ ك ر',rmean:'remembering / mentioning',
-  gloss:'“Will they not then remember?” (al-Anʿām 6:80 style)',
-  segs:[{t:'أَ',k:'prefix',l:'question'},{t:'فَ',k:'prefix',l:'so/then'},{t:'لَا',k:'prefix',l:'not'},
-        {t:'يَ',k:'shell',l:'he/they do'},{t:'تَ',k:'shell',l:'Form V'},{t:'ذ',k:'root'},{t:'كّ',k:'root'},
-        {t:'ر',k:'root'},{t:'ونَ',k:'suffix',l:'they (plural)'}]},
- {title:'لِيُخْرِجَكُم',root:'خ ر ج',rmean:'going out / bringing out',
-  gloss:'“…so that He may bring you out” (al-Baqarah 2:257 style)',
-  segs:[{t:'لِ',k:'prefix',l:'so that'},{t:'يُ',k:'shell',l:'he does'},{t:'خ',k:'root'},{t:'ر',k:'root'},
-        {t:'ج',k:'root'},{t:'كُم',k:'suffix',l:'you (pl.) object'}]},
- {title:'الْمَسَاجِد',root:'س ج د',rmean:'prostration',
-  gloss:'“the places of prostration = mosques” (al-Tawbah 9:18)',
-  segs:[{t:'الْ',k:'prefix',l:'the'},{t:'مَ',k:'shell',l:'place of'},{t:'س',k:'root'},{t:'ا',k:'shell',l:'plural stretch'},
-        {t:'ج',k:'root'},{t:'ِ',k:'shell',l:'plural vowel'},{t:'د',k:'root'}]}
+ {title:'وَالْمُسْتَغْفِرِينَ',root:'غ ف ر',
+  rmean_en:'covering / forgiving',rmean_ur:'ڈھانپنا / بخشش طلب کرنا',rmean_no:'å dekke over / tilgivelse',
+  gloss_en:'“…and those who seek forgiveness” (Āl ʿImrān 3:17)',
+  gloss_ur:'“…اور سحر کے وقت بخشش مانگنے والے” (آل عمران 3:17)',
+  gloss_no:'“…og de som søker tilgivelse” (Al Imran 3:17)',
+  segs:[{t:'وَ',k:'prefix',l_en:'and',l_ur:'اور',l_no:'og'},{t:'الْ',k:'prefix',l_en:'the',l_ur:'الـ (معرفہ)',l_no:'den'},{t:'مُسْتَ',k:'shell',l_en:'Form X doer',l_ur:'باب استفعال فاعل',l_no:'Form X doer'},
+        {t:'غ',k:'root'},{t:'ف',k:'root'},{t:'ر',k:'root'},{t:'ينَ',k:'suffix',l_en:'masc. plural',l_ur:'جمع مذکر',l_no:'flertall'}]},
+ {title:'أَفَلَا يَتَذَكَّرُونَ',root:'ذ ك ر',
+  rmean_en:'remembering / mentioning',rmean_ur:'یاد کرنا / نصیحت لینا',rmean_no:'å huske / påminne',
+  gloss_en:'“Will they not then remember?” (al-Anʿām 6:80 style)',
+  gloss_ur:'“کیا تم نصیحت قبول نہیں کرتے؟” (الانعام 6:80)',
+  gloss_no:'“Vil de da ikke huske?” (Al-Anam 6:80)',
+  segs:[{t:'أَ',k:'prefix',l_en:'question',l_ur:'ہمزۂ استفہام',l_no:'spørsmål'},{t:'فَ',k:'prefix',l_en:'so/then',l_ur:'پس',l_no:'så/derfor'},{t:'لَا',k:'prefix',l_en:'not',l_ur:'نفی',l_no:'ikke'},
+        {t:'يَ',k:'shell',l_en:'he/they do',l_ur:'علامت مضارع',l_no:'han/de gjør'},{t:'تَ',k:'shell',l_en:'Form V',l_ur:'باب تفعل',l_no:'Form V'},{t:'ذ',k:'root'},{t:'كّ',k:'root'},
+        {t:'ر',k:'root'},{t:'ونَ',k:'suffix',l_en:'they (plural)',l_ur:'جمع فاعل',l_no:'de (flertall)'}]},
+ {title:'لِيُخْرِجَكُم',root:'خ ر ج',
+  rmean_en:'going out / bringing out',rmean_ur:'نکالنا / باہر لانا',rmean_no:'å gå ut / bringe ut',
+  gloss_en:'“…so that He may bring you out” (al-Baqarah 2:257 style)',
+  gloss_ur:'“…تاکہ وہ تمہیں نکال لائے” (البقرہ 2:257)',
+  gloss_no:'“…for at Han skal bringe dere ut” (Al-Baqarah 2:257)',
+  segs:[{t:'لِ',k:'prefix',l_en:'so that',l_ur:'لام تعلیل (تاکہ)',l_no:'slik at'},{t:'يُ',k:'shell',l_en:'he does',l_ur:'علامت مضارع',l_no:'han gjør'},{t:'خ',k:'root'},{t:'ر',k:'root'},
+        {t:'ج',k:'root'},{t:'كُم',k:'suffix',l_en:'you (pl.) object',l_ur:'ضمیر مفعول (تمہیں)',l_no:'dere (objekt)'}]},
+ {title:'الْمَسَاجِد',root:'س ج د',
+  rmean_en:'prostration',rmean_ur:'سجدہ کرنا / عبادت گاہ',rmean_no:'underkastelse / prostrasjon',
+  gloss_en:'“the places of prostration = mosques” (al-Tawbah 9:18)',
+  gloss_ur:'“سجدہ گاہیں یعنی مساجد” (التوبہ 9:18)',
+  gloss_no:'“steder for underkastelse = moskeer” (At-Tawbah 9:18)',
+  segs:[{t:'الْ',k:'prefix',l_en:'the',l_ur:'الـ',l_no:'den/de'},{t:'مَ',k:'shell',l_en:'place of',l_ur:'اسم ظرف',l_no:'sted for'},{t:'س',k:'root'},{t:'ا',k:'shell',l_en:'plural stretch',l_ur:'الف جمع',l_no:'flertall'},
+        {t:'ج',k:'root'},{t:'ِ',k:'shell',l_en:'plural vowel',l_ur:'کسرہ',l_no:'vokal'},{t:'د',k:'root'}]}
 ];
-(function peelLab(){
-  const tabs=$('#peelTabs'),row=$('#segRow'),msg=$('#peelMsg');
-  let idx=0;
+
+let peelIdx = 0;
+function renderPeel(){
+  const p=PEEL[peelIdx];
+  const row=$('#segRow'), msg=$('#peelMsg');
+  const gloss = (LANG==='ur' ? p.gloss_ur : (LANG==='no' ? p.gloss_no : p.gloss_en));
+  const instr = (I18N_UI[LANG]||I18N_UI.en).peelInstruction;
+  
+  row.innerHTML=p.segs.map((s,i)=>{
+    const lbl = s.k==='root' ? '' : (LANG==='ur'?s.l_ur : (LANG==='no'?s.l_no : s.l_en));
+    return `<button class="seg ${s.k}" data-i="${i}" ${s.k==='root'?'disabled':''}>
+      ${s.t}${lbl?`<small>${lbl}</small>`:''}</button>`;
+  }).join('');
+  
+  msg.innerHTML=`<p class="mut" style="margin:0">${gloss}<br>${instr}</p>`;
+  $$('#segRow .seg').forEach(b=>b.addEventListener('click',()=>{
+    if(b.classList.contains('root'))return;
+    b.classList.add('gone'); checkPeel();
+  }));
+}
+
+function checkPeel(){
+  const left=$$('#segRow .seg:not(.root):not(.gone)').length;
+  if(left===0){
+    const p=PEEL[peelIdx];
+    const rmean = (LANG==='ur' ? p.rmean_ur : (LANG==='no' ? p.rmean_no : p.rmean_en));
+    const foundText = LANG==='ur' ? 'جذر دریافت ہو گیا:' : (LANG==='no' ? 'Rot funnet:' : 'Root found:');
+    const coreText = LANG==='ur' ? `بنیادی مفہوم: <b>${rmean}</b>۔ اب اس جذر سے اسم فاعل، مفعول اور دیگر اوزان بنائیں۔` : (LANG==='no' ? `Kjerneidé: <b>${rmean}</b>. Bygg videre med handlende, sted og verb.` : `Core idea: <b>${rmean}</b>. Now build siblings out loud — the doer, the place, the noun.`);
+    $$('#segRow .seg.root').forEach((b,i)=>setTimeout(()=>b.classList.add('pop'),i*130));
+    $('#peelMsg').innerHTML=`<p style="font-size:1.15rem;font-weight:800;margin:0 0 6px">✅ ${foundText}
+      <span class="ar" style="font-size:1.9rem;letter-spacing:.16em;color:var(--leaf)">${p.root}</span></p>
+      <p class="mut" style="margin:0">${coreText}</p>`;
+  }
+}
+
+(function initPeelLab(){
+  const tabs=$('#peelTabs');
   tabs.innerHTML=PEEL.map((p,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${p.title}</button>`).join('');
-  function render(){
-    const p=PEEL[idx];
-    row.innerHTML=p.segs.map((s,i)=>`<button class="seg ${s.k}" data-i="${i}" ${s.k==='root'?'disabled':''}>
-      ${s.t}${s.l?`<small>${s.l}</small>`:''}</button>`).join('');
-    msg.innerHTML=`<p class="mut" style="margin:0">${p.gloss}<br>Peel away every coloured piece until only the
-      <b style="color:var(--leaf)">green root letters</b> are left.</p>`;
-    $$('#segRow .seg').forEach(b=>b.addEventListener('click',()=>{
-      if(b.classList.contains('root'))return;
-      b.classList.add('gone'); check();
-    }));
-  }
-  function check(){
-    const left=$$('#segRow .seg:not(.root):not(.gone)').length;
-    if(left===0){
-      const p=PEEL[idx];
-      $$('#segRow .seg.root').forEach((b,i)=>setTimeout(()=>b.classList.add('pop'),i*130));
-      msg.innerHTML=`<p style="font-size:1.15rem;font-weight:800;margin:0 0 6px">✅ Root found:
-        <span class="ar" style="font-size:1.9rem;letter-spacing:.16em;color:var(--leaf)">${p.root}</span></p>
-        <p class="mut" style="margin:0">Core idea: <b>${p.rmean}</b>. Now build siblings out loud with your class —
-        the doer, the place, the Form X noun.</p>`;
-    }
-  }
   $('#peelNext').addEventListener('click',()=>{
     const next=$('#segRow .seg:not(.root):not(.gone)');
-    if(next){next.classList.add('gone');check();}
+    if(next){next.classList.add('gone');checkPeel();}
   });
-  $('#peelReset').addEventListener('click',render);
+  $('#peelReset').addEventListener('click',renderPeel);
   tabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
-    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');idx=+b.dataset.i;render();});
-  render();
+    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');peelIdx=+b.dataset.i;renderPeel();});
+  renderPeel();
 })();
 
 /* =====================================================================
-   7. MIZAN MACHINE + TEN FORMS
+   7. MIZAN & FORMS
 ===================================================================== */
 const PATTERNS=[
- {id:'fal',name:'فَعْل',t:'{1}َ{2}ْ{3}',m:'A simple action or thing — the bare noun of the action. حَمْد، نَصْر، قَوْل'},
- {id:'fil',name:'فِعْل',t:'{1}ِ{2}ْ{3}',m:'An abstract concept or state. عِلْم، ذِكْر، سِلْم'},
- {id:'fiaal',name:'فِعَال',t:'{1}ِ{2}َا{3}',m:'A thing/result, often something you can hold. كِتَاب، حِسَاب'},
- {id:'faail',name:'فَاعِل',t:'{1}َا{2}ِ{3}',m:'THE DOER (active participle) — the one who does it right now. كَاتِب، عَالِم، صَابِر'},
- {id:'mafuul',name:'مَفْعُول',t:'مَ{1}ْ{2}ُو{3}',m:'THE DONE-TO (passive participle) — the one it happened to. مَكْتُوب، مَعْلُوم، مَنْصُور'},
- {id:'mafal',name:'مَفْعَل',t:'مَ{1}ْ{2}َ{3}',m:'PLACE or TIME of the action. مَكْتَب (office)، مَسْجِد، مَطْلَع'},
- {id:'mafalah',name:'مَفْعَلَة',t:'مَ{1}ْ{2}َ{3}َة',m:'Place (feminine) or an abundance of something. مَكْتَبَة، مَرْحَمَة'},
- {id:'mafilah',name:'مَفْعِرَة→مَفْعِلَة',t:'مَ{1}ْ{2}ِ{3}َة',m:'The abstract noun of the action. مَغْفِرَة، مَعْرِفَة'},
- {id:'mifaal',name:'مِفْعَال',t:'مِ{1}ْ{2}َا{3}',m:'THE TOOL / instrument you do it with. مِفْتَاح (key)، مِيزَان، مِصْبَاح'},
- {id:'faaal',name:'فَعَّال',t:'{1}َ{2}َّا{3}',m:'Someone who does it INTENSELY or professionally. غَفَّار، جَبَّار، خَبَّاز (baker)'},
- {id:'fail',name:'فَعِيل',t:'{1}َ{2}ِي{3}',m:'A lasting quality baked into the thing. عَلِيم، رَحِيم، حَمِيد، نَصِير'},
- {id:'tafiil',name:'تَفْعِيل',t:'تَ{1}ْ{2}ِي{3}',m:'The verbal noun of Form II — the ACT of making it happen. تَعْلِيم، تَسْلِيم، تَكْبِير'},
- {id:'istifaal',name:'اِسْتِفْعَال',t:'اِسْتِ{1}ْ{2}َا{3}',m:'SEEKING / asking for it (Form X noun). اِسْتِغْفَار، اِسْتِنْصَار، اِسْتِمَاع'}
+ {id:'fal',name:'فَعْل',t:'{1}َ{2}ْ{3}',
+  m_en:'A simple action or thing — bare noun. حَمْد، نَصْر، قَوْل',
+  m_ur:'سادہ مصدر یا اسم۔ حَمْد، نَصْر، قَوْل',
+  m_no:'En enkel handling eller ting – substantiv. حَمْد، نَصْر، قَوْل'},
+ {id:'fil',name:'فِعْل',t:'{1}ِ{2}ْ{3}',
+  m_en:'An abstract concept or state. عِلْم، ذِكْر، سِلْم',
+  m_ur:'مجرد مفہوم یا کیفیت۔ عِلْم، ذِكْر، سِلْم',
+  m_no:'Et abstrakt konsept eller tilstand. عِلْم، ذِكْر، سِلْم'},
+ {id:'fiaal',name:'فِعَال',t:'{1}ِ{2}َا{3}',
+  m_en:'A thing/result, tangible. كِتَاب، حِسَاب',
+  m_ur:'نتیجہ یا ٹھوس چیز۔ كِتَاب، حِسَاب',
+  m_no:'En ting eller resultat. كِتَاب، حِسَاب'},
+ {id:'faail',name:'فَاعِل',t:'{1}َا{2}ِ{3}',
+  m_en:'THE DOER (active participle) — the one doing it. كَاتِب، عَالِم، صَابِر',
+  m_ur:'اسمِ فاعل — کام کرنے والا۔ كَاتِب، عَالِم، صَابِر',
+  m_no:'DEN SOM GJØR (aktiv partisipp). كَاتِب، عَالِم، صَابِر'},
+ {id:'mafuul',name:'مَفْعُول',t:'مَ{1}ْ{2}ُو{3}',
+  m_en:'THE DONE-TO (passive participle). مَكْتُوب، مَعْلُوم، مَنْصُور',
+  m_ur:'اسمِ مفعول — جس پر کام ہوا ہو۔ مَكْتُوب، مَعْلُوم، مَنْصُور',
+  m_no:'DEN DET GJØRES MOT (passiv partisipp). مَكْتُوب، مَعْلُوم'},
+ {id:'mafal',name:'مَفْعَل',t:'مَ{1}ْ{2}َ{3}',
+  m_en:'PLACE or TIME of action. مَكْتَب (office)، مَسْجِد، مَطْلَع',
+  m_ur:'اسمِ ظرف — کام کی جگہ یا وقت۔ مَكْتَب، مَسْجِد',
+  m_no:'Sted eller tid for handlingen. مَكْتَب، مَسْجِد'},
+ {id:'mafalah',name:'مَفْعَلَة',t:'مَ{1}ْ{2}َ{3}َة',
+  m_en:'Place (fem.) or abundance. مَكْتَبَة، مَرْحَمَة',
+  m_ur:'کثرت یا جگہ (مونث)۔ مَكْتَبَة، مَرْحَمَة',
+  m_no:'Sted (fem.) eller overflod. مَكْتَبَة، مَرْحَمَة'},
+ {id:'mifaal',name:'مِفْعَال',t:'مِ{1}ْ{2}َا{3}',
+  m_en:'THE TOOL / instrument. مِفْتَاح (key)، مِيزَان، مِصْبَاح',
+  m_ur:'اسمِ آلہ — جس سے کام لیا جائے۔ مِفْتَاح، مِيزَان',
+  m_no:'VERKTØYET som brukes. مِفْتَاح، مِيزَان'},
+ {id:'faaal',name:'فَعَّال',t:'{1}َ{2}َّا{3}',
+  m_en:'INTENSE doer or profession. غَفَّار، جَبَّار',
+  m_ur:'مبالغہ — کثرت سے کرنے والا یا پیشہ۔ غَفَّار، جَبَّار',
+  m_no:'INTENS utfører. غَفَّار، جَبَّار'},
+ {id:'fail',name:'فَعِيل',t:'{1}َ{2}ِي{3}',
+  m_en:'Lasting quality. عَلِيم، رَحِيم، حَمِيد، نَصِير',
+  m_ur:'صفتِ مشبہ — دائمی وصف۔ عَلِيم، رَحِيم، حَمِيد',
+  m_no:'Varig egenskap. عَلِيم، رَحِيم، حَمِيد'}
 ];
+
 const ATTESTED={
  'كتب|faail':"كَاتِب — a scribe (2:282)",'كتب|mafuul':"مَكْتُوب — written (7:157)",
  'كتب|fiaal':"كِتَاب — book (2:2)",'كتب|mafal':"مَكْتَب — office/desk (modern Arabic)",
  'كتب|mafalah':"مَكْتَبَة — library (modern Arabic)",
  'علم|faail':"عَالِم — a scholar (35:28)",'علم|fail':"عَلِيم — All-Knowing (2:32)",
  'علم|fil':"عِلْم — knowledge (2:32)",'علم|mafuul':"مَعْلُوم — known/appointed (15:38)",
- 'علم|tafiil':"تَعْلِيم — teaching (classical & modern)",
- 'غفر|faaal':"غَفَّار — Ever-Forgiving (20:82)",'غفر|istifaal':"اِسْتِغْفَار — seeking forgiveness",
- 'غفر|mafilah':"مَغْفِرَة — forgiveness (2:221)",'غفر|fail':"غَفِير — plentiful/covering (classical)",
+ 'غفر|faaal':"غَفَّار — Ever-Forgiving (20:82)",'غفر|fail':"غَفِير — plentiful/covering",
  'فتح|mifaal':"مِفْتَاح — a key (6:59)",'فتح|faail':"فَاتِح — the opener (7:89)",
  'فتح|fal':"فَتْح — victory, opening (110:1)",
  'نصر|faail':"نَاصِر — helper (3:150)",'نصر|fail':"نَصِير — constant helper (4:45)",
  'نصر|mafuul':"مَنْصُور — divinely aided (17:33)",'نصر|fal':"نَصْر — victory (110:1)",
- 'نصر|istifaal':"اِسْتِنْصَار — calling for help (cf. 28:18)",
  'حمد|fal':"حَمْد — praise (1:2)",'حمد|fail':"حَمِيد — Praiseworthy (14:1)",
  'حمد|mafuul':"مَحْمُود — praised (17:79)",'حمد|faail':"حَامِد — one who praises (9:112)",
  'ذكر|fil':"ذِكْر — remembrance (15:9)",'ذكر|mafuul':"مَذْكُور — mentioned (76:1)",
- 'ذكر|tafiil':"تَذْكِير — reminding (cf. تَذْكِرَة 20:3)",'ذكر|faail':"ذَاكِر — one who remembers (33:35)",
  'سلم|fail':"سَلِيم — sound, unblemished (26:89)",'سلم|fal':"سِلْم/سَلْم — peace (2:208)",
- 'سلم|tafiil':"تَسْلِيم — full submission (4:65)",'سلم|faail':"سَالِم — safe, intact (classical)",
  'صبر|faail':"صَابِر — steadfast (2:153)",'صبر|fal':"صَبْر — patience (2:45)",
- 'صبر|faaal':"صَبَّار — extremely patient (classical)",'صبر|istifaal':"اِسْتِصْبَار — cf. اصْطَبِرْ (19:65)",
  'رحم|fail':"رَحِيم — Ever-Merciful (1:1)",'رحم|mafalah':"مَرْحَمَة — compassion (90:17)",
  'رحم|faail':"رَاحِم — one who shows mercy (7:151)"
 };
-(function mizan(){
-  const sel=$('#patSel'),out=$('#mizWord'),ver=$('#mizVerdict'),pm=$('#patMeaning');
+
+function runMizan(){
+  const sel=$('#patSel'), out=$('#mizWord'), ver=$('#mizVerdict'), pm=$('#patMeaning');
+  if(!sel || !out) return;
+  const a=$('#L1').value.trim()||'ف',b=$('#L2').value.trim()||'ع',c=$('#L3').value.trim()||'ل';
+  const p=PATTERNS.find(x=>x.id===sel.value) || PATTERNS[0];
+  out.textContent=p.t.replace('{1}',a).replace('{2}',b).replace('{3}',c);
+  const pMean = LANG==='ur'?p.m_ur : (LANG==='no'?p.m_no : p.m_en);
+  pm.innerHTML=`<b class="ar" style="font-size:1.3rem">${p.name}</b> — ${pMean}`;
+  const key=a+b+c+'|'+p.id, hit=ATTESTED[key];
+  const weak=/[وياءأإآئؤ]/.test(a+b+c);
+  
+  const realWordBadge = LANG==='ur'?'✓ حقیقی لفظ':(LANG==='no'?'✓ ekte ord':'✓ real word');
+  const validBadge = LANG==='ur'?'⚗ درست سانچہ':'⚗ valid shape';
+  const validDesc = LANG==='ur'
+    ?'عربی میں اس سانچے پر لفظ بن سکتا تھا — طلبہ سے بحث کیجیے کہ اس کا کیا معنی ہو سکتا تھا۔'
+    :(LANG==='no'?'Arabisk kunne ha dannet dette ordet. Spør klassen hva det ville ha betydd.'
+    :'Arabic <em>could</em> have made this word. Ask the class: what would it have meant?');
+    
+  ver.innerHTML=(hit
+    ? `<span class="badge">${realWordBadge}</span><p style="font-weight:800;margin:10px 0 0">${hit}</p>`
+    : `<span class="badge gold">${validBadge}</span><p class="mut" style="margin:10px auto 0;max-width:52ch">${validDesc}</p>`)
+    + (weak?`<p class="mut" style="margin:12px auto 0;max-width:52ch;font-size:.92rem">⚠ ${LANG==='ur'?'اس جذر میں حرفِ علت شامل ہے۔':'This root contains a weak letter.'}</p>`:'');
+}
+
+(function initMizan(){
+  const sel=$('#patSel');
   sel.innerHTML=PATTERNS.map(p=>`<option value="${p.id}"${p.id==='faail'?' selected':''}>${p.name}</option>`).join('');
   const presets=[['ك','ت','ب'],['ع','ل','م'],['غ','ف','ر'],['ف','ت','ح'],['ن','ص','ر'],['ح','م','د'],['ذ','ك','ر'],['س','ل','م'],['ص','ب','ر'],['ر','ح','م']];
   $('#rootPresets').innerHTML=presets.map(p=>`<button class="chip">${p.join(' ')}</button>`).join('');
   $$('#rootPresets .chip').forEach((c,i)=>c.addEventListener('click',()=>{
-    $('#L1').value=presets[i][0];$('#L2').value=presets[i][1];$('#L3').value=presets[i][2];run();}));
-  function run(){
-    const a=$('#L1').value.trim()||'ف',b=$('#L2').value.trim()||'ع',c=$('#L3').value.trim()||'ل';
-    const p=PATTERNS.find(x=>x.id===sel.value);
-    out.textContent=p.t.replace('{1}',a).replace('{2}',b).replace('{3}',c);
-    pm.innerHTML=`<b class="ar" style="font-size:1.3rem">${p.name}</b> — ${p.m}`;
-    const key=a+b+c+'|'+p.id, hit=ATTESTED[key];
-    const weak=/[وياءأإآئؤ]/.test(a+b+c);
-    ver.innerHTML=(hit
-      ? `<span class="badge">✓ real word</span><p style="font-weight:800;margin:10px 0 0">${hit}</p>`
-      : `<span class="badge gold">⚗ valid shape, not coined</span>
-         <p class="mut" style="margin:10px auto 0;max-width:52ch">Arabic <em>could</em> have made this word — it just
-         didn't. Ask the class: what would it have meant? This is the best discussion in the whole lesson.</p>`)
-      + (weak?`<p class="mut" style="margin:12px auto 0;max-width:52ch;font-size:.92rem">⚠ This root contains a weak
-         letter (<b class="ar">و ي ا ء</b>). Real Arabic reshapes such words (قَالَ not قَوَلَ). Do these by hand.</p>`:'');
-  }
-  ['L1','L2','L3'].forEach(id=>$('#'+id).addEventListener('input',run));
-  sel.addEventListener('change',run); run();
+    $('#L1').value=presets[i][0];$('#L2').value=presets[i][1];$('#L3').value=presets[i][2];runMizan();}));
+  ['L1','L2','L3'].forEach(id=>$('#'+id).addEventListener('input',runMizan));
+  sel.addEventListener('change',runMizan); runMizan();
 })();
 
+/* FORMS I TO X */
 const FORMS=[
- {n:'I',p:'فَعَلَ',t:'The bare action',d:'The trunk. Just: he did it.',ex:'عَلِمَ',tr:'ʿalima — he knew',ref:'2:187',root:'ع ل م'},
- {n:'II',p:'فَعَّلَ',t:'Intensify or cause',d:'Doubling the middle letter doubles the force: make someone do it, or do it hard and repeatedly.',ex:'عَلَّمَ',tr:'ʿallama — he taught (made know)',ref:'55:2',root:'ع ل م'},
- {n:'III',p:'فَاعَلَ',t:'Do it WITH / AGAINST someone',d:'Two parties involved — the alif stretches the action towards another person.',ex:'جَاهَدَ',tr:'jāhada — he struggled (against)',ref:'9:73',root:'ج ه د'},
- {n:'IV',p:'أَفْعَلَ',t:'Cause it / make it happen',d:'A hamzah at the front makes it transitive: he brought it about.',ex:'أَنزَلَ',tr:'anzala — He sent (it) down',ref:'2:23',root:'ن ز ل'},
- {n:'V',p:'تَفَعَّلَ',t:'Do Form II to yourself, gradually',d:'تَ + doubling: the action turns back on the doer, step by step.',ex:'تَذَكَّرَ',tr:'tadhakkara — he brought himself to remember',ref:'6:80',root:'ذ ك ر'},
- {n:'VI',p:'تَفَاعَلَ',t:'Do it to one another',d:'Mutual, reciprocal — a whole group involved together.',ex:'تَعَاوَنُوا',tr:'taʿāwanū — help one another',ref:'5:2',root:'ع و ن'},
- {n:'VII',p:'اِنْفَعَلَ',t:'It happened / turned by itself',d:'No named doer: the thing simply underwent the action.',ex:'يَنقَلِبُ',tr:'yanqalibu — he turns back',ref:'2:143',root:'ق ل ب'},
- {n:'VIII',p:'اِفْتَعَلَ',t:'Do it for yourself, with effort',d:'A ت slides inside. Effort, involvement, personal benefit.',ex:'اسْتَمَعَ',tr:'istamaʿa — he listened attentively',ref:'7:204',root:'س م ع'},
- {n:'IX',p:'اِفْعَلَّ',t:'Colours & bodily defects',d:'Rare and specialised — turning a colour, or becoming crooked.',ex:'تَبْيَضُّ',tr:'tabyaḍḍu — (faces) turn white',ref:'3:106',root:'ب ي ض'},
- {n:'X',p:'اِسْتَفْعَلَ',t:'Seek it, ask for it, consider it',d:'اسْتَ at the front = requesting. The single most useful form for duʿāʾ.',ex:'اسْتَغْفَرَ',tr:'istaghfara — he sought forgiveness',ref:'4:106',root:'غ ف ر'}
+ {n:'I',p:'فَعَلَ',t_en:'The bare action',t_ur:'مجرد فعل (بنیادی عمل)',t_no:'Den enkle handlingen',d_en:'The trunk. Just: he did it.',d_ur:'درخت کا تنا۔ سادہ فعل: اس نے کیا۔',d_no:'Stammen. Han gjorde det.',ex:'عَلِمَ',tr_en:'ʿalima — he knew',tr_ur:'عَلِمَ — اس نے جانا',tr_no:'ʿalima — han visste',ref:'2:187',root:'ع ل م'},
+ {n:'II',p:'فَعَّلَ',t_en:'Intensify or cause',t_ur:'شدت یا تعدیہ (سکھانا)',t_no:'Forsterke eller forårsake',d_en:'Doubling the middle letter doubles the force: make someone do it.',d_ur:'درمیانی حرف کی تضعیف سے معنی میں شدت یا دوسروں کو کروانا پیدا ہوتا ہے۔',d_no:'Fordobling av midtkonsonanten forsterker handlingen.',ex:'عَلَّمَ',tr_en:'ʿallama — he taught (made know)',tr_ur:'عَلَّمَ — اس نے سکھایا',tr_no:'ʿallama — han lærte bort',ref:'55:2',root:'ع ل م'},
+ {n:'III',p:'فَاعَلَ',t_en:'Do it WITH / AGAINST someone',t_ur:'باہمی مقابلہ یا اشتراک',t_no:'Gjøre det MED eller MOT noen',d_en:'Two parties involved — the alif stretches the action towards another.',d_ur:'الف کے اضافے سے کام میں دوسرے فریق کا اشتراک پیدا ہوتا ہے۔',d_no:'To parter involvert – alif strekker handlingen.',ex:'جَاهَدَ',tr_en:'jāhada — he struggled (against)',tr_ur:'جَاهَدَ — اس نے جہاد و جدوجہد کی',tr_no:'jāhada — han kjempet',ref:'9:73',root:'ج ه د'},
+ {n:'IV',p:'أَفْعَلَ',t_en:'Cause it / make it happen',t_ur:'تعدیہ (نازل کرنا)',t_no:'Forårsake det',d_en:'A hamzah at the front makes it transitive.',d_ur:'شروع کا ہمزہ فعل کو متعدی بنا دیتا ہے۔',d_no:'Hamzah foran gjør verbet transitivt.',ex:'أَنزَلَ',tr_en:'anzala — He sent (it) down',tr_ur:'أَنزَلَ — اس نے نازل کیا',tr_no:'anzala — Han sendte ned',ref:'2:23',root:'ن ز ل'},
+ {n:'V',p:'تَفَعَّلَ',t_en:'Do Form II gradually / to yourself',t_ur:'خود پر اثر لینا / بتدریج کرنا',t_no:'Gjøre gradvis med seg selv',d_en:'تَ + doubling: the action turns back on the doer, step by step.',d_ur:'ت + تضعیف: عمل بتدریج خود پر واقع ہوتا ہے۔',d_no:'Handling som gradvis vender tilbake til en selv.',ex:'تَذَكَّرَ',tr_en:'tadhakkara — he brought himself to remember',tr_ur:'تَذَكَّرَ — اس نے نصیحت پکڑی',tr_no:'tadhakkara — han tok påminnelsen',ref:'6:80',root:'ذ ك ر'},
+ {n:'VI',p:'تَفَاعَلَ',t_en:'Do it to one another',t_ur:'باہمی تعاون و اشتراک',t_no:'Gjøre mot hverandre',d_en:'Mutual, reciprocal — a whole group involved together.',d_ur:'ایک دوسرے کے ساتھ مل کر باہمی عمل۔',d_no:'Gjensidig handling i en gruppe.',ex:'تَعَاوَنُوا',tr_en:'taʿāwanū — help one another',tr_ur:'تَعَاوَنُوا — آپس میں تعاون کرو',tr_no:'taʿāwanū — hjelp hverandre',ref:'5:2',root:'ع و ن'},
+ {n:'VII',p:'اِنْفَعَلَ',t_en:'It happened / turned by itself',t_ur:'مطاوعت (خود بخود ہو جانا)',t_no:'Skjedde av seg selv',d_en:'No named doer: the thing simply underwent the action.',d_ur:'فاعل کے بغیر خود بخود متاثر ہونا۔',d_no:'Tingen gjennomgikk handlingen.',ex:'يَنقَلِبُ',tr_en:'yanqalibu — he turns back',tr_ur:'يَنقَلِبُ — وہ پلٹ جاتا ہے',tr_no:'yanqalibu — han vender tilbake',ref:'2:143',root:'ق ل ب'},
+ {n:'VIII',p:'اِفْتَعَلَ',t_en:'Do it for yourself, with effort',t_ur:'کوشش اور دلی لگن سے کرنا',t_no:'Gjøre med oppriktig innsats',d_en:'A ت slides inside. Effort, involvement, personal benefit.',d_ur:'درمیان میں ت کا داخل ہونا محنت اور توجہ کو ظاہر کرتا ہے۔',d_no:'ت skytes inn. Innsats for personlig utbytte.',ex:'اسْتَمَعَ',tr_en:'istamaʿa — he listened attentively',tr_ur:'اسْتَمَعَ — اس نے توجہ سے سنا',tr_no:'istamaʿa — han lyttet oppmerksomt',ref:'7:204',root:'س م ع'},
+ {n:'IX',p:'اِفْعَلَّ',t_en:'Colours & bodily states',t_ur:'رنگ اور جسمانی کیفیات',t_no:'Farger og kroppstilstander',d_en:'Rare and specialised — turning a colour.',d_ur:'مخصوص رنگ یا کیفیت میں بدل جانا۔',d_no:'Sjelden – å skifte farge.',ex:'تَبْيَضُّ',tr_en:'tabyaḍḍu — (faces) turn white',tr_ur:'تَبْيَضُّ — چہرے روشن ہو جائیں گے',tr_no:'tabyaḍḍu — ansikter blir hvite',ref:'3:106',root:'ب ي ض'},
+ {n:'X',p:'اِسْتَفْعَلَ',t_en:'Seek it, ask for it',t_ur:'طلب کرنا / مانگنا',t_no:'Å be om eller søke noe',d_en:'اسْتَ at the front = requesting. Most useful form for duʿāʾ.',d_ur:'شروع میں است کا مطلب مانگنا ہے۔ دعا کے لیے بہترین باب۔',d_no:'اسْتَ foran = å be om. Svært nyttig for bønn.',ex:'اسْتَغْفَرَ',tr_en:'istaghfara — he sought forgiveness',tr_ur:'اسْتَغْفَرَ — اس نے بخشش مانگی',tr_no:'istaghfara — han ba om tilgivelse',ref:'4:106',root:'غ ف ر'}
 ];
-(function forms(){
-  const tabs=$('#formTabs'),body=$('#formBody');
-  tabs.innerHTML=FORMS.map((f,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${f.n} · <span class="ar">${f.p}</span></button>`).join('');
-  function show(i){
-    const f=FORMS[i];
-    body.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
-      <div style="flex:1 1 260px">
-        <div class="badge gold">Form ${f.n}</div>
-        <p class="ar" style="font-size:clamp(40px,5.5vw,68px);margin:12px 0 6px;direction:rtl">${f.p}</p>
-        <p style="font-size:1.3rem;font-weight:800;margin:0;color:var(--leaf)">${f.t}</p>
+
+let curFormIdx = 0;
+function showForm(i){
+  curFormIdx = i;
+  const f=FORMS[i];
+  const body=$('#formBody');
+  const fTitle = LANG==='ur'?f.t_ur : (LANG==='no'?f.t_no : f.t_en);
+  const fDesc = LANG==='ur'?f.d_ur : (LANG==='no'?f.d_no : f.d_en);
+  const fTrans = LANG==='ur'?f.tr_ur : (LANG==='no'?f.tr_no : f.tr_en);
+  const formBadge = LANG==='ur'?`باب ${f.n}` : (LANG==='no'?`Form ${f.n}` : `Form ${f.n}`);
+  const quranLabel = LANG==='ur'?`سورۃ ${f.ref} · جذر` : `Qur'ān ${f.ref} · root`;
+  
+  body.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
+    <div style="flex:1 1 260px">
+      <div class="badge gold">${formBadge}</div>
+      <p class="ar" style="font-size:clamp(40px,5.5vw,68px);margin:12px 0 6px;direction:rtl">${f.p}</p>
+      <p style="font-size:1.3rem;font-weight:800;margin:0;color:var(--leaf)">${fTitle}</p>
+    </div>
+    <div style="flex:1 1 320px">
+      <p class="mut" style="margin:0 0 16px;font-size:1.06rem">${fDesc}</p>
+      <div class="qref">
+        <p class="q" style="font-size:2.2rem;margin:0 0 4px">${f.ex}</p>
+        <p style="margin:0;font-weight:700;color:#ffeecd">${fTrans}</p>
+        <small>${quranLabel} <span class="ar">${f.root}</span></small>
       </div>
-      <div style="flex:1 1 320px">
-        <p class="mut" style="margin:0 0 16px;font-size:1.06rem">${f.d}</p>
-        <div class="qref">
-          <p class="q" style="font-size:2.2rem;margin:0 0 4px">${f.ex}</p>
-          <p style="margin:0;font-weight:700;color:#ffeecd">${f.tr}</p>
-          <small>Qur'ān ${f.ref} · root <span class="ar">${f.root}</span></small>
-        </div>
-      </div></div>`;
-  }
+    </div></div>`;
+}
+
+(function initForms(){
+  const tabs=$('#formTabs');
+  tabs.innerHTML=FORMS.map((f,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${f.n} · <span class="ar">${f.p}</span></button>`).join('');
   tabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
-    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');show(+b.dataset.i);});
-  show(0);
+    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');showForm(+b.dataset.i);});
+  showForm(0);
 })();
 
 /* =====================================================================
    8. AYAH X-RAY (14:24)
 ===================================================================== */
 const VERSE=[
- {w:'أَلَمْ',r:null,g:'“Have you not…?” — question + negation particle'},
- {w:'تَرَ',r:'ر أ ي',g:'to see, to realise',s:'رَأَىٰ · رُؤْيَا · مَرْئِيّ'},
- {w:'كَيْفَ',r:null,g:'“how” — question word'},
- {w:'ضَرَبَ',r:'ض ر ب',g:'to strike — and so: to set forth a parable',s:'ضَرْب · مَضْرُوب · إضْرَاب'},
- {w:'اللَّهُ',r:'أ ل ه',g:'Allah — the One who is worshipped',s:'إِلَٰه · آلِهَة · أُلُوهِيَّة'},
- {w:'مَثَلًا',r:'م ث ل',g:'a likeness, parable, example',s:'مِثْل · أَمْثَال · تَمْثِيل'},
- {w:'كَلِمَةً',r:'ك ل م',g:'a word, an utterance',s:'كَلَام · كَلِمَات · مُتَكَلِّم'},
- {w:'طَيِّبَةً',r:'ط ي ب',g:'good, pure, wholesome',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
- {w:'كَشَجَرَةٍ',r:'ش ج ر',g:'a tree (كَ = “like”)',s:'شَجَر · أَشْجَار · شَجَرَة'},
- {w:'طَيِّبَةٍ',r:'ط ي ب',g:'good, pure — the same root again',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
- {w:'أَصْلُهَا',r:'أ ص ل',g:'its ROOT / origin (هَا = its)',s:'أَصْل · أُصُول · أَصِيل'},
- {w:'ثَابِتٌ',r:'ث ب ت',g:'firm, fixed, unshaken',s:'ثَبَتَ · ثُبُوت · تَثْبِيت'},
- {w:'وَفَرْعُهَا',r:'ف ر ع',g:'and its BRANCH',s:'فَرْع · فُرُوع · تَفَرُّع'},
- {w:'فِي',r:null,g:'“in” — preposition'},
- {w:'السَّمَاءِ',r:'س م و',g:'the sky — that which is high',s:'سَمَاء · سَمَاوَات · سُمُوّ'}
+ {w:'أَلَمْ',r:null,g_en:'“Have you not…?” — question + negation',g_ur:'“کیا آپ نے نہیں دیکھا…؟” — ہمزۂ استفہام اور حرفِ نفی',g_no:'“Har du ikke sett…?” – spørsmål og nektelse'},
+ {w:'تَرَ',r:'ر أ ي',g_en:'to see, to realise',g_ur:'دیکھنا، جان لینا',g_no:'å se, innse',s:'رَأَىٰ · رُؤْيَا · مَرْئِيّ'},
+ {w:'كَيْفَ',r:null,g_en:'“how” — question word',g_ur:'“کیسے” — اسمِ استفہام',g_no:'“hvordan” – spørreord'},
+ {w:'ضَرَبَ',r:'ض ر ب',g_en:'to strike — to set forth a parable',g_ur:'بیان کرنا، مثال قائم کرنا',g_no:'å slå – fremsette en lignelse',s:'ضَرْب · مَضْرُوب · إضْرَاب'},
+ {w:'اللَّهُ',r:'أ ل ه',g_en:'Allah — the One worshipped',g_ur:'اللہ — وہ ذاتِ پاک جس کی عبادت کی جائے',g_no:'Allah – Den Ene som tilbes',s:'إِلَٰه · آلِهَة · أُلُوهِيَّة'},
+ {w:'مَثَلًا',r:'م ث ل',g_en:'a likeness, parable, example',g_ur:'مثال، تمثیل',g_no:'en lignelse, et eksempel',s:'مِثْل · أَمْثَال · تَمْثِيل'},
+ {w:'كَلِمَةً',r:'ك ل م',g_en:'a word, an utterance',g_ur:'کلمہ، بات',g_no:'et ord, et utsagn',s:'كَلَام · كَلِمَات · مُتَكَلِّم'},
+ {w:'طَيِّبَةً',r:'ط ي ب',g_en:'good, pure, wholesome',g_ur:'پاکیزہ، عمدہ',g_no:'godt, rent',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
+ {w:'كَشَجَرَةٍ',r:'ش ج ر',g_en:'a tree (كَ = “like”)',g_ur:'درخت (کَ = “جیسے”)',g_no:'et tre (كَ = “som”)',s:'شَجَر · أَشْجَار · شَجَرَة'},
+ {w:'طَيِّبَةٍ',r:'ط ي ب',g_en:'good, pure — same root',g_ur:'پاکیزہ — وہی جذر',g_no:'godt, rent – samme rot',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
+ {w:'أَصْلُهَا',r:'أ ص ل',g_en:'its ROOT / origin',g_ur:'اس کی جڑ / بنیاد',g_no:'dets ROT / opprinnelse',s:'أَصْل · أُصُول · أَصِيل'},
+ {w:'ثَابِتٌ',r:'ث ب ت',g_en:'firm, fixed, unshaken',g_ur:'مضبوط، ثابت قدم',g_no:'støtt, urokkelig',s:'ثَبَتَ · ثُبُوت · تَثْبِيت'},
+ {w:'وَفَرْعُهَا',r:'ف ر ع',g_en:'and its BRANCH',g_ur:'اور اس کی شاخ',g_no:'og dets GREN',s:'فَرْع · فُرُوع · تَفَرُّع'},
+ {w:'فِي',r:null,g_en:'“in” — preposition',g_ur:'“میں” — حرفِ جار',g_no:'“i” – preposisjon'},
+ {w:'السَّمَاءِ',r:'س م و',g_en:'the sky — that which is high',g_ur:'آسمان — بلندی والی چیز',g_no:'himmelen – det opphøyde',s:'سَمَاء · سَمَاوَات · سُمُوّ'}
 ];
-(function xray(){
-  const box=$('#verseBox'),card=$('#xrayCard');
+
+let curVerseIdx = 10;
+function showVerseCard(i){
+  curVerseIdx = i;
+  const v=VERSE[i];
+  const card=$('#xrayCard');
+  if(!card) return;
+  $$('.vw',$('#verseBox')).forEach(e=>e.classList.toggle('on',+e.dataset.i===i));
+  const gText = LANG==='ur'?v.g_ur : (LANG==='no'?v.g_no : v.g_en);
+  const rootBadge = LANG==='ur'?`جذر <span class="ar">${v.r}</span>` : `root <span class="ar">${v.r}</span>`;
+  const siblingTitle = LANG==='ur'?'اسی درخت کے دیگر پتے:':(LANG==='no'?'Samme tre, andre blader':'Same tree, other leaves');
+  const particleBadge = LANG==='ur'?'حرف — بغیر جذر کے':'no root — a particle';
+  
+  card.innerHTML=v.r
+    ? `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
+       <div class="metaline" style="margin-top:14px"><span class="badge">${rootBadge}</span></div>
+       <p style="font-size:1.18rem;font-weight:700;margin:0 0 12px">${gText}</p>
+       <p class="kicker" style="margin:0 0 6px">${siblingTitle}</p>
+       <p class="ar" style="font-size:1.6rem;margin:0;direction:rtl;text-align:right;color:var(--leaf)">${v.s}</p>`
+    : `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
+       <div class="metaline" style="margin-top:14px"><span class="badge sky">${particleBadge}</span></div>
+       <p style="font-size:1.18rem;font-weight:700;margin:0">${gText}</p>`;
+}
+
+(function initXRay(){
+  const box=$('#verseBox');
   box.innerHTML=VERSE.map((v,i)=>`<span class="vw${v.r?'':' part'}" data-i="${i}" tabindex="0" role="button">${v.w}</span>`).join('');
-  function show(i){
-    const v=VERSE[i];
-    $$('.vw',box).forEach(e=>e.classList.toggle('on',+e.dataset.i===i));
-    card.innerHTML=v.r
-      ? `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
-         <div class="metaline" style="margin-top:14px"><span class="badge">root <span class="ar" style="letter-spacing:.14em">${v.r}</span></span></div>
-         <p style="font-size:1.18rem;font-weight:700;margin:0 0 12px">${v.g}</p>
-         <p class="kicker" style="margin:0 0 6px">Same tree, other leaves</p>
-         <p class="ar" style="font-size:1.6rem;margin:0;direction:rtl;text-align:right;color:var(--leaf)">${v.s}</p>`
-      : `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
-         <div class="metaline" style="margin-top:14px"><span class="badge sky">no root — a particle</span></div>
-         <p style="font-size:1.18rem;font-weight:700;margin:0">${v.g}</p>
-         <p class="mut" style="margin:12px 0 0">Particles (حُرُوف) are the language's nails and screws. They have no
-         root and no family — you simply learn them. Good news: there are only a few dozen, and they are everywhere.</p>`;
-  }
-  box.addEventListener('click',e=>{const s=e.target.closest('.vw');if(s)show(+s.dataset.i);});
-  box.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('vw')){e.preventDefault();show(+e.target.dataset.i);}});
-  show(10);
+  box.addEventListener('click',e=>{const s=e.target.closest('.vw');if(s)showVerseCard(+s.dataset.i);});
+  box.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('vw')){e.preventDefault();showVerseCard(+e.target.dataset.i);}});
+  showVerseCard(10);
 })();
 
 /* =====================================================================
-   9. BENEFITS + ACTIVITIES
+   9. BENEFITS & ACTIVITIES
 ===================================================================== */
 const ICONS={
  leaf:'<path d="M6 40c0-16 12-28 34-30 2 22-12 34-34 30Z"/><path d="M6 40c8-10 16-16 28-22"/>',
@@ -1510,115 +1937,264 @@ const ICONS={
  globe:'<circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c8 10 8 24 0 34-8-10-8-24 0-34Z"/>',
  spark:'<path d="M24 6l4 12 12 4-12 4-4 12-4-12-12-4 12-4Z"/>'
 };
-const BENEFITS=[
- {i:'leaf',c:'#7ddc95',t:'Vocabulary that multiplies',b:'Learn one root and you don\'t learn one word — you learn a family. 40 roots taught well ≈ 400+ recognisable words.'},
- {i:'key',c:'#f5bf5f',t:'You stop needing the translation',b:'When the root registers, your eye reads Arabic and your heart hears meaning at the same time — the whole goal.'},
- {i:'heart',c:'#ff9db3',t:'Ṣalāh becomes alive',b:'الْحَمْدُ · الرَّحْمَٰن · الْعَالَمِينَ · نَعْبُدُ. Students who know roots stop reciting sounds and start speaking to Allah.'},
- {i:'brain',c:'#b6a4ff',t:'Ḥifẓ gets stronger',b:'Meaning is the best glue for memory. Root-aware students confuse similar āyāt far less and rebuild forgotten lines logically.'},
- {i:'book',c:'#69c8ff',t:'Independence with dictionaries',b:'Lisān al-ʿArab, Lane, al-Mufradāt, the Mufahras — all arranged BY ROOT. Without this skill those doors stay shut for life.'},
- {i:'spark',c:'#f09231',t:'Grammar suddenly makes sense',b:'Patterns predict the job of a word: doer, done-to, place, tool. Iʿrāb stops being guesswork.'},
- {i:'link',c:'#58e0c8',t:'Precision between near-synonyms',b:'خَوْف vs خَشْيَة · عِلْم vs مَعْرِفَة · رَحْمَٰن vs رَحِيم. Roots + patterns explain the difference the translation hides.'},
- {i:'tree',c:'#9fb0bd',t:'Tafsīr-level imagery',b:'كَافِر literally covers. مِسْكِين is one made motionless by need. Students start seeing pictures, not glossary entries.'},
- {i:'globe',c:'#6fe3ff',t:'A bonus language for free',b:'The same roots run through modern Arabic (مَكْتَبَة, مُعَلِّم), and echo in Hebrew and other Semitic languages. Real transferable knowledge.'}
-];
-$('#benefitGrid').innerHTML=BENEFITS.map(b=>`<div class="card reveal">
-  <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="${b.c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[b.i]}</svg>
-  <h3 style="font-size:1.24rem">${b.t}</h3>
-  <p class="mut" style="margin:0">${b.b}</p></div>`).join('');
 
-const ACTS=[
- {t:'1 · The Seed Bank notebook',b:'One page per root, for the whole year. Three letters in the soil, core meaning, a drawn tree, and a new leaf added every time the student meets the root in a new āyah. By June they own a forest they built themselves.',tag:'Every lesson'},
- {t:'2 · Root Relay',b:'Two teams, one root on the board, 60 seconds. Each student runs up and writes ONE derived word. Repeats and non-words are challenged by the other team. Loud, competitive, and pure derivation practice.',tag:'Game · 8 min'},
- {t:'3 · Leaf Hunt in the muṣḥaf',b:'“Find every word from ص ب ر on this page.” Pairs, 4 minutes, then a board tally. Trains the eye to see roots at reading speed — the single most transferable skill.',tag:'Pairs · 5 min'},
- {t:'4 · Odd Leaf Out',b:'Show four words; three share a root, one is an impostor (عَلِيم، عَالِم، عَالَمِين، عَالِي). Students must justify the answer using the third letter. Brilliant for the look-alike traps.',tag:'Warm-up · 3 min'},
- {t:'5 · Family Tree poster',b:'Groups of three get one root and A3 paper. Real tree drawing, 8+ leaves, one āyah per leaf, colour-coded by pattern. Display them around the room all term — passive revision.',tag:'Project · 40 min'},
- {t:'6 · Mīzān Wheel',b:'A card wheel: outer ring of patterns (فَاعِل، مَفْعُول، مَفْعَل، فَعِيل), inner ring of roots. Spin both, say the word, guess whether Arabic actually uses it, then check.',tag:'Hands-on'},
- {t:'7 · Duʿāʾ from the root',b:'End every lesson by building a duʿāʾ from today\'s root: غ ف ر → يَا غَفَّار، اغْفِرْ لِي. The root instantly becomes worship, not homework. This is the fruit of the tree.',tag:'Closing · 3 min'},
- {t:'8 · Root of the Week board',b:'A permanent wall space: the three letters huge, and space for students to pin words and āyāt they find during the week. Rewards for the rarest find.',tag:'Display'},
- {t:'Assessment ideas',b:'Exit ticket: 3 words → find the root (30 seconds). Mid-term: give a root, student must produce doer, done-to, place and one āyah. Final: hand them an unseen short sūrah and ask them to mark 10 roots.',tag:'Marking'}
+const BENEFITS=[
+ {i:'leaf',c:'#7ddc95',t_en:'Vocabulary that multiplies',t_ur:'الفاظ کے ذخیرے میں زبردست اضافہ',t_no:'Ordforråd som multipliserer',b_en:'Learn one root and you don\'t learn one word — you learn a family. 40 roots ≈ 400+ recognisable words.',b_ur:'ایک جذر سیکھنے سے آپ ایک لفظ نہیں بلکہ پورا خاندان سیکھتے ہیں۔ 40 جذور ≈ 400 سے زائد الفاظ۔',b_no:'Lær én rot og du forstår en hel familie. 40 røtter ≈ 400+ gjenkjennelige ord.'},
+ {i:'key',c:'#f5bf5f',t_en:'You stop needing the translation',t_ur:'براہ راست فہمِ قرآن',t_no:'Mindre behov for oversettelse',b_en:'When the root registers, your eye reads Arabic and your heart hears meaning at the same time.',b_ur:'آنکھیں عربی پڑھتی ہیں اور دل براہ راست معنی سنتا ہے۔',b_no:'Øyet leser arabisk og hjertet oppfatter meningen samtidig.'},
+ {i:'heart',c:'#ff9db3',t_en:'Ṣalāh becomes alive',t_ur:'نماز میں زندہ حضورِ قلب',t_no:'Bønnen blir levende',b_en:'Students who know roots stop reciting sounds and start speaking directly to Allah.',b_ur:'جذور جاننے والے طلبہ الفاظ کو محض آواز نہیں بلکہ اللہ سے زندہ کلام سمجھتے ہیں۔',b_no:'Elever som kjenner røtter slutter å bare resitere lyder og taler til Allah.'},
+ {i:'brain',c:'#b6a4ff',t_en:'Ḥifẓ gets stronger',t_ur:'حفظِ قرآن میں بے پناہ مضبوطی',t_no:'Hifdh blir sterkere',b_en:'Meaning is the best glue for memory. Root-aware students confuse similar āyāt far less.',b_ur:'معنی یادداشت کا بہترین ذریعہ ہے۔ متشابہات میں غلطی کا امکان ختم ہو جاتا ہے۔',b_no:'Meningen fester seg bedre i minnet.'},
+ {i:'book',c:'#69c8ff',t_en:'Independence with dictionaries',t_ur:'عربی لغات کا خود استعمال',t_no:'Selvstendighet med ordbøker',b_en:'Classical dictionaries are arranged BY ROOT. This skill unlocks them for life.',b_ur:'تمام قدیم عربی لغات جذور کے تحت مرتب ہیں۔ یہ مہارت ان کے دروازے کھول دیتی ہے۔',b_no:'Klassiske ordbøker er ordnet etter rot.'},
+ {i:'spark',c:'#f09231',t_en:'Grammar suddenly makes sense',t_ur:'علم النحو و الصرف کا آسان فہم',t_no:'Grammatikk gir plutselig mening',b_en:'Patterns predict the job of a word: doer, done-to, place, tool. Iʿrāb stops being guesswork.',b_ur:'سانچے بتاتے ہیں کہ لفظ فاعل ہے، مفعول ہے یا ظرف۔ اعراب لگانا آسان ہو جاتا ہے۔',b_no:'Mønstre forutsier ordets rolle i setningen.'}
 ];
-$('#activityGrid').innerHTML=ACTS.map(a=>`<div class="card reveal">
-  <div class="badge gold">${a.tag}</div><h3 style="font-size:1.2rem;margin-top:14px">${a.t}</h3>
-  <p class="mut" style="margin:0">${a.b}</p></div>`).join('');
-$('#printBtn').addEventListener('click',()=>window.print());
+
+function renderBenefits(){
+  const grid=$('#benefitGrid');
+  if(!grid) return;
+  grid.innerHTML=BENEFITS.map(b=>{
+    const t=LANG==='ur'?b.t_ur : (LANG==='no'?b.t_no : b.t_en);
+    const desc=LANG==='ur'?b.b_ur : (LANG==='no'?b.b_no : b.b_en);
+    return `<div class="card reveal">
+      <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="${b.c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[b.i]}</svg>
+      <h3 style="font-size:1.24rem">${t}</h3>
+      <p class="mut" style="margin:0">${desc}</p></div>`;
+  }).join('');
+}
+renderBenefits();
 
 /* =====================================================================
    10. QUIZ + SAPLING
 ===================================================================== */
 const QUIZ=[
- {w:'الْمُؤْمِنُونَ',o:['أ م ن','م ن و','أ م م'],a:0,why:'Take off <b>الْ</b> and the Form IV doer shell <b>مُـ…ونَ</b>. The hamzah is a real root letter here: <b>أ م ن</b> — safety, trust (آمَنَ، إِيمَان، أَمَانَة).'},
- {w:'يَسْتَغْفِرُونَ',o:['س غ ف','غ ف ر','ي غ ف'],a:1,why:'<b>يَـ</b> (he/they) + <b>سْتَـ</b> (Form X = seeking) + <b>ـونَ</b> (plural). What remains is <b>غ ف ر</b> — covering, forgiving.'},
- {w:'الْمَسَاجِد',o:['م س ج','س ج د','ج د د'],a:1,why:'<b>الْ</b> + the “place of” <b>مَـ</b> + the plural stretch. Root: <b>س ج د</b> — prostration. A masjid is literally <em>a place of prostration</em>.'},
- {w:'اسْتَكْبَرُوا',o:['س ك ب','ك ب ر','ت ك ب'],a:1,why:'<b>اسْتَـ</b> (Form X) + <b>ـُوا</b> (they). Root <b>ك ب ر</b> — greatness. So: they <em>made themselves out to be</em> great.'},
- {w:'الصَّابِرِينَ',o:['ص ب ر','ب ر ر','ص و ب'],a:0,why:'<b>الْ</b> + the doer pattern <b>فَاعِل</b> + <b>ـينَ</b>. Root <b>ص ب ر</b> — holding firm.'},
- {w:'قَالُوا',o:['ق ل ل','ق و ل','ق ي ل'],a:1,why:'A weak root! The <b>و</b> is hiding behind the long ā. It reappears in <b>يَقُولُ</b> and <b>قَوْل</b>. Root: <b>ق و ل</b>.'},
- {w:'يَتَذَكَّرُونَ',o:['ت ذ ك','ذ ك ر','ك ر ر'],a:1,why:'<b>يَـ</b> + <b>تَـ</b> (Form V) + shadda (doubling of the middle root letter) + <b>ـونَ</b>. Root: <b>ذ ك ر</b>.'},
- {w:'الْمُتَّقِينَ',o:['ت ق ي','و ق ي','ق و ي'],a:1,why:'Advanced! <b>اتَّقَىٰ</b> is Form VIII of <b>و ق ي</b> (to guard, to shield) — the <b>و</b> assimilated into the doubled <b>تّ</b>. Taqwā = building a shield.'},
- {w:'رَبَّنَا',o:['ر ب ب','ر ب و','ن ر ب'],a:0,why:'The shadda hides a twin. <b>رَبّ</b> = <b>ر ب ب</b> — to nurture and bring something up stage by stage. <b>ـنَا</b> is just “our”.'},
- {w:'الْمَسَاكِين',o:['س ك ن','م س ك','ك و ن'],a:0,why:'Root <b>س ك ن</b> — stillness, dwelling. A مِسْكِين is someone whom need has made <em>motionless</em>. Same root as سَكِينَة and مَسْكَن.'}
+ {w:'الْمُؤْمِنُونَ',o:['أ م ن','م ن و','أ م م'],a:0,
+  why_en:'Take off <b>الْ</b> and <b>مُـ…ونَ</b>. The hamzah is a root letter: <b>أ م ن</b> (safety, trust).',
+  why_ur:'<b>الْ</b> اور <b>مُـ…ونَ</b> ہٹائیں۔ ہمزہ اصل جذر کا حصہ ہے: <b>أ م ن</b> (امن، ایمان)۔',
+  why_no:'Fjern <b>الْ</b> og <b>مُـ…ونَ</b>. Roten er <b>أ م ن</b> (trygghet, tro).'},
+ {w:'يَسْتَغْفِرُونَ',o:['س غ ف','غ ف ر','ي غ ف'],a:1,
+  why_en:'<b>يَـ</b> + <b>سْتَـ</b> (Form X = seeking) + <b>ـونَ</b>. Remains: <b>غ ف ر</b> (forgiving).',
+  why_ur:'<b>يَـ</b> + <b>سْتَـ</b> (باب استفعال = طلب) + <b>ـونَ</b>۔ باقی رہا <b>غ ف ر</b> (مغفرت)۔',
+  why_no:'<b>يَـ</b> + <b>سْتَـ</b> (Form X = å søke) + <b>ـونَ</b>. Gjenstår: <b>غ ف ر</b> (tilgivelse).'},
+ {w:'الْمَسَاجِد',o:['م س ج','س ج د','ج د د'],a:1,
+  why_en:'<b>الْ</b> + <b>مَـ</b> (place) + plural stretch. Root: <b>س ج د</b> (prostration).',
+  why_ur:'<b>الْ</b> + <b>مَـ</b> (اسم ظرف)۔ جذر: <b>س ج د</b> (سجدہ کرنا)۔',
+  why_no:'<b>الْ</b> + <b>مَـ</b> (sted) + flertall. Rot: <b>س ج د</b> (prostrasjon).'},
+ {w:'اسْتَكْبَرُوا',o:['س ك ب','ك ب ر','ت ك ب'],a:1,
+  why_en:'<b>اسْتَـ</b> (Form X) + <b>ـُوا</b>. Root: <b>ك ب ر</b> (greatness).',
+  why_ur:'<b>اسْتَـ</b> (باب استفعال) + <b>ـُوا</b>۔ اصل جذر: <b>ك ب ر</b> (بڑائی)۔',
+  why_no:'<b>اسْتَـ</b> (Form X) + <b>ـُوا</b>. Rot: <b>ك ب ر</b> (storhet).'},
+ {w:'الصَّابِرِينَ',o:['ص ب ر','ب ر ر','ص و ب'],a:0,
+  why_en:'<b>الْ</b> + <b>فَاعِل</b> + <b>ـينَ</b>. Root: <b>ص ب ر</b> (holding firm).',
+  why_ur:'<b>الْ</b> + فاعل کا وزن + <b>ـينَ</b>۔ اصل جذر: <b>ص ب ر</b> (استقامت)۔',
+  why_no:'<b>الْ</b> + <b>فَاعِل</b> + <b>ـينَ</b>. Rot: <b>ص ب ر</b> (tålmodighet).'},
+ {w:'قَالُوا',o:['ق ل ل','ق و ل','ق ي ل'],a:1,
+  why_en:'Weak root! <b>و</b> reappears in <b>يَقُولُ</b> and <b>قَوْل</b>. Root: <b>ق و ل</b>.',
+  why_ur:'حرفِ علت والا جذر! و لفظ <b>يَقُولُ</b> اور <b>قَوْل</b> میں ظاہر ہوتا ہے۔ اصل جذر: <b>ق و ل</b>۔',
+  why_no:'Svak rot! <b>و</b> dukker opp i <b>يَقُولُ</b> og <b>قَوْل</b>. Rot: <b>ق و ل</b>.'},
+ {w:'يَتَذَكَّرُونَ',o:['ت ذ ك','ذ ك ر','ك ر ر'],a:1,
+  why_en:'<b>يَـ</b> + <b>تَـ</b> (Form V) + shadda + <b>ـونَ</b>. Root: <b>ذ ك ر</b>.',
+  why_ur:'<b>يَـ</b> + <b>تَـ</b> (باب تفعل) + تشدید + <b>ـونَ</b>۔ اصل جذر: <b>ذ ك ر</b>۔',
+  why_no:'<b>يَـ</b> + <b>تَـ</b> (Form V) + shadda + <b>ـونَ</b>. Rot: <b>ذ ك ر</b>.'},
+ {w:'الْمُتَّقِينَ',o:['ت ق ي','و ق ي','ق و ي'],a:1,
+  why_en:'Advanced! <b>اتَّقَىٰ</b> is Form VIII of <b>و ق ي</b> (to shield). Taqwā = a shield.',
+  why_ur:'اعلیٰ صرفی قاعدہ! <b>اتَّقَىٰ</b> اصل میں <b>و ق ي</b> (بچاؤ / ڈھال) سے باب افتعال ہے۔',
+  why_no:'Avansert! <b>اتَّقَىٰ</b> er Form VIII av <b>و ق ي</b> (å skjerme).'},
+ {w:'رَبَّنَا',o:['ر ب ب','ر ب و','ن ر ب'],a:0,
+  why_en:'Shadda hides a twin. <b>رَبّ</b> = <b>ر ب ب</b> (to nurture step by step).',
+  why_ur:'تشدید میں دو حروف ہیں۔ <b>رَبّ</b> = <b>ر ب ب</b> (بتدریج پرورش کرنا)۔',
+  why_no:'Shadda skjuler to like bokstaver. <b>رَبّ</b> = <b>ر ب ب</b> (å nære).'},
+ {w:'الْمَسَاكِين',o:['س ك ن','م س ك','ك و ن'],a:0,
+  why_en:'Root <b>س ك ن</b> (stillness). Same root as سَكِينَة and مَسْكَن.',
+  why_ur:'اصل جذر: <b>س ك ن</b> (سکون و بے بسی)۔ سَكِينَة اور مَسْكَن کا بھی یہی جذر ہے۔',
+  why_no:'Rot: <b>س ك ن</b> (ro/stille). Samme rot som سَكِينَة.'}
 ];
-(function quiz(){
+
+let quizI = 0, quizScore = 0, quizAnswered = false, quizScene = null;
+
+function drawSapling(){
   const host=$('#sapling');
-  let i=0,score=0,answered=false,scene=null;
-  function drawSapling(){
-    scene=buildScene({vbw:620,vbh:640,bx:310,by:470,len:96,wid:26,depth:5,spread:29,hue:130,
-      accent:'#7ddc95',roots:true,scale:.85,seed:777,label:'Your sapling grows as you answer'});
-    host.innerHTML=scene.svg;
-    /* hide all foliage: it will be revealed leaf-cluster by leaf-cluster */
-    host.querySelectorAll('.cluster').forEach(c=>{c.style.visibility='hidden'});
-    animateGrowth(host,scene.id,scene.maxR);
-    const cap=document.createElement('div');
-    cap.style.cssText='position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;font-size:.94rem;color:#9db0a4';
-    cap.innerHTML='Your sapling · <b id="lc" style="color:#7ddc95">0</b> leaves earned';
-    host.appendChild(cap);
-  }
-  function addLeaf(){
-    const hidden=[...host.querySelectorAll('.cluster')].filter(c=>c.style.visibility==='hidden');
-    const n=Math.max(1,Math.ceil(hidden.length/(QUIZ.length-score+1)));
-    hidden.slice(0,n).forEach(c=>{c.style.visibility='visible';
-      c.querySelectorAll('.lf').forEach(l=>{l.style.animation='none';l.style.animation='leafIn .55s cubic-bezier(.2,.85,.3,1) both'});});
-    const lc=$('#lc',host); if(lc) lc.textContent=score;
-  }
-  function render(){
-    answered=false;
-    const q=QUIZ[i];
-    $('#qCount').textContent=`Question ${i+1} / ${QUIZ.length}`;
-    $('#qBar').style.width=((i)/QUIZ.length*100+10)+'%';
-    $('#qWord').textContent=q.w;
-    $('#qWhy').innerHTML='';
-    $('#qNext').style.display='none';
-    $('#qOpts').innerHTML=q.o.map((o,k)=>`<button class="opt ar" data-k="${k}">${o}</button>`).join('');
-    $$('#qOpts .opt').forEach(b=>b.addEventListener('click',()=>{
-      if(answered)return; answered=true;
-      const k=+b.dataset.k, ok=k===q.a;
-      $$('#qOpts .opt').forEach((x,xi)=>{x.disabled=true;
-        if(xi===q.a)x.classList.add('right'); else if(xi===k)x.classList.add('wrong');});
-      if(ok){score++;$('#qScore').textContent=score;addLeaf();}
-      $('#qWhy').innerHTML=`<div class="why"><b>${ok?'✅ Correct — a new leaf grows!':'🌱 Not quite.'}</b> ${q.why}</div>`;
-      $('#qNext').style.display='inline-flex';
-      $('#qNext').textContent=(i===QUIZ.length-1)?'See my tree →':'Next word →';
-    }));
-  }
+  quizScene=buildScene({vbw:620,vbh:640,bx:310,by:470,len:96,wid:26,depth:5,spread:29,hue:130,
+    accent:'#7ddc95',roots:true,scale:.85,seed:777,label:'Your sapling grows as you answer'});
+  host.innerHTML=quizScene.svg;
+  host.querySelectorAll('.cluster').forEach(c=>{c.style.visibility='hidden'});
+  animateGrowth(host,quizScene.id,quizScene.maxR);
+  const cap=document.createElement('div');
+  cap.style.cssText='position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;font-size:.94rem;color:#9db0a4';
+  const earnedText = LANG==='ur' ? `آپ کا پودا · <b id="lc" style="color:#7ddc95">0</b> پتے اگے` : (LANG==='no'?`Ditt tre · <b id="lc" style="color:#7ddc95">0</b> blader`: `Your sapling · <b id="lc" style="color:#7ddc95">0</b> leaves earned`);
+  cap.innerHTML=earnedText;
+  host.appendChild(cap);
+}
+
+function addSaplingLeaf(){
+  const host=$('#sapling');
+  const hidden=[...host.querySelectorAll('.cluster')].filter(c=>c.style.visibility==='hidden');
+  const n=Math.max(1,Math.ceil(hidden.length/(QUIZ.length-quizScore+1)));
+  hidden.slice(0,n).forEach(c=>{c.style.visibility='visible';
+    c.querySelectorAll('.lf').forEach(l=>{l.style.animation='none';l.style.animation='leafIn .55s cubic-bezier(.2,.85,.3,1) both'});});
+  const lc=$('#lc',host); if(lc) lc.textContent=quizScore;
+}
+
+function renderQuizQuestion(){
+  quizAnswered=false;
+  const q=QUIZ[quizI];
+  const qLbl = LANG==='ur'?`سوال ${quizI+1} از ${QUIZ.length}` : (LANG==='no'?`Spørsmål ${quizI+1} / ${QUIZ.length}` : `Question ${quizI+1} / ${QUIZ.length}`);
+  const scoreLbl = LANG==='ur'?`اسکور: ` : (LANG==='no'?`Poeng: ` : `Score: `);
+  $('#qCount').textContent=qLbl;
+  $('#qBar').style.width=((quizI)/QUIZ.length*100+10)+'%';
+  $('#qWord').textContent=q.w;
+  $('#qWhy').innerHTML='';
+  $('#qNext').style.display='none';
+  $('#qOpts').innerHTML=q.o.map((o,k)=>`<button class="opt ar" data-k="${k}">${o}</button>`).join('');
+  $$('#qOpts .opt').forEach(b=>b.addEventListener('click',()=>{
+    if(quizAnswered)return; quizAnswered=true;
+    const k=+b.dataset.k, ok=k===q.a;
+    $$('#qOpts .opt').forEach((x,xi)=>{x.disabled=true;
+      if(xi===q.a)x.classList.add('right'); else if(xi===k)x.classList.add('wrong');});
+    if(ok){quizScore++;$('#qScore').textContent=quizScore;addSaplingLeaf();}
+    const whyText = LANG==='ur'?q.why_ur : (LANG==='no'?q.why_no : q.why_en);
+    const feedbackTitle = ok ? (LANG==='ur'?'✅ درست جواب — نیا پتہ کھل اٹھا!':(LANG==='no'?'✅ Riktig – et nytt blad gror!':'✅ Correct — a new leaf grows!'))
+                             : (LANG==='ur'?'🌱 دوبارہ سوچیے۔':(LANG==='no'?'🌱 Ikke helt riktig.':'🌱 Not quite.'));
+    $('#qWhy').innerHTML=`<div class="why"><b>${feedbackTitle}</b> ${whyText}</div>`;
+    $('#qNext').style.display='inline-flex';
+    $('#qNext').textContent=(quizI===QUIZ.length-1)?(LANG==='ur'?'درخت دیکھیں →':(LANG==='no'?'Se mitt tre →':'See my tree →')):(LANG==='ur'?'اگلا لفظ →':(LANG==='no'?'Neste ord →':'Next word →'));
+  }));
+}
+
+(function initQuiz(){
   $('#qNext').addEventListener('click',()=>{
-    if(i<QUIZ.length-1){i++;render();}
+    if(quizI<QUIZ.length-1){quizI++;renderQuizQuestion();}
     else{
       $('#qBar').style.width='100%';
-      const msg=score>=9?'Māshāʾ Allāh — root detective level: <b>عَالِم</b>. You are ready to read with a lexicon.'
-        :score>=7?'Strong work. Drill the weak roots (و/ي) and you will be at full marks next week.'
-        :score>=4?'Good start — you have the method. Redo the Peeling Lab, then come back.'
-        :'No problem at all. Go back to the four steps and the سَأَلْتُمُونِيهَا rule, then try again.';
-      $('#qOpts').innerHTML=`<div class="mizout"><p class="kicker" style="margin:0">Final score</p>
-        <div class="big" style="font-family:var(--ff);font-weight:900">${score} / ${QUIZ.length}</div>
+      const msg = quizScore>=9 
+        ? (LANG==='ur'?'ماشاء اللہ — آپ کا درجہ ہے: <b>عَالِم</b>۔ آپ لغت کے ساتھ قرآن فہمی کے لیے تیار ہیں!':(LANG==='no'?'MashaAllah – rotdetektiv-nivå: <b>عَالِم</b>.':'Māshāʾ Allāh — root detective level: <b>عَالِم</b>.'))
+        : (quizScore>=6 ? (LANG==='ur'?'بہترین کوشش! کمزور حروف کی مزید مشق کیجیے۔':'Good effort! Practice weak roots.') : (LANG==='ur'?'اچھی شروعات ہے — پیئلنگ لیب کو دوبارہ دہرائیں۔':'Good start — redo the Peeling Lab.'));
+      const finalScoreLbl = LANG==='ur'?'حتمی اسکور':'Final score';
+      $('#qOpts').innerHTML=`<div class="mizout"><p class="kicker" style="margin:0">${finalScoreLbl}</p>
+        <div class="big" style="font-family:var(--ff);font-weight:900">${quizScore} / ${QUIZ.length}</div>
         <p style="font-weight:700;margin:8px auto 0;max-width:46ch">${msg}</p></div>`;
       $('#qWord').textContent='🌳';$('#qWhy').innerHTML='';$('#qNext').style.display='none';
     }
   });
-  $('#qRestart').addEventListener('click',()=>{i=0;score=0;$('#qScore').textContent='0';drawSapling();render();});
-  drawSapling(); render();
+  $('#qRestart').addEventListener('click',()=>{quizI=0;quizScore=0;$('#qScore').textContent='0';drawSapling();renderQuizQuestion();});
+  drawSapling(); renderQuizQuestion();
 })();
 
 /* =====================================================================
-   11. SCROLL FX · COUNTERS · DUST
+   11. LANGUAGE SWITCHER IMPLEMENTATION
+===================================================================== */
+function switchLang(lang){
+  if(!['en','ur','no'].includes(lang)) lang='en';
+  LANG = lang;
+  localStorage.setItem('nq-rootwords-lang', lang);
+  document.documentElement.lang = lang;
+  
+  // Toggle button active states
+  $('#btnLangEn').classList.toggle('on', lang==='en');
+  $('#btnLangEn').setAttribute('aria-checked', lang==='en');
+  $('#btnLangUr').classList.toggle('on', lang==='ur');
+  $('#btnLangUr').setAttribute('aria-checked', lang==='ur');
+  $('#btnLangNo').classList.toggle('on', lang==='no');
+  $('#btnLangNo').setAttribute('aria-checked', lang==='no');
+  
+  const ui = I18N_UI[lang] || I18N_UI.en;
+  document.title = ui.title;
+  
+  // Nav links
+  const navA = $$('#navlinks a');
+  ui.nav.forEach((t, idx)=>{ if(navA[idx]) navA[idx].textContent = t; });
+  
+  // Hero section
+  const heroK = $('.hero .kicker'); if(heroK) heroK.textContent = ui.heroKicker;
+  const heroH = $('.hero h1 .grad'); if(heroH) heroH.textContent = ui.heroHead;
+  const heroL = $('.hero .lead'); if(heroL) heroL.innerHTML = ui.heroLead;
+  const heroAy = $('.ayahbox p:last-child'); if(heroAy) heroAy.innerHTML = ui.heroAyah;
+  const heroB1 = $('.hero .btns .btn.p'); if(heroB1) heroB1.textContent = ui.heroBtn1;
+  const heroB2 = $('.hero .btns .btn.s'); if(heroB2) heroB2.textContent = ui.heroBtn2;
+  const heroTp = $('.hero p.mut'); if(heroTp) heroTp.textContent = ui.heroTip;
+  
+  // Why section
+  const whyK = $('#why .kicker'); if(whyK) whyK.textContent = ui.whyKicker;
+  const whyH = $('#why h2'); if(whyH) whyH.innerHTML = ui.whyHead;
+  const whyL = $('#why .lead'); if(whyL) whyL.innerHTML = ui.whyLead;
+  const whyCards = $$('#why .grid.g3 .card');
+  ui.whyCards.forEach((c, idx)=>{
+    if(whyCards[idx]){
+      const b = whyCards[idx].querySelector('.badge'); if(b) b.textContent = c.badge;
+      const h = whyCards[idx].querySelector('h3'); if(h) h.textContent = c.title;
+      const p = whyCards[idx].querySelector('p.mut'); if(p) p.innerHTML = c.desc;
+    }
+  });
+  const statSpans = $$('#why .stat span');
+  ui.stats.forEach((st, idx)=>{ if(statSpans[idx]) statSpans[idx].textContent = st; });
+  
+  // Anatomy section
+  const anatK = $('#anatomy .kicker'); if(anatK) anatK.textContent = ui.anatomyKicker;
+  const anatH = $('#anatomy h2'); if(anatH) anatH.innerHTML = ui.anatomyHead;
+  const anatL = $('#anatomy .lead'); if(anatL) anatL.innerHTML = ui.anatomyLead;
+  updateAnatomyCard(curAnatomyIdx);
+  
+  // Explorer section
+  const expK = $('#explorer .kicker'); if(expK) expK.textContent = ui.explorerKicker;
+  const expH = $('#explorer h2'); if(expH) expH.innerHTML = ui.explorerHead;
+  const expL = $('#explorer .lead'); if(expL) expL.innerHTML = ui.explorerLead;
+  const regBtn = $('#regrow'); if(regBtn) regBtn.textContent = ui.regrowBtn;
+  const nxtBtn = $('#nextRoot'); if(nxtBtn) nxtBtn.textContent = ui.surpriseBtn;
+  updateSeedShelf();
+  paintExplorer(explorerCur, 20250101);
+  
+  // Peeler section
+  const peelK = $('#find .kicker'); if(peelK) peelK.textContent = ui.peelKicker;
+  const peelH = $('#find h2'); if(peelH) peelH.innerHTML = ui.peelHead;
+  const peelL = $('#find .lead'); if(peelL) peelL.innerHTML = ui.peelLead;
+  const pNext = $('#peelNext'); if(pNext) pNext.textContent = ui.peelNextBtn;
+  const pReset = $('#peelReset'); if(pReset) pReset.textContent = ui.peelResetBtn;
+  renderPeel();
+  
+  // Patterns & Forms
+  const patK = $('#patterns .kicker'); if(patK) patK.textContent = ui.patternsKicker;
+  const patH = $('#patterns h2'); if(patH) patH.innerHTML = ui.patternsHead;
+  const patL = $('#patterns .lead'); if(patL) patL.innerHTML = ui.patternsLead;
+  runMizan();
+  showForm(curFormIdx);
+  
+  // X-Ray section
+  const xrK = $('#xray .kicker'); if(xrK) xrK.textContent = ui.xrayKicker;
+  const xrH = $('#xray h2'); if(xrH) xrH.innerHTML = ui.xrayHead;
+  const xrL = $('#xray .lead'); if(xrL) xrL.innerHTML = ui.xrayLead;
+  showVerseCard(curVerseIdx);
+  
+  // Traps section
+  const trK = $('#traps .kicker'); if(trK) trK.textContent = ui.trapsKicker;
+  const trH = $('#traps h2'); if(trH) trH.innerHTML = ui.trapsHead;
+  const trL = $('#traps .lead'); if(trL) trL.innerHTML = ui.trapsLead;
+  
+  // Benefits
+  const benK = $('#benefits .kicker'); if(benK) benK.textContent = ui.benefitsKicker;
+  const benH = $('#benefits h2'); if(benH) benH.innerHTML = ui.benefitsHead;
+  const benL = $('#benefits .lead'); if(benL) benL.innerHTML = ui.benefitsLead;
+  renderBenefits();
+  
+  // Teacher
+  const tchK = $('#teach .kicker'); if(tchK) tchK.textContent = ui.teachKicker;
+  const tchH = $('#teach h2'); if(tchH) tchH.innerHTML = ui.teachHead;
+  const tchL = $('#teach .lead'); if(tchL) tchL.innerHTML = ui.teachLead;
+  
+  // Quiz
+  const qzK = $('#quiz .kicker'); if(qzK) qzK.textContent = ui.quizKicker;
+  const qzH = $('#quiz h2'); if(qzH) qzH.innerHTML = ui.quizHead;
+  const qzL = $('#quiz .lead'); if(qzL) qzL.innerHTML = ui.quizLead;
+  renderQuizQuestion();
+}
+
+// Language button listeners
+const bEn=$('#btnLangEn'), bUr=$('#btnLangUr'), bNo=$('#btnLangNo');
+if(bEn) bEn.addEventListener('click',()=>switchLang('en'));
+if(bUr) bUr.addEventListener('click',()=>switchLang('ur'));
+if(bNo) bNo.addEventListener('click',()=>switchLang('no'));
+
+// Initial call to apply saved or default language
+switchLang(LANG);
+
+/* =====================================================================
+   12. SCROLL FX · COUNTERS · DUST
 ===================================================================== */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 $$('.reveal').forEach(e=>io.observe(e));
