@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مِيزَان · Mizan — The Two Destinations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --j-void:#04140E; --j-body:#0B3D2E; --j-mid:#126B4A; --j-accent:#2FBF71;
+  --j-gold:#D4AF37; --j-ink:#F2EFE4;
+  --n-void:#160404; --n-body:#4A0A0A; --n-mid:#7A1408; --n-accent:#FF4D1C;
+  --n-ash:#8C7A6B; --n-ink:#D9C8C0;
+  --split:52%;
+  --ease-rest:cubic-bezier(.16,1,.3,1);
+  --ease-lurch:cubic-bezier(.7,0,.84,0);
+  --f-ar-d:"Reem Kufi",serif; --f-ar:"Amiri",serif;
+  --f-en:"Cormorant Garamond",Georgia,serif; --f-ui:"Inter",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--j-void);color:var(--j-ink);
+  font-family:var(--f-ui);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+:focus-visible{outline:2px solid var(--j-gold);outline-offset:4px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============ GEOMETRY LAYER ============ */
+.geo{position:absolute;inset:0;width:100%;height:100%;opacity:.09;pointer-events:none}
+
+/* ============ SCROLL PROGRESS (SIRAT) ============ */
+#sirat-bar{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:90;
+  background:linear-gradient(90deg,var(--j-accent),var(--j-gold),var(--n-accent));
+  box-shadow:0 0 12px rgba(212,175,55,.7);transition:width .12s linear;
+}
+
+/* ============ PRELOADER ============ */
+#veil{
+  position:fixed;inset:0;z-index:100;background:var(--j-void);
+  display:grid;place-items:center;gap:1.5rem;
+  transition:opacity .9s var(--ease-rest),visibility .9s;
+}
+#veil.gone{opacity:0;visibility:hidden}
+#veil svg{width:80px;height:80px;animation:spin 14s linear infinite}
+#veil p{font-family:var(--f-ar-d);font-size:1.4rem;color:var(--j-gold);letter-spacing:.1em;margin:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ NAV ============ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:80;display:flex;
+  align-items:center;justify-content:space-between;
+  padding:1.1rem clamp(1rem,4vw,3rem);
+  background:linear-gradient(180deg,rgba(4,20,14,.92),transparent);
+  backdrop-filter:blur(6px);
+}
+.brand{font-family:var(--f-ar-d);font-size:1.5rem;color:var(--j-gold);letter-spacing:.05em}
+.brand small{display:block;font-family:var(--f-ui);font-size:.55rem;
+  letter-spacing:.42em;color:var(--j-ink);opacity:.55;text-transform:uppercase}
+nav ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
+nav a{color:var(--j-ink);text-decoration:none;font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;opacity:.65;transition:opacity .3s,color .3s}
+nav a:hover{opacity:1;color:var(--j-gold)}
+#motion-toggle{
+  background:none;border:1px solid rgba(242,239,228,.25);color:var(--j-ink);
+  font-family:var(--f-ui);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:.5rem .85rem;border-radius:99px;cursor:pointer;transition:.3s;
+}
+#motion-toggle:hover{border-color:var(--j-gold);color:var(--j-gold)}
+@media(max-width:820px){nav ul{display:none}}
+
+/* ============ ACT I — THE SPLIT ============ */
+#split{position:relative;height:100vh;min-height:620px;overflow:hidden;
+  touch-action:pan-y;cursor:ew-resize}
+.realm{position:absolute;inset:0;display:grid;place-items:center;padding:0 6vw}
+.realm-inner{max-width:34ch;text-align:center;transform:translateY(-2vh)}
+#jannah-side{
+  background:radial-gradient(120% 90% at 20% 20%,#12A16B 0%,var(--j-body) 42%,var(--j-void) 100%);
+  clip-path:inset(0 calc(100% - var(--split)) 0 0);
+}
+#nar-side{
+  background:radial-gradient(120% 90% at 80% 80%,#C4300F 0%,var(--n-body) 40%,var(--n-void) 100%);
+  clip-path:inset(0 0 0 var(--split));
+}
+.realm h1{margin:0 0 .3rem;font-family:var(--f-ar-d);font-size:clamp(3rem,9vw,6.5rem);
+  font-weight:500;line-height:.95}
+#jannah-side h1{color:var(--j-ink);text-shadow:0 0 60px rgba(47,191,113,.55)}
+#nar-side h1{color:#FFE9DF;text-shadow:0 0 50px rgba(255,77,28,.7);animation:flicker 5.5s var(--ease-lurch) infinite}
+@keyframes flicker{
+  0%,100%{text-shadow:0 0 50px rgba(255,77,28,.7)}
+  42%{text-shadow:0 0 22px rgba(255,77,28,.45)}
+  44%{text-shadow:0 0 78px rgba(255,120,28,.9)}
+  47%{text-shadow:0 0 30px rgba(255,77,28,.5)}
+}
+.realm .label{font-size:.62rem;letter-spacing:.44em;text-transform:uppercase;opacity:.6;margin:0 0 1.6rem}
+.realm .ayah{font-family:var(--f-ar);font-size:clamp(1.05rem,2.4vw,1.5rem);
+  line-height:2.1;margin:0 0 .9rem}
+#jannah-side .ayah{color:var(--j-gold)}
+#nar-side .ayah{color:#FFB199}
+.realm .en{font-family:var(--f-en);font-style:italic;font-size:clamp(.9rem,1.6vw,1.05rem);
+  line-height:1.65;opacity:.8;margin:0 0 .5rem}
+.realm .ref{font-size:.6rem;letter-spacing:.3em;opacity:.45}
+
+/* ---- The Sirat handle ---- */
+#sirat{position:absolute;top:0;bottom:0;left:var(--split);width:0;z-index:20;pointer-events:none}
+#sirat::before{content:"";position:absolute;top:0;bottom:0;left:-1px;width:2px;
+  background:linear-gradient(180deg,transparent,var(--j-gold) 12%,#fff 50%,var(--j-gold) 88%,transparent);
+  box-shadow:0 0 26px 3px rgba(212,175,55,.65)}
+#sirat-grip{
+  position:absolute;top:50%;left:50%;translate:-50% -50%;width:46px;height:46px;
+  border:1px solid var(--j-gold);rotate:45deg;background:rgba(4,20,14,.75);
+  backdrop-filter:blur(4px);pointer-events:auto;cursor:grab;
+  display:grid;place-items:center;transition:box-shadow .35s,scale .35s var(--ease-rest);
+  box-shadow:0 0 24px rgba(212,175,55,.4);
+}
+#sirat-grip:hover,#sirat-grip:focus-visible{scale:1.12;box-shadow:0 0 46px rgba(212,175,55,.8)}
+#sirat-grip::after{content:"";width:7px;height:7px;background:var(--j-gold);
+  border-radius:50%;box-shadow:0 0 14px 3px var(--j-gold)}
+#sirat-grip.dragging{cursor:grabbing;scale:1.2}
+#sirat-word{
+  position:absolute;top:calc(50% + 48px);left:50%;translate:-50% 0;
+  font-family:var(--f-ar-d);font-size:1rem;color:var(--j-gold);white-space:nowrap;
+  letter-spacing:.08em;text-shadow:0 0 20px rgba(0,0,0,.8)}
+#sirat-hint{
+  position:absolute;bottom:8vh;left:50%;translate:-50% 0;z-index:20;
+  font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;opacity:.5;
+  animation:breathe 3.4s ease-in-out infinite;text-align:center;white-space:nowrap}
+@keyframes breathe{50%{opacity:.95}}
+#pcanvas{position:absolute;inset:0;z-index:10;pointer-events:none}
+
+/* ============ ACT II — JUDGEMENT PIVOT ============ */
+#pivot{
+  position:relative;min-height:100vh;display:grid;place-items:center;
+  padding:14vh clamp(1.5rem,6vw,4rem);text-align:center;
+  background:linear-gradient(180deg,var(--j-void),#000 45%,var(--n-void));
+}
+#pivot .kicker{font-size:.62rem;letter-spacing:.46em;text-transform:uppercase;
+  color:var(--j-gold);opacity:.7;margin-bottom:3rem}
+#pivot .ayah-lg{
+  font-family:var(--f-ar);font-size:clamp(1.5rem,4.6vw,3.2rem);line-height:2.15;
+  color:var(--j-ink);max-width:22ch;margin:0 auto 2.4rem}
+#pivot .ayah-lg .fire{color:var(--n-accent);text-shadow:0 0 34px rgba(255,77,28,.5)}
+#pivot .ayah-lg .garden{color:var(--j-accent);text-shadow:0 0 34px rgba(47,191,113,.5)}
+#pivot .ayah-lg .win{color:var(--j-gold);text-shadow:0 0 40px rgba(212,175,55,.6)}
+#pivot .en-lg{font-family:var(--f-en);font-size:clamp(1.05rem,2.2vw,1.5rem);
+  font-style:italic;line-height:1.75;max-width:46ch;margin:0 auto 1.4rem;opacity:.85}
+#pivot .ref{font-size:.62rem;letter-spacing:.3em;opacity:.5}
+
+/* ============ SHARED SECTION SHELL ============ */
+.act{position:relative;padding:16vh clamp(1.5rem,6vw,5rem);overflow:hidden}
+.act-head{max-width:1100px;margin:0 auto 6rem;text-align:center}
+.act-head .num{font-family:var(--f-en);font-size:.9rem;letter-spacing:.4em;opacity:.4}
+.act-head h2{font-family:var(--f-ar-d);font-size:clamp(2.6rem,7vw,5rem);
+  font-weight:500;margin:.6rem 0 .4rem;line-height:1}
+.act-head .sub{font-family:var(--f-en);font-style:italic;font-size:1.15rem;opacity:.7;margin:0}
+
+/* ---- Jannah act ---- */
+#jannah{background:linear-gradient(180deg,var(--n-void) 0%,#0A2A1F 22%,var(--j-body) 55%,#0A2A1F 100%)}
+#jannah h2{color:var(--j-ink);text-shadow:0 0 70px rgba(47,191,113,.5)}
+#jannah .num{color:var(--j-accent)}
+/* ---- Nar act ---- */
+#nar{background:linear-gradient(180deg,#0A2A1F 0%,var(--n-void) 20%,var(--n-body) 58%,#1F0606 100%)}
+#nar h2{color:#FFE9DF;text-shadow:0 0 60px rgba(255,77,28,.6)}
+#nar .num{color:var(--n-accent)}
+
+/* ============ VERSE CARDS ============ */
+.grid{display:grid;gap:1.4rem;max-width:1180px;margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(288px,1fr))}
+.card{
+  position:relative;padding:2.6rem 2rem;border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.03);backdrop-filter:blur(10px);overflow:hidden;
+  opacity:0;translate:0 44px;transition:opacity .95s var(--ease-rest),translate .95s var(--ease-rest),border-color .5s,background .5s;
+}
+.card.in{opacity:1;translate:0 0}
+.card::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,currentColor,transparent);opacity:.5}
+.card .idx{font-family:var(--f-en);font-size:.78rem;letter-spacing:.3em;opacity:.4;display:block;margin-bottom:1.4rem}
+.card .ar{font-family:var(--f-ar);font-size:1.35rem;line-height:2.05;margin:0 0 1.3rem}
+.card .tl{font-family:var(--f-ui);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;opacity:.45;margin:0 0 1.1rem}
+.card .en{font-family:var(--f-en);font-size:1.02rem;line-height:1.7;opacity:.86;margin:0 0 1.4rem}
+.card .ref{font-size:.6rem;letter-spacing:.28em;opacity:.42}
+#jannah .card{color:var(--j-accent)}
+#jannah .card .ar{color:var(--j-gold)}
+#jannah .card .en,#jannah .card .ref,#jannah .card .idx{color:var(--j-ink)}
+#jannah .card:hover{border-color:rgba(47,191,113,.55);background:rgba(47,191,113,.07);
+  box-shadow:0 24px 70px -24px rgba(47,191,113,.4)}
+#nar .card{color:var(--n-accent)}
+#nar .card .ar{color:#FFB199}
+#nar .card .en,#nar .card .ref,#nar .card .idx{color:var(--n-ink)}
+#nar .card:hover{border-color:rgba(255,77,28,.5);background:rgba(255,77,28,.07);
+  box-shadow:0 24px 70px -24px rgba(255,77,28,.45)}
+#nar .card:hover .ar{animation:jolt .32s steps(3) 2}
+@keyframes jolt{50%{translate:1.5px -1px}}
+
+/* ============ ACT V — THE SCALE ============ */
+#mizan{background:radial-gradient(90% 70% at 50% 0%,#1F0606,#000 70%);
+  padding:18vh clamp(1.5rem,6vw,5rem) 14vh;text-align:center}
+#mizan h2{color:var(--j-gold);text-shadow:0 0 60px rgba(212,175,55,.5)}
+#mizan .num{color:var(--j-gold);opacity:.55}
+.scale-wrap{max-width:760px;margin:0 auto}
+.beam-area{position:relative;height:270px;margin:3rem auto 1rem;width:100%;max-width:560px}
+.post{position:absolute;bottom:0;left:50%;translate:-50% 0;width:2px;height:150px;
+  background:linear-gradient(180deg,var(--j-gold),rgba(212,175,55,.15))}
+.fulcrum{position:absolute;bottom:146px;left:50%;translate:-50% 0;width:16px;height:16px;
+  rotate:45deg;border:1px solid var(--j-gold);background:#000;
+  box-shadow:0 0 22px rgba(212,175,55,.6);z-index:3}
+.beam{position:absolute;bottom:152px;left:50%;translate:-50% 0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--n-accent),var(--j-gold) 50%,var(--j-accent));
+  transform-origin:50% 50%;transition:rotate 1.15s var(--ease-rest);rotate:0deg;
+  box-shadow:0 0 16px rgba(212,175,55,.4)}
+.pan{position:absolute;top:0;width:112px;transition:translate 1.15s var(--ease-rest)}
+.pan.left{left:-6px}.pan.right{right:-6px}
+.pan .strings{width:1px;height:52px;margin:0 auto;background:rgba(212,175,55,.5)}
+.pan .dish{height:8px;border:1px solid;border-top:none;border-radius:0 0 56px 56px}
+.pan.left .dish{border-color:var(--n-accent);box-shadow:0 8px 30px -6px rgba(255,77,28,.6)}
+.pan.right .dish{border-color:var(--j-accent);box-shadow:0 8px 30px -6px rgba(47,191,113,.6)}
+.pan .cnt{font-family:var(--f-ar-d);font-size:1.6rem;margin-top:.7rem}
+.pan.left .cnt{color:var(--n-accent)}.pan.right .cnt{color:var(--j-accent)}
+.pan .nm{font-size:.55rem;letter-spacing:.26em;text-transform:uppercase;opacity:.5;margin-top:.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:2.6rem auto 1.6rem;max-width:640px}
+.chip{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.1em;padding:.62rem 1.15rem;
+  border-radius:99px;background:transparent;cursor:pointer;transition:.32s var(--ease-rest)}
+.chip.good{border:1px solid rgba(47,191,113,.45);color:var(--j-accent)}
+.chip.good:hover{background:rgba(47,191,113,.14);border-color:var(--j-accent);translate:0 -3px}
+.chip.bad{border:1px solid rgba(255,77,28,.45);color:var(--n-accent)}
+.chip.bad:hover{background:rgba(255,77,28,.14);border-color:var(--n-accent);translate:0 -3px}
+#verdict{font-family:var(--f-en);font-style:italic;font-size:1.2rem;min-height:2.4em;
+  max-width:44ch;margin:1.4rem auto;line-height:1.6;transition:color .6s}
+#reset{background:none;border:1px solid rgba(212,175,55,.4);color:var(--j-gold);
+  font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;padding:.7rem 1.5rem;
+  border-radius:99px;cursor:pointer;transition:.3s}
+#reset:hover{background:rgba(212,175,55,.12);border-color:var(--j-gold)}
+.disclaimer{font-size:.66rem;line-height:1.8;opacity:.4;max-width:52ch;margin:3.4rem auto 0;font-family:var(--f-ui)}
+
+/* ============ ACT VI — MERCY ============ */
+#rahmah{
+  min-height:100vh;display:grid;place-items:center;text-align:center;
+  padding:16vh clamp(1.5rem,6vw,4rem);
+  background:radial-gradient(100% 80% at 50% 100%,#12A16B 0%,var(--j-body) 34%,#000 100%);
+}
+#rahmah .kicker{font-size:.62rem;letter-spacing:.46em;text-transform:uppercase;
+  color:var(--j-gold);opacity:.75;margin-bottom:3rem}
+#rahmah .ayah-lg{font-family:var(--f-ar);font-size:clamp(1.7rem,5.4vw,3.6rem);
+  line-height:2;color:var(--j-gold);margin:0 0 2.2rem;
+  text-shadow:0 0 60px rgba(212,175,55,.45)}
+#rahmah .en-lg{font-family:var(--f-en);font-style:italic;font-size:clamp(1.1rem,2.3vw,1.6rem);
+  line-height:1.7;max-width:40ch;margin:0 auto 1.2rem;color:var(--j-ink)}
+#rahmah .ref{font-size:.62rem;letter-spacing:.3em;opacity:.6}
+
+footer{padding:5rem 2rem;text-align:center;background:#000;
+  border-top:1px solid rgba(212,175,55,.14)}
+footer p{font-size:.64rem;letter-spacing:.2em;opacity:.35;margin:.5rem 0;line-height:1.9}
+
+/* ============ REVEAL + REDUCED MOTION ============ */
+.rise{opacity:0;translate:0 34px;transition:opacity 1s var(--ease-rest),translate 1s var(--ease-rest)}
+.rise.in{opacity:1;translate:0 0}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .card,.rise{opacity:1!important;translate:none!important}
+  html{scroll-behavior:auto}
+}
+body.no-motion *{animation:none!important}
+body.no-motion .card,body.no-motion .rise{opacity:1!important;translate:none!important}
+</style>
+</head>
+<body>
+
+<!-- ===== GEOMETRIC PATTERN DEF (khatam / 8-fold star) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="khatam" width="86" height="86" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M43 5 L55 31 L81 43 L55 55 L43 81 L31 55 L5 43 L31 31 Z"/>
+        <path d="M43 14 L72 43 L43 72 L14 43 Z"/>
+        <circle cx="43" cy="43" r="6"/>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+
+<div id="sirat-bar" role="presentation"></div>
+
+<!-- ===== PRELOADER ===== -->
+<div id="veil" role="status" aria-live="polite">
+  <svg viewBox="0 0 86 86" style="color:#D4AF37" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M43 5 L55 31 L81 43 L55 55 L43 81 L31 55 L5 43 L31 31 Z"/>
+      <path d="M43 14 L72 43 L43 72 L14 43 Z"/>
+    </g>
+  </svg>
+  <p>بِسْمِ اللَّهِ</p>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="brand">مِيزَان<small>Mizan</small></div>
+  <ul>
+    <li><a href="#split">The Path</a></li>
+    <li><a href="#jannah">Al-Jannah</a></li>
+    <li><a href="#nar">An-Nār</a></li>
+    <li><a href="#mizan">The Scale</a></li>
+    <li><a href="#rahmah">Mercy</a></li>
+  </ul>
+  <button id="motion-toggle" aria-pressed="false">Calm Mode</button>
+</nav>
+
+<main>
+<!-- ================= ACT I : THE SPLIT ================= -->
+<section id="split" aria-label="The two destinations, divided by the path">
+  <div class="realm" id="jannah-side">
+    <svg class="geo" style="color:#2FBF71"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+    <div class="realm-inner">
+      <h1 dir="rtl" lang="ar">ٱلْجَنَّة</h1>
+      <p class="label">Al-Jannah · The Garden</p>
+      <p class="ayah" dir="rtl" lang="ar">جَنَّٰتٍ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ</p>
+      <p class="en">“Gardens beneath which rivers flow.”</p>
+      <p class="ref">AL-BAQARAH 2:25</p>
+    </div>
+  </div>
+
+  <div class="realm" id="nar-side">
+    <svg class="geo" style="color:#FF4D1C"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+    <div class="realm-inner">
+      <h1 dir="rtl" lang="ar">ٱلنَّار</h1>
+      <p class="label">An-Nār · The Fire</p>
+      <p class="ayah" dir="rtl" lang="ar">سَمِعُوا لَهَا تَغَيُّظًا وَزَفِيرًا</p>
+      <p class="en">“They will hear its raging and roaring.”</p>
+      <p class="ref">AL-FURQĀN 25:12</p>
+    </div>
+  </div>
+
+  <canvas id="pcanvas" aria-hidden="true"></canvas>
+
+  <div id="sirat">
+    <div id="sirat-grip" role="slider" tabindex="0"
+         aria-label="As-Sirat — the path. Move to shift the balance between the Garden and the Fire."
+         aria-valuemin="8" aria-valuemax="92" aria-valuenow="52" aria-valuetext="52 percent toward the Fire"></div>
+    <span id="sirat-word" dir="rtl" lang="ar" aria-hidden="true">ٱلصِّرَاط</span>
+  </div>
+  <p id="sirat-hint">drag the path · ← → keys · watch what crosses over</p>
+</section>
+
+<!-- ================= ACT II : THE PIVOT ================= -->
+<section id="pivot" aria-labelledby="pivot-h">
+  <svg class="geo" style="color:#D4AF37;opacity:.05"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+  <div class="rise">
+    <p class="kicker" id="pivot-h">They are not equal</p>
+    <p class="ayah-lg" dir="rtl" lang="ar">
+      لَا يَسْتَوِىٓ أَصْحَٰبُ <span class="fire">ٱلنَّارِ</span>
+      وَأَصْحَٰبُ <span class="garden">ٱلْجَنَّةِ</span> ۚ
+      أَصْحَٰبُ ٱلْجَنَّةِ هُمُ <span class="win">ٱلْفَآئِزُونَ</span>
+    </p>
+    <p class="en-lg">“Not equal are the companions of the Fire and the companions of the Garden. The companions of the Garden — they are the ones who attain success.”</p>
+    <p class="ref">SŪRAH AL-ḤASHR 59:20</p>
+  </div>
+</section>
+
+<!-- ================= ACT III : AL-JANNAH ================= -->
+<section id="jannah" class="act" aria-labelledby="jannah-h">
+  <svg class="geo" style="color:#2FBF71"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+  <header class="act-head rise">
+    <span class="num">ACT III</span>
+    <h2 id="jannah-h" dir="rtl" lang="ar">دَارُ ٱلسَّلَام</h2>
+    <p class="sub">Dār as-Salām — the Abode of Peace</p>
+  </header>
+  <div class="grid">
+    <article class="card">
+      <span class="idx">i · Two Gardens</span>
+      <p class="ar" dir="rtl" lang="ar">وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ</p>
+      <p class="tl">wa liman khāfa maqāma rabbihī jannatān</p>
+      <p class="en">“And for the one who feared the standing before his Lord — two gardens.”</p>
+      <p class="ref">AR-RAḤMĀN 55:46</p>
+    </article>
+    <article class="card">
+      <span class="idx">ii · No Harsh Weather</span>
+      <p class="ar" dir="rtl" lang="ar">لَا يَرَوْنَ فِيهَا شَمْسًا وَلَا زَمْهَرِيرًا</p>
+      <p class="tl">lā yarawna fīhā shamsan wa lā zamharīrā</p>
+      <p class="en">“They will find therein neither scorching sun nor bitter cold.”</p>
+      <p class="ref">AL-INSĀN 76:13</p>
+    </article>
+    <article class="card">
+      <span class="idx">iii · Only Peace</span>
+      <p class="ar" dir="rtl" lang="ar">لَا يَسْمَعُونَ فِيهَا لَغْوًا وَلَا تَأْثِيمًا ۝ إِلَّا قِيلًا سَلَٰمًا سَلَٰمًا</p>
+      <p class="tl">illā qīlan salāman salāmā</p>
+      <p class="en">“They hear no idle talk there, nor any sinful speech — only the saying: peace, peace.”</p>
+      <p class="ref">AL-WĀQIʿAH 56:25–26</p>
+    </article>
+    <article class="card">
+      <span class="idx">iv · The Welcome</span>
+      <p class="ar" dir="rtl" lang="ar">سَلَٰمٌ عَلَيْكُمْ طِبْتُمْ فَٱدْخُلُوهَا خَٰلِدِينَ</p>
+      <p class="tl">salāmun ʿalaykum ṭibtum fa-dkhulūhā khālidīn</p>
+      <p class="en">“Peace be upon you; you have become pure — so enter it, to remain forever.”</p>
+      <p class="ref">AZ-ZUMAR 39:73</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ACT IV : AN-NAR ================= -->
+<section id="nar" class="act" aria-labelledby="nar-h">
+  <svg class="geo" style="color:#FF4D1C"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+  <header class="act-head rise">
+    <span class="num">ACT IV</span>
+    <h2 id="nar-h" dir="rtl" lang="ar">دَارُ ٱلْبَوَار</h2>
+    <p class="sub">Dār al-Bawār — the Abode of Ruin</p>
+  </header>
+  <div class="grid">
+    <article class="card">
+      <span class="idx">i · Its Fuel</span>
+      <p class="ar" dir="rtl" lang="ar">ٱلنَّارَ ٱلَّتِى وَقُودُهَا ٱلنَّاسُ وَٱلْحِجَارَةُ</p>
+      <p class="tl">an-nāra allatī waqūduhā an-nāsu wa-l-ḥijārah</p>
+      <p class="en">“The Fire whose fuel is people and stones.”</p>
+      <p class="ref">AL-BAQARAH 2:24</p>
+    </article>
+    <article class="card">
+      <span class="idx">ii · It Reaches the Heart</span>
+      <p class="ar" dir="rtl" lang="ar">نَارُ ٱللَّهِ ٱلْمُوقَدَةُ ۝ ٱلَّتِى تَطَّلِعُ عَلَى ٱلْأَفْـِٔدَةِ</p>
+      <p class="tl">nāru-llāhi al-mūqadah · allatī taṭṭaliʿu ʿalā-l-afʾidah</p>
+      <p class="en">“The kindled Fire of Allah, which rises over the hearts.”</p>
+      <p class="ref">AL-HUMAZAH 104:6–7</p>
+    </article>
+    <article class="card">
+      <span class="idx">iii · Lying in Wait</span>
+      <p class="ar" dir="rtl" lang="ar">إِنَّ جَهَنَّمَ كَانَتْ مِرْصَادًا</p>
+      <p class="tl">inna jahannama kānat mirṣādā</p>
+      <p class="en">“Indeed, Hell has ever been a place lying in wait.”</p>
+      <p class="ref">AN-NABAʾ 78:21</p>
+    </article>
+    <article class="card">
+      <span class="idx">iv · No Rest</span>
+      <p class="ar" dir="rtl" lang="ar">كُلَّمَا خَبَتْ زِدْنَٰهُمْ سَعِيرًا</p>
+      <p class="tl">kullamā khabat zidnāhum saʿīrā</p>
+      <p class="en">“Every time it subsides, We increase for them the blaze.”</p>
+      <p class="ref">AL-ISRĀʾ 17:97</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================= ACT V : THE SCALE ================= -->
+<section id="mizan" class="act" aria-labelledby="mizan-h">
+  <header class="act-head rise" style="margin-bottom:2rem">
+    <span class="num">ACT V</span>
+    <h2 id="mizan-h" dir="rtl" lang="ar">ٱلْمِيزَان</h2>
+    <p class="sub">Al-Mīzān — the Scale</p>
+  </header>
+
+  <div class="scale-wrap">
+    <p class="en" style="font-family:var(--f-en);font-size:1.1rem;opacity:.72;max-width:44ch;margin:0 auto 1rem;line-height:1.7">
+      A reflective object, not a calculator. Add to either side and watch the beam answer.
+    </p>
+
+    <div class="beam-area">
+      <div class="post"></div>
+      <div class="beam" id="beam">
+        <div class="pan left" id="pan-l">
+          <div class="strings"></div><div class="dish"></div>
+          <div class="cnt" id="cnt-l">٠</div><div class="nm">Sayyi’āt</div>
+        </div>
+        <div class="pan right" id="pan-r">
+          <div class="strings"></div><div class="dish"></div>
+          <div class="cnt" id="cnt-r">٠</div><div class="nm">Ḥasanāt</div>
+        </div>
+      </div>
+      <div class="fulcrum"></div>
+    </div>
+
+    <div class="chips" role="group" aria-label="Add weight to the scale">
+      <button class="chip good" data-w="1">＋ a kind word</button>
+      <button class="chip good" data-w="1">＋ patience</button>
+      <button class="chip good" data-w="1">＋ forgiving someone</button>
+      <button class="chip good" data-w="1">＋ hidden charity</button>
+      <button class="chip bad"  data-w="-1">－ backbiting</button>
+      <button class="chip bad"  data-w="-1">－ arrogance</button>
+      <button class="chip bad"  data-w="-1">－ heedlessness</button>
+    </div>
+
+    <p id="verdict" role="status" aria-live="polite">The beam rests level. Nothing has been placed.</p>
+    <button id="reset">Return to level</button>
+
+    <p class="disclaimer">
+      This is a contemplative interaction — a piece of interface poetry. Deeds are not counted by
+      any app, and the true weighing belongs to Allah alone. Treat it as an invitation to reflect,
+      never as a verdict.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ACT VI : MERCY ================= -->
+<section id="rahmah" aria-labelledby="rahmah-h">
+  <svg class="geo" style="color:#D4AF37"><rect width="100%" height="100%" fill="url(#khatam)"/></svg>
+  <div class="rise">
+    <p class="kicker" id="rahmah-h">And yet — the door stays open</p>
+    <p class="ayah-lg" dir="rtl" lang="ar">لَا تَقْنَطُوا مِن رَّحْمَةِ ٱللَّهِ</p>
+    <p class="en-lg">“Do not despair of the mercy of Allah.”</p>
+    <p class="ref" style="margin-bottom:3.2rem">AZ-ZUMAR 39:53</p>
+    <p class="ayah-lg" style="font-size:clamp(1.2rem,3.4vw,2.1rem);opacity:.85" dir="rtl" lang="ar">وَرَحْمَتِى وَسِعَتْ كُلَّ شَىْءٍ</p>
+    <p class="en-lg" style="font-size:1.05rem">“My mercy encompasses all things.”</p>
+    <p class="ref">AL-AʿRĀF 7:156</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>مِيزَان · MIZAN — an interactive meditation on the two destinations</p>
+  <p>English lines are renderings of meaning, not the Qur’ān itself. For study, consult the Arabic with qualified tafsīr.</p>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let calm = reduced;
+
+/* ---------- PRELOADER ---------- */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('veil').classList.add('gone'), reduced ? 0 : 900);
+});
+
+/* ---------- CALM MODE TOGGLE ---------- */
+const mt = document.getElementById('motion-toggle');
+if (calm) { document.body.classList.add('no-motion'); mt.setAttribute('aria-pressed','true'); mt.textContent='Motion On'; }
+mt.addEventListener('click', () => {
+  calm = !calm;
+  document.body.classList.toggle('no-motion', calm);
+  mt.setAttribute('aria-pressed', String(calm));
+  mt.textContent = calm ? 'Motion On' : 'Calm Mode';
+});
+
+/* ---------- SCROLL PROGRESS ---------- */
+const bar = document.getElementById('sirat-bar');
+addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+}, {passive:true});
+
+/* ---------- REVEAL ---------- */
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.16, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.card, .rise').forEach((el,i) => {
+  el.style.transitionDelay = (i % 4) * 110 + 'ms';
+  io.observe(el);
+});
+
+/* ================= AS-SIRAT DIVIDER ================= */
+const stage = document.getElementById('split');
+const grip  = document.getElementById('sirat-grip');
+let split = 52, dragging = false;
+
+function setSplit(pct){
+  split = Math.max(8, Math.min(92, pct));
+  document.documentElement.style.setProperty('--split', split + '%');
+  grip.setAttribute('aria-valuenow', Math.round(split));
+  grip.setAttribute('aria-valuetext', Math.round(split) + ' percent toward the Fire');
+}
+function fromEvent(e){
+  const r = stage.getBoundingClientRect();
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+  setSplit((x / r.width) * 100);
+}
+grip.addEventListener('pointerdown', e => {
+  dragging = true; grip.classList.add('dragging');
+  grip.setPointerCapture(e.pointerId); e.preventDefault();
+});
+addEventListener('pointermove', e => { if (dragging) fromEvent(e); });
+addEventListener('pointerup',  () => { dragging = false; grip.classList.remove('dragging'); });
+stage.addEventListener('pointerdown', e => { if (e.target === grip) return; fromEvent(e); });
+grip.addEventListener('keydown', e => {
+  const step = e.shiftKey ? 10 : 3;
+  if (e.key === 'ArrowLeft')  { setSplit(split - step); e.preventDefault(); }
+  if (e.key === 'ArrowRight') { setSplit(split + step); e.preventDefault(); }
+  if (e.key === 'Home')       { setSplit(8);  e.preventDefault(); }
+  if (e.key === 'End')        { setSplit(92); e.preventDefault(); }
+});
+setSplit(52);
+
+/* ================= PARTICLES : SOULS THAT TRANSFORM ================= */
+const cv = document.getElementById('pcanvas');
+const cx = cv.getContext('2d');
+let W = 0, H = 0, dpr = 1, motes = [], raf = null;
+
+function sizeCanvas(){
+  dpr = Math.min(devicePixelRatio || 1, 2);
+  W = stage.clientWidth; H = stage.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function seed(){
+  const n = Math.min(150, Math.round(W * H / 11000));
+  motes = Array.from({length:n}, () => ({
+    x: Math.random() * W, y: Math.random() * H,
+    r: Math.random() * 1.9 + 0.5,
+    s: Math.random() * 0.5 + 0.16,
+    d: Math.random() * Math.PI * 2,
+    w: Math.random() * 0.02 + 0.006,
+    a: Math.random() * 0.5 + 0.25
+  }));
+}
+function frame(){
+  cx.clearRect(0, 0, W, H);
+  const boundary = W * split / 100;
+  for (const m of motes){
+    const inFire = m.x > boundary;
+    m.d += m.w;
+    if (inFire){
+      /* Embers: fast, erratic, rise then die */
+      m.y -= m.s * 2.3;
+      m.x += Math.sin(m.d * 3) * 1.1;
+      if (m.y < -12) { m.y = H + 10; m.x = boundary + Math.random() * (W - boundary); }
+      const flick = 0.55 + Math.sin(m.d * 7) * 0.45;
+      cx.beginPath();
+      cx.arc(m.x, m.y, m.r * 1.15, 0, Math.PI * 2);
+      cx.fillStyle = `rgba(255,${Math.round(90 + flick * 110)},28,${m.a * flick})`;
+      cx.shadowBlur = 14; cx.shadowColor = 'rgba(255,77,28,.9)';
+      cx.fill();
+    } else {
+      /* Light motes: slow, weightless, settle */
+      m.y -= m.s * 0.55;
+      m.x += Math.sin(m.d) * 0.32;
+      if (m.y < -12) { m.y = H + 10; m.x = Math.random() * boundary; }
+      cx.beginPath();
+      cx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      cx.fillStyle = `rgba(212,${Math.round(190 + m.r * 12)},120,${m.a})`;
+      cx.shadowBlur = 10; cx.shadowColor = 'rgba(47,191,113,.85)';
+      cx.fill();
+    }
+    cx.shadowBlur = 0;
+  }
+  raf = requestAnimationFrame(frame);
+}
+function startParticles(){
+  sizeCanvas(); seed();
+  if (calm) { cx.clearRect(0,0,W,H); return; }
+  if (raf) cancelAnimationFrame(raf);
+  frame();
+}
+startParticles();
+mt.addEventListener('click', () => {
+  if (calm) { if (raf) cancelAnimationFrame(raf); raf = null; cx.clearRect(0,0,W,H); }
+  else startParticles();
+});
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(startParticles, 180); });
+/* Pause offscreen — saves battery */
+new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = null; }
+    else if (e.isIntersecting && !raf && !calm) frame();
+  });
+}, {threshold:0.05}).observe(stage);
+
+/* ================= THE MIZAN ================= */
+const AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr = n => String(Math.abs(n)).split('').map(d => AR[+d]).join('');
+let good = 0, bad = 0;
+const beam = document.getElementById('beam');
+const cntL = document.getElementById('cnt-l'), cntR = document.getElementById('cnt-r');
+const panL = document.getElementById('pan-l'), panR = document.getElementById('pan-r');
+const verdict = document.getElementById('verdict');
+
+const LINES = {
+  level: ['The beam rests level. Nothing has been placed.', 'var(--j-ink)'],
+  good: [
+    'It leans toward light. “Indeed, good deeds erase bad deeds.” — Hūd 11:114',
+    'var(--j-accent)'
+  ],
+  bad: [
+    'It leans toward the Fire — and still, the door of return is not locked.',
+    'var(--n-accent)'
+  ],
+  tie: ['Perfectly balanced. Which way will the next deed tip it?', 'var(--j-gold)']
+};
+
+function render(){
+  const diff = good - bad;
+  const tilt = Math.max(-15, Math.min(15, -diff * 2.4)); /* right pan down when good wins */
+  beam.style.rotate = tilt + 'deg';
+  /* Counter-rotate pans so dishes stay level, and drop the heavy side */
+  panL.style.translate = `0 ${Math.max(0, diff) * 3}px`;
+  panR.style.translate = `0 ${Math.max(0, -diff) * 3}px`;
+  cntL.textContent = toAr(bad); cntR.textContent = toAr(good);
+
+  let key = 'level';
+  if (good || bad) key = diff > 0 ? 'good' : diff < 0 ? 'bad' : 'tie';
+  verdict.textContent = LINES[key][0];
+  verdict.style.color = LINES[key][1];
+}
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => {
+    (+c.dataset.w > 0) ? good++ : bad++;
+    render();
+  });
+});
+document.getElementById('reset').addEventListener('click', () => { good = 0; bad = 0; render(); });
+render();
+})();
+</script>
+</body>
+</html>

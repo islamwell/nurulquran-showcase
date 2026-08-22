@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شَجَرَةُ الجُذُور · The Root Tree — Quranic Arabic Root Words</title>
+<meta name="description" content="Learn Quranic Arabic root words (الجذر) through a living tree: interactive root explorer, patterns, ayah x-ray, quizzes and a teacher's toolkit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. TOKENS ============ */
+:root{
+  --bg0:#040605; --bg1:#080e0b; --bg2:#0d1712; --bg3:#132018;
+  --panel:rgba(18,28,22,.72); --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18);
+  --txt:#f0f5ee; --txt2:#dbe6da; --mut:#9db0a4;
+  --gold:#f5bf5f; --amber:#f09231; --leaf:#7ddc95; --leaf2:#3fa563; --sky:#69c8ff;
+  --rose:#ff9db3; --violet:#b6a4ff; --bark:#6b4a2e; --bark2:#2c1d13;
+  --ff:'Outfit',ui-sans-serif,system-ui,sans-serif;
+  --fa:'Noto Naskh Arabic','Amiri',serif;
+  --fq:'Amiri','Noto Naskh Arabic',serif;
+  --fk:'Reem Kufi','Noto Naskh Arabic',serif;
+  --r:22px; --maxw:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--ff); font-weight:500; font-size:clamp(17px,1.15vw,19.5px);
+  line-height:1.75; color:var(--txt); background:var(--bg0); overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{ /* atmospheric base */
+  content:""; position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background:
+    radial-gradient(1100px 700px at 78% -8%, rgba(245,191,95,.13), transparent 62%),
+    radial-gradient(900px 620px at 8% 12%, rgba(63,165,99,.12), transparent 60%),
+    radial-gradient(1200px 900px at 50% 108%, rgba(105,200,255,.09), transparent 65%),
+    linear-gradient(180deg,#040605 0%,#070d0a 30%,#0a120e 65%,#050806 100%);
+}
+.grain{ /* film grain = kills the "flat cartoon" feel */
+  position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.055; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.vignette{position:fixed;inset:0;z-index:59;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
+#dust{position:fixed;inset:0;z-index:1;pointer-events:none}
+::selection{background:rgba(125,220,149,.32)}
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:#060a08}
+::-webkit-scrollbar-thumb{background:linear-gradient(#3fa563,#2b6e44);border-radius:9px;border:3px solid #060a08}
+
+/* ============ 2. LAYOUT ============ */
+.wrap{width:min(100% - 40px,var(--maxw));margin-inline:auto;position:relative;z-index:2}
+section{padding:clamp(66px,8vw,124px) 0;position:relative}
+.ar{font-family:var(--fa);font-weight:700}
+.q{font-family:var(--fq);font-weight:700;line-height:2.15}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:.82rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.kicker::before{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+h1,h2,h3,h4{font-weight:800;line-height:1.12;letter-spacing:-.02em;margin:0 0 .5em}
+h2{font-size:clamp(31px,4.5vw,56px)}
+h3{font-size:clamp(22px,2.4vw,30px)}
+h2 .ar,h1 .ar{font-family:var(--fk);letter-spacing:0}
+.lead{font-size:clamp(18px,1.5vw,22px);color:var(--txt2);font-weight:500;max-width:74ch}
+.mut{color:var(--mut)}
+.grad{background:linear-gradient(100deg,#f5bf5f,#7ddc95 55%,#69c8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card{background:linear-gradient(158deg,rgba(255,255,255,.062),rgba(255,255,255,.016));
+  border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,2.2vw,30px);
+  backdrop-filter:blur(9px);transition:.4s cubic-bezier(.2,.8,.3,1);position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px);border-color:var(--line2);
+  box-shadow:0 26px 60px -28px rgba(0,0,0,.9),0 0 0 1px rgba(125,220,149,.18)}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(285px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(125,220,149,.35),transparent);margin:0}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px;background:rgba(125,220,149,.14);color:var(--leaf);
+  border:1px solid rgba(125,220,149,.3)}
+.badge.gold{background:rgba(245,191,95,.14);color:var(--gold);border-color:rgba(245,191,95,.32)}
+.badge.sky{background:rgba(105,200,255,.13);color:var(--sky);border-color:rgba(105,200,255,.3)}
+.badge.rose{background:rgba(255,157,179,.13);color:var(--rose);border-color:rgba(255,157,179,.3)}
+
+/* ============ 3. NAV ============ */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:70;background:transparent}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3fa563,#7ddc95,#f5bf5f)}
+nav{position:sticky;top:0;z-index:55;background:rgba(5,9,7,.74);backdrop-filter:blur(16px) saturate(1.3);
+  border-bottom:1px solid var(--line)}
+.navin{width:min(100% - 28px,1360px);margin-inline:auto;display:flex;align-items:center;gap:14px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.02rem;white-space:nowrap;text-decoration:none;color:inherit}
+.logo .nq-mini-logo{width:32px;height:32px;flex:0 0 32px;filter:drop-shadow(0 2px 8px rgba(125,220,149,.35))}
+.logo b{font-family:var(--fk);color:var(--leaf);font-size:1.25rem}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:4px}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--mut);text-decoration:none;font-weight:700;font-size:.9rem;padding:8px 12px;
+  border-radius:11px;white-space:nowrap;transition:.25s}
+.navlinks a:hover,.navlinks a.on{color:#fff;background:rgba(125,220,149,.13)}
+.nq-hub-badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--leaf);background:rgba(125,220,149,.12);border:1px solid rgba(125,220,149,.32);padding:7px 15px;border-radius:999px;transition:.25s;white-space:nowrap;flex-shrink:0}
+.nq-hub-badge:hover{background:var(--leaf);color:#04140a;border-color:var(--leaf);box-shadow:0 0 16px rgba(125,220,149,.4);transform:translateY(-1px)}
+@media(max-width:980px){.navlinks{display:none}}
+.nq-footer-badge{text-align:center;padding:28px 16px 10px;border-top:1px solid var(--line);margin-top:32px}
+.nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
+
+/* ============ 4. HERO ============ */
+.hero{min-height:min(100svh,940px);padding:0;display:grid;align-items:center;position:relative;overflow:hidden}
+.herosvg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.heroin{position:relative;z-index:3;padding:clamp(40px,7vh,90px) 0}
+.herobox{max-width:min(660px,100%);background:linear-gradient(150deg,rgba(6,12,9,.86),rgba(6,12,9,.42));
+  border:1px solid var(--line);border-radius:28px;padding:clamp(24px,3vw,44px);backdrop-filter:blur(7px)}
+h1{font-size:clamp(38px,6.4vw,80px)}
+.h1ar{display:block;font-family:var(--fk);font-size:clamp(52px,9vw,116px);font-weight:700;
+  line-height:1;margin-bottom:.1em;color:#fff;text-shadow:0 0 44px rgba(125,220,149,.5),0 4px 30px rgba(0,0,0,.8)}
+.ayahbox{margin:26px 0 0;padding:20px 22px;border-radius:18px;border:1px solid rgba(245,191,95,.26);
+  background:linear-gradient(140deg,rgba(245,191,95,.11),rgba(245,191,95,.02))}
+.ayahbox .q{font-size:clamp(21px,2.5vw,31px);color:#fff8e8;margin:0 0 10px;text-align:right;direction:rtl}
+.btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--ff);font-weight:800;font-size:1rem;
+  padding:15px 26px;border-radius:14px;border:1px solid transparent;cursor:pointer;text-decoration:none;
+  transition:.28s cubic-bezier(.2,.8,.3,1)}
+.btn.p{background:linear-gradient(135deg,#4bb875,#2c7d4d);color:#04140a;
+  box-shadow:0 14px 34px -14px rgba(75,184,117,.85)}
+.btn.p:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 44px -14px rgba(75,184,117,1)}
+.btn.s{background:rgba(255,255,255,.07);border-color:var(--line2);color:#fff}
+.btn.s:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+.scrollhint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:4;
+  color:var(--mut);font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;text-align:center}
+.scrollhint span{display:block;width:1px;height:36px;margin:10px auto 0;
+  background:linear-gradient(var(--leaf),transparent);animation:drop 2.1s infinite}
+@keyframes drop{0%{opacity:0;transform:scaleY(.2)}40%{opacity:1}100%{opacity:0;transform:scaleY(1)}}
+
+/* ============ 5. TREE SVG BEHAVIOUR ============ */
+.cluster{transform-box:fill-box;transform-origin:50% 100%;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}
+.lf{animation:leafIn .6s cubic-bezier(.2,.85,.3,1) both}
+@keyframes leafIn{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+.wleaf{cursor:pointer;opacity:0;transition:opacity .5s ease,transform .3s cubic-bezier(.2,.8,.3,1)}
+.wleaf.show{opacity:1}
+.wleaf:hover,.wleaf:focus{transform:scale(1.09);outline:none}
+.wleaf.sel .blade{stroke:#fff;stroke-width:2.6}
+.wleaf:focus-visible .blade{stroke:#fff;stroke-width:2.6}
+.rootorb{cursor:default}
+.rootorb text{font-family:var(--fa);font-weight:700}
+.hot{cursor:pointer}
+.hot circle.ring{animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{r:16;opacity:.85}70%{r:34;opacity:0}100%{opacity:0}}
+
+/* ============ 6. EXPLORER ============ */
+.exwrap{display:grid;grid-template-columns:1.45fr .95fr;gap:26px;align-items:start}
+.treestage{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(120% 80% at 50% 8%,rgba(245,191,95,.08),transparent 55%),
+             linear-gradient(180deg,#070d0a,#0c1410 55%,#0a0f0c)}
+.treestage svg{display:block;width:100%;height:auto}
+.tt{position:absolute;pointer-events:none;z-index:9;max-width:270px;padding:12px 15px;border-radius:14px;
+  background:rgba(6,13,9,.95);border:1px solid rgba(125,220,149,.4);box-shadow:0 18px 40px -16px #000;
+  opacity:0;transform:translateY(6px);transition:.18s;font-size:.9rem}
+.tt.on{opacity:1;transform:translateY(0)}
+.tt b{font-family:var(--fa);font-size:1.5rem;display:block;color:var(--leaf)}
+.seedshelf{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:22px}
+.seed{cursor:pointer;border:1px solid var(--line);border-radius:16px;padding:11px 16px 12px;
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+  display:flex;flex-direction:column;gap:2px;transition:.3s;min-width:112px}
+.seed:hover{transform:translateY(-4px);border-color:var(--line2);background:rgba(255,255,255,.09)}
+.seed .sl{font-family:var(--fa);font-size:1.62rem;font-weight:700;letter-spacing:.16em;line-height:1.35;
+  color:#fff;direction:rtl}
+.seed .sg{font-size:.78rem;font-weight:700;color:var(--mut);letter-spacing:.04em}
+.seed[aria-pressed="true"]{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 16%,transparent);
+  box-shadow:0 0 0 1px var(--sc),0 14px 34px -18px var(--sc)}
+.seed[aria-pressed="true"] .sg{color:var(--sc)}
+.panel{position:sticky;top:88px;display:flex;flex-direction:column;gap:16px}
+.pcard{background:linear-gradient(158deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--line);border-radius:20px;padding:22px}
+.rootbig{font-family:var(--fa);font-weight:700;font-size:clamp(40px,4.6vw,62px);letter-spacing:.2em;
+  direction:rtl;line-height:1.4;margin:0}
+.freqbar{height:11px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin-top:8px}
+.freqbar i{display:block;height:100%;border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.3,1)}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{cursor:pointer;font-family:var(--fa);font-weight:700;font-size:1.18rem;padding:7px 15px;border-radius:12px;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);color:#fff;transition:.24s;direction:rtl}
+.chip:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
+.chip.on{background:var(--sc);color:#06120b;border-color:var(--sc);font-weight:700}
+.wdet{min-height:190px}
+.wdet .w{font-family:var(--fa);font-size:clamp(34px,4vw,50px);font-weight:700;line-height:1.5;direction:rtl;margin:0}
+.wdet .tr{font-weight:800;letter-spacing:.05em;color:var(--gold);font-size:1.06rem}
+.wdet .en{font-size:1.24rem;font-weight:700;margin:8px 0 12px}
+.metaline{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.qref{padding:13px 15px;border-radius:14px;background:rgba(245,191,95,.09);border:1px solid rgba(245,191,95,.24)}
+.qref .q{font-size:1.35rem;direction:rtl;text-align:right;margin:0 0 6px;color:#fff6e6}
+.qref small{color:var(--gold);font-weight:800;letter-spacing:.06em}
+
+/* ============ 7. STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:34px}
+.stat{text-align:center;padding:26px 16px;border-radius:20px;border:1px solid var(--line);
+  background:linear-gradient(170deg,rgba(255,255,255,.06),rgba(255,255,255,.012))}
+.stat b{display:block;font-size:clamp(33px,4.4vw,52px);font-weight:900;line-height:1;
+  background:linear-gradient(120deg,#f5bf5f,#7ddc95);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:.94rem;font-weight:700;color:var(--mut);display:block;margin-top:9px}
+
+/* ============ 8. LABS (peeler / mizan / xray / quiz) ============ */
+.lab{background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+  border:1px solid var(--line);border-radius:26px;padding:clamp(20px,2.6vw,34px)}
+.segrow{display:flex;flex-wrap:wrap-reverse;gap:10px;justify-content:center;direction:rtl;
+  min-height:104px;align-items:center;padding:18px 0}
+.seg{position:relative;font-family:var(--fa);font-weight:700;font-size:clamp(28px,3.6vw,44px);
+  padding:9px 17px 26px;border-radius:15px;border:2px solid;cursor:pointer;transition:.35s cubic-bezier(.2,.8,.3,1);
+  background:rgba(255,255,255,.05);line-height:1.3}
+.seg small{position:absolute;bottom:6px;left:0;right:0;font-family:var(--ff);font-size:.63rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.seg.prefix{border-color:rgba(105,200,255,.55);color:#bfe6ff}
+.seg.suffix{border-color:rgba(255,157,179,.55);color:#ffd7e0}
+.seg.shell{border-color:rgba(182,164,255,.55);color:#ded6ff}
+.seg.root{border-color:rgba(125,220,149,.75);color:#06140b;background:linear-gradient(160deg,#9ce8b0,#4fae72);
+  cursor:default;box-shadow:0 12px 30px -14px rgba(125,220,149,.9)}
+.seg.gone{opacity:0;transform:translateY(-46px) rotate(14deg) scale(.7);pointer-events:none}
+.seg.prefix:hover,.seg.suffix:hover,.seg.shell:hover{transform:translateY(-6px);background:rgba(255,255,255,.13)}
+.seg.pop{animation:pop .5s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.16)}100%{transform:scale(1)}}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);
+  font-family:var(--ff);font-weight:800;font-size:.95rem;padding:11px 17px;border-radius:12px;white-space:nowrap;transition:.25s}
+.tab:hover{background:rgba(255,255,255,.12)}
+.tab.on{background:linear-gradient(135deg,#4bb875,#2c7d4d);color:#04140a;border-color:transparent}
+input.letter{width:74px;height:82px;text-align:center;font-family:var(--fa);font-size:2.3rem;font-weight:700;
+  color:#fff;background:rgba(255,255,255,.06);border:2px solid var(--line2);border-radius:16px;outline:none;transition:.25s}
+input.letter:focus{border-color:var(--leaf);background:rgba(125,220,149,.12);box-shadow:0 0 0 4px rgba(125,220,149,.16)}
+select.sel{font-family:var(--fa);font-weight:700;font-size:1.25rem;color:#fff;background:#101a14;
+  border:2px solid var(--line2);border-radius:14px;padding:14px 16px;outline:none;min-width:220px}
+.mizout{text-align:center;padding:26px 18px;border-radius:20px;border:1px dashed rgba(245,191,95,.4);
+  background:radial-gradient(80% 120% at 50% 0%,rgba(245,191,95,.12),transparent)}
+.mizout .big{font-family:var(--fa);font-size:clamp(42px,6vw,76px);font-weight:700;line-height:1.5;color:#fff;
+  direction:rtl;text-shadow:0 0 34px rgba(245,191,95,.35)}
+.verse{direction:rtl;text-align:center;display:flex;flex-wrap:wrap;gap:8px 4px;justify-content:center;padding:8px 0}
+.vw{font-family:var(--fq);font-weight:700;font-size:clamp(25px,3.4vw,44px);padding:6px 12px;border-radius:12px;
+  cursor:pointer;transition:.25s;border:1px solid transparent;line-height:2}
+.vw:hover{background:rgba(125,220,149,.15);border-color:rgba(125,220,149,.4)}
+.vw.on{background:linear-gradient(160deg,#f5bf5f,#e08b2a);color:#1a0e00;border-color:transparent}
+.vw.part{color:var(--mut);cursor:help}
+.opt{display:block;width:100%;text-align:right;direction:rtl;font-family:var(--fa);font-weight:700;
+  font-size:1.5rem;padding:14px 20px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:#fff;cursor:pointer;transition:.22s;margin-bottom:11px;letter-spacing:.14em}
+.opt:hover{background:rgba(255,255,255,.13);transform:translateX(-4px)}
+.opt.right{background:linear-gradient(135deg,#4bb875,#2c7d4d);color:#04140a;border-color:transparent}
+.opt.wrong{background:rgba(255,99,120,.2);border-color:rgba(255,99,120,.6)}
+.opt:disabled{cursor:default}
+.qbar{height:9px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.qbar i{display:block;height:100%;background:linear-gradient(90deg,#4bb875,#7ddc95);transition:width .4s}
+.why{border-radius:14px;padding:14px 16px;background:rgba(105,200,255,.09);border:1px solid rgba(105,200,255,.25);
+  font-size:1rem;margin-top:6px}
+
+/* ============ 9. MISC BLOCKS ============ */
+.step{display:flex;gap:18px;align-items:flex-start}
+.stepn{flex:0 0 58px;height:58px;border-radius:17px;display:grid;place-items:center;font-weight:900;font-size:1.4rem;
+  background:linear-gradient(150deg,rgba(245,191,95,.22),rgba(245,191,95,.05));border:1px solid rgba(245,191,95,.4);color:var(--gold)}
+.mnemonic{font-family:var(--fa);font-weight:700;font-size:clamp(38px,6.5vw,74px);letter-spacing:.06em;direction:rtl;
+  text-align:center;line-height:1.6;background:linear-gradient(100deg,#f5bf5f,#7ddc95,#69c8ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.lettergrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px;margin-top:18px}
+.lg{text-align:center;padding:14px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+.lg b{display:block;font-family:var(--fa);font-size:2.1rem;font-weight:700;color:#fff}
+.lg span{font-size:.75rem;font-weight:700;color:var(--mut)}
+.trap{display:grid;gap:8px}
+.trapline{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 15px;border-radius:13px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.trapline .a{font-family:var(--fa);font-size:1.6rem;font-weight:700;direction:rtl}
+.trapline .b{font-family:var(--fa);font-size:1.35rem;font-weight:700;letter-spacing:.14em;color:var(--leaf);direction:rtl}
+.ico{width:46px;height:46px;flex:0 0 46px;margin-bottom:14px}
+.tl{display:grid;gap:0;margin-top:12px}
+.tlrow{display:grid;grid-template-columns:104px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}
+.tlrow b{color:var(--gold);font-weight:800;font-size:1rem}
+.tlrow p{margin:.2em 0 0}
+.worksheet{display:none}
+footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(4,8,6,.9))}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ 10. RESPONSIVE ============ */
+@media(max-width:1000px){
+  .exwrap{grid-template-columns:1fr}
+  .panel{position:static}
+}
+@media(max-width:640px){
+  .hero{min-height:auto;padding-top:26px}
+  .herosvg{opacity:.55}
+  .tlrow{grid-template-columns:1fr;gap:4px}
+  .seg{font-size:1.7rem;padding:8px 12px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  body{background:#fff;color:#000}
+  nav,.hero,#dust,.grain,.vignette,.progress,section:not(#teach){display:none!important}
+  .worksheet{display:block!important}
+  .card,.lab{border:1px solid #999;background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div><div class="vignette"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="progress"><i id="prog"></i></div>
+
+<!-- ============================ NAV ============================ -->
+<nav>
+  <div class="navin">
+    <a class="logo" href="index.html" title="NurulQuran · Root Tree">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(125,220,149,0.15)" />
+        <g stroke="var(--leaf)" stroke-width="12" opacity="0.7" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#040605" stroke="var(--leaf)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#040605" stroke="var(--leaf)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--leaf)" />
+      </svg>
+      <span>NURULQURAN ·<b>&nbsp;الجَذْر</b></span>
+    </a>
+    <div class="navlinks" id="navlinks">
+      <a href="#why">Why Roots</a><a href="#anatomy">Anatomy</a><a href="#explorer">Root Tree</a>
+      <a href="#find">Find the Root</a><a href="#patterns">Patterns</a><a href="#xray">Ayah X-Ray</a>
+      <a href="#traps">Traps</a><a href="#benefits">Benefits</a><a href="#teach">For Teachers</a><a href="#quiz">Quiz</a>
+    </div>
+    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Showcase Portal">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Showcase</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="herosvg" id="heroTree" aria-hidden="true"></div>
+  <div class="wrap heroin">
+    <div class="herobox">
+      <p class="kicker">Quranic Arabic · Morphology for Teens</p>
+      <h1><span class="h1ar">الجَذْر</span><span class="grad">One root. A whole tree of words.</span></h1>
+      <p class="lead">Arabic is not a pile of separate words — it is a <b>forest of trees</b>. Three letters go
+        into the soil, and dozens of words grow out of them. Learn the root, and the Qur'ān starts opening
+        itself to you, page after page.</p>
+      <div class="ayahbox">
+        <p class="q">كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِي السَّمَاءِ</p>
+        <p style="margin:0;font-weight:600;color:#ffeecd">“…like a good tree: its <b>root</b> (أَصْل) is firm and its
+          <b>branch</b> (فَرْع) is in the sky.” <span class="mut">— Ibrāhīm 14:24</span></p>
+      </div>
+      <div class="btns">
+        <a class="btn p" href="#explorer">🌱 Grow a root tree</a>
+        <a class="btn s" href="#quiz">🔍 Test yourself</a>
+      </div>
+      <p style="margin:20px 0 0;font-size:.92rem" class="mut">Tip: the glowing leaves on the tree are real Qur'ānic words — hover them.</p>
+    </div>
+  </div>
+  <div class="scrollhint">Scroll<span></span></div>
+</header>
+
+<!-- ============================ WHY ============================ -->
+<section id="why">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="kicker">The Big Idea</p>
+      <h2>Stop memorising words.<br><span class="grad">Start planting roots.</span></h2>
+      <p class="lead">A <b class="ar">جَذْر</b> (root) is normally <b>three consonants</b> carrying one core idea.
+        Arabic then pours those three letters into fixed moulds called <b class="ar">أَوْزَان</b> (patterns) to make
+        verbs, doers, places, tools and qualities. That is why Arabic feels <em>infinite</em> yet is completely
+        <em>predictable</em>.</p>
+    </div>
+    <div class="grid g3" style="margin-top:36px">
+      <div class="card reveal">
+        <div class="badge sky">The Multiplier</div>
+        <h3 style="margin-top:14px">1 root ➜ 10–30 words</h3>
+        <p class="mut">From <b class="ar">ك ت ب</b> (writing) you instantly own: كَتَبَ · كِتَاب · كُتُب · كَاتِب ·
+          مَكْتُوب · مَكْتَب · مَكْتَبَة · مُكَاتَبَة. One deposit, endless withdrawals.</p>
+      </div>
+      <div class="card reveal">
+        <div class="badge gold">The Shortcut</div>
+        <h3 style="margin-top:14px">Roots are the 80/20 of the Qur'ān</h3>
+        <p class="mut">Roughly <b>300–500 high-frequency roots</b> cover about <b>80%</b> of the words of the Qur'ān.
+          That is a realistic target for one school year.</p>
+      </div>
+      <div class="card reveal">
+        <div class="badge rose">The Depth</div>
+        <h3 style="margin-top:14px">Roots carry hidden imagery</h3>
+        <p class="mut"><b class="ar">رَحْمَة</b> (mercy) shares its root with <b class="ar">رَحِم</b> (womb) — mercy
+          that <em>wraps and nourishes</em>. Suddenly translation is not enough; you <em>feel</em> the word.</p>
+      </div>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><b data-count="77430">0</b><span>words in the Qur'ān</span></div>
+      <div class="stat"><b data-count="14870">0</b><span>unique word-forms</span></div>
+      <div class="stat"><b data-count="1700" data-suffix="≈">0</b><span>distinct roots in the Qur'ān</span></div>
+      <div class="stat"><b data-count="80" data-suffix="%">0</b><span>of the text from ~300–500 roots</span></div>
+    </div>
+    <p class="mut" style="font-size:.86rem;margin-top:14px">Figures are widely-cited approximations (Qur'ānic Arabic
+      Corpus; al-Muʿjam al-Mufahras of ʿAbd al-Bāqī). Use them as motivation, not exam answers.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============================ ANATOMY ============================ -->
+<section id="anatomy">
+  <div class="wrap">
+    <div class="reveal" style="max-width:78ch">
+      <p class="kicker">Anatomy · تَشْرِيحُ الشَّجَرَة</p>
+      <h2>Every Arabic word is a <span class="grad">tree with parts</span></h2>
+      <p class="lead">Arabic grammarians literally use tree language: <b class="ar">أَصْل</b> (root/origin),
+        <b class="ar">فَرْع</b> (branch), <b class="ar">اِشْتِقَاق</b> (derivation — from “splitting off”).
+        Tap the glowing numbers on the tree.</p>
+    </div>
+    <div class="exwrap reveal" style="margin-top:32px">
+      <div class="treestage" id="anatomyStage"></div>
+      <div class="panel">
+        <div class="pcard" id="anatomyCard"></div>
+        <div class="pcard">
+          <h3 style="font-size:1.1rem;margin-bottom:12px">Teacher's board sketch</h3>
+          <p class="mut" style="margin:0;font-size:.98rem">Draw this exact tree on the whiteboard once, and reuse it all
+            year: <b>3 letters in the soil → trunk = core meaning → branches = patterns → leaves = words →
+            fruit = tadabbur & action.</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EXPLORER ============================ -->
+<section id="explorer">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Interactive · المُسْتَكْشِف</p>
+      <h2>The Root Tree <span class="grad">Explorer</span></h2>
+      <p class="lead">Pick a seed. Watch its root system push into the soil and its branches climb.
+        Every <b>bright leaf is a real Qur'ānic word</b> from that root — hover or tap it.
+        Press <b>Regrow</b> and the tree grows differently every single time, like real trees do.</p>
+    </div>
+
+    <div class="seedshelf reveal" id="seedShelf" role="group" aria-label="Choose a root"></div>
+
+    <div class="exwrap">
+      <div>
+        <div class="treestage" id="stage">
+          <div class="tt" id="tip"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:11px;margin-top:16px;align-items:center">
+          <button class="btn s" id="regrow">🌿 Regrow this tree</button>
+          <button class="btn s" id="nextRoot">🎲 Surprise me</button>
+          <span class="mut" style="font-size:.9rem">Leaves: <b id="leafCount">0</b> Qur'ānic words on this tree</span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="pcard" id="rootCard"></div>
+        <div class="pcard">
+          <p class="kicker" style="margin-bottom:10px">All leaves on this tree</p>
+          <div class="chips" id="chipBox"></div>
+        </div>
+        <div class="pcard wdet" id="wordCard"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============================ FIND THE ROOT ============================ -->
+<section id="find">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Method · كَيْفَ نَجِدُ الجَذْر</p>
+      <h2>How to strip a word down to <span class="grad">its three letters</span></h2>
+      <p class="lead">Think of it as peeling a fruit. The root is the seed in the middle; everything else is skin,
+        flesh and packaging.</p>
+    </div>
+
+    <div class="grid g2 reveal" style="margin-top:34px">
+      <div class="card"><div class="step"><div class="stepn">1</div><div>
+        <h3 style="font-size:1.25rem">Take off the outer clothes</h3>
+        <p class="mut" style="margin:0">Remove attached particles and pronouns:
+        <b class="ar">وَ، فَ، بِ، كَ، لِ، أَ، ال</b> in front, and
+        <b class="ar">ـهُ، ـهَا، ـهُمْ، ـكُمْ، ـنَا، ـونَ، ـينَ، ـاتِ، ـتُ</b> at the end.</p></div></div></div>
+      <div class="card"><div class="step"><div class="stepn">2</div><div>
+        <h3 style="font-size:1.25rem">Take off the pattern shell</h3>
+        <p class="mut" style="margin:0">Now remove the mould letters: <b class="ar">مُـ / مَـ</b>, <b class="ar">تَـ</b>,
+        <b class="ar">اسْتَـ</b>, <b class="ar">انْـ</b>, <b class="ar">ـا ـ</b>, <b class="ar">ـيـ</b>, and the
+        doubling shadda.</p></div></div></div>
+      <div class="card"><div class="step"><div class="stepn">3</div><div>
+        <h3 style="font-size:1.25rem">Count what's left</h3>
+        <p class="mut" style="margin:0">You should be holding <b>3 strong consonants in their original order</b>
+        (sometimes 4, e.g. <b class="ar">زَلْزَلَ ← ز ل ز ل</b>). Order never changes.</p></div></div></div>
+      <div class="card"><div class="step"><div class="stepn">4</div><div>
+        <h3 style="font-size:1.25rem">Test it with a sibling</h3>
+        <p class="mut" style="margin:0">Can you build a known word from the same three letters?
+        <b class="ar">غ ف ر ← غَفُور، مَغْفِرَة، اِسْتَغْفَرَ</b> ✔ Then check the core meaning actually fits the āyah.</p></div></div></div>
+    </div>
+
+    <div class="lab reveal" style="margin-top:34px">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between">
+        <div><p class="kicker" style="margin-bottom:6px">Peeling Lab · مَخْبَرُ التَّقْشِير</p>
+          <h3 style="margin:0">Tap the coloured pieces to peel them away</h3></div>
+        <div class="tabs" id="peelTabs"></div>
+      </div>
+      <div class="segrow" id="segRow" aria-live="polite"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:11px;align-items:center;justify-content:center">
+        <button class="btn p" id="peelNext">Peel next layer</button>
+        <button class="btn s" id="peelReset">↺ Reset</button>
+      </div>
+      <div id="peelMsg" style="text-align:center;margin-top:18px;min-height:64px"></div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:.86rem;font-weight:700;margin-top:6px">
+        <span style="color:#bfe6ff">■ prefix / particle</span>
+        <span style="color:#ded6ff">■ pattern shell</span>
+        <span style="color:#ffd7e0">■ ending</span>
+        <span style="color:#9ce8b0">■ the root</span>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:26px;text-align:center;
+        background:radial-gradient(90% 130% at 50% 0%,rgba(245,191,95,.12),rgba(255,255,255,.02))">
+      <div class="badge gold">Classical memory hack · حُرُوفُ الزِّيَادَة</div>
+      <p class="mnemonic">سَأَلْتُمُونِيهَا</p>
+      <p class="lead" style="margin:0 auto;text-align:center">“You asked me for it.” These <b>ten letters</b> are the only
+        letters Arabic ever <em>adds</em> to a root. If a letter in a word is one of these, <b>suspect it is not part of
+        the root</b>. Teach this sentence in week one — students use it for life.</p>
+      <div class="lettergrid">
+        <div class="lg"><b>س</b><span>sīn</span></div><div class="lg"><b>أ</b><span>hamzah</span></div>
+        <div class="lg"><b>ل</b><span>lām</span></div><div class="lg"><b>ت</b><span>tā'</span></div>
+        <div class="lg"><b>م</b><span>mīm</span></div><div class="lg"><b>و</b><span>wāw</span></div>
+        <div class="lg"><b>ن</b><span>nūn</span></div><div class="lg"><b>ي</b><span>yā'</span></div>
+        <div class="lg"><b>هـ</b><span>hā'</span></div><div class="lg"><b>ا</b><span>alif</span></div>
+      </div>
+      <p class="mut" style="font-size:.9rem;margin-bottom:0">⚠ Careful: these letters can <em>also</em> be root letters
+        (e.g. <b class="ar">س ل م</b>، <b class="ar">أ م ن</b>، <b class="ar">و ق ي</b>). Use the sibling test to decide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PATTERNS ============================ -->
+<section id="patterns">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Patterns · الأَوْزَان / المِيزَان</p>
+      <h2>The root is the seed.<br><span class="grad">The pattern is the mould.</span></h2>
+      <p class="lead">Arabs weigh every word against <b class="ar">فَعَلَ</b> — F is letter 1, ʿ is letter 2, L is
+        letter 3. Change the mould, and the meaning shifts in a <em>predictable direction</em>.</p>
+    </div>
+
+    <div class="lab reveal" style="margin-top:32px">
+      <p class="kicker">Mīzān Machine · آلَةُ المِيزَان</p>
+      <div style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start">
+        <div>
+          <p style="font-weight:800;margin:0 0 10px">1 · Put three letters in the soil <span class="mut">(right to left)</span></p>
+          <div style="display:flex;gap:12px;direction:rtl">
+            <input class="letter ar" id="L1" maxlength="1" value="ك" aria-label="root letter 1">
+            <input class="letter ar" id="L2" maxlength="1" value="ت" aria-label="root letter 2">
+            <input class="letter ar" id="L3" maxlength="1" value="ب" aria-label="root letter 3">
+          </div>
+          <div class="chips" id="rootPresets" style="margin-top:14px"></div>
+        </div>
+        <div>
+          <p style="font-weight:800;margin:0 0 10px">2 · Choose a mould</p>
+          <select class="sel" id="patSel"></select>
+          <p class="mut" id="patMeaning" style="margin:12px 0 0;max-width:330px;font-size:.98rem"></p>
+        </div>
+      </div>
+      <div class="mizout" style="margin-top:26px">
+        <p class="kicker" style="margin:0 0 4px">3 · The word that grows</p>
+        <div class="big" id="mizWord">كَاتِب</div>
+        <div id="mizVerdict" style="margin-top:10px"></div>
+      </div>
+      <p class="mut" style="font-size:.9rem;margin:16px 0 0;text-align:center">The machine is a naïve “letter-pourer”.
+        <b>Weak roots</b> (containing <b class="ar">و ي ا ء</b>) change shape in real Arabic — a perfect discussion
+        moment with your class.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:44px">
+      <h3>The ten branches of the verb <span class="mut" style="font-weight:700">— الأَبْوَابُ العَشَرَة</span></h3>
+      <p class="lead">Every Qur'ānic verb sits on one of these ten branches. Knowing the branch tells you the meaning
+        <em>before</em> you open a dictionary.</p>
+      <div class="tabs" id="formTabs" style="margin:20px 0 18px"></div>
+      <div class="lab" id="formBody" style="min-height:220px"></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============================ AYAH X-RAY ============================ -->
+<section id="xray">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Āyah X-Ray · الآيَةُ بِالأَشِعَّة</p>
+      <h2>See an āyah as <span class="grad">roots, not words</span></h2>
+      <p class="lead">Sūrah Ibrāhīm 14:24 — the āyah of the good tree itself. Tap any word to see its root and its
+        family. Fifteen words. Only <b>eleven roots</b>.</p>
+    </div>
+    <div class="lab reveal" style="margin-top:30px">
+      <div class="verse" id="verseBox"></div>
+      <p style="text-align:center;font-weight:600;color:#cfe0d3;max-width:62ch;margin:6px auto 22px">
+        “Do you not see how Allah sets forth a parable? A good word is like a good tree: its root is firm and its
+        branch is in the sky.”</p>
+      <div class="grid g2">
+        <div class="pcard" id="xrayCard" style="min-height:200px"></div>
+        <div class="pcard">
+          <p class="kicker" style="margin-bottom:10px">Do the maths with your class</p>
+          <div class="grid" style="gap:12px">
+            <div class="trapline"><span>Words in the āyah</span><b class="b" style="letter-spacing:0">15</b></div>
+            <div class="trapline"><span>Distinct roots</span><b class="b" style="letter-spacing:0">11</b></div>
+            <div class="trapline"><span>Particles (no root)</span><b class="b" style="letter-spacing:0">3</b></div>
+          </div>
+          <p class="mut" style="margin-bottom:0">Learn 11 roots today and this āyah becomes <b>yours</b> — plus every
+            other āyah that uses them: <b class="ar">شَجَرَة</b> (27×), <b class="ar">مَثَل</b> (169×),
+            <b class="ar">كَلِمَة</b> (75×)…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TRAPS ============================ -->
+<section id="traps">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Warning · مَزَالِقُ الجُذُور</p>
+      <h2>Four traps that fool <span class="grad">every beginner</span></h2>
+      <p class="lead">Teach these early. They turn “I can't find the root” into “ah, it's a weak root”.</p>
+    </div>
+    <div class="grid g2" style="margin-top:32px">
+      <div class="card reveal">
+        <div class="badge sky">Trap 1</div>
+        <h3 style="margin-top:14px">The hiding weak letters <span class="ar mut">و / ي / ا</span></h3>
+        <p class="mut">They vanish, stretch, or turn into alif. Find a sibling word and they reappear.</p>
+        <div class="trap">
+          <div class="trapline"><span class="a">قَالَ</span><span class="b">ق و ل</span></div>
+          <div class="trapline"><span class="a">بَاعَ</span><span class="b">ب ي ع</span></div>
+          <div class="trapline"><span class="a">دَعَا</span><span class="b">د ع و</span></div>
+          <div class="trapline"><span class="a">صَلَاة</span><span class="b">ص ل و</span></div>
+          <div class="trapline"><span class="a">زَكَاة</span><span class="b">ز ك و</span></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="badge rose">Trap 2</div>
+        <h3 style="margin-top:14px">The shadda hides a twin <span class="ar mut">مُضَعَّف</span></h3>
+        <p class="mut">A doubled letter is <b>two letters</b> of the root wearing one hat.</p>
+        <div class="trap">
+          <div class="trapline"><span class="a">رَدَّ</span><span class="b">ر د د</span></div>
+          <div class="trapline"><span class="a">رَبّ</span><span class="b">ر ب ب</span></div>
+          <div class="trapline"><span class="a">مَسَّ</span><span class="b">م س س</span></div>
+          <div class="trapline"><span class="a">حَجّ</span><span class="b">ح ج ج</span></div>
+          <div class="trapline"><span class="a">أَشَدّ</span><span class="b">ش د د</span></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="badge gold">Trap 3</div>
+        <h3 style="margin-top:14px">Hamzah in disguise <span class="ar mut">أ إ آ ء ئ ؤ</span></h3>
+        <p class="mut">All of these are the <b>same root letter</b> <b class="ar">أ</b> in different costumes.</p>
+        <div class="trap">
+          <div class="trapline"><span class="a">آمَنَ / إِيمَان / مُؤْمِن</span><span class="b">أ م ن</span></div>
+          <div class="trapline"><span class="a">سُئِلَ / مَسْؤُول</span><span class="b">س أ ل</span></div>
+          <div class="trapline"><span class="a">أَخَذَ / مُؤَاخَذَة</span><span class="b">أ خ ذ</span></div>
+          <div class="trapline"><span class="a">قُرْآن / اقْرَأْ</span><span class="b">ق ر أ</span></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="badge">Trap 4</div>
+        <h3 style="margin-top:14px">Look-alikes that are <em>not</em> family</h3>
+        <p class="mut">Same first letters, different third letter = different tree entirely. Always confirm all three.</p>
+        <div class="trap">
+          <div class="trapline"><span class="a">عَلِمَ · knew</span><span class="b">ع ل م</span></div>
+          <div class="trapline"><span class="a">عَلَا · rose high</span><span class="b">ع ل و</span></div>
+          <div class="trapline"><span class="a">مَلَك · owned</span><span class="b">م ل ك</span></div>
+          <div class="trapline"><span class="a">مَلَأ · filled</span><span class="b">م ل أ</span></div>
+        </div>
+        <p class="mut" style="margin-bottom:0;font-size:.92rem">Bonus: four-letter roots exist —
+          <b class="ar">وَسْوَسَ ← و س و س</b>، <b class="ar">زَلْزَلَ ← ز ل ز ل</b>، <b class="ar">طَمْأَنَ ← ط م أ ن</b>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============================ BENEFITS ============================ -->
+<section id="benefits">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Benefits · فَوَائِدُ الجُذُور</p>
+      <h2>What your students actually <span class="grad">gain</span></h2>
+      <p class="lead">Nine outcomes you can promise them — and measure.</p>
+    </div>
+    <div class="grid g3" id="benefitGrid" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<!-- ============================ TEACHER ============================ -->
+<section id="teach">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">For the Teacher · حَقِيبَةُ المُعَلِّم</p>
+      <h2>Your <span class="grad">classroom toolkit</span></h2>
+      <p class="lead">Eight activities that work with teenagers, a ready 45-minute lesson shape, and a printable
+        Seed Bank page.</p>
+    </div>
+    <div class="grid g3" id="activityGrid" style="margin-top:32px"></div>
+
+    <div class="lab reveal" style="margin-top:34px">
+      <p class="kicker">Lesson shape · 45 minutes</p>
+      <h3 style="margin-top:0">One root per lesson. Every lesson the same rhythm.</h3>
+      <div class="tl">
+        <div class="tlrow"><b>0–5 min</b><p><b>Hook.</b> Show one āyah on the screen with 3 words from the same root
+          highlighted. Ask: “what do these three have in common?” Let them argue.</p></div>
+        <div class="tlrow"><b>5–12 min</b><p><b>Plant it.</b> Draw the tree on the board. Write the 3 letters in the
+          soil. Give the <em>core sense</em> in one short English phrase (e.g. ك ت ب = “making a lasting mark”).</p></div>
+        <div class="tlrow"><b>12–22 min</b><p><b>Derive.</b> Students fill the branches using the moulds:
+          فَاعِل (doer), مَفْعُول (done-to), مَفْعَل (place), فَعِيل (quality). Wrong-but-logical answers are gold —
+          discuss why Arabic didn't use them.</p></div>
+        <div class="tlrow"><b>22–32 min</b><p><b>Leaf hunt.</b> In pairs, open the muṣḥaf at one page and find every
+          word from today's root. Board tally. Fastest pair reads their āyah aloud.</p></div>
+        <div class="tlrow"><b>32–40 min</b><p><b>Game.</b> Root Relay or Odd Leaf Out (see cards above). Loud, fast,
+          teams, points.</p></div>
+        <div class="tlrow"><b>40–45 min</b><p><b>Seed Bank + duʿāʾ.</b> Everyone completes their notebook page and
+          writes one duʿāʾ using today's root (e.g. <span class="ar">يَا غَفُور، اغْفِرْ لِي</span>). Exit ticket:
+          3 words → find the root.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+        <button class="btn p" id="printBtn">🖨 Print the Seed Bank worksheet</button>
+        <a class="btn s" href="#quiz">Use the quiz as an exit ticket →</a>
+      </div>
+    </div>
+
+    <!-- printable -->
+    <div class="worksheet">
+      <h2>Seed Bank · صَفْحَةُ الجَذْر</h2>
+      <p>Name: ______________________ &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Root of the week: ____________</p>
+      <p>1 · The three letters: ______  ______  ______ &nbsp;&nbsp; 2 · Core idea in my own words: ____________________</p>
+      <p>3 · Draw your tree. Put one derived word on each leaf (aim for 8).</p>
+      <div style="height:260px;border:1px solid #999"></div>
+      <p>4 · Three āyāt where I met this root (sūrah : āyah): ______________ , ______________ , ______________</p>
+      <p>5 · One duʿāʾ I can make using this root: ______________________________________________</p>
+      <p>6 · A modern-Arabic word from the same root: ______________________</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ============================ QUIZ ============================ -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="reveal" style="max-width:80ch">
+      <p class="kicker">Challenge · المُحَقِّقُ اللُّغَوِيّ</p>
+      <h2>Root Detective:<br><span class="grad">grow your own tree</span></h2>
+      <p class="lead">Ten words. Strip each one down and choose the correct root. Every correct answer makes a leaf
+        appear on your sapling.</p>
+    </div>
+    <div class="exwrap reveal" style="margin-top:30px">
+      <div class="lab">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+          <span class="badge gold" id="qCount">Question 1 / 10</span>
+          <span style="font-weight:800">Score: <b id="qScore" style="color:var(--leaf)">0</b></span>
+        </div>
+        <div class="qbar" style="margin:16px 0 24px"><i id="qBar" style="width:10%"></i></div>
+        <p class="mut" style="margin:0 0 6px;font-weight:700">What is the root of…</p>
+        <p class="ar" id="qWord" style="font-size:clamp(42px,6.5vw,78px);margin:0 0 24px;direction:rtl;text-align:center;
+           text-shadow:0 0 40px rgba(125,220,149,.3)"></p>
+        <div id="qOpts"></div>
+        <div id="qWhy"></div>
+        <div style="display:flex;gap:11px;flex-wrap:wrap;margin-top:18px">
+          <button class="btn p" id="qNext" style="display:none">Next word →</button>
+          <button class="btn s" id="qRestart">↺ Start again</button>
+        </div>
+      </div>
+      <div class="treestage" id="sapling"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <div class="grid g2" style="align-items:center">
+      <div>
+        <p class="q" style="font-size:clamp(22px,2.6vw,32px);direction:rtl;text-align:right;color:#fff6e6;margin:0 0 10px">
+          رَبِّ زِدْنِي عِلْمًا</p>
+        <p class="mut" style="margin:0">“My Lord, increase me in knowledge.” — Ṭā-Hā 20:114</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.15rem">Go deeper</h3>
+        <p class="mut" style="margin:0 0 8px">Root-organised references your students can grow into:
+          <b>Qur'ānic Arabic Corpus</b> (word-by-word roots), <b>al-Muʿjam al-Mufahras</b> (ʿAbd al-Bāqī),
+          <b>Mufradāt al-Qurʾān</b> (al-Rāghib al-Iṣfahānī), <b>Lisān al-ʿArab</b>, and <b>Lane's Lexicon</b> —
+          all arranged by root, which is exactly why this skill unlocks them.</p>
+        <p class="mut" style="font-size:.86rem;margin:0">Word meanings here are simplified for classroom use; frequency
+          numbers are approximate. Always verify a root in a proper lexicon before teaching it as fact.</p>
+      </div>
+    </div>
+    <p class="mut" style="text-align:center;margin:40px 0 0;font-size:.86rem">
+      شَجَرَةُ الجُذُور · The Root Tree — an interactive lesson page. Built for Qur'ān teachers and their students. 🌿</p>
+    <div class="nq-footer-badge">
+      <div class="nq-footer-logo-row">
+        <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="256" cy="256" r="230" fill="rgba(125,220,149,0.15)" />
+          <g stroke="var(--leaf)" stroke-width="12" opacity="0.7" fill="none">
+            <rect x="110" y="110" width="292" height="292" rx="28" />
+            <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+          </g>
+          <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#040605" stroke="var(--leaf)" stroke-width="10" />
+          <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#040605" stroke="var(--leaf)" stroke-width="10" />
+          <circle cx="256" cy="168" r="16" fill="var(--leaf)" />
+        </svg>
+        <span style="font-weight:700;letter-spacing:0.12em;font-size:0.88rem;color:var(--leaf)">NURULQURAN · نُورُ القُرْآن</span>
+      </div>
+      <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.2 (updated 2026-08-22 06:35)</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   0. UTILITIES
+===================================================================== */
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let UID=0;
+
+/* =====================================================================
+   1. ROOT DATA  (Qur'ānic words, simplified glosses for teens)
+===================================================================== */
+const ROOTS=[
+{id:'ktb',letters:'ك ت ب',tr:'k–t–b',hue:196,accent:'#69c8ff',freq:319,
+ core:'writing · recording · decreeing',
+ soil:'Making a lasting mark so it can be read later — from ink on a page to a decree written by Allah.',
+ words:[
+ {ar:'كَتَبَ',tr:'kataba',en:'he wrote / he decreed',form:'فَعَلَ · Form I verb',ref:'2:183',q:'كُتِبَ عَلَيْكُمُ الصِّيَامُ',qen:'“Fasting has been written (prescribed) upon you.”'},
+ {ar:'كِتَاب',tr:'kitāb',en:'book, scripture, record',form:'فِعَال · noun',ref:'2:2',q:'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ',qen:'“This is the Book, in which there is no doubt.”'},
+ {ar:'كَاتِب',tr:'kātib',en:'writer, scribe',form:'فَاعِل · the doer',ref:'2:282',q:'وَلْيَكْتُبْ بَيْنَكُمْ كَاتِبٌ بِالْعَدْلِ',qen:'“Let a scribe write it between you in justice.”'},
+ {ar:'مَكْتُوب',tr:'maktūb',en:'written, inscribed',form:'مَفْعُول · the done-to',ref:'7:157',q:'يَجِدُونَهُ مَكْتُوبًا عِندَهُمْ',qen:'“…whom they find written with them.”'},
+ {ar:'كُتُب',tr:'kutub',en:'books (plural)',form:'فُعُل · broken plural',ref:'2:285',q:'وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ',qen:'“…His angels, His Books and His Messengers.”'},
+ {ar:'مَكْتَب',tr:'maktab',en:'desk, office — a place of writing',form:'مَفْعَل · place',ref:'Modern Arabic',tag:'modern'},
+ {ar:'مَكْتَبَة',tr:'maktabah',en:'library, bookshop',form:'مَفْعَلَة · place',ref:'Modern Arabic',tag:'modern'}]},
+
+{id:'ilm',letters:'ع ل م',tr:'ʿ–l–m',hue:45,accent:'#f5bf5f',freq:854,
+ core:'knowing · the marks that lead to knowledge',
+ soil:'A عَلَامَة is a signpost. Knowledge is following the signs until you truly know.',
+ words:[
+ {ar:'عَلِمَ',tr:'ʿalima',en:'he knew',form:'فَعَلَ · Form I',ref:'2:187',q:'عَلِمَ اللَّهُ أَنَّكُمْ',qen:'“Allah knew that you…”'},
+ {ar:'عِلْم',tr:'ʿilm',en:'knowledge',form:'فِعْل · abstract noun',ref:'2:32',q:'لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا',qen:'“We have no knowledge except what You taught us.”'},
+ {ar:'عَلَّمَ',tr:'ʿallama',en:'he taught (made someone know)',form:'فَعَّلَ · Form II',ref:'55:2',q:'عَلَّمَ الْقُرْآنَ',qen:'“He taught the Qur’ān.”'},
+ {ar:'عُلَمَاء',tr:'ʿulamāʾ',en:'scholars, those who know',form:'فَاعِل → plural',ref:'35:28',q:'إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ',qen:'“Only the scholars truly fear Allah.”'},
+ {ar:'عَلِيم',tr:'ʿalīm',en:'All-Knowing (deep, lasting knowledge)',form:'فَعِيل · quality',ref:'2:32',q:'إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ',qen:'“You are the All-Knowing, the All-Wise.”'},
+ {ar:'مَعْلُوم',tr:'maʿlūm',en:'known, appointed',form:'مَفْعُول',ref:'15:38',q:'إِلَى يَوْمِ الْوَقْتِ الْمَعْلُومِ',qen:'“…until the Day of the appointed time.”'},
+ {ar:'عَالَمِين',tr:'ʿālamīn',en:'the worlds — all that makes Him known',form:'فَاعَل → plural',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise to Allah, Lord of the worlds.”'},
+ {ar:'عَلَامَات',tr:'ʿalāmāt',en:'signposts, landmarks',form:'noun of sign',ref:'16:16',q:'وَعَلَامَاتٍ وَبِالنَّجْمِ هُمْ يَهْتَدُونَ',qen:'“…and landmarks; and by the stars they are guided.”'},
+ {ar:'مُعَلِّم',tr:'muʿallim',en:'teacher',form:'مُفَعِّل · doer of II',ref:'classical / modern',tag:'modern'}]},
+
+{id:'rhm',letters:'ر ح م',hue:345,tr:'r–ḥ–m',accent:'#ff9db3',freq:339,
+ core:'mercy that wraps and nourishes',
+ soil:'Same root as رَحِم, the womb: total protection, feeding, warmth — given before it is ever asked for.',
+ words:[
+ {ar:'رَحْمَة',tr:'raḥmah',en:'mercy',form:'فَعْلَة · noun',ref:'7:156',q:'وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ',qen:'“My mercy encompasses all things.”'},
+ {ar:'الرَّحْمَٰن',tr:'ar-Raḥmān',en:'The Most Merciful — overflowing, to all',form:'فَعْلَان · intensity',ref:'1:1',q:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',qen:'“In the name of Allah, the Most Merciful…”'},
+ {ar:'الرَّحِيم',tr:'ar-Raḥīm',en:'The Ever-Merciful — constant, to the believers',form:'فَعِيل · permanence',ref:'1:1',q:'الرَّحْمَٰنِ الرَّحِيمِ',qen:'“…the Especially Merciful.”'},
+ {ar:'أَرْحَام',tr:'arḥām',en:'wombs, ties of kinship',form:'أَفْعَال · plural',ref:'4:1',q:'وَاتَّقُوا اللَّهَ الَّذِي تَسَاءَلُونَ بِهِ وَالْأَرْحَامَ',qen:'“…and be mindful of family ties.”'},
+ {ar:'الرَّاحِمِين',tr:'ar-rāḥimīn',en:'those who show mercy',form:'فَاعِل → plural',ref:'7:151',q:'وَأَنتَ أَرْحَمُ الرَّاحِمِينَ',qen:'“And You are the Most Merciful of the merciful.”'},
+ {ar:'مَرْحَمَة',tr:'marḥamah',en:'compassion',form:'مَفْعَلَة',ref:'90:17',q:'وَتَوَاصَوْا بِالْمَرْحَمَةِ',qen:'“…and urged one another to compassion.”'}]},
+
+{id:'slm',letters:'س ل م',tr:'s–l–m',hue:168,accent:'#58e0c8',freq:140,
+ core:'wholeness · soundness · safety',
+ soil:'To be free of defect and danger. Islām = handing yourself over whole, and finding safety there.',
+ words:[
+ {ar:'سَلَام',tr:'salām',en:'peace, wholeness',form:'فَعَال',ref:'36:58',q:'سَلَامٌ قَوْلًا مِّن رَّبٍّ رَّحِيمٍ',qen:'“Peace — a word from a Merciful Lord.”'},
+ {ar:'إِسْلَام',tr:'islām',en:'submitting yourself whole',form:'إِفْعَال · Form IV noun',ref:'3:19',q:'إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ',qen:'“Indeed, the religion with Allah is Islām.”'},
+ {ar:'مُسْلِم',tr:'muslim',en:'one who submits',form:'مُفْعِل · doer of IV',ref:'3:67',q:'وَلَٰكِن كَانَ حَنِيفًا مُّسْلِمًا',qen:'“…but he was upright, a Muslim.”'},
+ {ar:'أَسْلَمَ',tr:'aslama',en:'he submitted',form:'أَفْعَلَ · Form IV',ref:'2:131',q:'أَسْلَمْتُ لِرَبِّ الْعَالَمِينَ',qen:'“I have submitted to the Lord of the worlds.”'},
+ {ar:'سَلِيم',tr:'salīm',en:'sound, unblemished (a heart)',form:'فَعِيل',ref:'26:89',q:'إِلَّا مَنْ أَتَى اللَّهَ بِقَلْبٍ سَلِيمٍ',qen:'“…except one who comes to Allah with a sound heart.”'},
+ {ar:'تَسْلِيم',tr:'taslīm',en:'full, willing acceptance',form:'تَفْعِيل · Form II noun',ref:'4:65',q:'وَيُسَلِّمُوا تَسْلِيمًا',qen:'“…and submit with full submission.”'},
+ {ar:'سُلَّم',tr:'sullam',en:'a ladder — the safe way up',form:'فُعَّل',ref:'52:38',q:'أَمْ لَهُمْ سُلَّمٌ يَسْتَمِعُونَ فِيهِ',qen:'“Or do they have a ladder by which they listen?”'}]},
+
+{id:'hmd',letters:'ح م د',tr:'ḥ–m–d',hue:32,accent:'#f09231',freq:68,
+ core:'praise freely given, out of love',
+ soil:'Not flattery, not payment — praise for beauty and goodness, offered because the one praised deserves it.',
+ words:[
+ {ar:'الْحَمْد',tr:'al-ḥamd',en:'all praise (the thing itself)',form:'فَعْل',ref:'1:2',q:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',qen:'“All praise belongs to Allah, Lord of the worlds.”'},
+ {ar:'حَمِيد',tr:'ḥamīd',en:'Praiseworthy — always, by nature',form:'فَعِيل',ref:'14:1',q:'إِلَىٰ صِرَاطِ الْعَزِيزِ الْحَمِيدِ',qen:'“…to the path of the Mighty, the Praiseworthy.”'},
+ {ar:'مَحْمُود',tr:'maḥmūd',en:'praised (by others)',form:'مَفْعُول',ref:'17:79',q:'عَسَىٰ أَن يَبْعَثَكَ رَبُّكَ مَقَامًا مَّحْمُودًا',qen:'“…a praised station.”'},
+ {ar:'مُحَمَّد',tr:'Muḥammad',en:'the one praised again and again',form:'مُفَعَّل · Form II',ref:'48:29',q:'مُّحَمَّدٌ رَّسُولُ اللَّهِ',qen:'“Muḥammad is the Messenger of Allah.”'},
+ {ar:'أَحْمَد',tr:'Aḥmad',en:'the most praising / most praised',form:'أَفْعَل · comparative',ref:'61:6',q:'اسْمُهُ أَحْمَدُ',qen:'“…whose name is Aḥmad.”'},
+ {ar:'الْحَامِدُون',tr:'al-ḥāmidūn',en:'those who praise',form:'فَاعِل → plural',ref:'9:112',q:'التَّائِبُونَ الْعَابِدُونَ الْحَامِدُونَ',qen:'“Those who repent, worship and praise.”'}]},
+
+{id:'qwl',letters:'ق و ل',tr:'q–w–l',hue:268,accent:'#b6a4ff',freq:1722,
+ core:'saying · speech · a statement',
+ soil:'The Qur’ān’s most frequent root. Notice the hidden و — it hides in قَالَ but shows up in يَقُولُ and قَوْل.',
+ words:[
+ {ar:'قَالَ',tr:'qāla',en:'he said (the و is hiding!)',form:'فَعَلَ · weak root',ref:'2:30',q:'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ',qen:'“And when your Lord said to the angels…”'},
+ {ar:'يَقُولُ',tr:'yaqūlu',en:'he says (و reappears)',form:'يَفْعُلُ',ref:'2:8',q:'وَمِنَ النَّاسِ مَن يَقُولُ',qen:'“And among the people are those who say…”'},
+ {ar:'قَوْل',tr:'qawl',en:'a saying, a statement',form:'فَعْل',ref:'33:70',q:'وَقُولُوا قَوْلًا سَدِيدًا',qen:'“And speak a straight, upright word.”'},
+ {ar:'قِيل',tr:'qīla',en:'it was said (passive)',form:'فِيلَ · passive',ref:'2:11',q:'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا',qen:'“And when it is said to them: do not cause corruption…”'},
+ {ar:'قَائِل',tr:'qāʾil',en:'a speaker, the one saying it',form:'فَاعِل',ref:'23:100',q:'كَلِمَةٌ هُوَ قَائِلُهَا',qen:'“…a word he is (merely) saying.”'},
+ {ar:'تَقَوَّلَ',tr:'taqawwala',en:'to invent speech falsely',form:'تَفَعَّلَ · Form V',ref:'69:44',q:'وَلَوْ تَقَوَّلَ عَلَيْنَا',qen:'“And if he had invented (words) against Us…”'}]},
+
+{id:'sbr',letters:'ص ب ر',tr:'ṣ–b–r',hue:130,accent:'#7ddc95',freq:103,
+ core:'holding firm · restraining yourself',
+ soil:'Not passive waiting. It is gripping tight and refusing to collapse — like a tree standing through a drought.',
+ words:[
+ {ar:'صَبَرَ',tr:'ṣabara',en:'he held firm, he endured',form:'فَعَلَ',ref:'16:126',q:'وَلَئِن صَبَرْتُمْ لَهُوَ خَيْرٌ لِّلصَّابِرِينَ',qen:'“But if you are patient, it is better for the patient.”'},
+ {ar:'صَبْر',tr:'ṣabr',en:'steadfastness',form:'فَعْل',ref:'2:45',q:'وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ',qen:'“Seek help through patience and prayer.”'},
+ {ar:'الصَّابِرِين',tr:'aṣ-ṣābirīn',en:'the steadfast ones',form:'فَاعِل → plural',ref:'2:153',q:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',qen:'“Indeed Allah is with the patient.”'},
+ {ar:'الصَّابِرَات',tr:'aṣ-ṣābirāt',en:'the steadfast women',form:'فَاعِلَات',ref:'33:35',q:'وَالصَّابِرِينَ وَالصَّابِرَاتِ',qen:'“…the patient men and the patient women.”'},
+ {ar:'اصْطَبِرْ',tr:'iṣṭabir',en:'persevere with real effort',form:'اِفْتَعَلَ · Form VIII',ref:'19:65',q:'فَاعْبُدْهُ وَاصْطَبِرْ لِعِبَادَتِهِ',qen:'“So worship Him, and persevere in His worship.”'}]},
+
+{id:'dkr',letters:'ذ ك ر',tr:'dh–k–r',hue:188,accent:'#6fe3ff',freq:292,
+ core:'remembering · mentioning · reminding',
+ soil:'To bring something to your mind AND to your tongue. Remembrance you can hear.',
+ words:[
+ {ar:'ذَكَرَ',tr:'dhakara',en:'he remembered / mentioned',form:'فَعَلَ',ref:'2:152',q:'فَاذْكُرُونِي أَذْكُرْكُمْ',qen:'“So remember Me and I will remember you.”'},
+ {ar:'ذِكْر',tr:'dhikr',en:'remembrance; the Reminder (Qur’ān)',form:'فِعْل',ref:'15:9',q:'إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ',qen:'“Indeed We have sent down the Reminder.”'},
+ {ar:'ذِكْرَىٰ',tr:'dhikrā',en:'a reminder, a lesson',form:'فِعْلَىٰ',ref:'6:69',q:'وَلَٰكِن ذِكْرَىٰ لَعَلَّهُمْ يَتَّقُونَ',qen:'“…but as a reminder, so they may be mindful.”'},
+ {ar:'الذَّاكِرِين',tr:'adh-dhākirīn',en:'those who remember',form:'فَاعِل → plural',ref:'33:35',q:'وَالذَّاكِرِينَ اللَّهَ كَثِيرًا',qen:'“…and the men who remember Allah much.”'},
+ {ar:'مَذْكُور',tr:'madhkūr',en:'mentioned, remembered',form:'مَفْعُول',ref:'76:1',q:'لَمْ يَكُن شَيْئًا مَّذْكُورًا',qen:'“…he was not a thing mentioned.”'},
+ {ar:'تَذْكِرَة',tr:'tadhkirah',en:'a reminder (given to others)',form:'تَفْعِلَة · Form II',ref:'20:3',q:'إِلَّا تَذْكِرَةً لِّمَن يَخْشَىٰ',qen:'“…only as a reminder to whoever fears.”'},
+ {ar:'مُذَكِّر',tr:'mudhakkir',en:'one who reminds',form:'مُفَعِّل',ref:'88:21',q:'فَذَكِّرْ إِنَّمَا أَنتَ مُذَكِّرٌ',qen:'“So remind — you are only a reminder.”'}]},
+
+{id:'nsr',letters:'ن ص ر',tr:'n–ṣ–r',hue:22,accent:'#ff9f5a',freq:158,
+ core:'coming to the aid of the pressured',
+ soil:'Help given to someone under attack — help that ends in victory. Never “help” with the shopping!',
+ words:[
+ {ar:'نَصَرَ',tr:'naṣara',en:'he helped (to victory)',form:'فَعَلَ',ref:'3:123',q:'وَلَقَدْ نَصَرَكُمُ اللَّهُ بِبَدْرٍ',qen:'“Allah surely helped you at Badr.”'},
+ {ar:'نَصْر',tr:'naṣr',en:'victory, help',form:'فَعْل',ref:'110:1',q:'إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ',qen:'“When the help of Allah and victory come…”'},
+ {ar:'النَّاصِرِين',tr:'an-nāṣirīn',en:'the helpers',form:'فَاعِل → plural',ref:'3:150',q:'وَهُوَ خَيْرُ النَّاصِرِينَ',qen:'“And He is the best of helpers.”'},
+ {ar:'نَصِير',tr:'naṣīr',en:'a constant helper',form:'فَعِيل',ref:'4:45',q:'وَكَفَىٰ بِاللَّهِ نَصِيرًا',qen:'“And sufficient is Allah as a helper.”'},
+ {ar:'أَنْصَار',tr:'anṣār',en:'the helpers (a group)',form:'أَفْعَال',ref:'3:52',q:'نَحْنُ أَنصَارُ اللَّهِ',qen:'“We are the helpers of Allah.”'},
+ {ar:'مَنْصُور',tr:'manṣūr',en:'aided, given victory',form:'مَفْعُول',ref:'17:33',q:'إِنَّهُ كَانَ مَنصُورًا',qen:'“Indeed he is (divinely) aided.”'},
+ {ar:'اسْتَنْصَرَ',tr:'istanṣara',en:'he called for help',form:'اِسْتَفْعَلَ · Form X',ref:'28:18',q:'فَإِذَا الَّذِي اسْتَنصَرَهُ بِالْأَمْسِ',qen:'“…the one who sought his help the day before.”'},
+ {ar:'تَنَاصَرُ',tr:'tanāṣur',en:'helping one another',form:'تَفَاعَل · Form VI',ref:'37:25',q:'مَا لَكُمْ لَا تَنَاصَرُونَ',qen:'“What is wrong with you — you do not help one another?”'}]},
+
+{id:'kfr',letters:'ك ف ر',tr:'k–f–r',hue:210,accent:'#9fb0bd',freq:525,
+ core:'to cover · to bury · to conceal',
+ soil:'The physical image comes first: covering something up. Cover the truth = kufr. Cover a sin = kaffārah. A farmer covering seed with soil is also a كَافِر!',
+ words:[
+ {ar:'كَفَرَ',tr:'kafara',en:'he covered up / denied the truth',form:'فَعَلَ',ref:'2:6',q:'إِنَّ الَّذِينَ كَفَرُوا',qen:'“Indeed those who disbelieved…”'},
+ {ar:'كُفْر',tr:'kufr',en:'concealing the truth',form:'فُعْل',ref:'14:28',q:'بَدَّلُوا نِعْمَتَ اللَّهِ كُفْرًا',qen:'“They exchanged Allah’s favour for ingratitude.”'},
+ {ar:'الْكُفَّار',tr:'al-kuffār',en:'coverers — and also: farmers who cover seed!',form:'فُعَّال · plural',ref:'57:20',q:'كَمَثَلِ غَيْثٍ أَعْجَبَ الْكُفَّارَ نَبَاتُهُ',qen:'“…like rain whose growth pleases the tillers.” — same root, literal sense!'},
+ {ar:'كَفَّارَة',tr:'kaffārah',en:'expiation — a covering-over of sin',form:'فَعَّالَة',ref:'5:45',q:'فَهُوَ كَفَّارَةٌ لَّهُ',qen:'“…that is an expiation for him.”'},
+ {ar:'كَفَّرَ',tr:'kaffara',en:'He covered over (wiped out) sins',form:'فَعَّلَ · Form II',ref:'3:195',q:'لَأُكَفِّرَنَّ عَنْهُمْ سَيِّئَاتِهِمْ',qen:'“I will surely wipe away their sins.”'},
+ {ar:'كَفُور',tr:'kafūr',en:'utterly ungrateful',form:'فَعُول · intensity',ref:'17:67',q:'وَكَانَ الْإِنسَانُ كَفُورًا',qen:'“And man is ever ungrateful.”'},
+ {ar:'كَافُور',tr:'kāfūr',en:'camphor — a covering fragrance',form:'فَاعُول',ref:'76:5',q:'كَأْسٍ كَانَ مِزَاجُهَا كَافُورًا',qen:'“…a cup mixed with camphor.”'}]}
+];
+
+/* =====================================================================
+   2. PROCEDURAL TREE ENGINE  (organic tapered limbs + foliage)
+===================================================================== */
+function leafPalette(hue){
+  const h=118+(hue-118)*0.3;
+  return [[h-10,40,20],[h-4,46,28],[h+2,50,36],[h+8,56,46],[h+14,62,57]]
+    .map(([a,s,l])=>`hsl(${((a%360)+360)%360} ${s}% ${l}%)`);
+}
+const LEAFSHAPES=[
+ "M0,0 C5,-5 7.5,-13 0,-19.5 C-7.5,-13 -5,-5 0,0Z",
+ "M0,0 C7,-4 8.5,-14 0,-18 C-8.5,-14 -7,-4 0,0Z",
+ "M0,0 C4,-6.5 5.5,-15 0,-21.5 C-5.5,-15 -4,-6.5 0,0Z"
+];
+function taper(b){
+  const a1=Math.atan2(b.cy-b.y,b.cx-b.x), a2=Math.atan2(b.ey-b.cy,b.ex-b.cx), am=(a1+a2)/2;
+  const n1=[-Math.sin(a1),Math.cos(a1)], n2=[-Math.sin(a2),Math.cos(a2)], nm=[-Math.sin(am),Math.cos(am)];
+  const h0=b.w0/2,h1=b.w1/2,hm=(h0+h1)/2*0.92;
+  return `M${(b.x+n1[0]*h0).toFixed(1)},${(b.y+n1[1]*h0).toFixed(1)} `+
+         `Q${(b.cx+nm[0]*hm).toFixed(1)},${(b.cy+nm[1]*hm).toFixed(1)} ${(b.ex+n2[0]*h1).toFixed(1)},${(b.ey+n2[1]*h1).toFixed(1)} `+
+         `L${(b.ex-n2[0]*h1).toFixed(1)},${(b.ey-n2[1]*h1).toFixed(1)} `+
+         `Q${(b.cx-nm[0]*hm).toFixed(1)},${(b.cy-nm[1]*hm).toFixed(1)} ${(b.x-n1[0]*h0).toFixed(1)},${(b.y-n1[1]*h0).toFixed(1)} Z`;
+}
+function skeleton(rnd,o){
+  const br=[],tips=[];
+  (function grow(x,y,ang,len,wid,d){
+    const r=ang*Math.PI/180, ex=x+Math.cos(r)*len, ey=y+Math.sin(r)*len;
+    const curve=(rnd()-.5)*0.5, mx=(x+ex)/2,my=(y+ey)/2;
+    const cx=mx-Math.sin(r)*len*curve, cy=my+Math.cos(r)*len*curve;
+    br.push({x,y,cx,cy,ex,ey,w0:wid,w1:wid*.63,d});
+    if(d<=0||wid<1.15){tips.push({x:ex,y:ey,ang});return;}
+    const n=(d>=o.depth-1)?2:(rnd()<.34?3:2);
+    for(let i=0;i<n;i++){
+      const dir=n===2?(i===0?-1:1):(i-1);
+      grow(ex,ey,ang+dir*o.spread*(.55+rnd()*.95)+(rnd()-.5)*14,
+           len*(.66+rnd()*.19),wid*(.58+rnd()*.16),d-1);
+    }
+  })(o.x,o.y,o.ang,o.len,o.wid,o.depth);
+  return {br,tips};
+}
+function foliage(rnd,tips,pal,scale,limitY){
+  let back='',front='',clusters={};
+  tips.forEach((t,i)=>{
+    if(limitY!==undefined&&t.y>limitY) return;
+    const key='c'+i, n=3+Math.floor(rnd()*5);
+    let s='';
+    for(let k=0;k<n;k++){
+      const dx=(rnd()-.5)*30*scale, dy=(rnd()-.5)*26*scale;
+      const rot=(rnd()*360)|0, sc=(.65+rnd()*.75)*scale;
+      const c=pal[Math.floor(rnd()*pal.length)];
+      const shp=LEAFSHAPES[(rnd()*LEAFSHAPES.length)|0];
+      const del=(0.9+ (1-Math.min(1,(600-t.y)/600))*0.1 + rnd()*.7).toFixed(2);
+      s+=`<g class="lf" style="animation-delay:${del}s" transform="translate(${(t.x+dx).toFixed(1)},${(t.y+dy).toFixed(1)}) rotate(${rot}) scale(${sc.toFixed(2)})">`+
+         `<path d="${shp}" fill="${c}"/><path d="M0,-1 L0,-16" stroke="rgba(0,0,0,.32)" stroke-width=".9" fill="none"/></g>`;
+    }
+    const grp=`<g class="cluster" style="animation-delay:-${(rnd()*7).toFixed(2)}s;animation-duration:${(5.5+rnd()*4).toFixed(1)}s">${s}</g>`;
+    if(rnd()<.34) back+=grp; else front+=grp;
+  });
+  return {back,front};
+}
+function svgDefs(id,pal,accent,hue){
+  return `<defs>
+   <linearGradient id="bark${id}" x1="0" y1="0" x2="1" y2="0">
+     <stop offset="0" stop-color="#1d130c"/><stop offset=".45" stop-color="#4a3323"/>
+     <stop offset=".8" stop-color="#7a5636"/><stop offset="1" stop-color="#8c6540"/></linearGradient>
+   <linearGradient id="root${id}" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#4a3323"/><stop offset="1" stop-color="#170f09"/></linearGradient>
+   <radialGradient id="glow${id}" cx=".5" cy=".5" r=".5">
+     <stop offset="0" stop-color="${accent}" stop-opacity=".55"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient>
+   <linearGradient id="wl${id}" x1="0" y1="0" x2=".2" y2="1">
+     <stop offset="0" stop-color="hsl(${(118+(hue-118)*.3)|0} 58% 72%)"/>
+     <stop offset="1" stop-color="hsl(${(118+(hue-118)*.3)|0} 50% 44%)"/></linearGradient>
+   <linearGradient id="soil${id}" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#241a12"/><stop offset=".35" stop-color="#140e09"/><stop offset="1" stop-color="#080503"/></linearGradient>
+   <filter id="bfx${id}" x="-8%" y="-8%" width="116%" height="116%">
+     <feTurbulence type="fractalNoise" baseFrequency="0.018 0.09" numOctaves="3" seed="${(Math.random()*90)|0}" result="w"/>
+     <feDisplacementMap in="SourceGraphic" in2="w" scale="4.2" xChannelSelector="R" yChannelSelector="G" result="wp"/>
+     <feTurbulence type="fractalNoise" baseFrequency="0.02 0.55" numOctaves="4" seed="9" result="g"/>
+     <feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.15 .62" result="ga"/>
+     <feComposite in="ga" in2="wp" operator="in" result="gc"/>
+     <feBlend in="wp" in2="gc" mode="multiply"/></filter>
+   <filter id="blr${id}" x="-20%" y="-20%" width="140%" height="140%">
+     <feGaussianBlur stdDeviation="4.5"/></filter>
+   <filter id="sft${id}" x="-30%" y="-30%" width="160%" height="160%">
+     <feGaussianBlur stdDeviation="9"/></filter>
+   <filter id="ds${id}" x="-40%" y="-40%" width="180%" height="180%">
+     <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".6"/></filter>
+   <mask id="gm${id}"><circle cx="${0}" cy="${0}" r="0" fill="#fff" class="gmc"/></mask>
+  </defs>`;
+}
+/* Build a full tree scene. cfg: {vbw,vbh,bx,by,depth,len,wid,spread,hue,accent,words,rootLetters,fruit,scale} */
+function buildScene(cfg){
+  const id='s'+(++UID), rnd=mulberry32(cfg.seed||((Math.random()*1e9)|0));
+  const pal=leafPalette(cfg.hue);
+  const up=skeleton(rnd,{x:cfg.bx,y:cfg.by,ang:-90+(rnd()-.5)*6,len:cfg.len,wid:cfg.wid,depth:cfg.depth,spread:cfg.spread});
+  const dn=cfg.roots?skeleton(rnd,{x:cfg.bx,y:cfg.by+4,ang:90+(rnd()-.5)*10,len:cfg.len*.58,wid:cfg.wid*.72,depth:Math.max(3,cfg.depth-2),spread:cfg.spread+16}):{br:[],tips:[]};
+  const fol=foliage(rnd,up.tips,pal,cfg.scale||1);
+  /* distant blurred trees for depth of field */
+  let far='';
+  (cfg.far||[]).forEach(f=>{
+    const s=skeleton(mulberry32(f.seed),{x:f.x,y:f.y,ang:-90,len:f.len,wid:f.wid,depth:5,spread:cfg.spread});
+    const ff=foliage(mulberry32(f.seed+7),s.tips,leafPalette(cfg.hue).map(c=>c),f.scale||.8);
+    far+=`<g filter="url(#blr${id})" opacity="${f.op||.5}">
+      <g fill="#120c07">${s.br.map(b=>`<path d="${taper(b)}"/>`).join('')}</g>${ff.back}${ff.front}</g>`;
+  });
+  /* word leaves placed on well-spaced outer tips */
+  let wleaves='',placed=[];
+  if(cfg.words&&cfg.words.length){
+    const cand=up.tips.filter(t=>t.y<cfg.by-cfg.len*1.1).sort(()=>rnd()-.5);
+    for(const t of cand){
+      if(placed.length>=cfg.words.length) break;
+      if(placed.some(p=>Math.hypot(p.x-t.x,p.y-t.y)<96)) continue;
+      if(t.x<70||t.x>cfg.vbw-70||t.y<44) continue;
+      placed.push(t);
+    }
+    placed.forEach((t,i)=>{
+      const w=cfg.words[i]; if(!w) return;
+      const W=Math.max(112,w.ar.length*19+56), H=54, rot=(rnd()-.5)*13;
+      const tx=Math.min(cfg.vbw-W/2-8,Math.max(W/2+8,t.x)), ty=Math.max(H/2+10,t.y-14);
+      wleaves+=`<g class="wleaf" data-i="${i}" tabindex="0" role="button" aria-label="${w.tr}: ${w.en}"
+          transform="translate(${tx.toFixed(1)},${ty.toFixed(1)})" style="transition-delay:${(1.5+i*.11).toFixed(2)}s">
+        <path d="M0,0 L${(t.x-tx).toFixed(1)},${(t.y-ty+16).toFixed(1)}" stroke="#5d4229" stroke-width="2.6" stroke-linecap="round"/>
+        <g transform="rotate(${rot.toFixed(1)})" filter="url(#ds${id})">
+          <path class="blade" d="M${-W/2},0 Q${-W/2+20},${-H/2} 0,${-H/2} Q${W/2-20},${-H/2} ${W/2},0 Q${W/2-20},${H/2} 0,${H/2} Q${-W/2+20},${H/2} ${-W/2},0 Z"
+            fill="url(#wl${id})" stroke="hsl(${(118+(cfg.hue-118)*.3)|0} 45% 26%)" stroke-width="1.4"/>
+          <path d="M${-W/2+8},0 L${W/2-8},0" stroke="hsl(${(118+(cfg.hue-118)*.3)|0} 40% 30%)" stroke-width="1.1" opacity=".55"/>
+          <path d="M${-W*.22},0 l${W*.10},-${H*.24} M0,0 l${W*.10},-${H*.24} M${W*.22},0 l${W*.09},-${H*.2}
+                   M${-W*.22},0 l${W*.10},${H*.24} M0,0 l${W*.10},${H*.24} M${W*.22},0 l${W*.09},${H*.2}"
+            stroke="hsl(${(118+(cfg.hue-118)*.3)|0} 40% 32%)" stroke-width=".9" opacity=".45" fill="none"/>
+          <text x="0" y="-3" text-anchor="middle" font-family="'Noto Naskh Arabic',serif" font-weight="700"
+            font-size="24" fill="hsl(${(118+(cfg.hue-118)*.3)|0} 65% 11%)" direction="rtl">${w.ar}</text>
+          <text x="0" y="16" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="700"
+            font-size="11" letter-spacing=".7" fill="hsl(${(118+(cfg.hue-118)*.3)|0} 50% 20%)">${w.tr.toUpperCase()}</text>
+        </g></g>`;
+    });
+  }
+  /* fruit */
+  let fruit='';
+  if(cfg.fruit){
+    const ft=up.tips.filter(t=>t.y<cfg.by-cfg.len).sort(()=>rnd()-.5).slice(0,cfg.fruit);
+    ft.forEach(t=>{
+      const r=7+rnd()*4;
+      fruit+=`<g class="lf" style="animation-delay:${(1.6+rnd()*.6).toFixed(2)}s" transform="translate(${t.x.toFixed(1)},${(t.y+8).toFixed(1)})">
+        <path d="M0,-8 q2,-6 5,-8" stroke="#4a3323" stroke-width="1.8" fill="none"/>
+        <ellipse rx="${r}" ry="${r*1.12}" fill="url(#fr${id})"/>
+        <ellipse cx="${-r*.3}" cy="${-r*.4}" rx="${r*.3}" ry="${r*.2}" fill="#fff" opacity=".33"/></g>`;
+    });
+  }
+  /* grass + fallen leaves */
+  let grass='';
+  for(let i=0;i<70;i++){
+    const gx=cfg.bx+(rnd()-.5)*cfg.vbw*.95, h=6+rnd()*22, lean=(rnd()-.5)*13;
+    grass+=`<path d="M${gx.toFixed(1)},${cfg.by+3} q${lean.toFixed(1)},${(-h*.6).toFixed(1)} ${(lean*1.7).toFixed(1)},${(-h).toFixed(1)}"
+      stroke="${pal[1+((rnd()*3)|0)]}" stroke-width="${(1+rnd()*1.5).toFixed(1)}" fill="none" opacity="${(.35+rnd()*.5).toFixed(2)}"/>`;
+  }
+  for(let i=0;i<16;i++){
+    const gx=cfg.bx+(rnd()-.5)*cfg.vbw*.9, gy=cfg.by+2+rnd()*16;
+    grass+=`<g transform="translate(${gx.toFixed(1)},${gy.toFixed(1)}) rotate(${(rnd()*360)|0}) scale(${(.5+rnd()*.5).toFixed(2)})" opacity=".55">
+      <path d="${LEAFSHAPES[0]}" fill="${pal[(rnd()*2)|0]}"/></g>`;
+  }
+  const maxR=Math.max(...up.br.map(b=>Math.hypot(b.ex-cfg.bx,b.ey-cfg.by)),cfg.len*2)*1.25;
+  const svg=`<svg viewBox="0 0 ${cfg.vbw} ${cfg.vbh}" preserveAspectRatio="${cfg.par||'xMidYMid meet'}" role="img" aria-label="${cfg.label||'tree'}">
+   ${svgDefs(id,pal,cfg.accent,cfg.hue).replace(`<mask id="gm${id}"><circle cx="0" cy="0" r="0"`,`<mask id="gm${id}"><circle cx="${cfg.bx}" cy="${cfg.by}" r="0"`)}
+   <radialGradient id="fr${id}" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffd98a"/><stop offset=".55" stop-color="#e8952c"/><stop offset="1" stop-color="#8c4a10"/></radialGradient>
+   <!-- sky glow + rays + mist -->
+   <ellipse cx="${cfg.vbw*.78}" cy="${cfg.vbh*.12}" rx="${cfg.vbw*.42}" ry="${cfg.vbh*.3}" fill="url(#glow${id})" opacity=".7"/>
+   <g opacity=".13" filter="url(#sft${id})">
+     <polygon points="${cfg.vbw*.72},0 ${cfg.vbw*.86},0 ${cfg.vbw*.4},${cfg.vbh} ${cfg.vbw*.22},${cfg.vbh}" fill="${cfg.accent}"/>
+     <polygon points="${cfg.vbw*.88},0 ${cfg.vbw*.95},0 ${cfg.vbw*.66},${cfg.vbh} ${cfg.vbw*.52},${cfg.vbh}" fill="#ffe4b0"/>
+   </g>
+   ${far}
+   <ellipse cx="${cfg.bx}" cy="${cfg.by+cfg.vbh*.06}" rx="${cfg.vbw*.55}" ry="${cfg.vbh*.09}" fill="#000" opacity=".55" filter="url(#sft${id})"/>
+   <!-- underground -->
+   <rect x="0" y="${cfg.by}" width="${cfg.vbw}" height="${cfg.vbh-cfg.by}" fill="url(#soil${id})"/>
+   <path d="M0,${cfg.by} Q${cfg.vbw*.3},${cfg.by-7} ${cfg.vbw*.5},${cfg.by} T${cfg.vbw},${cfg.by-3} L${cfg.vbw},${cfg.by+8} L0,${cfg.by+8}Z"
+     fill="#2a1d13" opacity=".9"/>
+   <g mask="url(#gm${id})">
+     <g fill="url(#root${id})" opacity=".95">${dn.br.map(b=>`<path d="${taper(b)}"/>`).join('')}</g>
+     ${fol.back}
+     <g filter="url(#bfx${id})" fill="url(#bark${id})">${up.br.map(b=>`<path d="${taper(b)}"/>`).join('')}</g>
+     ${fol.front}${fruit}
+   </g>
+   ${grass}
+   <g class="rootletters">${cfg.rootLetters||''}</g>
+   ${cfg.extra||''}
+   <g class="wordlayer">${wleaves}</g>
+  </svg>`;
+  return {svg,id,maxR,pal,placed};
+}
+function animateGrowth(host,id,maxR){
+  const c=host.querySelector('.gmc'); if(!c) return;
+  if(RM){c.setAttribute('r',maxR);host.querySelectorAll('.wleaf').forEach(w=>w.classList.add('show'));return;}
+  const t0=performance.now(),dur=1650;
+  (function step(t){
+    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    c.setAttribute('r',(maxR*e).toFixed(1));
+    if(p<1) requestAnimationFrame(step);
+    else host.querySelectorAll('.wleaf').forEach(w=>w.classList.add('show'));
+  })(t0);
+}
+
+/* =====================================================================
+   3. HERO TREE
+===================================================================== */
+(function heroTree(){
+  const host=$('#heroTree');
+  const teaser=[{ar:'كِتَاب',tr:'kitāb',en:'book'},{ar:'عِلْم',tr:'ʿilm',en:'knowledge'},
+    {ar:'رَحْمَة',tr:'raḥmah',en:'mercy'},{ar:'سَلَام',tr:'salām',en:'peace'},
+    {ar:'حَمْد',tr:'ḥamd',en:'praise'},{ar:'ذِكْر',tr:'dhikr',en:'remembrance'},
+    {ar:'صَبْر',tr:'ṣabr',en:'patience'},{ar:'نَصْر',tr:'naṣr',en:'victory'}];
+  const sc=buildScene({vbw:1500,vbh:940,bx:1080,by:790,len:178,wid:62,depth:8,spread:26,
+    hue:120,accent:'#7ddc95',words:teaser,roots:true,fruit:6,scale:1.05,par:'xMidYMax slice',
+    label:'A realistic tree whose leaves are Arabic words',
+    far:[{x:250,y:800,len:96,wid:26,seed:31,scale:.7,op:.42},{x:520,y:812,len:74,wid:20,seed:77,scale:.6,op:.3},
+         {x:1420,y:806,len:88,wid:24,seed:53,scale:.65,op:.34}]});
+  host.innerHTML=sc.svg;
+  animateGrowth(host,sc.id,sc.maxR);
+  const tip=document.createElement('div'); tip.className='tt'; host.appendChild(tip);
+  host.querySelectorAll('.wleaf').forEach(g=>{
+    const w=teaser[+g.dataset.i];
+    g.addEventListener('mouseenter',e=>{
+      tip.innerHTML=`<b>${w.ar}</b><span style="color:#f5bf5f;font-weight:800">${w.tr}</span> — ${w.en}`;
+      tip.classList.add('on');
+    });
+    g.addEventListener('mousemove',e=>{
+      const r=host.getBoundingClientRect();
+      tip.style.left=Math.min(r.width-280,Math.max(8,e.clientX-r.left+14))+'px';
+      tip.style.top=Math.max(8,e.clientY-r.top-70)+'px';
+    });
+    g.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+  });
+})();
+
+/* =====================================================================
+   4. ANATOMY TREE + HOTSPOTS
+===================================================================== */
+const ANAT=[
+ {n:1,t:'التُّرَاب · The Soil',h:'Context (السِّيَاق)',b:'A root only means something inside a real sentence. The same three letters can lean warm or harsh depending on the āyah around them. Never teach a root without its āyah.'},
+ {n:2,t:'الجَذْر · The Root',h:'3 consonants = the core idea',b:'Three letters in a fixed order carrying one core sense. It is buried, invisible in speech — you only ever hear its branches. This is the DNA of the word.'},
+ {n:3,t:'السَّاق · The Trunk',h:'The bare verb — Form I (فَعَلَ)',b:'The simplest form: he did it. Everything else in the language is a modification of this trunk. Teach the trunk first, always.'},
+ {n:4,t:'الفُرُوع · The Branches',h:'Patterns & the ten forms (الأَوْزَان)',b:'Each branch bends the meaning in a known direction: intensify, cause, do-with-someone, do-to-yourself, seek. The branch tells you the meaning before the dictionary does.'},
+ {n:5,t:'الأَوْرَاق · The Leaves',h:'The actual words you meet',b:'كَاتِب، مَكْتُوب، مَكْتَبَة… Leaves are what you actually read on the page. They look many; they are one root wearing many moulds.'},
+ {n:6,t:'الثَّمَر · The Fruit',h:'Tadabbur, duʿāʾ and action',b:'The point of all this is not grammar marks. It is that when you say يَا غَفُور in duʿāʾ, you know you are asking the One who covers over what you cannot fix.'}
+];
+(function anatomy(){
+  const host=$('#anatomyStage'); const bx=520,by=560;
+  const spots=[[bx-235,by+16],[bx,by+118],[bx+16,by-96],[bx+150,by-300],[bx-190,by-400],[bx+215,by-380]];
+  const extra=spots.map((p,i)=>`<g class="hot" data-a="${i}" tabindex="0" role="button" aria-label="${ANAT[i].t}">
+     <circle class="ring" cx="${p[0]}" cy="${p[1]}" r="16" fill="none" stroke="#f5bf5f" stroke-width="2" style="animation-delay:${i*.35}s"/>
+     <circle cx="${p[0]}" cy="${p[1]}" r="17" fill="#08120c" stroke="#f5bf5f" stroke-width="2.2"/>
+     <text x="${p[0]}" y="${p[1]+6}" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="900" font-size="17" fill="#f5bf5f">${i+1}</text></g>`).join('');
+  const sc=buildScene({vbw:1040,vbh:760,bx,by,len:150,wid:52,depth:7,spread:27,hue:120,accent:'#f5bf5f',
+    roots:true,fruit:5,scale:.95,extra,label:'Labelled anatomy of a word tree'});
+  host.innerHTML=sc.svg; animateGrowth(host,sc.id,sc.maxR);
+  const card=$('#anatomyCard');
+  function show(i){
+    const a=ANAT[i];
+    card.innerHTML=`<div class="badge gold">Part ${a.n} of 6</div>
+      <h3 class="ar" style="font-size:clamp(26px,3vw,38px);margin:14px 0 4px;direction:rtl;text-align:right">${a.t.split(' · ')[0]}</h3>
+      <p style="font-weight:800;font-size:1.15rem;margin:0 0 10px;color:var(--gold)">${a.h}</p>
+      <p class="mut" style="margin:0">${a.b}</p>`;
+    host.querySelectorAll('.hot').forEach(h=>h.style.opacity=(+h.dataset.a===i)?1:.55);
+  }
+  host.querySelectorAll('.hot').forEach(h=>{
+    h.addEventListener('click',()=>show(+h.dataset.a));
+    h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(+h.dataset.a);}});
+  });
+  show(1);
+})();
+
+/* =====================================================================
+   5. ROOT EXPLORER
+===================================================================== */
+(function explorer(){
+  const shelf=$('#seedShelf'),stage=$('#stage'),tip=$('#tip');
+  let cur=0,scene=null;
+  shelf.innerHTML=ROOTS.map((r,i)=>`<button class="seed" data-i="${i}" aria-pressed="${i===0}" style="--sc:${r.accent}">
+      <span class="sl">${r.letters}</span><span class="sg">${r.core.split(' · ')[0]}</span></button>`).join('');
+  function rootLetterSVG(r,bx,by,accent){
+    const L=r.letters.split(' ');
+    const pos=[[bx+150,by+92],[bx,by+134],[bx-150,by+92]]; // rtl: first letter to the right
+    return pos.map((p,i)=>`<g class="rootorb">
+       <circle cx="${p[0]}" cy="${p[1]}" r="42" fill="${accent}" opacity=".16"/>
+       <circle cx="${p[0]}" cy="${p[1]}" r="29" fill="#0a1310" stroke="${accent}" stroke-width="2.4"/>
+       <text x="${p[0]}" y="${p[1]+12}" text-anchor="middle" font-size="32" fill="#fff">${L[i]}</text></g>`).join('')
+      +`<text x="${bx}" y="${by+192}" text-anchor="middle" font-family="Outfit,sans-serif" font-weight="800"
+         font-size="14" letter-spacing="3" fill="${accent}" opacity=".9">THE ROOT · الجَذْر</text>`;
+  }
+  function paint(i,seed){
+    cur=i; const r=ROOTS[i];
+    document.documentElement.style.setProperty('--sc',r.accent);
+    $$('.seed',shelf).forEach(b=>b.setAttribute('aria-pressed',(+b.dataset.i===i)));
+    const bx=550,by=580;
+    scene=buildScene({vbw:1100,vbh:840,bx,by,len:152,wid:50,depth:7,spread:27,hue:r.hue,accent:r.accent,
+      words:r.words,roots:true,fruit:0,scale:.95,seed,rootLetters:rootLetterSVG(r,bx,by,r.accent),
+      label:'Tree of the root '+r.tr});
+    stage.innerHTML=scene.svg; stage.appendChild(tip);
+    animateGrowth(stage,scene.id,scene.maxR);
+    $('#leafCount').textContent=Math.min(r.words.length,scene.placed.length);
+    /* root card */
+    $('#rootCard').innerHTML=`<p class="rootbig" style="color:${r.accent}">${r.letters}</p>
+      <p style="font-weight:800;letter-spacing:.08em;margin:0;color:var(--gold)">${r.tr}</p>
+      <p style="font-size:1.3rem;font-weight:800;margin:12px 0 4px">${r.core}</p>
+      <p class="mut" style="margin:0 0 16px">${r.soil}</p>
+      <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:800">
+        <span>Approx. occurrences in the Qur'ān</span><span style="color:${r.accent}">≈ ${r.freq}</span></div>
+      <div class="freqbar"><i style="width:${Math.min(100,(r.freq/1722)*100).toFixed(1)}%;background:linear-gradient(90deg,${r.accent},#fff3)"></i></div>`;
+    /* chips */
+    $('#chipBox').innerHTML=r.words.map((w,k)=>`<button class="chip" data-k="${k}" style="--sc:${r.accent}">${w.ar}</button>`).join('');
+    $$('#chipBox .chip').forEach(c=>c.addEventListener('click',()=>select(+c.dataset.k)));
+    /* leaves events */
+    stage.querySelectorAll('.wleaf').forEach(g=>{
+      const k=+g.dataset.i, w=r.words[k];
+      g.addEventListener('click',()=>select(k));
+      g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(k);}});
+      g.addEventListener('mouseenter',()=>{tip.innerHTML=`<b>${w.ar}</b><span style="color:${r.accent};font-weight:800">${w.form}</span><br>${w.en}`;tip.classList.add('on');});
+      g.addEventListener('mousemove',e=>{const b=stage.getBoundingClientRect();
+        tip.style.left=Math.min(b.width-286,Math.max(8,e.clientX-b.left+14))+'px';
+        tip.style.top=Math.max(8,e.clientY-b.top-84)+'px';});
+      g.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+    });
+    select(0);
+  }
+  function select(k){
+    const r=ROOTS[cur], w=r.words[k]; if(!w) return;
+    $$('#chipBox .chip').forEach(c=>c.classList.toggle('on',+c.dataset.k===k));
+    stage.querySelectorAll('.wleaf').forEach(g=>g.classList.toggle('sel',+g.dataset.i===k));
+    $('#wordCard').innerHTML=`
+      <p class="w" style="color:#fff">${w.ar}</p>
+      <p class="tr" style="margin:0">${w.tr}</p>
+      <p class="en">${w.en}</p>
+      <div class="metaline"><span class="badge" style="background:${r.accent}22;color:${r.accent};border-color:${r.accent}55">${w.form}</span>
+        ${w.tag==='modern'?'<span class="badge sky">also modern Arabic</span>':'<span class="badge gold">Qur\'ān '+w.ref+'</span>'}</div>
+      ${w.q?`<div class="qref"><p class="q">${w.q}</p><p style="margin:0;font-size:.98rem;color:#ffeecd">${w.qen}</p>
+        <small>— ${w.ref}</small></div>`:`<p class="mut" style="margin:0">Not a Qur'ānic word, but built from the very
+        same root — proof the language is still alive and still growing from these three letters.</p>`}
+      <p class="mut" style="margin:14px 0 0;font-size:.94rem">Core sense of <b style="color:${r.accent}">${r.letters}</b>:
+        ${r.core}. Ask your students: <em>how does that core show up in this word?</em></p>`;
+  }
+  shelf.addEventListener('click',e=>{const b=e.target.closest('.seed');if(b)paint(+b.dataset.i);});
+  $('#regrow').addEventListener('click',()=>paint(cur,(Math.random()*1e9)|0));
+  $('#nextRoot').addEventListener('click',()=>paint((cur+1+((Math.random()*(ROOTS.length-1))|0))%ROOTS.length));
+  paint(0,20250101);
+})();
+
+/* =====================================================================
+   6. PEELING LAB
+===================================================================== */
+const PEEL=[
+ {title:'وَالْمُسْتَغْفِرِينَ',root:'غ ف ر',rmean:'covering / forgiving',
+  gloss:'“…and those who seek forgiveness” (Āl ʿImrān 3:17)',
+  segs:[{t:'وَ',k:'prefix',l:'and'},{t:'الْ',k:'prefix',l:'the'},{t:'مُسْتَ',k:'shell',l:'Form X doer'},
+        {t:'غ',k:'root'},{t:'ف',k:'root'},{t:'ر',k:'root'},{t:'ينَ',k:'suffix',l:'masc. plural'}]},
+ {title:'أَفَلَا يَتَذَكَّرُونَ',root:'ذ ك ر',rmean:'remembering / mentioning',
+  gloss:'“Will they not then remember?” (al-Anʿām 6:80 style)',
+  segs:[{t:'أَ',k:'prefix',l:'question'},{t:'فَ',k:'prefix',l:'so/then'},{t:'لَا',k:'prefix',l:'not'},
+        {t:'يَ',k:'shell',l:'he/they do'},{t:'تَ',k:'shell',l:'Form V'},{t:'ذ',k:'root'},{t:'كّ',k:'root'},
+        {t:'ر',k:'root'},{t:'ونَ',k:'suffix',l:'they (plural)'}]},
+ {title:'لِيُخْرِجَكُم',root:'خ ر ج',rmean:'going out / bringing out',
+  gloss:'“…so that He may bring you out” (al-Baqarah 2:257 style)',
+  segs:[{t:'لِ',k:'prefix',l:'so that'},{t:'يُ',k:'shell',l:'he does'},{t:'خ',k:'root'},{t:'ر',k:'root'},
+        {t:'ج',k:'root'},{t:'كُم',k:'suffix',l:'you (pl.) object'}]},
+ {title:'الْمَسَاجِد',root:'س ج د',rmean:'prostration',
+  gloss:'“the places of prostration = mosques” (al-Tawbah 9:18)',
+  segs:[{t:'الْ',k:'prefix',l:'the'},{t:'مَ',k:'shell',l:'place of'},{t:'س',k:'root'},{t:'ا',k:'shell',l:'plural stretch'},
+        {t:'ج',k:'root'},{t:'ِ',k:'shell',l:'plural vowel'},{t:'د',k:'root'}]}
+];
+(function peelLab(){
+  const tabs=$('#peelTabs'),row=$('#segRow'),msg=$('#peelMsg');
+  let idx=0;
+  tabs.innerHTML=PEEL.map((p,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${p.title}</button>`).join('');
+  function render(){
+    const p=PEEL[idx];
+    row.innerHTML=p.segs.map((s,i)=>`<button class="seg ${s.k}" data-i="${i}" ${s.k==='root'?'disabled':''}>
+      ${s.t}${s.l?`<small>${s.l}</small>`:''}</button>`).join('');
+    msg.innerHTML=`<p class="mut" style="margin:0">${p.gloss}<br>Peel away every coloured piece until only the
+      <b style="color:var(--leaf)">green root letters</b> are left.</p>`;
+    $$('#segRow .seg').forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('root'))return;
+      b.classList.add('gone'); check();
+    }));
+  }
+  function check(){
+    const left=$$('#segRow .seg:not(.root):not(.gone)').length;
+    if(left===0){
+      const p=PEEL[idx];
+      $$('#segRow .seg.root').forEach((b,i)=>setTimeout(()=>b.classList.add('pop'),i*130));
+      msg.innerHTML=`<p style="font-size:1.15rem;font-weight:800;margin:0 0 6px">✅ Root found:
+        <span class="ar" style="font-size:1.9rem;letter-spacing:.16em;color:var(--leaf)">${p.root}</span></p>
+        <p class="mut" style="margin:0">Core idea: <b>${p.rmean}</b>. Now build siblings out loud with your class —
+        the doer, the place, the Form X noun.</p>`;
+    }
+  }
+  $('#peelNext').addEventListener('click',()=>{
+    const next=$('#segRow .seg:not(.root):not(.gone)');
+    if(next){next.classList.add('gone');check();}
+  });
+  $('#peelReset').addEventListener('click',render);
+  tabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
+    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');idx=+b.dataset.i;render();});
+  render();
+})();
+
+/* =====================================================================
+   7. MIZAN MACHINE + TEN FORMS
+===================================================================== */
+const PATTERNS=[
+ {id:'fal',name:'فَعْل',t:'{1}َ{2}ْ{3}',m:'A simple action or thing — the bare noun of the action. حَمْد، نَصْر، قَوْل'},
+ {id:'fil',name:'فِعْل',t:'{1}ِ{2}ْ{3}',m:'An abstract concept or state. عِلْم، ذِكْر، سِلْم'},
+ {id:'fiaal',name:'فِعَال',t:'{1}ِ{2}َا{3}',m:'A thing/result, often something you can hold. كِتَاب، حِسَاب'},
+ {id:'faail',name:'فَاعِل',t:'{1}َا{2}ِ{3}',m:'THE DOER (active participle) — the one who does it right now. كَاتِب، عَالِم، صَابِر'},
+ {id:'mafuul',name:'مَفْعُول',t:'مَ{1}ْ{2}ُو{3}',m:'THE DONE-TO (passive participle) — the one it happened to. مَكْتُوب، مَعْلُوم، مَنْصُور'},
+ {id:'mafal',name:'مَفْعَل',t:'مَ{1}ْ{2}َ{3}',m:'PLACE or TIME of the action. مَكْتَب (office)، مَسْجِد، مَطْلَع'},
+ {id:'mafalah',name:'مَفْعَلَة',t:'مَ{1}ْ{2}َ{3}َة',m:'Place (feminine) or an abundance of something. مَكْتَبَة، مَرْحَمَة'},
+ {id:'mafilah',name:'مَفْعِرَة→مَفْعِلَة',t:'مَ{1}ْ{2}ِ{3}َة',m:'The abstract noun of the action. مَغْفِرَة، مَعْرِفَة'},
+ {id:'mifaal',name:'مِفْعَال',t:'مِ{1}ْ{2}َا{3}',m:'THE TOOL / instrument you do it with. مِفْتَاح (key)، مِيزَان، مِصْبَاح'},
+ {id:'faaal',name:'فَعَّال',t:'{1}َ{2}َّا{3}',m:'Someone who does it INTENSELY or professionally. غَفَّار، جَبَّار، خَبَّاز (baker)'},
+ {id:'fail',name:'فَعِيل',t:'{1}َ{2}ِي{3}',m:'A lasting quality baked into the thing. عَلِيم، رَحِيم، حَمِيد، نَصِير'},
+ {id:'tafiil',name:'تَفْعِيل',t:'تَ{1}ْ{2}ِي{3}',m:'The verbal noun of Form II — the ACT of making it happen. تَعْلِيم، تَسْلِيم، تَكْبِير'},
+ {id:'istifaal',name:'اِسْتِفْعَال',t:'اِسْتِ{1}ْ{2}َا{3}',m:'SEEKING / asking for it (Form X noun). اِسْتِغْفَار، اِسْتِنْصَار، اِسْتِمَاع'}
+];
+const ATTESTED={
+ 'كتب|faail':"كَاتِب — a scribe (2:282)",'كتب|mafuul':"مَكْتُوب — written (7:157)",
+ 'كتب|fiaal':"كِتَاب — book (2:2)",'كتب|mafal':"مَكْتَب — office/desk (modern Arabic)",
+ 'كتب|mafalah':"مَكْتَبَة — library (modern Arabic)",
+ 'علم|faail':"عَالِم — a scholar (35:28)",'علم|fail':"عَلِيم — All-Knowing (2:32)",
+ 'علم|fil':"عِلْم — knowledge (2:32)",'علم|mafuul':"مَعْلُوم — known/appointed (15:38)",
+ 'علم|tafiil':"تَعْلِيم — teaching (classical & modern)",
+ 'غفر|faaal':"غَفَّار — Ever-Forgiving (20:82)",'غفر|istifaal':"اِسْتِغْفَار — seeking forgiveness",
+ 'غفر|mafilah':"مَغْفِرَة — forgiveness (2:221)",'غفر|fail':"غَفِير — plentiful/covering (classical)",
+ 'فتح|mifaal':"مِفْتَاح — a key (6:59)",'فتح|faail':"فَاتِح — the opener (7:89)",
+ 'فتح|fal':"فَتْح — victory, opening (110:1)",
+ 'نصر|faail':"نَاصِر — helper (3:150)",'نصر|fail':"نَصِير — constant helper (4:45)",
+ 'نصر|mafuul':"مَنْصُور — divinely aided (17:33)",'نصر|fal':"نَصْر — victory (110:1)",
+ 'نصر|istifaal':"اِسْتِنْصَار — calling for help (cf. 28:18)",
+ 'حمد|fal':"حَمْد — praise (1:2)",'حمد|fail':"حَمِيد — Praiseworthy (14:1)",
+ 'حمد|mafuul':"مَحْمُود — praised (17:79)",'حمد|faail':"حَامِد — one who praises (9:112)",
+ 'ذكر|fil':"ذِكْر — remembrance (15:9)",'ذكر|mafuul':"مَذْكُور — mentioned (76:1)",
+ 'ذكر|tafiil':"تَذْكِير — reminding (cf. تَذْكِرَة 20:3)",'ذكر|faail':"ذَاكِر — one who remembers (33:35)",
+ 'سلم|fail':"سَلِيم — sound, unblemished (26:89)",'سلم|fal':"سِلْم/سَلْم — peace (2:208)",
+ 'سلم|tafiil':"تَسْلِيم — full submission (4:65)",'سلم|faail':"سَالِم — safe, intact (classical)",
+ 'صبر|faail':"صَابِر — steadfast (2:153)",'صبر|fal':"صَبْر — patience (2:45)",
+ 'صبر|faaal':"صَبَّار — extremely patient (classical)",'صبر|istifaal':"اِسْتِصْبَار — cf. اصْطَبِرْ (19:65)",
+ 'رحم|fail':"رَحِيم — Ever-Merciful (1:1)",'رحم|mafalah':"مَرْحَمَة — compassion (90:17)",
+ 'رحم|faail':"رَاحِم — one who shows mercy (7:151)"
+};
+(function mizan(){
+  const sel=$('#patSel'),out=$('#mizWord'),ver=$('#mizVerdict'),pm=$('#patMeaning');
+  sel.innerHTML=PATTERNS.map(p=>`<option value="${p.id}"${p.id==='faail'?' selected':''}>${p.name}</option>`).join('');
+  const presets=[['ك','ت','ب'],['ع','ل','م'],['غ','ف','ر'],['ف','ت','ح'],['ن','ص','ر'],['ح','م','د'],['ذ','ك','ر'],['س','ل','م'],['ص','ب','ر'],['ر','ح','م']];
+  $('#rootPresets').innerHTML=presets.map(p=>`<button class="chip">${p.join(' ')}</button>`).join('');
+  $$('#rootPresets .chip').forEach((c,i)=>c.addEventListener('click',()=>{
+    $('#L1').value=presets[i][0];$('#L2').value=presets[i][1];$('#L3').value=presets[i][2];run();}));
+  function run(){
+    const a=$('#L1').value.trim()||'ف',b=$('#L2').value.trim()||'ع',c=$('#L3').value.trim()||'ل';
+    const p=PATTERNS.find(x=>x.id===sel.value);
+    out.textContent=p.t.replace('{1}',a).replace('{2}',b).replace('{3}',c);
+    pm.innerHTML=`<b class="ar" style="font-size:1.3rem">${p.name}</b> — ${p.m}`;
+    const key=a+b+c+'|'+p.id, hit=ATTESTED[key];
+    const weak=/[وياءأإآئؤ]/.test(a+b+c);
+    ver.innerHTML=(hit
+      ? `<span class="badge">✓ real word</span><p style="font-weight:800;margin:10px 0 0">${hit}</p>`
+      : `<span class="badge gold">⚗ valid shape, not coined</span>
+         <p class="mut" style="margin:10px auto 0;max-width:52ch">Arabic <em>could</em> have made this word — it just
+         didn't. Ask the class: what would it have meant? This is the best discussion in the whole lesson.</p>`)
+      + (weak?`<p class="mut" style="margin:12px auto 0;max-width:52ch;font-size:.92rem">⚠ This root contains a weak
+         letter (<b class="ar">و ي ا ء</b>). Real Arabic reshapes such words (قَالَ not قَوَلَ). Do these by hand.</p>`:'');
+  }
+  ['L1','L2','L3'].forEach(id=>$('#'+id).addEventListener('input',run));
+  sel.addEventListener('change',run); run();
+})();
+
+const FORMS=[
+ {n:'I',p:'فَعَلَ',t:'The bare action',d:'The trunk. Just: he did it.',ex:'عَلِمَ',tr:'ʿalima — he knew',ref:'2:187',root:'ع ل م'},
+ {n:'II',p:'فَعَّلَ',t:'Intensify or cause',d:'Doubling the middle letter doubles the force: make someone do it, or do it hard and repeatedly.',ex:'عَلَّمَ',tr:'ʿallama — he taught (made know)',ref:'55:2',root:'ع ل م'},
+ {n:'III',p:'فَاعَلَ',t:'Do it WITH / AGAINST someone',d:'Two parties involved — the alif stretches the action towards another person.',ex:'جَاهَدَ',tr:'jāhada — he struggled (against)',ref:'9:73',root:'ج ه د'},
+ {n:'IV',p:'أَفْعَلَ',t:'Cause it / make it happen',d:'A hamzah at the front makes it transitive: he brought it about.',ex:'أَنزَلَ',tr:'anzala — He sent (it) down',ref:'2:23',root:'ن ز ل'},
+ {n:'V',p:'تَفَعَّلَ',t:'Do Form II to yourself, gradually',d:'تَ + doubling: the action turns back on the doer, step by step.',ex:'تَذَكَّرَ',tr:'tadhakkara — he brought himself to remember',ref:'6:80',root:'ذ ك ر'},
+ {n:'VI',p:'تَفَاعَلَ',t:'Do it to one another',d:'Mutual, reciprocal — a whole group involved together.',ex:'تَعَاوَنُوا',tr:'taʿāwanū — help one another',ref:'5:2',root:'ع و ن'},
+ {n:'VII',p:'اِنْفَعَلَ',t:'It happened / turned by itself',d:'No named doer: the thing simply underwent the action.',ex:'يَنقَلِبُ',tr:'yanqalibu — he turns back',ref:'2:143',root:'ق ل ب'},
+ {n:'VIII',p:'اِفْتَعَلَ',t:'Do it for yourself, with effort',d:'A ت slides inside. Effort, involvement, personal benefit.',ex:'اسْتَمَعَ',tr:'istamaʿa — he listened attentively',ref:'7:204',root:'س م ع'},
+ {n:'IX',p:'اِفْعَلَّ',t:'Colours & bodily defects',d:'Rare and specialised — turning a colour, or becoming crooked.',ex:'تَبْيَضُّ',tr:'tabyaḍḍu — (faces) turn white',ref:'3:106',root:'ب ي ض'},
+ {n:'X',p:'اِسْتَفْعَلَ',t:'Seek it, ask for it, consider it',d:'اسْتَ at the front = requesting. The single most useful form for duʿāʾ.',ex:'اسْتَغْفَرَ',tr:'istaghfara — he sought forgiveness',ref:'4:106',root:'غ ف ر'}
+];
+(function forms(){
+  const tabs=$('#formTabs'),body=$('#formBody');
+  tabs.innerHTML=FORMS.map((f,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${f.n} · <span class="ar">${f.p}</span></button>`).join('');
+  function show(i){
+    const f=FORMS[i];
+    body.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center">
+      <div style="flex:1 1 260px">
+        <div class="badge gold">Form ${f.n}</div>
+        <p class="ar" style="font-size:clamp(40px,5.5vw,68px);margin:12px 0 6px;direction:rtl">${f.p}</p>
+        <p style="font-size:1.3rem;font-weight:800;margin:0;color:var(--leaf)">${f.t}</p>
+      </div>
+      <div style="flex:1 1 320px">
+        <p class="mut" style="margin:0 0 16px;font-size:1.06rem">${f.d}</p>
+        <div class="qref">
+          <p class="q" style="font-size:2.2rem;margin:0 0 4px">${f.ex}</p>
+          <p style="margin:0;font-weight:700;color:#ffeecd">${f.tr}</p>
+          <small>Qur'ān ${f.ref} · root <span class="ar">${f.root}</span></small>
+        </div>
+      </div></div>`;
+  }
+  tabs.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
+    $$('.tab',tabs).forEach(t=>t.classList.remove('on'));b.classList.add('on');show(+b.dataset.i);});
+  show(0);
+})();
+
+/* =====================================================================
+   8. AYAH X-RAY (14:24)
+===================================================================== */
+const VERSE=[
+ {w:'أَلَمْ',r:null,g:'“Have you not…?” — question + negation particle'},
+ {w:'تَرَ',r:'ر أ ي',g:'to see, to realise',s:'رَأَىٰ · رُؤْيَا · مَرْئِيّ'},
+ {w:'كَيْفَ',r:null,g:'“how” — question word'},
+ {w:'ضَرَبَ',r:'ض ر ب',g:'to strike — and so: to set forth a parable',s:'ضَرْب · مَضْرُوب · إضْرَاب'},
+ {w:'اللَّهُ',r:'أ ل ه',g:'Allah — the One who is worshipped',s:'إِلَٰه · آلِهَة · أُلُوهِيَّة'},
+ {w:'مَثَلًا',r:'م ث ل',g:'a likeness, parable, example',s:'مِثْل · أَمْثَال · تَمْثِيل'},
+ {w:'كَلِمَةً',r:'ك ل م',g:'a word, an utterance',s:'كَلَام · كَلِمَات · مُتَكَلِّم'},
+ {w:'طَيِّبَةً',r:'ط ي ب',g:'good, pure, wholesome',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
+ {w:'كَشَجَرَةٍ',r:'ش ج ر',g:'a tree (كَ = “like”)',s:'شَجَر · أَشْجَار · شَجَرَة'},
+ {w:'طَيِّبَةٍ',r:'ط ي ب',g:'good, pure — the same root again',s:'طَيِّب · طُوبَىٰ · أَطْيَب'},
+ {w:'أَصْلُهَا',r:'أ ص ل',g:'its ROOT / origin (هَا = its)',s:'أَصْل · أُصُول · أَصِيل'},
+ {w:'ثَابِتٌ',r:'ث ب ت',g:'firm, fixed, unshaken',s:'ثَبَتَ · ثُبُوت · تَثْبِيت'},
+ {w:'وَفَرْعُهَا',r:'ف ر ع',g:'and its BRANCH',s:'فَرْع · فُرُوع · تَفَرُّع'},
+ {w:'فِي',r:null,g:'“in” — preposition'},
+ {w:'السَّمَاءِ',r:'س م و',g:'the sky — that which is high',s:'سَمَاء · سَمَاوَات · سُمُوّ'}
+];
+(function xray(){
+  const box=$('#verseBox'),card=$('#xrayCard');
+  box.innerHTML=VERSE.map((v,i)=>`<span class="vw${v.r?'':' part'}" data-i="${i}" tabindex="0" role="button">${v.w}</span>`).join('');
+  function show(i){
+    const v=VERSE[i];
+    $$('.vw',box).forEach(e=>e.classList.toggle('on',+e.dataset.i===i));
+    card.innerHTML=v.r
+      ? `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
+         <div class="metaline" style="margin-top:14px"><span class="badge">root <span class="ar" style="letter-spacing:.14em">${v.r}</span></span></div>
+         <p style="font-size:1.18rem;font-weight:700;margin:0 0 12px">${v.g}</p>
+         <p class="kicker" style="margin:0 0 6px">Same tree, other leaves</p>
+         <p class="ar" style="font-size:1.6rem;margin:0;direction:rtl;text-align:right;color:var(--leaf)">${v.s}</p>`
+      : `<p class="ar" style="font-size:clamp(30px,3.6vw,46px);margin:0;direction:rtl;text-align:right">${v.w}</p>
+         <div class="metaline" style="margin-top:14px"><span class="badge sky">no root — a particle</span></div>
+         <p style="font-size:1.18rem;font-weight:700;margin:0">${v.g}</p>
+         <p class="mut" style="margin:12px 0 0">Particles (حُرُوف) are the language's nails and screws. They have no
+         root and no family — you simply learn them. Good news: there are only a few dozen, and they are everywhere.</p>`;
+  }
+  box.addEventListener('click',e=>{const s=e.target.closest('.vw');if(s)show(+s.dataset.i);});
+  box.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('vw')){e.preventDefault();show(+e.target.dataset.i);}});
+  show(10);
+})();
+
+/* =====================================================================
+   9. BENEFITS + ACTIVITIES
+===================================================================== */
+const ICONS={
+ leaf:'<path d="M6 40c0-16 12-28 34-30 2 22-12 34-34 30Z"/><path d="M6 40c8-10 16-16 28-22"/>',
+ key:'<circle cx="16" cy="16" r="9"/><path d="M22 22 42 42M34 34l6 6M30 38l4 4"/>',
+ tree:'<path d="M24 44V26"/><path d="M24 28c-9-1-13-8-13-15 8 0 15 4 13 15Z"/><path d="M24 24c9-2 12-8 12-15-8 1-14 5-12 15Z"/>',
+ brain:'<path d="M18 8c-6 0-9 5-9 9-4 2-4 9 1 11 0 6 5 8 8 8V8Z"/><path d="M30 8c6 0 9 5 9 9 4 2 4 9-1 11 0 6-5 8-8 8V8Z"/>',
+ book:'<path d="M8 10h14a6 6 0 016 6v22a6 6 0 00-6-6H8Z"/><path d="M40 10H26a6 6 0 00-6 6v22a6 6 0 016-6h14Z"/>',
+ heart:'<path d="M24 40S8 30 8 19a8 8 0 0116-4 8 8 0 0116 4c0 11-16 21-16 21Z"/>',
+ link:'<path d="M18 30 30 18"/><rect x="4" y="24" width="18" height="12" rx="6" transform="rotate(-45 13 30)"/><rect x="26" y="12" width="18" height="12" rx="6" transform="rotate(-45 35 18)"/>',
+ globe:'<circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c8 10 8 24 0 34-8-10-8-24 0-34Z"/>',
+ spark:'<path d="M24 6l4 12 12 4-12 4-4 12-4-12-12-4 12-4Z"/>'
+};
+const BENEFITS=[
+ {i:'leaf',c:'#7ddc95',t:'Vocabulary that multiplies',b:'Learn one root and you don\'t learn one word — you learn a family. 40 roots taught well ≈ 400+ recognisable words.'},
+ {i:'key',c:'#f5bf5f',t:'You stop needing the translation',b:'When the root registers, your eye reads Arabic and your heart hears meaning at the same time — the whole goal.'},
+ {i:'heart',c:'#ff9db3',t:'Ṣalāh becomes alive',b:'الْحَمْدُ · الرَّحْمَٰن · الْعَالَمِينَ · نَعْبُدُ. Students who know roots stop reciting sounds and start speaking to Allah.'},
+ {i:'brain',c:'#b6a4ff',t:'Ḥifẓ gets stronger',b:'Meaning is the best glue for memory. Root-aware students confuse similar āyāt far less and rebuild forgotten lines logically.'},
+ {i:'book',c:'#69c8ff',t:'Independence with dictionaries',b:'Lisān al-ʿArab, Lane, al-Mufradāt, the Mufahras — all arranged BY ROOT. Without this skill those doors stay shut for life.'},
+ {i:'spark',c:'#f09231',t:'Grammar suddenly makes sense',b:'Patterns predict the job of a word: doer, done-to, place, tool. Iʿrāb stops being guesswork.'},
+ {i:'link',c:'#58e0c8',t:'Precision between near-synonyms',b:'خَوْف vs خَشْيَة · عِلْم vs مَعْرِفَة · رَحْمَٰن vs رَحِيم. Roots + patterns explain the difference the translation hides.'},
+ {i:'tree',c:'#9fb0bd',t:'Tafsīr-level imagery',b:'كَافِر literally covers. مِسْكِين is one made motionless by need. Students start seeing pictures, not glossary entries.'},
+ {i:'globe',c:'#6fe3ff',t:'A bonus language for free',b:'The same roots run through modern Arabic (مَكْتَبَة, مُعَلِّم), and echo in Hebrew and other Semitic languages. Real transferable knowledge.'}
+];
+$('#benefitGrid').innerHTML=BENEFITS.map(b=>`<div class="card reveal">
+  <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="${b.c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[b.i]}</svg>
+  <h3 style="font-size:1.24rem">${b.t}</h3>
+  <p class="mut" style="margin:0">${b.b}</p></div>`).join('');
+
+const ACTS=[
+ {t:'1 · The Seed Bank notebook',b:'One page per root, for the whole year. Three letters in the soil, core meaning, a drawn tree, and a new leaf added every time the student meets the root in a new āyah. By June they own a forest they built themselves.',tag:'Every lesson'},
+ {t:'2 · Root Relay',b:'Two teams, one root on the board, 60 seconds. Each student runs up and writes ONE derived word. Repeats and non-words are challenged by the other team. Loud, competitive, and pure derivation practice.',tag:'Game · 8 min'},
+ {t:'3 · Leaf Hunt in the muṣḥaf',b:'“Find every word from ص ب ر on this page.” Pairs, 4 minutes, then a board tally. Trains the eye to see roots at reading speed — the single most transferable skill.',tag:'Pairs · 5 min'},
+ {t:'4 · Odd Leaf Out',b:'Show four words; three share a root, one is an impostor (عَلِيم، عَالِم، عَالَمِين، عَالِي). Students must justify the answer using the third letter. Brilliant for the look-alike traps.',tag:'Warm-up · 3 min'},
+ {t:'5 · Family Tree poster',b:'Groups of three get one root and A3 paper. Real tree drawing, 8+ leaves, one āyah per leaf, colour-coded by pattern. Display them around the room all term — passive revision.',tag:'Project · 40 min'},
+ {t:'6 · Mīzān Wheel',b:'A card wheel: outer ring of patterns (فَاعِل، مَفْعُول، مَفْعَل، فَعِيل), inner ring of roots. Spin both, say the word, guess whether Arabic actually uses it, then check.',tag:'Hands-on'},
+ {t:'7 · Duʿāʾ from the root',b:'End every lesson by building a duʿāʾ from today\'s root: غ ف ر → يَا غَفَّار، اغْفِرْ لِي. The root instantly becomes worship, not homework. This is the fruit of the tree.',tag:'Closing · 3 min'},
+ {t:'8 · Root of the Week board',b:'A permanent wall space: the three letters huge, and space for students to pin words and āyāt they find during the week. Rewards for the rarest find.',tag:'Display'},
+ {t:'Assessment ideas',b:'Exit ticket: 3 words → find the root (30 seconds). Mid-term: give a root, student must produce doer, done-to, place and one āyah. Final: hand them an unseen short sūrah and ask them to mark 10 roots.',tag:'Marking'}
+];
+$('#activityGrid').innerHTML=ACTS.map(a=>`<div class="card reveal">
+  <div class="badge gold">${a.tag}</div><h3 style="font-size:1.2rem;margin-top:14px">${a.t}</h3>
+  <p class="mut" style="margin:0">${a.b}</p></div>`).join('');
+$('#printBtn').addEventListener('click',()=>window.print());
+
+/* =====================================================================
+   10. QUIZ + SAPLING
+===================================================================== */
+const QUIZ=[
+ {w:'الْمُؤْمِنُونَ',o:['أ م ن','م ن و','أ م م'],a:0,why:'Take off <b>الْ</b> and the Form IV doer shell <b>مُـ…ونَ</b>. The hamzah is a real root letter here: <b>أ م ن</b> — safety, trust (آمَنَ، إِيمَان، أَمَانَة).'},
+ {w:'يَسْتَغْفِرُونَ',o:['س غ ف','غ ف ر','ي غ ف'],a:1,why:'<b>يَـ</b> (he/they) + <b>سْتَـ</b> (Form X = seeking) + <b>ـونَ</b> (plural). What remains is <b>غ ف ر</b> — covering, forgiving.'},
+ {w:'الْمَسَاجِد',o:['م س ج','س ج د','ج د د'],a:1,why:'<b>الْ</b> + the “place of” <b>مَـ</b> + the plural stretch. Root: <b>س ج د</b> — prostration. A masjid is literally <em>a place of prostration</em>.'},
+ {w:'اسْتَكْبَرُوا',o:['س ك ب','ك ب ر','ت ك ب'],a:1,why:'<b>اسْتَـ</b> (Form X) + <b>ـُوا</b> (they). Root <b>ك ب ر</b> — greatness. So: they <em>made themselves out to be</em> great.'},
+ {w:'الصَّابِرِينَ',o:['ص ب ر','ب ر ر','ص و ب'],a:0,why:'<b>الْ</b> + the doer pattern <b>فَاعِل</b> + <b>ـينَ</b>. Root <b>ص ب ر</b> — holding firm.'},
+ {w:'قَالُوا',o:['ق ل ل','ق و ل','ق ي ل'],a:1,why:'A weak root! The <b>و</b> is hiding behind the long ā. It reappears in <b>يَقُولُ</b> and <b>قَوْل</b>. Root: <b>ق و ل</b>.'},
+ {w:'يَتَذَكَّرُونَ',o:['ت ذ ك','ذ ك ر','ك ر ر'],a:1,why:'<b>يَـ</b> + <b>تَـ</b> (Form V) + shadda (doubling of the middle root letter) + <b>ـونَ</b>. Root: <b>ذ ك ر</b>.'},
+ {w:'الْمُتَّقِينَ',o:['ت ق ي','و ق ي','ق و ي'],a:1,why:'Advanced! <b>اتَّقَىٰ</b> is Form VIII of <b>و ق ي</b> (to guard, to shield) — the <b>و</b> assimilated into the doubled <b>تّ</b>. Taqwā = building a shield.'},
+ {w:'رَبَّنَا',o:['ر ب ب','ر ب و','ن ر ب'],a:0,why:'The shadda hides a twin. <b>رَبّ</b> = <b>ر ب ب</b> — to nurture and bring something up stage by stage. <b>ـنَا</b> is just “our”.'},
+ {w:'الْمَسَاكِين',o:['س ك ن','م س ك','ك و ن'],a:0,why:'Root <b>س ك ن</b> — stillness, dwelling. A مِسْكِين is someone whom need has made <em>motionless</em>. Same root as سَكِينَة and مَسْكَن.'}
+];
+(function quiz(){
+  const host=$('#sapling');
+  let i=0,score=0,answered=false,scene=null;
+  function drawSapling(){
+    scene=buildScene({vbw:620,vbh:640,bx:310,by:470,len:96,wid:26,depth:5,spread:29,hue:130,
+      accent:'#7ddc95',roots:true,scale:.85,seed:777,label:'Your sapling grows as you answer'});
+    host.innerHTML=scene.svg;
+    /* hide all foliage: it will be revealed leaf-cluster by leaf-cluster */
+    host.querySelectorAll('.cluster').forEach(c=>{c.style.visibility='hidden'});
+    animateGrowth(host,scene.id,scene.maxR);
+    const cap=document.createElement('div');
+    cap.style.cssText='position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;font-size:.94rem;color:#9db0a4';
+    cap.innerHTML='Your sapling · <b id="lc" style="color:#7ddc95">0</b> leaves earned';
+    host.appendChild(cap);
+  }
+  function addLeaf(){
+    const hidden=[...host.querySelectorAll('.cluster')].filter(c=>c.style.visibility==='hidden');
+    const n=Math.max(1,Math.ceil(hidden.length/(QUIZ.length-score+1)));
+    hidden.slice(0,n).forEach(c=>{c.style.visibility='visible';
+      c.querySelectorAll('.lf').forEach(l=>{l.style.animation='none';l.style.animation='leafIn .55s cubic-bezier(.2,.85,.3,1) both'});});
+    const lc=$('#lc',host); if(lc) lc.textContent=score;
+  }
+  function render(){
+    answered=false;
+    const q=QUIZ[i];
+    $('#qCount').textContent=`Question ${i+1} / ${QUIZ.length}`;
+    $('#qBar').style.width=((i)/QUIZ.length*100+10)+'%';
+    $('#qWord').textContent=q.w;
+    $('#qWhy').innerHTML='';
+    $('#qNext').style.display='none';
+    $('#qOpts').innerHTML=q.o.map((o,k)=>`<button class="opt ar" data-k="${k}">${o}</button>`).join('');
+    $$('#qOpts .opt').forEach(b=>b.addEventListener('click',()=>{
+      if(answered)return; answered=true;
+      const k=+b.dataset.k, ok=k===q.a;
+      $$('#qOpts .opt').forEach((x,xi)=>{x.disabled=true;
+        if(xi===q.a)x.classList.add('right'); else if(xi===k)x.classList.add('wrong');});
+      if(ok){score++;$('#qScore').textContent=score;addLeaf();}
+      $('#qWhy').innerHTML=`<div class="why"><b>${ok?'✅ Correct — a new leaf grows!':'🌱 Not quite.'}</b> ${q.why}</div>`;
+      $('#qNext').style.display='inline-flex';
+      $('#qNext').textContent=(i===QUIZ.length-1)?'See my tree →':'Next word →';
+    }));
+  }
+  $('#qNext').addEventListener('click',()=>{
+    if(i<QUIZ.length-1){i++;render();}
+    else{
+      $('#qBar').style.width='100%';
+      const msg=score>=9?'Māshāʾ Allāh — root detective level: <b>عَالِم</b>. You are ready to read with a lexicon.'
+        :score>=7?'Strong work. Drill the weak roots (و/ي) and you will be at full marks next week.'
+        :score>=4?'Good start — you have the method. Redo the Peeling Lab, then come back.'
+        :'No problem at all. Go back to the four steps and the سَأَلْتُمُونِيهَا rule, then try again.';
+      $('#qOpts').innerHTML=`<div class="mizout"><p class="kicker" style="margin:0">Final score</p>
+        <div class="big" style="font-family:var(--ff);font-weight:900">${score} / ${QUIZ.length}</div>
+        <p style="font-weight:700;margin:8px auto 0;max-width:46ch">${msg}</p></div>`;
+      $('#qWord').textContent='🌳';$('#qWhy').innerHTML='';$('#qNext').style.display='none';
+    }
+  });
+  $('#qRestart').addEventListener('click',()=>{i=0;score=0;$('#qScore').textContent='0';drawSapling();render();});
+  drawSapling(); render();
+})();
+
+/* =====================================================================
+   11. SCROLL FX · COUNTERS · DUST
+===================================================================== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('.reveal').forEach(e=>io.observe(e));
+
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return; cio.unobserve(e.target);
+  const el=e.target,end=+el.dataset.count,sfx=el.dataset.suffix||'',t0=performance.now(),dur=1600;
+  (function s(t){const p=Math.min(1,(t-t0)/dur),v=Math.round(end*(1-Math.pow(1-p,3)));
+    el.textContent=(sfx==='≈'?'≈':'')+v.toLocaleString('en-US')+(sfx==='%'?'%':'');
+    if(p<1)requestAnimationFrame(s);})(t0);
+}),{threshold:.4});
+$$('[data-count]').forEach(e=>cio.observe(e));
+
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  $('#prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let on=null;
+  $$('section[id]').forEach(s=>{if(s.getBoundingClientRect().top<160)on=s.id;});
+  $$('#navlinks a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+on));
+},{passive:true});
+
+(function dust(){
+  if(RM)return;
+  const c=$('#dust'),x=c.getContext('2d');let W,H,ps=[];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight;
+    ps=Array.from({length:Math.min(70,Math.round(W/26))},()=>({
+      x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.9+.4,
+      vx:(Math.random()-.5)*.16,vy:-Math.random()*.22-.04,a:Math.random()*.5+.12,
+      leaf:Math.random()<.12,rot:Math.random()*6.28,vr:(Math.random()-.5)*.02}));}
+  size();addEventListener('resize',size);
+  (function loop(){
+    x.clearRect(0,0,W,H);
+    ps.forEach(p=>{
+      p.x+=p.vx+Math.sin(p.y/120)*.12;p.y+=p.vy;p.rot+=p.vr;
+      if(p.y<-14){p.y=H+10;p.x=Math.random()*W}
+      if(p.x<-14)p.x=W+10; if(p.x>W+14)p.x=-10;
+      if(p.leaf){
+        x.save();x.translate(p.x,p.y);x.rotate(p.rot);x.globalAlpha=p.a*.9;
+        x.fillStyle='#4a8f5e';x.beginPath();
+        x.ellipse(0,0,p.r*3.4,p.r*1.5,0,0,6.28);x.fill();x.restore();
+      }else{
+        x.globalAlpha=p.a;x.fillStyle='#cfe6c9';x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fill();
+      }
+    });
+    x.globalAlpha=1;requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
