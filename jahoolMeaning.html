@@ -27,10 +27,53 @@
   --muted2:rgba(246,238,221,.42);
   --r:22px;
   --shadow:0 30px 80px -30px rgba(0,0,0,.85);
-  --ar:'Amiri',serif;
-  --ar2:'Scheherazade New',serif;
+  --ar:'Scheherazade New','Amiri',serif;
+  --ar2:'Scheherazade New','Amiri',serif;
+  --ar-scale:1;
   --dis:'Cormorant Garamond',serif;
   --ui:'Outfit',system-ui,sans-serif;
+}
+.ar, .ar2, [lang="ar"], .bigword, .bism, .letter span, .rootinfo .ar, .pillar .ar, .vs .side .ar, .ptable .ar, .ayah, .wbox .lft, .vitem .form, .vitem .ar, .closing .ar, .qq .ar, .w {
+  font-family: var(--ar) !important;
+  zoom: var(--ar-scale, 1);
+}
+.nq-ar-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: 3px 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nq-ar-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-family: var(--ar);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.nq-ar-btn:hover {
+  background: var(--panel2);
+  color: var(--gold-l);
+  transform: scale(1.1);
+}
+.nq-ar-val {
+  font-size: 0.74rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--muted);
+  min-width: 38px;
+  text-align: center;
+  user-select: none;
 }
 html[data-theme="light"]{
   --ink:#f7f3e8; --ink2:#efe8d6;
@@ -380,10 +423,11 @@ body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
       <a href="#voices">Scholars</a>
       <a href="#quiz">Test Me</a>
     </div>
-    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Portal">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Home</span>
-    </a>
+    <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+      <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size" title="Smaller Arabic text">ع−</button>
+      <span class="nq-ar-val" id="arScaleVal">100%</span>
+      <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size" title="Larger Arabic text">ع+</button>
+    </div>
     <button class="iconbtn" id="hz" title="Toggle vowel marks (ḥarakāt)">◌ً</button>
     <button class="iconbtn" id="th" title="Toggle light / dark">☾</button>
   </div>
@@ -834,7 +878,7 @@ body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.4 (updated 2026-08-23 06:00)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
   </div>
 </footer>
 
@@ -1049,6 +1093,30 @@ document.getElementById('hw').onclick=e=>{
   e.currentTarget.style.animation='none';e.currentTarget.offsetHeight;
   e.currentTarget.style.animation='sheen 1.4s ease-in-out 2, sheen 7s ease-in-out 1.4s infinite';
 };
+
+/* Arabic font size adjuster (Tanzil standard) */
+(function initArabicFontScaler(){
+  const SCALES=[0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx=2;
+  const saved=parseFloat(localStorage.getItem('nq_ar_scale'));
+  if(saved){
+    const closest=SCALES.reduce((prev,curr)=>Math.abs(curr-saved)<Math.abs(prev-saved)?curr:prev,1.0);
+    curIdx=SCALES.indexOf(closest);
+    if(curIdx===-1) curIdx=2;
+  }
+  function applyScale(idx){
+    curIdx=Math.max(0,Math.min(SCALES.length-1,idx));
+    const scale=SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale',scale);
+    localStorage.setItem('nq_ar_scale',scale);
+    const el=document.getElementById('arScaleVal');
+    if(el) el.textContent=Math.round(scale*100)+'%';
+  }
+  applyScale(curIdx);
+  const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
+  if(dec) dec.onclick=()=>applyScale(curIdx-1);
+  if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
 </script>
 </body>
 </html>

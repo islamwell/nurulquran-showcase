@@ -6,7 +6,7 @@
 <title>Twelve Words · The Qur'anic Verb</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -26,6 +26,8 @@
   --hal:#b98cff;
   --harf:#8095ab;
   --ghost:#f2c74c;
+  --ar-scale:1;
+  --ar-font:'Scheherazade New','Amiri',serif;
   --r:18px;
   --maxw:1140px;
 }
@@ -46,7 +48,49 @@ body::before{
     radial-gradient(800px 700px at 92% 8%, rgba(95,168,255,.09), transparent 62%),
     radial-gradient(700px 700px at 50% 110%, rgba(67,214,160,.07), transparent 60%);
 }
-.ar{font-family:'Amiri',serif;direction:rtl}
+.ar, [lang="ar"], .hero-ar, .dword, .feat b.ar, .irab .ar, .focus .rule, .formula i, .btn .ar, .out .big, .cell .p, .cell .v, .rung .w {
+  font-family:var(--ar-font)!important;
+  direction:rtl;
+  zoom:var(--ar-scale,1);
+}
+.nq-ar-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(227,183,105,.09);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 3px 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nq-ar-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-family: var(--ar-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.nq-ar-btn:hover {
+  background: rgba(227,183,105,.25);
+  color: #fff;
+  transform: scale(1.1);
+}
+.nq-ar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--muted);
+  min-width: 36px;
+  text-align: center;
+  user-select: none;
+}
 ::selection{background:rgba(227,183,105,.3)}
 
 /* ============ TOP BAR ============ */
@@ -374,10 +418,11 @@ footer .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-2);margin
       <a href="#atlas">Atlas</a>
       <a href="#quiz">Test</a>
     </nav>
-    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Portal">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Home</span>
-    </a>
+    <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+      <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size" title="Smaller Arabic text">ع−</button>
+      <span class="nq-ar-val" id="arScaleVal">100%</span>
+      <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size" title="Larger Arabic text">ع+</button>
+    </div>
     <button class="tog on" id="tTl">Translit</button>
     <button class="tog on" id="tEn">English</button>
   </div>
@@ -491,7 +536,7 @@ footer .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-2);margin
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.4 (updated 2026-08-23 06:00)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
   </div>
 </footer>
 
@@ -954,6 +999,30 @@ addEventListener('scroll',()=>{
 
 $('#tTl').onclick=e=>{document.body.classList.toggle('hide-tl');e.target.classList.toggle('on')};
 $('#tEn').onclick=e=>{document.body.classList.toggle('hide-en');e.target.classList.toggle('on')};
+
+/* Arabic font size adjuster (Tanzil standard) */
+(function initArabicFontScaler(){
+  const SCALES=[0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx=2;
+  const saved=parseFloat(localStorage.getItem('nq_ar_scale'));
+  if(saved){
+    const closest=SCALES.reduce((prev,curr)=>Math.abs(curr-saved)<Math.abs(prev-saved)?curr:prev,1.0);
+    curIdx=SCALES.indexOf(closest);
+    if(curIdx===-1) curIdx=2;
+  }
+  function applyScale(idx){
+    curIdx=Math.max(0,Math.min(SCALES.length-1,idx));
+    const scale=SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale',scale);
+    localStorage.setItem('nq_ar_scale',scale);
+    const el=document.getElementById('arScaleVal');
+    if(el) el.textContent=Math.round(scale*100)+'%';
+  }
+  applyScale(curIdx);
+  const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
+  if(dec) dec.onclick=()=>applyScale(curIdx-1);
+  if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
 </script>
 </body>
 </html>

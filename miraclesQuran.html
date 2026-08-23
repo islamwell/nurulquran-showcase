@@ -6,7 +6,7 @@
 <title>The Signs — Miracles of the Qur'ān</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@200;300;400;500;600&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@200;300;400;500;600&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    TOKENS
@@ -27,12 +27,55 @@
   --star-op:1;
   --f-display:"Cormorant Garamond",Georgia,serif;
   --f-body:"Inter",system-ui,sans-serif;
-  --f-ar:"Amiri",serif;
-  --f-ar-display:"Aref Ruqaa",serif;
+  --f-ar:'Scheherazade New',"Amiri",serif;
+  --f-ar-display:'Scheherazade New',"Amiri",serif;
   --f-kufi:"Reem Kufi",sans-serif;
+  --ar-scale:1;
   --r:20px;
   --ease:cubic-bezier(.16,1,.3,1);
   --ease-io:cubic-bezier(.65,.05,.36,1);
+}
+.ar, [lang="ar"], .ayah, .c-ar, .hero-ar, .sheet-ar, .q, .dua {
+  font-family: var(--f-ar) !important;
+  zoom: var(--ar-scale, 1);
+}
+.nq-ar-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 6px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.nq-ar-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-family: var(--f-ar);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.nq-ar-btn:hover {
+  background: rgba(232,195,122,.25);
+  color: #fff;
+  transform: scale(1.1);
+}
+.nq-ar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--ink-2);
+  min-width: 36px;
+  text-align: center;
+  user-select: none;
 }
 [data-theme="manuscript"]{
   --gold:#8a5e1e; --gold-2:#a37a33; --gold-3:#6d4813;
@@ -461,10 +504,11 @@ footer li:hover{color:var(--ink-2)}
     <a href="#signs">The Twelve</a>
     <a href="#chronicle">Chronicle</a>
     <a href="#reflect">Reflect</a>
-    <a href="index.html" class="nq-hub-badge" title="Home">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Home</span>
-    </a>
+    <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+      <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size" title="Smaller Arabic text">ع−</button>
+      <span class="nq-ar-val" id="arScaleVal">100%</span>
+      <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size" title="Larger Arabic text">ع+</button>
+    </div>
     <button class="theme-btn" id="theme" aria-label="Toggle theme">
       <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
     </button>
@@ -615,7 +659,7 @@ footer li:hover{color:var(--ink-2)}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.4 (updated 2026-08-23 06:00)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
   </div>
 </footer>
 
@@ -1045,6 +1089,30 @@ addEventListener('load',()=>{
 });
 setTimeout(()=>{document.getElementById('loader').classList.add('done');
   document.getElementById('hero').classList.add('go');onScroll();},3600);
+
+/* Arabic font size adjuster (Tanzil standard) */
+(function initArabicFontScaler(){
+  const SCALES=[0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx=2;
+  const saved=parseFloat(localStorage.getItem('nq_ar_scale'));
+  if(saved){
+    const closest=SCALES.reduce((prev,curr)=>Math.abs(curr-saved)<Math.abs(prev-saved)?curr:prev,1.0);
+    curIdx=SCALES.indexOf(closest);
+    if(curIdx===-1) curIdx=2;
+  }
+  function applyScale(idx){
+    curIdx=Math.max(0,Math.min(SCALES.length-1,idx));
+    const scale=SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale',scale);
+    localStorage.setItem('nq_ar_scale',scale);
+    const el=document.getElementById('arScaleVal');
+    if(el) el.textContent=Math.round(scale*100)+'%';
+  }
+  applyScale(curIdx);
+  const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
+  if(dec) dec.onclick=()=>applyScale(curIdx-1);
+  if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
 </script>
 </body>
 </html>

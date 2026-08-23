@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Allah Loves Those Who Control Anger</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#060911;
@@ -16,6 +16,8 @@
   --sky:#8FB6FF;
   --rose:#FF9DB0;
   --muted:#93A0B4;
+  --ar-scale:1;
+  --ar-font:'Scheherazade New','Amiri',serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -49,10 +51,13 @@ body{
 .nq-mini-logo{width:32px;height:32px;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(245,201,123,.3))}
 .nq-brand-text{display:flex;flex-direction:column;line-height:1.15}
 .nq-brand-name{font-size:.86rem;font-weight:700;letter-spacing:.18em;background:linear-gradient(135deg,#FFF2CC 0%,#F5C97B 50%,#D4AF37 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.nq-brand-arabic{font-size:.74rem;letter-spacing:.04em;color:rgba(255,255,255,.65);font-family:'Amiri',serif;direction:rtl}
+.nq-brand-arabic{font-size:.74rem;letter-spacing:.04em;color:rgba(255,255,255,.65);font-family:var(--ar-font);direction:rtl}
 .nq-bar-actions{display:flex;align-items:center;gap:8px}
-.nq-hub-link{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:#F5C97B;background:rgba(245,201,123,.09);border:1px solid rgba(245,201,123,.28);padding:6px 14px;border-radius:99px;backdrop-filter:blur(8px);transition:all .25s ease}
-.nq-hub-link:hover{background:rgba(245,201,123,.22);border-color:#F5C97B;color:#fff;box-shadow:0 0 16px rgba(245,201,123,.3);transform:translateY(-1px)}
+.nq-ar-ctrl{display:inline-flex;align-items:center;gap:3px;background:rgba(245,201,123,.10);border:1px solid rgba(245,201,123,.28);border-radius:999px;padding:3px 6px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nq-ar-btn{background:transparent;border:none;color:var(--gold);font-family:var(--ar-font);font-size:1.05rem;font-weight:700;cursor:pointer;padding:2px 7px;border-radius:999px;transition:all .2s ease;line-height:1}
+.nq-ar-btn:hover{background:rgba(245,201,123,.25);color:#fff;transform:scale(1.1)}
+.nq-ar-val{font-size:.74rem;font-weight:700;font-family:monospace;color:rgba(255,255,255,.85);min-width:38px;text-align:center;user-select:none}
+.ar, .dua, [lang="ar"]{font-family:var(--ar-font)!important;zoom:var(--ar-scale,1)}
 .nq-footer-badge{text-align:center;padding:32px 16px 20px;border-top:1px solid rgba(245,201,123,.14);margin-top:40px}
 .nq-footer-logo-row{display:inline-flex;align-items:center;gap:10px;justify-content:center}
 
@@ -202,10 +207,11 @@ footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-hei
       </div>
     </a>
     <div class="nq-bar-actions">
-      <a href="index.html" class="nq-hub-link" title="Return to home portal">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span>Home</span>
-      </a>
+      <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+        <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size" title="Smaller Arabic text">ع−</button>
+        <span class="nq-ar-val" id="arScaleVal">100%</span>
+        <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size" title="Larger Arabic text">ع+</button>
+      </div>
     </div>
   </div>
 </nav>
@@ -318,7 +324,7 @@ footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-hei
         <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C97B">NURULQURAN · نُورُ القُرْآن</span>
       </div>
       <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.4 (updated 2026-08-23 06:00)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
     </div>
   </footer>
 </div>
@@ -397,6 +403,30 @@ function closeB(){clearTimeout(timer);modal.classList.remove('show')}
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+/* Arabic font size adjuster (Tanzil standard) */
+(function initArabicFontScaler(){
+  const SCALES=[0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx=2;
+  const saved=parseFloat(localStorage.getItem('nq_ar_scale'));
+  if(saved){
+    const closest=SCALES.reduce((prev,curr)=>Math.abs(curr-saved)<Math.abs(prev-saved)?curr:prev,1.0);
+    curIdx=SCALES.indexOf(closest);
+    if(curIdx===-1) curIdx=2;
+  }
+  function applyScale(idx){
+    curIdx=Math.max(0,Math.min(SCALES.length-1,idx));
+    const scale=SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale',scale);
+    localStorage.setItem('nq_ar_scale',scale);
+    const el=document.getElementById('arScaleVal');
+    if(el) el.textContent=Math.round(scale*100)+'%';
+  }
+  applyScale(curIdx);
+  const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
+  if(dec) dec.onclick=()=>applyScale(curIdx-1);
+  if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
 </script>
 </body>
 </html>

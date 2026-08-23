@@ -7,7 +7,7 @@
 <meta name="description" content="Learn Quranic Arabic root words (الجذر) through a living tree: interactive root explorer, patterns, ayah x-ray, quizzes and a teacher's toolkit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ============ 1. TOKENS ============ */
 :root{
@@ -17,9 +17,10 @@
   --gold:#f5bf5f; --amber:#f09231; --leaf:#7ddc95; --leaf2:#3fa563; --sky:#69c8ff;
   --rose:#ff9db3; --violet:#b6a4ff; --bark:#6b4a2e; --bark2:#2c1d13;
   --ff:'Outfit',ui-sans-serif,system-ui,sans-serif;
-  --fa:'Noto Naskh Arabic','Amiri',serif;
-  --fq:'Amiri','Noto Naskh Arabic',serif;
+  --fa:'Scheherazade New','Amiri','Noto Naskh Arabic',serif;
+  --fq:'Scheherazade New','Amiri',serif;
   --fk:'Reem Kufi','Noto Naskh Arabic',serif;
+  --ar-scale:1;
   --r:22px; --maxw:1220px;
 }
 *{box-sizing:border-box}
@@ -302,7 +303,49 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
   body{background:#fff;color:#000}
   nav,.hero,#dust,.grain,.vignette,.progress,section:not(#teach){display:none!important}
   .worksheet{display:block!important}
-  .card,.lab{border:1px solid #999;background:#fff;color:#000}
+/* ============ ARABIC FONT SCALING (TANZIL STANDARD) ============ */
+.ar, [lang="ar"], .q, .h1ar, .mnemonic, .lg b, .trapline .a, .trapline .b, .ayahbox .q, .qref .q, .wbox .lft, .ptable .ar, .rootinfo .ar, .pillar .ar, .vs .ar, .mw .ar, .feats b.ar, .irab .ar, .dua, .vitem .ar, #mizWord {
+  font-family: var(--fa) !important;
+  zoom: var(--ar-scale, 1);
+}
+.nq-ar-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(125,220,149,.10);
+  border: 1px solid rgba(125,220,149,.28);
+  border-radius: 999px;
+  padding: 3px 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  margin-left: auto;
+}
+.nq-ar-btn {
+  background: transparent;
+  border: none;
+  color: var(--leaf);
+  font-family: var(--fa);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.nq-ar-btn:hover {
+  background: rgba(125,220,149,.22);
+  color: #fff;
+  transform: scale(1.1);
+}
+.nq-ar-val {
+  font-size: 0.74rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: rgba(255,255,255,.8);
+  min-width: 38px;
+  text-align: center;
+  user-select: none;
 }
 </style>
 </head>
@@ -332,10 +375,11 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
       <a href="#find">Find the Root</a><a href="#patterns">Patterns</a><a href="#xray">Ayah X-Ray</a>
       <a href="#traps">Traps</a><a href="#benefits">Benefits</a><a href="#teach">For Teachers</a><a href="#quiz">Quiz</a>
     </div>
-    <a href="index.html" class="nq-hub-badge" title="Return to NurulQuran Portal">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Home</span>
-    </a>
+    <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+      <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size" title="Smaller Arabic text">ع−</button>
+      <span class="nq-ar-val" id="arScaleVal">100%</span>
+      <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size" title="Larger Arabic text">ع+</button>
+    </div>
   </div>
 </nav>
 
@@ -881,7 +925,7 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
         </div>
       </div>
 
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.4 (updated 2026-08-23 06:00)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
     </div>
   </div>
 </footer>
@@ -2241,6 +2285,30 @@ addEventListener('scroll',()=>{
     });
     x.globalAlpha=1;requestAnimationFrame(loop);
   })();
+})();
+
+/* Arabic font size adjuster (Tanzil standard) */
+(function initArabicFontScaler(){
+  const SCALES=[0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx=2;
+  const saved=parseFloat(localStorage.getItem('nq_ar_scale'));
+  if(saved){
+    const closest=SCALES.reduce((prev,curr)=>Math.abs(curr-saved)<Math.abs(prev-saved)?curr:prev,1.0);
+    curIdx=SCALES.indexOf(closest);
+    if(curIdx===-1) curIdx=2;
+  }
+  function applyScale(idx){
+    curIdx=Math.max(0,Math.min(SCALES.length-1,idx));
+    const scale=SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale',scale);
+    localStorage.setItem('nq_ar_scale',scale);
+    const el=document.getElementById('arScaleVal');
+    if(el) el.textContent=Math.round(scale*100)+'%';
+  }
+  applyScale(curIdx);
+  const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
+  if(dec) dec.onclick=()=>applyScale(curIdx-1);
+  if(inc) inc.onclick=()=>applyScale(curIdx+1);
 })();
 </script>
 </body>
