@@ -66,6 +66,57 @@
   text-align: center;
   user-select: none;
 }
+
+/* Quran Ayah Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(217,180,91,.12);
+  border: 1px solid rgba(217,180,91,.35);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(217,180,91,.28);
+  color: #fff;
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(217,180,91,.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(126,227,198,.25);
+  border-color: var(--teal, #2DD4BF);
+  color: var(--teal, #2DD4BF);
+  box-shadow: 0 0 14px rgba(126,227,198,.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
 html[data-theme="dawn"]{
   --bg:#f6f2e9; --bg2:#efe8da; --panel:rgba(20,25,35,.04);
   --ink:#141a22; --ink-2:#4a5666; --ink-3:#8a95a4;
@@ -508,7 +559,14 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
       <div class="verse">
         <div class="ar">وَإِن كُنتُمْ فِى رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ</div>
         <div class="tr">“And if you are in doubt about what We have sent down to Our servant, then produce a single chapter like it.”</div>
-        <cite>QUR'AN 2:23</cite>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <cite style="margin:0">QUR'AN 2:23</cite>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002023.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div class="chips"><span class="chip">falsifiable by design</span><span class="chip">1,400 years open</span><span class="chip">hostile expert concession</span><span class="chip">sui generis form</span></div>
       <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
@@ -555,8 +613,16 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
         </div>
       </div>
       <div class="verse">
+        <div class="ar">عَبَسَ وَتَوَلَّىٰ ۝ أَن جَآءَهُ ٱلْأَعْمَىٰ ۝ وَمَا يُدْرِيكَ لَعَلَّهُۥ يَزَّكَّىٰٓ</div>
         <div class="tr">“He frowned and turned away because the blind man came to him… but what would make you know? Perhaps he might be purified.”</div>
-        <cite>QUR'AN 80:1–3 — a public rebuke of the Prophet, preserved permanently in the text he recited</cite>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <cite style="margin:0">QUR'AN 80:1–3 — a public rebuke of the Prophet, preserved permanently in the text he recited</cite>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/080001.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div class="chips"><span class="chip">self-damaging testimony</span><span class="chip">no divine status claimed</span><span class="chip">revelation withheld</span><span class="chip">explicit limits on his power</span></div>
       <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
@@ -606,7 +672,14 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
       <div class="verse">
         <div class="ar">غُلِبَتِ الرُّومُ فِى أَدْنَى الْأَرْضِ وَهُمْ مِّن بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ فِى بِضْعِ سِنِينَ</div>
         <div class="tr">“The Romans have been defeated in the nearest land, but they will be victorious after their defeat — within a few years.”</div>
-        <cite>QUR'AN 30:2–4 — revealed at the nadir of Byzantine collapse</cite>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <cite style="margin:0">QUR'AN 30:2–4 — revealed at the nadir of Byzantine collapse</cite>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/030002.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div class="chips"><span class="chip">time-bounded</span><span class="chip">recorded pre-event</span><span class="chip">against expectation</span><span class="chip">publicly wagered on</span></div>
       <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
@@ -631,8 +704,16 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
         </div>
       </div>
       <div class="verse">
+        <div class="ar">قُلْ هَاتُوا بُرْهَانَكُمْ إِن كُنتُمْ صَادِقِينَ</div>
         <div class="tr">“Say: bring your proof, if you are truthful.” · “Do not pursue what you have no knowledge of.” · “Say: are those who know equal to those who do not?”</div>
-        <cite>QUR'AN 2:111 · 17:36 · 39:9 — the demand for evidence, stated repeatedly as a religious obligation</cite>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <cite style="margin:0">QUR'AN 2:111 · 17:36 · 39:9 — the demand for evidence, stated repeatedly as a religious obligation</cite>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002111.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div class="chips"><span class="chip">evidentialist commands</span><span class="chip">no astrology or alchemy</span><span class="chip">absence-of-era-errors</span><span class="chip">generated an experimental tradition</span></div>
       <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
@@ -818,7 +899,14 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
 
 <footer><div class="container">
   <p>Built as a reasoned invitation, not a polemic. Where these arguments are strong, examine them; where the objections are strong, they are printed alongside. Peace be upon him — and upon every sincere seeker of truth.</p>
-  <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;margin-top:14px">﴾ لَا إِكْرَاهَ فِى الدِّينِ ﴿ · &nbsp;NO COMPULSION IN RELIGION · 2:256</p>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;margin:0">﴾ لَا إِكْرَاهَ فِى الدِّينِ ﴿ · &nbsp;NO COMPULSION IN RELIGION · 2:256</p>
+    <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002256.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+      <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <span>Recite</span>
+    </button>
+  </div>
   <div class="nq-footer-badge">
     <div class="nq-footer-logo-row">
       <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -834,7 +922,7 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.6 (updated 2026-08-23 06:50)</div>
   </div>
 </div></footer>
 
@@ -1078,6 +1166,57 @@ calc();
   const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
   if(dec) dec.onclick=()=>applyScale(curIdx-1);
   if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
+
+/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn){
+        activeBtn.classList.remove('playing','loading');
+        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+    }
+
+    activeBtn=btn;
+    btn.classList.add('loading');
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+    }).catch(err=>{
+      btn.classList.remove('loading','playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing','loading');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
 })();
 </script>
 </body>

@@ -347,6 +347,57 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
   text-align: center;
   user-select: none;
 }
+
+/* Quran Ayah Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(125,220,149,.14);
+  border: 1px solid rgba(125,220,149,.35);
+  color: var(--leaf, #7ddc95);
+  border-radius: 999px;
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(125,220,149,.3);
+  color: #fff;
+  border-color: var(--leaf, #7ddc95);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(125,220,149,.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(105,200,255,.25);
+  border-color: var(--sky, #69c8ff);
+  color: var(--sky, #69c8ff);
+  box-shadow: 0 0 14px rgba(105,200,255,.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
 </style>
 </head>
 <body>
@@ -395,8 +446,14 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
         itself to you, page after page.</p>
       <div class="ayahbox">
         <p class="q">كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِي السَّمَاءِ</p>
-        <p style="margin:0;font-weight:600;color:#ffeecd">“…like a good tree: its <b>root</b> (أَصْل) is firm and its
-          <b>branch</b> (فَرْع) is in the sky.” <span class="mut">— Ibrāhīm 14:24</span></p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;flex-wrap:wrap">
+          <p style="margin:0;font-weight:600;color:#ffeecd" class="ayah-txt">“…like a good tree: its <b>root</b> (أَصْل) is firm and its <b>branch</b> (فَرْع) is in the sky.” <span class="mut">— Ibrāhīm 14:24</span></p>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/014024.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div class="btns">
         <a class="btn p" href="#explorer">🌱 Grow a root tree</a>
@@ -646,6 +703,13 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
         family. Fifteen words. Only <b>eleven roots</b>.</p>
     </div>
     <div class="lab reveal" style="margin-top:30px">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/014024.mp3" aria-label="Listen to Sūrah Ibrāhīm 14:24" title="Listen · Qari Nasser Al-Qatami">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span>Recite Sūrah Ibrāhīm 14:24</span>
+        </button>
+      </div>
       <div class="verse" id="verseBox"></div>
       <p style="text-align:center;font-weight:600;color:#cfe0d3;max-width:62ch;margin:6px auto 22px">
         “Do you not see how Allah sets forth a parable? A good word is like a good tree: its root is firm and its
@@ -925,7 +989,7 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
         </div>
       </div>
 
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.6 (updated 2026-08-23 06:50)</div>
     </div>
   </div>
 </footer>
@@ -1621,7 +1685,15 @@ function selectExplorerWord(k){
     <div class="metaline"><span class="badge" style="background:${r.accent}22;color:${r.accent};border-color:${r.accent}55">${w.form}</span>
       ${tagText}</div>
     ${w.q?`<div class="qref"><p class="q">${w.q}</p><p style="margin:0;font-size:.98rem;color:#ffeecd">${qTrans}</p>
-      <small>— ${w.ref}</small></div>`:notQuranText}
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap">
+        <small style="margin:0">— ${w.ref}</small>
+        ${w.ref && w.ref.includes(':') ? `
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/${String(w.ref.split(':')[0]).padStart(3,'0')}${String(w.ref.split(':')[1]).padStart(3,'0')}.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span>Recite</span>
+        </button>` : ''}
+      </div></div>`:notQuranText}
     <p class="mut" style="margin:14px 0 0;font-size:.94rem">${askText}</p>`;
 }
 
@@ -1902,7 +1974,15 @@ function showForm(i){
       <div class="qref">
         <p class="q" style="font-size:2.2rem;margin:0 0 4px">${f.ex}</p>
         <p style="margin:0;font-weight:700;color:#ffeecd">${fTrans}</p>
-        <small>${quranLabel} <span class="ar">${f.root}</span></small>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:6px;flex-wrap:wrap">
+          <small style="margin:0">${quranLabel} <span class="ar">${f.root}</span></small>
+          ${f.ref && f.ref.includes(':') ? `
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/${String(f.ref.split(':')[0]).padStart(3,'0')}${String(f.ref.split(':')[1]).padStart(3,'0')}.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>` : ''}
+        </div>
       </div>
     </div></div>`;
 }
@@ -2149,7 +2229,7 @@ function switchLang(lang){
   const heroK = $('.hero .kicker'); if(heroK) heroK.textContent = ui.heroKicker;
   const heroH = $('.hero h1 .grad'); if(heroH) heroH.textContent = ui.heroHead;
   const heroL = $('.hero .lead'); if(heroL) heroL.innerHTML = ui.heroLead;
-  const heroAy = $('.ayahbox p:last-child'); if(heroAy) heroAy.innerHTML = ui.heroAyah;
+  const heroAy = $('.ayahbox .ayah-txt'); if(heroAy) heroAy.innerHTML = ui.heroAyah;
   const heroB1 = $('.hero .btns .btn.p'); if(heroB1) heroB1.textContent = ui.heroBtn1;
   const heroB2 = $('.hero .btns .btn.s'); if(heroB2) heroB2.textContent = ui.heroBtn2;
   const heroTp = $('.hero p.mut'); if(heroTp) heroTp.textContent = ui.heroTip;
@@ -2309,6 +2389,57 @@ addEventListener('scroll',()=>{
   const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
   if(dec) dec.onclick=()=>applyScale(curIdx-1);
   if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
+
+/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn){
+        activeBtn.classList.remove('playing','loading');
+        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+    }
+
+    activeBtn=btn;
+    btn.classList.add('loading');
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+    }).catch(err=>{
+      btn.classList.remove('loading','playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing','loading');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
 })();
 </script>
 </body>

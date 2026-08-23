@@ -91,6 +91,57 @@ body::before{
   text-align: center;
   user-select: none;
 }
+
+/* Quran Ayah Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(227,183,105,.12);
+  border: 1px solid rgba(227,183,105,.35);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(227,183,105,.28);
+  color: #fff;
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(227,183,105,.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(126,227,198,.25);
+  border-color: #7ee3c6;
+  color: #7ee3c6;
+  box-shadow: 0 0 14px rgba(126,227,198,.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
 ::selection{background:rgba(227,183,105,.3)}
 
 /* ============ TOP BAR ============ */
@@ -536,7 +587,7 @@ footer .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-2);margin
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.6 (updated 2026-08-23 06:50)</div>
   </div>
 </footer>
 
@@ -559,6 +610,7 @@ const VERSES = [
   id:'v1', n:'٠١', wm:'ع ل م',
   title:'The doer who was never written',
   ref:'Sūrat ar-Raḥmān 55:2', tags:['2 words','Past · مَاضٍ','Form II'],
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/055002.mp3',
   translit:'ʿallama l-qurʾān',
   english:'“He taught the Qur’an.”',
   ctxAr:'اَلرَّحْمَٰنُ ۝ عَلَّمَ الْقُرْآنَ ۝ خَلَقَ الْإِنسَانَ',
@@ -587,6 +639,7 @@ const VERSES = [
   id:'v2', n:'٠٢', wm:'ق ر ب',
   title:'A verb that changes shape for her',
   ref:'Sūrat al-Qamar 54:1', tags:['2 words','Past · مَاضٍ','Form VIII','Agreement'],
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/054001.mp3',
   translit:'iqtarabati s-sāʿah',
   english:'“The Hour has drawn near.”',
   ctxAr:'اقْتَرَبَتِ السَّاعَةُ وَانشَقَّ الْقَمَرُ',
@@ -612,6 +665,7 @@ const VERSES = [
   id:'v3', n:'٠٣', wm:'خ ل ق',
   title:'When the doer is deliberately erased',
   ref:'Sūrat an-Nisāʾ 4:28', tags:['3 words','Passive · مَجْهُول','Ḥāl'],
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/004028.mp3',
   translit:'khuliqa l-insānu ḍaʿīfā',
   english:'“Man was created weak.”',
   ctxAr:'يُرِيدُ اللَّهُ أَن يُخَفِّفَ عَنكُمْ ۚ وَخُلِقَ الْإِنسَانُ ضَعِيفًا',
@@ -642,6 +696,7 @@ const VERSES = [
   title:'Two words that create',
   ref:'Sūrat Yā-Sīn 36:82 · also 2:117, 3:47',
   tags:['2 words','Command · أَمْر','Present · مُضَارِع','Hollow verb'],
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/036082.mp3',
   translit:'kun fa-yakūn',
   english:'“Be — and it is.”',
   ctxAr:'إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ',
@@ -675,6 +730,7 @@ const VERSES = [
   title:'A promise sealed by a vowel',
   ref:'Sūrat al-Baqarah 2:152',
   tags:['2 words','Command · أَمْر','Jussive · مَجْزُوم','Pronouns'],
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/002152.mp3',
   translit:'fa-dhkurūnī adhkurkum',
   english:'“So remember Me — I will remember you.”',
   ctxAr:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ',
@@ -785,7 +841,17 @@ VERSES.forEach(v=>{
   el.innerHTML = `
     <div class="v-head">
       <div class="v-num">${v.n}</div>
-      <div><div class="v-title">${v.title}</div><div class="v-ref">${v.ref}</div></div>
+      <div>
+        <div class="v-title">${v.title}</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:2px;flex-wrap:wrap">
+          <div class="v-ref">${v.ref}</div>
+          <button class="nq-play-btn" data-audio="${v.audio}" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+      </div>
       <div class="v-tags">${v.tags.map((t,i)=>`<span class="v-tag${i===0?' hot':''}">${t}</span>`).join('')}</div>
     </div>
     <div class="stage" data-wm="${v.wm}">
@@ -1022,6 +1088,57 @@ $('#tEn').onclick=e=>{document.body.classList.toggle('hide-en');e.target.classLi
   const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
   if(dec) dec.onclick=()=>applyScale(curIdx-1);
   if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
+
+/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn){
+        activeBtn.classList.remove('playing','loading');
+        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+    }
+
+    activeBtn=btn;
+    btn.classList.add('loading');
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+    }).catch(err=>{
+      btn.classList.remove('loading','playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing','loading');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
 })();
 </script>
 </body>

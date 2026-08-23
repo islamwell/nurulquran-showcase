@@ -75,6 +75,57 @@
   text-align: center;
   user-select: none;
 }
+
+/* Quran Ayah Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232,199,102,.12);
+  border: 1px solid rgba(232,199,102,.35);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(232,199,102,.28);
+  color: #fff;
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(232,199,102,.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(126,227,198,.25);
+  border-color: var(--em, #0b7a63);
+  color: var(--em, #0b7a63);
+  box-shadow: 0 0 14px rgba(126,227,198,.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
 html[data-theme="light"]{
   --ink:#f7f3e8; --ink2:#efe8d6;
   --panel:rgba(10,30,25,.045); --panel2:rgba(10,30,25,.07);
@@ -648,7 +699,14 @@ body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
       <p>"Indeed, We offered the Trust to the heavens and the earth and the mountains, and they declined to bear it and
       feared it; but man undertook to bear it. Indeed, he was <b style="color:var(--gold);font-style:normal;font-weight:400">unjust</b>
       and <b style="color:var(--gold);font-style:normal;font-weight:400">ignorant</b>."</p>
-      <cite>Ṣaḥīḥ International · Al-Aḥzāb 33:72</cite>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+        <cite style="margin:0">Ṣaḥīḥ International · Al-Aḥzāb 33:72</cite>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/033072.mp3" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span>Recite</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -744,37 +802,107 @@ body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
   <h3 class="rv d2" style="margin-top:56px">Verses to feel the range</h3>
   <div class="vlist rv d2" style="margin-top:20px">
     <div class="vitem">
-      <div class="top"><span class="ref">Al-Baqarah 2:67</span><span class="form">الْجَاهِلِين</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Al-Baqarah 2:67</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002067.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">الْجَاهِلِين</span>
+      </div>
       <div class="ar">أَعُوذُ بِٱللَّهِ أَنْ أَكُونَ مِنَ ٱلْجَٰهِلِينَ</div>
       <div class="en">"I seek refuge in Allah from being among the ignorant." — Mūsā, refusing to mock his people. Ignorance is something a prophet actively seeks protection from.</div>
     </div>
     <div class="vitem">
-      <div class="top"><span class="ref">Al-Aʿrāf 7:199</span><span class="form">الْجَاهِلِين</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Al-Aʿrāf 7:199</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/007199.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">الْجَاهِلِين</span>
+      </div>
       <div class="ar">وَأَعْرِضْ عَنِ ٱلْجَٰهِلِينَ</div>
       <div class="en">"And turn away from the ignorant." Here <i>jāhil</i> clearly means the abusive and hot-headed — the <b>ḥilm</b> sense, not the <b>ʿilm</b> sense.</div>
     </div>
     <div class="vitem">
-      <div class="top"><span class="ref">Al-Furqān 25:63</span><span class="form">الْجَاهِلُون</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Al-Furqān 25:63</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/025063.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">الْجَاهِلُون</span>
+      </div>
       <div class="ar">وَإِذَا خَاطَبَهُمُ ٱلْجَٰهِلُونَ قَالُوا سَلَٰمًا</div>
       <div class="en">"And when the ignorant address them, they say: peace." The believer's answer to <i>jahl</i> is not more <i>jahl</i> — it is <b>salām</b>.</div>
     </div>
     <div class="vitem">
-      <div class="top"><span class="ref">Al-Ḥujurāt 49:6</span><span class="form">جَهَالَة</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Al-Ḥujurāt 49:6</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/049006.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">جَهَالَة</span>
+      </div>
       <div class="ar">أَن تُصِيبُوا قَوْمًا بِجَهَٰلَةٍ</div>
       <div class="en">"…lest you harm a people out of ignorance." Verify news before acting — because <i>jahālah</i> is not just a private gap in knowledge, it damages other people.</div>
     </div>
     <div class="vitem">
-      <div class="top"><span class="ref">An-Nisāʾ 4:17</span><span class="form">جَهَالَة</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">An-Nisāʾ 4:17</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/004017.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">جَهَالَة</span>
+      </div>
       <div class="ar">لِلَّذِينَ يَعْمَلُونَ ٱلسُّوٓءَ بِجَهَٰلَةٍ ثُمَّ يَتُوبُونَ</div>
       <div class="en">"…for those who do evil out of ignorance, then repent soon after." Ignorance is the <i>condition</i> repentance is designed for. Deeply hopeful.</div>
     </div>
     <div class="vitem">
-      <div class="top"><span class="ref">Āl ʿImrān 3:154</span><span class="form">الْجَاهِلِيَّة</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Āl ʿImrān 3:154</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003154.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form">الْجَاهِلِيَّة</span>
+      </div>
       <div class="ar">يَظُنُّونَ بِٱللَّهِ غَيْرَ ٱلْحَقِّ ظَنَّ ٱلْجَٰهِلِيَّةِ</div>
       <div class="en">"…thinking of Allah other than the truth — the thought of <i>jāhiliyyah</i>." Ignorance here is a way of <b>suspecting God</b>. One of the four <i>jāhiliyyah</i> verses (with 5:50, 33:33, 48:26).</div>
     </div>
     <div class="vitem" style="border-left-color:var(--gold)">
-      <div class="top"><span class="ref">Al-Aḥzāb 33:72</span><span class="form" style="color:var(--gold)">جَهُولًا</span></div>
+      <div class="top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="ref">Al-Aḥzāb 33:72</span>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/033072.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <span class="form" style="color:var(--gold)">جَهُولًا</span>
+      </div>
       <div class="ar">إِنَّهُۥ كَانَ ظَلُومًا جَهُولًا</div>
       <div class="en">"Indeed he has ever been deeply unjust, deeply unknowing." The root's most concentrated form — the final verdict on the creature who carried the Trust.</div>
     </div>
@@ -878,7 +1006,7 @@ body.plain .ayah,body.plain .vitem .ar{letter-spacing:.02em}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.6 (updated 2026-08-23 06:50)</div>
   </div>
 </footer>
 
@@ -1081,7 +1209,14 @@ qnext.onclick=()=>{
       `<div class="result"><div class="score">${score}<span style="font-size:1.6rem;color:var(--muted2)">/${QS.length}</span></div>
        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;margin:16px auto;max-width:44ch">${m}</p>
        <p style="font-family:Amiri,serif;font-size:1.7rem;color:var(--gold);direction:rtl;margin:22px 0 6px">رَبِّ زِدْنِي عِلْمًا</p>
-       <p style="font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2)">Rabbi zidnī ʿilmā</p>
+       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+         <p style="font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted2);margin:0">Rabbi zidnī ʿilmā (20:114)</p>
+         <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/020114.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+           <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+           <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+           <span>Recite</span>
+         </button>
+       </div>
        <button class="btn ghost" onclick="location.reload()">Try again ↺</button></div>`;
   }
 };

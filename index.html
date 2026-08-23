@@ -102,6 +102,57 @@
   user-select: none;
 }
 
+/* Quran Ayah Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 201, 123, 0.12);
+  border: 1px solid rgba(245, 201, 123, 0.35);
+  color: var(--gold-2);
+  border-radius: var(--radius-full);
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(245, 201, 123, 0.28);
+  color: #fff;
+  border-color: var(--gold-2);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(245, 201, 123, 0.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(45, 212, 191, 0.25);
+  border-color: var(--teal-2);
+  color: var(--teal-2);
+  box-shadow: 0 0 14px rgba(45, 212, 191, 0.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
 [data-theme="light"] {
   --bg-primary: #F8F5EE;
   --bg-secondary: #EFE9DC;
@@ -1052,7 +1103,14 @@ body {
 
 <!-- HERO SECTION -->
 <section class="hero-section">
-  <div class="bismillah-hero">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+    <div class="bismillah-hero" style="margin-bottom:0">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/001001.mp3" aria-label="Listen to Bismillah" title="Listen · Qari Nasser Al-Qatami">
+      <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <span>Recite</span>
+    </button>
+  </div>
   <div class="hero-badge">
     <span class="hero-pulse-dot"></span>
     <span>NurulQuran Interactive Suite</span>
@@ -1434,7 +1492,7 @@ body {
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
     <div class="footer-version-tag">
-      v1.0.5 (updated 2026-08-23 06:22)
+      v1.0.6 (updated 2026-08-23 06:50)
     </div>
   </div>
 </footer>
@@ -1559,6 +1617,57 @@ document.addEventListener('keydown', (e) => {
   const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
   if(dec) dec.onclick=()=>applyScale(curIdx-1);
   if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
+
+/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn){
+        activeBtn.classList.remove('playing','loading');
+        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+    }
+
+    activeBtn=btn;
+    btn.classList.add('loading');
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+    }).catch(err=>{
+      btn.classList.remove('loading','playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing','loading');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
 })();
 </script>
 

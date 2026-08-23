@@ -77,6 +77,57 @@
   text-align: center;
   user-select: none;
 }
+
+/* Unobtrusive Quran Audio Button */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(232, 195, 122, 0.12);
+  border: 1px solid rgba(232, 195, 122, 0.35);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 4px 12px 4px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(232, 195, 122, 0.28);
+  color: #fff;
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(232, 195, 122, 0.35);
+}
+.nq-play-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.nq-play-btn .pause-icon {
+  display: none;
+}
+.nq-play-btn.playing {
+  background: rgba(63, 208, 168, 0.25);
+  border-color: var(--emerald);
+  color: var(--emerald);
+  box-shadow: 0 0 14px rgba(63, 208, 168, 0.3);
+}
+.nq-play-btn.playing .play-icon {
+  display: none;
+}
+.nq-play-btn.playing .pause-icon {
+  display: block;
+}
+.nq-play-btn.loading {
+  opacity: 0.65;
+  pointer-events: none;
+}
 [data-theme="manuscript"]{
   --gold:#8a5e1e; --gold-2:#a37a33; --gold-3:#6d4813;
   --emerald:#1f7a5f;
@@ -220,7 +271,7 @@ section{position:relative;padding:clamp(90px,13vh,170px) clamp(18px,5vw,64px)}
 h1,h2,h3{font-family:var(--f-display);font-weight:300;line-height:1.06;letter-spacing:-.02em}
 h2{font-size:clamp(2.1rem,5.6vw,4.2rem)}
 h3{font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.25}
-.lede{font-size:clamp(1rem,1.35vw,1.15rem);color:var(--ink-2);max-width:60ch;font-weight:300}
+.lede{font-size:clamp(1.02rem,1.35vw,1.18rem);color:#E2E8F0;max-width:60ch;font-weight:400;line-height:1.75}
 .gold-t{background:linear-gradient(105deg,var(--gold-3),var(--gold) 38%,#fff6dd 52%,var(--gold) 66%,var(--gold-3));
   -webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;
   animation:shine 7s linear infinite}
@@ -309,9 +360,9 @@ h3{font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.25}
   border-radius:190px 190px 12px 12px;pointer-events:none}
 .mihrab .ayah{font-family:var(--f-ar);direction:rtl;font-size:clamp(1.35rem,2.9vw,2.05rem);
   line-height:2.15;color:var(--gold)}
-.mihrab .tr{font-family:var(--f-display);font-style:italic;font-size:1.05rem;
-  color:var(--ink-2);margin-top:22px;line-height:1.6}
-.mihrab .rf{margin-top:16px;font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-3)}
+.mihrab .tr{font-family:var(--f-body),system-ui,sans-serif;font-weight:500;font-size:1.15rem;
+  color:#FFFFFF;margin-top:20px;line-height:1.7}
+.mihrab .rf{margin-top:16px;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
   gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px;border-radius:var(--r);overflow:hidden}
 .stat{background:var(--bg);padding:26px 18px;text-align:center;transition:background .4s}
@@ -419,10 +470,10 @@ h3{font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.25}
 .ayah-box::before{top:10px;left:14px}.ayah-box::after{bottom:10px;right:14px}
 .ayah-box .ar{font-family:var(--f-ar);direction:rtl;font-size:clamp(1.3rem,3.1vw,1.95rem);
   line-height:2.3;color:var(--gold)}
-.ayah-box .en{margin-top:22px;font-family:var(--f-display);font-size:1.1rem;font-style:italic;
-  color:var(--ink);line-height:1.65}
-.ayah-box .rf{margin-top:18px;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
-.sheet-bd p{color:var(--ink-2);margin-bottom:18px;font-size:.98rem}
+.ayah-box .en{margin-top:20px;font-family:var(--f-body),system-ui,sans-serif;font-size:1.12rem;font-weight:500;
+  color:#FFFFFF;line-height:1.7}
+.ayah-box .rf{margin-top:16px;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.sheet-bd p{color:#E2E8F0;margin-bottom:18px;font-size:1.02rem;font-weight:400;line-height:1.75}
 .pullq{border-left:2px solid var(--gold);padding:6px 0 6px 22px;margin:28px 0;
   font-family:var(--f-display);font-size:1.2rem;font-style:italic;color:var(--ink);line-height:1.5}
 .sheet-ft{display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -569,7 +620,14 @@ footer li:hover{color:var(--ink-2)}
         <figure class="mihrab rv" style="--d:180ms">
           <p class="ayah" lang="ar" dir="rtl">قُلْ لَّئِنِ ٱجْتَمَعَتِ ٱلْإِنسُ وَٱلْجِنُّ عَلَىٰ أَن يَأْتُوا۟ بِمِثْلِ هَٰذَا ٱلْقُرْءَانِ لَا يَأْتُونَ بِمِثْلِهِ وَلَوْ كَانَ بَعْضُهُمْ لِبَعْضٍ ظَهِيرًا</p>
           <p class="tr">“Say: if all mankind and the jinn gathered together to produce something like this Qurʾān, they could not produce its like — even if they backed one another.”</p>
-          <p class="rf">Sūrah al‑Isrāʾ · 17 : 88</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+            <p class="rf" style="margin:0">Sūrah al‑Isrāʾ · 17 : 88</p>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/017088.mp3" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              <span>Recite</span>
+            </button>
+          </div>
         </figure>
       </div>
     </div>
@@ -605,8 +663,15 @@ footer li:hover{color:var(--ink-2)}
       <div class="eyebrow rv" style="justify-content:center">Closing</div>
       <figure class="mihrab rv" style="--d:100ms;margin-top:14px">
         <p class="ayah" lang="ar" dir="rtl">سَنُرِيهِمْ آيَاتِنَا فِى ٱلْآفَاقِ وَفِىٓ أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ ٱلْحَقُّ</p>
-          <p class="tr">“We shall show them Our signs in the horizons and within themselves, until it becomes clear to them that this is the truth.”</p>
-        <p class="rf">Sūrah Fuṣṣilat · 41 : 53</p>
+        <p class="tr">“We shall show them Our signs in the horizons and within themselves, until it becomes clear to them that this is the truth.”</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+          <p class="rf" style="margin:0">Sūrah Fuṣṣilat · 41 : 53</p>
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/041053.mp3" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </figure>
       <p class="lede rv" style="--d:180ms;margin:44px auto 0;text-align:center">
         A miracle, in the Qurʾānic vocabulary, is called an <em>āyah</em> — a <strong>sign</strong>. Not a spectacle to be consumed, but an arrow pointing beyond itself. The splitting moon, the parted sea, the cooled fire: each was temporary. The invitation they carried was not.
@@ -659,7 +724,7 @@ footer li:hover{color:var(--ink-2)}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.5 (updated 2026-08-23 06:22)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.6 (updated 2026-08-23 06:50)</div>
   </div>
 </footer>
 
@@ -677,7 +742,14 @@ footer li:hover{color:var(--ink-2)}
       <div class="ayah-box">
         <p class="ar" id="mAr" lang="ar" dir="rtl"></p>
         <p class="en" id="mEn"></p>
-        <p class="rf" id="mRf"></p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap">
+          <p class="rf" id="mRf" style="margin:0"></p>
+          <button class="nq-play-btn" id="mPlayBtn" data-audio="" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
       </div>
       <div id="mBody"></div>
       <blockquote class="pullq" id="mPull"></blockquote>
@@ -709,6 +781,7 @@ const SIGNS = [
 { tag:'Muḥammad ﷺ', wide:true, icon:'book',
   ar:'إِعْجَازُ الْقُرْآن', title:'The Inimitable Qurʾān', who:'Prophet Muḥammad ﷺ — the miracle that outlived its witnesses',
   ref:'Al‑Baqarah 2:23', refFull:'Sūrah al‑Baqarah · 2 : 23',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/002023.mp3',
   ayahAr:'وَإِن كُنتُمْ فِى رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا۟ بِسُورَةٍ مِّن مِّثْلِهِ',
   ayahEn:'“And if you are in doubt about what We have revealed to Our servant, then produce a single sūrah like it.”',
   blurb:'A literary challenge issued to the greatest poets of Arabia — and never answered.',
@@ -720,6 +793,7 @@ const SIGNS = [
 { tag:'Muḥammad ﷺ', wide:true, icon:'moon',
   ar:'انْشِقَاقُ الْقَمَر', title:'The Splitting of the Moon', who:'Prophet Muḥammad ﷺ — Makkah, before the Hijrah',
   ref:'Al‑Qamar 54:1', refFull:'Sūrah al‑Qamar · 54 : 1–2',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/054001.mp3',
   ayahAr:'ٱقْتَرَبَتِ ٱلسَّاعَةُ وَٱنشَقَّ ٱلْقَمَرُ ۝ وَإِن يَرَوْا۟ آيَةً يُعْرِضُوا۟ وَيَقُولُوا۟ سِحْرٌ مُّسْتَمِرٌّ',
   ayahEn:'“The Hour has drawn near, and the moon was split in two. Yet if they see a sign they turn away and say: passing magic.”',
   blurb:'The Quraysh demanded a sign in the sky. The moon answered — and they called it sorcery.',
@@ -731,6 +805,7 @@ const SIGNS = [
 { tag:'Muḥammad ﷺ', wide:false, icon:'ascend',
   ar:'الْإِسْرَاءُ وَالْمِعْرَاج', title:'The Night Journey & Ascension', who:'Prophet Muḥammad ﷺ — Makkah to Jerusalem to the heavens',
   ref:'Al‑Isrāʾ 17:1', refFull:'Sūrah al‑Isrāʾ · 17 : 1',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/017001.mp3',
   ayahAr:'سُبْحَٰنَ ٱلَّذِى أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ ٱلْمَسْجِدِ ٱلْحَرَامِ إِلَى ٱلْمَسْجِدِ ٱلْأَقْصَى ٱلَّذِى بَٰرَكْنَا حَوْلَهُ',
   ayahEn:'“Glory be to the One who took His servant by night from the Sacred Mosque to the Farthest Mosque, whose surroundings We have blessed.”',
   blurb:'In a single night: Makkah, Jerusalem, and the seven heavens — after the hardest year of his life.',
@@ -742,6 +817,7 @@ const SIGNS = [
 { tag:'Mūsā', wide:false, icon:'waves',
   ar:'فَلْقُ الْبَحْر', title:'The Parting of the Sea', who:'Prophet Mūsā (Moses) — the Exodus from Egypt',
   ref:'Ash‑Shuʿarāʾ 26:63', refFull:'Sūrah ash‑Shuʿarāʾ · 26 : 63',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/026063.mp3',
   ayahAr:'فَأَوْحَيْنَا إِلَىٰ مُوسَىٰ أَنِ ٱضْرِب بِّعَصَاكَ ٱلْبَحْرَ ۖ فَٱنفَلَقَ فَكَانَ كُلُّ فِرْقٍ كَٱلطَّوْدِ ٱلْعَظِيمِ',
   ayahEn:'“So We inspired Mūsā: strike the sea with your staff. It parted, and each part stood like a towering mountain.”',
   blurb:'Water stood upright like mountains — twelve dry paths through the deep.',
@@ -752,6 +828,7 @@ const SIGNS = [
 { tag:'Mūsā', wide:false, icon:'staff',
   ar:'عَصَا مُوسَى', title:'The Staff & the Nine Signs', who:'Prophet Mūsā (Moses) — in the court of Pharaoh',
   ref:'Al‑Aʿrāf 7:107', refFull:'Sūrah al‑Aʿrāf · 7 : 107',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/007107.mp3',
   ayahAr:'فَأَلْقَىٰ عَصَاهُ فَإِذَا هِىَ ثُعْبَانٌ مُّبِينٌ',
   ayahEn:'“So he threw down his staff, and at once it was a serpent, manifest.”',
   blurb:'A shepherd\'s stick, a luminous hand, and nine signs delivered to the mightiest throne on earth.',
@@ -762,6 +839,7 @@ const SIGNS = [
 { tag:'Ibrāhīm', wide:false, icon:'flame',
   ar:'بَرْدًا وَسَلَامًا', title:'The Fire Made Cool', who:'Prophet Ibrāhīm (Abraham) — cast into the furnace',
   ref:'Al‑Anbiyāʾ 21:69', refFull:'Sūrah al‑Anbiyāʾ · 21 : 69',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/021069.mp3',
   ayahAr:'قُلْنَا يَٰنَارُ كُونِى بَرْدًا وَسَلَٰمًا عَلَىٰ إِبْرَٰهِيمَ',
   ayahEn:'“We said: O fire, be coolness and safety for Ibrāhīm.”',
   blurb:'They built the largest fire they could. It was commanded to become cool.',
@@ -773,6 +851,7 @@ const SIGNS = [
 { tag:'Ibrāhīm', wide:false, icon:'birds',
   ar:'إِحْيَاءُ الطَّيْر', title:'The Four Birds Restored', who:'Prophet Ibrāhīm (Abraham) — a request for certainty',
   ref:'Al‑Baqarah 2:260', refFull:'Sūrah al‑Baqarah · 2 : 260',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/002260.mp3',
   ayahAr:'قَالَ رَبِّ أَرِنِى كَيْفَ تُحْىِ ٱلْمَوْتَىٰ ۖ قَالَ أَوَلَمْ تُؤْمِن ۖ قَالَ بَلَىٰ وَلَٰكِن لِّيَطْمَئِنَّ قَلْبِى',
   ayahEn:'“My Lord, show me how You give life to the dead. He said: do you not believe? He said: yes, but so that my heart may be at rest.”',
   blurb:'Not a request for proof — a request for peace. And it was granted.',
@@ -783,6 +862,7 @@ const SIGNS = [
 { tag:'ʿĪsā', wide:true, icon:'hand',
   ar:'مُعْجِزَاتُ عِيسَى', title:'The Signs of ʿĪsā', who:'Prophet ʿĪsā (Jesus), son of Maryam — by the permission of God',
   ref:'Al‑Māʾidah 5:110', refFull:'Sūrah al‑Māʾidah · 5 : 110',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/005110.mp3',
   ayahAr:'وَتُبْرِئُ ٱلْأَكْمَهَ وَٱلْأَبْرَصَ بِإِذْنِى ۖ وَإِذْ تُخْرِجُ ٱلْمَوْتَىٰ بِإِذْنِى',
   ayahEn:'“And you healed the blind and the leper by My permission; and you brought forth the dead by My permission.”',
   blurb:'Speech in the cradle, sight restored, clay birds given breath — each sealed with four words: by My permission.',
@@ -794,6 +874,7 @@ const SIGNS = [
 { tag:'Maryam', wide:false, icon:'palm',
   ar:'نَخْلَةُ مَرْيَم', title:'The Palm and the Provision', who:'Maryam bint ʿImrān — alone, in labour, in the desert',
   ref:'Maryam 19:25', refFull:'Sūrah Maryam · 19 : 25–26',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/019025.mp3',
   ayahAr:'وَهُزِّىٓ إِلَيْكِ بِجِذْعِ ٱلنَّخْلَةِ تُسَٰقِطْ عَلَيْكِ رُطَبًا جَنِيًّا',
   ayahEn:'“And shake the trunk of the palm tree toward you: it will drop upon you fresh, ripe dates.”',
   blurb:'A dry trunk yields fresh dates, and a stream opens at her feet.',
@@ -805,6 +886,7 @@ const SIGNS = [
 { tag:'Sulaymān', wide:false, icon:'wind',
   ar:'مُلْكُ سُلَيْمَان', title:'The Dominion of Sulaymān', who:'Prophet Sulaymān (Solomon) — king and prophet',
   ref:'An‑Naml 27:16', refFull:'Sūrah an‑Naml · 27 : 16',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/027016.mp3',
   ayahAr:'وَقَالَ يَٰأَيُّهَا ٱلنَّاسُ عُلِّمْنَا مَنطِقَ ٱلطَّيْرِ وَأُوتِينَا مِن كُلِّ شَىْءٍ',
   ayahEn:'“He said: O people, we have been taught the speech of birds, and we have been given of all things.”',
   blurb:'The wind at his command, the speech of birds, the jinn in his service — and a throne moved across a kingdom.',
@@ -815,6 +897,7 @@ const SIGNS = [
 { tag:'Others', wide:false, icon:'cave',
   ar:'أَصْحَابُ الْكَهْف', title:'The People of the Cave', who:'Youths who fled a tyrant — and slept for three centuries',
   ref:'Al‑Kahf 18:25', refFull:'Sūrah al‑Kahf · 18 : 25',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/018025.mp3',
   ayahAr:'وَلَبِثُوا۟ فِى كَهْفِهِمْ ثَلَٰثَ مِائَةٍ سِنِينَ وَٱزْدَادُوا۟ تِسْعًا',
   ayahEn:'“And they remained in their cave three hundred years, and add nine.”',
   blurb:'A handful of believers slept through the death of an empire.',
@@ -825,6 +908,7 @@ const SIGNS = [
 { tag:'Others', wide:false, icon:'whale',
   ar:'يُونُسُ وَالْحُوت', title:'Yūnus in the Depths', who:'Prophet Yūnus (Jonah) — in the belly of the great fish',
   ref:'Al‑Anbiyāʾ 21:87', refFull:'Sūrah al‑Anbiyāʾ · 21 : 87',
+  audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/021087.mp3',
   ayahAr:'فَنَادَىٰ فِى ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبْحَٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّٰلِمِينَ',
   ayahEn:'“So he called out in the depths of darkness: there is no god but You. Glory be to You. Indeed, I was among the wrongdoers.”',
   blurb:'Swallowed by the sea, kept alive in the dark, and returned by a single sentence.',
@@ -961,6 +1045,13 @@ function openModal(i){
   document.getElementById('mRf').textContent=s.refFull;
   document.getElementById('mBody').innerHTML=s.body;
   document.getElementById('mPull').textContent=s.pull;
+  const pb=document.getElementById('mPlayBtn');
+  if(pb){
+    pb.dataset.audio=s.audio||'';
+    pb.classList.remove('playing','loading');
+    const span=pb.querySelector('span');
+    if(span) span.textContent='Recite';
+  }
   modal.classList.add('on');
   document.body.style.overflow='hidden';
   document.getElementById('sheet').scrollTop=0;
@@ -1112,6 +1203,57 @@ setTimeout(()=>{document.getElementById('loader').classList.add('done');
   const dec=document.getElementById('arDec'), inc=document.getElementById('arInc');
   if(dec) dec.onclick=()=>applyScale(curIdx-1);
   if(inc) inc.onclick=()=>applyScale(curIdx+1);
+})();
+
+/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn){
+        activeBtn.classList.remove('playing','loading');
+        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
+      }
+    }
+
+    activeBtn=btn;
+    btn.classList.add('loading');
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
+    }).catch(err=>{
+      btn.classList.remove('loading','playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing','loading');
+      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
 })();
 </script>
 </body>
