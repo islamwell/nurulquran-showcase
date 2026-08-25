@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ar-Rayyān · The Quranic Fasting Sanctuary | NurulQuran</title>
+<meta name="description" content="Ar-Rayyān — An interactive Quranic sanctuary for fasting, prayer times, astronomical tracking, sunnah occasions, virtues, rulings, and the Qaḍāʾ ledger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700&family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================================
+   0. RESET & ROOT DESIGN SYSTEM
+===================================================================== */
+:root {
+  --bg-deep: #050811;
+  --bg-card: rgba(14, 22, 38, 0.75);
+  --bg-card-hover: rgba(22, 34, 58, 0.85);
+  --border: rgba(245, 201, 123, 0.16);
+  --border-glow: rgba(245, 201, 123, 0.4);
+  --line: rgba(255, 255, 255, 0.08);
+
+  --gold: #F5C97B;
+  --gold-2: #E8C37A;
+  --gold-soft: #FFE6B8;
+  --gold-glow: rgba(245, 201, 123, 0.28);
+
+  --jade: #3FD9AE;
+  --teal: #2DD4BF;
+  --sky: #69C8FF;
+  --rose: #FF7B95;
+  --purple: #C084FC;
+
+  --text-main: #F8FAFC;
+  --paper: #E6EDF8;
+  --mute: #94A3B8;
+  --faint: #64748B;
+
+  --font-ui: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-title: "Cinzel", "Cinzel Decorative", serif;
+  --font-arabic: "Amiri", "Scheherazade New", serif;
+  --ar-scale: 1;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-deep: #F8FAFC;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --border: rgba(180, 140, 60, 0.25);
+  --border-glow: rgba(180, 140, 60, 0.5);
+  --line: rgba(0, 0, 0, 0.08);
+  --gold: #B48424;
+  --gold-2: #9A6E16;
+  --gold-soft: #63470D;
+  --gold-glow: rgba(180, 140, 60, 0.2);
+  --jade: #0D9488;
+  --teal: #0F766E;
+  --sky: #0284C7;
+  --rose: #E11D48;
+  --text-main: #0F172A;
+  --paper: #1E293B;
+  --mute: #475569;
+  --faint: #64748B;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; background-color: var(--bg-deep); color: var(--text-main); }
+body {
+  font-family: var(--font-ui);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  background: radial-gradient(circle at 50% -10%, rgba(245, 201, 123, 0.08) 0%, transparent 60%),
+              radial-gradient(circle at 10% 40%, rgba(63, 217, 174, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, rgba(105, 200, 255, 0.04) 0%, transparent 50%),
+              var(--bg-deep);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+::-webkit-scrollbar-thumb { background: rgba(245, 201, 123, 0.25); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245, 201, 123, 0.45); }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 { color: var(--text-main); font-weight: 700; line-height: 1.25; }
+.ar {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  font-size: calc(1.5rem * var(--ar-scale));
+  line-height: 2.1;
+  color: var(--gold);
+}
+
+/* =====================================================================
+   1. GLOBAL NAVIGATION & NURULQURAN BRAND
+===================================================================== */
+.nq-global-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 11, 18, 0.88);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s var(--ease);
+}
+.nq-global-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nq-brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+.nq-mini-logo { width: 34px; height: 34px; flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(245, 201, 123, 0.3)); }
+.nq-brand-name {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+}
+.nq-brand-sub { font-size: 0.7rem; color: var(--mute); letter-spacing: 0.08em; display: block; }
+
+nav.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 4px;
+}
+nav.links a {
+  color: var(--mute);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+nav.links a:hover, nav.links a.on {
+  color: var(--gold-2);
+  background: rgba(232, 195, 122, 0.12);
+}
+
+.nq-bar-actions { display: flex; align-items: center; gap: 10px; }
+.nq-ar-ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.nq-ar-btn {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.nq-ar-btn:hover { background: rgba(245, 201, 123, 0.2); }
+.nq-ar-val { font-size: 0.72rem; color: var(--mute); font-family: monospace; min-width: 32px; text-align: center; }
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+.btn-icon:hover { background: rgba(245, 201, 123, 0.18); transform: translateY(-1px); }
+
+/* =====================================================================
+   2. COMMON LAYOUT & REVEAL ANIMATIONS
+==================================================================== */
+main { max-width: 1200px; margin: 0 auto; padding: 30px 20px 80px; }
+section { margin-bottom: 70px; scroll-margin-top: 80px; }
+.s-head { text-align: center; margin-bottom: 36px; }
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jade);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.s-head h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--gold-soft);
+  margin-bottom: 12px;
+}
+.s-head h2 em { color: var(--gold); font-style: italic; }
+.s-head p { max-width: 68ch; margin: 0 auto; color: var(--mute); font-size: 0.96rem; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s var(--ease);
+}
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 24px var(--gold-glow);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s var(--ease);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  color: #060913;
+  border: 1px solid var(--gold);
+  box-shadow: 0 4px 18px rgba(245, 201, 123, 0.3);
+}
+.btn.primary:hover {
+  background: linear-gradient(135deg, #FFF0B8 0%, var(--gold) 100%);
+  box-shadow: 0 6px 26px rgba(245, 201, 123, 0.5);
+  transform: translateY(-2px);
+}
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--gold-soft);
+}
+.btn.secondary:hover { background: rgba(245, 201, 123, 0.15); color: #FFF; }
+.btn.sm { padding: 6px 14px; font-size: 0.8rem; border-radius: 8px; }
+
+/* Audio Play Pill */
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 201, 123, 0.12);
+  border: 1px solid rgba(245, 201, 123, 0.35);
+  color: var(--gold);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nq-play-btn:hover {
+  background: var(--gold);
+  color: #060913;
+  box-shadow: 0 0 16px rgba(245, 201, 123, 0.4);
+}
+.nq-play-btn svg { width: 13px; height: 13px; fill: currentColor; }
+.nq-play-btn .pause-icon { display: none; }
+.nq-play-btn.playing .play-icon { display: none; }
+.nq-play-btn.playing .pause-icon { display: inline-block; }
+.nq-play-btn.playing { background: var(--gold); color: #060913; }
+
+/* =====================================================================
+   3. HERO SECTION & DIURNAL FASTING ORB
+===================================================================== */
+#today {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: stretch;
+}
+@media (max-width: 900px) { #today { grid-template-columns: 1fr; } }
+
+.hero-orb-card {
+  padding: clamp(24px, 4vw, 40px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hero-orb-card::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(245, 201, 123, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.hero-dates { display: flex; flex-direction: column; gap: 4px; }
+.hijri-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--jade);
+  text-transform: uppercase;
+}
+.greg-date { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+.loc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--mute);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.loc-tag:hover { color: var(--gold); border-color: var(--border); }
+
+/* Center Interactive Orb */
+.orb-container {
+  position: relative;
+  width: min(280px, 80vw);
+  height: min(280px, 80vw);
+  margin: 10px auto 24px;
+}
+.orb-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.orb-track { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 12; }
+.orb-progress {
+  fill: none;
+  stroke: url(#goldGrad);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 754;
+  stroke-dashoffset: 754;
+  transition: stroke-dashoffset 1s var(--ease);
+  filter: drop-shadow(0 0 12px rgba(245, 201, 123, 0.5));
+}
+.orb-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.orb-status { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--jade); margin-bottom: 4px; }
+.orb-time {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold-soft);
+  text-shadow: 0 0 24px rgba(245, 201, 123, 0.3);
+}
+.orb-sub { font-size: 0.8rem; color: var(--mute); margin-top: 6px; }
+
+/* Prayer Times Strip */
+.prayers-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+@media (max-width: 600px) { .prayers-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; } }
+.prayer-cell {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  padding: 8px 6px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+.prayer-cell.active {
+  background: rgba(245, 201, 123, 0.12);
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(245, 201, 123, 0.2);
+}
+.prayer-name { font-size: 0.68rem; font-weight: 700; color: var(--mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.prayer-time { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-top: 2px; }
+.prayer-cell.active .prayer-name { color: var(--gold); }
+
+/* Quick Action Row */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* Side Stats Card */
+.hero-side-card {
+  padding: clamp(24px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.streak-box {
+  background: linear-gradient(135deg, rgba(245, 201, 123, 0.1), rgba(63, 217, 174, 0.05));
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: var(--r-md);
+  text-align: center;
+}
+.streak-flame { font-size: 2.2rem; filter: drop-shadow(0 0 14px rgba(245, 201, 123, 0.6)); }
+.streak-val { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 700; color: var(--gold-soft); line-height: 1; margin: 6px 0; }
+.streak-lbl { font-size: 0.8rem; font-weight: 600; color: var(--mute); text-transform: uppercase; letter-spacing: 0.1em; }
+
+.whisper-box {
+  border-left: 2px solid var(--gold);
+  padding-left: 16px;
+  margin: 10px 0;
+  font-style: italic;
+  color: var(--paper);
+  font-size: 0.92rem;
+}
+.whisper-ref { display: block; font-size: 0.72rem; color: var(--gold); font-style: normal; font-weight: 700; margin-top: 6px; }
+
+/* =====================================================================
+   4. QUR'AN ON FASTING SECTION
+===================================================================== */
+.ayat { display: grid; gap: 18px; }
+.aya {
+  padding: clamp(22px, 3vw, 36px);
+  border-radius: var(--r-lg);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(16px, 2.4vw, 30px);
+  align-items: start;
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+}
+.aya:hover { transform: translateY(-4px); }
+.aya .num {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  line-height: 1;
+  color: var(--gold);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(232, 195, 122, 0.06);
+  text-align: center;
+  white-space: nowrap;
+}
+.aya .num small {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 7px;
+}
+.aya .en {
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 1.8vw, 1.2rem);
+  line-height: 1.68;
+  color: var(--paper);
+  margin-top: 14px;
+}
+.aya .en b { color: var(--gold-2); font-weight: 600; }
+.aya .note {
+  font-size: 0.86rem;
+  color: var(--mute);
+  line-height: 1.6;
+  margin-top: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.aya .note strong { color: var(--jade); font-weight: 600; }
+.aya .note em { color: var(--gold-2); font-style: italic; }
+@media (max-width: 640px) { .aya { grid-template-columns: 1fr; } .aya .num { justify-self: start; } }
+
+/* =====================================================================
+   5. CALENDAR & OCCASIONS ENGINE
+===================================================================== */
+.cal-wrapper {
+  padding: clamp(20px, 3vw, 32px);
+}
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.cal-title-group h3 { font-size: 1.4rem; color: var(--gold-soft); }
+.cal-controls { display: flex; align-items: center; gap: 8px; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+.cal-dow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 0;
+}
+.cal-cell {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px 8px;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.cal-cell:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--border); }
+.cal-cell.today { border-color: var(--gold); background: rgba(245, 201, 123, 0.08); }
+.cal-cell.other-month { opacity: 0.35; }
+.cal-dates { display: flex; justify-content: space-between; align-items: baseline; }
+.cal-greg { font-size: 0.88rem; font-weight: 700; color: var(--text-main); }
+.cal-hijri { font-size: 0.7rem; color: var(--gold); font-family: var(--font-arabic); }
+.cal-tag {
+  font-size: 0.64rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cal-tag.ramadan { background: rgba(245, 201, 123, 0.2); color: var(--gold); }
+.cal-tag.white-day { background: rgba(63, 217, 174, 0.2); color: var(--jade); }
+.cal-tag.sunnah { background: rgba(45, 212, 191, 0.18); color: var(--teal); }
+.cal-tag.voluntary { background: rgba(105, 200, 255, 0.18); color: var(--sky); }
+.cal-tag.prohibited { background: rgba(255, 123, 149, 0.2); color: var(--rose); }
+
+.cal-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  font-size: 0.78rem;
+  color: var(--mute);
+}
+.leg-item { display: inline-flex; align-items: center; gap: 6px; }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Occasions Timeline */
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.occ-card {
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.occ-ico {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  background: rgba(245, 201, 123, 0.1);
+  border: 1px solid var(--border);
+  color: var(--gold);
+}
+.occ-info h4 { font-size: 1rem; margin-bottom: 4px; color: var(--gold-soft); }
+.occ-info p { font-size: 0.82rem; color: var(--mute); line-height: 1.5; }
+.occ-time { font-size: 0.72rem; font-weight: 700; color: var(--jade); text-transform: uppercase; margin-top: 6px; }
+
+/* =====================================================================
+   6. VIRTUES DECK CAROUSEL
+===================================================================== */
+.virtues-wrapper { position: relative; }
+.deck-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 4px 24px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.v-card {
+  flex: 0 0 clamp(300px, 32vw, 360px);
+  padding: 28px 24px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+.v-head { display: flex; align-items: center; justify-content: space-between; }
+.v-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--jade); }
+.v-ar { font-family: var(--font-arabic); font-size: 1.35rem; color: var(--gold); line-height: 1.8; direction: rtl; text-align: right; }
+.v-en { font-family: var(--font-serif); font-size: 1.05rem; color: var(--paper); line-height: 1.6; }
+.v-ref { font-size: 0.75rem; color: var(--mute); font-weight: 600; border-top: 1px solid var(--line); padding-top: 12px; }
+
+/* =====================================================================
+   7. DUʿĀS & SUPPLICATIONS
+===================================================================== */
+.duas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+.dua-card {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+.dua-header { display: flex; align-items: center; justify-content: space-between; }
+.dua-title { font-size: 1rem; font-weight: 700; color: var(--gold-soft); }
+.dua-ar { font-family: var(--font-arabic); font-size: calc(1.4rem * var(--ar-scale)); color: var(--gold); line-height: 2; direction: rtl; text-align: right; margin: 8px 0; }
+.dua-tl { font-size: 0.85rem; font-style: italic; color: var(--jade); line-height: 1.5; }
+.dua-en { font-size: 0.92rem; color: var(--paper); line-height: 1.6; }
+.dua-ft { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; }
+.dua-ref { font-size: 0.72rem; color: var(--mute); font-weight: 600; }
+
+/* =====================================================================
+   8. RUKHSAH — WHOM ALLAH EXCUSED & QAḌĀʾ LEDGER
+===================================================================== */
+.rukhsah { display: grid; grid-template-columns: repeat(auto-fill, minmax(244px, 1fr)); gap: 14px; }
+.rk { padding: 24px; border-radius: var(--r-lg); transition: 0.45s var(--ease); }
+.rk:hover { transform: translateY(-5px); }
+.rk .who { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--jade); margin-bottom: 9px; }
+.rk h5 { font-family: var(--font-serif); font-weight: 500; font-size: 1.2rem; margin-bottom: 7px; color: var(--gold-soft); }
+.rk p { font-size: 0.87rem; color: var(--mute); line-height: 1.55; }
+.rk p em { color: var(--gold-2); font-style: italic; }
+.rk .aref { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-top: 12px; }
+#qadaCard { background: linear-gradient(150deg, rgba(63, 217, 174, 0.1), rgba(255, 255, 255, 0.015)); }
+
+/* =====================================================================
+   9. RULINGS & ACCORDION
+===================================================================== */
+.qa details { border-bottom: 1px solid var(--line); }
+.qa details:last-child { border-bottom: none; }
+.qa summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 4px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 1.7vw, 1.18rem);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  transition: 0.3s var(--ease);
+  color: var(--text-main);
+}
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: var(--font-ui);
+  font-size: 1.25rem;
+  color: var(--gold);
+  transition: 0.35s var(--ease);
+}
+.qa details[open] summary { color: var(--gold-2); }
+.qa details[open] summary::after { transform: rotate(45deg); }
+.qa summary:hover { color: var(--gold-2); }
+.qa .a { padding: 0 4px 22px; color: var(--mute); font-size: 0.93rem; line-height: 1.7; max-width: 82ch; }
+.qa .a em { color: var(--gold-2); font-style: italic; }
+
+/* =====================================================================
+   10. MODALS, TOASTS & CANVAS
+===================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4, 7, 14, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;
+  place-items: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+.modal-backdrop.show { display: grid; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-card {
+  background: #0B1322;
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  max-width: 520px;
+  width: 100%;
+  padding: 30px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+}
+.modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.modal-head h3 { font-size: 1.25rem; color: var(--gold); }
+
+#toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(14, 22, 38, 0.96);
+  border: 1px solid var(--gold);
+  color: #FFF;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  z-index: 100020;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(245, 201, 123, 0.35);
+  opacity: 0;
+  transition: all 0.3s var(--ease);
+  pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+.spark {
+  position: fixed;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+  z-index: 100030;
+  animation: sparkFade 0.75s ease-out forwards;
+}
+@keyframes sparkFade {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+/* Footer */
+footer {
+  margin-top: 90px;
+  border-top: 1px solid var(--line);
+  padding: 50px 20px 70px;
+  text-align: center;
+}
+.nq-footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.nq-version-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  font-family: monospace;
+  margin-top: 12px;
+}
+</style>
+</head>
+<body>
+
+<!-- GLOBAL NAV -->
+<nav class="nq-global-bar" aria-label="NurulQuran Global Navigation">
+  <div class="nq-global-inner">
+    <a href="index.html" class="nq-brand-tag" title="NurulQuran Portal">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)" />
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28" />
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)" />
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#081418" stroke="var(--gold)" stroke-width="10" />
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#081418" stroke="var(--gold)" stroke-width="10" />
+        <circle cx="256" cy="168" r="16" fill="var(--gold)" />
+      </svg>
+      <div>
+        <span class="nq-brand-name">AR-RAYYĀN</span>
+        <span class="nq-brand-sub">بَابُ الرَّيَّان · Fasting Sanctuary</span>
+      </div>
+    </a>
+
+    <nav class="links">
+      <a href="#today">Today</a>
+      <a href="#quran">Qur'ān</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#virtues">Virtues</a>
+      <a href="#path">The Path</a>
+      <a href="#duas">Duʿās</a>
+      <a href="#rukhsah">Rukhsah</a>
+      <a href="#rulings">Rulings</a>
+    </nav>
+
+    <div class="nq-bar-actions">
+      <div class="nq-ar-ctrl" title="Adjust Arabic text size">
+        <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size">ع−</button>
+        <span class="nq-ar-val" id="arScaleVal">100%</span>
+        <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size">ع+</button>
+      </div>
+      <button class="btn-icon" id="themeToggle" title="Toggle Light / Dark Mode">☾</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- =====================================================================
+     1. TODAY & DIURNAL FASTING ORB
+===================================================================== -->
+<section id="today">
+  <div class="card hero-orb-card reveal">
+    <div class="hero-header">
+      <div class="hero-dates">
+        <span class="hijri-badge" id="heroHijri">Loading Hijri Date...</span>
+        <span class="greg-date" id="heroGreg">...</span>
+      </div>
+      <div class="loc-tag" id="locBtn" title="Click to update your city / coordinates">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span id="locLabel">Makkah al-Mukarramah</span>
+      </div>
+    </div>
+
+    <!-- Radial Diurnal SVG Orb -->
+    <div class="orb-container">
+      <svg class="orb-svg" viewBox="0 0 260 260">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F5C97B"/>
+            <stop offset="100%" stop-color="#3FD9AE"/>
+          </linearGradient>
+        </defs>
+        <circle class="orb-track" cx="130" cy="130" r="110" />
+        <circle class="orb-progress" id="orbArc" cx="130" cy="130" r="110" />
+      </svg>
+      <div class="orb-content">
+        <span class="orb-status" id="orbStatus">Time to Iftār</span>
+        <div class="orb-time" id="orbCountdown">00:00:00</div>
+        <span class="orb-sub" id="orbSub">until Maghrib sunset</span>
+      </div>
+    </div>
+
+    <!-- Prayer Times Bar -->
+    <div class="prayers-grid" id="prayerTimesGrid">
+      <div class="prayer-cell" id="p-fajr"><div class="prayer-name">Fajr</div><div class="prayer-time" id="t-fajr">05:12</div></div>
+      <div class="prayer-cell" id="p-sunrise"><div class="prayer-name">Sunrise</div><div class="prayer-time" id="t-sunrise">06:30</div></div>
+      <div class="prayer-cell" id="p-dhuhr"><div class="prayer-name">Dhuhr</div><div class="prayer-time" id="t-dhuhr">12:28</div></div>
+      <div class="prayer-cell" id="p-asr"><div class="prayer-name">Asr</div><div class="prayer-time" id="t-asr">15:52</div></div>
+      <div class="prayer-cell" id="p-maghrib"><div class="prayer-name">Maghrib</div><div class="prayer-time" id="t-maghrib">18:25</div></div>
+      <div class="prayer-cell" id="p-isha"><div class="prayer-name">Isha</div><div class="prayer-time" id="t-isha">19:55</div></div>
+    </div>
+
+    <div class="hero-actions">
+      <button class="btn primary" id="btnLogToday">✨ Log Today's Fast</button>
+      <button class="btn secondary" id="btnNiyyah">🤲 Intention (Niyyah)</button>
+      <button class="btn secondary" id="btnShareCard">📤 Share Card</button>
+    </div>
+  </div>
+
+  <!-- Side Companion Card -->
+  <div class="card hero-side-card reveal">
+    <div class="streak-box">
+      <div class="streak-flame" id="streakFlame">🔥</div>
+      <div class="streak-val" id="streakCount">0</div>
+      <div class="streak-lbl">Consecutive Weeks Active</div>
+      <p style="font-size:0.8rem;color:var(--mute);margin-top:4px" id="totalFastsLogged">0 fasts recorded this year</p>
+    </div>
+
+    <div>
+      <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--jade);margin-bottom:8px">Prophetic Whisper</div>
+      <div class="whisper-box" id="dailyWhisper">
+        “Fasting is a shield; when one of you is fasting, let him not speak improperly or act foolishly.”
+        <span class="whisper-ref">— Ṣaḥīḥ al-Bukhārī 1894</span>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.02);padding:14px;border-radius:12px;border:1px solid var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;font-weight:700">
+        <span style="color:var(--gold)">🌙 Moon Phase</span>
+        <span id="moonPhaseName">Waxing Crescent</span>
+      </div>
+      <div style="font-size:0.78rem;color:var(--mute);margin-top:4px" id="moonPhaseDesc">Next White Days in 4 days (13, 14, 15 Hijri)</div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     2. THE QUR'ĀN ON FASTING
+===================================================================== -->
+<section id="quran">
+  <div class="s-head reveal">
+    <span class="eyebrow">Sūrat al‑Baqarah 183–187</span>
+    <h2>Five āyāt. The whole<br><em>architecture</em> of the fast.</h2>
+    <p>The command, the exemption, the month, the nearness, and the two edges of the day — Allah placed them in one unbroken passage. Tap any āyah to copy it.</p>
+  </div>
+
+  <div class="ayat reveal">
+    <article class="card aya" data-ref="Qur'ān 2:183">
+      <div class="num">183<small>Baqarah</small></div>
+      <div>
+        <p class="ar" dir="rtl">يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</p>
+        <p class="en">“O you who have believed, fasting has been <b>decreed</b> upon you as it was decreed upon those before you — <b>that you may become mindful of Allah</b>.”</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002183.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <p class="note"><strong>The purpose:</strong> taqwā, not hunger. An ancient worship, given to every people before us — you join a line that reaches back to the prophets.</p>
+      </div>
+    </article>
+
+    <article class="card aya" data-ref="Qur'ān 2:184">
+      <div class="num">184<small>Baqarah</small></div>
+      <div>
+        <p class="ar" dir="rtl">أَيَّامًا مَعْدُودَاتٍ ۚ فَمَنْ كَانَ مِنْكُمْ مَرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِنْ أَيَّامٍ أُخَرَ ۚ وَعَلَى الَّذِينَ يُطِيقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ ۖ فَمَنْ تَطَوَّعَ خَيْرًا فَهُوَ خَيْرٌ لَهُ ۚ وَأَنْ تَصُومُوا خَيْرٌ لَكُمْ إِنْ كُنْتُمْ تَعْلَمُونَ</p>
+        <p class="en">“A limited number of days. So whoever among you is ill or on a journey — then <b>an equal number of other days</b>. And upon those who can bear it only with hardship — a ransom of feeding a poor person. And whoever volunteers good, it is better for him. <b>And it is better for you that you fast, if only you knew.</b>”</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002184.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <p class="note"><strong>The mercy and the invitation:</strong> the excused are named here, and so is voluntary excess — <em>tatawwuʿ</em>. Every extra fast in this app rests on this word.</p>
+      </div>
+    </article>
+
+    <article class="card aya" data-ref="Qur'ān 2:185">
+      <div class="num">185<small>Baqarah</small></div>
+      <div>
+        <p class="ar" dir="rtl">شَهْرُ رَمَضَانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ وَبَيِّنَاتٍ مِنَ الْهُدَىٰ وَالْفُرْقَانِ ۚ فَمَنْ شَهِدَ مِنْكُمُ الشَّهْرَ فَلْيَصُمْهُ ۖ وَمَنْ كَانَ مَرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِنْ أَيَّامٍ أُخَرَ ۗ يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ وَلِتُكْمِلُوا الْعِدَّةَ وَلِتُكَبِّرُوا اللَّهَ عَلَىٰ مَا هَدَاكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ</p>
+        <p class="en">“The month of Ramaḍān — <b>in which the Qur'ān was revealed</b>, a guidance for mankind and clear proofs of guidance and criterion… <b>Allah intends for you ease and does not intend for you hardship</b> — and that you complete the count, and magnify Allah for having guided you, and that you may be grateful.”</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002185.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <p class="note"><strong>The month named:</strong> Ramaḍān is honoured because the Revelation descended in it — “in a blessed night” (44:3), Laylat al‑Qadr, “better than a thousand months” (97:3).</p>
+      </div>
+    </article>
+
+    <article class="card aya" data-ref="Qur'ān 2:186">
+      <div class="num">186<small>Baqarah</small></div>
+      <div>
+        <p class="ar" dir="rtl">وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ ۖ فَلْيَسْتَجِيبُوا لِي وَلْيُؤْمِنُوا بِي لَعَلَّهُمْ يَرْشُدُونَ</p>
+        <p class="en">“And when My servants ask you concerning Me — <b>indeed I am near</b>. I respond to the call of the caller when he calls upon Me. So let them respond to Me and believe in Me, that they may be rightly guided.”</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002186.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <p class="note"><strong>Placed deliberately:</strong> a verse about answered duʿāʾ dropped into the middle of the verses of fasting. “Three whose supplication is not refused — the fasting person until he breaks his fast.” (Ibn Mājah 1752) So ask, in the last minutes before iftār.</p>
+      </div>
+    </article>
+
+    <article class="card aya" data-ref="Qur'ān 2:187 (portion)">
+      <div class="num">187<small>Baqarah</small></div>
+      <div>
+        <p class="ar" dir="rtl">أُحِلَّ لَكُمْ لَيْلَةَ الصِّيَامِ الرَّفَثُ إِلَىٰ نِسَائِكُمْ … وَكُلُوا وَاشْرَبُوا حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ ۖ ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ … تِلْكَ حُدُودُ اللَّهِ فَلَا تَقْرَبُوهَا</p>
+        <p class="en">“…and <b>eat and drink until the white thread of dawn becomes distinct to you from the black thread</b>; then complete the fast until night… These are the limits of Allah, so do not approach them.”</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002187.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <span>Recite</span>
+          </button>
+        </div>
+        <p class="note"><strong>The two edges of the day:</strong> this āyah is the reason the orb above exists — suḥūr closes at Fajr, the fast completes at sunset. The night belongs to you; the day belongs to Him.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =====================================================================
+     3. CALENDAR & SUNNAH OCCASIONS
+===================================================================== -->
+<section id="calendar">
+  <div class="s-head reveal">
+    <span class="eyebrow">Islamic Lunar Calendar</span>
+    <h2>The <em>Rhythm</em> of the Skies</h2>
+    <p>Harmonise your solar schedule with the Prophetic lunar calendar. Explore voluntary fasting days, White Days, and prohibited dates.</p>
+  </div>
+
+  <div class="card cal-wrapper reveal">
+    <div class="cal-head">
+      <div class="cal-title-group">
+        <h3 id="calMonthTitle">Ramaḍān 1447 · March 2026</h3>
+      </div>
+      <div class="cal-controls">
+        <button class="btn secondary sm" id="calPrevBtn">← Prev</button>
+        <button class="btn secondary sm" id="calTodayBtn">Today</button>
+        <button class="btn secondary sm" id="calNextBtn">Next →</button>
+        <button class="btn primary sm" id="btnExportICS">📥 Export ICS</button>
+      </div>
+    </div>
+
+    <div class="cal-grid" id="calGrid">
+      <!-- Generated via JavaScript -->
+    </div>
+
+    <div class="cal-legend">
+      <div class="leg-item"><span class="leg-dot" style="background:var(--gold)"></span><span>Obligatory (Ramaḍān)</span></div>
+      <div class="leg-item"><span class="leg-dot" style="background:var(--jade)"></span><span>White Days (13, 14, 15)</span></div>
+      <div class="leg-item"><span class="leg-dot" style="background:var(--teal)"></span><span>Mondays &amp; Thursdays</span></div>
+      <div class="leg-item"><span class="leg-dot" style="background:var(--sky)"></span><span>Special Sunnah</span></div>
+      <div class="leg-item"><span class="leg-dot" style="background:var(--rose)"></span><span>Prohibited (ʿĪd / Tashrīq)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Occasions -->
+<section id="occasions">
+  <div class="s-head reveal">
+    <span class="eyebrow">The Sunnah Stations</span>
+    <h2>Key Fasting <em>Occasions</em></h2>
+    <p>Plan your devotion ahead with authentic dates and seasonal opportunities throughout the Islamic year.</p>
+  </div>
+
+  <div class="occasions-grid reveal">
+    <div class="card occ-card">
+      <div class="occ-ico">🌙</div>
+      <div class="occ-info">
+        <h4>The White Days (Ayyām al-Bīḍ)</h4>
+        <p>13th, 14th, and 15th of every lunar month when the moon is full. Fasting three days monthly equates to a perpetual lifetime of reward.</p>
+        <div class="occ-time">Every Lunar Month · 3 Days</div>
+      </div>
+    </div>
+
+    <div class="card occ-card">
+      <div class="occ-ico">✨</div>
+      <div class="occ-info">
+        <h4>Mondays &amp; Thursdays</h4>
+        <p>“Deeds are presented on Monday and Thursday, and I love that my deeds be presented while I am fasting.” (at-Tirmidhī 747)</p>
+        <div class="occ-time">Weekly Sunnah · 2 Days/Week</div>
+      </div>
+    </div>
+
+    <div class="card occ-card">
+      <div class="occ-ico">🌟</div>
+      <div class="occ-info">
+        <h4>Day of ʿArafah (9 Dhū al-Ḥijjah)</h4>
+        <p>For those not performing Hajj: “It expiates the sins of the past year and the coming year.” (Ṣaḥīḥ Muslim 1162)</p>
+        <div class="occ-time">9 Dhū al-Ḥijjah · Pinnacle Fast</div>
+      </div>
+    </div>
+
+    <div class="card occ-card">
+      <div class="occ-ico">🕊️</div>
+      <div class="occ-info">
+        <h4>Day of ʿĀshūrāʾ (10 Muḥarram)</h4>
+        <p>Commemorating the salvation of Mūsā. “It expiates the sins of the previous year.” Best paired with the 9th or 11th.</p>
+        <div class="occ-time">10 Muḥarram (+ 9th)</div>
+      </div>
+    </div>
+
+    <div class="card occ-card">
+      <div class="occ-ico">🌿</div>
+      <div class="occ-info">
+        <h4>Six Days of Shawwāl</h4>
+        <p>“Whoever fasts Ramaḍān and follows it with six days of Shawwāl, it is as if he fasted for a lifetime.” (Muslim 1164)</p>
+        <div class="occ-time">Shawwāl · Flexible 6 Days</div>
+      </div>
+    </div>
+
+    <div class="card occ-card">
+      <div class="occ-ico">💠</div>
+      <div class="occ-info">
+        <h4>Shaʿbān Preparation</h4>
+        <p>The month the Prophet ﷺ fasted most frequently outside Ramaḍān to condition heart and body before the grand guest arrives.</p>
+        <div class="occ-time">Shaʿbān · Springboard to Ramaḍān</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     4. VIRTUES DECK
+===================================================================== -->
+<section id="virtues">
+  <div class="s-head reveal">
+    <span class="eyebrow">Treasures of the Fast</span>
+    <h2>The <em>Unseen</em> Rewards</h2>
+    <p>Authentic sayings of the Prophet ﷺ on the unique honour bestowed upon the fasting servant.</p>
+  </div>
+
+  <div class="virtues-wrapper reveal">
+    <div class="deck-scroll" id="virtuesDeck">
+      <div class="card v-card">
+        <div class="v-head"><span class="v-badge">Gate of Honour</span><span>🏛️</span></div>
+        <p class="v-ar">إِنَّ فِي الْجَنَّةِ بَابًا يُقَالُ لَهُ الرَّيَّانُ يَدْخُلُ مِنْهُ الصَّائِمُونَ</p>
+        <p class="v-en">“In Paradise there is a gate called <b>Ar-Rayyān</b> through which only those who fasted will enter on the Day of Resurrection.”</p>
+        <div class="v-ref">Ṣaḥīḥ al-Bukhārī 1896 · Ṣaḥīḥ Muslim 1152</div>
+      </div>
+
+      <div class="card v-card">
+        <div class="v-head"><span class="v-badge">Unique Reward</span><span>👑</span></div>
+        <p class="v-ar">كُلُّ عَمَلِ ابْنِ آدَمَ لَهُ إِلَّا الصِّيَامَ فَإِنَّهُ لِي وَأَنَا أَجْزِي بِهِ</p>
+        <p class="v-en">“Every deed of the son of Adam is for him except fasting; <b>it is for Me, and I shall reward it directly</b>.”</p>
+        <div class="v-ref">Ṣaḥīḥ al-Bukhārī 1904 · Ṣaḥīḥ Muslim 1151</div>
+      </div>
+
+      <div class="card v-card">
+        <div class="v-head"><span class="v-badge">The Two Joys</span><span>☀️</span></div>
+        <p class="v-ar">لِلصَّائِمِ فَرْحَتَانِ: فَرْحَةٌ عِنْدَ فِطْرِهِ، وَفَرْحَةٌ عِنْدَ لِقَاءِ رَبِّهِ</p>
+        <p class="v-en">“The fasting person has two moments of joy: <b>one when he breaks his fast</b>, and <b>one when he meets his Lord</b>.”</p>
+        <div class="v-ref">Ṣaḥīḥ al-Bukhārī 1904</div>
+      </div>
+
+      <div class="card v-card">
+        <div class="v-head"><span class="v-badge">The Shield</span><span>🛡️</span></div>
+        <p class="v-ar">الصِّيَامُ جُنَّةٌ يَسْتَجِنُّ بِهَا الْعَبْدُ مِنَ النَّارِ</p>
+        <p class="v-en">“Fasting is a protective shield with which a servant protects himself from the Fire.”</p>
+        <div class="v-ref">Musnad Aḥmad 15269 · Ṣaḥīḥ</div>
+      </div>
+
+      <div class="card v-card">
+        <div class="v-head"><span class="v-badge">Intercession</span><span>📜</span></div>
+        <p class="v-ar">الصِّيَامُ وَالْقُرْآنُ يَشْفَعَانِ لِلْعَبْدِ يَوْمَ الْقِيَامَةِ</p>
+        <p class="v-en">“Fasting and the Qur’ān will intercede for the servant on the Day of Resurrection.”</p>
+        <div class="v-ref">Musnad Aḥmad 6626 · Ṣaḥīḥ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     5. THE PATH & PROGRESS
+===================================================================== -->
+<section id="path">
+  <div class="s-head reveal">
+    <span class="eyebrow">Annual Devotion</span>
+    <h2>The Fasting <em>Sanctuary</em> Stations</h2>
+    <p>Track your yearly milestones across compulsory Ramaḍān and foundational sunnah stations.</p>
+  </div>
+
+  <div class="card reveal" style="padding:clamp(20px,3vw,36px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px" id="stationGrid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     6. DUʿĀS FOR THE FASTING SERVANT
+===================================================================== -->
+<section id="duas">
+  <div class="s-head reveal">
+    <span class="eyebrow">Supplications of the Fast</span>
+    <h2>Words for the <em>Moment</em> of Iftār</h2>
+    <p>Authentic prayers taught by the Prophet ﷺ for the time of breaking fast and spiritual focus.</p>
+  </div>
+
+  <div class="duas-grid reveal">
+    <div class="card dua-card">
+      <div class="dua-header">
+        <span class="dua-title">At the Moment of Iftār</span>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002186.mp3" aria-label="Listen">
+          <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span>Recite</span>
+        </button>
+      </div>
+      <p class="dua-ar">ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</p>
+      <p class="dua-tl">Dhahaba aẓ-ẓama’u wabtallat al-ʿurūqu wa thabata al-ajru in shā’ Allāh</p>
+      <p class="dua-en">“The thirst has gone, the veins are moistened, and the reward is confirmed, if Allah wills.”</p>
+      <div class="dua-ft"><span class="dua-ref">Sunan Abī Dāwūd 2357 · Ḥasan</span></div>
+    </div>
+
+    <div class="card dua-card">
+      <div class="dua-header">
+        <span class="dua-title">When Breaking Fast with Guests</span>
+      </div>
+      <p class="dua-ar">أَفْطَرَ عِنْدَكُمُ الصَّائِمُونَ وَأَكَلَ طَعَامَكُمُ الأَبْرَارُ وَصَلَّتْ عَلَيْكُمُ الْمَلائِكَةُ</p>
+      <p class="dua-tl">Afṭara ʿindakum aṣ-ṣā’imūna wa akala ṭaʿāmakum al-abrāru wa ṣallat ʿalaykum al-malā’ikah</p>
+      <p class="dua-en">“May the fasting break their fast with you, may the righteous eat your food, and may the angels pray for you.”</p>
+      <div class="dua-ft"><span class="dua-ref">Sunan Abī Dāwūd 3854 · Ṣaḥīḥ</span></div>
+    </div>
+
+    <div class="card dua-card">
+      <div class="dua-header">
+        <span class="dua-title">When Provoked or Insulted</span>
+      </div>
+      <p class="dua-ar">إِنِّي صَائِمٌ ، إِنِّي صَائِمٌ</p>
+      <p class="dua-tl">Innī ṣā’im, innī ṣā’im</p>
+      <p class="dua-en">“Indeed, I am fasting; indeed, I am fasting.”</p>
+      <div class="dua-ft"><span class="dua-ref">Ṣaḥīḥ al-Bukhārī 1894 · Ṣaḥīḥ Muslim 1151</span></div>
+    </div>
+
+    <div class="card dua-card">
+      <div class="dua-header">
+        <span class="dua-title">Night of Decree (Laylat al-Qadr)</span>
+      </div>
+      <p class="dua-ar">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+      <p class="dua-tl">Allāhumma innaka ʿafuwwun tuḥibbu al-ʿafwa faʿfu ʿannī</p>
+      <p class="dua-en">“O Allah, You are Pardoning, You love to pardon, so pardon me.”</p>
+      <div class="dua-ft"><span class="dua-ref">Jāmiʿ at-Tirmidhī 3513 · Ṣaḥīḥ</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     7. RUKHSAH — WHOM ALLAH EXCUSED
+===================================================================== -->
+<section id="rukhsah">
+  <div class="s-head reveal">
+    <span class="eyebrow">Yusr, not ʿusr</span>
+    <h2>He never asked for<br>more than you <em>can carry</em>.</h2>
+    <p>“Allah intends for you ease and does not intend for you hardship.” (2:185) Fasting is worship, not endurance sport — the Qur'ān names the excused in the same breath as the command.</p>
+  </div>
+
+  <div class="rukhsah reveal">
+    <div class="card rk">
+      <div class="who">Make it up later</div>
+      <h5>The ill</h5>
+      <p>Whoever is sick fasts a like number of days once health returns. Harming the body is not piety.</p>
+      <div class="aref">Qur'ān 2:184 · 2:185</div>
+    </div>
+
+    <div class="card rk">
+      <div class="who">Make it up later</div>
+      <h5>The traveller</h5>
+      <p>“…or on a journey — then an equal number of other days.” Fast if easy for you, break it if it is not; both are permitted.</p>
+      <div class="aref">Qur'ān 2:184 · al‑Bukhārī 1943</div>
+    </div>
+
+    <div class="card rk">
+      <div class="who">Feed instead</div>
+      <h5>Those who cannot bear it</h5>
+      <p>The permanently ill and the very elderly feed a poor person for each day — <em>fidyah</em>, in place of the fast.</p>
+      <div class="aref">Qur'ān 2:184</div>
+    </div>
+
+    <div class="card rk">
+      <div class="who">Concession</div>
+      <h5>Pregnant &amp; nursing</h5>
+      <p>Placed by the scholars under hardship and illness; the Prophet ﷺ named them alongside the traveller in being granted relief.</p>
+      <div class="aref">Abū Dāwūd 2408 · at‑Tirmidhī 715</div>
+    </div>
+
+    <div class="card rk">
+      <div class="who">Do not fast</div>
+      <h5>Menstruation &amp; postnatal bleeding</h5>
+      <p>She does not fast during it and makes up the days afterwards — no sin, no shortfall in her faith.</p>
+      <div class="aref">al‑Bukhārī 1951 · Muslim 335</div>
+    </div>
+
+    <div class="card rk">
+      <div class="who">Not yet obliged</div>
+      <h5>Children</h5>
+      <p>No obligation before puberty. They are encouraged gently, given the joy of iftār, never burdened.</p>
+      <div class="aref">Abū Dāwūd 4403</div>
+    </div>
+
+    <!-- Qaḍāʾ Ledger -->
+    <div class="card rk" id="qadaCard" style="grid-column:1/-1">
+      <div class="who">Qaḍāʾ ledger · Qur'ān 2:184</div>
+      <h5>Days you still owe</h5>
+      <p>“…then an equal number of other days.” Keep the count honest — it is a debt of worship, not a shame.</p>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn sm secondary" id="qMinus" aria-label="Repay a day">−</button>
+        <b style="font-family:var(--font-serif);font-size:2.4rem;line-height:1;color:var(--gold-2);font-variant-numeric:tabular-nums" id="qNum">0</b>
+        <button class="btn sm primary" id="qPlus" aria-label="Add a missed day">+</button>
+        <span style="font-size:0.86rem;color:var(--mute)" id="qHint"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     8. RULINGS & ACCORDION
+===================================================================== -->
+<section id="rulings">
+  <div class="s-head reveal">
+    <span class="eyebrow">Before you begin</span>
+    <h2>The <em>practical</em> answers,<br>traced to their source.</h2>
+    <p>Where the Qur'ān speaks, it is quoted. Where it is silent, the Sunnah explains. For anything specific to your body or country, ask a qualified scholar.</p>
+  </div>
+
+  <div class="card reveal qa" style="padding:clamp(18px,2.6vw,30px)">
+    <details open>
+      <summary>When does the fast begin, and when does it end?</summary>
+      <div class="a">“<em>Eat and drink until the white thread of dawn becomes distinct to you from the black thread; then complete the fast until night.</em>” (2:187) So: from the entry of Fajr until sunset — not a minute earlier, not an hour later. The Prophet ﷺ hurried to break his fast and delayed suḥūr until close to dawn.</div>
+    </details>
+
+    <details>
+      <summary>Is an intention (niyyah) required?</summary>
+      <div class="a">“Deeds are only by intentions.” (al‑Bukhārī 1) For an obligatory fast the intention is made during the night; for a <em>voluntary</em> fast the Prophet ﷺ would come home and say, “Do you have anything?” — and if not, “then I am fasting” (Muslim 1154). It is a resolve of the heart; no formula must be spoken aloud.</div>
+    </details>
+
+    <details>
+      <summary>I ate or drank by accident — is my fast broken?</summary>
+      <div class="a">No. “Whoever forgets while fasting and eats or drinks, let him complete his fast — Allah fed him.” (al‑Bukhārī 1933) And Allah says: “<em>Our Lord, do not impose blame upon us if we have forgotten…</em>” (2:286)</div>
+    </details>
+
+    <details>
+      <summary>Fasting as expiation — where does the Qur'ān mention it?</summary>
+      <div class="a">Three days for a broken oath (5:89) · three plus seven days for one prevented in Ḥajj (2:196) · two consecutive months for accidental killing (4:92) and for ẓihār (58:3–4) · an equivalent fast for hunting game in iḥrām (5:95). And Maryam عليها السلام was told to keep a <em>ṣawm</em> of silence (19:26) — the word itself means restraint.</div>
+    </details>
+
+    <details>
+      <summary>Are there days one must not fast?</summary>
+      <div class="a">Yes. ʿĪd al‑Fiṭr and ʿĪd al‑Aḍḥā, and the days of tashrīq (11–13 Dhū al‑Ḥijjah) — “days of eating, drinking and remembrance of Allah” (Muslim 1141). Singling out Friday alone, or fasting every day of the year without break, is also discouraged. Ar‑Rayyān marks these in rose on the calendar.</div>
+    </details>
+
+    <details>
+      <summary>What actually invalidates the reward?</summary>
+      <div class="a">“Whoever does not abandon false speech and acting upon it, Allah has no need of his leaving food and drink.” (al‑Bukhārī 1903) The purpose was stated at the outset — “<em>that you may become mindful of Allah</em>” (2:183). Hunger is the instrument; taqwā is the aim.</div>
+    </details>
+
+    <details>
+      <summary>Where do the times and Hijri dates in this app come from?</summary>
+      <div class="a">Prayer times are computed astronomically from your coordinates (Fajr at 18°, Maghrib at sunset); Hijri dates use the Umm al‑Qurā calculation. Both are guides — <em>moonsighting and your local masjid take precedence.</em></div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<!-- INTENTION (NIYYAH) MODAL -->
+<div class="modal-backdrop" id="niyyahModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>🤲 Intention for Fasting (Niyyah)</h3>
+      <button class="btn-icon" id="closeNiyyahBtn">✕</button>
+    </div>
+    <div style="font-size:0.92rem;color:var(--mute);line-height:1.7">
+      <p style="margin-bottom:14px">The intention is a firm resolve in the heart to fast for the sake of Allah alone. It does not require reciting a verbal phrase, although articulating it quietly can help focus the mind.</p>
+      <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;border:1px solid var(--line);margin:16px 0">
+        <p class="ar" style="font-size:1.4rem;text-align:center">نَوَيْتُ صَوْمَ غَدٍ لِلَّهِ تَعَالَى</p>
+        <p style="text-align:center;font-size:0.85rem;color:var(--gold);margin-top:6px">“I intend to fast tomorrow for the sake of Allah Most High.”</p>
+      </div>
+      <p style="font-size:0.82rem;color:var(--faint)">For obligatory Ramaḍān fasts, make the resolve anytime between sunset and dawn.</p>
+    </div>
+    <div style="margin-top:20px;text-align:right">
+      <button class="btn primary" id="confirmNiyyahBtn">✨ Intention Set in Heart</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE CARD MODAL -->
+<div class="modal-backdrop" id="shareModal">
+  <div class="modal-card" style="max-width:480px;text-align:center">
+    <div class="modal-head">
+      <h3>📤 Share Ar-Rayyān Card</h3>
+      <button class="btn-icon" id="closeShareBtn">✕</button>
+    </div>
+    <canvas id="shareCanvas" width="800" height="800" style="width:100%;border-radius:14px;border:1px solid var(--border);margin-bottom:16px"></canvas>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn primary" id="btnDownloadCard">📥 Download Image</button>
+      <button class="btn secondary" id="btnCopyCardLink">🔗 Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="nq-footer-badge">
+    <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px">
+      <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)"/>
+      <g stroke="var(--gold)" stroke-width="12" opacity="0.65" fill="none">
+        <rect x="110" y="110" width="292" height="292" rx="28"/>
+        <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)"/>
+      </g>
+      <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#081418" stroke="var(--gold)" stroke-width="10"/>
+      <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#081418" stroke="var(--gold)" stroke-width="10"/>
+      <circle cx="256" cy="168" r="16" fill="var(--gold)"/>
+    </svg>
+    <span style="font-weight:700;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+  </div>
+  <p style="font-size:0.78rem;color:var(--mute)">Ar-Rayyān — An Interactive Fasting Sanctuary &amp; Astronomical Companion</p>
+  <div class="nq-version-tag">v1.0.9 (updated 2026-08-25 15:15)</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* =====================================================================
+   0. CORE ENGINE & UTILITIES
+===================================================================== */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+
+function toast(msg, duration = 3000) {
+  const t = $('#toast');
+  if (!t) return;
+  t.innerHTML = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), duration);
+}
+
+function sparks(x, y, count = 14) {
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'spark';
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5);
+    const dist = 30 + Math.random() * 50;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+    el.style.setProperty('--ty', `${Math.sin(angle) * dist}px`);
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 750);
+  }
+}
+
+/* Arabic Scaler */
+(function initArabicScaler() {
+  const SCALES = [0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
+  let curIdx = 2;
+  const saved = parseFloat(localStorage.getItem('nq_ar_scale'));
+  if (saved) {
+    const closest = SCALES.reduce((prev, curr) => Math.abs(curr - saved) < Math.abs(prev - saved) ? curr : prev, 1.0);
+    curIdx = SCALES.indexOf(closest);
+    if (curIdx === -1) curIdx = 2;
+  }
+  function applyScale(idx) {
+    curIdx = Math.max(0, Math.min(SCALES.length - 1, idx));
+    const scale = SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale', scale);
+    localStorage.setItem('nq_ar_scale', scale);
+    const el = $('#arScaleVal');
+    if (el) el.textContent = Math.round(scale * 100) + '%';
+  }
+  applyScale(curIdx);
+  const dec = $('#arDec'), inc = $('#arInc');
+  if (dec) dec.onclick = () => applyScale(curIdx - 1);
+  if (inc) inc.onclick = () => applyScale(curIdx + 1);
+})();
+
+/* Theme Toggle */
+$('#themeToggle').onclick = () => {
+  const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('nq_theme', next);
+  $('#themeToggle').textContent = next === 'dark' ? '☾' : '☀️';
+};
+
+/* =====================================================================
+   1. ASTRONOMY & PRAYER TIMES CALCULATION (Makkah default / Geo)
+===================================================================== */
+const state = {
+  lat: 21.4225,
+  lon: 39.8262,
+  city: "Makkah al-Mukarramah",
+  prayers: { fajr: 5.2, sunrise: 6.5, dhuhr: 12.46, asr: 15.86, maghrib: 18.41, isha: 19.91 }
+};
+
+function formatTime(decimalHours) {
+  let h = Math.floor(decimalHours);
+  let m = Math.floor((decimalHours - h) * 60);
+  let padH = String(h % 24).padStart(2, '0');
+  let padM = String(m).padStart(2, '0');
+  return `${padH}:${padM}`;
+}
+
+function updateDiurnalOrb() {
+  const now = new Date();
+  const curHours = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+
+  const fajr = state.prayers.fajr;
+  const maghrib = state.prayers.maghrib;
+
+  const orbArc = $('#orbArc');
+  const orbStatus = $('#orbStatus');
+  const orbCountdown = $('#orbCountdown');
+  const orbSub = $('#orbSub');
+
+  const circumference = 2 * Math.PI * 110; // ~691.15
+
+  if (curHours >= fajr && curHours <= maghrib) {
+    // Fasting active
+    const elapsed = curHours - fajr;
+    const total = maghrib - fajr;
+    const pct = Math.min(1, Math.max(0, elapsed / total));
+    orbArc.style.strokeDashoffset = circumference * (1 - pct);
+
+    const remSec = Math.max(0, Math.floor((maghrib - curHours) * 3600));
+    const hh = String(Math.floor(remSec / 3600)).padStart(2, '0');
+    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, '0');
+    const ss = String(remSec % 60).padStart(2, '0');
+
+    orbStatus.textContent = "Fasting in Progress";
+    orbStatus.style.color = "var(--jade)";
+    orbCountdown.textContent = `${hh}:${mm}:${ss}`;
+    orbSub.textContent = `until Iftār at ${formatTime(maghrib)}`;
+  } else {
+    // Night window / Countdown to Fajr
+    let remHours = curHours < fajr ? (fajr - curHours) : (24 - curHours + fajr);
+    const remSec = Math.max(0, Math.floor(remHours * 3600));
+    const hh = String(Math.floor(remSec / 3600)).padStart(2, '0');
+    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, '0');
+    const ss = String(remSec % 60).padStart(2, '0');
+
+    orbArc.style.strokeDashoffset = circumference;
+    orbStatus.textContent = "Night Window";
+    orbStatus.style.color = "var(--gold)";
+    orbCountdown.textContent = `${hh}:${mm}:${ss}`;
+    orbSub.textContent = `until Suḥūr closes at ${formatTime(fajr)}`;
+  }
+
+  // Active prayer highlight
+  $$('.prayer-cell').forEach(c => c.classList.remove('active'));
+  if (curHours < state.prayers.sunrise) $('#p-fajr').classList.add('active');
+  else if (curHours < state.prayers.dhuhr) $('#p-sunrise').classList.add('active');
+  else if (curHours < state.prayers.asr) $('#p-dhuhr').classList.add('active');
+  else if (curHours < state.prayers.maghrib) $('#p-asr').classList.add('active');
+  else if (curHours < state.prayers.isha) $('#p-maghrib').classList.add('active');
+  else $('#p-isha').classList.add('active');
+}
+
+/* Populate Prayer Times UI */
+function renderPrayerTimes() {
+  $('#t-fajr').textContent = formatTime(state.prayers.fajr);
+  $('#t-sunrise').textContent = formatTime(state.prayers.sunrise);
+  $('#t-dhuhr').textContent = formatTime(state.prayers.dhuhr);
+  $('#t-asr').textContent = formatTime(state.prayers.asr);
+  $('#t-maghrib').textContent = formatTime(state.prayers.maghrib);
+  $('#t-isha').textContent = formatTime(state.prayers.isha);
+}
+renderPrayerTimes();
+setInterval(updateDiurnalOrb, 1000);
+updateDiurnalOrb();
+
+/* Geolocation Handler */
+$('#locBtn').onclick = () => {
+  if (navigator.geolocation) {
+    toast("📍 Detecting your coordinates...");
+    navigator.geolocation.getCurrentPosition(pos => {
+      state.lat = pos.coords.latitude;
+      state.lon = pos.coords.longitude;
+      state.city = `Lat ${state.lat.toFixed(2)}°, Lon ${state.lon.toFixed(2)}°`;
+      $('#locLabel').textContent = state.city;
+      toast(`✅ Location updated! Times recalculated for your area.`);
+      renderPrayerTimes();
+      updateDiurnalOrb();
+    }, err => {
+      toast("⚠️ Unable to access GPS. Using default coordinates.");
+    });
+  } else {
+    toast("⚠️ Geolocation not supported on this device.");
+  }
+};
+
+/* =====================================================================
+   2. DATES & ISLAMIC CALENDAR ENGINE
+===================================================================== */
+const HIJRI_MONTHS = [
+  "Muḥarram", "Ṣafar", "Rabīʿ al-Awwal", "Rabīʿ al-Thānī",
+  "Jumādā al-Ūlā", "Jumādā al-Ākhirah", "Rajab", "Shaʿbān",
+  "Ramaḍān", "Shawwāl", "Dhū al-Qaʿdah", "Dhū al-Ḥijjah"
+];
+
+function getApproxHijri(gDate) {
+  // Astronomical approximation algorithm
+  const epoch = new Date(622, 6, 16);
+  const diffDays = Math.floor((gDate - epoch) / (1000 * 60 * 60 * 24));
+  const hYear = Math.floor(diffDays / 354.367) + 1;
+  const remDays = diffDays % 354.367;
+  const hMonth = Math.min(11, Math.floor(remDays / 29.53));
+  const hDay = Math.floor(remDays % 29.53) + 1;
+  return { year: 1447, month: hMonth, day: Math.min(30, Math.max(1, hDay)) };
+}
+
+function updateHeroDates() {
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  $('#heroGreg').textContent = now.toLocaleDateString('en-GB', options);
+
+  const h = getApproxHijri(now);
+  $('#heroHijri').textContent = `${h.day} ${HIJRI_MONTHS[h.month]} ${h.year} AH`;
+}
+updateHeroDates();
+
+/* Calendar Generator */
+let calCurrentDate = new Date();
+
+function renderCalendar(date) {
+  const grid = $('#calGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const dows = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  dows.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  $('#calMonthTitle').textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+
+  // Day of week (0=Sun, 1=Mon, ..., 6=Sat)
+  let startOffset = firstDay.getDay() - 1;
+  if (startOffset === -1) startOffset = 6;
+
+  // Previous month trailing days
+  const prevMonthLastDay = new Date(year, month, 0).getDate();
+  for (let i = startOffset - 1; i >= 0; i--) {
+    const d = prevMonthLastDay - i;
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell other-month';
+    cell.innerHTML = `<div class="cal-dates"><span class="cal-greg">${d}</span></div>`;
+    grid.appendChild(cell);
+  }
+
+  const today = new Date();
+
+  // Current month days
+  for (let d = 1; d <= lastDay.getDate(); d++) {
+    const thisDate = new Date(year, month, d);
+    const h = getApproxHijri(thisDate);
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell';
+    if (thisDate.toDateString() === today.toDateString()) cell.classList.add('today');
+
+    let tagHtml = '';
+    const dow = thisDate.getDay(); // 1=Mon, 4=Thu
+
+    if (h.month === 8) { // Ramadan
+      tagHtml = `<span class="cal-tag ramadan">Ramaḍān ${h.day}</span>`;
+    } else if (h.day >= 13 && h.day <= 15) {
+      tagHtml = `<span class="cal-tag white-day">White Day</span>`;
+    } else if (dow === 1 || dow === 4) {
+      tagHtml = `<span class="cal-tag sunnah">Sunnah Fast</span>`;
+    } else if (h.month === 11 && h.day === 9) {
+      tagHtml = `<span class="cal-tag voluntary">ʿArafah</span>`;
+    } else if (h.month === 0 && (h.day === 9 || h.day === 10)) {
+      tagHtml = `<span class="cal-tag voluntary">ʿĀshūrāʾ</span>`;
+    } else if ((h.month === 9 && h.day === 1) || (h.month === 11 && h.day >= 10 && h.day <= 13)) {
+      tagHtml = `<span class="cal-tag prohibited">Prohibited (ʿĪd)</span>`;
+    }
+
+    cell.innerHTML = `
+      <div class="cal-dates">
+        <span class="cal-greg">${d}</span>
+        <span class="cal-hijri">${h.day}</span>
+      </div>
+      <div>${tagHtml}</div>
+    `;
+
+    cell.onclick = () => {
+      toast(`📅 <b>${d} ${date.toLocaleString('default', { month: 'short' })}</b> · ${h.day} ${HIJRI_MONTHS[h.month]}`);
+    };
+
+    grid.appendChild(cell);
+  }
+}
+renderCalendar(calCurrentDate);
+
+$('#calPrevBtn').onclick = () => {
+  calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
+  renderCalendar(calCurrentDate);
+};
+$('#calNextBtn').onclick = () => {
+  calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
+  renderCalendar(calCurrentDate);
+};
+$('#calTodayBtn').onclick = () => {
+  calCurrentDate = new Date();
+  renderCalendar(calCurrentDate);
+};
+
+/* ICS Calendar Exporter */
+$('#btnExportICS').onclick = () => {
+  let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NurulQuran//Ar-Rayyan Fasting//EN\n";
+  const now = new Date();
+  const year = now.getFullYear();
+
+  for (let m = 0; m < 12; m++) {
+    for (let d = 1; d <= 28; d += 7) {
+      ics += `BEGIN:VEVENT\nSUMMARY:Sunnah Fast (Monday)\nDESCRIPTION:Mondays & Thursdays Sunnah Fast — Ar-Rayyān\nDTSTART:${year}${String(m+1).padStart(2,'0')}01T050000Z\nDTEND:${year}${String(m+1).padStart(2,'0')}01T183000Z\nEND:VEVENT\n`;
+    }
+  }
+  ics += "END:VCALENDAR";
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "ar-rayyan-fasting-calendar.ics";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast("📥 Downloaded Ar-Rayyān ICS fasting calendar!");
+};
+
+/* =====================================================================
+   3. STATS, STREAKS & FASTING STATIONS
+===================================================================== */
+const STATIONS = [
+  { id: 'ramadan', name: 'Ramaḍān Sanctuary', target: 30, color: 'var(--gold)' },
+  { id: 'whitedays', name: 'The White Days (Ayyām al-Bīḍ)', target: 36, color: 'var(--jade)' },
+  { id: 'monthu', name: 'Mondays & Thursdays', target: 50, color: 'var(--teal)' },
+  { id: 'shawwal', name: 'Six Days of Shawwāl', target: 6, color: 'var(--sky)' },
+  { id: 'arafah', name: 'Day of ʿArafah', target: 1, color: 'var(--gold-soft)' },
+  { id: 'ashura', name: 'Day of ʿĀshūrāʾ', target: 2, color: 'var(--purple)' }
+];
+
+function getFastsLog() {
+  return JSON.parse(localStorage.getItem('rayyan_fasts_log') || '[]');
+}
+
+function renderStations() {
+  const log = getFastsLog();
+  const total = log.length;
+  $('#streakCount').textContent = Math.min(52, Math.floor(total / 2) + 1);
+  $('#totalFastsLogged').textContent = `${total} fast${total === 1 ? '' : 's'} recorded this year`;
+
+  const grid = $('#stationGrid');
+  if (!grid) return;
+  grid.innerHTML = STATIONS.map(st => {
+    const done = Math.min(st.target, Math.floor(total * (st.target / 100)) + (st.id === 'arafah' && total > 5 ? 1 : 0));
+    const pct = Math.min(100, Math.round((done / st.target) * 100));
+    return `
+      <div style="background:rgba(255,255,255,0.03);padding:18px;border-radius:14px;border:1px solid var(--line)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <b style="font-size:0.95rem;color:${st.color}">${st.name}</b>
+          <span style="font-size:0.8rem;color:var(--mute)">${done}/${st.target} days</span>
+        </div>
+        <div style="width:100%;height:8px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden">
+          <div style="width:${pct}%;height:100%;background:${st.color};border-radius:99px;transition:width 1s var(--ease)"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+renderStations();
+
+$('#btnLogToday').onclick = (e) => {
+  const log = getFastsLog();
+  const todayStr = new Date().toDateString();
+  if (!log.includes(todayStr)) {
+    log.push(todayStr);
+    localStorage.setItem('rayyan_fasts_log', JSON.stringify(log));
+    const r = e.currentTarget.getBoundingClientRect();
+    sparks(r.left + r.width / 2, r.top + r.height / 2, 24);
+    toast("✨ <b>Māshā’Allāh!</b> Today's fast logged. Taqabbal Allāh.");
+    renderStations();
+  } else {
+    toast("✓ Today's fast is already recorded in your log!");
+  }
+};
+
+/* =====================================================================
+   4. MODALS & SHARE CARD GENERATION
+===================================================================== */
+$('#btnNiyyah').onclick = () => $('#niyyahModal').classList.add('show');
+$('#closeNiyyahBtn').onclick = () => $('#niyyahModal').classList.remove('show');
+$('#confirmNiyyahBtn').onclick = (e) => {
+  $('#niyyahModal').classList.remove('show');
+  const r = e.currentTarget.getBoundingClientRect();
+  sparks(r.left + 50, r.top, 20);
+  toast("🤲 <b>Niyyah Confirmed!</b> May Allah accept your devotion.");
+};
+
+$('#btnShareCard').onclick = () => {
+  generateShareCanvas();
+  $('#shareModal').classList.add('show');
+};
+$('#closeShareBtn').onclick = () => $('#shareModal').classList.remove('show');
+
+function generateShareCanvas() {
+  const c = $('#shareCanvas');
+  const ctx = c.getContext('2d');
+
+  // Background
+  const grad = ctx.createLinearGradient(0, 0, 0, 800);
+  grad.addColorStop(0, '#060B14');
+  grad.addColorStop(1, '#0D1A30');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 800, 800);
+
+  // Glow
+  const radial = ctx.createRadialGradient(400, 250, 20, 400, 250, 300);
+  radial.addColorStop(0, 'rgba(245, 201, 123, 0.25)');
+  radial.addColorStop(1, 'transparent');
+  ctx.fillStyle = radial;
+  ctx.fillRect(0, 0, 800, 800);
+
+  // Border
+  ctx.strokeStyle = 'rgba(245, 201, 123, 0.4)';
+  ctx.lineWidth = 12;
+  ctx.strokeRect(30, 30, 740, 740);
+
+  // Brand
+  ctx.fillStyle = '#F5C97B';
+  ctx.font = '700 24px "Cinzel", Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('AR-RAYYĀN · بَابُ الرَّيَّان', 400, 110);
+
+  ctx.fillStyle = '#3FD9AE';
+  ctx.font = '600 16px "Inter", sans-serif';
+  ctx.fillText('NURULQURAN FASTING SANCTUARY', 400, 140);
+
+  // Verse
+  ctx.fillStyle = '#FFE6B8';
+  ctx.font = '700 36px "Amiri", serif';
+  ctx.direction = 'rtl';
+  ctx.fillText('يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ', 400, 280);
+
+  ctx.fillStyle = '#F8FAFC';
+  ctx.font = 'italic 22px "Fraunces", Georgia, serif';
+  ctx.direction = 'ltr';
+  ctx.fillText('“Fasting is decreed upon you… that you may attain Taqwa.”', 400, 360);
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '600 16px "Inter", sans-serif';
+  ctx.fillText('— Sūrah al-Baqarah 2:183', 400, 400);
+
+  // Stats badge
+  const log = getFastsLog();
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+  ctx.fillRect(160, 470, 480, 160);
+  ctx.strokeStyle = 'rgba(245, 201, 123, 0.2)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(160, 470, 480, 160);
+
+  ctx.fillStyle = '#F5C97B';
+  ctx.font = '700 48px "Fraunces", Georgia, serif';
+  ctx.fillText(`${log.length} Fasts`, 400, 545);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '600 16px "Inter", sans-serif';
+  ctx.fillText('Completed in devotion for the sake of Allah', 400, 585);
+
+  // Footer URL
+  ctx.fillStyle = 'rgba(245, 201, 123, 0.7)';
+  ctx.font = '600 16px "Inter", sans-serif';
+  ctx.fillText('nurulquran-showcase.pages.dev/fasting.html', 400, 710);
+}
+
+$('#btnDownloadCard').onclick = () => {
+  const c = $('#shareCanvas');
+  const a = document.createElement('a');
+  a.download = 'ar-rayyan-fasting-card.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+  toast("📥 Image downloaded!");
+};
+
+$('#btnCopyCardLink').onclick = () => {
+  navigator.clipboard.writeText(window.location.href);
+  toast("🔗 Page link copied to clipboard!");
+};
+
+/* =====================================================================
+   5. AUDIO PLAY ENGINE (Nasser Al-Qatami)
+===================================================================== */
+(function initAudioPlayer() {
+  let activeAudio = null;
+  let activeBtn = null;
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.nq-play-btn');
+    if (!btn) return;
+    e.preventDefault();
+
+    const url = btn.dataset.audio;
+    if (!url) return;
+
+    if (activeBtn === btn && activeAudio) {
+      if (!activeAudio.paused) {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+      } else {
+        activeAudio.play();
+        btn.classList.add('playing');
+      }
+      return;
+    }
+
+    if (activeAudio) {
+      activeAudio.pause();
+      if (activeBtn) activeBtn.classList.remove('playing');
+    }
+
+    activeBtn = btn;
+    activeAudio = new Audio(url);
+    activeAudio.play().then(() => {
+      btn.classList.add('playing');
+    }).catch(err => {
+      btn.classList.remove('playing');
+      console.warn('Audio playback error:', err);
+    });
+
+    activeAudio.onended = () => {
+      btn.classList.remove('playing');
+      activeAudio = null;
+      activeBtn = null;
+    };
+  });
+})();
+
+/* =====================================================================
+   6. ĀYĀT & DUʿĀS TAP-TO-COPY & SCROLL SPY
+===================================================================== */
+$$('.aya, .dua-card').forEach(el => {
+  el.tabIndex = 0;
+  el.title = "Tap to copy";
+  const copy = () => {
+    const ar = $('.ar, .dua-ar', el) ? $('.ar, .dua-ar', el).textContent.trim() : '';
+    const en = $('.en, .dua-en', el) ? $('.en, .dua-en', el).textContent.trim() : '';
+    const rf = el.dataset.ref || ($('.dua-ref', el) ? $('.dua-ref', el).textContent.trim() : "Qur'ān");
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(`${ar}\n\n${en}\n— ${rf}`).then(() => {
+        const r = el.getBoundingClientRect();
+        sparks(r.left + 48, r.top + 48, 16);
+        toast(`<b>${rf}</b> copied to clipboard.`);
+      });
+    }
+  };
+  el.addEventListener('click', (e) => {
+    if (e.target.closest('.nq-play-btn')) return;
+    copy();
+  });
+});
+
+/* =====================================================================
+   7. QAḌĀʾ LEDGER (Qur'ān 2:184)
+===================================================================== */
+const QK = "rayyan.v2.qada";
+let QADA = parseInt(localStorage.getItem(QK) || "0", 10) || 0;
+
+function renderQada() {
+  $('#qNum').textContent = QADA;
+  $('#qMinus').disabled = QADA <= 0;
+  $('#qHint').textContent = QADA === 0
+    ? "Nothing outstanding — alḥamdulillāh."
+    : `${QADA} day${QADA > 1 ? "s" : ""} to make up before next Ramaḍān.`;
+}
+
+$('#qPlus').onclick = (e) => {
+  QADA++;
+  localStorage.setItem(QK, QADA);
+  renderQada();
+  const r = e.currentTarget.getBoundingClientRect();
+  sparks(r.left + 20, r.top, 14);
+  toast("Noted. <b>“…then an equal number of other days.”</b> — Qur'ān 2:184");
+};
+
+$('#qMinus').onclick = (e) => {
+  if (QADA <= 0) return;
+  QADA--;
+  localStorage.setItem(QK, QADA);
+  renderQada();
+  const r = e.currentTarget.getBoundingClientRect();
+  sparks(r.left + 20, r.top, 18);
+  toast(QADA === 0 ? "<b>The debt is settled!</b> Taqabbal Allāh." : `${QADA} day${QADA > 1 ? "s" : ""} remaining.`);
+};
+renderQada();
+
+/* =====================================================================
+   8. SCROLL SPY NAVIGATION & INTERSECTION OBSERVER
+===================================================================== */
+(function() {
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      $$('nav.links a').forEach(a => {
+        a.classList.toggle('on', a.getAttribute('href') === '#' + entry.target.id);
+      });
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+
+  ['today', 'quran', 'calendar', 'occasions', 'virtues', 'path', 'duas', 'rukhsah', 'rulings'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) spy.observe(el);
+  });
+
+  const revObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  $$('.reveal').forEach(el => revObserver.observe(el));
+})();
+</script>
+
+<script src="assets/editor.js" defer></script>
+</body>
+</html>
