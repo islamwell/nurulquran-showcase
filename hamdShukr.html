@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#07100f" />
+<title>Ḥamd &amp; Shukr — A Qur'anic Practice of Praise &amp; Gratitude</title>
+<meta name="description" content="An interactive Qur'anic companion for hamd (praise of Allah) and shukr (gratitude) — to Allah, to parents, and to people." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..600&family=Inter+Tight:wght@300..800&family=Noto+Naskh+Arabic:wght@400..700&display=swap" />
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   0 · DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════ */
+@property --angle   { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@property --glow    { syntax: '<number>'; inherits: false; initial-value: 0; }
+@property --sweep   { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --ring    { syntax: '<number>'; inherits: false; initial-value: 0; }
+
+:root{
+  /* Palette — perceptual OKLCH so gradients never go muddy */
+  --gold:      oklch(84% 0.132 84);
+  --gold-deep: oklch(70% 0.145 72);
+  --emerald:   oklch(76% 0.135 166);
+  --teal:      oklch(70% 0.105 195);
+  --violet:    oklch(68% 0.150 300);
+
+  --ink:       oklch(97% 0.010 90);
+  --ink-2:     oklch(83% 0.014 95 / .78);
+  --ink-3:     oklch(75% 0.012 95 / .55);
+
+  --bg:        oklch(15.5% 0.026 178);
+  --bg-2:      oklch(12% 0.020 180);
+  --pane:      oklch(100% 0 0 / .045);
+  --pane-2:    oklch(100% 0 0 / .075);
+  --edge:      oklch(100% 0 0 / .10);
+  --edge-hi:   oklch(100% 0 0 / .22);
+
+  --shadow-lo: 0 1px 2px oklch(0% 0 0 / .35);
+  --shadow-md: 0 18px 50px -22px oklch(0% 0 0 / .70);
+  --shadow-hi: 0 44px 110px -34px oklch(0% 0 0 / .82);
+
+  /* Type */
+  --f-ui:  'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+  --f-dis: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --f-ar:  'Amiri Quran', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  --f-arui:'Noto Naskh Arabic', 'Amiri Quran', serif;
+
+  /* Fluid scale */
+  --t-xs: clamp(.72rem, .70rem + .10vw, .80rem);
+  --t-sm: clamp(.84rem, .80rem + .18vw, .95rem);
+  --t-md: clamp(1rem, .95rem + .28vw, 1.14rem);
+  --t-lg: clamp(1.3rem, 1.1rem + .9vw, 1.85rem);
+  --t-xl: clamp(2rem, 1.4rem + 2.9vw, 4rem);
+  --t-2xl:clamp(2.7rem, 1.5rem + 6.2vw, 7.5rem);
+
+  --r-sm: 10px; --r-md: 18px; --r-lg: 28px; --r-xl: 40px;
+  --gut: clamp(1.15rem, 4vw, 3.5rem);
+  --maxw: 1240px;
+
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-io:  cubic-bezier(.65,0,.35,1);
+  --spring:   linear(0,.006,.025 2.7%,.101 6.3%,.539 17.5%,.721 23%,.849,.937 31.5%,.968,.991 38.4%,1.003 42.2%,1.008 46.9%,1.004 56.7%,.999 70.7%,1);
+
+  --sc-nav: 68px;
+}
+
+:root[data-theme="light"]{
+  --ink:   oklch(24% 0.022 190);
+  --ink-2: oklch(38% 0.020 195 / .86);
+  --ink-3: oklch(48% 0.018 195 / .66);
+  --bg:    oklch(97.5% 0.014 92);
+  --bg-2:  oklch(94% 0.018 96);
+  --pane:  oklch(100% 0 0 / .62);
+  --pane-2:oklch(100% 0 0 / .82);
+  --edge:  oklch(30% 0.02 190 / .12);
+  --edge-hi: oklch(30% 0.02 190 / .22);
+  --gold-deep: oklch(58% 0.135 68);
+  --emerald: oklch(58% 0.125 166);
+  --shadow-md: 0 18px 46px -26px oklch(35% .04 190 / .35);
+  --shadow-hi: 0 40px 100px -36px oklch(35% .04 190 / .42);
+  color-scheme: light;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   1 · RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{ box-sizing:border-box; }
+*{ margin:0; }
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top: calc(var(--sc-nav) + 1.4rem);
+}
+body{
+  font-family:var(--f-ui);
+  font-size:var(--t-md);
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:clip;
+  min-height:100svh;
+  font-variant-ligatures: common-ligatures contextual;
+}
+img,svg{ display:block; max-width:100% }
+button,input,textarea,select{ font:inherit; color:inherit }
+button{ background:none; border:0; cursor:pointer }
+:where(h1,h2,h3,h4){ line-height:1.08; text-wrap:balance; font-weight:400 }
+p{ text-wrap:pretty }
+::selection{ background:color-mix(in oklab, var(--gold) 40%, transparent); color:var(--ink) }
+
+:focus-visible{
+  outline:2.5px solid var(--gold);
+  outline-offset:3px;
+  border-radius:6px;
+}
+.skip{
+  position:fixed; inset-inline-start:.6rem; top:.6rem; z-index:999;
+  padding:.7rem 1.1rem; background:var(--gold); color:#0b1412;
+  border-radius:var(--r-sm); font-weight:650; translate:0 -160%;
+  transition:translate .28s var(--ease-out);
+}
+.skip:focus-visible{ translate:0 0 }
+.sr{ position:absolute!important; width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap }
+
+/* Arabic typography */
+[lang="ar"]{ direction:rtl; unicode-bidi:isolate; font-family:var(--f-arui); font-feature-settings:"calt" 1 }
+.ayah{
+  font-family:var(--f-ar);
+  font-size: calc(clamp(1.55rem, 1.05rem + 2.1vw, 2.85rem) * var(--ar-scale, 1));
+  font-size:clamp(1.55rem, 1.05rem + 2.1vw, 2.85rem);
+  line-height:2.15;
+  letter-spacing:0;
+  color:color-mix(in oklab, var(--ink) 94%, var(--gold));
+  text-wrap:balance;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2 · AMBIENT BACKDROP (aurora + film grain + pointer light)
+   ═══════════════════════════════════════════════════════════════ */
+.backdrop{ position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% -20%, color-mix(in oklab, var(--bg-2) 88%, var(--emerald)) 0%, transparent 62%),
+    var(--bg);
+}
+.orb{
+  position:absolute; border-radius:50%;
+  filter: blur(70px) saturate(1.35);
+  opacity:.42; will-change:transform;
+  mix-blend-mode:screen;
+}
+:root[data-theme="light"] .orb{ mix-blend-mode:multiply; opacity:.26; filter:blur(80px) }
+.orb-1{ width:58vmax;height:58vmax; top:-24vmax; left:-14vmax;
+  background:radial-gradient(circle at 35% 35%, var(--emerald), transparent 65%);
+  animation: drift-a 34s var(--ease-io) infinite alternate }
+.orb-2{ width:48vmax;height:48vmax; top:22vmax; right:-18vmax;
+  background:radial-gradient(circle at 60% 40%, var(--gold), transparent 66%);
+  animation: drift-b 41s var(--ease-io) infinite alternate }
+.orb-3{ width:42vmax;height:42vmax; bottom:-16vmax; left:26vw;
+  background:radial-gradient(circle at 50% 50%, var(--violet), transparent 68%);
+  animation: drift-c 47s var(--ease-io) infinite alternate }
+@keyframes drift-a{ to{ transform:translate3d(14vw, 10vh, 0) scale(1.22) } }
+@keyframes drift-b{ to{ transform:translate3d(-16vw, 14vh, 0) scale(1.14) } }
+@keyframes drift-c{ to{ transform:translate3d(12vw, -12vh, 0) scale(1.3) } }
+
+.grain{
+  position:fixed; inset:-50%; z-index:-1; pointer-events:none;
+  opacity:.055; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainshift 8s steps(6) infinite;
+}
+@keyframes grainshift{
+  0%{transform:translate(0,0)} 20%{transform:translate(-3%,2%)} 40%{transform:translate(2%,-3%)}
+  60%{transform:translate(-2%,-2%)} 80%{transform:translate(3%,1%)} 100%{transform:translate(0,0)}
+}
+
+/* Pointer-follow spotlight — driven by CSS vars set in rAF */
+.spot{
+  position:fixed; z-index:-1; inset:0; pointer-events:none;
+  background: radial-gradient(340px circle at var(--mx,50%) var(--my,20%),
+              color-mix(in oklab, var(--gold) 18%, transparent), transparent 70%);
+  opacity:0; transition:opacity .6s ease;
+}
+@media (hover:hover) and (pointer:fine){ .spot{ opacity:1 } }
+
+/* ═══════════════════════════════════════════════════════════════
+   3 · LAYOUT PRIMITIVES
+   ═══════════════════════════════════════════════════════════════ */
+.wrap{ width:min(100% - var(--gut)*2, var(--maxw)); margin-inline:auto }
+section{ position:relative; padding-block: clamp(4.5rem, 9vw, 9rem); }
+section + section::before{
+  content:''; position:absolute; inset-inline:0; top:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--edge) 22%, var(--edge-hi) 50%, var(--edge) 78%, transparent);
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-size:var(--t-xs); font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:1.1rem;
+}
+.eyebrow::before{
+  content:''; width:26px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+.h2{
+  font-family:var(--f-dis); font-size:var(--t-xl); font-weight:400;
+  letter-spacing:-.02em; max-width:22ch;
+}
+.h2 em{
+  font-style:italic;
+  background:linear-gradient(100deg, var(--gold) 10%, var(--emerald) 90%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.lede{ color:var(--ink-2); max-width:62ch; margin-top:1.1rem; font-size:var(--t-md) }
+.sec-head{ margin-bottom:clamp(2.2rem,4vw,3.6rem) }
+
+/* Glass panel — the core surface of the whole UI */
+.glass{
+  position:relative;
+  background:
+    linear-gradient(160deg, var(--pane-2), var(--pane) 45%, transparent),
+    color-mix(in oklab, var(--bg) 55%, transparent);
+  border:1px solid var(--edge);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-md), inset 0 1px 0 var(--edge-hi);
+  overflow:hidden;
+  isolation:isolate;
+}
+@supports (backdrop-filter: blur(1px)){
+  .glass{ backdrop-filter: blur(22px) saturate(1.5); }
+}
+/* Specular sheen that tracks the pointer */
+.glass::after{
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background: radial-gradient(420px circle at var(--px,50%) var(--py,0%),
+              color-mix(in oklab, var(--gold) 13%, transparent), transparent 62%);
+  opacity:0; transition:opacity .45s ease;
+}
+.glass:hover::after, .glass:focus-within::after{ opacity:1 }
+
+
+.nq-ar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--pane);
+  border: 1px solid var(--edge);
+  color: var(--gold);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.nq-ar-btn:hover {
+  background: var(--pane-2);
+  border-color: var(--edge-hi);
+  transform: translateY(-1px);
+}
+.nq-ar-btn .nq-ar-glyph {
+  font-family: var(--f-ar);
+  font-size: 1.15em;
+  line-height: 1;
+}
+.nq-ar-btn .nq-ar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  letter-spacing: 0.02em;
+}
+
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nq-play-btn.playing {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: color-mix(in oklab, var(--gold) 15%, transparent);
+}
+.nq-play-btn.playing .play-icon { display: none !important; }
+.nq-play-btn.playing .pause-icon { display: inline-block !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   4 · NAV
+   ═══════════════════════════════════════════════════════════════ */
+.progress{
+  position:fixed; top:0; inset-inline:0; height:2px; z-index:60;
+  background:linear-gradient(90deg,var(--gold),var(--emerald),var(--violet));
+  transform-origin:0 50%; transform:scaleX(0); will-change:transform;
+}
+@supports (animation-timeline: scroll()){
+  .progress{ animation: grow linear both; animation-timeline: scroll(root block); }
+  @keyframes grow{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+}
+
+.topbar{
+  position:fixed; top:0; inset-inline:0; z-index:50; height:var(--sc-nav);
+  display:flex; align-items:center; gap:1rem;
+  padding-inline:var(--gut);
+  transition: background .4s ease, border-color .4s ease, backdrop-filter .4s;
+  border-bottom:1px solid transparent;
+}
+.topbar[data-stuck="true"]{
+  background:color-mix(in oklab, var(--bg) 72%, transparent);
+  backdrop-filter:blur(18px) saturate(1.4);
+  border-bottom-color:var(--edge);
+}
+.brand{ display:flex; align-items:center; gap:.7rem; font-weight:600; letter-spacing:-.01em; margin-inline-end:auto }
+.brand .mark{
+  width:34px;height:34px;flex:none;border-radius:11px;
+  display:grid;place-items:center;
+  font-family:var(--f-ar); font-size:.95rem; color:#0a1311;
+  background:conic-gradient(from var(--angle), var(--gold), var(--emerald), var(--violet), var(--gold));
+  animation: spin 9s linear infinite;
+  box-shadow:0 0 0 1px var(--edge-hi), 0 6px 20px -6px color-mix(in oklab,var(--gold) 60%, transparent);
+}
+@keyframes spin{ to{ --angle:360deg } }
+.brand small{ display:block; font-size:.68rem; font-weight:500; color:var(--ink-3); letter-spacing:.14em; text-transform:uppercase }
+
+.nav{ display:flex; gap:.15rem; position:relative; padding:.25rem;
+  border-radius:999px; border:1px solid var(--edge); background:var(--pane) }
+@supports (backdrop-filter: blur(1px)){ .nav{ backdrop-filter:blur(14px) } }
+.nav a{
+  position:relative; z-index:1; padding:.48rem .85rem; border-radius:999px;
+  font-size:var(--t-sm); font-weight:520; color:var(--ink-3);
+  text-decoration:none; white-space:nowrap;
+  transition:color .25s ease;
+}
+.nav a:hover{ color:var(--ink) }
+.nav a[aria-current="true"]{ color:var(--ink); font-weight:620 }
+.nav-pill{
+  position:absolute; z-index:0; inset-block:.25rem; border-radius:999px;
+  background:linear-gradient(140deg, var(--pane-2), var(--pane));
+  border:1px solid var(--edge-hi);
+  transition: translate .55s var(--spring), width .55s var(--spring), opacity .3s;
+  opacity:0;
+}
+@media (max-width: 1080px){ .nav{ display:none } }
+
+.icon-btn{
+  width:38px;height:38px;flex:none;display:grid;place-items:center;
+  border-radius:12px; border:1px solid var(--edge); background:var(--pane);
+  color:var(--ink-2); transition: all .3s var(--ease-out);
+}
+.icon-btn:hover{ color:var(--ink); border-color:var(--edge-hi); background:var(--pane-2); transform:translateY(-1px) }
+.icon-btn:active{ transform:scale(.94) }
+.kbd{
+  display:inline-flex; gap:.25rem; align-items:center; padding:.36rem .6rem;
+  border:1px solid var(--edge); border-radius:9px; background:var(--pane);
+  font-size:.72rem; color:var(--ink-3); font-weight:600;
+}
+@media (max-width:700px){ .kbd{ display:none } }
+
+/* ═══════════════════════════════════════════════════════════════
+   5 · HERO
+   ═══════════════════════════════════════════════════════════════ */
+.hero{ min-height:100svh; display:grid; align-items:center; padding-top:var(--sc-nav); overflow:clip }
+.hero-inner{ position:relative; text-align:center; padding-block: 3rem }
+
+.bismillah{
+  font-family:var(--f-ar); font-size:clamp(1.1rem,.9rem+.9vw,1.6rem);
+  color:color-mix(in oklab, var(--gold) 80%, var(--ink));
+  opacity:0; letter-spacing:.02em;
+  animation: fade-up 1.5s var(--ease-out) .15s both;
+}
+.hero h1{
+  font-family:var(--f-ar);
+  font-size:var(--t-2xl); line-height:1.35; margin-block:.6rem .2rem;
+  background:linear-gradient(175deg, oklch(99% .02 90) 12%, var(--gold) 52%, var(--gold-deep) 88%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 14px 40px color-mix(in oklab, var(--gold) 30%, transparent));
+  direction:rtl;
+}
+:root[data-theme="light"] .hero h1{ background:linear-gradient(175deg, var(--gold-deep), oklch(38% .07 170)); -webkit-background-clip:text; background-clip:text }
+
+.hero-sub{
+  font-family:var(--f-dis); font-size:var(--t-lg); font-style:italic;
+  color:var(--ink-2); max-width:26ch; margin:.4rem auto 0;
+}
+.hero-ref{ font-size:var(--t-xs); letter-spacing:.24em; text-transform:uppercase; color:var(--ink-3); margin-top:1.2rem }
+.hero-copy{ color:var(--ink-2); max-width:52ch; margin:1.9rem auto 0 }
+
+/* Kinetic word reveal */
+.kin{ display:inline-block; overflow:hidden; vertical-align:bottom }
+.kin > span{ display:inline-block; translate:0 110%; rotate:x 45deg;
+  animation: rise .95s var(--ease-out) both; animation-delay: calc(.45s + var(--i,0)*.055s) }
+@keyframes rise{ to{ translate:0 0; rotate:x 0deg } }
+@keyframes fade-up{ from{opacity:0; translate:0 14px} to{opacity:1; translate:0 0} }
+
+.cta-row{ display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; margin-top:2.4rem;
+  animation: fade-up 1s var(--ease-out) 1.15s both }
+.btn{
+  --bd:var(--edge);
+  position:relative; display:inline-flex; align-items:center; gap:.55rem;
+  padding:.85rem 1.5rem; border-radius:999px; font-weight:600; font-size:var(--t-sm);
+  text-decoration:none; color:var(--ink); border:1px solid var(--bd);
+  background:var(--pane); overflow:hidden; isolation:isolate;
+  transition: transform .3s var(--spring), border-color .3s, box-shadow .3s;
+}
+.btn:hover{ transform:translateY(-2px); border-color:var(--edge-hi); box-shadow:var(--shadow-md) }
+.btn:active{ transform:translateY(0) scale(.98) }
+.btn-primary{
+  color:#08110f; border-color:transparent;
+  background:linear-gradient(120deg, var(--gold) 0%, oklch(88% .11 95) 48%, var(--emerald) 120%);
+  background-size:200% 100%; background-position:0% 50%;
+  transition: background-position .7s var(--ease-out), transform .3s var(--spring), box-shadow .3s;
+  box-shadow: 0 12px 34px -14px color-mix(in oklab, var(--gold) 70%, transparent);
+}
+.btn-primary:hover{ background-position:100% 50% }
+/* Shimmer sweep */
+.btn-primary::before{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(105deg, transparent 30%, oklch(100% 0 0/.55) 48%, transparent 66%);
+  translate:-120% 0;
+}
+.btn-primary:hover::before{ animation: sweep 1s var(--ease-out) }
+@keyframes sweep{ to{ translate:120% 0 } }
+
+.scroll-hint{
+  position:absolute; bottom:1.2rem; left:50%; translate:-50% 0;
+  display:grid; gap:.5rem; place-items:center;
+  font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-3);
+  animation: fade-up 1s ease 1.6s both;
+}
+.scroll-hint i{ width:1px; height:42px; background:linear-gradient(var(--gold), transparent); display:block;
+  animation: pulse-line 2.4s var(--ease-io) infinite }
+@keyframes pulse-line{ 0%,100%{ opacity:.3; scale:1 .5 } 50%{ opacity:1; scale:1 1 } }
+
+/* Live counter strip */
+.stats{ display:flex; flex-wrap:wrap; gap:clamp(1.2rem,4vw,3.4rem); justify-content:center; margin-top:3rem;
+  animation: fade-up 1s ease 1.35s both }
+.stat{ text-align:center }
+.stat b{ display:block; font-family:var(--f-dis); font-size:clamp(1.7rem,1.1rem+1.8vw,2.6rem); font-weight:500;
+  color:var(--ink); font-variant-numeric:tabular-nums }
+.stat span{ font-size:var(--t-xs); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3) }
+
+/* ═══════════════════════════════════════════════════════════════
+   6 · REVEAL SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+.rv{ opacity:0; translate:0 26px; filter:blur(6px);
+  transition: opacity .85s var(--ease-out), translate .85s var(--ease-out), filter .85s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+.rv.in{ opacity:1; translate:0 0; filter:blur(0) }
+
+/* ═══════════════════════════════════════════════════════════════
+   7 · AYAH CARDS
+   ═══════════════════════════════════════════════════════════════ */
+.card-grid{ display:grid; gap:clamp(1rem,2vw,1.5rem);
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 330px), 1fr)) }
+
+.ayah-card{
+  container-type:inline-size;
+  padding:clamp(1.5rem,3vw,2.2rem);
+  display:grid; gap:1.1rem; align-content:start;
+  transition: transform .5s var(--ease-out), border-color .5s, box-shadow .5s;
+  transform-style:preserve-3d;
+}
+.ayah-card:hover{ transform:translateY(-5px); border-color:var(--edge-hi); box-shadow:var(--shadow-hi) }
+.ayah-card .ayah{ font-size:clamp(1.4rem,1.05rem+.85vw,1.95rem); line-height:2.05 }
+@container (min-width: 480px){ .ayah-card .ayah{ font-size:2.05rem } }
+
+.ayah-card .trans{ color:var(--ink); font-size:var(--t-md); line-height:1.62 }
+.ayah-card .lit{ font-family:var(--f-dis); font-style:italic; color:var(--ink-3); font-size:var(--t-sm) }
+.ayah-card .note{
+  font-size:var(--t-sm); color:var(--ink-2); padding-top:1rem;
+  border-top:1px solid var(--edge);
+}
+.ayah-card .note strong{ color:var(--gold); font-weight:620 }
+
+.ref{
+  display:inline-flex; align-items:center; gap:.45rem; align-self:start;
+  padding:.34rem .72rem; border-radius:999px;
+  font-size:.72rem; font-weight:650; letter-spacing:.06em;
+  color:var(--gold); background:color-mix(in oklab, var(--gold) 12%, transparent);
+  border:1px solid color-mix(in oklab, var(--gold) 28%, transparent);
+}
+.ref.em{ color:var(--emerald); background:color-mix(in oklab,var(--emerald) 12%, transparent);
+  border-color:color-mix(in oklab,var(--emerald) 30%, transparent) }
+
+.card-tools{ display:flex; gap:.4rem; margin-top:.2rem }
+.tool{
+  display:inline-flex; align-items:center; gap:.4rem; padding:.42rem .78rem;
+  border-radius:999px; border:1px solid var(--edge); background:transparent;
+  font-size:var(--t-xs); font-weight:600; color:var(--ink-3);
+  transition: all .28s var(--ease-out);
+}
+.tool:hover{ color:var(--ink); border-color:var(--edge-hi); background:var(--pane) }
+.tool[data-on="true"]{ color:var(--gold); border-color:color-mix(in oklab,var(--gold) 40%, transparent);
+  background:color-mix(in oklab,var(--gold) 10%, transparent) }
+.tool svg{ width:14px;height:14px }
+
+/* Featured / wide card */
+.feature{
+  grid-column:1/-1; text-align:center; padding:clamp(2.2rem,5vw,4rem);
+  background:
+    radial-gradient(90% 130% at 50% -10%, color-mix(in oklab,var(--gold) 15%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--pane-2), var(--pane) 50%, transparent);
+}
+.feature .ayah{ font-size:clamp(1.8rem,1.1rem+3vw,3.4rem); line-height:2 }
+.feature .trans{ font-family:var(--f-dis); font-size:var(--t-lg); font-style:italic; max-width:34ch; margin-inline:auto }
+.feature .ref{ margin-inline:auto }
+
+/* ═══════════════════════════════════════════════════════════════
+   8 · DIVINE NAMES MARQUEE
+   ═══════════════════════════════════════════════════════════════ */
+.marquee{ overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  padding-block:1.2rem; border-block:1px solid var(--edge) }
+.marquee-track{ display:flex; gap:clamp(1.6rem,4vw,4rem); width:max-content;
+  animation: slide 40s linear infinite }
+.marquee:hover .marquee-track{ animation-play-state:paused }
+@keyframes slide{ to{ translate:-50% 0 } }
+.name-chip{ display:flex; align-items:center; gap:.9rem; white-space:nowrap }
+.name-chip b{ font-family:var(--f-ar); font-size:1.7rem; color:var(--gold); font-weight:400 }
+.name-chip span{ font-size:var(--t-sm); color:var(--ink-3) }
+.name-chip i{ font-style:normal; color:var(--edge-hi) }
+
+/* ═══════════════════════════════════════════════════════════════
+   9 · THREE LIMBS OF SHUKR (tabs + view transitions)
+   ═══════════════════════════════════════════════════════════════ */
+.limbs{ display:grid; gap:1.4rem; grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr) }
+@media (max-width:900px){ .limbs{ grid-template-columns:1fr } }
+.limb-list{ display:grid; gap:.6rem; align-content:start }
+.limb-btn{
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:1rem;
+  padding:1.1rem 1.25rem; border-radius:var(--r-md); text-align:start;
+  border:1px solid var(--edge); background:var(--pane);
+  transition: all .4s var(--ease-out);
+}
+.limb-btn:hover{ border-color:var(--edge-hi); transform:translateX(4px) }
+.limb-btn[aria-selected="true"]{
+  border-color:color-mix(in oklab,var(--gold) 45%, transparent);
+  background:linear-gradient(100deg, color-mix(in oklab,var(--gold) 14%, transparent), var(--pane));
+  box-shadow:var(--shadow-md);
+}
+.limb-btn .num{ font-family:var(--f-dis); font-size:1.5rem; color:var(--gold); width:1.4ch }
+.limb-btn strong{ display:block; font-weight:600; font-size:var(--t-md) }
+.limb-btn small{ color:var(--ink-3); font-size:var(--t-xs) }
+.limb-btn .ar{ font-family:var(--f-ar); color:var(--ink-3); font-size:1.25rem }
+.limb-panel{ padding:clamp(1.6rem,3vw,2.6rem); display:grid; gap:1.2rem; align-content:start }
+.limb-panel h3{ font-family:var(--f-dis); font-size:var(--t-lg) }
+.limb-panel .ayah{ font-size:clamp(1.35rem,1rem+.8vw,1.8rem) }
+.limb-panel ul{ margin:0; padding-inline-start:1.15rem; display:grid; gap:.5rem; color:var(--ink-2); font-size:var(--t-sm) }
+.limb-panel li::marker{ color:var(--gold) }
+::view-transition-old(limb),::view-transition-new(limb){ animation-duration:.42s }
+
+/* ═══════════════════════════════════════════════════════════════
+   10 · PARENTS TIMELINE
+   ═══════════════════════════════════════════════════════════════ */
+.timeline{ position:relative; display:grid; gap:clamp(1.4rem,3vw,2.4rem); padding-inline-start:clamp(1.6rem,4vw,3rem) }
+.timeline::before{
+  content:''; position:absolute; inset-block:.6rem; inset-inline-start:0; width:2px;
+  background:linear-gradient(var(--edge), var(--edge));
+}
+.timeline::after{
+  content:''; position:absolute; top:.6rem; inset-inline-start:0; width:2px; height:var(--sweep,0%);
+  background:linear-gradient(var(--gold), var(--emerald)); border-radius:2px;
+  transition: height .2s linear;
+}
+@supports (animation-timeline: view()){
+  .timeline::after{ animation: fill linear both; animation-timeline: view(); animation-range: entry 60% exit 40% }
+  @keyframes fill{ from{ height:0% } to{ height:100% } }
+}
+.tl-item{ position:relative; padding:clamp(1.3rem,2.5vw,2rem); border-radius:var(--r-md) }
+.tl-item::before{
+  content:''; position:absolute; inset-inline-start:calc(-1 * clamp(1.6rem,4vw,3rem) - 5px);
+  top:1.8rem; width:12px;height:12px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--gold);
+  box-shadow:0 0 0 4px color-mix(in oklab,var(--gold) 16%, transparent);
+}
+.tl-item .ayah{ font-size:clamp(1.35rem,1rem+.85vw,1.9rem) }
+.tl-item h3{ font-family:var(--f-dis); font-size:var(--t-lg); margin-bottom:.5rem }
+
+/* Dua card for parents */
+.dua{
+  margin-top:2rem; padding:clamp(1.6rem,3vw,2.6rem); text-align:center;
+  background:
+    radial-gradient(80% 120% at 50% 0%, color-mix(in oklab,var(--emerald) 16%, transparent), transparent 62%),
+    linear-gradient(160deg,var(--pane-2),var(--pane));
+}
+.dua .ayah{ font-size:clamp(1.5rem,1.05rem+1.4vw,2.4rem) }
+
+/* ═══════════════════════════════════════════════════════════════
+   11 · TASBIH / DHIKR COUNTER
+   ═══════════════════════════════════════════════════════════════ */
+.dhikr{ display:grid; gap:clamp(1.5rem,3vw,2.5rem); grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center }
+@media (max-width:880px){ .dhikr{ grid-template-columns:1fr } }
+.counter-shell{ padding:clamp(1.8rem,4vw,3rem); display:grid; gap:1.5rem; place-items:center; text-align:center }
+
+.dial{ position:relative; width:min(78vw, 320px); aspect-ratio:1 }
+.dial svg{ width:100%; height:100%; rotate:-90deg; overflow:visible }
+.dial circle{ fill:none; stroke-linecap:round }
+.dial .track{ stroke:var(--edge); stroke-width:6 }
+.dial .prog{
+  stroke:url(#dialGrad); stroke-width:8;
+  stroke-dasharray:var(--circ); stroke-dashoffset:calc(var(--circ) - var(--circ) * var(--ring));
+  transition: stroke-dashoffset .6s var(--spring);
+  filter: drop-shadow(0 0 12px color-mix(in oklab,var(--gold) 60%, transparent));
+}
+.dial-face{
+  position:absolute; inset:0; display:grid; place-content:center; gap:.15rem; text-align:center;
+}
+.dial-face b{ font-family:var(--f-dis); font-size:clamp(3rem,10vw,4.6rem); font-weight:500; line-height:1;
+  font-variant-numeric:tabular-nums }
+.dial-face .ar{ font-family:var(--f-ar); font-size:clamp(1.15rem,4vw,1.6rem); color:var(--gold) }
+.dial-face small{ font-size:var(--t-xs); letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3) }
+
+.tap{
+  --bd:transparent; width:min(72vw,240px); padding:1.15rem 1rem; border-radius:999px;
+  font-size:1rem; font-weight:700; letter-spacing:.02em; color:#08110f;
+  background:linear-gradient(120deg,var(--gold),var(--emerald));
+  box-shadow:0 16px 40px -16px color-mix(in oklab,var(--gold) 70%, transparent);
+  transition: transform .18s var(--spring), box-shadow .3s;
+  touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+}
+.tap:active{ transform:scale(.955); box-shadow:0 6px 18px -10px color-mix(in oklab,var(--gold) 70%, transparent) }
+.tap.ping{ animation: ping .5s var(--ease-out) }
+@keyframes ping{ 0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--gold) 55%,transparent)}
+  100%{box-shadow:0 0 0 30px transparent} }
+
+.stage-row{ display:flex; gap:.45rem; flex-wrap:wrap; justify-content:center }
+.stage{ padding:.5rem .9rem; border-radius:999px; border:1px solid var(--edge);
+  font-size:var(--t-xs); font-weight:600; color:var(--ink-3); transition:all .3s var(--ease-out) }
+.stage[data-on="true"]{ color:var(--ink); border-color:color-mix(in oklab,var(--gold) 45%,transparent);
+  background:color-mix(in oklab,var(--gold) 12%,transparent) }
+.stage[data-done="true"]{ color:var(--emerald); border-color:color-mix(in oklab,var(--emerald) 40%,transparent) }
+
+.breathe{ padding:clamp(1.6rem,3vw,2.4rem); display:grid; gap:1.2rem }
+.breathe h3{ font-family:var(--f-dis); font-size:var(--t-lg) }
+.breath-orb{
+  width:120px; aspect-ratio:1; border-radius:50%; margin-inline:auto;
+  background:radial-gradient(circle at 40% 35%, var(--gold), var(--emerald) 70%, transparent);
+  filter:blur(2px); opacity:.85;
+  animation: breathe 11s var(--ease-io) infinite;
+}
+@keyframes breathe{ 0%,100%{ scale:.6; opacity:.5 } 36%{ scale:1; opacity:.95 } 55%{ scale:1; opacity:.95 } }
+.breath-caption{ text-align:center; color:var(--ink-2); font-size:var(--t-sm); min-height:1.6em }
+
+/* ═══════════════════════════════════════════════════════════════
+   12 · NI'MAH JOURNAL
+   ═══════════════════════════════════════════════════════════════ */
+.journal{ display:grid; gap:1.4rem; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) }
+@media (max-width:940px){ .journal{ grid-template-columns:1fr } }
+.compose{ padding:clamp(1.5rem,3vw,2.2rem); display:grid; gap:1rem; align-content:start }
+.compose h3{ font-family:var(--f-dis); font-size:var(--t-lg) }
+.field{ position:relative }
+.field textarea{
+  width:100%; min-height:104px; resize:vertical; padding:1rem 1rem .9rem;
+  border-radius:var(--r-md); border:1px solid var(--edge);
+  background:color-mix(in oklab, var(--bg) 40%, transparent); color:var(--ink);
+  transition:border-color .3s, box-shadow .3s;
+}
+.field textarea:focus{ outline:none; border-color:color-mix(in oklab,var(--gold) 55%,transparent);
+  box-shadow:0 0 0 4px color-mix(in oklab,var(--gold) 12%,transparent) }
+.field textarea::placeholder{ color:var(--ink-3) }
+.chips{ display:flex; flex-wrap:wrap; gap:.4rem }
+.chip{
+  padding:.42rem .8rem; border-radius:999px; border:1px solid var(--edge);
+  font-size:var(--t-xs); font-weight:600; color:var(--ink-3); transition:all .28s var(--ease-out);
+}
+.chip:hover{ color:var(--ink); border-color:var(--edge-hi) }
+.chip[aria-pressed="true"]{ color:#08110f; border-color:transparent;
+  background:linear-gradient(120deg,var(--gold),oklch(88% .10 100)) }
+.count-hint{ font-size:var(--t-xs); color:var(--ink-3); font-variant-numeric:tabular-nums }
+
+.entries{ padding:clamp(1.3rem,2.5vw,2rem); display:grid; gap:1rem; align-content:start; min-height:280px }
+.entries-head{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap }
+.streak{ display:flex; align-items:center; gap:.5rem; font-size:var(--t-sm); color:var(--ink-2) }
+.streak b{ color:var(--gold); font-variant-numeric:tabular-nums; font-size:var(--t-md) }
+.entry-list{ display:grid; gap:.65rem; list-style:none; padding:0; margin:0 }
+.entry{
+  display:grid; grid-template-columns:auto 1fr auto; gap:.85rem; align-items:start;
+  padding:.9rem 1rem; border-radius:var(--r-md); border:1px solid var(--edge);
+  background:var(--pane);
+  animation: pop .5s var(--spring) both;
+  transition: opacity .35s ease, translate .35s var(--ease-out), scale .35s;
+}
+.entry.out{ opacity:0; translate:0 -6px; scale:.97 }
+@keyframes pop{ from{ opacity:0; translate:0 12px; scale:.96 } }
+.entry .dot{ width:8px;height:8px;border-radius:50%;margin-top:.55rem;
+  background:linear-gradient(var(--gold),var(--emerald)) }
+.entry p{ font-size:var(--t-sm); line-height:1.55 }
+.entry .meta{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-top:.3rem }
+.entry .del{ color:var(--ink-3); font-size:1.1rem; line-height:1; padding:.2rem .35rem; border-radius:8px;
+  transition:all .25s }
+.entry .del:hover{ color:oklch(70% .17 25); background:oklch(70% .17 25/.12) }
+.empty{ text-align:center; color:var(--ink-3); padding:2.4rem 1rem; display:grid; gap:.7rem; place-items:center }
+.empty .ar{ font-family:var(--f-ar); font-size:1.6rem; color:color-mix(in oklab,var(--gold) 70%,transparent) }
+
+/* ═══════════════════════════════════════════════════════════════
+   13 · AYAH OF THE MOMENT
+   ═══════════════════════════════════════════════════════════════ */
+.today{ text-align:center; padding:clamp(2rem,5vw,4.2rem);
+  background:
+    radial-gradient(70% 100% at 50% 0%, color-mix(in oklab,var(--violet) 14%, transparent), transparent 62%),
+    linear-gradient(165deg,var(--pane-2),var(--pane) 55%, transparent) }
+.today .ayah{ font-size:clamp(1.7rem,1.05rem+2.4vw,3rem); transition:opacity .45s ease }
+.today .trans{ font-family:var(--f-dis); font-style:italic; font-size:var(--t-lg); color:var(--ink-2); max-width:36ch; margin-inline:auto }
+.today.swapping .ayah,.today.swapping .trans{ opacity:0 }
+
+/* ═══════════════════════════════════════════════════════════════
+   14 · COMMAND PALETTE / DIALOG
+   ═══════════════════════════════════════════════════════════════ */
+dialog{
+  border:0; padding:0; color:var(--ink); background:transparent;
+  max-width:min(100% - 2rem, 620px); width:100%;
+  margin:auto; margin-top:12vh;
+}
+dialog::backdrop{
+  background:color-mix(in oklab, oklch(8% .02 200) 62%, transparent);
+  backdrop-filter:blur(6px);
+  animation: fadein .3s ease both;
+}
+@keyframes fadein{ from{opacity:0} }
+dialog[open] .palette{ animation: dialog-in .45s var(--spring) both }
+@keyframes dialog-in{ from{ opacity:0; translate:0 -18px; scale:.96 } }
+.palette{ padding:.7rem; display:grid; gap:.5rem; border-radius:var(--r-lg) }
+.palette input{
+  width:100%; padding:.95rem 1.1rem; border-radius:var(--r-md);
+  border:1px solid var(--edge); background:color-mix(in oklab,var(--bg) 45%, transparent); color:var(--ink);
+}
+.palette input:focus{ outline:none; border-color:color-mix(in oklab,var(--gold) 50%,transparent) }
+.palette ul{ list-style:none; margin:0; padding:0; max-height:46vh; overflow:auto; display:grid; gap:.2rem }
+.palette li button{
+  width:100%; display:flex; align-items:center; gap:.8rem; text-align:start;
+  padding:.72rem .9rem; border-radius:12px; font-size:var(--t-sm); color:var(--ink-2);
+  transition: background .2s, color .2s;
+}
+.palette li button:hover, .palette li[data-active="true"] button{ background:var(--pane-2); color:var(--ink) }
+.palette li .k{ margin-inline-start:auto; font-size:.68rem; color:var(--ink-3) }
+.palette li .ic{ font-family:var(--f-ar); color:var(--gold); font-size:1.1rem; width:1.4em; text-align:center }
+
+/* ═══════════════════════════════════════════════════════════════
+   15 · FOOTER + TOAST
+   ═══════════════════════════════════════════════════════════════ */
+footer{ padding-block:clamp(3rem,6vw,5rem) 3rem; border-top:1px solid var(--edge); text-align:center }
+footer .ayah{ font-size:clamp(1.4rem,1rem+1.4vw,2.2rem) }
+footer p{ color:var(--ink-3); font-size:var(--t-sm); margin-top:1.4rem }
+footer a{ color:var(--ink-2); text-decoration-color:var(--edge-hi); text-underline-offset:3px }
+
+.toast-wrap{ position:fixed; z-index:80; inset-block-end:1.2rem; inset-inline:0; display:grid; justify-items:center; gap:.5rem; pointer-events:none }
+.toast{
+  padding:.8rem 1.2rem; border-radius:999px; font-size:var(--t-sm); font-weight:600;
+  background:color-mix(in oklab,var(--bg) 82%, var(--gold)); color:var(--ink);
+  border:1px solid var(--edge-hi); box-shadow:var(--shadow-hi);
+  animation: toast-in .5s var(--spring) both;
+}
+.toast.out{ animation: toast-out .35s var(--ease-out) both }
+@keyframes toast-in{ from{ opacity:0; translate:0 20px; scale:.9 } }
+@keyframes toast-out{ to{ opacity:0; translate:0 12px; scale:.95 } }
+
+/* ═══════════════════════════════════════════════════════════════
+   16 · ACCESSIBILITY / MOTION / PRINT
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important; animation-iteration-count:1!important;
+    transition-duration:.01ms!important; scroll-behavior:auto!important;
+  }
+  .rv{ opacity:1; translate:0; filter:none }
+  .orb,.grain,.breath-orb{ animation:none }
+  .kin > span{ translate:0 0; rotate:none }
+}
+@media (prefers-contrast: more){
+  :root{ --edge: oklch(100% 0 0 / .35); --edge-hi: oklch(100% 0 0 / .6); --ink-2:var(--ink); --ink-3:var(--ink) }
+}
+@media print{
+  .backdrop,.grain,.spot,.topbar,.progress,.toast-wrap,.scroll-hint,dialog{ display:none!important }
+  body{ background:#fff; color:#000 }
+  .glass{ border:1px solid #ccc; box-shadow:none; background:#fff }
+}
+/* Perf: skip offscreen paint work */
+section:not(.hero){ content-visibility:auto; contain-intrinsic-size:auto 900px }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Ambient layers -->
+<div class="backdrop" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<div class="spot" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true" id="prog"></div>
+
+<!-- ══ NAV ══ -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="index.html" title="NurulQuran Showcase Portal">
+    <span class="mark" aria-hidden="true">حَ</span>
+    <span>Ḥamd &amp; Shukr<small>Qur'anic gratitude</small></span>
+  </a>
+
+  <nav class="nav" id="nav" aria-label="Sections">
+    <span class="nav-pill" id="navPill" aria-hidden="true"></span>
+    <a href="#hamd">Ḥamd</a>
+    <a href="#shukr">Shukr</a>
+    <a href="#limbs">Three Limbs</a>
+    <a href="#parents">Parents &amp; People</a>
+    <a href="#dhikr">Tasbīḥ</a>
+    <a href="#journal">Ni'mah Log</a>
+  </nav>
+
+  <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
+    <span class="nq-ar-glyph">ع</span>
+    <span class="nq-ar-val" id="arScaleVal">100%</span>
+  </button>
+  <button class="kbd" id="openPalette" aria-label="Open command palette">
+    <span aria-hidden="true">⌘</span>K <span class="sr">Search</span>
+  </button>
+  <button class="icon-btn" id="themeBtn" aria-label="Toggle colour theme" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+      <path id="themeIcon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+    </svg>
+  </button>
+</header>
+
+<main id="main">
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="wrap hero-inner">
+    <p class="bismillah" lang="ar" dir="rtl">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+
+    <h1 lang="ar" dir="rtl">ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ</h1>
+    <p class="hero-sub" id="kinetic" aria-label="All praise is for Allah — Lord of all worlds."></p>
+    <p class="hero-ref">Sūrah Al‑Fātiḥah · 1:2</p>
+
+    <p class="hero-copy">
+      The Qur'an opens with praise. Before law, before story, before warning — <em>al‑ḥamd</em>.
+      This is a living companion for the two words that reorder a heart:
+      <strong>ḥamd</strong> (praise that is owed) and <strong>shukr</strong> (thanks that is returned) —
+      to Allah, and then to the parents and people He placed in your path.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#hamd">Begin with Ḥamd
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn" href="#dhikr">Open the Tasbīḥ</a>
+      <button class="btn" id="heroRandom">Give me an āyah</button>
+    </div>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b id="stAyat">0</b><span>āyāt gathered</span></div>
+      <div class="stat" role="listitem"><b id="stDhikr">0</b><span>your dhikr today</span></div>
+      <div class="stat" role="listitem"><b id="stNimah">0</b><span>ni'am recorded</span></div>
+      <div class="stat" role="listitem"><b id="stStreak">0</b><span>day streak</span></div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+  </div>
+</section>
+
+<!-- ══ HAMD ══ -->
+<section id="hamd">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Part One · <span lang="ar">ٱلْحَمْد</span></p>
+      <h2 class="h2">Ḥamd is praise that would be <em>true</em> even if no one gave it.</h2>
+      <p class="lede">
+        <em>Shukr</em> responds to a favour received. <em>Ḥamd</em> is wider: it is praise for who
+        Allah <strong>is</strong> — His perfection, His names, His wisdom — whether or not the gift has
+        yet arrived. Notice how many sūrahs Allah begins by praising Himself, teaching us the words to use.
+      </p>
+    </header>
+
+    <div class="card-grid" id="hamdGrid"></div>
+  </div>
+</section>
+
+<!-- ══ NAMES MARQUEE ══ -->
+<section id="names" style="padding-block:0; border:0">
+  <div class="marquee" aria-label="Divine names connected to praise and gratitude">
+    <div class="marquee-track" id="nameTrack"></div>
+  </div>
+</section>
+
+<!-- ══ SHUKR ══ -->
+<section id="shukr">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Part Two · <span lang="ar">ٱلشُّكْر</span></p>
+      <h2 class="h2">Gratitude is not a mood. It is a <em>transaction Allah guarantees</em>.</h2>
+      <p class="lede">
+        The Qur'an frames shukr as recognition (heart), declaration (tongue), and obedience (limbs) —
+        and attaches to it one of the most emphatic promises in the entire Book.
+      </p>
+    </header>
+
+    <div class="card-grid" id="shukrGrid"></div>
+  </div>
+</section>
+
+<!-- ══ THREE LIMBS ══ -->
+<section id="limbs">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Anatomy of thanks</p>
+      <h2 class="h2">Shukr has <em>three organs</em>. Miss one and it limps.</h2>
+      <p class="lede">A classical framework (developed by scholars such as Ibn al‑Qayyim) drawn from how the Qur'an itself describes grateful servants.</p>
+    </header>
+
+    <div class="limbs">
+      <div class="limb-list" role="tablist" aria-label="The three limbs of shukr" id="limbList"></div>
+      <div class="glass limb-panel" id="limbPanel" role="tabpanel" tabindex="0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARENTS & PEOPLE ══ -->
+<section id="parents">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Part Three · <span lang="ar">شُكْرُ ٱلْوَالِدَيْنِ وَٱلنَّاس</span></p>
+      <h2 class="h2">Allah paired thanks to Himself with thanks to <em>your parents</em> — in one command.</h2>
+      <p class="lede">
+        In Sūrah Luqmān the imperative arrives undivided: <strong lang="ar">أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ</strong>.
+        Vertical gratitude and horizontal gratitude are not two projects. Ingratitude to the people who
+        carried you is a rehearsal for ingratitude to the One who made them carry you.
+      </p>
+    </header>
+
+    <div class="timeline" id="parentTimeline"></div>
+
+    <div class="glass dua rv" style="--d:120ms">
+      <p class="eyebrow" style="justify-content:center">The du'ā' Allah taught for parents</p>
+      <p class="ayah" lang="ar" dir="rtl">وَقُل رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًا</p>
+      <p class="lit">wa qul rabbi rḥamhumā kamā rabbayānī ṣaghīrā</p>
+      <p class="trans" style="font-family:var(--f-dis); font-style:italic; font-size:var(--t-lg); max-width:38ch; margin-inline:auto">
+        “And say, ‘My Lord, be merciful to them as they raised me when I was small.’”
+      </p>
+      <span class="ref em">Al‑Isrā' · 17:24</span>
+      <p class="note" style="max-width:60ch; margin-inline:auto; text-align:start">
+        <strong>Read the exchange:</strong> they gave you <em>tarbiyah</em> you could never repay, so Allah
+        redirects the debt — you ask <em>Ar‑Rabb</em>, the ultimate Nurturer, to repay them on your behalf,
+        in a currency you don't possess: His mercy.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TASBIH ══ -->
+<section id="dhikr">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Practice · <span lang="ar">تَسْبِيح</span></p>
+      <h2 class="h2">Put it on the tongue. <em>Thirty‑three, thirty‑three, thirty‑four.</em></h2>
+      <p class="lede">The tasbīḥ of Fāṭimah — a habit the Prophet ﷺ taught for after prayer and before sleep. Tap, hold the sound, let the count fall away. Saved on this device only.</p>
+    </header>
+
+    <div class="dhikr">
+      <div class="glass counter-shell rv">
+        <div class="dial" id="dial">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="dialGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%"  stop-color="oklch(84% .132 84)"/>
+                <stop offset="60%" stop-color="oklch(76% .135 166)"/>
+                <stop offset="100%" stop-color="oklch(68% .15 300)"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="100" cy="100" r="88"/>
+            <circle class="prog" id="dialProg" cx="100" cy="100" r="88"/>
+          </svg>
+          <div class="dial-face">
+            <span class="ar" id="dhikrAr" lang="ar" dir="rtl">سُبْحَانَ ٱللَّهِ</span>
+            <b id="dhikrCount" aria-live="polite" aria-atomic="true">0</b>
+            <small id="dhikrOf">of 33</small>
+          </div>
+        </div>
+
+        <button class="btn tap" id="tapBtn">Tap to count</button>
+
+        <div class="stage-row" id="stageRow" role="group" aria-label="Dhikr stages"></div>
+
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center">
+          <button class="tool" id="resetBtn">Reset cycle</button>
+          <button class="tool" id="hapticBtn" data-on="true" aria-pressed="true">Haptics</button>
+          <span class="tool" style="pointer-events:none">Today: <strong id="dhikrToday" style="color:var(--gold)">0</strong></span>
+        </div>
+        <p class="count-hint">Tip: press <b>Space</b> or <b>↑</b> to count without touching the screen.</p>
+      </div>
+
+      <div class="glass breathe rv" style="--d:120ms">
+        <h3>Breath of Ḥamd</h3>
+        <p class="lede" style="font-size:var(--t-sm); margin:0">
+          Slow the body and the tongue follows. Inhale as you gather what you were given; exhale the words.
+        </p>
+        <div class="breath-orb" aria-hidden="true"></div>
+        <p class="breath-caption" id="breathCap" aria-live="polite">Inhale…</p>
+        <div class="note" style="border-top:1px solid var(--edge); padding-top:1rem; font-size:var(--t-sm); color:var(--ink-2)">
+          <p class="ayah" style="font-size:1.5rem; text-align:center; margin-bottom:.6rem" lang="ar" dir="rtl">وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ</p>
+          <p style="text-align:center">“And as for the favour of your Lord — <em>speak of it.</em>”<br>
+          <span class="ref" style="margin-top:.6rem">Aḍ‑Ḍuḥā · 93:11</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NI'MAH JOURNAL ══ -->
+<section id="journal">
+  <div class="wrap">
+    <header class="sec-head rv">
+      <p class="eyebrow">Practice · <span lang="ar">دَفْتَرُ ٱلنِّعَم</span></p>
+      <h2 class="h2">You cannot count them — but you can <em>notice three</em>.</h2>
+      <p class="lede">
+        <span lang="ar" dir="rtl" style="font-family:var(--f-ar)">وَإِن تَعُدُّوا نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَا</span> —
+        “If you tried to count Allah's favours, you could never number them.” <span class="ref">An‑Naḥl · 16:18</span>
+        Counting is impossible; <em>noticing</em> is a discipline. Name three today, and name the person Allah used to deliver one of them.
+      </p>
+    </header>
+
+    <div class="journal">
+      <form class="glass compose rv" id="nimahForm">
+        <h3>Record a ni'mah</h3>
+        <div class="field">
+          <label class="sr" for="nimahText">What favour did you notice?</label>
+          <textarea id="nimahText" maxlength="240" placeholder="e.g. My mother called before I remembered to call her — alḥamdulillāh." required></textarea>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:.6rem">Whose hand carried it?</p>
+          <div class="chips" id="tagChips" role="group" aria-label="Category"></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap">
+          <button class="btn btn-primary" type="submit">
+            Add &amp; give thanks
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <span class="count-hint"><span id="charCount">0</span>/240</span>
+        </div>
+      </form>
+
+      <div class="glass entries rv" style="--d:120ms">
+        <div class="entries-head">
+          <h3 style="font-family:var(--f-dis); font-size:var(--t-lg)">Your ni'mah log</h3>
+          <div class="streak" title="Consecutive days with at least one entry">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2s5 4.5 5 9a5 5 0 0 1-10 0c0-1.5.5-2.8 1-3.8"/><path d="M12 22a4 4 0 0 0 4-4c0-2-2-3.5-4-6-2 2.5-4 4-4 6a4 4 0 0 0 4 4Z"/></svg>
+            <b id="streakNum">0</b> day streak
+          </div>
+        </div>
+        <ul class="entry-list" id="entryList" aria-live="polite"></ul>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:auto">
+          <button class="tool" id="exportBtn">Export .json</button>
+          <button class="tool" id="copyAllBtn">Copy as text</button>
+          <button class="tool" id="clearBtn">Clear all</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AYAH OF THE MOMENT ══ -->
+<section id="today">
+  <div class="wrap">
+    <div class="glass today rv" id="todayCard">
+      <p class="eyebrow" style="justify-content:center">Āyah of the moment</p>
+      <p class="ayah" id="todayAr" lang="ar" dir="rtl"></p>
+      <p class="lit" id="todayLit" style="font-family:var(--f-dis); font-style:italic; color:var(--ink-3); font-size:var(--t-sm)"></p>
+      <p class="trans" id="todayEn"></p>
+      <p><span class="ref" id="todayRef"></span></p>
+      <div class="cta-row" style="animation:none; margin-top:1.6rem">
+        <button class="btn" id="nextAyah">Another āyah
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg>
+        </button>
+        <button class="btn" id="shareAyah">Share</button>
+        <button class="btn" id="copyAyah">Copy</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="ayah" lang="ar" dir="rtl">رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ</p>
+    <p style="font-family:var(--f-dis); font-style:italic; font-size:var(--t-lg); color:var(--ink-2); max-width:40ch; margin:.8rem auto 0">
+      “My Lord, inspire me to be grateful for Your favour upon me and upon my parents…”
+    </p>
+    <p><span class="ref em">Al‑Aḥqāf · 46:15</span> · also the du'ā' of Sulaymān ﷺ, <span class="ref">An‑Naml · 27:19</span></p>
+    <p>
+      Arabic text and references checked against <a href="https://quran.com" target="_blank" rel="noopener">quran.com</a>.
+      Translations are close renderings for reflection — for study, return to the Arabic and a qualified teacher.
+      All data stays in your browser.
+    </p>
+    <div class="footer-version-tag" style="margin-top:1.5rem;font-size:0.75rem;opacity:0.6;font-family:monospace">
+      v1.0.11 (updated 2026-08-25 15:49)
+    </div>
+  </div>
+</footer>
+
+<!-- ══ COMMAND PALETTE ══ -->
+<dialog id="palette" aria-label="Command palette">
+  <div class="glass palette">
+    <input id="paletteInput" type="search" placeholder="Search āyāt, sections, actions…" autocomplete="off" spellcheck="false" />
+    <ul id="paletteList" role="listbox" aria-label="Results"></ul>
+  </div>
+</dialog>
+
+<div class="toast-wrap" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script type="module">
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════════
+   DATA — every reference verified against quran.com
+   ═══════════════════════════════════════════════════════════════ */
+
+const HAMD = [
+  { ar:'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ',
+    lit:'al‑ḥamdu lillāhi rabbi l‑ʿālamīn',
+    en:'All praise is for Allah, Lord of all worlds.',
+    ref:'Al‑Fātiḥah · 1:2', feature:true,
+    note:'<strong>The first thing a Muslim is taught to say.</strong> The definite article in <em>al‑</em>ḥamd makes it total: not “some praise,” but the entire category of praise, wherever it exists, already belongs to Him.' },
+
+  { ar:'ٱلْحَمْدُ لِلَّهِ ٱلَّذِى خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَجَعَلَ ٱلظُّلُمَٰتِ وَٱلنُّورَ',
+    lit:'al‑ḥamdu lillāhi lladhī khalaqa s‑samāwāti wa l‑arḍa wa jaʿala ẓ‑ẓulumāti wa n‑nūr',
+    en:'All praise is for Allah, who created the heavens and the earth and made darkness and light.',
+    ref:'Al‑Anʿām · 6:1',
+    note:'<strong>Praise for the architecture of reality.</strong> Even the darkness is named as something He <em>made</em> — so praise is not reserved for the parts of your life that are lit.' },
+
+  { ar:'ٱلْحَمْدُ لِلَّهِ فَاطِرِ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ جَاعِلِ ٱلْمَلَٰئِكَةِ رُسُلًا',
+    lit:'al‑ḥamdu lillāhi fāṭiri s‑samāwāti wa l‑arḍi jāʿili l‑malā'+'ikati rusulā',
+    en:'All praise is for Allah, Originator of the heavens and the earth, who made the angels messengers.',
+    ref:'Fāṭir · 35:1',
+    note:'<strong>Ḥamd for the unseen too.</strong> You are praising Him for systems you will never witness — revelation, angels, orbits — which is precisely why ḥamd outgrows personal benefit.' },
+
+  { ar:'ٱلْحَمْدُ لِلَّهِ ٱلَّذِى لَهُ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ وَلَهُ ٱلْحَمْدُ فِى ٱلْآخِرَةِ',
+    lit:'al‑ḥamdu lillāhi lladhī lahū mā fī s‑samāwāti wa mā fī l‑arḍi wa lahu l‑ḥamdu fī l‑ākhirah',
+    en:'All praise is for Allah, to whom belongs whatever is in the heavens and the earth; and for Him is all praise in the Hereafter.',
+    ref:'Sabaʾ · 34:1',
+    note:'<strong>Praise has no expiry.</strong> Ḥamd is the one act of worship that continues past death — the people of Paradise are still saying it (10:10).' },
+
+  { ar:'وَقَالَا ٱلْحَمْدُ لِلَّهِ ٱلَّذِى فَضَّلَنَا عَلَىٰ كَثِيرٍ مِّنْ عِبَادِهِ ٱلْمُؤْمِنِينَ',
+    lit:'wa qālā l‑ḥamdu lillāhi lladhī faḍḍalanā ʿalā kathīrin min ʿibādihi l‑mu'+'minīn',
+    en:'And both said: “All praise is for Allah, who has favoured us over many of His believing servants.”',
+    ref:'An‑Naml · 27:15',
+    note:'<strong>Dāwūd and Sulaymān ﷺ — kings, prophets, given kingdoms and language of birds.</strong> Their first move on receiving privilege is to route the credit upward. Competence is a ni'+'mah, not a self‑made asset.' },
+
+  { ar:'ٱلْحَمْدُ لِلَّهِ ٱلَّذِى وَهَبَ لِى عَلَى ٱلْكِبَرِ إِسْمَٰعِيلَ وَإِسْحَٰقَ ۚ إِنَّ رَبِّى لَسَمِيعُ ٱلدُّعَاءِ',
+    lit:'al‑ḥamdu lillāhi lladhī wahaba lī ʿalā l‑kibari Ismāʿīla wa Isḥāq…',
+    en:'All praise is for Allah, who granted me Ismāʿīl and Isḥāq in old age. Indeed, my Lord is the Hearer of supplication.',
+    ref:'Ibrāhīm · 14:39',
+    note:'<strong>Ḥamd after a long wait.</strong> Ibrāhīm ﷺ praises with a specific name attached — the gift <em>and</em> the delay. Gratitude that names the detail is harder to fake and harder to forget.' },
+
+  { ar:'وَآخِرُ دَعْوَاهُمْ أَنِ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ',
+    lit:'wa ākhiru daʿwāhum ani l‑ḥamdu lillāhi rabbi l‑ʿālamīn',
+    en:'And the last of their call will be: “All praise is for Allah, Lord of all worlds.”',
+    ref:'Yūnus · 10:10',
+    note:'<strong>The final sentence of the believers.</strong> Where the Book opens, the people of Paradise close. Practising ḥamd now is rehearsing your last words.' },
+];
+
+const SHUKR = [
+  { ar:'وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ',
+    lit:'wa idh ta'+'adhdhana rabbukum la'+'in shakartum la‑azīdannakum',
+    en:'And ˹remember˺ when your Lord proclaimed: “If you are grateful, I will certainly give you more.”',
+    ref:'Ibrāhīm · 14:7', feature:true,
+    note:'<strong>The emphatic oath.</strong> Arabic doubles down twice — <em>la‑</em> plus <em>‑anna</em> — a construction of certainty. Mufassirūn note the increase is left unspecified: more of the blessing, or more capacity to enjoy and use it.' },
+
+  { ar:'فَٱذْكُرُونِى أَذْكُرْكُمْ وَٱشْكُرُوا لِى وَلَا تَكْفُرُونِ',
+    lit:'fa‑dhkurūnī adhkurkum wa shkurū lī wa lā takfurūn',
+    en:'So remember Me — I will remember you. And be grateful to Me, and do not deny Me.',
+    ref:'Al‑Baqarah · 2:152',
+    note:'<strong>Note the opposite Allah chooses.</strong> Not “do not be sad” — but <em>kufr</em>. In Qur'+'anic Arabic the antonym of shukr is disbelief itself: ingratitude is covering over what is plainly there.' },
+
+  { ar:'وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِ ۚ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌ',
+    lit:'wa man yashkur fa‑innamā yashkuru li‑nafsih…',
+    en:'Whoever is grateful is grateful only for his own benefit. And whoever is ungrateful — Allah is Free of need, Praiseworthy.',
+    ref:'Luqmān · 31:12',
+    note:'<strong>He gains nothing from your thanks.</strong> <em>Ghaniyy</em> (self‑sufficient) and <em>Ḥamīd</em> (praised) sit side by side: He is praised whether or not you praise. Shukr is a gift you hand to yourself.' },
+
+  { ar:'بَلِ ٱللَّهَ فَٱعْبُدْ وَكُن مِّنَ ٱلشَّٰكِرِينَ',
+    lit:'bali llāha fa‑ʿbud wa kun mina sh‑shākirīn',
+    en:'Rather, worship Allah, and be among the grateful.',
+    ref:'Az‑Zumar · 39:66',
+    note:'<strong>“Be among” — not merely “be.”</strong> Shukr is framed as a community you join, not just a feeling you produce alone.' },
+
+  { ar:'وَإِن تَشْكُرُوا يَرْضَهُ لَكُمْ',
+    lit:'wa in tashkurū yarḍahu lakum',
+    en:'And if you are grateful, He is pleased with it for you.',
+    ref:'Az‑Zumar · 39:7',
+    note:'<strong>Pleased “for you,” not “with you.”</strong> The grammar tilts the benefit back toward the servant — He wants this state for you because of what it does to you.' },
+
+  { ar:'وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَٰرَ وَٱلْأَفْئِدَةَ لَعَلَّكُمْ تَشْكُرُونَ',
+    lit:'wa jaʿala lakumu s‑samʿa wa l‑abṣāra wa l‑af'+'idata laʿallakum tashkurūn',
+    en:'And He made for you hearing, sight and hearts, so that perhaps you would be grateful.',
+    ref:'An‑Naḥl · 16:78',
+    note:'<strong>Your instruments were issued with a purpose clause.</strong> Hearing, sight, and the heart were given <em>in order that</em> you would give thanks — which means shukr is what these organs are <em>for</em>.' },
+
+  { ar:'وَإِن تَعُدُّوا نِعْمَةَ ٱللَّهِ لَا تُحْصُوهَا ۗ إِنَّ ٱللَّهَ لَغَفُورٌ رَّحِيمٌ',
+    lit:'wa in taʿuddū niʿmata llāhi lā tuḥṣūhā…',
+    en:'If you tried to count Allah\u2019s favours, you could never number them. Indeed, Allah is Forgiving, Merciful.',
+    ref:'An‑Naḥl · 16:18',
+    note:'<strong>Why forgiveness in a verse about blessings?</strong> Because full accounting is beyond us — so He follows the impossible task with mercy for our shortfall. Do what you can; He knows the ledger can\u2019t be balanced.' },
+
+  { ar:'وَقَلِيلٌ مِّنْ عِبَادِىَ ٱلشَّكُورُ',
+    lit:'wa qalīlun min ʿibādiya sh‑shakūr',
+    en:'And few of My servants are truly grateful.',
+    ref:'Sabaʾ · 34:13',
+    note:'<strong>Said right after describing the household of Dāwūd ﷺ working in gratitude.</strong> <em>Shakūr</em> is the intensive form — not someone who says thanks, but someone made of it. Being “few” is the diagnosis; it is also the invitation.' },
+
+  { ar:'إِنَّهُ كَانَ عَبْدًا شَكُورًا',
+    lit:'innahū kāna ʿabdan shakūrā',
+    en:'Indeed, he was a deeply grateful servant.',
+    ref:'Al‑Isrāʾ · 17:3',
+    note:'<strong>Nūḥ ﷺ — 950 years, near‑total rejection, a drowned world.</strong> And the title Allah records for him is <em>grateful</em>. Shukr is evidently not a function of easy circumstances.' },
+
+  { ar:'وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ',
+    lit:'wa ammā bi‑niʿmati rabbika fa‑ḥaddith',
+    en:'And as for the favour of your Lord — speak of it.',
+    ref:'Aḍ‑Ḍuḥā · 93:11',
+    note:'<strong>A command to be vocal.</strong> Silent gratitude is incomplete: mention it, teach it, let others trace the gift back to the Giver. This is shukr of the tongue.' },
+];
+
+const PARENTS = [
+  { h:'One command, two objects',
+    ar:'وَوَصَّيْنَا ٱلْإِنسَٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍ وَفِصَٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ',
+    lit:'…ani shkur lī wa li‑wālidayk, ilayya l‑maṣīr',
+    en:'And We enjoined upon man ˹care˺ for his parents. His mother carried him in weakness upon weakness, and his weaning is in two years. “Be grateful to Me and to your parents. To Me is the final return.”',
+    ref:'Luqmān · 31:14',
+    note:'<strong>The single most important verse on this page.</strong> Thanks to Allah and thanks to parents are joined in one imperative — and Allah supplies the evidence first (the pregnancy, the weakness, the two years of nursing), as if to say: you were shown the cost, now respond to it.' },
+
+  { h:'The decree of iḥsān',
+    ar:'وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوٓا إِلَّا إِيَّاهُ وَبِٱلْوَٰلِدَيْنِ إِحْسَٰنًا',
+    lit:'wa qaḍā rabbuka allā taʿbudū illā iyyāhu wa bi‑l‑wālidayni iḥsānā',
+    en:'Your Lord has decreed that you worship none but Him, and that you be excellent to your parents.',
+    ref:'Al‑Isrāʾ · 17:23',
+    note:'<strong>Placed immediately beside tawḥīd.</strong> Not merely “be fair” to parents — <em>iḥsān</em>: beauty, excellence, going beyond the required minimum.' },
+
+  { h:'Not even a sound of irritation',
+    ar:'فَلَا تَقُل لَّهُمَا أُفٍّ وَلَا تَنْهَرْهُمَا وَقُل لَّهُمَا قَوْلًا كَرِيمًا',
+    lit:'fa‑lā taqul lahumā uffin wa lā tanharhumā wa qul lahumā qawlan karīmā',
+    en:'…do not say to them ˹even˺ “uff,” nor repel them, but speak to them a noble word.',
+    ref:'Al‑Isrāʾ · 17:23',
+    note:'<strong>The bar is set at a syllable.</strong> “Uff” is barely a word — a tut, an exhale of annoyance. If that is forbidden, the discussion of raised voices is over before it begins. And the replacement is prescribed: <em>qawlan karīmā</em>, speech with dignity in it.' },
+
+  { h:'The grateful heart\u2019s own du\u2019ā\u2019',
+    ar:'رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًا تَرْضَٰهُ',
+    lit:'rabbi awziʿnī an ashkura niʿmataka llatī anʿamta ʿalayya wa ʿalā wālidayya wa an aʿmala ṣāliḥan tarḍāh',
+    en:'“My Lord, inspire me to be grateful for Your favour upon me and upon my parents, and to do righteous work that pleases You.”',
+    ref:'Al‑Aḥqāf · 46:15',
+    note:'<strong>Even gratitude must be asked for.</strong> <em>Awziʿnī</em> — “make me devoted to it, restrain me toward it.” Then notice the structure: thanks for myself, thanks for my parents, then <em>action</em>. Shukr resolves into deeds.' },
+
+  { h:'When they are gone — and when they differ',
+    ar:'رَبَّنَا ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ ٱلْحِسَابُ',
+    lit:'rabbanā ghfir lī wa li‑wālidayya wa li‑l‑mu'+'minīna yawma yaqūmu l‑ḥisāb',
+    en:'“Our Lord, forgive me and my parents and the believers on the Day the account is established.”',
+    ref:'Ibrāhīm · 14:41',
+    note:'<strong>Ibrāhīm ﷺ kept praying for a father who opposed him.</strong> And in 31:15 the limit is drawn precisely: if parents command you toward shirk, do not obey — <em>but keep company with them in kindness in this world</em>. Disagreement never licenses disrespect.' },
+
+  { h:'Thanking the people, not just the Provider',
+    ar:'هَلْ جَزَآءُ ٱلْإِحْسَٰنِ إِلَّا ٱلْإِحْسَٰنُ',
+    lit:'hal jazā'+'u l‑iḥsāni illā l‑iḥsān',
+    en:'Is the reward for good ˹anything˺ but good?',
+    ref:'Ar‑Raḥmān · 55:60',
+    note:'<strong>A rhetorical question with a social obligation inside it.</strong> The Prophet ﷺ said: <em>“Whoever does not thank people does not thank Allah”</em> (Aḥmad, Tirmidhī) — and taught that whoever cannot repay a favour should at least say <em>jazākallāhu khayran</em> (Tirmidhī). Recognising the human hand is part of recognising the Divine one.' },
+
+  { h:'Give without invoicing',
+    ar:'إِنَّمَا نُطْعِمُكُمْ لِوَجْهِ ٱللَّهِ لَا نُرِيدُ مِنكُمْ جَزَآءً وَلَا شُكُورًا',
+    lit:'innamā nuṭʿimukum li‑wajhi llāhi lā nurīdu minkum jazā'+'an wa lā shukūrā',
+    en:'“We feed you only for the sake of Allah. We desire from you neither reward nor thanks.”',
+    ref:'Al‑Insān · 76:9',
+    note:'<strong>The mirror image — and the balance.</strong> You owe thanks to others; you are not owed thanks by others. Demand shukr from people and your good deed becomes a transaction. Give as though no one is watching, receive as though everyone deserves credit.' },
+];
+
+const NAMES = [
+  { ar:'ٱلْحَمِيدُ',  en:'Al‑Ḥamīd — The Praiseworthy',        ref:'31:12' },
+  { ar:'ٱلشَّكُورُ',  en:'Ash‑Shakūr — The Most Appreciative',  ref:'35:30' },
+  { ar:'شَاكِرٌ',     en:'Shākir — He appreciates your good',   ref:'2:158' },
+  { ar:'ٱلْوَهَّابُ', en:'Al‑Wahhāb — The Bestower',            ref:'3:8'  },
+  { ar:'ٱلْكَرِيمُ',  en:'Al‑Karīm — The Generous',             ref:'27:40' },
+  { ar:'ٱلرَّزَّاقُ', en:'Ar‑Razzāq — The Provider',            ref:'51:58' },
+  { ar:'ٱلرَّبُّ',    en:'Ar‑Rabb — The Nurturer',              ref:'1:2'  },
+  { ar:'ٱلْغَنِىُّ',  en:'Al‑Ghaniyy — Free of all need',       ref:'39:7' },
+];
+
+const LIMBS = [
+  { ar:'ٱلْقَلْب', title:'Shukr of the heart', sub:'Recognition — knowing where it came from',
+    body:'Before a word is spoken, the heart performs an act of attribution: <em>this did not originate with me.</em> The Qur\u2019an names the failure mode precisely — Qārūn said “I earned it by my own knowledge” (28:78), and the man of the two gardens said “I don\u2019t think this will ever perish” (18:35). Both had the blessing; both misfiled the sender.',
+    ar_ayah:'وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ ٱللَّهِ',
+    en_ayah:'“Whatever blessing you have — it is from Allah.”', ref:'An‑Naḥl · 16:53',
+    list:['Trace each comfort back one step further than feels natural.','Refuse the sentence “I made this happen.”','Ask: what am I currently treating as permanent?'] },
+
+  { ar:'ٱللِّسَان', title:'Shukr of the tongue', sub:'Declaration — saying it out loud',
+    body:'Gratitude that is never voiced tends to evaporate. So the Qur\u2019an commands speech: <em>fa‑ḥaddith</em> — “speak of it.” This is why <em>alḥamdulillāh</em> is not a formality but a technology: a short sentence that repeatedly re‑attributes reality to its Owner. It also includes thanking the people He used as His delivery mechanism.',
+    ar_ayah:'وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ',
+    en_ayah:'“And as for the favour of your Lord — speak of it.”', ref:'Aḍ‑Ḍuḥā · 93:11',
+    list:['Say alḥamdulillāh with the detail attached, not on autopilot.','Tell someone specifically what they did for you.','If you cannot repay a favour, say jazākallāhu khayran (Tirmidhī).'] },
+
+  { ar:'ٱلْجَوَارِح', title:'Shukr of the limbs', sub:'Obedience — using the gift as intended',
+    body:'The heaviest limb of the three. To thank Allah for eyes is to control what they consume; for wealth, to move it toward those without; for health, to spend it in what He loves. When Allah told the family of Dāwūd ﷺ “work in gratitude,” shukr became a verb with sweat in it — and the next words were: “few of My servants are grateful.”',
+    ar_ayah:'ٱعْمَلُوٓا آلَ دَاوُودَ شُكْرًا ۚ وَقَلِيلٌ مِّنْ عِبَادِىَ ٱلشَّكُورُ',
+    en_ayah:'“Work, O family of Dāwūd, in gratitude — and few of My servants are truly grateful.”', ref:'Sabaʾ · 34:13',
+    list:['Match every blessing to one act it makes possible.','Let the strongest part of you serve the weakest person near you.','Guard the gift from the sin it makes easy.'] },
+];
+
+const TAGS = ['My body & health','My parents','Family & spouse','A friend / stranger','Rizq & work','Īmān & guidance','A hardship removed','Something I overlooked'];
+
+const STAGES = [
+  { ar:'سُبْحَانَ ٱللَّهِ',  tr:'SubḥānAllāh',  en:'Glory be to Allah', target:33 },
+  { ar:'ٱلْحَمْدُ لِلَّهِ',  tr:'Alḥamdulillāh', en:'All praise is for Allah', target:33 },
+  { ar:'ٱللَّهُ أَكْبَرُ',   tr:'Allāhu akbar',  en:'Allah is greatest', target:34 },
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   UTIL
+   ═══════════════════════════════════════════════════════════════ */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const el = (tag, props={}, ...kids) => {
+  const n = Object.assign(document.createElement(tag), props);
+  kids.flat().forEach(k => n.append(k)); return n;
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)');
+const todayKey = () => new Date().toISOString().slice(0,10);
+
+const store = {
+  get(k, fb){ try { const v = localStorage.getItem('hs:'+k); return v==null ? fb : JSON.parse(v); } catch { return fb; } },
+  set(k, v){ try { localStorage.setItem('hs:'+k, JSON.stringify(v)); } catch {} },
+  del(k){ try { localStorage.removeItem('hs:'+k); } catch {} }
+};
+
+function toast(msg){
+  const t = el('div', { className:'toast', textContent:msg });
+  $('#toasts').append(t);
+  setTimeout(() => { t.classList.add('out'); t.addEventListener('animationend', () => t.remove()); }, 2400);
+}
+
+/* Animated number tween */
+function tweenNum(node, to, dur=900){
+  const from = parseFloat(node.textContent.replace(/[^\d.]/g,'')) || 0;
+  if (RM.matches || from === to){ node.textContent = to; return; }
+  const t0 = performance.now();
+  const step = now => {
+    const p = Math.min(1, (now - t0)/dur);
+    const e = 1 - Math.pow(1 - p, 3);
+    node.textContent = Math.round(from + (to - from)*e);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+/* Icons */
+const ICON = {
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 7a4.1 4.1 0 0 1 7 3.6c0 5-7 9.4-7 9.4Z"/></svg>',
+  share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4m0 0L8 8m4-4 4 4"/><path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>'
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   AYAH CARDS
+   ═══════════════════════════════════════════════════════════════ */
+const FAVS = new Set(store.get('favs', []));
+
+function ayahCard(v, i){
+  const m = v.ref.match(/(\d+):(\d+)/);
+  let audioHtml = '';
+  if (m) {
+    const surahPad = String(m[1]).padStart(3, '0');
+    const ayahPad = String(m[2]).padStart(3, '0');
+    const audioUrl = `https://everyayah.com/data/Nasser_Alqatami_128kbps/${surahPad}${ayahPad}.mp3`;
+    audioHtml = `<button class="tool nq-play-btn" data-act="recite" data-audio="${audioUrl}" aria-label="Recite this āyah" title="Recite · Qari Nasser Al-Qatami">
+      <svg class="play-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <span>Recite</span>
+    </button>`;
+  }
+  const card = el('article', { className:'glass ayah-card rv' + (v.feature ? ' feature' : '') });
+  card.style.setProperty('--d', `${Math.min(i,6)*70}ms`);
+  card.innerHTML = `
+    <span class="ref${v.refEm ? ' em' : ''}">${v.ref}</span>
+    <p class="ayah" lang="ar" dir="rtl">${v.ar}</p>
+    ${v.lit ? `<p class="lit">${v.lit}</p>` : ''}
+    <p class="trans">${v.en}</p>
+    ${v.note ? `<p class="note">${v.note}</p>` : ''}
+    <div class="card-tools">
+      ${audioHtml}
+      <button class="tool" data-act="copy" aria-label="Copy this āyah">${ICON.copy} Copy</button>
+      <button class="tool" data-act="fav" aria-pressed="false" aria-label="Save this āyah">${ICON.heart} Save</button>
+    </div>`;
+
+  const favBtn = $('[data-act="fav"]', card);
+  const key = v.ref;
+  const paint = () => {
+    const on = FAVS.has(key);
+    favBtn.dataset.on = on; favBtn.setAttribute('aria-pressed', on);
+    favBtn.lastChild.textContent = on ? ' Saved' : ' Save';
+  };
+  paint();
+
+  card.addEventListener('click', async e => {
+    const btn = e.target.closest('.tool'); if (!btn) return;
+    if (btn.dataset.act === 'copy'){
+      try {
+        await navigator.clipboard.writeText(`${v.ar}\n\n${v.en}\n— Qur'an, ${v.ref}`);
+        toast('Āyah copied');
+      } catch { toast('Copy blocked by browser'); }
+    } else {
+      FAVS.has(key) ? FAVS.delete(key) : FAVS.add(key);
+      store.set('favs', [...FAVS]); paint();
+      toast(FAVS.has(key) ? 'Saved to your collection' : 'Removed');
+      if (!RM.matches) btn.animate(
+        [{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],
+        {duration:340, easing:'cubic-bezier(.16,1,.3,1)'});
+    }
+  });
+
+  /* Pointer-tracked specular highlight */
+  if (matchMedia('(hover:hover)').matches){
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--px', `${((e.clientX-r.left)/r.width*100).toFixed(1)}%`);
+      card.style.setProperty('--py', `${((e.clientY-r.top)/r.height*100).toFixed(1)}%`);
+    }, { passive:true });
+  }
+  return card;
+}
+
+$('#hamdGrid').append(...HAMD.map(ayahCard));
+$('#shukrGrid').append(...SHUKR.map(ayahCard));
+
+/* Names marquee (duplicated for seamless loop) */
+const nameNodes = [...NAMES, ...NAMES].map(n =>
+  el('div', { className:'name-chip', innerHTML:
+    `<b lang="ar" dir="rtl">${n.ar}</b><i aria-hidden="true">·</i><span>${n.en} <small style="opacity:.6">${n.ref}</small></span>` }));
+$('#nameTrack').append(...nameNodes);
+
+/* Parents timeline */
+$('#parentTimeline').append(...PARENTS.map((v,i) => {
+  const n = el('article', { className:'glass tl-item rv' });
+  n.style.setProperty('--d', `${Math.min(i,5)*60}ms`);
+  n.innerHTML = `
+    <h3>${v.h}</h3>
+    <p class="ayah" lang="ar" dir="rtl">${v.ar}</p>
+    <p class="lit" style="font-family:var(--f-dis);font-style:italic;color:var(--ink-3);font-size:var(--t-sm);margin:.5rem 0">${v.lit}</p>
+    <p class="trans" style="margin-bottom:.9rem">${v.en}</p>
+    <span class="ref em">${v.ref}</span>
+    <p class="note" style="margin-top:1rem">${v.note}</p>`;
+  return n;
+}));
+
+/* ═══════════════════════════════════════════════════════════════
+   THREE LIMBS — tabs with View Transitions
+   ═══════════════════════════════════════════════════════════════ */
+const limbList = $('#limbList'), limbPanel = $('#limbPanel');
+let limbIdx = 0;
+
+LIMBS.forEach((L,i) => {
+  const b = el('button', { className:'limb-btn', type:'button', role:'tab', id:`limbTab${i}` });
+  b.setAttribute('aria-selected', i===0);
+  b.setAttribute('aria-controls', 'limbPanel');
+  b.tabIndex = i===0 ? 0 : -1;
+  b.innerHTML = `<span class="num">${i+1}</span>
+    <span><strong>${L.title}</strong><small>${L.sub}</small></span>
+    <span class="ar" lang="ar" dir="rtl">${L.ar}</span>`;
+  b.addEventListener('click', () => selectLimb(i));
+  limbList.append(b);
+});
+
+limbList.addEventListener('keydown', e => {
+  const map = { ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1 };
+  if (!(e.key in map)) return;
+  e.preventDefault();
+  selectLimb((limbIdx + map[e.key] + LIMBS.length) % LIMBS.length, true);
+});
+
+function renderLimb(){
+  const L = LIMBS[limbIdx];
+  limbPanel.innerHTML = `
+    <span class="ref">Limb ${limbIdx+1} of 3 · <span lang="ar" dir="rtl">${L.ar}</span></span>
+    <h3>${L.title}</h3>
+    <p style="color:var(--ink-2);font-size:var(--t-sm)">${L.body}</p>
+    <div style="padding:1.1rem;border-radius:var(--r-md);border:1px solid var(--edge);background:var(--pane);text-align:center">
+      <p class="ayah" lang="ar" dir="rtl">${L.ar_ayah}</p>
+      <p style="font-family:var(--f-dis);font-style:italic;color:var(--ink-2);margin-top:.6rem">${L.en_ayah}</p>
+      <p style="margin-top:.7rem"><span class="ref em">${L.ref}</span></p>
+    </div>
+    <div><p class="eyebrow" style="margin-bottom:.7rem">Put it into practice</p>
+      <ul>${L.list.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+}
+
+function selectLimb(i, focus=false){
+  limbIdx = i;
+  $$('.limb-btn', limbList).forEach((b,j) => {
+    b.setAttribute('aria-selected', j===i); b.tabIndex = j===i ? 0 : -1;
+    if (j===i && focus) b.focus();
+  });
+  const run = () => renderLimb();
+  if (document.startViewTransition && !RM.matches){
+    limbPanel.style.viewTransitionName = 'limb';
+    const t = document.startViewTransition(run);
+    t.finished.finally(() => limbPanel.style.viewTransitionName = '');
+  } else run();
+}
+renderLimb();
+
+/* ═══════════════════════════════════════════════════════════════
+   TASBĪḤ
+   ═══════════════════════════════════════════════════════════════ */
+const dial = { count:$('#dhikrCount'), ar:$('#dhikrAr'), of:$('#dhikrOf'), prog:$('#dialProg') };
+const CIRC = 2 * Math.PI * 88;
+$('#dial').style.setProperty('--circ', CIRC);
+dial.prog.style.setProperty('--circ', CIRC);
+
+let stage = store.get('stage', 0);
+let count = store.get('count', 0);
+let dayLog = store.get('day', { d: todayKey(), n: 0 });
+if (dayLog.d !== todayKey()) dayLog = { d: todayKey(), n: 0 };
+let haptics = store.get('haptics', true);
+
+const stageRow = $('#stageRow');
+STAGES.forEach((s,i) => {
+  const b = el('button', { className:'stage', type:'button',
+    innerHTML:`${s.tr} <span style="opacity:.6">·${s.target}</span>` });
+  b.title = s.en;
+  b.addEventListener('click', () => { stage = i; count = 0; paintDial(); persist(); });
+  stageRow.append(b);
+});
+
+function paintDial(){
+  const S = STAGES[stage];
+  dial.ar.textContent = S.ar;
+  dial.of.textContent = `of ${S.target} · ${S.tr}`;
+  tweenNum(dial.count, count, 380);
+  dial.prog.style.setProperty('--ring', (count / S.target).toFixed(4));
+  $$('.stage', stageRow).forEach((b,i) => {
+    b.dataset.on = i === stage;
+    b.dataset.done = i < stage;
+  });
+  $('#dhikrToday').textContent = dayLog.n;
+  tweenNum($('#stDhikr'), dayLog.n, 500);
+}
+const persist = () => { store.set('stage', stage); store.set('count', count); store.set('day', dayLog); };
+
+function tick(){
+  const S = STAGES[stage];
+  count++; dayLog.n++;
+  if (haptics && navigator.vibrate) navigator.vibrate(count >= S.target ? [16,40,26] : 12);
+
+  if (count >= S.target){
+    count = 0;
+    if (stage < STAGES.length - 1){ stage++; toast(`${S.tr} complete → ${STAGES[stage].tr}`); }
+    else { stage = 0; toast('Full tasbīḥ complete — 100. Alḥamdulillāh.'); burst(); }
+  }
+  const btn = $('#tapBtn');
+  btn.classList.remove('ping'); void btn.offsetWidth; if (!RM.matches) btn.classList.add('ping');
+  paintDial(); persist();
+}
+
+function burst(){
+  if (RM.matches) return;
+  const host = $('#dial');
+  for (let i=0;i<14;i++){
+    const p = el('span');
+    Object.assign(p.style, { position:'absolute', left:'50%', top:'50%', width:'6px', height:'6px',
+      borderRadius:'50%', pointerEvents:'none',
+      background: i%2 ? 'var(--gold)' : 'var(--emerald)' });
+    host.append(p);
+    const a = (i/14) * Math.PI * 2, d = 100 + Math.random()*80;
+    p.animate([
+      { transform:'translate(-50%,-50%) scale(1)', opacity:1 },
+      { transform:`translate(calc(-50% + ${Math.cos(a)*d}px), calc(-50% + ${Math.sin(a)*d}px)) scale(0)`, opacity:0 }
+    ], { duration: 900 + Math.random()*400, easing:'cubic-bezier(.16,1,.3,1)' })
+     .finished.then(() => p.remove());
+  }
+}
+
+$('#tapBtn').addEventListener('click', tick);
+$('#resetBtn').addEventListener('click', () => { stage=0; count=0; paintDial(); persist(); toast('Cycle reset'); });
+$('#hapticBtn').addEventListener('click', e => {
+  haptics = !haptics; store.set('haptics', haptics);
+  e.currentTarget.dataset.on = haptics; e.currentTarget.setAttribute('aria-pressed', haptics);
+  toast(haptics ? 'Haptics on' : 'Haptics off');
+});
+addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea') || $('#palette').open) return;
+  if ((e.code === 'Space' || e.key === 'ArrowUp') && $('#dhikr').getBoundingClientRect().top < innerHeight*0.75
+      && $('#dhikr').getBoundingClientRect().bottom > 0){
+    e.preventDefault(); tick();
+  }
+});
+paintDial();
+
+/* Breath captions synced to the 11s CSS animation */
+const BREATH = [['Inhale…',0],['Hold — notice one gift',4000],['Exhale: alḥamdulillāh',6100],['Rest',9200]];
+(function loopBreath(){
+  const cap = $('#breathCap'); let t = 0;
+  BREATH.forEach(([txt,at]) => setTimeout(() => cap.textContent = txt, at));
+  setTimeout(loopBreath, 11000);
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   NI'MAH JOURNAL
+   ═══════════════════════════════════════════════════════════════ */
+let entries = store.get('entries', []);
+let activeTag = TAGS[0];
+
+const chipBox = $('#tagChips');
+TAGS.forEach((t,i) => {
+  const b = el('button', { className:'chip', type:'button', textContent:t });
+  b.setAttribute('aria-pressed', i===0);
+  b.addEventListener('click', () => {
+    activeTag = t;
+    $$('.chip', chipBox).forEach(c => c.setAttribute('aria-pressed', c === b));
+  });
+  chipBox.append(b);
+});
+
+function streak(){
+  if (!entries.length) return 0;
+  const days = new Set(entries.map(e => e.date));
+  let n = 0, d = new Date();
+  // allow the streak to stand if today isn't logged yet but yesterday was
+  if (!days.has(d.toISOString().slice(0,10))) d.setDate(d.getDate()-1);
+  while (days.has(d.toISOString().slice(0,10))){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+
+function renderEntries(){
+  const list = $('#entryList');
+  list.innerHTML = '';
+  if (!entries.length){
+    list.append(el('li', { className:'empty', innerHTML:
+      `<span class="ar" lang="ar" dir="rtl">وَٱشْكُرُوا لِى وَلَا تَكْفُرُونِ</span>
+       <p style="max-width:34ch">Nothing recorded yet. Start with the smallest thing you almost missed today.</p>` }));
+  } else {
+    entries.slice(0,40).forEach((e,i) => {
+      const li = el('li', { className:'entry' });
+      li.style.animationDelay = `${Math.min(i,10)*35}ms`;
+      li.innerHTML = `<span class="dot" aria-hidden="true"></span>
+        <div><p></p><p class="meta">${e.tag} · ${new Date(e.date+'T00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}</p></div>
+        <button class="del" aria-label="Delete this entry">×</button>`;
+      $('p', li).textContent = e.text;               // textContent → no XSS surface
+      $('.del', li).addEventListener('click', () => {
+        li.classList.add('out');
+        setTimeout(() => { entries = entries.filter(x => x.id !== e.id); save(); }, 320);
+      });
+      list.append(li);
+    });
+  }
+  tweenNum($('#streakNum'), streak(), 700);
+  tweenNum($('#stNimah'), entries.length, 700);
+  tweenNum($('#stStreak'), streak(), 700);
+}
+const save = () => { store.set('entries', entries); renderEntries(); };
+
+$('#nimahForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ta = $('#nimahText'), text = ta.value.trim();
+  if (!text) return;
+  entries.unshift({ id: crypto.randomUUID?.() ?? String(Date.now()), text, tag: activeTag, date: todayKey() });
+  ta.value = ''; $('#charCount').textContent = '0';
+  save();
+  toast(entries.filter(x => x.date === todayKey()).length >= 3
+    ? 'Three today — alḥamdulillāh 🤍' : 'Recorded. Alḥamdulillāh.');
+});
+$('#nimahText').addEventListener('input', e => $('#charCount').textContent = e.target.value.length);
+$('#nimahText').addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') $('#nimahForm').requestSubmit();
+});
+
+$('#exportBtn').addEventListener('click', () => {
+  if (!entries.length) return toast('Nothing to export yet');
+  const url = URL.createObjectURL(new Blob([JSON.stringify(entries,null,2)], {type:'application/json'}));
+  const a = el('a', { href:url, download:`nimah-log-${todayKey()}.json` }); a.click();
+  URL.revokeObjectURL(url); toast('Exported');
+});
+$('#copyAllBtn').addEventListener('click', async () => {
+  if (!entries.length) return toast('Nothing to copy yet');
+  const txt = entries.map(e => `• ${e.text}  (${e.tag}, ${e.date})`).join('\n');
+  try { await navigator.clipboard.writeText(`Ni'mah log — alḥamdulillāh\n\n${txt}`); toast('Copied'); }
+  catch { toast('Copy blocked by browser'); }
+});
+$('#clearBtn').addEventListener('click', () => {
+  if (!entries.length) return;
+  if (confirm('Delete every entry in your ni\u2019mah log? This cannot be undone.')){
+    entries = []; save(); toast('Log cleared');
+  }
+});
+renderEntries();
+
+/* ═══════════════════════════════════════════════════════════════
+   ĀYAH OF THE MOMENT — deterministic per day, then shuffles
+   ═══════════════════════════════════════════════════════════════ */
+const ALL = [...HAMD, ...SHUKR, ...PARENTS];
+tweenNum($('#stAyat'), ALL.length, 1100);
+
+const dayIndex = (() => {
+  const d = new Date(); const s = `${d.getFullYear()}${d.getMonth()}${d.getDate()}`;
+  let h = 0; for (const ch of s) h = (h*31 + ch.charCodeAt(0)) >>> 0;
+  return h % ALL.length;
+})();
+let todayIdx = dayIndex;
+
+function paintToday(v){
+  const card = $('#todayCard');
+  const set = () => {
+    $('#todayAr').textContent = '';                       // reset before HTML insert
+    $('#todayAr').insertAdjacentHTML('beforeend', v.ar);
+    $('#todayLit').textContent = v.lit || '';
+    $('#todayEn').textContent = v.en;
+    $('#todayRef').textContent = v.ref;
+  };
+  if (RM.matches) return set();
+  card.classList.add('swapping');
+  setTimeout(() => { set(); card.classList.remove('swapping'); }, 260);
+}
+paintToday(ALL[todayIdx]);
+
+const nextAyah = () => { let n; do { n = Math.floor(Math.random()*ALL.length); } while (n === todayIdx && ALL.length>1);
+  todayIdx = n; paintToday(ALL[todayIdx]); };
+$('#nextAyah').addEventListener('click', nextAyah);
+$('#heroRandom').addEventListener('click', () => {
+  nextAyah(); $('#today').scrollIntoView({ behavior: RM.matches ? 'auto' : 'smooth', block:'center' });
+});
+$('#copyAyah').addEventListener('click', async () => {
+  const v = ALL[todayIdx];
+  try { await navigator.clipboard.writeText(`${v.ar}\n\n${v.en}\n— Qur'an, ${v.ref}`); toast('Copied'); }
+  catch { toast('Copy blocked by browser'); }
+});
+$('#shareAyah').addEventListener('click', async () => {
+  const v = ALL[todayIdx];
+  const data = { title:'Ḥamd & Shukr', text:`${v.ar}\n\n"${v.en}"\n— Qur'an, ${v.ref}`, url: location.href };
+  if (navigator.share){ try { await navigator.share(data); } catch {} }
+  else { try { await navigator.clipboard.writeText(data.text); toast('Copied — share it on'); } catch { toast('Sharing unavailable'); } }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME (circular View Transition reveal)
+   ═══════════════════════════════════════════════════════════════ */
+const themeBtn = $('#themeBtn');
+const savedTheme = store.get('theme', null);
+const initial = savedTheme ?? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+applyTheme(initial, false);
+
+function applyTheme(t, announce=true){
+  document.documentElement.dataset.theme = t;
+  themeBtn.setAttribute('aria-pressed', t === 'light');
+  $('meta[name="theme-color"]').content = t === 'light' ? '#f7f3ea' : '#07100f';
+  $('#themeIcon').setAttribute('d', t === 'light'
+    ? 'M12 4v2m0 12v2M4 12H2m20 0h-2M6.3 6.3 4.9 4.9m14.2 14.2-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z'
+    : 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z');
+  store.set('theme', t);
+  if (announce) toast(t === 'light' ? 'Light — parchment' : 'Dark — midnight');
+}
+
+themeBtn.addEventListener('click', e => {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  if (!document.startViewTransition || RM.matches) return applyTheme(next);
+  const x = e.clientX || innerWidth - 40, y = e.clientY || 34;
+  const r = Math.hypot(Math.max(x, innerWidth-x), Math.max(y, innerHeight-y));
+  const t = document.startViewTransition(() => applyTheme(next));
+  t.ready.then(() => document.documentElement.animate(
+    { clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+    { duration:620, easing:'cubic-bezier(.16,1,.3,1)', pseudoElement:'::view-transition-new(root)' }));
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV — sticky state, morphing pill, scroll-spy
+   ═══════════════════════════════════════════════════════════════ */
+const links = $$('#nav a'), pill = $('#navPill'), bar = $('#topbar');
+
+function movePill(a){
+  if (!a) return pill.style.opacity = 0;
+  pill.style.opacity = 1;
+  pill.style.width = `${a.offsetWidth}px`;
+  pill.style.translate = `${a.offsetLeft}px 0`;
+}
+links.forEach(a => a.addEventListener('pointerenter', () => movePill(a)));
+$('#nav').addEventListener('pointerleave', () => movePill($('#nav a[aria-current="true"]')));
+
+const sections = links.map(a => $(a.getAttribute('href')));
+const spy = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#'+e.target.id));
+    movePill($(`#nav a[href="#${e.target.id}"]`));
+  });
+}, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+sections.forEach(s => s && spy.observe(s));
+
+addEventListener('scroll', () => { bar.dataset.stuck = scrollY > 24; }, { passive:true });
+
+/* JS fallback for scroll progress where scroll-driven CSS is unsupported */
+if (!CSS.supports('animation-timeline: scroll()')){
+  const p = $('#prog');
+  addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    p.style.transform = `scaleX(${max > 0 ? scrollY/max : 0})`;
+  }, { passive:true });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REVEAL ON SCROLL
+   ═══════════════════════════════════════════════════════════════ */
+const rv = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); rv.unobserve(e.target); }
+}), { rootMargin:'0px 0px -8% 0px', threshold:0.08 });
+$$('.rv').forEach(n => rv.observe(n));
+new MutationObserver(() => $$('.rv:not(.in)').forEach(n => rv.observe(n)))
+  .observe(document.body, { childList:true, subtree:true });
+
+/* ═══════════════════════════════════════════════════════════════
+   KINETIC HERO HEADLINE
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  const host = $('#kinetic');
+  'All praise is for Allah — Lord of all worlds.'.split(' ').forEach((w,i) => {
+    const k = el('span', { className:'kin' }, el('span', { textContent:w }));
+    k.firstChild.style.setProperty('--i', i);
+    host.append(k, document.createTextNode(' '));
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   POINTER SPOTLIGHT (rAF-throttled)
+   ═══════════════════════════════════════════════════════════════ */
+if (matchMedia('(hover:hover) and (pointer:fine)').matches && !RM.matches){
+  let mx=0, my=0, queued=false;
+  addEventListener('pointermove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (queued) return; queued = true;
+    requestAnimationFrame(() => {
+      document.documentElement.style.setProperty('--mx', mx+'px');
+      document.documentElement.style.setProperty('--my', my+'px');
+      queued = false;
+    });
+  }, { passive:true });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMMAND PALETTE
+   ═══════════════════════════════════════════════════════════════ */
+const dlg = $('#palette'), pInput = $('#paletteInput'), pList = $('#paletteList');
+
+const COMMANDS = [
+  ...links.map(a => ({ ic:'§', label:`Go to ${a.textContent.trim()}`, k:'Section',
+    run(){ $(a.getAttribute('href')).scrollIntoView({behavior: RM.matches?'auto':'smooth'}); } })),
+  { ic:'✦', label:'Random āyah', k:'Action', run: () => { nextAyah(); $('#today').scrollIntoView({behavior:'smooth',block:'center'}); } },
+  { ic:'☾', label:'Toggle theme', k:'Action', run: () => themeBtn.click() },
+  { ic:'٣٣', label:'Reset tasbīḥ cycle', k:'Action', run: () => $('#resetBtn').click() },
+  { ic:'✎', label:'Record a ni\u2019mah', k:'Action', run: () => { $('#journal').scrollIntoView({behavior:'smooth'}); setTimeout(()=>$('#nimahText').focus(), 620); } },
+  ...ALL.map(v => ({ ic:'۩', label:`${v.ref} — ${v.en.slice(0,58)}…`, k:'Āyah',
+    run(){ todayIdx = ALL.indexOf(v); paintToday(v); $('#today').scrollIntoView({behavior:'smooth',block:'center'}); } })),
+];
+
+let pIdx = 0, pShown = [];
+function paintPalette(q=''){
+  const s = q.trim().toLowerCase();
+  pShown = (s ? COMMANDS.filter(c => c.label.toLowerCase().includes(s) || c.k.toLowerCase().includes(s)) : COMMANDS).slice(0,40);
+  pIdx = 0;
+  pList.innerHTML = '';
+  if (!pShown.length){
+    pList.append(el('li', { innerHTML:`<button type="button" style="color:var(--ink-3)">No matches</button>` }));
+    return;
+  }
+  pShown.forEach((c,i) => {
+    const li = el('li'); li.dataset.active = i===0; li.setAttribute('role','option');
+    const b = el('button', { type:'button', innerHTML:`<span class="ic" aria-hidden="true">${c.ic}</span><span></span><span class="k">${c.k}</span>` });
+    b.children[1].textContent = c.label;
+    b.addEventListener('click', () => { dlg.close(); c.run(); });
+    li.append(b); pList.append(li);
+  });
+}
+function moveSel(d){
+  if (!pShown.length) return;
+  pIdx = (pIdx + d + pShown.length) % pShown.length;
+  $$('li', pList).forEach((li,i) => li.dataset.active = i===pIdx);
+  $$('li', pList)[pIdx]?.scrollIntoView({ block:'nearest' });
+}
+
+const openPalette = () => { paintPalette(pInput.value=''); dlg.showModal(); pInput.focus(); };
+$('#openPalette').addEventListener('click', openPalette);
+pInput.addEventListener('input', e => paintPalette(e.target.value));
+dlg.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown'){ e.preventDefault(); moveSel(1); }
+  else if (e.key === 'ArrowUp'){ e.preventDefault(); moveSel(-1); }
+  else if (e.key === 'Enter'){ e.preventDefault(); const c = pShown[pIdx]; if (c){ dlg.close(); c.run(); } }
+});
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });  // click-outside
+addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); dlg.open ? dlg.close() : openPalette(); }
+  if (e.key === '/' && !e.target.matches('input,textarea') && !dlg.open){ e.preventDefault(); openPalette(); }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   INSTALLABILITY — generate a manifest at runtime (no extra files)
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  const icon = svg => 'data:image/svg+xml,' + encodeURIComponent(svg);
+  const art = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0c46a"/><stop offset="1" stop-color="#4fd0a6"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="#07100f"/><circle cx="256" cy="256" r="150" fill="none" stroke="url(#g)" stroke-width="14"/><text x="256" y="300" font-size="150" text-anchor="middle" fill="url(#g)" font-family="serif">حَ</text></svg>`;
+  const manifest = {
+    name:'Ḥamd & Shukr', short_name:'Ḥamd', start_url:'.', display:'standalone',
+    background_color:'#07100f', theme_color:'#07100f', description:'A Qur\u2019anic companion for praise and gratitude.',
+    icons:[{ src:icon(art), sizes:'512x512', type:'image/svg+xml', purpose:'any maskable' }]
+  };
+  document.head.append(el('link', { rel:'manifest',
+    href:URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'})) }));
+})();
+
+
+/* Audio Recitation Engine */
+let activeAudio = null;
+let activeAudioBtn = null;
+
+function playRecitation(btn) {
+  const url = btn.dataset.audio;
+  if (!url) return;
+
+  if (activeAudioBtn === btn && activeAudio) {
+    if (!activeAudio.paused) {
+      activeAudio.pause();
+      btn.classList.remove('playing');
+    } else {
+      activeAudio.play();
+      btn.classList.add('playing');
+    }
+    return;
+  }
+
+  if (activeAudio) {
+    activeAudio.pause();
+    if (activeAudioBtn) activeAudioBtn.classList.remove('playing');
+  }
+
+  activeAudioBtn = btn;
+  activeAudio = new Audio(url);
+  activeAudio.play().then(() => {
+    btn.classList.add('playing');
+  }).catch(err => {
+    btn.classList.remove('playing');
+    console.warn('Playback blocked/failed:', err);
+  });
+
+  activeAudio.onended = () => {
+    btn.classList.remove('playing');
+    activeAudio = null;
+    activeAudioBtn = null;
+  };
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.nq-play-btn');
+  if (btn) {
+    e.preventDefault();
+    playRecitation(btn);
+  }
+});
+
+/* Arabic font size loop scaler */
+(function initArabicScaler() {
+  const SCALES = [1.0, 1.15, 1.30, 1.45, 0.85];
+  let curIdx = 0;
+  const saved = parseFloat(localStorage.getItem('nq_ar_scale'));
+  if (saved) {
+    const closest = SCALES.reduce((prev, curr) => Math.abs(curr - saved) < Math.abs(prev - saved) ? curr : prev, 1.0);
+    curIdx = SCALES.indexOf(closest);
+    if (curIdx === -1) curIdx = 0;
+  }
+  function applyScale(idx) {
+    curIdx = (idx % SCALES.length + SCALES.length) % SCALES.length;
+    const scale = SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale', scale);
+    localStorage.setItem('nq_ar_scale', scale);
+    const el = document.getElementById('arScaleVal');
+    if (el) el.textContent = Math.round(scale * 100) + '%';
+  }
+  applyScale(curIdx);
+  const btn = document.getElementById('arScaleBtn');
+  if (btn) btn.onclick = () => applyScale(curIdx + 1);
+})();
+
+console.log('%cالحمد لله رب العالمين','font-size:20px;font-family:serif;color:#f0c46a');
+</script>
+<script src="assets/editor.js" defer></script>
+</body>
+</html>
