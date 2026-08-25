@@ -164,27 +164,41 @@ nav.links a:hover, nav.links a.on {
 }
 
 .nq-bar-actions { display: flex; align-items: center; gap: 10px; }
-.nq-ar-ctrl {
+.nq-ar-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  padding: 3px 8px;
+  gap: 5px;
+  background: rgba(245, 201, 123, 0.10);
+  border: 1px solid rgba(245, 201, 123, 0.30);
+  color: var(--gold, #F5C97B);
+  padding: 4px 10px;
   border-radius: 999px;
-}
-.nq-ar-btn {
-  background: none;
-  border: none;
-  color: var(--gold);
+  font-family: inherit;
+  font-size: 0.78rem;
   font-weight: 700;
-  font-size: 0.8rem;
   cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
-.nq-ar-btn:hover { background: rgba(245, 201, 123, 0.2); }
-.nq-ar-val { font-size: 0.72rem; color: var(--mute); font-family: monospace; min-width: 32px; text-align: center; }
+.nq-ar-btn:hover {
+  background: rgba(245, 201, 123, 0.22);
+  border-color: var(--gold, #F5C97B);
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(245, 201, 123, 0.25);
+}
+.nq-ar-btn .nq-ar-glyph {
+  font-family: var(--font-arabic, "Amiri", serif);
+  font-size: 1.15em;
+  line-height: 1;
+}
+.nq-ar-btn .nq-ar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-2, #E8C37A);
+  letter-spacing: 0.02em;
+}
 
 .btn-icon {
   background: rgba(255, 255, 255, 0.06);
@@ -855,11 +869,10 @@ footer {
     </nav>
 
     <div class="nq-bar-actions">
-      <div class="nq-ar-ctrl" title="Adjust Arabic text size">
-        <button class="nq-ar-btn" id="arDec" aria-label="Decrease Arabic font size">ع−</button>
+      <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
+        <span class="nq-ar-glyph">ع</span>
         <span class="nq-ar-val" id="arScaleVal">100%</span>
-        <button class="nq-ar-btn" id="arInc" aria-label="Increase Arabic font size">ع+</button>
-      </div>
+      </button>
       <button class="btn-icon" id="themeToggle" title="Toggle Light / Dark Mode">☾</button>
     </div>
   </div>
@@ -1439,7 +1452,7 @@ footer {
     <span style="font-weight:700;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
   </div>
   <p style="font-size:0.78rem;color:var(--mute)">Ar-Rayyān — An Interactive Fasting Sanctuary &amp; Astronomical Companion</p>
-  <div class="nq-version-tag">v1.0.9 (updated 2026-08-25 15:15)</div>
+  <div class="nq-version-tag">v1.0.10 (updated 2026-08-25 15:45)</div>
 </footer>
 
 <!-- SCRIPTS -->
@@ -1475,27 +1488,27 @@ function sparks(x, y, count = 14) {
 }
 
 /* Arabic Scaler */
+/* Arabic font size loop scaler */
 (function initArabicScaler() {
-  const SCALES = [0.85, 0.92, 1.0, 1.15, 1.30, 1.45, 1.60, 1.80];
-  let curIdx = 2;
+  const SCALES = [1.0, 1.15, 1.30, 1.45, 0.85];
+  let curIdx = 0;
   const saved = parseFloat(localStorage.getItem('nq_ar_scale'));
   if (saved) {
     const closest = SCALES.reduce((prev, curr) => Math.abs(curr - saved) < Math.abs(prev - saved) ? curr : prev, 1.0);
     curIdx = SCALES.indexOf(closest);
-    if (curIdx === -1) curIdx = 2;
+    if (curIdx === -1) curIdx = 0;
   }
   function applyScale(idx) {
-    curIdx = Math.max(0, Math.min(SCALES.length - 1, idx));
+    curIdx = (idx % SCALES.length + SCALES.length) % SCALES.length;
     const scale = SCALES[curIdx];
     document.documentElement.style.setProperty('--ar-scale', scale);
     localStorage.setItem('nq_ar_scale', scale);
-    const el = $('#arScaleVal');
+    const el = document.getElementById('arScaleVal');
     if (el) el.textContent = Math.round(scale * 100) + '%';
   }
   applyScale(curIdx);
-  const dec = $('#arDec'), inc = $('#arInc');
-  if (dec) dec.onclick = () => applyScale(curIdx - 1);
-  if (inc) inc.onclick = () => applyScale(curIdx + 1);
+  const btn = document.getElementById('arScaleBtn');
+  if (btn) btn.onclick = () => applyScale(curIdx + 1);
 })();
 
 /* Theme Toggle */
@@ -1508,36 +1521,119 @@ $('#themeToggle').onclick = () => {
 };
 
 /* =====================================================================
-   1. ASTRONOMY & PRAYER TIMES CALCULATION (Makkah default / Geo)
+   1. ASTRONOMY & EXACT SOLAR PRAYER TIMES ENGINE (NOAA / PrayTimes)
 ===================================================================== */
 const state = {
-  lat: 21.4225,
-  lon: 39.8262,
-  city: "Makkah al-Mukarramah",
-  prayers: { fajr: 5.2, sunrise: 6.5, dhuhr: 12.46, asr: 15.86, maghrib: 18.41, isha: 19.91 }
+  lat: parseFloat(localStorage.getItem("nq_lat")) || 21.4225,
+  lon: parseFloat(localStorage.getItem("nq_lon")) || 39.8262,
+  city: localStorage.getItem("nq_city") || (localStorage.getItem("nq_lat") ? "Custom Location" : "Makkah al-Mukarramah"),
+  prayers: {}
 };
+
+function calculatePrayers(date, lat, lon, tzone) {
+  const d2r = Math.PI / 180;
+  const r2d = 180 / Math.PI;
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  // Julian Day
+  const a = Math.floor((14 - month) / 12);
+  const y = year + 4800 - a;
+  const m = month + 12 * a - 3;
+  const jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+  const d = jd - 2451545.0;
+
+  // Mean solar anomaly and longitude
+  const g = (357.529 + 0.98560028 * d) % 360;
+  const q = (280.459 + 0.98564736 * d) % 360;
+  const L = (q + 1.915 * Math.sin(g * d2r) + 0.020 * Math.sin(2 * g * d2r)) % 360;
+
+  const e = 23.439 - 0.00000036 * d;
+
+  // Sun declination
+  const sinDec = Math.sin(e * d2r) * Math.sin(L * d2r);
+  const dec = Math.asin(sinDec);
+
+  // Right ascension
+  let RA = Math.atan2(Math.cos(e * d2r) * Math.sin(L * d2r), Math.cos(L * d2r)) * r2d;
+  RA = (RA % 360 + 360) % 360;
+
+  // Equation of Time in hours
+  let EqT = (q - RA) / 15;
+  while (EqT > 12) EqT -= 24;
+  while (EqT < -12) EqT += 24;
+
+  // Solar noon in local hours
+  const dhuhr = 12 + tzone - (lon / 15) - EqT;
+
+  function hourAngle(altitudeAngle) {
+    const cosHA = (Math.sin(altitudeAngle * d2r) - Math.sin(lat * d2r) * Math.sin(dec)) /
+                  (Math.cos(lat * d2r) * Math.cos(dec));
+    if (cosHA > 1) return 0;
+    if (cosHA < -1) return 180;
+    return Math.acos(cosHA) * r2d;
+  }
+
+  // Sunrise/Sunset (standard -0.8333 deg)
+  const sunriseHA = hourAngle(-0.8333);
+  // Fajr (-18.0 deg)
+  const fajrHA = hourAngle(-18.0);
+  // Isha (-17.5 deg)
+  const ishaHA = hourAngle(-17.5);
+
+  // Asr (Shafi'i / Standard: shadow = 1 + shadow at noon)
+  const asrAlt = Math.atan(1 / (1 + Math.tan(Math.abs(lat - dec * r2d) * d2r))) * r2d;
+  const asrHA = hourAngle(asrAlt);
+
+  const fajr = ((dhuhr - fajrHA / 15) % 24 + 24) % 24;
+  const sunrise = ((dhuhr - sunriseHA / 15) % 24 + 24) % 24;
+  const asr = ((dhuhr + asrHA / 15) % 24 + 24) % 24;
+  const maghrib = ((dhuhr + sunriseHA / 15) % 24 + 24) % 24;
+  const isha = ((dhuhr + ishaHA / 15) % 24 + 24) % 24;
+
+  return { fajr, sunrise, dhuhr: ((dhuhr % 24) + 24) % 24, asr, maghrib, isha };
+}
 
 function formatTime(decimalHours) {
   let h = Math.floor(decimalHours);
   let m = Math.floor((decimalHours - h) * 60);
-  let padH = String(h % 24).padStart(2, '0');
-  let padM = String(m).padStart(2, '0');
+  let padH = String(h % 24).padStart(2, "0");
+  let padM = String(m).padStart(2, "0");
   return `${padH}:${padM}`;
 }
 
+function updatePrayerTimes() {
+  const now = new Date();
+  const tzone = -now.getTimezoneOffset() / 60;
+  state.prayers = calculatePrayers(now, state.lat, state.lon, tzone);
+
+  $("#t-fajr").textContent = formatTime(state.prayers.fajr);
+  $("#t-sunrise").textContent = formatTime(state.prayers.sunrise);
+  $("#t-dhuhr").textContent = formatTime(state.prayers.dhuhr);
+  $("#t-asr").textContent = formatTime(state.prayers.asr);
+  $("#t-maghrib").textContent = formatTime(state.prayers.maghrib);
+  $("#t-isha").textContent = formatTime(state.prayers.isha);
+
+  $("#locLabel").textContent = state.city;
+}
+
 function updateDiurnalOrb() {
+  if (!state.prayers.fajr) updatePrayerTimes();
+
   const now = new Date();
   const curHours = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
 
   const fajr = state.prayers.fajr;
   const maghrib = state.prayers.maghrib;
 
-  const orbArc = $('#orbArc');
-  const orbStatus = $('#orbStatus');
-  const orbCountdown = $('#orbCountdown');
-  const orbSub = $('#orbSub');
+  const orbArc = $("#orbArc");
+  const orbStatus = $("#orbStatus");
+  const orbCountdown = $("#orbCountdown");
+  const orbSub = $("#orbSub");
 
-  const circumference = 2 * Math.PI * 110; // ~691.15
+  const circumference = 2 * Math.PI * 110;
 
   if (curHours >= fajr && curHours <= maghrib) {
     // Fasting active
@@ -1547,9 +1643,9 @@ function updateDiurnalOrb() {
     orbArc.style.strokeDashoffset = circumference * (1 - pct);
 
     const remSec = Math.max(0, Math.floor((maghrib - curHours) * 3600));
-    const hh = String(Math.floor(remSec / 3600)).padStart(2, '0');
-    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, '0');
-    const ss = String(remSec % 60).padStart(2, '0');
+    const hh = String(Math.floor(remSec / 3600)).padStart(2, "0");
+    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, "0");
+    const ss = String(remSec % 60).padStart(2, "0");
 
     orbStatus.textContent = "Fasting in Progress";
     orbStatus.style.color = "var(--jade)";
@@ -1559,9 +1655,9 @@ function updateDiurnalOrb() {
     // Night window / Countdown to Fajr
     let remHours = curHours < fajr ? (fajr - curHours) : (24 - curHours + fajr);
     const remSec = Math.max(0, Math.floor(remHours * 3600));
-    const hh = String(Math.floor(remSec / 3600)).padStart(2, '0');
-    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, '0');
-    const ss = String(remSec % 60).padStart(2, '0');
+    const hh = String(Math.floor(remSec / 3600)).padStart(2, "0");
+    const mm = String(Math.floor((remSec % 3600) / 60)).padStart(2, "0");
+    const ss = String(remSec % 60).padStart(2, "0");
 
     orbArc.style.strokeDashoffset = circumference;
     orbStatus.textContent = "Night Window";
@@ -1571,47 +1667,53 @@ function updateDiurnalOrb() {
   }
 
   // Active prayer highlight
-  $$('.prayer-cell').forEach(c => c.classList.remove('active'));
-  if (curHours < state.prayers.sunrise) $('#p-fajr').classList.add('active');
-  else if (curHours < state.prayers.dhuhr) $('#p-sunrise').classList.add('active');
-  else if (curHours < state.prayers.asr) $('#p-dhuhr').classList.add('active');
-  else if (curHours < state.prayers.maghrib) $('#p-asr').classList.add('active');
-  else if (curHours < state.prayers.isha) $('#p-maghrib').classList.add('active');
-  else $('#p-isha').classList.add('active');
+  $$(".prayer-cell").forEach(c => c.classList.remove("active"));
+  if (curHours < state.prayers.sunrise) $("#p-fajr").classList.add("active");
+  else if (curHours < state.prayers.dhuhr) $("#p-sunrise").classList.add("active");
+  else if (curHours < state.prayers.asr) $("#p-dhuhr").classList.add("active");
+  else if (curHours < state.prayers.maghrib) $("#p-asr").classList.add("active");
+  else if (curHours < state.prayers.isha) $("#p-maghrib").classList.add("active");
+  else $("#p-isha").classList.add("active");
 }
 
-/* Populate Prayer Times UI */
-function renderPrayerTimes() {
-  $('#t-fajr').textContent = formatTime(state.prayers.fajr);
-  $('#t-sunrise').textContent = formatTime(state.prayers.sunrise);
-  $('#t-dhuhr').textContent = formatTime(state.prayers.dhuhr);
-  $('#t-asr').textContent = formatTime(state.prayers.asr);
-  $('#t-maghrib').textContent = formatTime(state.prayers.maghrib);
-  $('#t-isha').textContent = formatTime(state.prayers.isha);
-}
-renderPrayerTimes();
-setInterval(updateDiurnalOrb, 1000);
-updateDiurnalOrb();
-
-/* Geolocation Handler */
-$('#locBtn').onclick = () => {
+function detectUserLocation(silent = false) {
   if (navigator.geolocation) {
-    toast("📍 Detecting your coordinates...");
+    if (!silent) toast("📍 Detecting your coordinates...");
     navigator.geolocation.getCurrentPosition(pos => {
       state.lat = pos.coords.latitude;
       state.lon = pos.coords.longitude;
-      state.city = `Lat ${state.lat.toFixed(2)}°, Lon ${state.lon.toFixed(2)}°`;
-      $('#locLabel').textContent = state.city;
-      toast(`✅ Location updated! Times recalculated for your area.`);
-      renderPrayerTimes();
+      
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const cityName = tz ? tz.split("/").pop().replace(/_/g, " ") : `Lat ${state.lat.toFixed(2)}°, Lon ${state.lon.toFixed(2)}°`;
+      state.city = cityName;
+
+      localStorage.setItem("nq_lat", state.lat);
+      localStorage.setItem("nq_lon", state.lon);
+      localStorage.setItem("nq_city", state.city);
+
+      updatePrayerTimes();
       updateDiurnalOrb();
+      if (!silent) toast(`✅ Location set to <b>${state.city}</b>. Sunset (Maghrib) recalculated to <b>${formatTime(state.prayers.maghrib)}</b>!`);
     }, err => {
-      toast("⚠️ Unable to access GPS. Using default coordinates.");
-    });
+      if (!silent) toast("⚠️ Unable to access GPS. Using saved coordinates.");
+    }, { timeout: 8000, enableHighAccuracy: true });
   } else {
-    toast("⚠️ Geolocation not supported on this device.");
+    if (!silent) toast("⚠️ Geolocation not supported on this device.");
   }
-};
+}
+
+updatePrayerTimes();
+setInterval(updateDiurnalOrb, 1000);
+updateDiurnalOrb();
+
+// Try automatic location detection if permission was previously granted
+if (navigator.permissions && navigator.permissions.query) {
+  navigator.permissions.query({ name: "geolocation" }).then(res => {
+    if (res.state === "granted") detectUserLocation(true);
+  }).catch(() => {});
+}
+
+$("#locBtn").onclick = () => detectUserLocation(false);
 
 /* =====================================================================
    2. DATES & ISLAMIC CALENDAR ENGINE

@@ -610,7 +610,7 @@
   function enableEditableElements() {
     const els = document.querySelectorAll(EDITABLE_SELECTORS);
     els.forEach(el => {
-      if (el.closest("#nq-editor-bar, #nq-editor-pill, #nq-wysiwyg-bubble, .nq-modal-backdrop, .nq-ar-ctrl")) return;
+      if (el.closest("#nq-editor-bar, #nq-editor-pill, #nq-wysiwyg-bubble, .nq-modal-backdrop, .nq-ar-ctrl, .nq-ar-btn")) return;
       el.setAttribute("contenteditable", "true");
       el.classList.add("nq-editable");
 
