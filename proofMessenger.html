@@ -68,16 +68,15 @@
 .nq-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   background: rgba(217,180,91,.12);
   border: 1px solid rgba(217,180,91,.35);
   color: var(--gold);
-  border-radius: 999px;
-  padding: 4px 12px 4px 9px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
   cursor: pointer;
   transition: all 0.25s ease;
   vertical-align: middle;
@@ -87,16 +86,18 @@
   background: rgba(217,180,91,.28);
   color: #fff;
   border-color: var(--gold);
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.08);
   box-shadow: 0 0 14px rgba(217,180,91,.35);
 }
 .nq-play-btn svg {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
+  margin-left: 1px;
 }
 .nq-play-btn .pause-icon {
   display: none;
+  margin-left: 0;
 }
 .nq-play-btn.playing {
   background: rgba(126,227,198,.25);
@@ -560,7 +561,6 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
           <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002023.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            <span>Recite</span>
           </button>
         </div>
       </div>
@@ -616,7 +616,6 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
           <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/080001.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            <span>Recite</span>
           </button>
         </div>
       </div>
@@ -673,7 +672,6 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
           <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/030002.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            <span>Recite</span>
           </button>
         </div>
       </div>
@@ -707,7 +705,6 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
           <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002111.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            <span>Recite</span>
           </button>
         </div>
       </div>
@@ -900,7 +897,6 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
     <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/002256.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
       <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
       <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      <span>Recite</span>
     </button>
   </div>
   <div class="nq-footer-badge">
@@ -918,7 +914,7 @@ footer p{font-size:.8rem;color:var(--ink-3);max-width:66ch;margin:0 auto 8px}
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.12 (updated 2026-08-26 19:05)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.13 (updated 2026-08-26 19:35)</div>
   </div>
 </div></footer>
 
@@ -1176,11 +1172,9 @@ calc();
       if(activeAudio.paused){
         activeAudio.play();
         btn.classList.add('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
       } else {
         activeAudio.pause();
         btn.classList.remove('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
       return;
     }
@@ -1189,7 +1183,6 @@ calc();
       activeAudio.pause();
       if(activeBtn){
         activeBtn.classList.remove('playing','loading');
-        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
     }
 
@@ -1199,7 +1192,6 @@ calc();
     activeAudio.play().then(()=>{
       btn.classList.remove('loading');
       btn.classList.add('playing');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
     }).catch(err=>{
       btn.classList.remove('loading','playing');
       console.warn('Audio playback error:', err);
@@ -1207,7 +1199,6 @@ calc();
 
     activeAudio.onended=()=>{
       btn.classList.remove('playing','loading');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       activeAudio=null;
       activeBtn=null;
     };

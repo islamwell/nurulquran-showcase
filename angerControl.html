@@ -91,13 +91,14 @@ body{
 .ar, .dua, [lang="ar"]{font-family:var(--ar-font)!important;zoom:var(--ar-scale,1)}
 
 /* Quran Ayah Play Button */
-.nq-play-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(245,201,123,.12);border:1px solid rgba(245,201,123,.35);color:var(--gold);border-radius:999px;padding:4px 12px 4px 9px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .25s ease;vertical-align:middle;user-select:none}
-.nq-play-btn:hover{background:rgba(245,201,123,.28);color:#fff;border-color:var(--gold);transform:translateY(-1px);box-shadow:0 0 14px rgba(245,201,123,.35)}
-.nq-play-btn svg{width:13px;height:13px;flex-shrink:0}
-.nq-play-btn .pause-icon{display:none}
+.nq-play-btn{display:inline-flex;align-items:center;justify-content:center;background:rgba(245,201,123,.12);border:1px solid rgba(245,201,123,.35);color:var(--gold);border-radius:50%;width:32px;height:32px;min-width:32px;padding:0;cursor:pointer;transition:all .25s ease;vertical-align:middle;user-select:none}
+.nq-play-btn:hover{background:rgba(245,201,123,.28);color:#fff;border-color:var(--gold);transform:translateY(-1px) scale(1.08);box-shadow:0 0 14px rgba(245,201,123,.35)}
+.nq-play-btn svg{width:14px;height:14px;flex-shrink:0;margin-left:1px}
+.nq-play-btn .pause-icon{display:none;margin-left:0}
 .nq-play-btn.playing{background:rgba(126,227,198,.25);border-color:var(--mint);color:var(--mint);box-shadow:0 0 14px rgba(126,227,198,.3)}
 .nq-play-btn.playing .play-icon{display:none}
 .nq-play-btn.playing .pause-icon{display:block}
+.nq-play-btn.loading{opacity:.65;pointer-events:none}
 .nq-play-btn.loading{opacity:.65;pointer-events:none}
 
 .nq-footer-badge{text-align:center;padding:32px 16px 20px;border-top:1px solid rgba(245,201,123,.14);margin-top:40px}
@@ -277,7 +278,6 @@ footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-hei
       <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003134.mp3" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        <span>Recite</span>
       </button>
     </div>
   </div>
@@ -372,7 +372,7 @@ footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-hei
         <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C97B">NURULQURAN · نُورُ القُرْآن</span>
       </div>
       <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.12 (updated 2026-08-26 19:05)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.13 (updated 2026-08-26 19:35)</div>
     </div>
   </footer>
 </div>
@@ -488,11 +488,9 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
       if(activeAudio.paused){
         activeAudio.play();
         btn.classList.add('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
       } else {
         activeAudio.pause();
         btn.classList.remove('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
       return;
     }
@@ -501,7 +499,6 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
       activeAudio.pause();
       if(activeBtn){
         activeBtn.classList.remove('playing','loading');
-        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
     }
 
@@ -511,7 +508,6 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
     activeAudio.play().then(()=>{
       btn.classList.remove('loading');
       btn.classList.add('playing');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
     }).catch(err=>{
       btn.classList.remove('loading','playing');
       console.warn('Audio playback error:', err);
@@ -519,7 +515,6 @@ document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 
     activeAudio.onended=()=>{
       btn.classList.remove('playing','loading');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       activeAudio=null;
       activeBtn=null;
     };

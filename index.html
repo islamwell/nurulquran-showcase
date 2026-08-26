@@ -102,16 +102,15 @@
 .nq-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   background: rgba(245, 201, 123, 0.12);
   border: 1px solid rgba(245, 201, 123, 0.35);
   color: var(--gold-2);
-  border-radius: var(--radius-full);
-  padding: 4px 12px 4px 9px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
   cursor: pointer;
   transition: all 0.25s ease;
   vertical-align: middle;
@@ -121,16 +120,18 @@
   background: rgba(245, 201, 123, 0.28);
   color: #fff;
   border-color: var(--gold-2);
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.08);
   box-shadow: 0 0 14px rgba(245, 201, 123, 0.35);
 }
 .nq-play-btn svg {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
+  margin-left: 1px;
 }
 .nq-play-btn .pause-icon {
   display: none;
+  margin-left: 0;
 }
 .nq-play-btn.playing {
   background: rgba(45, 212, 191, 0.25);
@@ -379,19 +380,117 @@ body {
   gap: 10px;
 }
 
-.badge-counter {
+/* Islam Navigation Dropdown */
+.islam-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.islam-dropdown-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: 7px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
-  background: rgba(45, 212, 191, 0.08);
-  border: 1px solid rgba(45, 212, 191, 0.28);
+  background: rgba(45, 212, 191, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.35);
   color: var(--teal-2);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.islam-dropdown-btn:hover,
+.islam-dropdown-btn.active {
+  background: rgba(45, 212, 191, 0.25);
+  border-color: var(--teal-2);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(45, 212, 191, 0.35);
+}
+
+.islam-dropdown-btn .chevron-icon {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.25s ease;
+}
+
+.islam-dropdown-btn.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.islam-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border-hover);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  box-shadow: var(--shadow-lg), 0 16px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.islam-dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.islam-dropdown-menu .dropdown-header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-2);
+  padding: 6px 10px 8px;
+  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 4px;
+}
+
+.islam-dropdown-menu .dropdown-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.islam-dropdown-menu .dropdown-item:hover {
+  background: var(--card-hover);
+  border-left: 2px solid var(--gold-2);
+  transform: translateX(3px);
+}
+
+.islam-dropdown-menu .item-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--teal-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.islam-dropdown-menu .item-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
 }
 
 .btn-icon-pill {
@@ -1081,9 +1180,51 @@ body {
     </a>
 
     <div class="nav-actions">
-      <div class="badge-counter">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-        <span>9 Exhibits Live</span>
+      <div class="islam-dropdown-wrapper">
+        <button class="islam-dropdown-btn" id="islamDropdownBtn" aria-expanded="false" aria-haspopup="true" title="Browse all Islamic Exhibits">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+          <span>Islam</span>
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="islam-dropdown-menu" id="islamDropdownMenu">
+          <div class="dropdown-header">Interactive Exhibits</div>
+          <a href="rootwords.html" class="dropdown-item">
+            <span class="item-badge">Root Words</span>
+            <span class="item-title">شَجَرَةُ الجُذُور · The Root Tree</span>
+          </a>
+          <a href="miraclesQuran.html" class="dropdown-item">
+            <span class="item-badge">Signs &amp; Science</span>
+            <span class="item-title">The Signs — Miracles of Qur'an</span>
+          </a>
+          <a href="proofMessenger.html" class="dropdown-item">
+            <span class="item-badge">Prophethood</span>
+            <span class="item-title">Ten Reasons for Muhammad ﷺ</span>
+          </a>
+          <a href="jahoolMeaning.html" class="dropdown-item">
+            <span class="item-badge">Linguistics</span>
+            <span class="item-title">جَهُولًا · Jahūlā Word Study</span>
+          </a>
+          <a href="shortSentenceVerb.html" class="dropdown-item">
+            <span class="item-badge">Grammar</span>
+            <span class="item-title">Twelve Words · The Qur'anic Verb</span>
+          </a>
+          <a href="sleepAdvice.html" class="dropdown-item">
+            <span class="item-badge">Circadian</span>
+            <span class="item-title">The Golden Window · Sleep Science</span>
+          </a>
+          <a href="angerControl.html" class="dropdown-item">
+            <span class="item-badge">Psychology</span>
+            <span class="item-title">Controlling Anger Toolkit</span>
+          </a>
+          <a href="fasting.html" class="dropdown-item">
+            <span class="item-badge">Sanctuary</span>
+            <span class="item-title">Ar-Rayyān · Fasting Science</span>
+          </a>
+          <a href="hamdShukr.html" class="dropdown-item">
+            <span class="item-badge">Praise</span>
+            <span class="item-title">Ḥamd &amp; Shukr · Gratitude Study</span>
+          </a>
+        </div>
       </div>
       <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
         <span class="nq-ar-glyph">ع</span>
@@ -1103,12 +1244,11 @@ body {
     <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/001001.mp3" aria-label="Listen to Bismillah" title="Listen · Qari Nasser Al-Qatami">
       <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
       <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-      <span>Recite</span>
     </button>
   </div>
   <div class="hero-badge">
     <span class="hero-pulse-dot"></span>
-    <span>NurulQuran Interactive Suite</span>
+    <span>The Translation</span>
   </div>
   <h1 class="hero-title">
     Exploring Quranic Eloquence,<br>
@@ -1555,7 +1695,7 @@ body {
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
     <div class="footer-version-tag">
-      v1.0.12 (updated 2026-08-26 19:05)
+      v1.0.13 (updated 2026-08-26 19:35)
     </div>
   </div>
 </footer>
@@ -1570,18 +1710,61 @@ const themeBtn = document.getElementById('themeToggle');
 function setTheme(theme) {
   htmlRoot.setAttribute('data-theme', theme);
   localStorage.setItem('nq-theme', theme);
-  themeBtn.innerHTML = theme === 'light' 
-    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>'
-    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+  if (themeBtn) {
+    themeBtn.innerHTML = theme === 'light' 
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+  }
 }
 
 const savedTheme = localStorage.getItem('nq-theme') || 'dark';
 setTheme(savedTheme);
 
-themeBtn.addEventListener('click', () => {
+themeBtn?.addEventListener('click', () => {
   const current = htmlRoot.getAttribute('data-theme');
   setTheme(current === 'dark' ? 'light' : 'dark');
 });
+
+// ============================================================
+// ISLAM NAVIGATION DROPDOWN
+// ============================================================
+(function initIslamDropdown() {
+  const dropdownBtn = document.getElementById('islamDropdownBtn');
+  const dropdownMenu = document.getElementById('islamDropdownMenu');
+  if (!dropdownBtn || !dropdownMenu) return;
+
+  function toggleMenu(e) {
+    e.stopPropagation();
+    const isOpen = dropdownMenu.classList.contains('open');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      dropdownMenu.classList.add('open');
+      dropdownBtn.classList.add('active');
+      dropdownBtn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeMenu() {
+    dropdownMenu.classList.remove('open');
+    dropdownBtn.classList.remove('active');
+    dropdownBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  dropdownBtn.addEventListener('click', toggleMenu);
+
+  document.addEventListener('click', (e) => {
+    if (!dropdownMenu.contains(e.target) && !dropdownBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdownMenu.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+})();
 
 // ============================================================
 // SEARCH & CATEGORY FILTERING
@@ -1619,7 +1802,7 @@ catPills.forEach(pill => {
   });
 });
 
-searchInput.addEventListener('input', (e) => {
+searchInput?.addEventListener('input', (e) => {
   searchQuery = e.target.value.toLowerCase().trim();
   filterCards();
 });
@@ -1633,6 +1816,7 @@ const modalTitle = document.getElementById('modalTitle');
 const modalOpenTab = document.getElementById('modalOpenTab');
 
 function openPreview(url, title) {
+  if (!previewModal) return;
   modalTitle.textContent = title;
   modalIframe.src = url;
   modalOpenTab.href = url;
@@ -1641,6 +1825,7 @@ function openPreview(url, title) {
 }
 
 function closePreview() {
+  if (!previewModal) return;
   previewModal.classList.remove('open');
   modalIframe.src = '';
   document.body.style.overflow = '';
@@ -1653,7 +1838,7 @@ function closePreviewOnBackdrop(e) {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && previewModal.classList.contains('open')) {
+  if (e.key === 'Escape' && previewModal && previewModal.classList.contains('open')) {
     closePreview();
   }
 });
@@ -1694,11 +1879,9 @@ document.addEventListener('keydown', (e) => {
       if(activeAudio.paused){
         activeAudio.play();
         btn.classList.add('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
       } else {
         activeAudio.pause();
         btn.classList.remove('playing');
-        const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
       return;
     }
@@ -1707,7 +1890,6 @@ document.addEventListener('keydown', (e) => {
       activeAudio.pause();
       if(activeBtn){
         activeBtn.classList.remove('playing','loading');
-        const sp=activeBtn.querySelector('span'); if(sp) sp.textContent='Recite';
       }
     }
 
@@ -1717,7 +1899,6 @@ document.addEventListener('keydown', (e) => {
     activeAudio.play().then(()=>{
       btn.classList.remove('loading');
       btn.classList.add('playing');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Pause';
     }).catch(err=>{
       btn.classList.remove('loading','playing');
       console.warn('Audio playback error:', err);
@@ -1725,7 +1906,6 @@ document.addEventListener('keydown', (e) => {
 
     activeAudio.onended=()=>{
       btn.classList.remove('playing','loading');
-      const sp=btn.querySelector('span'); if(sp) sp.textContent='Recite';
       activeAudio=null;
       activeBtn=null;
     };

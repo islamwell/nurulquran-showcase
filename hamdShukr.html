@@ -280,7 +280,24 @@ section + section::before{
 .nq-play-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+.nq-play-btn svg {
+  margin-left: 1px;
+}
+.nq-play-btn .pause-icon {
+  margin-left: 0;
+}
+.nq-play-btn:hover {
+  transform: translateY(-1px) scale(1.08);
 }
 .nq-play-btn.playing {
   color: var(--gold);
@@ -1096,7 +1113,7 @@ section:not(.hero){ content-visibility:auto; contain-intrinsic-size:auto 900px }
       All data stays in your browser.
     </p>
     <div class="footer-version-tag" style="margin-top:1.5rem;font-size:0.75rem;opacity:0.6;font-family:monospace">
-      v1.0.12 (updated 2026-08-26 19:05)
+      v1.0.13 (updated 2026-08-26 19:35)
     </div>
   </div>
 </footer>
@@ -1371,10 +1388,9 @@ function ayahCard(v, i){
     const surahPad = String(m[1]).padStart(3, '0');
     const ayahPad = String(m[2]).padStart(3, '0');
     const audioUrl = `https://everyayah.com/data/Nasser_Alqatami_128kbps/${surahPad}${ayahPad}.mp3`;
-    audioHtml = `<button class="tool nq-play-btn" data-act="recite" data-audio="${audioUrl}" aria-label="Recite this āyah" title="Recite · Qari Nasser Al-Qatami">
-      <svg class="play-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="pause-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      <span>Recite</span>
+    audioHtml = `<button class="tool nq-play-btn" data-act="recite" data-audio="${audioUrl}" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
+      <svg class="play-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>`;
   }
   const card = el('article', { className:'glass ayah-card rv' + (v.feature ? ' feature' : '') });
