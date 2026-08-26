@@ -583,7 +583,7 @@ footer .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold-2);margin
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.11 (updated 2026-08-25 15:49)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.12 (updated 2026-08-26 19:05)</div>
   </div>
 </footer>
 
@@ -659,32 +659,32 @@ const VERSES = [
 },
 {
   id:'v3', n:'٠٣', wm:'خ ل ق',
-  title:'When the doer is deliberately erased',
-  ref:'Sūrat an-Nisāʾ 4:28', tags:['3 words','Passive · مَجْهُول','Ḥāl'],
+  title:'When the doer steps aside · The Passive Verb',
+  ref:'Sūrat an-Nisāʾ 4:28', tags:['3 words','Passive · مَجْهُول','Deputy Doer · نَائِب فَاعِل','Ḥāl · حَال'],
   audio:'https://everyayah.com/data/Nasser_Alqatami_128kbps/004028.mp3',
   translit:'khuliqa l-insānu ḍaʿīfā',
-  english:'“Man was created weak.”',
+  english:'“Human was created weak.”',
   ctxAr:'يُرِيدُ اللَّهُ أَن يُخَفِّفَ عَنكُمْ ۚ وَخُلِقَ الْإِنسَانُ ضَعِيفًا',
-  ctxEn:'In context: “Allah wishes to lighten [the burden] for you — and man was created weak.” (the verse begins with the conjunction <span class="ar">وَ</span>, dropped here to isolate the sentence).',
+  ctxEn:'In context: “Allah wishes to lighten the burden for you — and human was created weak.” (Sūrah an-Nisāʾ 4:28).',
   words:[
     {ar:'خُلِقَ', tl:'khuliqa', role:'fiil', gloss:'was created',
-     root:'خ · ل · ق', wazn:'فُعِلَ', form:'I', tense:'Past — مَاضٍ', voice:'Passive — مَجْهُول',
+     root:'خ · ل · ق', wazn:'فُعِلَ', form:'I', tense:'Past — مَاضٍ', voice:'Passive — مَبْنِيٌّ لِلْمَجْهُول',
      pgn:'3rd · masc. · sing.',
-     irab:'فِعْلٌ مَاضٍ مَبْنِيٌّ لِلْمَجْهُولِ، مَبْنِيٌّ عَلَى الفَتْح',
-     note:'The active <span class="ar">خَلَقَ</span> (<em>kha-la-qa</em>) becomes passive by pure vowel surgery: <em>ḍamma on the first letter, kasra on the letter before the last</em> → <span class="ar">خُلِقَ</span> (<em>khu-li-qa</em>). No extra letters, no “was”, no “by”. The Creator is not named — the focus falls entirely on the creature and his frailty.'},
-    {ar:'الْإِنسَانُ', tl:'al-insānu', role:'naib', gloss:'man / the human being',
-     root:'أ · ن س', wazn:'فِعْلَان',
-     irab:'نَائِبُ فَاعِلٍ مَرْفُوعٌ وَعَلَامَةُ رَفْعِهِ الضَّمَّة',
-     note:'In the active sentence <span class="ar">خَلَقَ اللَّهُ الْإِنسَانَ</span>, “man” was the object in <em>naṣb</em> (<span class="ar">الْإِنسَانَ</span>). Delete the doer and the object is <em>promoted</em>: it takes the doer’s seat and the doer’s ḍamma, and is renamed <span class="ar">نَائِبُ الفَاعِل</span> — “the deputy of the doer”.'},
+     irab:'فِعْلٌ مَاضٍ مَبْنِيٌّ لِلْمَجْهُولِ، مَبْنِيٌّ عَلَى الفَتْحِ الظَّاهِر',
+     note:'<b>How it works:</b> In English, you need two words: <em>“was created”</em>. In Arabic, you do not add any extra words! You simply change the vowels inside the verb:<br>• <b>Past Tense Rule:</b> Put a ḍammah (ـُ) on the 1st letter, and a kasrah (ـِ) on the letter before the last → <span class="ar">خَلَقَ</span> (<em>kha-la-qa</em> = he created) becomes <span class="ar">خُلِقَ</span> (<em>khu-li-qa</em> = was created).<br>• <b>Why passive here?</b> The Creator is already known to everyone — the Quran uses passive to turn all our attention to human frailty and our need for Allah’s mercy.'},
+    {ar:'الْإِنسَانُ', tl:'al-insānu', role:'naib', gloss:'the human being (as deputy doer)',
+     root:'أ · ن · س', wazn:'فِعْلَان',
+     irab:'نَائِبُ فَاعِلٍ مَرْفُوعٌ وَعَلَامَةُ رَفْعِهِ الضَّمَّةُ الظَّاهِرَةُ عَلَى آخِرِه',
+     note:'<b>Why did it get a ḍammah (ـُ)?</b><br>In the normal sentence (<span class="ar">خَلَقَ اللَّهُ <u>الْإِنسَانَ</u></span>), “human” was the direct receiver/object wearing a fatḥah (ـَ).<br>When the Doer (<span class="ar">اللَّهُ</span>) is not mentioned, the Doer’s seat becomes empty! In Arabic, every action sentence must have a leader wearing the crown of <b>ḍammah (ـُ)</b>.<br>So the object is <b>promoted</b>: it sits in the Doer’s empty chair, takes the ḍammah, and is renamed <b><span class="ar">نَائِبُ الفَاعِل</span> (The Deputy Doer)</b>!'},
     {ar:'ضَعِيفًا', tl:'ḍaʿīfan', role:'hal', gloss:'weak — in a state of weakness',
-     root:'ض · ع ف', wazn:'فَعِيل',
-     irab:'حَالٌ مَنْصُوبٌ وَعَلَامَةُ نَصْبِهِ الفَتْحَة',
-     note:'Not an adjective describing “man” in general — a <span class="ar">حَال</span>, the <em>condition he was in at the moment of the action</em>. The tanwīn fatḥa <em>-an</em> is its marker. Arabic packs an entire English clause (“…in a state of weakness”) into one word ending.'}
+     root:'ض · ع · ف', wazn:'فَعِيل',
+     irab:'حَالٌ مَنْصُوبٌ وَعَلَامَةُ نَصْبِهِ الفَتْحَةُ الظَّاهِرَةُ (تَنْوِينُ الفَتْح)',
+     note:'<b>Not a normal adjective:</b> If it were a plain adjective, it would copy “the human” and say <span class="ar">الضَّعِيفُ</span>. Instead, it is a <b><span class="ar">حَال</span> (Snapshot of State)</b> — answering the question: <em>“In what state was he created?”</em><br>A Ḥāl always wears a <b>fatḥah / tanwīn fatḥah (-an)</b>. Arabic packs a whole English clause (<em>“…while in a state of helplessness”</em>) into one short word!'}
   ],
-  focusRule:'خَلَقَ ← خُلِقَ : ضُمَّ أَوَّلُهُ وَكُسِرَ مَا قَبْلَ آخِرِه',
-  focusTitle:'Grammar focus · the passive machine',
-  focusText:'Arabic has no “to be + past participle”. The passive is made <em>inside</em> the word by re-vowelling it. Past: ḍamma first, kasra before the last. Present: ḍamma first, fatḥa before the last.',
-  formula:['فِعْل مَجْهُول','نَائِب فَاعِل مَرْفُوع','حَال مَنْصُوب'],
+  focusRule:'فَعَلَ ← فُعِلَ (مَاضٍ)  |  يَفْعَلُ ← يُفْعَلُ (مُضَارِع)',
+  focusTitle:'Grammar Focus · The Passive Engine & Iʿrāb',
+  focusText:'<b>1. The Vowel Shift:</b><br>• <b>Past:</b> ḍammah first, kasrah before last → <span class="ar">خَلَقَ ← خُلِقَ</span> (was created), <span class="ar">كَتَبَ ← كُتِبَ</span> (was decreed).<br>• <b>Present:</b> ḍammah first, fatḥah before last → <span class="ar">يَخْلُقُ ← يُخْلَقُ</span> (is created), <span class="ar">يَكْتُبُ ← يُكْتَبُ</span> (is written).<br><br><b>2. Why ḍammah on the Deputy Doer?</b> The receiver takes the place of the absent doer and receives the doer’s mark of honor (ḍammah).<br><br><b>3. Easy Iʿrāb Summary:</b><br>• <span class="ar">خُلِقَ</span>: Past passive verb, locked on fatḥah.<br>• <span class="ar">الْإِنسَانُ</span>: Deputy doer, raised with ḍammah.<br>• <span class="ar">ضَعِيفًا</span>: State/condition (Ḥāl), marked with fatḥah.',
+  formula:['فِعْل مَبْنِيّ لِلْمَجْهُول','نَائِب فَاعِل مَرْفُوع (ـُ)','حَال مَنْصُوب (ـًا)'],
   lab:'voice'
 },
 {
@@ -807,7 +807,22 @@ const QUIZ = [
    a:2, e:'<span class="ar">جَوَاب الطَّلَب</span>: “remember Me → I will remember you” carries a hidden <em>if</em>, and that conditional force cuts the final vowel.'},
   {q:'<span class="ar">اذْكُرُوا</span> is built on <span class="ar">حَذْف النُّون</span>. What does that mean?',
    o:['A letter was added to make it a command','The <span class="ar">نَ</span> of <span class="ar">تَذْكُرُونَ</span> was dropped to form the imperative','The nūn is silent','It is a passive form'],
-   a:1, e:'Verbs whose present ends in <span class="ar">نَ</span> (the five verbs) form their command and jussive by deleting that nūn; the remaining <span class="ar">و</span> is the plural doer.'}
+   a:1, e:'Verbs whose present ends in <span class="ar">نَ</span> (the five verbs) form their command and jussive by deleting that nūn; the remaining <span class="ar">و</span> is the plural doer.'},
+  {q:'Thinking Question: Why does <span class="ar">الْإِنسَانُ</span> in <span class="ar">خُلِقَ الْإِنسَانُ</span> take a <b>ḍammah (ـُ)</b> instead of a fatḥah?',
+   o:['Because it is the original creator','Because it is promoted to the Deputy Doer (نَائِب فَاعِل) when the doer is left unstated','Because human is a plural word','Because every noun in Arabic must end in ḍammah'],
+   a:1, e:'In Arabic, when the real doer is omitted, the receiver steps into the empty seat of the doer and is crowned with the doer’s ḍammah as the <span class="ar">نَائِب الفَاعِل</span>.'},
+  {q:'How do you turn the past active verb <span class="ar">كَتَبَ</span> (he decreed) into the passive “was decreed”?',
+   o:['Add a prefix like <span class="ar">مَا</span>','Put a ḍammah on the 1st letter and kasrah on the 2nd: <span class="ar">كُتِبَ</span>','Add the helper verb <span class="ar">كَانَ</span>','Double the middle letter: <span class="ar">كَتَّبَ</span>'],
+   a:1, e:'Past passive rule: ḍammah on the first letter, kasrah on the letter before the last (<span class="ar">فُعِلَ</span>). Example: <span class="ar">كُتِبَ عَلَيْكُمُ الصِّيَامُ</span> (2:183).'},
+  {q:'What is the correct voweling for the passive sentence: “The Quran was sent down”?',
+   o:['<span class="ar">أُنْزِلَ الْقُرْآنَ</span> (with fatḥah)','<span class="ar">أُنْزِلَ الْقُرْآنُ</span> (with ḍammah)','<span class="ar">أَنْزَلَ الْقُرْآنُ</span>','<span class="ar">أُنْزِلَ الْقُرْآنِ</span> (with kasrah)'],
+   a:1, e:'<span class="ar">أُنْزِلَ الْقُرْآنُ</span> (2:185) — the verb is passive (<span class="ar">أُنْزِلَ</span>), so <span class="ar">الْقُرْآنُ</span> is the Deputy Doer and must carry a <b>ḍammah</b>.'},
+  {q:'In <span class="ar">خُلِقَ الْإِنسَانُ ضَعِيفًا</span>, why does <span class="ar">ضَعِيفًا</span> have a <b>tanwīn fatḥah (-an)</b>?',
+   o:['It is the direct object of the verb','It is a Ḥāl (حَال) describing the temporary state/condition at creation','It is an adjective modifying a hidden noun','It is a preposition'],
+   a:1, e:'<span class="ar">ضَعِيفًا</span> is a <b>Ḥāl (حَال)</b> — answering: <em>“In what state was he created?”</em> A Ḥāl is always in the state of naṣb (fatḥah).'},
+  {q:'Spot the Error: A student says <span class="ar">خُلِقَ الْإِنسَانُ</span> means “the creator is completely unknown”. What is the correct understanding?',
+   o:['The student is right, Arabic passive only means unknown actors','In the Quran, Allah is the known Creator; passive is used to highlight human weakness and focus on our need for mercy','The verb is actually active, not passive','Passive only applies to animals'],
+   a:1, e:'In Quranic Arabic, the passive (المبني لما لم يُسَمَّ فاعله) is often used out of reverence, modesty, or to center the spotlight entirely on the receiver without repeating what is already known.'}
 ];
 
 /* =========================================================
@@ -936,36 +951,147 @@ agree(id){
   show(0);
 },
 
-/* --- 3. VOICE FLIPPER --- */
+/* --- 3. VOICE FLIPPER & STEP-BY-STEP WORKSHOP --- */
 voice(id){
   const P=[
-    {a:'خَلَقَ',p:'خُلِقَ',ea:'he created',ep:'was created'},
-    {a:'نَصَرَ',p:'نُصِرَ',ea:'he helped',ep:'was helped'},
-    {a:'أَنْزَلَ',p:'أُنْزِلَ',ea:'he sent down',ep:'was sent down'},
-    {a:'قَالَ',p:'قِيلَ',ea:'he said',ep:'it was said'},
-    {a:'يَخْلُقُ',p:'يُخْلَقُ',ea:'he creates',ep:'is created'},
-    {a:'يَقُولُ',p:'يُقَالُ',ea:'he says',ep:'it is said'}
+    {a:'خَلَقَ',p:'خُلِقَ',ea:'he created',ep:'was created',type:'Past I'},
+    {a:'كَتَبَ',p:'كُتِبَ',ea:'he wrote/decreed',ep:'was decreed',type:'Past I'},
+    {a:'أَنْزَلَ',p:'أُنْزِلَ',ea:'he sent down',ep:'was sent down',type:'Past IV'},
+    {a:'قَالَ',p:'قِيلَ',ea:'he said',ep:'it was said',type:'Past Hollow'},
+    {a:'يَخْلُقُ',p:'يُخْلَقُ',ea:'he creates',ep:'is created',type:'Present I'},
+    {a:'يَهْزِمُ',p:'يُهْزَمُ',ea:'he defeats',ep:'is defeated',type:'Present I'}
   ];
+
+  const EXAMPLES = [
+    {
+      title:'Verse 03 (Human Creation · 4:28)',
+      active:'خَلَقَ اللَّهُ <span style="color:var(--obj)">الْإِنسَانَ</span> <span style="color:var(--hal)">ضَعِيفًا</span>',
+      activeEn:'“Allah created the human (object with fatḥah) in a weak state.”',
+      passive:'<span style="color:var(--verb)">خُلِقَ</span> <span style="color:var(--subj)">الْإِنسَانُ</span> <span style="color:var(--hal)">ضَعِيفًا</span>',
+      passiveEn:'“The human (deputy doer with ḍammah) was created in a weak state.”',
+      whyDamma:'<b>Why ḍammah?</b> When the Doer (Allah) is not mentioned, the human steps up from Object to Deputy Doer (<span class="ar">نَائِب فَاعِل</span>). He inherits the Doer’s seat and wears the ḍammah (ـُ).'
+    },
+    {
+      title:'Fasting Decree (Sūrat al-Baqarah 2:183)',
+      active:'كَتَبَ اللَّهُ عَلَيْكُمُ <span style="color:var(--obj)">الصِّيَامَ</span>',
+      activeEn:'“Allah decreed upon you fasting (object with fatḥah).”',
+      passive:'<span style="color:var(--verb)">كُتِبَ</span> عَلَيْكُمُ <span style="color:var(--subj)">الصِّيَامُ</span>',
+      passiveEn:'“Fasting (deputy doer with ḍammah) was decreed upon you.”',
+      whyDamma:'<b>Why ḍammah?</b> <span class="ar">الصِّيَامُ</span> is now the subject of the sentence. The focus is entirely on the obligation of fasting itself.'
+    },
+    {
+      title:'Revelation of Quran (Sūrat al-Baqarah 2:185)',
+      active:'أَنْزَلَ اللَّهُ فِيهِ <span style="color:var(--obj)">الْقُرْآنَ</span>',
+      activeEn:'“Allah sent down in it the Quran (object with fatḥah).”',
+      passive:'<span style="color:var(--verb)">أُنْزِلَ</span> فِيهِ <span style="color:var(--subj)">الْقُرْآنُ</span>',
+      passiveEn:'“In it, the Quran (deputy doer with ḍammah) was sent down.”',
+      whyDamma:'<b>Why ḍammah?</b> <span class="ar">الْقُرْآنُ</span> is honoured as the deputy doer, standing in the spotlight of the blessed month.'
+    },
+    {
+      title:'Defeat of the Host (Sūrat al-Qamar 54:45)',
+      active:'يَهْزِمُ اللَّهُ <span style="color:var(--obj)">الْجَمْعَ</span>',
+      activeEn:'“Allah defeats the gathered army (object with fatḥah).”',
+      passive:'سَـ<span style="color:var(--verb)">يُهْزَمُ</span> <span style="color:var(--subj)">الْجَمْعُ</span>',
+      passiveEn:'“The gathered army (deputy doer with ḍammah) will be defeated.”',
+      whyDamma:'<b>Why ḍammah?</b> In present passive, the verb gets ḍammah on the 1st letter and fatḥah before the last (<span class="ar">يُهْزَمُ</span>). <span class="ar">الْجَمْعُ</span> takes ḍammah.'
+    }
+  ];
+
   const box=$('#l-'+id);
-  box.innerHTML=`<div class="lab-h"><b>Lab · the passive machine</b><span>Flip the switch and watch only the vowels move.</span></div>
-    <div class="btnrow"><button class="btn on" data-m="a"><span class="ar">مَعْلُوم</span> Active</button><button class="btn" data-m="p"><span class="ar">مَجْهُول</span> Passive</button></div>
-    <div class="flip">${P.map((p,i)=>`<div class="fcard"><div class="lbl" id="fl-${id}-${i}">Active</div><div class="w ar" id="fw-${id}-${i}"></div><div class="en" id="fe-${id}-${i}"></div></div>`).join('')}</div>
-    <div class="out" style="margin-top:14px"><div class="big" id="lo-${id}"></div><div class="sm" id="ls-${id}"></div></div>`;
-  const show=m=>{
+  box.innerHTML=`
+    <div class="lab-h">
+      <b>Lab · The Passive Transformation Machine</b>
+      <span>See how vowels change and why the object gets promoted to ḍammah.</span>
+    </div>
+
+    <!-- Mode Switcher -->
+    <div class="btnrow" style="margin-bottom:12px">
+      <button class="btn on" data-m="a"><span class="ar">مَعْلُوم</span> Active Voice</button>
+      <button class="btn" data-m="p"><span class="ar">مَبْنِيٌّ لِلْمَجْهُول</span> Passive Voice</button>
+    </div>
+
+    <div class="flip">
+      ${P.map((p,i)=>`
+        <div class="fcard">
+          <div class="lbl" style="font-size:0.65rem;color:var(--gold)">${p.type}</div>
+          <div class="w ar" id="fw-${id}-${i}"></div>
+          <div class="en" id="fe-${id}-${i}"></div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- Step-by-Step Sentence Transformer -->
+    <div style="margin-top:20px;background:rgba(255,255,255,0.02);border:1px solid var(--line);border-radius:14px;padding:18px">
+      <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">
+        🔍 Step-by-Step Qur'anic Examples (Click to inspect)
+      </div>
+      <div class="btnrow" id="exBtnRow-${id}">
+        ${EXAMPLES.map((ex,i)=>`<button class="btn ${i===0?'on':''}" data-ex="${i}">${ex.title}</button>`).join('')}
+      </div>
+      <div class="out" style="margin-top:10px;text-align:left;align-items:flex-start">
+        <div class="big" id="exAr-${id}" style="width:100%;text-align:center"></div>
+        <div class="sm" id="exEn-${id}" style="font-size:0.95rem;color:var(--text);margin-top:6px;width:100%;text-align:center"></div>
+        <div class="sm" id="exWhy-${id}" style="background:rgba(227,183,105,0.06);border-left:3px solid var(--gold);padding:10px 14px;border-radius:8px;margin-top:10px;width:100%;line-height:1.6"></div>
+      </div>
+    </div>
+
+    <!-- Common Misconceptions & Traps Box -->
+    <div style="margin-top:18px;background:rgba(255,127,178,0.04);border:1px solid rgba(255,127,178,0.22);border-radius:14px;padding:16px 18px">
+      <div style="font-size:0.76rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--obj);margin-bottom:8px">
+        ⚠️ 4 Common Misconceptions &amp; Traps to Avoid
+      </div>
+      <ul style="padding-left:18px;font-size:0.85rem;color:var(--muted);line-height:1.65;display:grid;gap:8px">
+        <li><b>Trap 1: Thinking the noun stays an object (Fatḥah).</b> ❌ <em>khuliqa l-insāna</em> → ✔️ <b><span class="ar">خُلِقَ الْإِنسَانُ</span></b> (Takes ḍammah because it is the Deputy Doer!).</li>
+        <li><b>Trap 2: Thinking passive means "we don't know who did it".</b> In the Quran, the Creator is known to all. The passive is used to highlight the human condition or out of profound spiritual modesty.</li>
+        <li><b>Trap 3: Adding helper words like "was" (كَانَ).</b> Arabic needs no helper verbs — changing the internal vowels from <span class="ar">خَلَقَ</span> to <span class="ar">خُلِقَ</span> does the whole job!</li>
+        <li><b>Trap 4: Confusing the State (Ḥāl) with an Adjective.</b> <span class="ar">ضَعِيفًا</span> is not a permanent title; it is a snapshot of the weak state at the moment of creation. That is why it keeps its tanwīn fatḥah.</li>
+      </ul>
+    </div>
+  `;
+
+  let currentMode = 'a';
+  let currentEx = 0;
+
+  const showVowels = m => {
+    currentMode = m;
     P.forEach((p,i)=>{
-      $(`#fw-${id}-${i}`).innerHTML=m==='a'?p.a:p.p;
-      $(`#fw-${id}-${i}`).style.color = m==='a'?'var(--verb)':'var(--hal)';
-      $(`#fl-${id}-${i}`).textContent = m==='a'?'Active':'Passive';
-      $(`#fe-${id}-${i}`).textContent = m==='a'?p.ea:p.ep;
+      const wEl = $(`#fw-${id}-${i}`);
+      const eEl = $(`#fe-${id}-${i}`);
+      if (wEl && eEl) {
+        wEl.innerHTML = m==='a'?p.a:p.p;
+        wEl.style.color = m==='a'?'var(--verb)':'var(--subj)';
+        eEl.textContent = m==='a'?p.ea:p.ep;
+      }
     });
-    $('#lo-'+id).innerHTML = m==='a' ? 'خَلَقَ اللَّهُ الْإِنسَانَ' : 'خُلِقَ الْإِنسَانُ';
-    $('#ls-'+id).innerHTML = m==='a'
-      ? 'Active: the doer <span class="ar">اللَّهُ</span> is named and <span class="ar">الْإِنسَانَ</span> takes fatḥa as object.'
-      : 'Passive: the doer is deleted and <span class="ar">الْإِنسَانُ</span> is <b>promoted</b> — it now takes ḍamma as <span class="ar">نَائِب الفَاعِل</span>. Past rule: <b>ḍamma first, kasra before last</b>. Present rule: <b>ḍamma first, fatḥa before last</b>.';
-    box.querySelectorAll('.btn').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+    box.querySelectorAll('.btnrow:first-of-type .btn').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+    renderExample(currentEx);
   };
-  box.querySelectorAll('.btn').forEach(b=>b.onclick=()=>show(b.dataset.m));
-  show('a');
+
+  const renderExample = idx => {
+    currentEx = idx;
+    const ex = EXAMPLES[idx];
+    const arEl = $(`#exAr-${id}`);
+    const enEl = $(`#exEn-${id}`);
+    const whyEl = $(`#exWhy-${id}`);
+    if (arEl && enEl && whyEl) {
+      if (currentMode === 'a') {
+        arEl.innerHTML = ex.active;
+        enEl.innerHTML = `<b>Active Voice:</b> ${ex.activeEn}`;
+        whyEl.innerHTML = `<b>Active Structure:</b> The Doer is named openly, and the receiver takes a <b>fatḥah (ـَ)</b> as the direct object (<span class="ar">مَفْعُول بِه</span>).`;
+      } else {
+        arEl.innerHTML = ex.passive;
+        enEl.innerHTML = `<b>Passive Voice:</b> ${ex.passiveEn}`;
+        whyEl.innerHTML = ex.whyDamma;
+      }
+    }
+    box.querySelectorAll(`#exBtnRow-${id} .btn`).forEach((b,j)=>b.classList.toggle('on',j===idx));
+  };
+
+  box.querySelectorAll('.btnrow:first-of-type .btn').forEach(b=>b.onclick=()=>showVowels(b.dataset.m));
+  box.querySelectorAll(`#exBtnRow-${id} .btn`).forEach(b=>b.onclick=()=>renderExample(+b.dataset.ex));
+
+  showVowels('a');
+  renderExample(0);
 },
 
 /* --- 4. KANA CONJUGATION --- */
