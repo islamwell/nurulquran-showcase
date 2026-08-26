@@ -798,6 +798,35 @@ footer a{ color:var(--ink-2); text-decoration-color:var(--edge-hi); text-underli
 }
 /* Perf: skip offscreen paint work */
 section:not(.hero){ content-visibility:auto; contain-intrinsic-size:auto 900px }
+
+.nq-play-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
+  user-select: none !important;
+}
+.nq-play-btn svg {
+  width: 13px !important;
+  height: 13px !important;
+  margin-left: 1px !important;
+}
+.nq-play-btn .pause-icon { display: none !important; margin-left: 0 !important; }
+.nq-play-btn.playing .play-icon { display: none !important; }
+.nq-play-btn.playing .pause-icon { display: block !important; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 </style>
 </head>
 
@@ -1113,7 +1142,7 @@ section:not(.hero){ content-visibility:auto; contain-intrinsic-size:auto 900px }
       All data stays in your browser.
     </p>
     <div class="footer-version-tag" style="margin-top:1.5rem;font-size:0.75rem;opacity:0.6;font-family:monospace">
-      v1.0.13 (updated 2026-08-26 19:35)
+      v1.0.13 (updated 2026-08-26 20:18)
     </div>
   </div>
 </footer>

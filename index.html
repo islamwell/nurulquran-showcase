@@ -1144,6 +1144,182 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
+
+/* ============================================================
+   MOBILE VIEWPORT & 100% RESPONSIVE REFINEMENT (NO HORIZONTAL SCROLL)
+   ============================================================ */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.nq-play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(245, 201, 123, 0.12);
+  border: 1px solid rgba(245, 201, 123, 0.35);
+  color: var(--gold-2);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.nq-play-btn:hover {
+  background: rgba(245, 201, 123, 0.28);
+  border-color: var(--gold-2);
+  transform: translateY(-1px) scale(1.06);
+}
+.nq-play-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  margin-left: 1px;
+}
+.nq-play-btn .pause-icon { display: none; margin-left: 0; }
+.nq-play-btn.playing {
+  background: rgba(126, 227, 198, 0.25);
+  border-color: var(--teal-2);
+  color: var(--teal-2);
+}
+.nq-play-btn.playing .play-icon { display: none; }
+.nq-play-btn.playing .pause-icon { display: block; }
+
+@media (max-width: 768px) {
+  .nav-header {
+    padding: 0;
+  }
+  .nav-container {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .brand-tagline {
+    display: none;
+  }
+  .brand-name {
+    font-size: 1.05rem;
+  }
+  .hero-section {
+    padding: 60px 14px 40px;
+  }
+  .bismillah-hero {
+    font-size: clamp(1.35rem, 6vw, 2.2rem);
+    word-break: break-word;
+  }
+  .hero-badge {
+    max-width: 94vw;
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .hero-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.8rem);
+    letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    padding: 0 4px;
+  }
+  .hero-stats-strip {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px;
+    justify-content: space-around;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .stat-item {
+    min-width: 120px;
+    text-align: center;
+  }
+  .main-showcase-container {
+    padding: 0 14px 60px;
+  }
+  .search-box-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  .filter-pills-row {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    width: 100%;
+    scrollbar-width: none;
+  }
+  .filter-pills-row::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-pill {
+    flex-shrink: 0;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    width: 100%;
+  }
+  .card-item {
+    padding: 22px 18px;
+  }
+  .islam-dropdown-menu {
+    position: fixed;
+    top: 58px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    min-width: unset;
+    max-width: calc(100vw - 20px);
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+  .modal-dialog-box {
+    max-width: calc(100vw - 16px);
+    width: 96vw;
+    height: 90vh;
+  }
+  .modal-header-bar {
+    padding: 10px 14px;
+  }
+}
+
+
+.nq-play-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
+  user-select: none !important;
+}
+.nq-play-btn svg {
+  width: 13px !important;
+  height: 13px !important;
+  margin-left: 1px !important;
+}
+.nq-play-btn .pause-icon { display: none !important; margin-left: 0 !important; }
+.nq-play-btn.playing .play-icon { display: none !important; }
+.nq-play-btn.playing .pause-icon { display: block !important; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 </style>
 <link rel="stylesheet" type="text/css" href="chrome-extension://mfidniedemcgceagapgdekdbmanojomk/css/content-shared.css"></head>
 <body>
@@ -1248,7 +1424,7 @@ body {
   </div>
   <div class="hero-badge">
     <span class="hero-pulse-dot"></span>
-    <span>The Translation</span>
+    <span>In the name of Allah, the Entirely Merciful, the Especially Merciful</span>
   </div>
   <h1 class="hero-title">
     Exploring Quranic Eloquence,<br>
@@ -1260,8 +1436,8 @@ body {
 
   <div class="hero-stats-strip">
     <div class="stat-item">
-      <span class="stat-number">7</span>
-      <span class="stat-label">Full Interactive Apps</span>
+      <span class="stat-number">9</span>
+      <span class="stat-label">Full Interactive Exhibits</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
@@ -1695,7 +1871,7 @@ body {
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
     <div class="footer-version-tag">
-      v1.0.13 (updated 2026-08-26 19:35)
+      v1.0.13 (updated 2026-08-26 20:18)
     </div>
   </div>
 </footer>

@@ -227,6 +227,35 @@ h1{font-family:'Fraunces',serif;font-weight:900;letter-spacing:-.035em;
   border:1px solid rgba(255,255,255,.22);color:#fff;font-family:inherit;font-size:15px;transition:.22s}
 .close:hover{background:rgba(255,255,255,.1)}
 footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-height:1.9}
+
+.nq-play-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
+  user-select: none !important;
+}
+.nq-play-btn svg {
+  width: 13px !important;
+  height: 13px !important;
+  margin-left: 1px !important;
+}
+.nq-play-btn .pause-icon { display: none !important; margin-left: 0 !important; }
+.nq-play-btn.playing .play-icon { display: none !important; }
+.nq-play-btn.playing .pause-icon { display: block !important; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 </style>
 </head>
 <body>
@@ -372,7 +401,7 @@ footer{margin-top:60px;text-align:center;font-size:14.5px;color:#5E6A7C;line-hei
         <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C97B">NURULQURAN · نُورُ القُرْآن</span>
       </div>
       <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.13 (updated 2026-08-26 19:35)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.13 (updated 2026-08-26 20:18)</div>
     </div>
   </footer>
 </div>
