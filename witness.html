@@ -8,7 +8,7 @@
 <meta name="description" content="An immersive visual meditation on Sūrah Āl ʿImrān 3:18 — Allah Himself is a Witness that there is no god except Him." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Reem+Kufi:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300&family=Inter+Tight:wght@200..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 
 /* ═══════════════════════════════════════════════════════════
@@ -48,14 +48,14 @@
   --gold-deep:  oklch(70% 0.14  70);
   --teal:       oklch(84% 0.11  190);
   --violet:     oklch(72% 0.14  300);
-  --paper:      oklch(96% 0.02  90);
-  --mist:       oklch(88% 0.015 250 / .62);
+  --paper:      #F8FAFC; /* Luminous crisp off-white for maximum contrast */
+  --mist:       #CBD5E1; /* Slate-300: High-contrast, easy-reading body text */
   --line:       oklch(100% 0 0 / .10);
   --glass:      oklch(30% 0.04 275 / .28);
   --ar: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
   --kufi: 'Reem Kufi', serif;
   --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Inter Tight', system-ui, sans-serif;
+  --sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --ease: cubic-bezier(.16,1,.3,1);
   --ease-io: cubic-bezier(.76,0,.24,1);
 }
@@ -64,7 +64,7 @@
 html{ scroll-behavior:smooth; }
 body{
   margin:0; background:var(--ink); color:var(--paper);
-  font-family:var(--sans); font-weight:250; line-height:1.7;
+  font-family:var(--sans); font-weight:400; line-height:1.75; color:var(--paper);
   overflow-x:clip; -webkit-font-smoothing:antialiased;
   cursor:none;
 }
@@ -73,7 +73,7 @@ body{
 
 /* ── Grain + scanline atmosphere ─────────────────────────── */
 body::after{
-  content:''; position:fixed; inset:-50%; pointer-events:none; z-index:60;
+  content:''; position:fixed; inset:-50%; pointer-events:none; z-index:-1; opacity:0.12;
   background-image:
     repeating-linear-gradient(0deg, transparent 0 2px, oklch(0% 0 0 / .16) 2px 3px);
   opacity:.35; mix-blend-mode:overlay;
@@ -169,12 +169,15 @@ section{ position:relative; min-height:100svh; display:grid; place-items:center;
   color:oklch(86% .145 88 / .8); display:flex; align-items:center; gap:.9rem; }
 .eyebrow::before{ content:''; width:clamp(24px,6vw,64px); height:1px;
   background:linear-gradient(90deg,transparent,var(--gold)); }
-h2{ font-family:var(--serif); font-weight:300; letter-spacing:-.01em; line-height:1.05;
-  font-size:clamp(2.1rem,6.2vw,4.4rem); margin:.5em 0 .3em; text-wrap:balance; }
-h2 em{ font-style:italic;
+h2{ font-family:var(--sans); font-weight:600; letter-spacing:-.02em; line-height:1.18;
+  font-size:clamp(2.1rem,5.5vw,3.8rem); margin:.5em 0 .3em; text-wrap:balance; color:#FFFFFF; }
+h2 em{ font-style:normal; font-weight:700;
   background:linear-gradient(100deg,var(--gold),var(--teal) 60%,var(--violet));
   -webkit-background-clip:text; background-clip:text; color:transparent; }
-p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; text-wrap:pretty; }
+p.lead{ font-family:var(--sans); font-size:clamp(1.08rem,1.8vw,1.25rem); font-weight:400;
+  color:#E2E8F0; max-width:64ch; text-wrap:pretty; line-height:1.8; }
+.eyebrow{ font-size:.76rem; font-weight:700; letter-spacing:.36em; text-transform:uppercase;
+  color:var(--gold); display:flex; align-items:center; gap:.9rem; }
 
 /* reveal (scroll-driven where supported, IO fallback) */
 .rise{ opacity:0; translate:0 40px; filter:blur(8px);
@@ -202,9 +205,26 @@ p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; 
   background:linear-gradient(180deg,#fff, oklch(88% .1 88));
   -webkit-background-clip:text; background-clip:text; color:transparent; }
 @keyframes word{ to{ opacity:1; filter:blur(0); translate:0 0; scale:1; } }
-.trans{ font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.45rem); font-style:italic;
-  color:oklch(92% .02 90 / .84); max-width:46ch; margin:0 auto; opacity:0;
-  animation:word 2s var(--ease) 2.6s forwards; }
+.trans{
+  font-family: var(--sans);
+  font-size: clamp(1.12rem, 2.3vw, 1.45rem);
+  font-style: normal;
+  font-weight: 450;
+  line-height: 1.8;
+  color: #FFFFFF;
+  max-width: 58ch;
+  margin: 1.4rem auto 0;
+  opacity: 0;
+  animation: word 2s var(--ease) 2.6s forwards;
+  background: rgba(12, 18, 30, 0.72);
+  border: 1px solid rgba(245, 201, 123, 0.28);
+  border-radius: 20px;
+  padding: 22px 28px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 201, 123, 0.08);
+  text-wrap: pretty;
+}
 .ref{ margin-top:1.4rem; font-size:.72rem; letter-spacing:.4em; color:oklch(86% .145 88 / .75);
   opacity:0; animation:word 1.6s var(--ease) 3.1s forwards; }
 .scroll-cue{ position:absolute; bottom:3.2vh; left:50%; translate:-50% 0; display:grid; gap:.6rem;
@@ -232,14 +252,14 @@ p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; 
 .tok:hover,.tok:focus-visible{ --glow:1; outline:none; transform:translateY(-8px) scale(1.04);
   border-color:oklch(86% .145 88 / .5); box-shadow:0 22px 60px -20px oklch(86% .145 88 / .45); }
 .tok .card{ position:absolute; inset-inline:auto; left:50%; top:calc(100% + 14px); translate:-50% 8px;
-  width:max(220px,16vw); padding:.9rem 1rem; border-radius:14px; direction:ltr; text-align:left;
-  background:oklch(14% .04 278 / .92); border:1px solid oklch(86% .145 88 / .28);
-  box-shadow:0 30px 70px -30px #000; opacity:0; pointer-events:none; z-index:9;
-  transition:.45s var(--ease); backdrop-filter:blur(14px); }
+  width:max(270px,22vw); padding:1rem 1.25rem; border-radius:16px; direction:ltr; text-align:left;
+  background:rgba(12, 18, 32, 0.97); border:1px solid rgba(245, 201, 123, 0.45);
+  box-shadow:0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(245, 201, 123, 0.15); opacity:0; pointer-events:none; z-index:99;
+  transition:.45s var(--ease); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
 .tok:hover .card,.tok:focus-visible .card{ opacity:1; translate:-50% 0; }
-.tok .card b{ display:block; font-family:var(--sans); font-weight:600; font-size:.78rem;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
-.tok .card span{ font-family:var(--serif); font-size:.98rem; color:var(--mist); }
+.tok .card b{ display:block; font-family:var(--sans); font-weight:700; font-size:.88rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+.tok .card span{ display:block; font-family:var(--sans); font-size:.96rem; font-weight:400; line-height:1.65; color:#F1F5F9; }
 
 /* ═══════════════════════════════════════════════════════════
    8 · THREE WITNESSES
@@ -261,10 +281,10 @@ p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; 
 .wit:nth-child(3) .sigil *{ stroke:var(--violet); }
 .wit .sigil{ animation:spin 26s linear infinite; }
 .wit:nth-child(2) .sigil{ animation-duration:34s; animation-direction:reverse; }
-.wit h3{ font-family:var(--kufi); font-weight:500; font-size:clamp(1.05rem,2vw,1.3rem); margin:0 0 .1em; }
-.wit .ar{ font-family:var(--ar); direction:rtl; font-size:1.5rem; color:var(--gold);
-  display:block; margin-bottom:.6rem; }
-.wit p{ margin:0; font-size:.95rem; color:var(--mist); }
+.wit h3{ font-family:var(--sans); font-weight:700; font-size:clamp(1.2rem,2.2vw,1.45rem); margin:0 0 .3em; color:#FFFFFF; }
+.wit .ar{ font-family:var(--ar); direction:rtl; font-size:1.75rem; color:var(--gold);
+  display:block; margin-bottom:.7rem; line-height:1.6; }
+.wit p{ margin:0; font-family:var(--sans); font-size:1.02rem; font-weight:400; line-height:1.75; color:#E2E8F0; }
 .num{ position:absolute; top:1rem; right:1.4rem; font-family:var(--serif); font-size:3.4rem;
   color:oklch(100% 0 0 / .07); line-height:1; }
 
@@ -285,9 +305,9 @@ p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; 
   filter:blur(46px); animation:hue 12s linear infinite; }
 .meter{ display:flex; align-items:baseline; gap:.7rem; margin-top:1.6rem;
   font-family:var(--serif); }
-.meter output{ font-size:clamp(2.4rem,6vw,4rem); color:var(--gold);
+.meter output{ font-size:clamp(2.4rem,6vw,4rem); font-family:var(--sans); font-weight:700; color:var(--gold);
   font-variant-numeric:tabular-nums; text-shadow:0 0 30px oklch(86% .145 88 /.45); }
-.meter span{ font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--mist); }
+.meter span{ font-size:.78rem; font-family:var(--sans); font-weight:600; letter-spacing:.25em; text-transform:uppercase; color:#E2E8F0; }
 
 /* ═══════════════════════════════════════════════════════════
    10 · TWO NAMES — orbit
@@ -325,10 +345,15 @@ p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; 
   backdrop-filter:blur(10px); position:relative; transition:.6s var(--ease); }
 .note:hover{ background:oklch(100% 0 0 /.06); border-color:oklch(86% .145 88 /.32);
   transform:translateY(-6px); }
-.note q{ font-family:var(--serif); font-size:1.05rem; font-style:italic; color:var(--paper);
+.note{
+  background: rgba(14, 20, 34, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.note q{ font-family:var(--sans); font-size:1.05rem; font-style:normal; font-weight:400; line-height:1.8; color:#F8FAFC;
   quotes:'“' '”'; display:block; }
-.note cite{ display:block; margin-top:.9rem; font-size:.66rem; letter-spacing:.26em;
-  text-transform:uppercase; font-style:normal; color:oklch(86% .145 88 /.85); }
+.note cite{ display:block; margin-top:1rem; font-family:var(--sans); font-size:.76rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; font-style:normal; color:var(--gold); }
 .note::before{ content:''; position:absolute; left:0; top:1.4rem; width:2px; height:34px;
   background:linear-gradient(var(--gold),transparent); border-radius:2px; }
 
@@ -875,7 +900,6 @@ footer hr{ border:0; height:1px; width:min(420px,70vw); margin:0 auto 2.2rem;
     QURʾĀN 3:18 · TRANSLATION: DR. MUSTAFA KHATTAB, THE CLEAR QURʾĀN<br>
     <span style="opacity:.6">Built with WebGL2 · generative geometry · no imagery of living beings</span>
   </footer>
-</footer>
 </section>
 
 <script type="module">
@@ -1218,7 +1242,7 @@ document.addEventListener('visibilitychange', () => { t0 = performance.now() - (
   </div>
   <p style="font-size:0.78rem;color:var(--mist);max-width:540px;margin:0 auto 14px">Shahida Allāh — An Interactive Meditation on Sūrah Āl ʿImrān 3:18 and the Threefold Testimony of Light</p>
   <div class="footer-version-tag" style="display:inline-block;font-family:monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--gold);padding:4px 10px;border-radius:6px;background:rgba(245,201,123,0.08);border:1px solid rgba(245,201,123,0.2)">
-    v1.0.15 (updated 2026-09-06 06:36)
+    v1.0.16 (updated 2026-09-06 06:48)
   </div>
 </footer>
 
