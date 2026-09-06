@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Shahida Allāh — Qurʾān 3:18 · The Testimony of Light</title>
+<meta name="description" content="An immersive visual meditation on Sūrah Āl ʿImrān 3:18 — Allah Himself is a Witness that there is no god except Him." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Reem+Kufi:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300&family=Inter+Tight:wght@200..800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   0 · DESIGN TOKENS  —  OKLCH palette, animated @property vars
+   ═══════════════════════════════════════════════════════════ */
+@property --ang    { syntax:'<angle>';     inherits:false; initial-value:0deg; }
+@property --glow   { syntax:'<number>';    inherits:false; initial-value:0; }
+@property --sweep  { syntax:'<percentage>';inherits:false; initial-value:0%; }
+@property --tilt   { syntax:'<angle>';     inherits:false; initial-value:0deg; }
+
+:root{
+  --ink:        oklch(11% 0.035 275);
+  --ink-2:      oklch(16% 0.05  282);
+  --gold:       oklch(86% 0.145 88);
+  --gold-deep:  oklch(70% 0.14  70);
+  --teal:       oklch(84% 0.11  190);
+  --violet:     oklch(72% 0.14  300);
+  --paper:      oklch(96% 0.02  90);
+  --mist:       oklch(88% 0.015 250 / .62);
+  --line:       oklch(100% 0 0 / .10);
+  --glass:      oklch(30% 0.04 275 / .28);
+  --ar: 'Amiri Quran', 'Reem Kufi', serif;
+  --kufi: 'Reem Kufi', serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter Tight', system-ui, sans-serif;
+  --ease: cubic-bezier(.16,1,.3,1);
+  --ease-io: cubic-bezier(.76,0,.24,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--ink); color:var(--paper);
+  font-family:var(--sans); font-weight:250; line-height:1.7;
+  overflow-x:clip; -webkit-font-smoothing:antialiased;
+  cursor:none;
+}
+@media (hover:none){ body{ cursor:auto; } }
+::selection{ background:oklch(86% .145 88 / .28); color:#fff; }
+
+/* ── Grain + scanline atmosphere ─────────────────────────── */
+body::after{
+  content:''; position:fixed; inset:-50%; pointer-events:none; z-index:60;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 2px, oklch(0% 0 0 / .16) 2px 3px);
+  opacity:.35; mix-blend-mode:overlay;
+  animation:drift 24s linear infinite;
+}
+@keyframes drift{ to{ transform:translate3d(0,3px,0);} }
+
+/* ═══════════════════════════════════════════════════════════
+   1 · CANVASES
+   ═══════════════════════════════════════════════════════════ */
+#gl, #stars{ position:fixed; inset:0; width:100%; height:100%; display:block; }
+#gl{ z-index:-2; }
+#stars{ z-index:-1; mix-blend-mode:screen; opacity:.9; }
+
+/* soft radial veil so type always reads */
+.veil{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 0%,  transparent 30%, oklch(11% .035 275 / .72) 100%),
+    radial-gradient(80% 60% at 50% 110%, oklch(11% .035 275 / .9), transparent 70%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2 · CURSOR — luminous witness
+   ═══════════════════════════════════════════════════════════ */
+.cursor,.cursor-halo{ position:fixed; top:0; left:0; z-index:70; pointer-events:none;
+  border-radius:50%; will-change:transform; }
+.cursor{ width:6px; height:6px; margin:-3px 0 0 -3px;
+  background:var(--gold); box-shadow:0 0 14px 4px oklch(86% .145 88 / .7); }
+.cursor-halo{ width:52px; height:52px; margin:-26px 0 0 -26px;
+  border:1px solid oklch(86% .145 88 / .38);
+  background:radial-gradient(circle, oklch(86% .145 88 / .10), transparent 68%);
+  transition:width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease),
+             border-color .35s, background .35s; }
+body[data-hot="1"] .cursor-halo{ width:104px; height:104px; margin:-52px 0 0 -52px;
+  border-color:oklch(84% .11 190 / .55);
+  background:radial-gradient(circle, oklch(84% .11 190 / .14), transparent 70%); }
+@media (hover:none){ .cursor,.cursor-halo{ display:none; } }
+
+/* ═══════════════════════════════════════════════════════════
+   3 · PRELOADER — the ring of light
+   ═══════════════════════════════════════════════════════════ */
+#pre{ position:fixed; inset:0; z-index:100; display:grid; place-items:center;
+  background:radial-gradient(circle at 50% 50%, oklch(16% .05 282), var(--ink) 70%);
+  transition:opacity 1.1s var(--ease), visibility 1.1s; }
+#pre[hidden]{ opacity:0; visibility:hidden; }
+.ring{ width:min(46vmin,320px); aspect-ratio:1; position:relative; display:grid; place-items:center; }
+.ring i{ position:absolute; inset:0; border-radius:50%;
+  border:1px solid oklch(86% .145 88 / .22);
+  animation:spin 9s linear infinite; }
+.ring i:nth-child(2){ inset:12%; border-style:dashed; animation-duration:14s; animation-direction:reverse;
+  border-color:oklch(84% .11 190 / .3); }
+.ring i:nth-child(3){ inset:26%; border-color:oklch(72% .14 300 / .35); animation-duration:20s; }
+@keyframes spin{ to{ transform:rotate(1turn);} }
+.ring b{ font-family:var(--ar); font-size:clamp(1.1rem,3.4vw,1.9rem); font-weight:400;
+  color:var(--gold); text-shadow:0 0 34px oklch(86% .145 88 / .55);
+  animation:breathe 3.4s ease-in-out infinite; }
+@keyframes breathe{ 50%{ opacity:.45; letter-spacing:.04em; } }
+.pre-bar{ position:absolute; bottom:14vh; width:min(240px,50vw); height:1px; background:var(--line); }
+.pre-bar span{ display:block; height:100%; width:0; background:linear-gradient(90deg,transparent,var(--gold));
+  box-shadow:0 0 12px var(--gold); transition:width .4s linear; }
+
+/* ═══════════════════════════════════════════════════════════
+   4 · HUD — progress + section dots
+   ═══════════════════════════════════════════════════════════ */
+.progress{ position:fixed; top:0; left:0; height:2px; z-index:65; width:100%;
+  transform-origin:0 50%; transform:scaleX(0);
+  background:linear-gradient(90deg, var(--teal), var(--gold), var(--violet));
+  box-shadow:0 0 18px oklch(86% .145 88 / .6); }
+@supports (animation-timeline:scroll()){
+  .progress{ animation:grow linear both; animation-timeline:scroll(root block); }
+  @keyframes grow{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+}
+nav.dots{ position:fixed; right:clamp(12px,2.4vw,34px); top:50%; translate:0 -50%; z-index:66;
+  display:grid; gap:16px; }
+nav.dots a{ width:9px; height:9px; border-radius:50%; border:1px solid oklch(100% 0 0 / .35);
+  position:relative; transition:.4s var(--ease); }
+nav.dots a::after{ content:attr(data-l); position:absolute; right:20px; top:50%; translate:0 -50%;
+  font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; white-space:nowrap;
+  color:var(--mist); opacity:0; transition:.4s var(--ease); }
+nav.dots a:hover::after{ opacity:1; }
+nav.dots a[aria-current="true"]{ background:var(--gold); border-color:var(--gold);
+  box-shadow:0 0 16px 3px oklch(86% .145 88 / .55); scale:1.25; }
+@media (max-width:640px){ nav.dots{ display:none; } }
+
+/* ═══════════════════════════════════════════════════════════
+   5 · LAYOUT
+   ═══════════════════════════════════════════════════════════ */
+section{ position:relative; min-height:100svh; display:grid; place-items:center;
+  padding:clamp(4rem,10vh,9rem) clamp(1.1rem,5vw,3rem); }
+.wrap{ width:min(1120px,100%); }
+.eyebrow{ font-size:.68rem; letter-spacing:.42em; text-transform:uppercase;
+  color:oklch(86% .145 88 / .8); display:flex; align-items:center; gap:.9rem; }
+.eyebrow::before{ content:''; width:clamp(24px,6vw,64px); height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold)); }
+h2{ font-family:var(--serif); font-weight:300; letter-spacing:-.01em; line-height:1.05;
+  font-size:clamp(2.1rem,6.2vw,4.4rem); margin:.5em 0 .3em; text-wrap:balance; }
+h2 em{ font-style:italic;
+  background:linear-gradient(100deg,var(--gold),var(--teal) 60%,var(--violet));
+  -webkit-background-clip:text; background-clip:text; color:transparent; }
+p.lead{ font-size:clamp(1rem,1.6vw,1.16rem); color:var(--mist); max-width:62ch; text-wrap:pretty; }
+
+/* reveal (scroll-driven where supported, IO fallback) */
+.rise{ opacity:0; translate:0 40px; filter:blur(8px);
+  transition:opacity 1s var(--ease), translate 1.1s var(--ease), filter 1s var(--ease); }
+.rise.in{ opacity:1; translate:0 0; filter:blur(0); }
+.rise.d1{ transition-delay:.12s } .rise.d2{ transition-delay:.24s } .rise.d3{ transition-delay:.36s }
+
+/* ═══════════════════════════════════════════════════════════
+   6 · HERO
+   ═══════════════════════════════════════════════════════════ */
+#hero{ text-align:center; }
+.crest{ width:clamp(120px,20vw,210px); margin-inline:auto; filter:drop-shadow(0 0 24px oklch(86% .145 88 /.4)); }
+.crest path,.crest circle,.crest polygon{ fill:none; stroke:var(--gold); stroke-width:.7;
+  stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600);
+  animation:draw 3s var(--ease-io) forwards; }
+.crest [data-d="1"]{ animation-delay:.35s; stroke:var(--teal); }
+.crest [data-d="2"]{ animation-delay:.7s;  stroke:var(--violet); }
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+
+.ayah-hero{ font-family:var(--ar); direction:rtl; font-size:clamp(1.55rem,5.6vw,4.1rem);
+  line-height:2.05; margin:clamp(1.4rem,4vh,2.6rem) 0; letter-spacing:0;
+  text-shadow:0 0 60px oklch(86% .145 88 / .18); }
+.ayah-hero .w{ display:inline-block; opacity:0; filter:blur(14px); translate:0 .35em; scale:.94;
+  animation:word 1.5s var(--ease) forwards; animation-delay:calc(.6s + var(--i) * .13s);
+  background:linear-gradient(180deg,#fff, oklch(88% .1 88));
+  -webkit-background-clip:text; background-clip:text; color:transparent; }
+@keyframes word{ to{ opacity:1; filter:blur(0); translate:0 0; scale:1; } }
+.trans{ font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.45rem); font-style:italic;
+  color:oklch(92% .02 90 / .84); max-width:46ch; margin:0 auto; opacity:0;
+  animation:word 2s var(--ease) 2.6s forwards; }
+.ref{ margin-top:1.4rem; font-size:.72rem; letter-spacing:.4em; color:oklch(86% .145 88 / .75);
+  opacity:0; animation:word 1.6s var(--ease) 3.1s forwards; }
+.scroll-cue{ position:absolute; bottom:3.2vh; left:50%; translate:-50% 0; display:grid; gap:.6rem;
+  justify-items:center; font-size:.6rem; letter-spacing:.34em; color:var(--mist);
+  opacity:0; animation:word 1.4s var(--ease) 3.6s forwards; }
+.scroll-cue i{ width:1px; height:52px; background:linear-gradient(var(--gold),transparent);
+  animation:cue 2.4s var(--ease-io) infinite; transform-origin:top; }
+@keyframes cue{ 0%{scale:1 0; opacity:0} 40%{scale:1 1; opacity:1} 100%{scale:1 1; opacity:0} }
+
+/* ═══════════════════════════════════════════════════════════
+   7 · WORD-BY-WORD LATTICE
+   ═══════════════════════════════════════════════════════════ */
+.verse-grid{ direction:rtl; display:flex; flex-wrap:wrap; gap:clamp(.5rem,1.4vw,1rem);
+  justify-content:center; margin-top:clamp(2rem,5vh,3.4rem); }
+.tok{ --glow:0; position:relative; font-family:var(--ar); font-size:clamp(1.25rem,3.4vw,2.3rem);
+  padding:.62em .8em .5em; border-radius:18px; border:1px solid var(--line);
+  background:linear-gradient(160deg, oklch(100% 0 0 / .045), transparent 60%);
+  backdrop-filter:blur(10px) saturate(140%);
+  transition:transform .5s var(--ease), border-color .5s, box-shadow .5s, --glow .5s;
+  isolation:isolate; }
+.tok::before{ content:''; position:absolute; inset:-1px; border-radius:inherit; z-index:-1;
+  background:conic-gradient(from var(--ang), transparent, oklch(86% .145 88 / .75), transparent 40%);
+  opacity:var(--glow); animation:hue 5s linear infinite; }
+@keyframes hue{ to{ --ang:360deg; } }
+.tok:hover,.tok:focus-visible{ --glow:1; outline:none; transform:translateY(-8px) scale(1.04);
+  border-color:oklch(86% .145 88 / .5); box-shadow:0 22px 60px -20px oklch(86% .145 88 / .45); }
+.tok .card{ position:absolute; inset-inline:auto; left:50%; top:calc(100% + 14px); translate:-50% 8px;
+  width:max(220px,16vw); padding:.9rem 1rem; border-radius:14px; direction:ltr; text-align:left;
+  background:oklch(14% .04 278 / .92); border:1px solid oklch(86% .145 88 / .28);
+  box-shadow:0 30px 70px -30px #000; opacity:0; pointer-events:none; z-index:9;
+  transition:.45s var(--ease); backdrop-filter:blur(14px); }
+.tok:hover .card,.tok:focus-visible .card{ opacity:1; translate:-50% 0; }
+.tok .card b{ display:block; font-family:var(--sans); font-weight:600; font-size:.78rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+.tok .card span{ font-family:var(--serif); font-size:.98rem; color:var(--mist); }
+
+/* ═══════════════════════════════════════════════════════════
+   8 · THREE WITNESSES
+   ═══════════════════════════════════════════════════════════ */
+.trio{ display:grid; gap:clamp(1rem,2.4vw,1.8rem); margin-top:clamp(2rem,5vh,3.4rem);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); }
+.wit{ --glow:0; position:relative; padding:clamp(1.4rem,2.6vw,2.2rem); border-radius:26px;
+  border:1px solid var(--line); background:var(--glass); backdrop-filter:blur(18px) saturate(130%);
+  overflow:hidden; transition:transform .7s var(--ease), border-color .6s, box-shadow .7s; }
+.wit::after{ content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),
+    oklch(86% .145 88 / .16), transparent 62%); opacity:0; transition:opacity .5s; }
+.wit:hover{ transform:translateY(-10px); border-color:oklch(86% .145 88 / .38);
+  box-shadow:0 40px 90px -40px oklch(86% .145 88 / .35); }
+.wit:hover::after{ opacity:1; }
+.wit .sigil{ width:74px; height:74px; margin-bottom:1.2rem; }
+.wit .sigil *{ fill:none; stroke:var(--gold); stroke-width:1; }
+.wit:nth-child(2) .sigil *{ stroke:var(--teal); }
+.wit:nth-child(3) .sigil *{ stroke:var(--violet); }
+.wit .sigil{ animation:spin 26s linear infinite; }
+.wit:nth-child(2) .sigil{ animation-duration:34s; animation-direction:reverse; }
+.wit h3{ font-family:var(--kufi); font-weight:500; font-size:clamp(1.05rem,2vw,1.3rem); margin:0 0 .1em; }
+.wit .ar{ font-family:var(--ar); direction:rtl; font-size:1.5rem; color:var(--gold);
+  display:block; margin-bottom:.6rem; }
+.wit p{ margin:0; font-size:.95rem; color:var(--mist); }
+.num{ position:absolute; top:1rem; right:1.4rem; font-family:var(--serif); font-size:3.4rem;
+  color:oklch(100% 0 0 / .07); line-height:1; }
+
+/* ═══════════════════════════════════════════════════════════
+   9 · QĀʾIMAN BIL-QISṬ  — the scale of light
+   ═══════════════════════════════════════════════════════════ */
+#justice .stage{ display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+@media(min-width:900px){ #justice .stage{ grid-template-columns:1fr 1fr; } }
+.scale-wrap{ position:relative; display:grid; place-items:center; }
+.scale{ width:min(100%,520px); overflow:visible; }
+.scale .beam{ transform-box:fill-box; transform-origin:50% 50%; }
+.scale [stroke]{ stroke:var(--gold); fill:none; stroke-width:1.2; stroke-linecap:round;
+  filter:drop-shadow(0 0 8px oklch(86% .145 88 / .55)); }
+.scale .pan{ transform-box:fill-box; transform-origin:50% 0%; }
+.scale .orb{ fill:var(--teal); filter:drop-shadow(0 0 16px var(--teal)); }
+.halo{ position:absolute; width:62%; aspect-ratio:1; border-radius:50%; z-index:-1;
+  background:conic-gradient(from var(--ang), oklch(86% .145 88 /.35), transparent 30%, oklch(84% .11 190/.3), transparent 70%);
+  filter:blur(46px); animation:hue 12s linear infinite; }
+.meter{ display:flex; align-items:baseline; gap:.7rem; margin-top:1.6rem;
+  font-family:var(--serif); }
+.meter output{ font-size:clamp(2.4rem,6vw,4rem); color:var(--gold);
+  font-variant-numeric:tabular-nums; text-shadow:0 0 30px oklch(86% .145 88 /.45); }
+.meter span{ font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--mist); }
+
+/* ═══════════════════════════════════════════════════════════
+   10 · TWO NAMES — orbit
+   ═══════════════════════════════════════════════════════════ */
+.orbit{ position:relative; aspect-ratio:1; width:min(74vmin,560px); margin-inline:auto;
+  display:grid; place-items:center; }
+.orbit i{ position:absolute; inset:0; border-radius:50%; border:1px solid oklch(100% 0 0 /.08); }
+.orbit i:nth-child(2){ inset:14%; } .orbit i:nth-child(3){ inset:30%; }
+.orbit .name{ position:absolute; font-family:var(--ar); font-size:clamp(1.5rem,4.6vw,2.9rem);
+  padding:.35em .9em; border-radius:999px; border:1px solid oklch(86% .145 88 /.3);
+  background:oklch(14% .04 278 /.7); backdrop-filter:blur(12px); white-space:nowrap;
+  box-shadow:0 0 50px -10px oklch(86% .145 88 /.4); }
+.orbit .name.a{ top:6%;  left:50%; translate:-50% 0; color:var(--gold);
+  animation:float 7s ease-in-out infinite; }
+.orbit .name.b{ bottom:6%; left:50%; translate:-50% 0; color:var(--teal);
+  animation:float 7s ease-in-out infinite reverse; border-color:oklch(84% .11 190 /.35); }
+@keyframes float{ 50%{ transform:translateY(-14px); } }
+.orbit .core{ font-family:var(--ar); font-size:clamp(2rem,7vw,4.6rem); color:#fff;
+  text-shadow:0 0 70px oklch(86% .145 88 /.7); animation:breathe 5s ease-in-out infinite; }
+.orbit .sat{ position:absolute; width:8px; height:8px; border-radius:50%; background:var(--gold);
+  box-shadow:0 0 16px 4px oklch(86% .145 88 /.6);
+  offset-path:circle(50% at 50% 50%); animation:orb 16s linear infinite; }
+.orbit .sat:nth-of-type(2){ background:var(--teal); box-shadow:0 0 16px 4px var(--teal);
+  offset-path:circle(36% at 50% 50%); animation-duration:11s; animation-direction:reverse; }
+.orbit .sat:nth-of-type(3){ background:var(--violet); box-shadow:0 0 16px 4px var(--violet);
+  offset-path:circle(43% at 50% 50%); animation-duration:21s; }
+@keyframes orb{ to{ offset-distance:100%; } }
+
+/* ═══════════════════════════════════════════════════════════
+   11 · TAFSĪR MOSAIC
+   ═══════════════════════════════════════════════════════════ */
+.mosaic{ columns:2 300px; column-gap:clamp(1rem,2vw,1.6rem); margin-top:2.6rem; }
+.note{ break-inside:avoid; margin-bottom:clamp(1rem,2vw,1.6rem); padding:1.5rem 1.6rem;
+  border-radius:20px; border:1px solid var(--line); background:oklch(100% 0 0 /.035);
+  backdrop-filter:blur(10px); position:relative; transition:.6s var(--ease); }
+.note:hover{ background:oklch(100% 0 0 /.06); border-color:oklch(86% .145 88 /.32);
+  transform:translateY(-6px); }
+.note q{ font-family:var(--serif); font-size:1.05rem; font-style:italic; color:var(--paper);
+  quotes:'“' '”'; display:block; }
+.note cite{ display:block; margin-top:.9rem; font-size:.66rem; letter-spacing:.26em;
+  text-transform:uppercase; font-style:normal; color:oklch(86% .145 88 /.85); }
+.note::before{ content:''; position:absolute; left:0; top:1.4rem; width:2px; height:34px;
+  background:linear-gradient(var(--gold),transparent); border-radius:2px; }
+
+/* ═══════════════════════════════════════════════════════════
+   12 · FINALE
+   ═══════════════════════════════════════════════════════════ */
+#finale{ text-align:center; }
+.echo{ position:relative; display:grid; place-items:center; }
+.echo .layer{ font-family:var(--ar); direction:rtl; font-size:clamp(2rem,9vw,6.4rem);
+  line-height:1.5; }
+.echo .layer.g{ position:absolute; color:transparent;
+  background:linear-gradient(100deg,var(--teal),var(--gold),var(--violet));
+  -webkit-background-clip:text; background-clip:text; filter:blur(24px); opacity:.75;
+  animation:breathe 6s ease-in-out infinite; }
+.echo .layer.f{ color:#fff; text-shadow:0 0 46px oklch(86% .145 88 /.35); }
+footer{ padding:6vh 1rem 5vh; text-align:center; color:oklch(88% .015 250 /.45); font-size:.74rem;
+  letter-spacing:.2em; }
+footer hr{ border:0; height:1px; width:min(420px,70vw); margin:0 auto 2.2rem;
+  background:linear-gradient(90deg,transparent,var(--line),transparent); }
+
+/* ═══════════════════════════════════════════════════════════
+   13 · A11Y / MOTION
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.001s !important; animation-iteration-count:1 !important;
+    transition-duration:.001s !important; }
+  .rise{ opacity:1; translate:none; filter:none; }
+  .ayah-hero .w,.trans,.ref,.scroll-cue{ opacity:1; }
+}
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+
+/* Top Bar & Global Elements */
+.nq-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(8, 11, 16, 0.78);
+  border-bottom: 1px solid var(--line);
+}
+.nq-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.nq-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+.nq-mini-logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(245, 201, 123, 0.3));
+}
+.nq-brand-title {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  display: block;
+}
+.nq-brand-sub {
+  font-size: 0.68rem;
+  color: var(--mist);
+  letter-spacing: 0.04em;
+  display: block;
+}
+.nq-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Islam Dropdown */
+.islam-dropdown-wrapper {
+  position: relative;
+}
+.islam-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(245, 201, 123, 0.12);
+  border: 1px solid rgba(245, 201, 123, 0.35);
+  color: var(--gold);
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+}
+.islam-dropdown-btn:hover, .islam-dropdown-btn.active {
+  background: var(--gold);
+  color: #080b10;
+  box-shadow: 0 0 16px rgba(245, 201, 123, 0.45);
+}
+.islam-dropdown-btn .chevron-icon {
+  transition: transform 0.25s ease;
+}
+.islam-dropdown-btn.active .chevron-icon {
+  transform: rotate(180deg);
+}
+.islam-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 310px;
+  background: rgba(12, 18, 30, 0.96);
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(245, 201, 123, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 100;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.islam-dropdown-menu.open {
+  display: flex;
+}
+.dropdown-header {
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 6px 10px 4px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--paper);
+  font-size: 0.8rem;
+  transition: all 0.18s ease;
+}
+.dropdown-item:hover {
+  background: rgba(245, 201, 123, 0.15);
+  color: var(--gold);
+  transform: translateX(3px);
+}
+.dropdown-item.active-page {
+  background: rgba(245, 201, 123, 0.22);
+  color: var(--gold);
+  font-weight: 700;
+}
+.item-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.item-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Play Button */
+.nq-play-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  background: rgba(245, 201, 123, 0.12) !important;
+  border: 1px solid rgba(245, 201, 123, 0.35) !important;
+  color: var(--gold) !important;
+  transition: all 0.25s ease !important;
+  vertical-align: middle !important;
+  user-select: none !important;
+}
+.nq-play-btn:hover {
+  background: rgba(245, 201, 123, 0.28) !important;
+  border-color: var(--gold) !important;
+  transform: translateY(-1px) scale(1.08) !important;
+}
+.nq-play-btn svg {
+  width: 14px !important;
+  height: 14px !important;
+  fill: currentColor !important;
+  margin-left: 1px !important;
+}
+.nq-play-btn .pause-icon { display: none !important; margin-left: 0 !important; }
+.nq-play-btn.playing {
+  background: rgba(126, 227, 198, 0.25) !important;
+  border-color: var(--teal) !important;
+  color: var(--teal) !important;
+}
+.nq-play-btn.playing .play-icon { display: none !important; }
+.nq-play-btn.playing .pause-icon { display: block !important; }
+
+/* Arabic Loop Button */
+.nq-ar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245, 201, 123, 0.10);
+  border: 1px solid rgba(245, 201, 123, 0.30);
+  color: var(--gold);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nq-ar-btn:hover {
+  background: rgba(245, 201, 123, 0.22);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.nq-ar-btn .nq-ar-glyph {
+  font-family: var(--ar);
+  font-size: 1.15em;
+  line-height: 1;
+}
+.nq-ar-btn .nq-ar-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+/* Arabic scale CSS variable support */
+[lang="ar"], .ayah-hero, .tok, .ar-text {
+  font-size: calc(1em * var(--ar-scale, 1));
+}
+
+@media (max-width: 600px) {
+  .nq-brand-sub { display: none; }
+  .nq-nav-inner { padding: 8px 12px; }
+  .islam-dropdown-menu {
+    position: fixed;
+    top: 54px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+  }
+}
+
+</style>
+</head>
+<body>
+<!-- TOP BAR -->
+<header class="nq-nav-bar" id="topbar">
+  <div class="nq-nav-inner">
+    <a href="index.html" class="nq-brand" title="NurulQuran Showcase Portal">
+      <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)"/>
+        <g stroke="var(--gold)" stroke-width="12" opacity="0.75" fill="none">
+          <rect x="110" y="110" width="292" height="292" rx="28"/>
+          <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)"/>
+        </g>
+        <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10"/>
+        <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10"/>
+        <circle cx="256" cy="168" r="16" fill="var(--gold)"/>
+      </svg>
+      <div>
+        <span class="nq-brand-title">NURULQURAN</span>
+        <span class="nq-brand-sub">شَهِدَ اللَّهُ · The Divine Testimony</span>
+      </div>
+    </a>
+
+    <div class="nq-nav-actions">
+      <div class="islam-dropdown-wrapper">
+        <button class="islam-dropdown-btn" id="islamDropdownBtn" aria-expanded="false" aria-haspopup="true" title="Browse all Islamic Exhibits">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+          <span>Islam</span>
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="islam-dropdown-menu" id="islamDropdownMenu">
+          <div class="dropdown-header">Interactive Exhibits</div>
+          <a href="rootwords.html" class="dropdown-item">
+            <span class="item-badge">Root Words</span>
+            <span class="item-title">شَجَرَةُ الجُذُور · The Root Tree</span>
+          </a>
+          <a href="miraclesQuran.html" class="dropdown-item">
+            <span class="item-badge">Signs &amp; Science</span>
+            <span class="item-title">The Signs — Miracles of Qur'an</span>
+          </a>
+          <a href="witness.html" class="dropdown-item active-page">
+            <span class="item-badge">Witness</span>
+            <span class="item-title">شَهِدَ اللَّهُ · The Divine Testimony</span>
+          </a>
+          <a href="proofMessenger.html" class="dropdown-item">
+            <span class="item-badge">Prophethood</span>
+            <span class="item-title">Ten Reasons for Muhammad ﷺ</span>
+          </a>
+          <a href="jahoolMeaning.html" class="dropdown-item">
+            <span class="item-badge">Linguistics</span>
+            <span class="item-title">جَهُولًا · Jahūlā Word Study</span>
+          </a>
+          <a href="shortSentenceVerb.html" class="dropdown-item">
+            <span class="item-badge">Grammar</span>
+            <span class="item-title">Twelve Words · The Qur'anic Verb</span>
+          </a>
+          <a href="sleepAdvice.html" class="dropdown-item">
+            <span class="item-badge">Circadian</span>
+            <span class="item-title">The Golden Window · Sleep Science</span>
+          </a>
+          <a href="angerControl.html" class="dropdown-item">
+            <span class="item-badge">Psychology</span>
+            <span class="item-title">Controlling Anger Toolkit</span>
+          </a>
+          <a href="fasting.html" class="dropdown-item">
+            <span class="item-badge">Sanctuary</span>
+            <span class="item-title">Ar-Rayyān · Fasting Science</span>
+          </a>
+          <a href="hamdShukr.html" class="dropdown-item">
+            <span class="item-badge">Praise</span>
+            <span class="item-title">Ḥamd &amp; Shukr · Gratitude Study</span>
+          </a>
+        </div>
+      </div>
+
+      <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003018.mp3" aria-label="Listen to Ayah 3:18" title="Listen · Qari Nasser Al-Qatami">
+        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+      </button>
+
+      <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
+        <span class="nq-ar-glyph">ع</span>
+        <span class="nq-ar-val" id="arScaleVal">100%</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ░░ PRELOADER ░░ -->
+<div id="pre" role="status" aria-label="Loading">
+  <div class="ring"><i></i><i></i><i></i><b>لَا إِلَٰهَ إِلَّا هُوَ</b></div>
+  <div class="pre-bar"><span id="preBar"></span></div>
+</div>
+
+<!-- ░░ ATMOSPHERE ░░ -->
+<canvas id="gl" aria-hidden="true"></canvas>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<div class="progress" id="prog" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-halo" aria-hidden="true"></div>
+
+<nav class="dots" aria-label="Sections">
+  <a href="#hero"     data-l="Witness"  aria-current="true"></a>
+  <a href="#verse"    data-l="The Verse"></a>
+  <a href="#witness"  data-l="Three Testimonies"></a>
+  <a href="#justice"  data-l="Qāʾiman bil-Qisṭ"></a>
+  <a href="#names"    data-l="Two Names"></a>
+  <a href="#tafsir"   data-l="Tafsīr"></a>
+  <a href="#finale"   data-l="Echo"></a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="wrap">
+    <svg class="crest" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="52" style="--len:340"/>
+      <circle cx="60" cy="60" r="40" data-d="1" style="--len:260"/>
+      <polygon points="60,14 92,60 60,106 28,60" data-d="2" style="--len:280"/>
+      <polygon points="14,60 60,28 106,60 60,92" style="--len:280"/>
+      <circle cx="60" cy="60" r="9" data-d="1" style="--len:70"/>
+    </svg>
+
+    <p class="ayah-hero" lang="ar" dir="rtl">
+      <span class="w" style="--i:0">شَهِدَ</span> <span class="w" style="--i:1">ٱللَّهُ</span>
+      <span class="w" style="--i:2">أَنَّهُۥ</span> <span class="w" style="--i:3">لَآ</span>
+      <span class="w" style="--i:4">إِلَٰهَ</span> <span class="w" style="--i:5">إِلَّا</span>
+      <span class="w" style="--i:6">هُوَ</span> <span class="w" style="--i:7">وَٱلْمَلَٰٓئِكَةُ</span>
+      <span class="w" style="--i:8">وَأُو۟لُوا۟</span> <span class="w" style="--i:9">ٱلْعِلْمِ</span>
+      <span class="w" style="--i:10">قَآئِمًۢا</span> <span class="w" style="--i:11">بِٱلْقِسْطِ</span>
+      <span class="w" style="--i:12">لَآ</span> <span class="w" style="--i:13">إِلَٰهَ</span>
+      <span class="w" style="--i:14">إِلَّا</span> <span class="w" style="--i:15">هُوَ</span>
+      <span class="w" style="--i:16">ٱلْعَزِيزُ</span> <span class="w" style="--i:17">ٱلْحَكِيمُ</span>
+    </p>
+    <p class="trans">“Allah ˹Himself˺ is a Witness that there is no god ˹worthy of worship˺ except Him — and so are the angels and people of knowledge. He is the Maintainer of justice. There is no god ˹worthy of worship˺ except Him — the Almighty, All-Wise.”</p>
+    <p class="ref">SŪRAH ĀL ʿIMRĀN · 3 : 18</p>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span>SCROLL</span><i></i></div>
+</section>
+
+<!-- ═══════════ WORD BY WORD ═══════════ -->
+<section id="verse">
+  <div class="wrap">
+    <p class="eyebrow rise">Ⅰ · Word upon word</p>
+    <h2 class="rise d1">A sentence built like <em>a proof</em>.</h2>
+    <p class="lead rise d2">Hover — or tap — any word of the āyah. The grammar itself is an argument: a witness, a negation, an exception, and two names that seal it shut.</p>
+
+    <div class="verse-grid rise d3" id="grid" dir="rtl"></div>
+  </div>
+</section>
+
+<!-- ═══════════ THREE WITNESSES ═══════════ -->
+<section id="witness">
+  <div class="wrap">
+    <p class="eyebrow rise">Ⅱ · Three testimonies, one truth</p>
+    <h2 class="rise d1">Who bears <em>witness</em>?</h2>
+    <p class="lead rise d2">Allah testifies by the signs He raised in the horizons and in the self; the angels testify by affirmation; and the people of knowledge testify by conviction, by speech, and by calling others to it. Their inclusion — alongside the angels — is, as Ibn Kathīr notes, the Qurʾān’s great honouring of knowledge.</p>
+
+    <div class="trio">
+      <article class="wit rise d1">
+        <span class="num">01</span>
+        <svg class="sigil" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26"/><circle cx="30" cy="30" r="17"/><circle cx="30" cy="30" r="6"/><path d="M30 4v52M4 30h52"/></svg>
+        <span class="ar">شَهِدَ ٱللَّهُ</span>
+        <h3>The Witness of Allah</h3>
+        <p>He is sufficient as a Witness — the most truthful, the most just. His testimony is written across creation: every atom in need, He alone free of need.</p>
+      </article>
+
+      <article class="wit rise d2">
+        <span class="num">02</span>
+        <svg class="sigil" viewBox="0 0 60 60" aria-hidden="true"><polygon points="30,5 55,30 30,55 5,30"/><polygon points="12,12 48,12 48,48 12,48"/><circle cx="30" cy="30" r="4"/></svg>
+        <span class="ar">وَٱلْمَلَٰٓئِكَةُ</span>
+        <h3>The Angels</h3>
+        <p>Beings of pure light and pure obedience, who never withhold the affirmation — a witness we know only because He informed us of it.</p>
+      </article>
+
+      <article class="wit rise d3">
+        <span class="num">03</span>
+        <svg class="sigil" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 6 L52 22 L44 48 H16 L8 22 Z"/><path d="M30 18v24M18 30h24"/><circle cx="30" cy="30" r="22"/></svg>
+        <span class="ar">وَأُو۟لُوا۟ ٱلْعِلْمِ</span>
+        <h3>The People of Knowledge</h3>
+        <p>From the first prophet to the last scholar, unanimous across every century — and whoever has not reached this certainty in tawḥīd, said al-Saʿdī, is not yet of them.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ JUSTICE ═══════════ -->
+<section id="justice">
+  <div class="wrap">
+    <div class="stage">
+      <div>
+        <p class="eyebrow rise">Ⅲ · قَآئِمًۢا بِٱلْقِسْطِ</p>
+        <h2 class="rise d1">The Maintainer of <em>justice</em>.</h2>
+        <p class="lead rise d2">Not a god who merely exists, but One who <em>upholds</em> — sustaining every creature in perfect equity, in creation, in decree, in law. The balance may swing as you move through the world; it always returns to true.</p>
+        <div class="meter rise d3">
+          <output id="qistOut">100.0</output><span>Equilibrium · al-Qisṭ</span>
+        </div>
+      </div>
+
+      <div class="scale-wrap rise d2">
+        <div class="halo" aria-hidden="true"></div>
+        <svg class="scale" viewBox="0 0 400 300" aria-label="An abstract scale of light returning to balance">
+          <path stroke d="M200 275 h0"/>
+          <path stroke d="M160 275 h80"/>
+          <path stroke d="M200 275 V90"/>
+          <circle stroke cx="200" cy="82" r="8"/>
+          <g class="beam" id="beam">
+            <path stroke d="M70 82 H330"/>
+            <g class="pan" id="panL"><path stroke d="M70 82 V132"/><path stroke d="M30 132 q40 46 80 0"/><circle class="orb" cx="70" cy="150" r="6"/></g>
+            <g class="pan" id="panR"><path stroke d="M330 82 V132"/><path stroke d="M290 132 q40 46 80 0"/><circle class="orb" cx="330" cy="150" r="6"/></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TWO NAMES ═══════════ -->
+<section id="names">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow rise" style="justify-content:center">Ⅳ · The seal of two names</p>
+    <h2 class="rise d1">Might that never fails.<br>Wisdom that never errs.</h2>
+    <div class="orbit rise d2">
+      <i></i><i></i><i></i>
+      <span class="name a" lang="ar">ٱلْعَزِيزُ</span>
+      <span class="core" lang="ar">هُوَ</span>
+      <span class="name b" lang="ar">ٱلْحَكِيمُ</span>
+      <b class="sat" aria-hidden="true"></b><b class="sat" aria-hidden="true"></b><b class="sat" aria-hidden="true"></b>
+    </div>
+    <p class="lead rise d3" style="margin:2rem auto 0">Al-ʿAzīz — the Almighty, whose might no weakness touches. Al-Ḥakīm — the All-Wise, perfect in every word, act, law and decree. Power without wisdom is tyranny; wisdom without power is a wish. He is both, absolutely.</p>
+  </div>
+</section>
+
+<!-- ═══════════ TAFSĪR ═══════════ -->
+<section id="tafsir">
+  <div class="wrap">
+    <p class="eyebrow rise">Ⅴ · From the commentaries</p>
+    <h2 class="rise d1">Voices on the <em>testimony</em>.</h2>
+    <div class="mosaic">
+      <div class="note rise"><q>Allah bears witness — and He is sufficient as a Witness; He is the most truthful and most just of witnesses. <em>Lā ilāha illā Huwa</em>: He alone is the Lord and God of all creation; everyone and everything is His servant, in need of Him, while He is Rich beyond need.</q><cite>Ibn Kathīr</cite></div>
+      <div class="note rise d1"><q>This āyah emphasises the great virtue of those who have knowledge — for Allah mentioned their testimony directly after the testimony of His angels.</q><cite>Ibn Kathīr</cite></div>
+      <div class="note rise d2"><q>This is Allah’s establishment of tawḥīd by the mightiest of paths: His own testimony, and the testimony of the elite of His creation. And testimony is only given from knowledge and certainty — like seeing with the eye.</q><cite>al-Saʿdī</cite></div>
+      <div class="note rise"><q>He has made it clear to His creation through proofs and signs that there is none truly worshipped in existence except Him. <em>Qāʾiman</em> — upholding, alone, His creation with justice. He repeats <em>lā ilāha illā Huwa</em> for emphasis.</q><cite>al-Jalālayn</cite></div>
+      <div class="note rise d1"><q>Allah Himself bears witness that there is no God but He; and likewise do the angels and the men possessed of knowledge bear witness — in truth and in justice.</q><cite>Maududi · Tafhīm al-Qurʾān</cite></div>
+      <div class="note rise d2"><q>The Mighty in His dominion, whom none can overpower; the Wise in His creating, His planning and His legislating.</q><cite>al-Mukhtaṣar</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FINALE ═══════════ -->
+<section id="finale">
+  <div class="wrap">
+    <p class="eyebrow rise" style="justify-content:center">Ⅵ · Echo</p>
+    <div class="echo rise d1">
+      <span class="layer g" aria-hidden="true" lang="ar">لَآ إِلَٰهَ إِلَّا هُوَ</span>
+      <span class="layer f" lang="ar">لَآ إِلَٰهَ إِلَّا هُوَ</span>
+    </div>
+    <p class="lead rise d2" style="margin:1.6rem auto 0">Said twice in one verse — once as the content of the testimony, once as its conclusion. The heavens declare it, the light declares it, and now, perhaps, so do you.</p>
+  </div>
+  <footer>
+    <hr>
+    QURʾĀN 3:18 · TRANSLATION: DR. MUSTAFA KHATTAB, THE CLEAR QURʾĀN<br>
+    <span style="opacity:.6">Built with WebGL2 · generative geometry · no imagery of living beings</span>
+  </footer>
+</footer>
+</section>
+
+<script type="module">
+/* ══════════════════════════════════════════════════════════════
+   A · WEBGL2 — domain-warped veils of light + 8-fold arabesque
+   ══════════════════════════════════════════════════════════════ */
+const cv = document.getElementById('gl');
+const gl = cv.getContext('webgl2', {antialias:false, alpha:false, powerPreference:'high-performance'});
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const VS = `#version 300 es
+in vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
+
+const FS = `#version 300 es
+precision highp float;
+out vec4 O;
+uniform vec2  uRes;
+uniform float uTime, uScroll, uPhase;
+uniform vec2  uMouse;
+
+const float TAU = 6.28318530718;
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  f = f*f*(3.0-2.0*f);
+  float a=hash(i), b=hash(i+vec2(1,0)), c=hash(i+vec2(0,1)), d=hash(i+vec2(1,1));
+  return mix(mix(a,b,f.x), mix(c,d,f.x), f.y);
+}
+float fbm(vec2 p){
+  float s=0.0, a=0.55;
+  mat2 m = mat2(1.62,1.18,-1.18,1.62);
+  for(int i=0;i<6;i++){ s += a*noise(p); p = m*p; a *= 0.5; }
+  return s;
+}
+// domain-warped flow field  → "veils"
+float veil(vec2 p, float t){
+  vec2 q = vec2(fbm(p + vec2(0.0, t*0.09)), fbm(p + vec2(4.7,-2.1) - t*0.05));
+  vec2 r = vec2(fbm(p + 3.0*q + vec2(1.7,9.2) + t*0.06),
+                fbm(p + 3.0*q + vec2(8.3,2.8) - t*0.04));
+  return fbm(p + 3.4*r);
+}
+// 8-fold arabesque interference
+float arabesque(vec2 uv, float t, float amt){
+  float r = length(uv);
+  float a = atan(uv.y, uv.x);
+  float k = 8.0;
+  float fold = abs(fract(a*k/TAU + 0.5) - 0.5)*2.0;
+  float rings  = sin(r*26.0 - t*0.7);
+  float petals = sin(fold*10.0 + r*9.0 - t*0.5);
+  float lattice = smoothstep(0.92, 1.0, max(rings*petals, 0.0));
+  float star = 0.0;
+  for(int i=0;i<4;i++){
+    float ang = float(i)*0.7853981634 + t*0.03;
+    vec2 d = vec2(cos(ang), sin(ang));
+    star += smoothstep(0.004, 0.0, abs(dot(uv, vec2(-d.y,d.x)))) * smoothstep(0.95,0.15,r);
+  }
+  return (lattice*0.55 + star*0.35) * amt;
+}
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*uRes) / min(uRes.x, uRes.y);
+  float t  = uTime;
+  vec2  mo = (uMouse - 0.5) * vec2(uRes.x/uRes.y, 1.0);
+
+  // parallax breathing around a moving centre of light
+  vec2 c = uv - mo*0.14;
+  float r = length(c);
+
+  float v  = veil(c*1.55 + vec2(0.0, uScroll*0.55), t);
+  float v2 = veil(c*3.1  - vec2(uScroll*0.3, 0.0), t*1.4);
+
+  // radial shafts of light
+  float ang = atan(c.y, c.x);
+  float shafts = fbm(vec2(ang*2.6, r*2.2 - t*0.12));
+  shafts = pow(max(shafts,0.0), 2.2) * smoothstep(1.25, 0.05, r);
+
+  // core luminance — the Witness
+  float core = exp(-r*3.1) * (0.55 + 0.25*sin(t*0.5));
+
+  // palettes drift with journey phase
+  vec3 cGold   = vec3(1.00, 0.80, 0.42);
+  vec3 cTeal   = vec3(0.42, 0.92, 0.95);
+  vec3 cViolet = vec3(0.66, 0.50, 1.00);
+  vec3 base    = vec3(0.035, 0.038, 0.062);
+
+  float ph = uPhase;
+  vec3 accent = mix(mix(cGold, cTeal, smoothstep(0.10,0.55,ph)),
+                    cViolet, smoothstep(0.55,1.0,ph));
+
+  vec3 col = base;
+  col += accent * pow(v, 2.6) * 0.85;
+  col += cTeal  * pow(v2, 4.0) * 0.28;
+  col += accent * shafts * 0.55;
+  col += mix(cGold, vec3(1.0), 0.5) * core;
+  col += accent * arabesque(c, t, 0.35 + 0.55*smoothstep(0.05,0.6,ph));
+
+  // deep-space falloff + vignette
+  col *= 1.0 - 0.55*smoothstep(0.35, 1.35, r);
+  col = mix(col, base, smoothstep(0.9, 1.7, r)*0.65);
+
+  // filmic tonemap + grain
+  col = (col*(2.51*col+0.03))/(col*(2.43*col+0.59)+0.14);
+  col += (hash(gl_FragCoord.xy + fract(t))-0.5)*0.035;
+
+  O = vec4(max(col, 0.0), 1.0);
+}`;
+
+let prog, u = {}, running = !!gl;
+if (gl){
+  const mk = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.warn(gl.getShaderInfoLog(s)); return s; };
+  prog = gl.createProgram();
+  gl.attachShader(prog, mk(gl.VERTEX_SHADER, VS));
+  gl.attachShader(prog, mk(gl.FRAGMENT_SHADER, FS));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog,'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  ['uRes','uTime','uScroll','uPhase','uMouse'].forEach(n => u[n] = gl.getUniformLocation(prog,n));
+} else {
+  document.body.style.background =
+    'radial-gradient(60% 50% at 50% 30%, oklch(28% .08 275), oklch(11% .035 275) 70%)';
+}
+
+/* ══════════════════════════════════════════════════════════════
+   B · CONSTELLATION — three drifting clusters of witnesses
+   ══════════════════════════════════════════════════════════════ */
+const sc = document.getElementById('stars'), sx = sc.getContext('2d');
+let stars = [], W = 0, H = 0, DPR = 1;
+
+function buildStars(){
+  const n = innerWidth < 700 ? 70 : 150;
+  stars = Array.from({length:n}, (_,i) => ({
+    cl: i % 3,
+    x: Math.random(), y: Math.random(),
+    vx:(Math.random()-.5)*0.00016, vy:(Math.random()-.5)*0.00016,
+    r: Math.random()*1.5 + .35, ph: Math.random()*Math.PI*2
+  }));
+}
+const CLR = ['255,205,120', '120,232,240', '176,140,255'];
+
+function drawStars(t){
+  sx.clearRect(0,0,W,H);
+  sx.globalCompositeOperation = 'lighter';
+  for (const s of stars){
+    s.x += s.vx; s.y += s.vy;
+    if (s.x<0||s.x>1) s.vx*=-1; if (s.y<0||s.y>1) s.vy*=-1;
+    const X = s.x*W, Y = s.y*H;
+    const tw = .45 + .55*Math.sin(t*0.0013 + s.ph);
+    sx.beginPath(); sx.arc(X, Y, s.r*DPR*(1+tw*.5), 0, 6.2832);
+    sx.fillStyle = `rgba(${CLR[s.cl]},${.25+tw*.6})`; sx.fill();
+  }
+  // filaments between same-cluster neighbours
+  const L = 120*DPR;
+  for (let i=0;i<stars.length;i++) for (let j=i+1;j<stars.length;j++){
+    const a=stars[i], b=stars[j]; if (a.cl!==b.cl) continue;
+    const dx=(a.x-b.x)*W, dy=(a.y-b.y)*H, d=Math.hypot(dx,dy);
+    if (d<L){ sx.beginPath(); sx.moveTo(a.x*W,a.y*H); sx.lineTo(b.x*W,b.y*H);
+      sx.strokeStyle = `rgba(${CLR[a.cl]},${(1-d/L)*0.13})`; sx.lineWidth = DPR*.6; sx.stroke(); }
+  }
+  sx.globalCompositeOperation = 'source-over';
+}
+
+/* ══════════════════════════════════════════════════════════════
+   C · RESIZE / LOOP
+   ══════════════════════════════════════════════════════════════ */
+function resize(){
+  DPR = Math.min(devicePixelRatio || 1, 2);
+  W = Math.floor(innerWidth*DPR); H = Math.floor(innerHeight*DPR);
+  [cv, sc].forEach(c => { c.width = W; c.height = H; });
+  if (gl){ gl.viewport(0,0,W,H); gl.uniform2f(u.uRes, W, H); }
+}
+addEventListener('resize', () => { resize(); buildStars(); }, {passive:true});
+resize(); buildStars();
+
+const mouse = {x:.5, y:.5, tx:.5, ty:.5};
+addEventListener('pointermove', e => { mouse.tx = e.clientX/innerWidth; mouse.ty = 1 - e.clientY/innerHeight; }, {passive:true});
+
+let scrollN = 0, scrollT = 0;
+function readScroll(){
+  const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  scrollT = scrollY / max;
+}
+addEventListener('scroll', readScroll, {passive:true}); readScroll();
+
+let t0 = performance.now();
+function loop(now){
+  const t = (now - t0)/1000;
+  mouse.x += (mouse.tx-mouse.x)*.055; mouse.y += (mouse.ty-mouse.y)*.055;
+  scrollN += (scrollT - scrollN)*.07;
+
+  if (gl){
+    gl.uniform1f(u.uTime, REDUCED ? 4.0 : t);
+    gl.uniform1f(u.uScroll, scrollN*2.4);
+    gl.uniform1f(u.uPhase, scrollN);
+    gl.uniform2f(u.uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  if (!REDUCED) drawStars(now);
+
+  // fallback progress bar (browsers without scroll-timeline)
+  if (!CSS.supports('animation-timeline','scroll()'))
+    document.getElementById('prog').style.transform = `scaleX(${scrollT})`;
+
+  updateScale(now);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* ══════════════════════════════════════════════════════════════
+   D · WORD-BY-WORD LATTICE (data-driven)
+   ══════════════════════════════════════════════════════════════ */
+const TOKENS = [
+  ['شَهِدَ ٱللَّهُ','Shahida Allāh','Allah bears witness — the truest, most just of witnesses; His testimony alone suffices.'],
+  ['أَنَّهُۥ','annahu','“…that He” — the content of the testimony now follows.'],
+  ['لَآ إِلَٰهَ','lā ilāha','Total negation: there is no deity at all — every false object of worship swept away.'],
+  ['إِلَّا هُوَ','illā Huwa','The single exception: except Him. Negation + exception = the strongest affirmation in Arabic.'],
+  ['وَٱلْمَلَٰٓئِكَةُ','wa’l-malāʾikatu','And the angels — beings of light who affirm it without hesitation.'],
+  ['وَأُو۟لُوا۟ ٱلْعِلْمِ','wa-ūlū’l-ʿilm','And the people of knowledge — an immense honour: their witness stands beside the angels’.'],
+  ['قَآئِمًۢا بِٱلْقِسْطِ','qāʾiman bi’l-qisṭ','Upholding, sustaining all creation in perfect justice — in creating, decreeing and legislating.'],
+  ['لَآ إِلَٰهَ إِلَّا هُوَ','lā ilāha illā Huwa','Repeated — for emphasis, and as the conclusion the whole verse was built to reach.'],
+  ['ٱلْعَزِيزُ','al-ʿAzīz','The Almighty: might that weakness cannot touch, dominion none can overpower.'],
+  ['ٱلْحَكِيمُ','al-Ḥakīm','The All-Wise: perfect in every word, act, law and decree.']
+];
+const grid = document.getElementById('grid');
+grid.innerHTML = TOKENS.map(([ar, tr, gl_], i) => `
+  <button class="tok" tabindex="0" style="--i:${i}" lang="ar">
+    ${ar}
+    <span class="card" role="tooltip"><b>${tr}</b><span>${gl_}</span></span>
+  </button>`).join('');
+
+/* ══════════════════════════════════════════════════════════════
+   E · SCROLL REVEALS + active section + card spotlight
+   ══════════════════════════════════════════════════════════════ */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rise').forEach(el => io.observe(el));
+
+const links = [...document.querySelectorAll('nav.dots a')];
+const secObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a =>
+    a.setAttribute('aria-current', String(a.hash === '#'+e.target.id)));
+}), {threshold:.5});
+document.querySelectorAll('section').forEach(s => secObs.observe(s));
+
+document.querySelectorAll('.wit').forEach(card => {
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════
+   F · CURSOR (spring-lerped) + magnetic hover state
+   ══════════════════════════════════════════════════════════════ */
+const dot = document.querySelector('.cursor'), halo = document.querySelector('.cursor-halo');
+let cx=innerWidth/2, cy=innerHeight/2, hx=cx, hy=cy, px=cx, py=cy;
+addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; }, {passive:true});
+(function cursorLoop(){
+  cx += (px-cx)*.42; cy += (py-cy)*.42;
+  hx += (px-hx)*.13; hy += (py-hy)*.13;
+  dot.style.transform  = `translate3d(${cx}px,${cy}px,0)`;
+  halo.style.transform = `translate3d(${hx}px,${hy}px,0)`;
+  requestAnimationFrame(cursorLoop);
+})();
+document.querySelectorAll('a,button,.wit,.note,.tok').forEach(el => {
+  el.addEventListener('pointerenter', () => document.body.dataset.hot = '1');
+  el.addEventListener('pointerleave', () => document.body.dataset.hot = '0');
+});
+
+/* ══════════════════════════════════════════════════════════════
+   G · SCALE OF JUSTICE — damped-spring return to equilibrium
+   ══════════════════════════════════════════════════════════════ */
+const beam = document.getElementById('beam'),
+      panL = document.getElementById('panL'), panR = document.getElementById('panR'),
+      out  = document.getElementById('qistOut'),
+      jSec = document.getElementById('justice');
+let angle = 0, vel = 0, lastT = 0, lastScroll = scrollY;
+
+addEventListener('scroll', () => {
+  const d = scrollY - lastScroll; lastScroll = scrollY;
+  const r = jSec.getBoundingClientRect();
+  const visible = r.top < innerHeight && r.bottom > 0;
+  if (visible && !REDUCED) vel += Math.max(-2.2, Math.min(2.2, d * 0.16));
+}, {passive:true});
+
+function updateScale(now){
+  const dt = Math.min(0.032, (now - lastT)/1000 || 0.016); lastT = now;
+  // spring: k → pull to zero, c → damping
+  const k = 26, c = 3.4;
+  vel += (-k*angle - c*vel) * dt;
+  angle += vel * dt;
+  angle = Math.max(-16, Math.min(16, angle));
+  beam.style.transform = `rotate(${angle.toFixed(3)}deg)`;
+  const counter = `rotate(${(-angle).toFixed(3)}deg)`;
+  panL.style.transform = counter; panR.style.transform = counter;
+  if (out) out.textContent = (100 - Math.abs(angle)*2.4).toFixed(1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   H · PRELOADER hand-off
+   ══════════════════════════════════════════════════════════════ */
+const bar = document.getElementById('preBar');
+let p = 0;
+const tick = setInterval(() => {
+  p = Math.min(100, p + Math.random()*17 + 6);
+  bar.style.width = p + '%';
+  if (p >= 100){
+    clearInterval(tick);
+    setTimeout(() => {
+      document.getElementById('pre').hidden = true;
+      document.documentElement.dataset.ready = '1';
+    }, 520);
+  }
+}, 190);
+
+/* Pause GPU work when tab hidden */
+document.addEventListener('visibilitychange', () => { t0 = performance.now() - (t0 ? 0 : 0); });
+</script>
+
+<!-- FOOTER -->
+<footer style="position:relative;z-index:10;border-top:1px solid var(--line);padding:50px 20px 70px;text-align:center;background:rgba(8,11,16,0.92);margin-top:60px">
+  <div style="display:inline-flex;align-items:center;gap:10px;justify-content:center;margin-bottom:12px">
+    <svg class="nq-mini-logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px">
+      <circle cx="256" cy="256" r="230" fill="rgba(245,201,123,0.15)"/>
+      <g stroke="var(--gold)" stroke-width="12" opacity="0.75" fill="none">
+        <rect x="110" y="110" width="292" height="292" rx="28"/>
+        <rect x="110" y="110" width="292" height="292" rx="28" transform="rotate(45 256 256)"/>
+      </g>
+      <path d="M256 320 C220 295 160 300 130 312 L130 210 C165 198 220 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10"/>
+      <path d="M256 320 C292 295 352 300 382 312 L382 210 C347 198 292 202 256 225 Z" fill="#080b10" stroke="var(--gold)" stroke-width="10"/>
+      <circle cx="256" cy="168" r="16" fill="var(--gold)"/>
+    </svg>
+    <span style="font-weight:700;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
+  </div>
+  <p style="font-size:0.78rem;color:var(--mist);max-width:540px;margin:0 auto 14px">Shahida Allāh — An Interactive Meditation on Sūrah Āl ʿImrān 3:18 and the Threefold Testimony of Light</p>
+  <div class="footer-version-tag" style="display:inline-block;font-family:monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--gold);padding:4px 10px;border-radius:6px;background:rgba(245,201,123,0.08);border:1px solid rgba(245,201,123,0.2)">
+    v1.0.14 (updated 2026-09-06 06:10)
+  </div>
+</footer>
+
+<script>
+
+/* Islam Navigation Dropdown */
+(function initIslamDropdown() {
+  const dropdownBtn = document.getElementById('islamDropdownBtn');
+  const dropdownMenu = document.getElementById('islamDropdownMenu');
+  if (!dropdownBtn || !dropdownMenu) return;
+
+  function toggleMenu(e) {
+    e.stopPropagation();
+    const isOpen = dropdownMenu.classList.contains('open');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      dropdownMenu.classList.add('open');
+      dropdownBtn.classList.add('active');
+      dropdownBtn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeMenu() {
+    dropdownMenu.classList.remove('open');
+    dropdownBtn.classList.remove('active');
+    dropdownBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  dropdownBtn.addEventListener('click', toggleMenu);
+  document.addEventListener('click', (e) => {
+    if (!dropdownMenu.contains(e.target) && !dropdownBtn.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdownMenu.classList.contains('open')) closeMenu();
+  });
+})();
+
+/* Arabic font size loop scaler */
+(function initArabicScaler() {
+  const SCALES = [1.0, 1.15, 1.30, 1.45, 0.85];
+  let curIdx = 0;
+  const saved = parseFloat(localStorage.getItem('nq_ar_scale'));
+  if (saved) {
+    const closest = SCALES.reduce((prev, curr) => Math.abs(curr - saved) < Math.abs(prev - saved) ? curr : prev, 1.0);
+    curIdx = SCALES.indexOf(closest);
+    if (curIdx === -1) curIdx = 0;
+  }
+  function applyScale(idx) {
+    curIdx = (idx % SCALES.length + SCALES.length) % SCALES.length;
+    const scale = SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale', scale);
+    localStorage.setItem('nq_ar_scale', scale);
+    const el = document.getElementById('arScaleVal');
+    if (el) el.textContent = Math.round(scale * 100) + '%';
+  }
+  applyScale(curIdx);
+  const btn = document.getElementById('arScaleBtn');
+  if (btn) btn.onclick = () => applyScale(curIdx + 1);
+})();
+
+/* Audio Player */
+(function initAyahAudioPlayer(){
+  let activeAudio=null, activeBtn=null;
+  document.addEventListener('click',(e)=>{
+    const btn=e.target.closest('.nq-play-btn');
+    if(!btn) return;
+    const url=btn.dataset.audio;
+    if(!url) return;
+
+    if(activeBtn===btn && activeAudio){
+      if(activeAudio.paused){
+        activeAudio.play();
+        btn.classList.add('playing');
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+      }
+      return;
+    }
+
+    if(activeAudio){
+      activeAudio.pause();
+      if(activeBtn) activeBtn.classList.remove('playing','loading');
+    }
+
+    activeBtn=btn;
+    activeAudio=new Audio(url);
+    activeAudio.play().then(()=>{
+      btn.classList.add('playing');
+    }).catch(err=>{
+      btn.classList.remove('playing');
+    });
+
+    activeAudio.onended=()=>{
+      btn.classList.remove('playing');
+      activeAudio=null;
+      activeBtn=null;
+    };
+  });
+})();
+
+</script>
+<script src="assets/editor.js" defer></script>
+</body>
+</html>
