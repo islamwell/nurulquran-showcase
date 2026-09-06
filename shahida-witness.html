@@ -165,8 +165,7 @@ nav.dots a[aria-current="true"]{ background:var(--gold); border-color:var(--gold
 section{ position:relative; min-height:100svh; display:grid; place-items:center;
   padding:clamp(4rem,10vh,9rem) clamp(1.1rem,5vw,3rem); }
 .wrap{ width:min(1120px,100%); }
-.eyebrow{ font-size:.68rem; letter-spacing:.42em; text-transform:uppercase;
-  color:oklch(86% .145 88 / .8); display:flex; align-items:center; gap:.9rem; }
+
 .eyebrow::before{ content:''; width:clamp(24px,6vw,64px); height:1px;
   background:linear-gradient(90deg,transparent,var(--gold)); }
 h2{ font-family:var(--sans); font-weight:600; letter-spacing:-.02em; line-height:1.18;
@@ -188,7 +187,7 @@ p.lead{ font-family:var(--sans); font-size:clamp(1.08rem,1.8vw,1.25rem); font-we
 /* ═══════════════════════════════════════════════════════════
    6 · HERO
    ═══════════════════════════════════════════════════════════ */
-#hero{ text-align:center; }
+#hero{ text-align:center; padding-top:calc(clamp(4rem,10vh,9rem) + 40px); }
 .crest{ width:clamp(120px,20vw,210px); margin-inline:auto; filter:drop-shadow(0 0 24px oklch(86% .145 88 /.4)); }
 .crest path,.crest circle,.crest polygon{ fill:none; stroke:var(--gold); stroke-width:.7;
   stroke-dasharray:var(--len,600); stroke-dashoffset:var(--len,600);
@@ -635,6 +634,42 @@ footer hr{ border:0; height:1px; width:min(420px,70vw); margin:0 auto 2.2rem;
   font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
 }
 
+
+/* Classical serif for the proof heading per user design */
+#verse h2 {
+  font-family: var(--serif) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.05 !important;
+  font-size: clamp(2.2rem, 6.2vw, 4.4rem) !important;
+  color: #FFFFFF !important;
+}
+#verse h2 em {
+  font-family: var(--serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  background: linear-gradient(100deg, var(--gold), var(--teal) 60%, var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* Responsive Mobile Card Tooltip Docking */
+@media (max-width: 600px) {
+  .tok .card {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: auto !important;
+    bottom: 24px !important;
+    width: auto !important;
+    max-width: calc(100vw - 24px) !important;
+    translate: 0 0 !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(245, 201, 123, 0.25) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -895,11 +930,10 @@ footer hr{ border:0; height:1px; width:min(420px,70vw); margin:0 auto 2.2rem;
     </div>
     <p class="lead rise d2" style="margin:1.6rem auto 0">Said twice in one verse — once as the content of the testimony, once as its conclusion. The heavens declare it, the light declares it, and now, perhaps, so do you.</p>
   </div>
-  <footer>
-    <hr>
-    QURʾĀN 3:18 · TRANSLATION: DR. MUSTAFA KHATTAB, THE CLEAR QURʾĀN<br>
-    <span style="opacity:.6">Built with WebGL2 · generative geometry · no imagery of living beings</span>
-  </footer>
+  <div class="finale-attribution" style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px dashed var(--line);font-size:0.75rem;letter-spacing:0.12em;color:var(--mist);text-transform:uppercase">
+    Qurʾān 3:18 · Translation: Dr. Mustafa Khattab, The Clear Qurʾān<br>
+    <span style="opacity:0.65;font-size:0.7rem;text-transform:none">Generative geometry &amp; physics-driven balance scale · Built for contemplation</span>
+  </div>
 </section>
 
 <script type="module">
@@ -1094,12 +1128,16 @@ function loop(now){
   mouse.x += (mouse.tx-mouse.x)*.055; mouse.y += (mouse.ty-mouse.y)*.055;
   scrollN += (scrollT - scrollN)*.07;
 
-  if (gl){
-    gl.uniform1f(u.uTime, REDUCED ? 4.0 : t);
-    gl.uniform1f(u.uScroll, scrollN*2.4);
-    gl.uniform1f(u.uPhase, scrollN);
-    gl.uniform2f(u.uMouse, mouse.x, mouse.y);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  if (gl && prog && u && u.uTime){
+    try {
+      gl.uniform1f(u.uTime, REDUCED ? 4.0 : t);
+      gl.uniform1f(u.uScroll, scrollN*2.4);
+      gl.uniform1f(u.uPhase, scrollN);
+      gl.uniform2f(u.uMouse, mouse.x, mouse.y);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    } catch(err) {
+      // Graceful WebGL fallback
+    }
   }
   if (!REDUCED) drawStars(now);
 
@@ -1215,11 +1253,28 @@ const tick = setInterval(() => {
   if (p >= 100){
     clearInterval(tick);
     setTimeout(() => {
-      document.getElementById('pre').hidden = true;
+      const preEl = document.getElementById('pre');
+      if (preEl) preEl.hidden = true;
       document.documentElement.dataset.ready = '1';
     }, 520);
   }
 }, 190);
+
+/* Preloader Safety Fallback & Tap-to-Dismiss */
+setTimeout(() => {
+  const pr = document.getElementById('pre');
+  if (pr && !pr.hidden) {
+    pr.hidden = true;
+    document.documentElement.dataset.ready = '1';
+  }
+}, 3200);
+document.getElementById('pre')?.addEventListener('click', () => {
+  const pr = document.getElementById('pre');
+  if (pr) {
+    pr.hidden = true;
+    document.documentElement.dataset.ready = '1';
+  }
+});
 
 /* Pause GPU work when tab hidden */
 document.addEventListener('visibilitychange', () => { t0 = performance.now() - (t0 ? 0 : 0); });
@@ -1242,7 +1297,7 @@ document.addEventListener('visibilitychange', () => { t0 = performance.now() - (
   </div>
   <p style="font-size:0.78rem;color:var(--mist);max-width:540px;margin:0 auto 14px">Shahida Allāh — An Interactive Meditation on Sūrah Āl ʿImrān 3:18 and the Threefold Testimony of Light</p>
   <div class="footer-version-tag" style="display:inline-block;font-family:monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--gold);padding:4px 10px;border-radius:6px;background:rgba(245,201,123,0.08);border:1px solid rgba(245,201,123,0.2)">
-    v1.0.16 (updated 2026-09-06 06:48)
+    v1.0.17 (updated 2026-09-06 06:55)
   </div>
 </footer>
 
