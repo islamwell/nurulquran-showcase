@@ -8,6 +8,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============ TOKENS ============ */
 :root{
   --j-void:#04140E; --j-body:#0B3D2E; --j-mid:#126B4A; --j-accent:#2FBF71;
@@ -17,7 +40,7 @@
   --split:52%;
   --ease-rest:cubic-bezier(.16,1,.3,1);
   --ease-lurch:cubic-bezier(.7,0,.84,0);
-  --f-ar-d:"Reem Kufi",serif; --f-ar:"Amiri",serif;
+  --f-ar-d: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif; --f-ar: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
   --f-en:"Cormorant Garamond",Georgia,serif; --f-ui:"Inter",system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -295,6 +318,12 @@ html, body {
   overflow-x: hidden;
 }
 
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
+}
+
 </style>
 </head>
 <body>
@@ -536,7 +565,7 @@ html, body {
 <footer>
   <p>مِيزَان · MIZAN — an interactive meditation on the two destinations</p>
   <p>English lines are renderings of meaning, not the Qur’ān itself. For study, consult the Arabic with qualified tafsīr.</p>
-  <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.14 (updated 2026-09-06 06:10)</div>
+  <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.15 (updated 2026-09-06 06:36)</div>
 </footer>
 
 <script>

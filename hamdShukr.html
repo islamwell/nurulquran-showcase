@@ -13,6 +13,29 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..600&family=Inter+Tight:wght@300..800&family=Noto+Naskh+Arabic:wght@400..700&display=swap" />
 
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    0 · DESIGN TOKENS
    ═══════════════════════════════════════════════════════════════ */
@@ -47,7 +70,7 @@
   /* Type */
   --f-ui:  'Inter Tight', ui-sans-serif, system-ui, sans-serif;
   --f-dis: 'Cormorant Garamond', ui-serif, Georgia, serif;
-  --f-ar:  'Amiri Quran', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  --f-ar: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
   --f-arui:'Noto Naskh Arabic', 'Amiri Quran', serif;
 
   /* Fluid scale */
@@ -827,6 +850,12 @@ html, body {
   overflow-x: hidden;
 }
 
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
+}
+
 </style>
 </head>
 
@@ -1142,7 +1171,7 @@ html, body {
       All data stays in your browser.
     </p>
     <div class="footer-version-tag" style="margin-top:1.5rem;font-size:0.75rem;opacity:0.6;font-family:monospace">
-      v1.0.14 (updated 2026-09-06 06:10)
+      v1.0.15 (updated 2026-09-06 06:36)
     </div>
   </div>
 </footer>

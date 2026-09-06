@@ -9,6 +9,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Reem+Kufi:wght@500;600;700&family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============ 1. TOKENS ============ */
 :root{
   --bg0:#040605; --bg1:#080e0b; --bg2:#0d1712; --bg3:#132018;
@@ -422,6 +445,12 @@ footer{padding:64px 0 46px;border-top:1px solid var(--line);background:linear-gr
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
 }
 
 </style>
@@ -1012,7 +1041,7 @@ html, body {
         </div>
       </div>
 
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.14 (updated 2026-09-06 06:10)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.15 (updated 2026-09-06 06:36)</div>
     </div>
   </div>
 </footer>

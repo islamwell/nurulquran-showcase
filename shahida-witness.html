@@ -10,6 +10,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Reem+Kufi:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300&family=Inter+Tight:wght@200..800&display=swap" rel="stylesheet">
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ═══════════════════════════════════════════════════════════
    0 · DESIGN TOKENS  —  OKLCH palette, animated @property vars
    ═══════════════════════════════════════════════════════════ */
@@ -29,7 +52,7 @@
   --mist:       oklch(88% 0.015 250 / .62);
   --line:       oklch(100% 0 0 / .10);
   --glass:      oklch(30% 0.04 275 / .28);
-  --ar: 'Amiri Quran', 'Reem Kufi', serif;
+  --ar: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
   --kufi: 'Reem Kufi', serif;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Inter Tight', system-ui, sans-serif;
@@ -579,6 +602,12 @@ footer hr{ border:0; height:1px; width:min(420px,70vw); margin:0 auto 2.2rem;
     width: auto;
     max-width: calc(100vw - 20px);
   }
+}
+
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
 }
 
 </style>
@@ -1189,7 +1218,7 @@ document.addEventListener('visibilitychange', () => { t0 = performance.now() - (
   </div>
   <p style="font-size:0.78rem;color:var(--mist);max-width:540px;margin:0 auto 14px">Shahida Allāh — An Interactive Meditation on Sūrah Āl ʿImrān 3:18 and the Threefold Testimony of Light</p>
   <div class="footer-version-tag" style="display:inline-block;font-family:monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--gold);padding:4px 10px;border-radius:6px;background:rgba(245,201,123,0.08);border:1px solid rgba(245,201,123,0.2)">
-    v1.0.14 (updated 2026-09-06 06:10)
+    v1.0.15 (updated 2026-09-06 06:36)
   </div>
 </footer>
 

@@ -8,6 +8,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root{
   --top:#241548; --mid:#3a1f57; --bot:#120a26;
   --glow:#b8517a; --ga:.28;
@@ -354,6 +377,12 @@ html, body {
   overflow-x: hidden;
 }
 
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
+}
+
 </style>
 </head>
 <body>
@@ -640,7 +669,7 @@ html, body {
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C26B">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.14 (updated 2026-09-06 06:10)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.15 (updated 2026-09-06 06:36)</div>
   </div>
   <p style="margin-top:30px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">Scroll back up to return to dusk ↑</p>
 </div></footer>

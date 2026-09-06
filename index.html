@@ -12,6 +12,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&amp;family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 
 <style>
+
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    DESIGN TOKENS & THEMING
    ============================================================ */
@@ -43,7 +66,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', sans-serif;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-arabic: 'Scheherazade New', 'Amiri', serif;
+  --font-arabic: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
   --ar-scale: 1;
   
   --radius-sm: 10px;
@@ -1327,6 +1350,12 @@ html, body {
   color: var(--gold-2);
 }
 
+
+/* Standard King Fahd Othmani Madina Font System */
+.ar, [lang="ar"], .ayah, .ayah-hero, .bismillah, .bismillah-hero, .tok, .word-ar, .quran-text, .c-ar, .f-ar, .stage .ayah, .chip {
+  font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
+}
+
 </style>
 <link rel="stylesheet" type="text/css" href="chrome-extension://mfidniedemcgceagapgdekdbmanojomk/css/content-shared.css"></head>
 <body>
@@ -1918,7 +1947,7 @@ html, body {
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
     <div class="footer-version-tag">
-      v1.0.14 (updated 2026-09-06 06:10)
+      v1.0.15 (updated 2026-09-06 06:36)
     </div>
   </div>
 </footer>
