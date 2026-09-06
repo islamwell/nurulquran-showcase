@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0c">
+  <meta name="description"
+        content="A quiet, visual reflection on Quran 77:15.">
+  <title>That Day — Quran 77:15</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <style>
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+    @layer reset, base, scene, layout, components, motion;
+
+    @layer reset {
+      *, *::before, *::after { box-sizing: border-box; }
+      * { margin: 0; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      button { font: inherit; }
+      a { color: inherit; text-decoration: none; }
+      button { color: inherit; }
+      ::selection { background: #e7b675; color: #090a0c; }
+    }
+
+    @layer base {
+      :root {
+        color-scheme: dark;
+        --bg: #090a0c;
+        --ink: #f3efe7;
+        --muted: #aaa9a5;
+        --gold: #e8bb83;
+        --line: #ffffff17;
+        --ease: cubic-bezier(.22, 1, .36, 1);
+        --font-arabic: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      button, a, summary { touch-action: manipulation; }
+      button { cursor: pointer; }
+      :focus-visible { outline: 2px solid var(--gold); outline-offset: 7px; }
+      [hidden] { display: none !important; }
+
+      .wrap { width: min(1180px, calc(100% - 64px)); margin-inline: auto; }
+      .eyebrow {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: .23em;
+        text-transform: uppercase;
+      }
+      .muted { color: var(--muted); }
+      .gold { color: var(--gold); }
+
+      .skip {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 100;
+        padding: 14px;
+        background: var(--ink);
+        color: var(--bg);
+        transform: translateY(-150%);
+      }
+      .skip:focus { transform: none; }
+    }
+
+    @layer scene {
+      .atmosphere {
+        position: absolute;
+        inset: 0;
+        height: 1050px;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: -1;
+        background:
+          radial-gradient(ellipse at 50% 37%, #7c532222, transparent 43%),
+          radial-gradient(ellipse at 50% 90%, #bd77430b, transparent 55%);
+        mask-image: linear-gradient(#000 80%, transparent);
+      }
+
+      #particles { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+      .eclipse {
+        position: absolute;
+        width: clamp(290px, 42vw, 520px);
+        aspect-ratio: 1;
+        top: 118px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: #090a0c;
+        box-shadow:
+          0 0 1px 1px #f2d5a670,
+          0 -9px 24px -15px #fff1d8,
+          0 12px 50px -32px #eec184;
+      }
+
+      .eclipse::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        z-index: -1;
+        border-radius: inherit;
+        background: conic-gradient(
+          from 170deg,
+          transparent 0deg,
+          #a16b37 35deg,
+          #ffdc9d 83deg,
+          transparent 135deg,
+          transparent 205deg,
+          #bd8a4b 255deg,
+          #ffe4b2 310deg,
+          transparent 355deg
+        );
+        filter: blur(3px);
+        animation: orbit 45s linear infinite;
+      }
+
+      .eclipse::after {
+        content: "";
+        position: absolute;
+        inset: -65px;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle,
+          transparent 55%,
+          #d3965010 61%,
+          transparent 72%
+        );
+        animation: breathe 9s ease-in-out infinite alternate;
+      }
+
+      .horizon {
+        position: absolute;
+        width: 140%;
+        height: 500px;
+        left: -20%;
+        top: 800px;
+        border-radius: 50%;
+        border-top: 1px solid #c6945540;
+        background: radial-gradient(ellipse at 50% 0%, #c1823520, transparent 55%);
+        box-shadow: 0 -13px 70px -35px #ecae62;
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        opacity: .035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.7' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+      }
+    }
+
+    @layer layout {
+      .site-header {
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        position: relative;
+        z-index: 5;
+      }
+
+      .brand { display: flex; align-items: center; gap: 13px; }
+      .brand-symbol {
+        width: 23px;
+        height: 23px;
+        display: block;
+        border: 1px solid var(--gold);
+        transform: rotate(45deg);
+        position: relative;
+      }
+      .brand-symbol::after {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border: 1px solid #e8bb8355;
+      }
+
+      .header-right { display: flex; align-items: center; gap: 36px; }
+      .nav-link {
+        font-size: 12px;
+        color: var(--muted);
+        transition: color .2s;
+      }
+      .nav-link:hover { color: var(--ink); }
+
+      main { position: relative; isolation: isolate; }
+
+      .hero {
+        position: relative;
+        min-height: 830px;
+        min-height: min(940px, max(830px, 100svh - 96px));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 68px 20px 32px;
+      }
+
+      .verse-marker {
+        display: inline-flex;
+        gap: 11px;
+        align-items: center;
+        color: #c8bca7;
+      }
+      .verse-marker::before, .verse-marker::after {
+        content: "";
+        width: 23px;
+        height: 1px;
+        background: #d4ad6650;
+      }
+
+      .arabic {
+        font-family: var(--font-arabic);
+        font-weight: 400;
+        font-size: clamp(39px, 6.5vw, 82px);
+        line-height: 1.9;
+        margin-top: 75px;
+        color: #f3e3c7;
+        text-shadow: 0 2px 40px #dba75a25;
+      }
+
+      .nq-play-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(232, 187, 131, 0.12);
+        border: 1px solid rgba(232, 187, 131, 0.35);
+        color: var(--gold);
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        vertical-align: middle;
+        user-select: none;
+      }
+      .nq-play-btn:hover {
+        background: rgba(232, 187, 131, 0.28);
+        border-color: var(--gold);
+        transform: scale(1.08);
+        box-shadow: 0 0 16px rgba(232, 187, 131, 0.4);
+      }
+      .nq-play-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+      .nq-play-btn .pause-icon { display: none; }
+      .nq-play-btn.playing .play-icon { display: none; }
+      .nq-play-btn.playing .pause-icon { display: block; }
+      .nq-play-btn.loading { opacity: 0.6; pointer-events: none; }
+
+      .translation-label { margin-top: 21px; color: #aaa18f; }
+
+      h1 {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(44px, 6vw, 78px);
+        font-weight: 400;
+        line-height: 1.12;
+        letter-spacing: -.065em;
+        margin-top: 20px;
+        text-wrap: balance;
+      }
+      h1 span { color: var(--gold); }
+
+      .hero-description {
+        font-size: 14px;
+        line-height: 1.8;
+        max-width: 300px;
+        margin-top: 25px;
+        color: var(--muted);
+      }
+
+      .hero-bottom {
+        width: 100%;
+        margin-top: auto;
+        padding-top: 54px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: end;
+        color: #9c9a93;
+      }
+      .hero-bottom > :first-child { text-align: left; }
+      .hero-bottom > :last-child { text-align: right; }
+      .hero-bottom .eyebrow { font-size: 9px; line-height: 1.9; }
+
+      .section {
+        padding-block: 115px;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 30px;
+        margin-bottom: 46px;
+      }
+
+      h2 {
+        font-family: "Manrope", sans-serif;
+        font-size: clamp(32px, 4.5vw, 52px);
+        font-weight: 400;
+        letter-spacing: -.055em;
+        line-height: 1.15;
+        text-wrap: balance;
+      }
+      .section-heading h2 { margin-top: 20px; }
+      .section-heading > p {
+        max-width: 245px;
+        font-size: 13px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      .meaning-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: linear-gradient(125deg, #ffffff04, transparent);
+      }
+
+      .context-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: center;
+      }
+
+      .context-copy h2 { margin: 22px 0; }
+      .context-copy > p:not(.eyebrow) {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.9;
+        max-width: 400px;
+      }
+
+      .reflection {
+        position: relative;
+        text-align: center;
+        padding: 110px 24px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background:
+          radial-gradient(ellipse at 50% 100%, #b87a3520, transparent 65%),
+          #0c0d0f;
+        overflow: hidden;
+      }
+      .reflection::after {
+        content: "";
+        position: absolute;
+        bottom: -150px;
+        left: calc(50% - 250px);
+        width: 500px;
+        height: 200px;
+        border-radius: 50%;
+        border: 1px solid #dbab6555;
+        box-shadow: 0 0 55px #dbab6510;
+        pointer-events: none;
+      }
+      .reflection h2 { margin: 27px auto 20px; max-width: 650px; }
+      .reflection > p:not(.eyebrow) {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      footer {
+        padding-block: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      footer a { text-decoration: underline; text-underline-offset: 4px; }
+      footer p { max-width: 460px; line-height: 1.8; }
+
+      @media (min-width: 1600px) {
+        .hero { min-height: 900px; }
+      }
+
+      @media (max-width: 760px) {
+        .wrap { width: calc(100% - 36px); }
+        .site-header { height: 78px; }
+        .header-right { gap: 18px; }
+        .nav-link { display: none; }
+        .hero { min-height: 790px; padding-top: 48px; }
+        .arabic { margin-top: 96px; }
+        .eclipse { top: 130px; }
+        .hero-bottom { grid-template-columns: 1fr 1fr; }
+        .hero-bottom > :last-child { display: none; }
+        .hero-bottom > :nth-child(2) { justify-self: end; }
+        .section { padding-block: 75px; }
+        .section-heading { align-items: start; flex-direction: column; gap: 18px; }
+        .section-heading > p { max-width: 330px; }
+        .meaning-layout, .context-grid { grid-template-columns: 1fr; }
+        .context-grid { gap: 44px; }
+        .reflection { padding: 80px 20px; }
+        footer { flex-direction: column; align-items: start; }
+      }
+    }
+
+    @layer components {
+      .motion-control {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 10px;
+        letter-spacing: .07em;
+        padding: 10px 12px;
+        border: 1px solid #ffffff24;
+        border-radius: 100px;
+        background: #ffffff03;
+      }
+      .status-dot {
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+        box-shadow: 0 0 10px #e8bb8360;
+      }
+      [data-still="true"] .status-dot { background: #999; box-shadow: none; }
+
+      .primary-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        margin-top: 30px;
+        padding: 15px 22px;
+        font-size: 12px;
+        background: #ead5b8;
+        color: #191611;
+        border: 1px solid #f4e3c8;
+        border-radius: 3px;
+        transition: background .25s, box-shadow .25s, transform .25s;
+      }
+      .primary-link:hover {
+        background: #f7e7cf;
+        box-shadow: 0 0 35px #e2b57420;
+        transform: translateY(-2px);
+      }
+      .primary-link svg { width: 15px; height: 15px; }
+
+      .scroll-cue {
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .scroll-line {
+        display: block;
+        width: 1px;
+        height: 35px;
+        background: linear-gradient(var(--gold), transparent);
+        transform-origin: top;
+        animation: scroll-line 2.8s ease-in-out infinite;
+      }
+
+      .word-tabs { padding: 16px; }
+      .word-tab {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 28px 1fr auto;
+        align-items: center;
+        gap: 14px;
+        padding: 23px 20px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        background: transparent;
+        text-align: left;
+        transition: background .3s, border-color .3s;
+      }
+      .word-tab + .word-tab { margin-top: 7px; }
+      .word-tab:hover { background: #ffffff04; }
+      .word-tab[aria-selected="true"] {
+        border-color: #e4b37535;
+        background: linear-gradient(110deg, #bc8a3f14, #bc8a3f03);
+      }
+      .word-tab .number { font-size: 10px; color: #a9a297; }
+      .word-tab .word {
+        font-family: var(--font-arabic);
+        font-size: 28px;
+        line-height: 1.6;
+      }
+      .word-tab .english {
+        color: var(--muted);
+        font-size: 11px;
+        min-width: 58px;
+      }
+      .word-tab[aria-selected="true"] .word { color: var(--gold); }
+
+      .meaning-panel {
+        position: relative;
+        min-height: 337px;
+        padding: 46px;
+        border-left: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .meaning-panel::after {
+        content: "";
+        position: absolute;
+        width: 240px;
+        aspect-ratio: 1;
+        border: 1px solid #d5af7510;
+        border-radius: 50%;
+        top: -120px;
+        right: -80px;
+        box-shadow: 0 0 0 30px #d5af7503, 0 0 0 60px #d5af7503;
+        pointer-events: none;
+      }
+      .meaning-panel h3 {
+        font-size: 30px;
+        font-family: "Manrope", sans-serif;
+        font-weight: 400;
+        letter-spacing: -.04em;
+        margin: 21px 0 16px;
+      }
+      .meaning-panel p:not(.eyebrow) {
+        max-width: 360px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.9;
+      }
+      .panel-note {
+        display: block;
+        margin-top: 30px;
+        font-size: 10px;
+        color: #9a9388;
+      }
+
+      .context-art {
+        min-height: 350px;
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: radial-gradient(circle at 50% 50%, #8f6d2620, transparent 65%);
+      }
+      .orbit-ring {
+        position: absolute;
+        width: 250px;
+        aspect-ratio: 1;
+        border: 1px solid #e8bb8328;
+        border-radius: 50%;
+      }
+      .orbit-ring:nth-child(2) {
+        width: 310px;
+        border-style: dashed;
+        border-color: #e8bb8315;
+        animation: orbit 120s linear infinite;
+      }
+      .orbit-ring:nth-child(3) { width: 185px; border-color: #e8bb8312; }
+      .orbit-ring:first-child::after {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+        top: 50%;
+        left: -3px;
+        box-shadow: 0 0 20px var(--gold);
+      }
+      .context-art-inner { position: relative; text-align: center; }
+      .context-art strong {
+        display: block;
+        font-size: 67px;
+        font-weight: 400;
+        font-family: "Manrope", sans-serif;
+        letter-spacing: -.07em;
+        color: #e8d7ba;
+      }
+      .context-art .eyebrow { font-size: 8px; margin-top: 8px; }
+      .art-caption {
+        position: absolute;
+        bottom: 20px;
+        font-size: 9px;
+        letter-spacing: .12em;
+        color: #969087;
+        text-transform: uppercase;
+      }
+
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 26px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e8bb8350;
+        color: var(--gold);
+        font-size: 12px;
+      }
+
+      details { max-width: 390px; margin: 30px auto 0; }
+      summary {
+        display: inline-block;
+        cursor: pointer;
+        color: var(--gold);
+        font-size: 12px;
+        padding: 10px;
+        list-style: none;
+      }
+      summary::-webkit-details-marker { display: none; }
+      summary::after { content: " +"; margin-left: 12px; }
+      details[open] summary::after { content: " −"; }
+      details p {
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 1.9;
+        color: #d0c7b8;
+      }
+
+      .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        z-index: 50;
+        background: var(--gold);
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+
+      @media (max-width: 760px) {
+        .meaning-panel {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          padding: 32px;
+          min-height: 310px;
+        }
+        .word-tabs { padding: 10px; }
+        .word-tab { padding: 14px 18px; }
+      }
+    }
+
+    @layer motion {
+      @keyframes orbit { to { rotate: 360deg; } }
+      @keyframes breathe {
+        from { opacity: .4; scale: .95; }
+        to { opacity: 1; scale: 1.05; }
+      }
+      @keyframes scroll-line {
+        0%, 100% { transform: scaleY(.6); opacity: .4; }
+        50% { transform: scaleY(1); opacity: 1; }
+      }
+      @keyframes arrive {
+        from { opacity: 0; transform: translateY(18px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes progress { to { transform: scaleX(1); } }
+      @keyframes reveal {
+        from { opacity: .15; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .hero > :not(.hero-bottom) { animation: arrive 1.3s var(--ease) both; }
+      .hero .arabic { animation-delay: .12s; }
+      .hero h1 { animation-delay: .22s; }
+      .hero .hero-description { animation-delay: .32s; }
+      .hero .primary-link { animation-delay: .42s; }
+
+      @supports (animation-timeline: scroll()) {
+        .reading-progress {
+          animation: progress linear both;
+          animation-timeline: scroll();
+        }
+      }
+
+      @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+          .reveal {
+            animation: reveal linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 85%;
+          }
+        }
+      }
+
+      [data-still="true"] *,
+      [data-still="true"] *::before,
+      [data-still="true"] *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      html[data-still="true"] { scroll-behavior: auto; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#meaning">Skip to explanation</a>
+  <div class="reading-progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header wrap">
+    <a href="index.html" class="brand" aria-label="NurulQuran Showcase">
+      <span class="brand-symbol" aria-hidden="true"></span>
+      <span class="eyebrow">NurulQuran / That Day · 077</span>
+    </a>
+
+    <div class="header-right">
+      <a href="index.html" class="nav-link" style="color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:6px">
+        <span>← All Exhibits</span>
+      </a>
+      <a href="#meaning" class="nav-link">The meaning</a>
+      <a href="#reflection" class="nav-link">Reflect</a>
+      <button class="motion-control" id="motion" type="button"
+              aria-pressed="false" aria-label="Pause animation">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="motion-label">Pause motion</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="atmosphere" aria-hidden="true">
+      <canvas id="particles"></canvas>
+      <div class="eclipse"></div>
+      <div class="horizon"></div>
+    </div>
+
+    <section class="hero wrap" aria-labelledby="verse-translation">
+      <p class="verse-marker eyebrow">Quran 77:15</p>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:75px;flex-wrap:wrap">
+        <p class="arabic" lang="ar" dir="rtl" style="margin-top:0">
+          وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ
+        </p>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15" title="Listen · Sheikh Mishary Rashid Alafasy">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </div>
+
+      <p class="translation-label eyebrow">English translation</p>
+      <h1 id="verse-translation">
+        Woe, that Day,<br>
+        <span>to the deniers.</span>
+      </h1>
+
+      <p class="hero-description">
+        A warning about denying the truth.<br>
+        A moment to examine our own hearts.
+      </p>
+
+      <a class="primary-link" href="#meaning">
+        Explore the meaning
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" aria-hidden="true">
+          <path d="M7 17 17 7M7 7h10v10"/>
+        </svg>
+      </a>
+
+      <div class="hero-bottom">
+        <p class="eyebrow">One verse.<br>A moment to reflect.</p>
+        <a class="scroll-cue" href="#meaning" aria-label="Scroll to the meaning">
+          <span class="eyebrow">Look deeper</span>
+          <span class="scroll-line" aria-hidden="true"></span>
+        </a>
+        <p class="eyebrow">An abstract visual study<br>Not a depiction of the unseen</p>
+      </div>
+    </section>
+
+    <section class="section wrap" id="meaning" aria-labelledby="meaning-heading">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow gold">01 / The meaning</p>
+          <h2 id="meaning-heading">Three phrases.<br>One solemn warning.</h2>
+        </div>
+        <p>
+          Explore each phrase.<br>
+          Read the warning as a call to honesty,
+          not a label to place on others.
+        </p>
+      </div>
+
+      <div class="meaning-layout reveal">
+        <div class="word-tabs" role="tablist"
+             aria-label="Explore the verse" aria-orientation="vertical">
+          <button class="word-tab" id="tab-warning" type="button"
+                  role="tab" aria-selected="true" aria-controls="panel-warning"
+                  tabindex="0">
+            <span class="number" aria-hidden="true">01</span>
+            <span class="word" lang="ar" dir="rtl">وَيْلٌ</span>
+            <span class="english">Woe</span>
+          </button>
+
+          <button class="word-tab" id="tab-day" type="button"
+                  role="tab" aria-selected="false" aria-controls="panel-day"
+                  tabindex="-1">
+            <span class="number" aria-hidden="true">02</span>
+            <span class="word" lang="ar" dir="rtl">يَوْمَئِذٍ</span>
+            <span class="english">That Day</span>
+          </button>
+
+          <button class="word-tab" id="tab-denial" type="button"
+                  role="tab" aria-selected="false" aria-controls="panel-denial"
+                  tabindex="-1">
+            <span class="number" aria-hidden="true">03</span>
+            <span class="word" lang="ar" dir="rtl">لِلْمُكَذِّبِينَ</span>
+            <span class="english">The deniers</span>
+          </button>
+        </div>
+
+        <div>
+          <section class="meaning-panel" id="panel-warning" role="tabpanel"
+                   aria-labelledby="tab-warning" tabindex="0">
+            <p class="eyebrow gold">01 / A grave warning</p>
+            <h3>Not a small loss.</h3>
+            <p>
+              “Woe” warns of severe distress and punishment.
+              Rejecting God's truth has consequences.
+            </p>
+            <span class="panel-note">Brief explanation · not a translation</span>
+          </section>
+
+          <section class="meaning-panel" id="panel-day" role="tabpanel"
+                   aria-labelledby="tab-day" tabindex="0" hidden>
+            <p class="eyebrow gold">02 / The Day of Judgment</p>
+            <h3>A day of account.</h3>
+            <p>
+              “That Day” points to the Day of Judgment:
+              when people are raised and held accountable before God.
+            </p>
+            <span class="panel-note">Brief explanation · not a translation</span>
+          </section>
+
+          <section class="meaning-panel" id="panel-denial" role="tabpanel"
+                   aria-labelledby="tab-denial" tabindex="0" hidden>
+            <p class="eyebrow gold">03 / Rejecting the truth</p>
+            <h3>Denial has a cost.</h3>
+            <p>
+              The warning addresses those who reject God's truth,
+              including resurrection and judgment.
+            </p>
+            <span class="panel-note">Brief explanation · not a translation</span>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="context" aria-labelledby="context-heading">
+      <div class="context-grid">
+        <div class="context-art reveal" aria-hidden="true">
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring"></div>
+          <div class="context-art-inner">
+            <strong>77:15</strong>
+            <p class="eyebrow gold">The warning returns</p>
+          </div>
+          <span class="art-caption">Read the verse within its chapter</span>
+        </div>
+
+        <div class="context-copy reveal">
+          <p class="eyebrow gold">02 / The context</p>
+          <h2>A warning<br>that returns.</h2>
+          <p>
+            This verse appears repeatedly in chapter 77.
+            The chapter points to God's power and the coming judgment.
+          </p>
+          <br>
+          <p>
+            The repeated warning brings us back to one question:
+            how do we respond to the truth?
+          </p>
+          <a class="text-link" href="https://quran.com/77"
+             target="_blank" rel="noopener noreferrer">
+            Read chapter 77
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="reflection" aria-labelledby="reflection-heading">
+      <div class="reflection reveal">
+        <p class="eyebrow gold">03 / A personal reflection</p>
+        <h2 id="reflection-heading">
+          Let the question<br>turn inward.
+        </h2>
+        <p>
+          What truth am I avoiding?<br>
+          What would an honest response look like?
+        </p>
+
+        <details>
+          <summary>A quiet next step</summary>
+          <p>
+            Pause. Ask God for guidance.<br>
+            Choose one sincere step toward what is right.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" style="flex-wrap:wrap;gap:20px">
+    <div>
+      <p class="eyebrow gold" style="margin-bottom: 10px">The verse / 077</p>
+      <p>
+        Quran 77:15 · English: Sahih International.<br>
+        Brief reflections, not a full commentary.
+        Visuals are abstract, not depictions of the unseen.
+      </p>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+      <a href="https://quran.com/77/15" target="_blank" rel="noopener noreferrer">Verse &amp; source ↗</a>
+      <a href="index.html">← All Exhibits</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+    <div class="footer-version-tag" style="width:100%;text-align:right;opacity:0.75;font-size:0.72rem;letter-spacing:0.04em;color:var(--gold)">
+      v1.0.18 (updated 2026-09-06 15:50)
+    </div>
+  </footer>
+
+  <script type="module">
+    const root = document.documentElement;
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const motionButton = document.querySelector("#motion");
+    const motionLabel = document.querySelector("#motion-label");
+    const canvas = document.querySelector("#particles");
+    const ctx = canvas.getContext("2d");
+
+    let still = reducedMotion.matches;
+    let frame = 0;
+    let previousTime = 0;
+    let sceneTime = 0;
+    let width = 0;
+    let height = 0;
+    let stars = [];
+    let sceneVisible = true;
+
+    const pointer = { x: 0, y: 0 };
+    const easedPointer = { x: 0, y: 0 };
+
+    function updateMotionControl() {
+      root.dataset.still = String(still);
+      motionButton.setAttribute("aria-pressed", String(still));
+      motionButton.setAttribute(
+        "aria-label",
+        still ? "Resume animation" : "Pause animation"
+      );
+      motionLabel.textContent = still ? "Motion paused" : "Pause motion";
+    }
+
+    function stop() {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+    }
+
+    function start() {
+      if (!ctx || still || document.hidden || !sceneVisible || frame) return;
+      frame = requestAnimationFrame(tick);
+    }
+
+    function setStill(value) {
+      still = value;
+      updateMotionControl();
+      stop();
+      draw();
+      start();
+    }
+
+    motionButton.addEventListener("click", () => setStill(!still));
+    reducedMotion.addEventListener("change", event => setStill(event.matches));
+
+    // Keyboard-accessible, automatically activated vertical tabs.
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+
+    function activateTab(tab) {
+      tabs.forEach(item => {
+        const selected = item === tab;
+        item.setAttribute("aria-selected", String(selected));
+        item.tabIndex = selected ? 0 : -1;
+      });
+
+      panels.forEach(panel => {
+        panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+      });
+
+      if (!still) {
+        document.getElementById(tab.getAttribute("aria-controls")).animate(
+          [
+            { opacity: 0, transform: "translateY(8px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ],
+          { duration: 380, easing: "cubic-bezier(.22,1,.36,1)" }
+        );
+      }
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => activateTab(tab));
+      tab.addEventListener("keydown", event => {
+        let next;
+        if (event.key === "ArrowDown") next = (index + 1) % tabs.length;
+        if (event.key === "ArrowUp") next = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = tabs.length - 1;
+        if (next === undefined) return;
+        event.preventDefault();
+        tabs[next].focus();
+        activateTab(tabs[next]);
+      });
+    });
+
+    // Decorative canvas: no images, libraries, or media files.
+    function resize() {
+      if (!ctx) return;
+      const bounds = canvas.getBoundingClientRect();
+      width = bounds.width;
+      height = bounds.height;
+
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = Math.min(150, Math.floor(width / 9));
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.1 + .25,
+        alpha: Math.random() * .38 + .08,
+        speed: Math.random() * 5 + 1.5,
+        phase: Math.random() * Math.PI * 2
+      }));
+      draw();
+    }
+
+    function draw() {
+      if (!ctx || !width || !height) return;
+      ctx.clearRect(0, 0, width, height);
+
+      const px = still ? 0 : easedPointer.x;
+      const py = still ? 0 : easedPointer.y;
+
+      for (const star of stars) {
+        const y = ((star.y - sceneTime * star.speed) % height + height) % height;
+        const x = star.x + Math.sin(sceneTime * .12 + star.phase) * 9;
+        const twinkle = .8 + Math.sin(sceneTime * .5 + star.phase) * .2;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(235,208,160,${star.alpha * twinkle})`;
+        ctx.arc(x + px * 8, y + py * 6, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Fine elliptical lines create a quiet, architectural horizon.
+      ctx.save();
+      ctx.translate(width / 2 + px * 5, 823 + py * 3);
+
+      for (let i = 0; i < 7; i++) {
+        ctx.beginPath();
+        ctx.ellipse(
+          0, i * 15,
+          width * .68 + i * 36,
+          105 + i * 19,
+          0, Math.PI, Math.PI * 2
+        );
+        ctx.strokeStyle = `rgba(211,165,102,${.075 - i * .008})`;
+        ctx.lineWidth = .7;
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    function tick(now) {
+      frame = 0;
+      if (still || document.hidden || !sceneVisible) return;
+
+      const delta = previousTime ? Math.min((now - previousTime) / 1000, .05) : 0;
+      previousTime = now;
+      sceneTime += delta;
+
+      easedPointer.x += (pointer.x - easedPointer.x) * .035;
+      easedPointer.y += (pointer.y - easedPointer.y) * .035;
+
+      draw();
+      frame = requestAnimationFrame(tick);
+    }
+
+    if (matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", event => {
+        if (still) return;
+        pointer.x = (event.clientX / innerWidth - .5) * 2;
+        pointer.y = (event.clientY / innerHeight - .5) * 2;
+      }, { passive: true });
+
+      document.documentElement.addEventListener("pointerleave", () => {
+        pointer.x = 0;
+        pointer.y = 0;
+      });
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        sceneVisible = entry.isIntersecting;
+        if (sceneVisible) start();
+        else stop();
+      });
+      observer.observe(document.querySelector(".atmosphere"));
+    }
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(resize).observe(canvas);
+    } else {
+      window.addEventListener("resize", resize, { passive: true });
+    }
+
+    // Fallback reading progress where CSS scroll timelines are unavailable.
+    if (!CSS.supports("animation-timeline: scroll()")) {
+      const progress = document.querySelector(".reading-progress");
+      let progressPending = false;
+
+      function updateProgress() {
+        const distance = root.scrollHeight - innerHeight;
+        const ratio = distance > 0 ? Math.min(1, scrollY / distance) : 0;
+        progress.style.transform = `scaleX(${ratio})`;
+        progressPending = false;
+      }
+
+      window.addEventListener("scroll", () => {
+        if (progressPending) return;
+        progressPending = true;
+        requestAnimationFrame(updateProgress);
+      }, { passive: true });
+
+      window.addEventListener("resize", updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    updateMotionControl();
+    resize();
+    start();
+  </script>
+  <script>
+    // Ayah Audio Player
+    (function initAyahAudio() {
+      let activeAudio = null;
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.nq-play-btn');
+        if (!btn) return;
+        const url = btn.dataset.audio;
+        if (!url) return;
+        if (activeAudio && !activeAudio.paused) {
+          activeAudio.pause();
+          btn.classList.remove('playing');
+          return;
+        }
+        btn.classList.add('loading');
+        activeAudio = new Audio(url);
+        activeAudio.play().then(() => {
+          btn.classList.remove('loading');
+          btn.classList.add('playing');
+        }).catch(() => {
+          btn.classList.remove('loading', 'playing');
+        });
+        activeAudio.onended = () => {
+          btn.classList.remove('playing', 'loading');
+          activeAudio = null;
+        };
+      });
+    })();
+  </script>
+</body>
+</html>

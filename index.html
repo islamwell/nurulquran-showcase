@@ -845,6 +845,70 @@ body {
 .cat-linguistics { background: rgba(45, 212, 191, 0.12); color: var(--teal-2); border: 1px solid rgba(45, 212, 191, 0.3); }
 .cat-lifestyle { background: rgba(185, 140, 255, 0.12); color: #C4B5FD; border: 1px solid rgba(185, 140, 255, 0.3); }
 .cat-psychology { background: rgba(253, 164, 175, 0.12); color: var(--rose-1); border: 1px solid rgba(253, 164, 175, 0.3); }
+.cat-theology { background: rgba(245, 158, 11, 0.12); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.cat-spirituality { background: rgba(16, 185, 129, 0.12); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+/* Card Snapshot */
+.card-snapshot-link {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 20px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--card-border);
+  transition: all 0.35s var(--transition-smooth);
+}
+.card-snapshot-link:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55), 0 0 24px rgba(245, 201, 123, 0.22);
+}
+.card-snapshot-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #070a12;
+  overflow: hidden;
+}
+.card-snapshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s var(--transition-smooth), filter 0.4s ease;
+  filter: brightness(0.92) contrast(1.05);
+}
+.card-item:hover .card-snapshot-img {
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1.08);
+}
+.snapshot-badge-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 4px 11px;
+  background: rgba(6, 9, 19, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 201, 123, 0.35);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.88;
+  transition: all 0.25s ease;
+}
+.card-item:hover .snapshot-badge-overlay {
+  opacity: 1;
+  background: rgba(6, 9, 19, 0.96);
+  border-color: var(--gold-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(245, 201, 123, 0.28);
+}
 
 .card-arabic-motif {
   font-family: var(--font-arabic);
@@ -856,7 +920,7 @@ body {
 
 .card-title {
   font-family: var(--font-display);
-  font-size: 1.42rem;
+  font-size: 1.35rem;
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-main);
@@ -864,40 +928,93 @@ body {
 }
 
 .card-desc {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 22px;
-  flex: 1;
+  line-height: 1.55;
+  margin-bottom: 14px;
 }
 
-.card-highlights {
-  list-style: none;
+/* Card Quranic Ayah Box */
+.card-ayah-box {
+  background: rgba(8, 14, 28, 0.75);
+  border: 1px solid rgba(245, 201, 123, 0.22);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 26px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  justify-content: space-between;
+  flex: 1;
+  transition: all 0.3s ease;
+  position: relative;
+}
+[data-theme="light"] .card-ayah-box {
+  background: rgba(245, 240, 228, 0.85);
+  border-color: rgba(180, 140, 50, 0.28);
+}
+.card-item:hover .card-ayah-box {
+  border-color: rgba(245, 201, 123, 0.48);
+  background: rgba(12, 20, 38, 0.9);
+  box-shadow: inset 0 0 20px rgba(245, 201, 123, 0.06);
+}
+[data-theme="light"] .card-item:hover .card-ayah-box {
+  border-color: rgba(180, 140, 50, 0.5);
+  background: rgba(255, 252, 245, 0.95);
 }
 
-[data-theme="light"] .card-highlights {
-  border-top-color: rgba(0, 0, 0, 0.08);
+.ayah-arabic-text {
+  font-family: var(--font-arabic);
+  font-size: 1.25rem;
+  line-height: 1.95;
+  color: var(--gold-1);
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 12px rgba(245, 201, 123, 0.15);
+}
+[data-theme="light"] .ayah-arabic-text {
+  color: var(--gold-1);
+  text-shadow: none;
 }
 
-.card-highlight-item {
+.ayah-meta-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(245, 201, 123, 0.15);
+}
+[data-theme="light"] .ayah-meta-row {
+  border-bottom-color: rgba(180, 140, 50, 0.2);
+}
+.ayah-ref {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--gold-2);
+  text-transform: uppercase;
+}
+.card-ayah-play {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+}
+.card-ayah-play svg {
+  width: 12px !important;
+  height: 12px !important;
 }
 
-.card-highlight-item svg {
-  width: 14px;
-  height: 14px;
-  color: var(--teal-2);
-  flex-shrink: 0;
+.ayah-trans-text {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-style: italic;
+  margin: 0;
+}
+[data-theme="light"] .ayah-trans-text {
+  color: var(--text-muted);
 }
 
 .card-actions-row {
@@ -1440,6 +1557,10 @@ html, body {
             <span class="item-badge">Praise</span>
             <span class="item-title">Ḥamd &amp; Shukr · Gratitude Study</span>
           </a>
+          <a href="woeDeny.html" class="dropdown-item">
+            <span class="item-badge">Warning</span>
+            <span class="item-title">وَيْلٌ يَوْمَئِذٍ · Woe to the Deniers</span>
+          </a>
         </div>
       </div>
       <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
@@ -1476,7 +1597,7 @@ html, body {
 
   <div class="hero-stats-strip">
     <div class="stat-item">
-      <span class="stat-number">10</span>
+      <span class="stat-number">11</span>
       <span class="stat-label">Full Interactive Exhibits</span>
     </div>
     <div class="stat-divider"></div>
@@ -1508,7 +1629,7 @@ html, body {
     </div>
 
     <div class="category-pills">
-      <button class="cat-pill active" data-cat="all">All Exhibits (7)</button>
+      <button class="cat-pill active" data-cat="all">All Exhibits (11)</button>
       <button class="cat-pill" data-cat="quran">Quranic Sciences</button>
       <button class="cat-pill" data-cat="prophet">Prophetic Evidences</button>
       <button class="cat-pill" data-cat="linguistics">Arabic &amp; Morphology</button>
@@ -1523,64 +1644,74 @@ html, body {
   <div class="showcase-grid" id="cardsGrid">
     
     <!-- CARD 1: MIRACLES OF QURAN -->
-    <article class="card-item" data-category="quran" data-keywords="miracles signs ijaz ayaat cosmic historical linguistic parting sea iron embryology">
+    <article class="card-item" data-category="quran" data-keywords="miracles signs ijaz ayaat cosmic historical linguistic parting sea iron embryology fussilat 41:53">
+      <a href="miraclesQuran.html" class="card-snapshot-link" aria-label="Launch The Signs — Miracles of the Qur'ān">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/miraclesQuran.webp" alt="The Signs — Miracles of the Qur'an Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-quran">Quranic Sciences</span>
         <span class="card-arabic-motif">الآيات</span>
       </div>
       <h2 class="card-title">The Signs — Miracles of the Qur'ān</h2>
       <p class="card-desc">
-        A deep, multi-layered interactive chronicle of the inimitability (Iʿjāz) and 12 profound signs described across the Holy Qur'an, with cosmic visual cards and tafsir reflections.
+        A deep chronicle of inimitability (Iʿjāz) and 12 cosmic, historical, and linguistic signs described across the Qur'an.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>12 Interactive 3D Sign Cards &amp; Deep Dives</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Historical Chronicle &amp; Linguistic Inimitability</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Dual Cosmic / Manuscript Color Themes</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">سَنُرِيهِمْ ءَايَٰتِنَا فِى ٱلْءَافَاقِ وَفِىٓ أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ ٱلْحَقُّ ۗ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ فُصِّلَتْ · <bdi>41:53</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/041053.mp3" aria-label="Listen to Ayah 41:53" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“We will show them Our signs in the horizons and within themselves until it becomes clear to them that it is the truth.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="miraclesQuran.html" class="btn-launch">
           <span>Launch Exhibit</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </a>
-        <button class="btn-preview-modal" onclick="openPreview('miraclesQuran.html', 'The Signs — Miracles of the Qur\'ān')" title="Quick Preview">
+        <button class="btn-preview-modal" onclick="openPreview('miraclesQuran.html', 'The Signs — Miracles of the Qur'ān')" title="Quick Preview">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
       </div>
     </article>
 
     <!-- CARD 2: PROOF OF MESSENGER -->
-    <article class="card-item" data-category="prophet" data-keywords="proof messenger prophethood muhammad ten reasons logic lab timeline textual criticism sira">
+    <article class="card-item" data-category="prophet" data-keywords="proof messenger prophethood muhammad ten reasons logic lab timeline textual criticism sira najm 53:3-4">
+      <a href="proofMessenger.html" class="card-snapshot-link" aria-label="Launch Ten Reasons — The Case for Muhammad ﷺ">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/proofMessenger.webp" alt="Ten Reasons — The Case for Muhammad ﷺ Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-prophet">Prophetic Evidences</span>
         <span class="card-arabic-motif">محمد ﷺ</span>
       </div>
       <h2 class="card-title">Ten Reasons — The Case for Muhammad ﷺ</h2>
       <p class="card-desc">
-        A rigorous, philosophical, and historical presentation of ten reasoned arguments for the prophethood of Muhammad ﷺ, equipped with an interactive Logic Hypothesis Lab.
+        A reasoned philosophical and historical presentation of ten evidence pillars for the prophethood of Muhammad ﷺ with a Logic Hypothesis Lab.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive 3-Hypothesis Logic Probability Lab</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Chronological Timeline &amp; Textual Preservation</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Complete Counter-Arguments &amp; Primary Sources</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَمَا يَنطِقُ عَنِ ٱلْهَوَىٰٓ · إِنْ هُوَ إِلَّا وَحْىٌ يُوحَىٰ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ النَّجْمِ · <bdi>53:3-4</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/053003.mp3" aria-label="Listen to Ayah 53:3" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“Nor does he speak from his own inclination. It is not but a revelation revealed.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="proofMessenger.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1593,29 +1724,34 @@ html, body {
     </article>
 
     <!-- CARD 3: JAHOOL MEANING -->
-    <article class="card-item" data-category="linguistics" data-keywords="jahool jahula unknowing ahzab amanah trust morphology faool root jhl tafsir quiz">
+    <article class="card-item" data-category="linguistics" data-keywords="jahool jahula unknowing ahzab amanah trust morphology faool root jhl tafsir quiz 33:72">
+      <a href="jahoolMeaning.html" class="card-snapshot-link" aria-label="Launch جَهُولًا · Jahūlā — The Deeply Unknowing">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/jahoolMeaning.webp" alt="Jahūlā — The Deeply Unknowing Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-linguistics">Quranic Word Study</span>
         <span class="card-arabic-motif">جَهُولًا</span>
       </div>
       <h2 class="card-title">جَهُولًا · Jahūlā — The Deeply Unknowing</h2>
       <p class="card-desc">
-        A deep linguistic and thematic exegesis of Surah Al-Ahzab (33:72), breaking down the intensive pattern فَعُول, the Amanah (Trust), classical lexicons, and an interactive quiz.
+        A deep linguistic and thematic exegesis of Surah Al-Ahzab (33:72), dissecting the Amanah (Trust) and the intensive pattern فَعُول.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Root Morphological Breakdown (ج · ه · ل)</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Synthesis of Classical Exegesis &amp; Lexical History</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive Harakat Switcher &amp; Knowledge Test</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَحَمَلَهَا ٱلْإِنسَٰنُ ۖ إِنَّهُۥ كَانَ ظَلُومًا جَهُولًا</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ الأَحْزَابِ · <bdi>33:72</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/033072.mp3" aria-label="Listen to Ayah 33:72" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“And man undertook to bear the trust. Indeed, he was unjust and deeply unknowing (jahūlā).”</p>
+      </div>
       <div class="card-actions-row">
         <a href="jahoolMeaning.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1628,64 +1764,74 @@ html, body {
     </article>
 
     <!-- CARD 4: SHORT SENTENCE VERB -->
-    <article class="card-item" data-category="linguistics" data-keywords="twelve words quranic verb jumla fi'liyyah grammar syntax visualizer irab fail mafool">
+    <article class="card-item" data-category="linguistics" data-keywords="twelve words quranic verb jumla fi'liyyah grammar syntax visualizer irab fail mafool baqarah 2:137">
+      <a href="shortSentenceVerb.html" class="card-snapshot-link" aria-label="Launch Twelve Words · The Qur'anic Verb">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/shortSentenceVerb.webp" alt="Twelve Words · The Qur'anic Verb Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-linguistics">Arabic Grammar &amp; Eloquence</span>
         <span class="card-arabic-motif">الجملة الفعلية</span>
       </div>
       <h2 class="card-title">Twelve Words · The Qur'anic Verb</h2>
       <p class="card-desc">
-        Five shortest verbal sentences in the Qur'an covering 100% of the Arabic verb system. Featuring interactive grammatical role coloring (Fi'l, Fā'il, Maf'ūl, Hāl) and Atlas.
+        Five shortest verbal sentences in the Qur'an covering 100% of the Arabic verb system with interactive Iʿrāb syntax visualizers.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive I'rāb Syntax Visualizer</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Past, Present, Imperative, Passive &amp; Jussive</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Color-Coded Grammar Roles &amp; 8-Question Quiz</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">فَسَيَكْفِيكَهُمُ ٱللَّهُ ۚ وَهُوَ ٱلسَّمِيعُ ٱلْعَلِيمُ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ البَقَرَةِ · <bdi>2:137</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002137.mp3" aria-label="Listen to Ayah 2:137" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“So Allah will suffice you against them. And He is the Hearing, the Knowing.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="shortSentenceVerb.html" class="btn-launch">
           <span>Launch Exhibit</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </a>
-        <button class="btn-preview-modal" onclick="openPreview('shortSentenceVerb.html', 'Twelve Words · The Qur\'anic Verb')" title="Quick Preview">
+        <button class="btn-preview-modal" onclick="openPreview('shortSentenceVerb.html', 'Twelve Words · The Qur'anic Verb')" title="Quick Preview">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
       </div>
     </article>
 
     <!-- CARD 5: SLEEP ADVICE -->
-    <article class="card-item" data-category="lifestyle" data-keywords="sleep golden window chronobiology circadian melatonin sunnah night clock stages">
+    <article class="card-item" data-category="lifestyle" data-keywords="sleep golden window chronobiology circadian melatonin sunnah night clock stages naba 78:9-10">
+      <a href="sleepAdvice.html" class="card-snapshot-link" aria-label="Launch The Golden Window — Sleep Science &amp; Sunnah">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/sleepAdvice.webp" alt="The Golden Window — Sleep Science Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-lifestyle">Circadian Science &amp; Sunnah</span>
         <span class="card-arabic-motif">الليل والنهار</span>
       </div>
       <h2 class="card-title">The Golden Window — When Should You Sleep?</h2>
       <p class="card-desc">
-        Circadian chronobiology aligned with prophetic routine. Discover why timing matters more than duration, with a scrollable real-time night sky clock simulator and sleep calculator.
+        Circadian chronobiology aligned with prophetic routine. Discover why sleep timing matters more than duration with an interactive night clock.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Dynamic Scroll-Driven Night Sky &amp; Clock Simulator</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Circadian Curve Visualizer (Melatonin, Temp, Alertness)</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>UK Biobank &amp; Hadith Sleep Architecture Data</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا · وَجَعَلْنَا ٱلَّيْلَ لِبَاسًا</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ النَّبَإِ · <bdi>78:9-10</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/078009.mp3" aria-label="Listen to Ayah 78:9" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“And We made your sleep a means for rest, and We made the night as a garment.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="sleepAdvice.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1698,29 +1844,34 @@ html, body {
     </article>
 
     <!-- CARD 6: ANGER CONTROL -->
-    <article class="card-item" data-category="psychology" data-keywords="anger control psychology breathing exercise prophetic hadith calmness dua">
+    <article class="card-item" data-category="psychology" data-keywords="anger control psychology breathing exercise prophetic hadith calmness dua ali imran 3:134">
+      <a href="angerControl.html" class="card-snapshot-link" aria-label="Launch Allah Loves Those Who Control Anger">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/angerControl.webp" alt="Allah Loves Those Who Control Anger Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-psychology">Spiritual Psychology</span>
         <span class="card-arabic-motif">الكاظمين الغيظ</span>
       </div>
       <h2 class="card-title">Allah Loves Those Who Control Anger</h2>
       <p class="card-desc">
-        A practical, prophetic and cognitive toolkit to restrain anger in real-time. Includes an interactive visual breathing pacer, checklist, and copyable de-escalation statements.
+        A prophetic and cognitive toolkit to restrain anger in real-time, featuring an interactive visual breathing pacer and de-escalation steps.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive 4-In / 6-Out Breathing Pacer &amp; Dua</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Prophetic 7-Step Action Progress Checklist</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>One-Click Copyable Calm De-escalation Phrases</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَٱلْكَٰظِمِينَ ٱلْغَيْظَ وَٱلْعَافِينَ عَنِ ٱلنَّاسِ ۗ وَٱللَّهُ يُحِبُّ ٱلْمُحْسِنِينَ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ آلِ عِمْرَانَ · <bdi>3:134</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003134.mp3" aria-label="Listen to Ayah 3:134" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“And who restrain anger and who pardon the people — and Allah loves the doers of good.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="angerControl.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1733,29 +1884,34 @@ html, body {
     </article>
 
     <!-- CARD 7: THE ROOT TREE (ROOT WORDS) -->
-    <article class="card-item" data-category="linguistics" data-keywords="root words root tree jithr morphology sarf arabic roots tree explorer patterns ayah xray quiz teacher toolkit">
+    <article class="card-item" data-category="linguistics" data-keywords="root words root tree jithr morphology sarf arabic roots tree explorer patterns ayah xray quiz teacher toolkit ibrahim 14:24">
+      <a href="rootwords.html" class="card-snapshot-link" aria-label="Launch شَجَرَةُ الجُذُور · The Root Tree — Quranic Roots">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/rootwords.webp" alt="The Root Tree Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-linguistics">Quranic Arabic Morphology</span>
         <span class="card-arabic-motif">الجَذْر</span>
       </div>
       <h2 class="card-title">شَجَرَةُ الجُذُور · The Root Tree — Quranic Roots</h2>
       <p class="card-desc">
-        Unfold the living forest of Quranic Arabic morphology. Discover how 3-letter roots branch into dozens of words, with an interactive Root Tree explorer, pattern calculator, Ayah X-Ray, and quiz.
+        Unfold the living forest of Quranic Arabic morphology: explore how 3-letter roots branch into dozens of words with Ayah X-Ray decomposition.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive Living Root Tree Explorer &amp; Branches</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Ayah X-Ray Root &amp; Pattern Decomposition</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>10-Question Morphological Sapling Quiz &amp; Teacher Tools</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">كَلِمَةً طَيِّبَةً كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِى ٱلسَّمَآءِ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ إِبْرَاهِيمَ · <bdi>14:24</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014024.mp3" aria-label="Listen to Ayah 14:24" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“A good word is like a good tree, whose root is firmly fixed and its branches high in the sky.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="rootwords.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1768,27 +1924,34 @@ html, body {
     </article>
 
     <!-- CARD 8: AR-RAYYĀN (FASTING SANCTUARY) -->
-    <article class="card-item" data-category="spirituality" data-keywords="fasting sawm ramadan rayyan calendar prayer times suhur iftar white days sunnah duas qada ledger virtues">
+    <article class="card-item" data-category="lifestyle" data-keywords="fasting sawm ramadan rayyan calendar prayer times suhur iftar white days sunnah duas qada ledger virtues baqarah 2:183">
+      <a href="fasting.html" class="card-snapshot-link" aria-label="Launch Ar-Rayyān · The Quranic Fasting Sanctuary">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/fasting.webp" alt="Ar-Rayyān Fasting Sanctuary Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
-        <span class="card-category-badge cat-spirituality">Worship &amp; Fasting</span>
+        <span class="card-category-badge cat-lifestyle">Worship &amp; Fasting</span>
         <span class="card-arabic-motif">بَابُ الرَّيَّان</span>
       </div>
       <h2 class="card-title">Ar-Rayyān · The Quranic Fasting Sanctuary</h2>
-      <p class="card-desc">Leaving your food, drink, and desires for Allah brings you nearer to the Most Merciful.</p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Live Fasting Progress Orb &amp; Prayer Times</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive Lunar Calendar with ICS Export</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive Qaḍāʾ Missed Days Debt Ledger</span>
-        </li>
-      </ul>
+      <p class="card-desc">
+        Leaving food, drink, and desires for Allah brings spiritual elevation. Live fasting orb, prayer times, and interactive lunar calendar.
+      </p>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ البَقَرَةِ · <bdi>2:183</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002183.mp3" aria-label="Listen to Ayah 2:183" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="fasting.html" class="btn-launch">
           <span>Launch Exhibit</span>
@@ -1801,71 +1964,120 @@ html, body {
     </article>
 
     <!-- CARD 9: ḤAMD & SHUKR (QURANIC PRAISE & GRATITUDE) -->
-    <article class="card-item" data-category="spirituality" data-keywords="hamd shukr gratitude praise thankfulness alhamdulillah tasbih dhikr parents nimah journal limbs">
+    <article class="card-item" data-category="psychology" data-keywords="hamd shukr gratitude praise thankfulness alhamdulillah tasbih dhikr parents nimah journal limbs ibrahim 14:7">
+      <a href="hamdShukr.html" class="card-snapshot-link" aria-label="Launch Ḥamd &amp; Shukr · Qur'anic Praise &amp; Gratitude">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/hamdShukr.webp" alt="Ḥamd &amp; Shukr Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
-        <span class="card-category-badge cat-spirituality">Worship &amp; Gratitude</span>
+        <span class="card-category-badge cat-psychology">Worship &amp; Gratitude</span>
         <span class="card-arabic-motif">ٱلْحَمْدُ لِلَّهِ</span>
       </div>
       <h2 class="card-title">Ḥamd &amp; Shukr · Qur'anic Praise &amp; Gratitude</h2>
       <p class="card-desc">
         A living companion for the two words that reorder a heart: ḥamd (praise owed) and shukr (thanks returned) — to Allah, parents, and people.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive 33-Cycle Tactile Tasbīḥ Dial</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Three Limbs of Gratitude Explorer &amp; Parents Timeline</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Offline Ni'mah Gratitude Journal &amp; Export</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ إِبْرَاهِيمَ · <bdi>14:7</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014007.mp3" aria-label="Listen to Ayah 14:7" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“And when your Lord proclaimed: If you are grateful, I will surely increase you in favor.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="hamdShukr.html" class="btn-launch">
           <span>Launch Exhibit</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </a>
-        <button class="btn-preview-modal" onclick="openPreview('hamdShukr.html', 'Ḥamd &amp; Shukr — A Qur\'anic Practice of Praise &amp; Gratitude')" title="Quick Preview">
+        <button class="btn-preview-modal" onclick="openPreview('hamdShukr.html', 'Ḥamd &amp; Shukr — A Qur'anic Practice of Praise &amp; Gratitude')" title="Quick Preview">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
       </div>
     </article>
 
-
     <!-- CARD 10: SHAHIDA ALLĀH (THE DIVINE WITNESS) -->
-    <article class="card-item" data-category="theology" data-keywords="witness shahida allah shahadah testimony angels knowledge justice qist aziz hakim 3:18">
+    <article class="card-item" data-category="theology" data-keywords="witness shahida allah shahadah testimony angels knowledge justice qist aziz hakim ali imran 3:18">
+      <a href="witness.html" class="card-snapshot-link" aria-label="Launch Shahida Allāh · The Divine Testimony — Qur'an 3:18">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/witness.webp" alt="Shahida Allāh Divine Testimony Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
       <div class="card-top-row">
         <span class="card-category-badge cat-theology">Quranic Theology &amp; Justice</span>
         <span class="card-arabic-motif">شَهِدَ اللَّهُ</span>
       </div>
       <h2 class="card-title">Shahida Allāh · The Divine Testimony — Qur'an 3:18</h2>
       <p class="card-desc">
-        An immersive visual meditation on Sūrah Āl ʿImrān 3:18 — The threefold testimony of Allah, the Angels, and the People of Knowledge upholding cosmic justice.
+        An immersive visual meditation on Sūrah Āl ʿImrān 3:18 — The threefold testimony of Allah, the Angels, and the People of Knowledge upholding justice.
       </p>
-      <ul class="card-highlights">
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Threefold Testimony of Light (Allah, Angels &amp; Scholars)</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Interactive Physics-Driven Scale of Cosmic Justice (Qisṭ)</span>
-        </li>
-        <li class="card-highlight-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Word-by-Word Morphology Lattice &amp; Divine Names</span>
-        </li>
-      </ul>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">شَهِدَ ٱللَّهُ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا هُوَ وَٱلْمَلَٰٓئِكَةُ وَأُو۟لُوا۟ ٱلْعِلْمِ قَآئِمًۢا بِٱلْقِسْطِ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ آلِ عِمْرَانَ · <bdi>3:18</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003018.mp3" aria-label="Listen to Ayah 3:18" title="Listen · Qari Mishary Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“Allah witnesses that there is no deity except Him, and so do the angels and those of knowledge — maintaining creation in justice.”</p>
+      </div>
       <div class="card-actions-row">
         <a href="witness.html" class="btn-launch">
           <span>Launch Exhibit</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
         </a>
         <button class="btn-preview-modal" onclick="openPreview('witness.html', 'Shahida Allāh · Sūrah Āl ʿImrān 3:18 — The Testimony of Light')" title="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+
+    <!-- CARD 11: THAT DAY — WOE TO THE DENIERS -->
+    <article class="card-item" data-category="quran" data-keywords="woe that day deniers mursalat warning judgment reflection account mursalat 77:15">
+      <a href="woeDeny.html" class="card-snapshot-link" aria-label="Launch That Day — Woe to the Deniers">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/woeDeny.webp" alt="That Day — Woe to the Deniers Snapshot" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Explore Exhibit ↗</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-top-row">
+        <span class="card-category-badge cat-quran">Quranic Eschatology</span>
+        <span class="card-arabic-motif">وَيْلٌ يَوْمَئِذٍ</span>
+      </div>
+      <h2 class="card-title">That Day · Sūrah Al-Mursalat 77:15</h2>
+      <p class="card-desc">
+        A solemn, atmospheric reflection on the recurring cosmic warning: an inward examination of truth, conscience, and accountability before Allah.
+      </p>
+      <div class="card-ayah-box">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ</div>
+        <div class="ayah-meta-row">
+          <span class="ayah-ref">سُورَةُ المُرْسَلَاتِ · <bdi>77:15</bdi></span>
+          <button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15" title="Listen · Sheikh Mishary Rashid Alafasy">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+        <p class="ayah-trans-text">“Woe, that Day, to the deniers.”</p>
+      </div>
+      <div class="card-actions-row">
+        <a href="woeDeny.html" class="btn-launch">
+          <span>Launch Exhibit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-preview-modal" onclick="openPreview('woeDeny.html', 'That Day — Sūrah Al-Mursalat 77:15')" title="Quick Preview">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
       </div>
@@ -1928,6 +2140,10 @@ html, body {
         <li><a href="shortSentenceVerb.html">Twelve Words · The Qur'anic Verb</a></li>
         <li><a href="sleepAdvice.html">The Golden Window · Sleep Science</a></li>
         <li><a href="angerControl.html">Controlling Anger Toolkit</a></li>
+        <li><a href="fasting.html">Ar-Rayyān · Fasting Sanctuary</a></li>
+        <li><a href="hamdShukr.html">Ḥamd &amp; Shukr · Praise &amp; Gratitude</a></li>
+        <li><a href="witness.html">شَهِدَ اللَّهُ · The Divine Testimony</a></li>
+        <li><a href="woeDeny.html">وَيْلٌ يَوْمَئِذٍ · That Day (77:15)</a></li>
       </ul>
     </div>
 
@@ -1947,7 +2163,7 @@ html, body {
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
     <div class="footer-version-tag">
-      v1.0.17 (updated 2026-09-06 06:55)
+      v1.0.18 (updated 2026-09-06 15:50)
     </div>
   </div>
 </footer>
