@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Ripple — Sadaqah & Comprehensive Zakat Calculator · NurulQuran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>if(location.search.includes('snap')){document.documentElement.classList.add('snap');}</script>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============ TOKENS ============ */
+:root{
+  --ink:#04141a; --ink2:#08222a; --ink3:#0b2f38;
+  --gold:#e3bd7a; --gold2:#f6e0b0; --gold-glow:rgba(227,189,122,.28);
+  --jade:#2fb1a0; --jade-glow:rgba(47,177,160,.22);
+  --rose:#e88b6a; --cream:#f7f1e6; --mute:#8fa8ab; --mute-border:rgba(227,189,122,.18);
+  --panel:rgba(255,255,255,.04); --panel-hover:rgba(255,255,255,.07);
+  --r:20px; --ease:cubic-bezier(.19,1,.22,1);
+  --f-ar:'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'Amiri Quran', 'Amiri', serif;
+  --ar-scale:1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--cream);
+  font-family:'Outfit',system-ui,sans-serif; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased; cursor:none;
+}
+@media (max-width:900px){body{cursor:auto}}
+::selection{background:var(--gold);color:var(--ink)}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:400;letter-spacing:-.01em}
+.ar,[lang="ar"]{
+  font-family:var(--f-ar);
+  direction:rtl;
+  font-size:calc(1.35rem * var(--ar-scale, 1));
+  font-feature-settings:"cv01","cv02","calt";
+  text-rendering:optimizeLegibility;
+  line-height:1.9;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);opacity:.6}
+
+/* ============ CURSOR ============ */
+#cur,#curDot{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;border-radius:50%;
+  mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease),opacity .3s}
+#cur{width:38px;height:38px;border:1px solid var(--gold);margin:-19px 0 0 -19px}
+#curDot{width:5px;height:5px;background:var(--gold2);margin:-2.5px 0 0 -2.5px}
+body.hot #cur{width:76px;height:76px;margin:-38px 0 0 -38px;background:rgba(227,189,122,.12);border-color:var(--gold2)}
+@media(max-width:900px){#cur,#curDot{display:none}}
+
+/* ============ PRELOADER ============ */
+#pre{position:fixed;inset:0;background:var(--ink);z-index:9000;display:grid;place-items:center;
+  transition:opacity .8s .3s,visibility .8s .3s}
+#pre.done{opacity:0;visibility:hidden}
+#pre .m{text-align:center}
+#pre svg{width:96px;height:96px;overflow:visible}
+#pre circle,#pre path{fill:none;stroke:var(--gold);stroke-width:1.1}
+#pre .spin{animation:spin 9s linear infinite;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+#pre .bar{width:150px;height:1px;background:rgba(227,189,122,.2);margin:1.6rem auto 0;overflow:hidden}
+#pre .bar i{display:block;height:100%;width:0;background:var(--gold);animation:load 1.8s var(--ease) forwards}
+@keyframes load{to{width:100%}}
+#pre p{font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--mute);margin-top:1rem}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:1.1rem 0;
+  transition:.4s var(--ease);border-bottom:1px solid transparent}
+nav.stuck{background:rgba(4,20,26,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:rgba(227,189,122,.14);padding:.7rem 0}
+nav .in{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.nav-left{display:flex;align-items:center;gap:1.2rem}
+.nav-portal-link{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:999px;
+  font-size:.76rem;font-weight:500;letter-spacing:.05em;border:1px solid rgba(227,189,122,.3);
+  color:var(--gold2);background:rgba(227,189,122,.08);transition:.3s;white-space:nowrap;
+}
+.nav-portal-link:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.logo{display:flex;align-items:center;gap:.65rem;font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:.02em;white-space:nowrap}
+.logo b{font-weight:600}
+.logo i{width:28px;height:28px;border:1px solid var(--gold);display:grid;place-items:center;
+  transform:rotate(45deg);border-radius:5px;flex-shrink:0}
+.logo i s{width:9px;height:9px;background:var(--gold);border-radius:2px;text-decoration:none;
+  animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(.5);opacity:.5}}
+.links{display:flex;gap:1.6rem;font-size:.82rem;font-weight:300;letter-spacing:.04em}
+.links a{position:relative;padding:.2rem 0;color:#cfe0e1;transition:color .3s}
+.links a:hover{color:var(--gold2)}
+.links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:.3s var(--ease)}
+.links a:hover::after{width:100%}
+@media(max-width:940px){.links{display:none}}
+.nav-right{display:flex;align-items:center;gap:.8rem}
+
+/* Arabic Scaler Button */
+.nq-ar-btn{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(227,189,122,.28);color:var(--gold2);
+  cursor:pointer;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:600;transition:.3s;
+}
+.nq-ar-btn:hover{background:rgba(227,189,122,.18);border-color:var(--gold);transform:scale(1.04)}
+.nq-ar-btn .nq-ar-glyph{font-family:var(--f-ar);font-size:1.15rem;line-height:1;color:var(--gold)}
+
+/* Audio Play Button */
+.nq-play-btn{
+  width:32px;height:32px;border-radius:50%;background:rgba(227,189,122,.15);
+  border:1px solid rgba(227,189,122,.38);color:var(--gold);display:inline-grid;place-items:center;
+  cursor:pointer;transition:.3s;padding:0;flex-shrink:0;
+}
+.nq-play-btn:hover{background:var(--gold);color:var(--ink);transform:scale(1.1)}
+.nq-play-btn svg{width:14px;height:14px}
+.nq-play-btn .pause-icon{display:none}
+.nq-play-btn.playing .play-icon{display:none}
+.nq-play-btn.playing .pause-icon{display:block}
+.nq-play-btn.loading{opacity:.6;animation:spin 1.2s linear infinite}
+
+/* ============ BUTTONS ============ */
+.btn{position:relative;display:inline-flex;align-items:center;gap:.65rem;padding:.85rem 1.8rem;
+  border-radius:99px;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--gold);color:var(--ink);background:var(--gold);overflow:hidden;isolation:isolate;
+  transition:.45s var(--ease);cursor:pointer}
+.btn span{position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;background:var(--gold2);transform:translateY(101%);
+  transition:transform .5s var(--ease);z-index:1}
+.btn:hover::before{transform:translateY(0)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px -10px rgba(227,189,122,.6)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn.ghost::before{background:var(--gold)}
+.btn.ghost:hover{color:var(--ink)}
+.btn .arw{transition:transform .35s var(--ease)}
+.btn:hover .arw{transform:translateX(5px)}
+.btn.sm{padding:.6rem 1.2rem;font-size:.75rem}
+
+/* ============ HERO ============ */
+header{position:relative;min-height:100vh;display:flex;align-items:center;padding:8.5rem 0 4.5rem;overflow:hidden}
+#geo{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.g1{width:620px;height:620px;background:rgba(47,177,160,.18);top:-14%;right:-8%;animation:float1 15s ease-in-out infinite}
+.g2{width:480px;height:480px;background:rgba(227,189,122,.14);bottom:-16%;left:-6%;animation:float1 19s ease-in-out infinite reverse}
+@keyframes float1{50%{transform:translate(-50px,60px) scale(1.15)}}
+header .in{position:relative;z-index:3;display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:center}
+@media(max-width:980px){header .in{grid-template-columns:1fr;gap:3rem}}
+h1{font-size:clamp(2.8rem,7vw,5.8rem);line-height:.95;letter-spacing:-.03em}
+h1 .it{font-style:italic;color:var(--gold);font-weight:300}
+h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
+h1 .word s{display:inline-block;text-decoration:none;transform:translateY(110%);
+  animation:rise 1s var(--ease) forwards}
+@keyframes rise{to{transform:translateY(0)}}
+.lede{margin:1.6rem 0 2.2rem;max-width:48ch;font-size:1.06rem;line-height:1.75;font-weight:300;color:#c2d8da}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.fadeUp{opacity:0;transform:translateY(24px);animation:fu 1s var(--ease) forwards}
+html.snap #pre, body.snap #pre{display:none !important;opacity:0 !important;visibility:hidden !important;pointer-events:none !important}
+html.snap .fadeUp, body.snap .fadeUp{opacity:1 !important;transform:none !important;animation:none !important}
+html.snap .word s, body.snap .word s{transform:none !important;animation:none !important}
+html.snap .reveal, body.snap .reveal{opacity:1 !important;transform:none !important}
+@keyframes fu{to{opacity:1;transform:none}}
+
+/* verse plate */
+.plate{position:relative;padding:2.4rem 2rem;border-radius:var(--r);
+  background:linear-gradient(150deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid rgba(227,189,122,.26);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transform-style:preserve-3d;transition:transform .2s ease-out;box-shadow:0 24px 60px -20px rgba(0,0,0,.6)}
+.plate::after{content:"";position:absolute;inset:0;border-radius:var(--r);pointer-events:none;
+  background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(227,189,122,.16),transparent 60%);
+  opacity:0;transition:opacity .4s}
+.plate:hover::after{opacity:1}
+.plate-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.plate .ar{font-size:calc(1.55rem * var(--ar-scale, 1));line-height:2.1;color:var(--gold2);margin-bottom:1.2rem}
+.plate q{display:block;font-family:'Cormorant Garamond',serif;font-size:1.25rem;line-height:1.6;font-style:italic;color:#edf6f5}
+.plate cite{display:block;margin-top:1rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);font-style:normal}
+.plate .seal{width:38px;height:38px;background:var(--ink2);
+  border:1px solid rgba(227,189,122,.35);border-radius:50%;display:grid;place-items:center;font-size:1rem;color:var(--gold);
+  animation:spin 22s linear infinite}
+
+.hstats{display:flex;gap:2.2rem;margin-top:3.2rem;flex-wrap:wrap}
+.hstats div small{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin-top:.35rem}
+.hstats b{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--gold)}
+
+.scroll-cue{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;font-size:.62rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--mute)}
+.scroll-cue i{width:1px;height:48px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;top:0;left:0;width:100%;height:14px;background:var(--gold2);
+  animation:drop 1.9s var(--ease) infinite}
+@keyframes drop{0%{top:-14px}100%{top:48px}}
+
+/* ============ MARQUEE ============ */
+.marq{border-block:1px solid rgba(227,189,122,.16);padding:1.1rem 0;overflow:hidden;
+  background:linear-gradient(90deg,var(--ink),var(--ink2),var(--ink))}
+.marq .t{display:flex;gap:3.5rem;white-space:nowrap;animation:slide 36s linear infinite;width:max-content}
+.marq:hover .t{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marq span{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:#a4bdc0;display:flex;align-items:center;gap:3.5rem}
+.marq span::after{content:"✦";color:var(--gold);font-size:.8rem;font-style:normal}
+
+/* ============ SECTIONS ============ */
+section{padding:7rem 0;position:relative}
+.head{max-width:680px;margin-bottom:3.2rem}
+.head h2{font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.06}
+.head h2 em{color:var(--gold);font-weight:300}
+.head p{margin-top:1.1rem;color:#a8c0c2;font-weight:300;line-height:1.75;font-size:1.05rem}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ RIPPLE POOL ============ */
+#pool{position:relative;height:430px;border-radius:var(--r);overflow:hidden;cursor:crosshair;
+  background:radial-gradient(circle at 50% 120%,#0d3a42,#04141a 72%);
+  border:1px solid rgba(227,189,122,.2);box-shadow:inset 0 0 60px rgba(0,0,0,.5)}
+#pool canvas{position:absolute;inset:0}
+#pool .hint{position:absolute;inset:0;display:grid;place-items:center;text-align:center;pointer-events:none;
+  transition:opacity .6s}
+#pool .hint b{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--cream)}
+#pool .hint small{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.pop{position:absolute;transform:translate(-50%,-50%);pointer-events:none;font-size:.82rem;font-weight:500;
+  letter-spacing:.08em;color:var(--gold2);white-space:nowrap;animation:pop 2.4s var(--ease) forwards;
+  background:rgba(4,20,26,.8);padding:.35rem .75rem;border-radius:99px;border:1px solid rgba(227,189,122,.4)}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+ 20%{opacity:1}100%{opacity:0;transform:translate(-50%,-240%) scale(1)}}
+.pool-bar{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;flex-wrap:wrap;gap:1rem}
+.pool-bar .c{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
+
+/* ============ IMPACT PICKER ============ */
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:900px){.picker{grid-template-columns:1fr}}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.tab{padding:.6rem 1.15rem;border-radius:99px;border:1px solid rgba(227,189,122,.28);
+  font-size:.78rem;letter-spacing:.06em;color:#c3d6d7;transition:.3s var(--ease);cursor:pointer;background:none}
+.tab:hover{border-color:var(--gold);color:var(--gold)}
+.tab.on{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+.chips{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.chip{width:80px;height:54px;border-radius:12px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.03);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:1.25rem;
+  transition:.3s var(--ease);cursor:pointer}
+.chip:hover{transform:translateY(-3px);border-color:var(--gold)}
+.chip.on{background:linear-gradient(160deg,var(--gold),#c79b52);color:var(--ink);border-color:var(--gold);font-weight:700}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:9px;background:rgba(227,189,122,.22);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 1px var(--gold),0 0 16px rgba(227,189,122,.7);transition:.2s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.impact-card{padding:2.4rem;border-radius:var(--r);background:linear-gradient(160deg,rgba(47,177,160,.12),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden}
+.impact-card::before{content:"";position:absolute;top:-60%;right:-30%;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(227,189,122,.18),transparent 65%)}
+.impact-card .ico{font-size:2.6rem;margin-bottom:1rem;display:block;animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
+.impact-card .amt{font-family:'Cormorant Garamond',serif;font-size:3.6rem;font-weight:600;color:var(--gold);line-height:1}
+.impact-card .msg{font-size:1.1rem;line-height:1.6;margin:.9rem 0 1.6rem;font-weight:300;min-height:3.4em}
+.impact-card .msg b{color:var(--gold2);font-weight:600}
+.meter{height:6px;border-radius:9px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:.6rem}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--jade),var(--gold));transition:width .8s var(--ease)}
+.freq{display:flex;gap:.4rem;margin:1.4rem 0}
+.freq button{flex:1;padding:.6rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.14);background:none;color:#b9cdcf;border-radius:10px;transition:.3s;cursor:pointer}
+.freq button.on{background:rgba(227,189,122,.16);border-color:var(--gold);color:var(--gold);font-weight:600}
+
+/* ============ DUAL ZAKAT CALCULATOR ============ */
+.zakat-panel{
+  background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  border:1px solid var(--mute-border);border-radius:var(--r);padding:2.6rem;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+}
+.calc-controls-bar{
+  display:flex;justify-content:space-between;align-items:center;gap:1.2rem;
+  padding-bottom:1.8rem;border-bottom:1px solid rgba(227,189,122,.15);margin-bottom:2.2rem;flex-wrap:wrap;
+}
+.calc-option-group{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.calc-opt-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.cur-select{
+  background:rgba(4,20,26,.8);border:1px solid var(--mute-border);color:var(--gold);
+  border-radius:8px;padding:.45rem .8rem;font-size:.82rem;font-family:'Outfit',sans-serif;outline:none;cursor:pointer;
+}
+.nisab-switch{display:flex;background:rgba(255,255,255,.06);padding:3px;border-radius:99px;border:1px solid rgba(227,189,122,.2)}
+.nisab-switch button{
+  padding:.4rem 1rem;font-size:.72rem;letter-spacing:.06em;border:none;border-radius:99px;
+  background:transparent;color:#b9cdcf;cursor:pointer;transition:.25s;
+}
+.nisab-switch button.active{background:var(--gold);color:var(--ink);font-weight:600}
+
+.zak-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:start}
+@media(max-width:980px){.zak-grid{grid-template-columns:1fr}}
+
+.field-box{
+  margin-bottom:1.4rem;padding:1rem 1.2rem;border-radius:12px;
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);transition:.3s;
+}
+.field-box:hover{border-color:rgba(227,189,122,.3);background:rgba(255,255,255,.04)}
+.field-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.5rem}
+.field-name{font-size:.82rem;color:#d8e8e7;font-weight:400}
+.field-name small{display:block;font-size:.68rem;color:var(--mute);font-weight:300}
+.field-val-wrap{display:flex;align-items:center;gap:.35rem}
+.field-num-input{
+  width:110px;background:rgba(4,20,26,.9);border:1px solid rgba(227,189,122,.3);
+  border-radius:6px;padding:.3rem .5rem;color:var(--gold);font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:600;text-align:right;outline:none;transition:.25s;
+}
+.field-num-input:focus{border-color:var(--gold2);box-shadow:0 0 10px rgba(227,189,122,.35)}
+
+.dial-wrap{
+  background:linear-gradient(160deg,rgba(47,177,160,.08),rgba(0,0,0,.3));
+  border:1px solid rgba(227,189,122,.2);border-radius:var(--r);padding:2.2rem 1.8rem;text-align:center;
+  position:sticky;top:100px;
+}
+.dial{position:relative;width:240px;height:240px;margin:0 auto}
+.dial svg{transform:rotate(-90deg)}
+.dial .trk{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10}
+.dial .val{fill:none;stroke:url(#gg);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .8s var(--ease)}
+.dial .mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.dial .mid small{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.dial .mid b{display:block;font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--gold2);line-height:1.05;margin:.2rem 0}
+.dial .mid .rate-pill{font-size:.7rem;padding:.2rem .6rem;border-radius:99px;background:rgba(227,189,122,.15);color:var(--gold);align-self:center}
+
+.nisab-badge-strip{
+  margin:1.4rem 0 1rem;padding:.75rem 1rem;border-radius:10px;font-size:.8rem;line-height:1.5;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:#cfe0e1;transition:.4s;
+}
+.nisab-badge-strip.due{border-color:var(--jade);background:rgba(47,177,160,.12);color:#aff4ea}
+.nisab-badge-strip.under{border-color:rgba(232,139,106,.4);background:rgba(232,139,106,.1);color:#ffd8cc}
+
+.breakdown-row{display:flex;justify-content:space-between;font-size:.78rem;padding:.45rem 0;border-bottom:1px dashed rgba(255,255,255,.08);color:#b9cdcf}
+.breakdown-row b{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.05rem}
+
+/* ============ 8 DIVINE BENEFICIARIES (9:60) ============ */
+.recipients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.rcard{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);
+  padding:1.8rem;transition:.4s var(--ease);position:relative;overflow:hidden;
+}
+.rcard:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 18px 40px -15px rgba(0,0,0,.8);background:rgba(255,255,255,.05)}
+.rcard-num{position:absolute;top:1.2rem;right:1.4rem;font-size:.68rem;letter-spacing:.2em;color:var(--gold);font-family:monospace}
+.rcard-ar{font-size:calc(1.4rem * var(--ar-scale, 1));color:var(--gold2);margin-bottom:.4rem}
+.rcard-title{font-size:1.35rem;margin-bottom:.4rem;color:var(--cream)}
+.rcard-trans{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--jade);margin-bottom:.8rem;font-weight:600}
+.rcard-desc{font-size:.85rem;line-height:1.65;color:#b9cdcf;font-weight:300}
+.rcard-example{margin-top:1rem;padding-top:.8rem;border-top:1px dashed rgba(227,189,122,.18);font-size:.75rem;color:var(--gold2)}
+.rcard-example b{color:var(--cream)}
+
+/* ============ SCHOLAR WISDOM ============ */
+.scholar-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.scholar-tab{
+  padding:.55rem 1.2rem;border-radius:999px;border:1px solid rgba(227,189,122,.28);
+  font-size:.78rem;letter-spacing:.05em;color:#b9cdcf;background:transparent;cursor:pointer;transition:.25s;
+}
+.scholar-tab:hover{border-color:var(--gold);color:var(--gold)}
+.scholar-tab.on{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:600}
+
+.quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem}
+.qcard{
+  background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  border:1px solid rgba(227,189,122,.2);border-radius:var(--r);padding:2rem;display:flex;
+  flex-direction:column;justify-content:space-between;transition:.4s var(--ease);
+}
+.qcard:hover{transform:translateY(-4px);border-color:rgba(227,189,122,.5);box-shadow:0 20px 40px -15px rgba(0,0,0,.7)}
+.qcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.qcard-author{display:flex;align-items:center;gap:.75rem}
+.qcard-avatar{width:36px;height:36px;border-radius:50%;background:rgba(227,189,122,.15);border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-size:.9rem}
+.qcard-name{font-size:.9rem;font-weight:600;color:var(--cream)}
+.qcard-role{font-size:.72rem;color:var(--mute)}
+.qcard-tag{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;border-radius:999px;background:rgba(47,177,160,.15);color:var(--jade)}
+.qcard-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;line-height:1.55;font-style:italic;color:#e8f4f3;margin-bottom:1.4rem}
+.qcard-foot{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;color:var(--mute)}
+.copy-q-btn{
+  background:none;border:1px solid rgba(227,189,122,.3);border-radius:999px;padding:.3rem .75rem;
+  color:var(--gold);font-size:.7rem;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:.35rem;
+}
+.copy-q-btn:hover{background:var(--gold);color:var(--ink)}
+
+/* ============ COMPARISON MATRIX ============ */
+.comp-table-wrap{
+  background:rgba(255,255,255,.03);border:1px solid rgba(227,189,122,.2);border-radius:var(--r);
+  overflow-x:auto;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);
+}
+.comp-table{width:100%;border-collapse:collapse;text-align:left;font-size:.85rem}
+.comp-table th,.comp-table td{padding:1.2rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.comp-table th{background:rgba(255,255,255,.04);font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--gold)}
+.comp-table tr:hover td{background:rgba(255,255,255,.02)}
+.comp-table td b{color:var(--gold2)}
+
+/* ============ SADAQAH JAR ============ */
+.jarwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.4rem;align-items:center}
+@media(max-width:900px){.jarwrap{grid-template-columns:1fr}}
+#jar{position:relative;width:240px;height:310px;margin:0 auto;cursor:pointer}
+#jar .glass{position:absolute;inset:0;border:2px solid rgba(227,189,122,.45);
+  border-radius:20px 20px 65px 65px/20px 20px 45px 45px;overflow:hidden;
+  background:linear-gradient(120deg,rgba(255,255,255,.08),rgba(255,255,255,.015));backdrop-filter:blur(4px);
+  box-shadow:inset 0 0 30px rgba(227,189,122,.15), 0 20px 50px rgba(0,0,0,.6)}
+#jar .lid{position:absolute;top:-16px;left:12%;width:76%;height:20px;border-radius:8px;
+  background:linear-gradient(var(--gold),#b8873f);box-shadow:0 4px 16px rgba(0,0,0,.5)}
+#jar .fill{position:absolute;bottom:0;left:0;right:0;height:0;transition:height .6s var(--ease);
+  background:linear-gradient(0deg,#b8873f,var(--gold),var(--gold2));opacity:.88}
+#jar .fill::after{content:"";position:absolute;top:-8px;left:0;width:200%;height:16px;border-radius:50%;
+  background:var(--gold2);opacity:.7;animation:wave 4s linear infinite}
+@keyframes wave{to{transform:translateX(-50%)}}
+#jar .shine{position:absolute;top:8%;left:14%;width:14px;height:55%;border-radius:9px;
+  background:linear-gradient(rgba(255,255,255,.4),transparent)}
+.coin{position:absolute;left:50%;top:-40px;width:28px;height:28px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,var(--gold2),#b8873f);
+  box-shadow:0 0 16px rgba(227,189,122,.9);display:grid;place-items:center;font-size:.65rem;color:#5a3f14;font-weight:800;
+  animation:fall 1.05s cubic-bezier(.45,.05,.55,.95) forwards;pointer-events:none}
+@keyframes fall{0%{top:-40px;opacity:0;transform:translateX(-50%) rotate(0)}
+ 12%{opacity:1}100%{top:80%;opacity:0;transform:translateX(-50%) rotate(540deg) scale(.6)}}
+.jar-note{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);text-align:center;margin-top:2rem}
+
+/* ============ HADITH FLIP ============ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+@media(max-width:768px){.grid2{grid-template-columns:1fr}}
+.flip{perspective:1200px;height:230px;cursor:pointer}
+.flip .fi{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s var(--ease)}
+.flip:hover .fi,.flip.t .fi{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);padding:2rem;
+  display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(227,189,122,.25)}
+.flip .f{background:rgba(255,255,255,.035)}
+.flip .b{transform:rotateY(180deg);background:linear-gradient(160deg,var(--gold),#c08f45);color:var(--ink)}
+.flip .f .ar{font-size:calc(1.35rem * var(--ar-scale, 1));color:var(--gold2);line-height:1.8;text-align:right}
+.flip .f small,.flip .b small{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;margin-top:1rem;opacity:.8}
+.flip .b q{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;line-height:1.5;font-weight:600}
+
+/* ============ CAMPAIGNS ============ */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem}
+.card{position:relative;padding:2rem 1.8rem;border-radius:var(--r);overflow:hidden;
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);
+  transition:.5s var(--ease)}
+.card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(227,189,122,.14),transparent 65%)}
+.card:hover{transform:translateY(-8px);border-color:rgba(227,189,122,.4);box-shadow:0 26px 60px -30px rgba(0,0,0,.9)}
+.card:hover::before{opacity:1}
+.card .tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.card h3{font-size:1.6rem;margin-bottom:.6rem}
+.card p{font-size:.9rem;line-height:1.7;color:#a8c0c2;font-weight:300;margin-bottom:1.6rem}
+.card .row{display:flex;justify-content:space-between;font-size:.78rem;color:#cfe0e1;margin-bottom:.6rem}
+.card .row b{color:var(--gold)}
+.card .go{margin-top:1.4rem;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  display:inline-flex;align-items:center;gap:.5rem;transition:gap .3s;cursor:pointer}
+.card:hover .go{gap:1rem}
+.pill{position:absolute;top:1.4rem;right:1.4rem;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.3rem .75rem;border-radius:99px;background:rgba(232,139,106,.16);color:var(--rose);border:1px solid rgba(232,139,106,.4)}
+
+/* ============ STATS ============ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(227,189,122,.16);
+  border:1px solid rgba(227,189,122,.16);border-radius:var(--r);overflow:hidden}
+.stats div{background:var(--ink);padding:2.6rem 1.6rem;text-align:center;transition:.5s}
+.stats div:hover{background:var(--ink2)}
+.stats b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:600;color:var(--gold)}
+.stats small{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+
+/* ============ CTA ============ */
+.cta{text-align:center;padding:9rem 0 6rem;position:relative;overflow:hidden}
+.cta h2{font-size:clamp(2.6rem,7vw,5.5rem);line-height:.98}
+.cta h2 em{color:var(--gold);font-weight:300}
+.magnet{position:relative;display:inline-block;margin-top:2.8rem}
+.magnet .btn{padding:1.2rem 3.2rem;font-size:.9rem}
+.orbit{position:absolute;inset:-70px;border:1px dashed rgba(227,189,122,.3);border-radius:50%;
+  animation:spin 24s linear infinite;pointer-events:none}
+.orbit s{position:absolute;top:-5px;left:50%;width:10px;height:10px;background:var(--gold);border-radius:50%;
+  box-shadow:0 0 16px var(--gold)}
+
+/* ============ ALLOCATION / RECEIPT MODAL ============ */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(4,20,26,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  z-index:9500;display:grid;place-items:center;padding:1.5rem;opacity:0;pointer-events:none;transition:.4s var(--ease);
+}
+.modal-backdrop.open{opacity:1;pointer-events:auto}
+.modal-box{
+  background:linear-gradient(160deg,#0a262e,#04141a);border:1px solid rgba(227,189,122,.35);
+  border-radius:24px;width:min(640px,94vw);max-height:90vh;overflow-y:auto;padding:2.4rem;
+  box-shadow:0 35px 90px -20px rgba(0,0,0,.9);position:relative;transform:scale(.94);transition:.4s var(--ease);
+}
+.modal-backdrop.open .modal-box{transform:scale(1)}
+.modal-close{
+  position:absolute;top:1.4rem;right:1.4rem;width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(227,189,122,.3);color:var(--cream);
+  display:grid;place-items:center;cursor:pointer;transition:.25s;font-size:1.1rem;
+}
+.modal-close:hover{background:var(--gold);color:var(--ink)}
+.receipt-cert{
+  border:2px dashed rgba(227,189,122,.35);border-radius:16px;padding:1.8rem;margin:1.6rem 0;
+  background:rgba(255,255,255,.02);text-align:center;
+}
+.receipt-cert .cert-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold)}
+.receipt-cert .dua-ar{font-size:calc(1.3rem * var(--ar-scale, 1));color:var(--gold2);margin:1rem 0 .5rem}
+.receipt-cert .dua-en{font-size:.8rem;font-style:italic;color:#bad3d5}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid rgba(227,189,122,.16);padding:3.5rem 0 2.5rem;font-size:.82rem;color:var(--mute)}
+footer .in{display:flex;justify-content:space-between;gap:1.6rem;flex-wrap:wrap;align-items:center}
+footer a:hover{color:var(--gold)}
+.footer-version-tag{
+  font-family:monospace;font-size:.74rem;letter-spacing:.06em;color:var(--gold);
+  padding:4px 12px;border-radius:999px;background:rgba(227,189,122,.08);border:1px solid rgba(227,189,122,.24);
+}
+.tick{position:fixed;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--jade),var(--gold));z-index:900;width:0}
+canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
+</style>
+</head>
+<body>
+
+<!-- CANVAS CONFETTI -->
+<canvas id="confetti"></canvas>
+
+<!-- PRELOADER -->
+<div id="pre"><div class="m">
+  <svg viewBox="0 0 100 100"><g class="spin">
+    <path d="M50 6 61 28 85 32 68 50 85 68 61 72 50 94 39 72 15 68 32 50 15 32 39 28Z"/>
+    <circle cx="50" cy="50" r="30"/></g><circle cx="50" cy="50" r="12"/></svg>
+  <div class="bar"><i></i></div><p>Bismillah · The Ripple</p>
+</div></div>
+
+<div id="cur"></div><div id="curDot"></div><div class="tick"></div>
+
+<!-- NAV -->
+<nav id="nav"><div class="wrap in">
+  <div class="nav-left">
+    <a href="index.html" class="nav-portal-link" title="Return to NurulQuran Portal">← Showcase</a>
+    <a class="logo" href="#"><i><s></s></i> The&nbsp;<b>Ripple</b></a>
+  </div>
+  <div class="links">
+    <a href="#pool-s">Ripple</a>
+    <a href="#give">Give</a>
+    <a href="#zakat">Zakat</a>
+    <a href="#recipients">Beneficiaries</a>
+    <a href="#wisdom">Wisdom</a>
+    <a href="#causes">Causes</a>
+    <a href="#jar-s">Jar</a>
+  </div>
+  <div class="nav-right">
+    <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
+      <span class="nq-ar-glyph">ع</span>
+      <span id="arScaleVal">100%</span>
+    </button>
+    <a class="btn sm" href="#zakat"><span>Zakat Calc</span><span class="arw">→</span></a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<header>
+  <canvas id="geo"></canvas>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="wrap in">
+    <div>
+      <div class="eyebrow fadeUp" style="animation-delay:.9s">Sadaqah · Zakat · Waqf · 100% Policy</div>
+      <h1 id="hl">Drop one coin. <span class="it">Move an ocean.</span></h1>
+      <p class="lede fadeUp" style="animation-delay:1.3s">
+        Charity never stays where you leave it. It travels — through a well, a lesson, a warm meal —
+        long after your hand lets go. Purify your wealth with precision and start the ripple today.
+      </p>
+      <div class="hero-cta fadeUp" style="animation-delay:1.5s">
+        <a class="btn" href="#give"><span>Give Sadaqah</span><span class="arw">→</span></a>
+        <a class="btn ghost" href="#zakat"><span>Calculate Zakat</span></a>
+      </div>
+      <div class="hstats fadeUp" style="animation-delay:1.7s">
+        <div><b data-cnt="1284000" data-pre="$">$0</b><small>Given this year</small></div>
+        <div><b data-cnt="96">0</b><small>% to the field</small></div>
+        <div><b data-cnt="41">0</b><small>Countries</small></div>
+        <div><b data-cnt="8">0</b><small>Quranic Beneficiaries</small></div>
+      </div>
+    </div>
+    <div class="plate tilt fadeUp" style="animation-delay:1.2s">
+      <div class="plate-header">
+        <div class="seal">✦</div>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002261.mp3" aria-label="Listen to Ayah 2:261" title="Recitation · Sheikh Mishary Rashid Alafasy">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </div>
+      <div class="ar">مَّثَلُ ٱلَّذِينَ يُنفِقُونَ أَمْوَٰلَهُمْ فِى سَبِيلِ ٱللَّهِ كَمَثَلِ حَبَّةٍ أَنۢبَتَتْ سَبْعَ سَنَابِلَ فِى كُلِّ سُنبُلَةٍ مِّا۟ئَةُ حَبَّةٍ ۗ وَٱللَّهُ يُضَٰعِفُ لِمَن يَشَآءُ ۗ وَٱللَّهُ وَٰسِعٌ عَلِيمٌ</div>
+      <q>“The likeness of those who spend their wealth in the way of Allah is as a grain that grows seven ears, in every ear a hundred grains. And Allah multiplies for whom He wills.”</q>
+      <cite>Surah Al-Baqarah · 2:261</cite>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><i></i></div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="t" id="marq"></div></div>
+
+<!-- RIPPLE POOL -->
+<section id="pool-s">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Interactive Canvas</div>
+      <h2>Touch the water.<br><em>Watch it travel.</em></h2>
+      <p>Every gift begins as a single point and refuses to stay one. Tap the pool below — each kinetic ripple unfolds a real human transformation.</p>
+    </div>
+    <div class="reveal" id="pool">
+      <canvas id="rc"></canvas>
+      <div class="hint" id="hint"><div><b>Tap anywhere in the pool</b><small>Send a golden ripple</small></div></div>
+    </div>
+    <div class="pool-bar reveal">
+      <div class="c">Ripples sent: <b id="rcount">0</b></div>
+      <a class="btn ghost" href="#give"><span>Make it real with Sadaqah</span><span class="arw">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT PICKER -->
+<section id="give">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Choose your impact</div>
+      <h2>Pick a cause. <em>See the outcome.</em></h2>
+      <p>No vague promises. Move the slider and read exactly what your sadaqah becomes in lives around the globe.</p>
+    </div>
+    <div class="picker reveal">
+      <div>
+        <div class="tabs" id="tabs"></div>
+        <div class="chips" id="chips"></div>
+        <div class="field-box" style="padding:1.4rem">
+          <div class="field-row">
+            <span class="field-name">Custom Amount</span>
+            <div class="field-val-wrap">
+              <span style="color:var(--gold);font-weight:600">$</span>
+              <input type="number" id="numSlide" class="field-num-input" value="100" min="5" max="10000" step="5">
+            </div>
+          </div>
+          <input type="range" id="slide" min="5" max="2500" step="5" value="100">
+        </div>
+        <div class="freq" id="freq">
+          <button class="on" data-f="1">One-off Gift</button>
+          <button data-f="12">Monthly Sustainer</button>
+          <button data-f="30">Daily · Jariyah</button>
+        </div>
+        <p style="font-size:.84rem;color:var(--mute);line-height:1.7;margin-top:1rem">
+          Monthly giving is <b style="color:var(--gold)">sadaqah jariyah</b> — an uninterrupted current of good deeds that outlives your breath.
+        </p>
+      </div>
+      <div class="impact-card">
+        <span class="ico" id="ico">💧</span>
+        <div class="amt" id="amt">$100</div>
+        <div class="msg" id="msg"></div>
+        <div class="meter"><i id="meter"></i></div>
+        <div style="display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.14em;color:var(--mute);text-transform:uppercase">
+          <span id="yr">Yearly total: $100</span><span>100% Zakat Policy</span>
+        </div>
+        <button class="btn" style="margin-top:1.8rem;width:100%;justify-content:center" id="giveModalBtn">
+          <span id="cbtn">Give $100 Now</span><span class="arw">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZAKAT CALCULATOR -->
+<section id="zakat" style="background:linear-gradient(180deg,transparent,rgba(47,177,160,.06),transparent)">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">The Third Pillar · فَرِيضَةً مِّنَ ٱللَّهِ</div>
+      <h2>Zakat is not charity.<br><em>It is a divine right.</em></h2>
+      <p>
+        2.5% (one fortieth) of your surplus zakatable wealth above the Nisab threshold held for a full lunar year (Hawl). Calculate your obligation with complete accuracy below.
+      </p>
+    </div>
+
+    <div class="plate reveal" style="margin-bottom:2.6rem;padding:1.8rem 2rem">
+      <div class="plate-header">
+        <span class="eyebrow" style="margin-bottom:0">Purification of Wealth · 9:103</span>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/009103.mp3" aria-label="Listen to Ayah 9:103" title="Listen · Sheikh Mishary Rashid Alafasy">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </div>
+      <div class="ar" style="font-size:calc(1.4rem * var(--ar-scale, 1));margin-bottom:.6rem">خُذْ مِنْ أَمْوَٰلِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَوٰتَكَ سَكَنٌ لَّهُمْ ۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ</div>
+      <q style="font-size:1.15rem">“Take, [O Muhammad], from their wealth a charity by which you purify them and cause them to increase...”</q>
+      <cite>Surah At-Tawbah · 9:103</cite>
+    </div>
+
+    <div class="zakat-panel reveal">
+      <!-- CALC CONTROLS -->
+      <div class="calc-controls-bar">
+        <div class="calc-option-group">
+          <span class="calc-opt-label">Currency:</span>
+          <select id="curSelect" class="cur-select">
+            <option value="USD" data-sym="$" selected>USD ($)</option>
+            <option value="EUR" data-sym="€">EUR (€)</option>
+            <option value="GBP" data-sym="£">GBP (£)</option>
+            <option value="CAD" data-sym="$">CAD ($)</option>
+            <option value="AUD" data-sym="$">AUD ($)</option>
+            <option value="SAR" data-sym="﷼">SAR (﷼)</option>
+            <option value="AED" data-sym="د.إ">AED (د.إ)</option>
+            <option value="PKR" data-sym="₨">PKR (₨)</option>
+            <option value="INR" data-sym="₹">INR (₹)</option>
+          </select>
+        </div>
+
+        <div class="calc-option-group">
+          <span class="calc-opt-label">Nisab Standard:</span>
+          <div class="nisab-switch">
+            <button id="btnNisabGold" class="active" title="85 grams of 24k Gold (standard today)">Gold (85g)</button>
+            <button id="btnNisabSilver" title="595 grams of Silver (classical Hanafi standard, benefits more poor)">Silver (595g)</button>
+          </div>
+        </div>
+
+        <div class="calc-option-group">
+          <label style="display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:#c2d8da;cursor:pointer">
+            <input type="checkbox" id="chkHawl" checked style="accent-color:var(--gold)">
+            <span>Hawl (1 lunar year) completed</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="zak-grid">
+        <!-- INPUT FIELDS -->
+        <div>
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">1. Cash &amp; Bank Savings <small>Checking, savings, cash at home</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="0" value="8500" min="0" step="100">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="0" min="0" max="200000" step="250" value="8500">
+          </div>
+
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">2. Gold &amp; Silver Value <small>Bullion, coins, or scrap jewelry for investment</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="1" value="3200" min="0" step="100">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="1" min="0" max="150000" step="250" value="3200">
+          </div>
+
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">3. Stocks, ETFs &amp; Shares <small>Trading shares (100%) or zakatable fund assets (~30%)</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="2" value="2500" min="0" step="100">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="2" min="0" max="250000" step="500" value="2500">
+          </div>
+
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">4. Business Merchandise &amp; Stock <small>Wholesale/cost value of items intended for resale ('urūd)</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="3" value="0" min="0" step="250">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="3" min="0" max="200000" step="500" value="0">
+          </div>
+
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">5. Receivables &amp; Good Debts <small>Loans to trustworthy people expected to be repaid</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="4" value="0" min="0" step="100">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="4" min="0" max="50000" step="250" value="0">
+          </div>
+
+          <div class="field-box">
+            <div class="field-row">
+              <span class="field-name">6. Crypto &amp; Digital Assets <small>Bitcoin, stablecoins, liquid tokens held for growth</small></span>
+              <div class="field-val-wrap">
+                <span class="csym">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="5" value="0" min="0" step="100">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="5" min="0" max="100000" step="250" value="0">
+          </div>
+
+          <div class="field-box" style="border-color:rgba(232,139,106,.25);background:rgba(232,139,106,.03)">
+            <div class="field-row">
+              <span class="field-name" style="color:#ffc4b0">7. Deductible Debts &amp; Bills Due <small>Immediate overdue bills, monthly rent, immediate liabilities</small></span>
+              <div class="field-val-wrap">
+                <span class="csym" style="color:var(--rose)">$</span>
+                <input type="number" class="field-num-input z-num" data-idx="6" value="700" min="0" step="50" style="color:var(--rose);border-color:rgba(232,139,106,.4)">
+              </div>
+            </div>
+            <input type="range" class="z-slide" data-idx="6" min="0" max="100000" step="250" value="700">
+          </div>
+        </div>
+
+        <!-- RADIAL GAUGE & RESULT -->
+        <div>
+          <div class="dial-wrap">
+            <div class="dial">
+              <svg width="240" height="240" viewBox="0 0 240 240">
+                <defs>
+                  <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#2fb1a0"/>
+                    <stop offset="100%" stop-color="#e3bd7a"/>
+                  </linearGradient>
+                </defs>
+                <circle class="trk" cx="120" cy="120" r="102"/>
+                <circle class="val" id="ring" cx="120" cy="120" r="102"
+                  stroke-dasharray="640" stroke-dashoffset="640"/>
+              </svg>
+              <div class="mid">
+                <small>Zakat Obligation</small>
+                <b id="zout">$0</b>
+                <span class="rate-pill">2.5% Rate</span>
+              </div>
+            </div>
+
+            <div class="nisab-badge-strip" id="nisBadge">Calculating nisab threshold…</div>
+
+            <div style="margin:1.4rem 0">
+              <div class="breakdown-row"><span>Total Gross Assets:</span><b id="bGross">$0</b></div>
+              <div class="breakdown-row"><span>Total Deductions:</span><b id="bDebt" style="color:var(--rose)">-$0</b></div>
+              <div class="breakdown-row"><span>Net Zakatable Wealth:</span><b id="bNet">$0</b></div>
+              <div class="breakdown-row"><span>Active Nisab Threshold:</span><b id="bNisab">$0</b></div>
+              <div class="breakdown-row"><span>Monthly Budget Equiv:</span><b id="bMonth">$0 / mo</b></div>
+            </div>
+
+            <button class="btn" id="payZakatBtn" style="width:100%;justify-content:center;margin-top:.8rem">
+              <span>Allocate &amp; Pay Zakat</span><span class="arw">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 DIVINE BENEFICIARIES (SURAH AT-TAWBAH 9:60) -->
+<section id="recipients">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Quranic Jurisprudence · 9:60</div>
+      <h2>The Eight Beneficiaries.<br><em>Divinely Chosen Recipients.</em></h2>
+      <p>
+        Allah Himself designated the exact categories eligible to receive Zakat in Surah At-Tawbah (9:60). No human, caliph, or scholar has authority to invent a ninth category.
+      </p>
+    </div>
+
+    <!-- AYAH 9:60 PLATE -->
+    <div class="plate reveal" style="margin-bottom:3rem;padding:2.2rem">
+      <div class="plate-header">
+        <span class="eyebrow" style="margin-bottom:0">Surah At-Tawbah · 9:60</span>
+        <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/009060.mp3" aria-label="Listen to Ayah 9:60" title="Listen · Sheikh Mishary Rashid Alafasy">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+      </div>
+      <div class="ar" style="font-size:calc(1.5rem * var(--ar-scale, 1));line-height:2.2">
+        ۞ إِنَّمَا ٱلصَّدَقَٰتُ لِلْفُقَرَآءِ وَٱلْمَسَٰكِينِ وَٱلْعَٰمِلِينَ عَلَيْهَا وَٱلْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِى ٱلرِّقَابِ وَٱلْغَٰرِمِينَ وَفِى سَبِيلِ ٱللَّهِ وَٱبْنِ ٱلسَّبِيلِ ۖ فَرِيضَةً مِّنَ ٱللَّهِ ۗ وَٱللَّهُ عَلِيمٌ حَكِيمٌ
+      </div>
+      <q style="font-size:1.18rem">
+        “Zakat expenditures are only for the poor and for the needy and for those employed to collect [zakat] and for bringing hearts together [for Islam] and for freeing captives [or slaves] and for those in debt and for the cause of Allah and for the [stranded] traveler - an obligation [imposed] by Allah. And Allah is Knowing and Wise.”
+      </q>
+      <cite>Surah At-Tawbah · 9:60</cite>
+    </div>
+
+    <!-- 8 CARDS GRID -->
+    <div class="recipients-grid reveal">
+      <div class="rcard">
+        <span class="rcard-num">01 / 08</span>
+        <div class="rcard-ar">الفُقَرَاء</div>
+        <h3 class="rcard-title">Al-Fuqarā'</h3>
+        <div class="rcard-trans">The Destitute</div>
+        <p class="rcard-desc">
+          Those who possess virtually nothing — no income, no assets, or less than half of what is necessary to meet life's basic human requirements for food, water, and shelter.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Displaced families with zero assets, refugees in famine conditions.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">02 / 08</span>
+        <div class="rcard-ar">المَسَاكِين</div>
+        <h3 class="rcard-title">Al-Masākīn</h3>
+        <div class="rcard-trans">The Working Needy</div>
+        <p class="rcard-desc">
+          Those who work or earn income, yet whose earnings fall short of fulfilling their essential monthly needs. They maintain dignity and do not beg, yet suffer in silence.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Underpaid workers unable to afford rent, healthcare, or winter utilities.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">03 / 08</span>
+        <div class="rcard-ar">العَامِلِينَ عَلَيْهَا</div>
+        <h3 class="rcard-title">Al-'Āmilīna 'Alayhā</h3>
+        <div class="rcard-trans">Zakat Administrators</div>
+        <p class="rcard-desc">
+          Those appointed or employed by legitimate authorities to collect, account for, safeguard, and faithfully distribute Zakat to verified beneficiaries.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Field workers, auditable caseworkers, and distribution logistics staff.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">04 / 08</span>
+        <div class="rcard-ar">المُؤَلَّفَةِ قُلُوبُهُمْ</div>
+        <h3 class="rcard-title">Al-Mu'allafah</h3>
+        <div class="rcard-trans">Reconciling Hearts</div>
+        <p class="rcard-desc">
+          Individuals whose hearts are drawn to Islam, new converts who have lost family and financial support, or those whose harm against the community is averted through goodwill.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Relieving ostracized converts, social integration, and bridge-building.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">05 / 08</span>
+        <div class="rcard-ar">فِي الرِّقَاب</div>
+        <h3 class="rcard-title">Fī Ar-Riqāb</h3>
+        <div class="rcard-trans">Emancipating Bondage</div>
+        <p class="rcard-desc">
+          Historically used to purchase freedom for enslaved individuals. In contemporary jurisprudence, applied to ransom unjust captives and rescue victims of human trafficking.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Anti-trafficking legal rescues, bonded brick-kiln laborers, prison bond aid.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">06 / 08</span>
+        <div class="rcard-ar">الغَارِمِين</div>
+        <h3 class="rcard-title">Al-Ghārimīn</h3>
+        <div class="rcard-trans">Debt-Stricken Souls</div>
+        <p class="rcard-desc">
+          Those overwhelmed by inescapable debts incurred for permissible and necessary causes (e.g. emergency surgery, natural disaster loss, basic sustenance) without means to pay.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Catastrophic hospital bills, earthquake victims who lost homes to debt.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">07 / 08</span>
+        <div class="rcard-ar">فِي سَبِيلِ اللَّهِ</div>
+        <h3 class="rcard-title">Fī Sabīlillāh</h3>
+        <div class="rcard-trans">In the Cause of Allah</div>
+        <p class="rcard-desc">
+          Activities dedicated to defending the oppressed Muslim community, spreading the truth of Islam, public religious education, and establishing righteous community welfare.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Authentic Islamic scholarship, dawah institutes, and defending persecuted communities.</div>
+      </div>
+
+      <div class="rcard">
+        <span class="rcard-num">08 / 08</span>
+        <div class="rcard-ar">ابْنِ السَّبِيل</div>
+        <h3 class="rcard-title">Ibn As-Sabīl</h3>
+        <div class="rcard-trans">The Wayfarer</div>
+        <p class="rcard-desc">
+          The stranded traveler who is cut off from their wealth while away from home, even if they are wealthy in their homeland, until they can safely return.
+        </p>
+        <div class="rcard-example"><b>Modern Impact:</b> Displaced asylum seekers, stranded students abroad whose funding collapsed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOLAR WISDOM -->
+<section id="wisdom" style="background:linear-gradient(180deg,transparent,rgba(227,189,122,.04),transparent)">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Scholarly Depth &amp; Spiritual Reflections</div>
+      <h2>The Secrets of Purification.<br><em>What the Masters Taught.</em></h2>
+      <p>
+        Zakat is not a tax; it is spiritual chemotherapy for the greed of the ego (*shuhh al-nafs*). Explore profound insights from contemporary thinkers and classical luminaries.
+      </p>
+    </div>
+
+    <!-- TABS -->
+    <div class="scholar-tabs reveal" id="scholarTabs">
+      <button class="scholar-tab on" data-filter="all">All Wisdom (4)</button>
+      <button class="scholar-tab" data-filter="qadhi">Dr. Yasir Qadhi</button>
+      <button class="scholar-tab" data-filter="nak">Ustadh Nouman Ali Khan</button>
+      <button class="scholar-tab" data-filter="ghazali">Imam Al-Ghazali</button>
+      <button class="scholar-tab" data-filter="qayyim">Ibn Al-Qayyim</button>
+    </div>
+
+    <!-- QUOTES GRID -->
+    <div class="quotes-grid reveal" id="quotesGrid"></div>
+  </div>
+</section>
+
+<!-- SADAQAH JARIYAH VS ZAKAT MATRIX -->
+<section id="comparison">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Clear Jurisprudence</div>
+      <h2>Zakat vs. Sadaqah Jariyah.<br><em>Know the Difference.</em></h2>
+      <p>
+        Both purify the soul, but their legal rulings, eligible beneficiaries, and calculation mechanics operate under distinct divine guidelines.
+      </p>
+    </div>
+
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>Zakat al-Māl (الزَّكَاة)</th>
+            <th>Sadaqah Jāriyah (صَدَقَة جَارِيَة)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Islamic Ruling</b></td>
+            <td><b style="color:var(--jade)">Farḍ 'Ayn (Obligatory)</b> — One of the 5 Pillars of Islam.</td>
+            <td><b style="color:var(--gold)">Mustaḥabb (Voluntary / Sunnah)</b> — Highly rewarded continuous charity.</td>
+          </tr>
+          <tr>
+            <td><b>Required Amount</b></td>
+            <td>Fixed strictly at <b>2.5%</b> (1/40th) of qualifying surplus wealth.</td>
+            <td><b>Any amount</b> — from half a date, a smile, a borehole, to a grand university.</td>
+          </tr>
+          <tr>
+            <td><b>Eligible Recipients</b></td>
+            <td>Restricted strictly to the <b>8 Quranic categories</b> in Surah 9:60.</td>
+            <td><b>Open to all humans &amp; creations</b> — public utilities, relatives, non-Muslims, animals.</td>
+          </tr>
+          <tr>
+            <td><b>Threshold (Niṣāb)</b></td>
+            <td>Must exceed 85g gold or 595g silver net wealth.</td>
+            <td><b>No minimum threshold</b> — even someone receiving Zakat can give Sadaqah.</td>
+          </tr>
+          <tr>
+            <td><b>Time Horizon</b></td>
+            <td>Calculated after holding surplus for <b>one lunar year (Ḥawl)</b>.</td>
+            <td>Immediate; continuous rewards flow into the grave long after death.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SADAQAH JAR -->
+<section id="jar-s">
+  <div class="wrap jarwrap">
+    <div class="reveal">
+      <div id="jar" title="Click to drop a golden coin">
+        <div class="lid"></div>
+        <div class="glass">
+          <div class="fill" id="fill"></div>
+          <div class="shine"></div>
+        </div>
+      </div>
+      <div class="jar-note">Click the jar · <span id="jn">0</span> coins dropped</div>
+      <div style="text-align:center;margin-top:1.2rem">
+        <button class="btn sm ghost" id="emptyJarBtn"><span>Pour Jar to Field 🕊️</span></button>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">The Sunnah of Small &amp; Steady</div>
+      <h2 style="font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.08">The Prophet ﷺ said:<br>
+        <em style="color:var(--gold);font-weight:300">“Save yourselves from the Fire, even with half a date.”</em></h2>
+      <p style="margin-top:1.2rem;color:#a8c0c2;font-weight:300;line-height:1.8;max-width:48ch">
+        Nothing is too small in the sight of the Most Appreciative (*Ash-Shakūr*). A single recurring dirham turns into a wellspring of barakah.
+      </p>
+      <div class="grid2" style="margin-top:2.2rem">
+        <div class="flip"><div class="fi">
+          <div class="f"><div class="ar">مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ</div><small>Click / Hover to translate</small></div>
+          <div class="b"><q>“Charity never decreases wealth in the least.”</q><small>Ṣaḥīḥ Muslim · 2588</small></div>
+        </div></div>
+        <div class="flip"><div class="fi">
+          <div class="f"><div class="ar">وَٱلصَّدَقَةُ تُطْفِئُ ٱلْخَطِيئَةَ كَمَا يُطْفِئُ ٱلْمَاءُ ٱلنَّارَ</div><small>Click / Hover to translate</small></div>
+          <div class="b"><q>“Charity extinguishes sin just as water extinguishes fire.”</q><small>Jāmi' at-Tirmidhī · 614</small></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAUSES -->
+<section id="causes">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Active Humanitarian Appeals</div>
+      <h2>Where the water is <em>needed most.</em></h2>
+      <p>Transparent, auditable, and 100% Zakat-eligible emergency appeals.</p>
+    </div>
+    <div class="grid3" id="cards"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="stats">
+      <div><b data-cnt="3240">0</b><small>Wells dug</small></div>
+      <div><b data-cnt="18900">0</b><small>Orphans supported</small></div>
+      <div><b data-cnt="784000">0</b><small>Meals served</small></div>
+      <div><b data-cnt="142">0</b><small>Classrooms built</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="justify-content:center">Your Turn to Give</div>
+    <h2>Be the reason<br>someone <em>breathes easier.</em></h2>
+    <div class="magnet" id="mag">
+      <div class="orbit"><s></s></div>
+      <a class="btn" href="#give"><span>Start My Ripple</span><span class="arw">→</span></a>
+    </div>
+    <p style="margin-top:2.4rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)">
+      100% Zakat policy · No administrative deductions from Zakat funds · Instant Certificate
+    </p>
+  </div>
+</section>
+
+<!-- ALLOCATION / RECEIPT MODAL -->
+<div class="modal-backdrop" id="allocModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeAllocModal()" aria-label="Close modal">✕</button>
+    <div class="eyebrow" style="margin-bottom:.5rem">NurulQuran Philanthropy</div>
+    <h3 style="font-size:1.8rem;margin-bottom:.4rem" id="modalHeading">Zakat &amp; Sadaqah Allocation</h3>
+    <p style="font-size:.85rem;color:var(--mute);margin-bottom:1.4rem">Review your contribution, generate your formal calculation summary, and dedicate your gift.</p>
+    
+    <div class="field-box" style="padding:1rem">
+      <div class="field-row">
+        <span class="field-name">Gift Amount:</span>
+        <div class="field-val-wrap">
+          <span style="color:var(--gold);font-weight:600" class="csym">$</span>
+          <input type="number" id="modalAmtInput" class="field-num-input" value="100" min="1" step="5">
+        </div>
+      </div>
+    </div>
+
+    <div class="receipt-cert" id="receiptCert">
+      <div class="cert-logo">✦ The Ripple Foundation · Zakat Statement ✦</div>
+      <div style="font-size:.75rem;color:var(--mute);letter-spacing:.1em;margin-top:.2rem" id="certDate">Date: 2026-09-09</div>
+      <div class="dua-ar">اللَّهُمَّ اجْعَلْهَا مَغْنَمًا وَلَا تَجْعَلْهَا مَغْرَمًا</div>
+      <div class="dua-en">“O Allah! Make it an abundant gain, and do not make it a loss.”</div>
+      <div style="margin-top:1rem;font-size:.85rem;line-height:1.7;color:#d8ebea">
+        Dedicated Amount: <b style="color:var(--gold2)" id="certAmt">$100</b> · <span id="certType">100% Zakat Eligible</span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <button class="btn" style="flex:1;justify-content:center" id="btnConfirmPledge">
+        <span>Pledge &amp; Celebrate 🎉</span>
+      </button>
+      <button class="btn ghost" style="flex:1;justify-content:center" onclick="window.print()">
+        <span>Print Statement 🖨️</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer><div class="wrap in">
+  <div>
+    <span>© 2026 The Ripple · <a href="index.html" style="color:var(--gold)">NurulQuran Institute</a></span>
+    <span style="display:block;font-size:.72rem;margin-top:4px;color:#7a9497">All Knowledge &amp; Calculations for the Sake of Allah</span>
+  </div>
+  <div style="display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap">
+    <a href="index.html">← Showcase Home</a>
+    <a href="#zakat">Zakat Guide</a>
+    <a href="#recipients">The 8 Beneficiaries</a>
+    <div class="footer-version-tag">
+      v1.0.23 (updated 2026-09-09 21:15)
+    </div>
+  </div>
+</div></footer>
+
+<script>
+/* ===== PRELOADER ===== */
+if (location.search.includes('snap')) {
+  document.body.classList.add('snap');
+  const p = document.getElementById('pre');
+  if (p) p.remove();
+} else {
+  addEventListener('load',()=>setTimeout(()=>document.getElementById('pre').classList.add('done'),800));
+}
+
+/* ===== HERO WORD SPLIT ===== */
+(()=>{
+  const h=document.getElementById('hl');
+  h.innerHTML=h.innerHTML.replace(/([^\s<>]+)(?![^<]*>)/g,m=>m.trim()?`<span class="word"><s>${m}</s></span>`:m);
+  [...h.querySelectorAll('s')].forEach((s,i)=>s.style.animationDelay=(.55+i*.08)+'s');
+})();
+
+/* ===== CURSOR ===== */
+const cur=document.getElementById('cur'),dot=document.getElementById('curDot');
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`});
+(function loop(){cx+=(mx-cx)*.16;cy+=(my-cy)*.16;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(loop)})();
+document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.flip,#jar,#pool,input,select,.rcard,.qcard'))document.body.classList.add('hot')});
+document.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.flip,#jar,#pool,input,select,.rcard,.qcard'))document.body.classList.remove('hot')});
+
+/* ===== NAV + PROGRESS ===== */
+const nav=document.getElementById('nav'),tick=document.querySelector('.tick');
+addEventListener('scroll',()=>{
+  nav.classList.toggle('stuck',scrollY>40);
+  const scrollTotal = document.body.scrollHeight - innerHeight;
+  tick.style.width = (scrollTotal > 0 ? (scrollY / scrollTotal * 100) : 0) + '%';
+});
+
+/* ===== REVEAL ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+
+/* ===== COUNTERS ===== */
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
+  const el=e.target,t=+el.dataset.cnt,pre=el.dataset.pre||'';let s=null;
+  const run=n=>{const p=Math.min((n-(s||=n))/1600,1),v=Math.floor(t*(1-Math.pow(1-p,3)));
+  el.textContent=pre+v.toLocaleString();if(p<1)requestAnimationFrame(run)};
+  requestAnimationFrame(run);co.unobserve(el)}),{threshold:.4});
+document.querySelectorAll('[data-cnt]').forEach(e=>co.observe(e));
+
+/* ===== HERO GEOMETRY CANVAS ===== */
+(()=>{
+  const c=document.getElementById('geo'),x=c.getContext('2d');let W,H,stars=[],dust=[];
+  const rs=()=>{
+    W=c.width=innerWidth;H=c.height=c.parentElement.offsetHeight;
+    stars=[...Array(9)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:60+Math.random()*150,a:Math.random()*6,s:(Math.random()-.5)*.003,o:.05+Math.random()*.12}));
+    dust=[...Array(60)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,vy:-.1-Math.random()*.3,o:Math.random()*.6}));
+  };
+  rs();addEventListener('resize',rs);
+  const star=(s,px,py)=>{
+    x.save();x.translate(s.x+px,s.y+py);x.rotate(s.a);x.beginPath();
+    for(let i=0;i<16;i++){const R=i%2?s.r*.46:s.r,t=i*Math.PI/8;i?x.lineTo(Math.cos(t)*R,Math.sin(t)*R):x.moveTo(Math.cos(t)*R,Math.sin(t)*R)}
+    x.closePath();x.strokeStyle=`rgba(227,189,122,${s.o})`;x.lineWidth=1;x.stroke();
+    x.beginPath();x.arc(0,0,s.r*.55,0,7);x.strokeStyle=`rgba(47,177,160,${s.o*.7})`;x.stroke();x.restore();
+  };
+  (function d(){
+    x.clearRect(0,0,W,H);
+    const px=(mx/innerWidth-.5)*24,py=(my/innerHeight-.5)*24;
+    stars.forEach(s=>{s.a+=s.s;star(s,px,py)});
+    dust.forEach(p=>{p.y+=p.vy;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}
+      x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fillStyle=`rgba(246,224,176,${p.o})`;x.fill()});
+    requestAnimationFrame(d);
+  })();
+})();
+
+/* ===== TILT / CARD GLOW ===== */
+document.addEventListener('mousemove',e=>{
+  document.querySelectorAll('.plate,.card,.rcard,.qcard').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    el.style.setProperty('--my',(e.clientY-r.top)+'px');
+    if(el.classList.contains('tilt')){
+      const dx=(e.clientX-r.left-r.width/2)/r.width,dy=(e.clientY-r.top-r.height/2)/r.height;
+      const near=e.clientX>r.left-90&&e.clientX<r.right+90&&e.clientY>r.top-90&&e.clientY<r.bottom+90;
+      el.style.transform=near?`perspective(900px) rotateY(${dx*7}deg) rotateX(${-dy*7}deg) translateZ(6px)`:'';
+    }
+  });
+});
+
+/* ===== MARQUEE ===== */
+const verses=[
+  "Whoever saves one life, it is as if he saved all humanity — 5:32",
+  "Charity does not decrease wealth in the least — Muslim",
+  "The upper giving hand is better than the lower receiving hand",
+  "Save yourselves from the Fire, even with half a date — Bukhari",
+  "Spend from what We have provided you — 2:3",
+  "A righteous smile at your brother is charity — Tirmidhi",
+  "Water given is forgiveness returned — Abu Dawud"
+];
+document.getElementById('marq').innerHTML=[...verses,...verses].map(v=>`<span>${v}</span>`).join('');
+
+/* ===== AUDIO CHIME SYNTHESIZER (0 DEPENDENCIES) ===== */
+let audioCtx=null;
+function playCoinChime(){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
+    osc.type = 'sine';
+    const freqs = [1046.5, 1318.5, 1567.98, 2093.0];
+    osc.frequency.setValueAtTime(freqs[Math.floor(Math.random()*freqs.length)], now);
+    osc.frequency.exponentialRampToValueAtTime(880, now + 0.35);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.35);
+  }catch(e){}
+}
+
+/* ===== RIPPLE POOL ===== */
+(()=>{
+  const pool=document.getElementById('pool'),cv=document.getElementById('rc'),x=cv.getContext('2d');
+  let W,H,rips=[],n=0;
+  const words=["1 month of clean drinking water","3 warm hot meals","school books for a child","a malaria net","medicine for a mother","a winter blanket in the Levant","seeds for a family farm"];
+  const rs=()=>{W=cv.width=pool.offsetWidth;H=cv.height=pool.offsetHeight};rs();addEventListener('resize',rs);
+  const add=(px,py,auto)=>{
+    rips.push({x:px,y:py,r:0,a:1});
+    if(!auto){
+      n++;document.getElementById('rcount').textContent=n;
+      document.getElementById('hint').style.opacity=0;
+      playCoinChime();
+      const p=document.createElement('div');p.className='pop';p.textContent='+ '+words[Math.floor(Math.random()*words.length)];
+      p.style.left=px+'px';p.style.top=py+'px';pool.appendChild(p);setTimeout(()=>p.remove(),2400);
+      setTimeout(()=>add(px,py,1),260);setTimeout(()=>add(px,py,1),520);
+    }
+  };
+  pool.addEventListener('click',e=>{const r=pool.getBoundingClientRect();add(e.clientX-r.left,e.clientY-r.top)});
+  pool.addEventListener('mousemove',e=>{if(Math.random()>.94){const r=pool.getBoundingClientRect();rips.push({x:e.clientX-r.left,y:e.clientY-r.top,r:0,a:.35})}});
+  setInterval(()=>rips.push({x:Math.random()*W,y:Math.random()*H,r:0,a:.28}),1500);
+  (function d(){
+    x.clearRect(0,0,W,H);
+    rips=rips.filter(p=>{
+      p.r+=2.4;p.a-=.006;
+      x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.strokeStyle=`rgba(227,189,122,${Math.max(p.a,0)})`;x.lineWidth=1.4;x.stroke();
+      x.beginPath();x.arc(p.x,p.y,p.r*.62,0,7);x.strokeStyle=`rgba(47,177,160,${Math.max(p.a*.6,0)})`;x.lineWidth=1;x.stroke();
+      return p.a>0&&p.r<Math.max(W,H);
+    });
+    requestAnimationFrame(d);
+  })();
+})();
+
+/* ===== IMPACT PICKER ===== */
+const causes=[
+  {k:'Water',i:'💧',unit:35,txt:a=>`<b>$${a}</b> provides <b>${Math.max(1,Math.round(a/35))} people</b> with clean running water for an entire year.`},
+  {k:'Food',i:'🍲',unit:2,txt:a=>`<b>$${a}</b> prepares and serves <b>${Math.round(a/2)} warm nutritious meals</b> to families in crisis.`},
+  {k:'Orphans',i:'🕊️',unit:45,txt:a=>`<b>$${a}</b> covers <b>${(a/45).toFixed(1)} months</b> of comprehensive shelter, nutrition and schooling for an orphan.`},
+  {k:'Education',i:'📖',unit:20,txt:a=>`<b>$${a}</b> outfits <b>${Math.round(a/20)} children</b> with classrooms, uniforms, and textbooks.`},
+  {k:'Emergency',i:'⛑️',unit:60,txt:a=>`<b>$${a}</b> deploys <b>${Math.max(1,Math.round(a/60))} emergency trauma relief kits</b> in disaster zones.`}
+];
+let ci=0,amt=100,freq=1;
+const $=s=>document.querySelector(s);
+$('#tabs').innerHTML=causes.map((c,i)=>`<button class="tab${i?'':' on'}" data-i="${i}">${c.i} ${c.k}</button>`).join('');
+$('#chips').innerHTML=[25,50,100,250,500,1000].map(v=>`<button class="chip${v===100?' on':''}" data-v="${v}">$${v}</button>`).join('');
+
+function renderImpact(){
+  const c=causes[ci];
+  $('#ico').textContent=c.i;
+  $('#amt').textContent='$'+amt.toLocaleString();
+  $('#numSlide').value=amt;
+  $('#msg').innerHTML=c.txt(amt);
+  $('#cbtn').textContent='Give $'+amt.toLocaleString()+(freq>1?' / '+(freq===12?'month':'day'):'');
+  $('#meter').style.width=Math.min(100,amt/2500*100)+'%';
+  $('#yr').textContent='Yearly total: $'+(amt*freq).toLocaleString();
+  $('#slide').value=Math.min(amt,2500);
+  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',+b.dataset.v===amt));
+}
+$('#tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');ci=+b.dataset.i;renderImpact()};
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(b){amt=+b.dataset.v;renderImpact()}};
+$('#slide').oninput=e=>{amt=+e.target.value;renderImpact()};
+$('#numSlide').oninput=e=>{amt=Math.max(1,+e.target.value||0);renderImpact()};
+$('#freq').onclick=e=>{const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#freq button').forEach(x=>x.classList.remove('on'));b.classList.add('on');freq=+b.dataset.f;renderImpact()};
+renderImpact();
+
+/* ===== DUAL ZAKAT CALCULATOR ===== */
+let curSym = '$';
+let nisabMode = 'gold';
+const NISAB_GOLD = 6800;   // ≈ 85g gold @ $80/g
+const NISAB_SILVER = 595;  // ≈ 595g silver @ $1.00/g
+
+const zSlides = [...document.querySelectorAll('.z-slide')];
+const zNums = [...document.querySelectorAll('.z-num')];
+
+function zakCalc(){
+  const vals = zNums.map(inp => Math.max(0, +inp.value || 0));
+  const gross = vals[0] + vals[1] + vals[2] + vals[3] + vals[4] + vals[5];
+  const debt = vals[6];
+  const net = Math.max(0, gross - debt);
+  const activeNisab = nisabMode === 'gold' ? NISAB_GOLD : NISAB_SILVER;
+  const hawlMet = $('#chkHawl').checked;
+  const due = (net >= activeNisab && hawlMet) ? net * 0.025 : 0;
+
+  $('#bGross').textContent = curSym + Math.round(gross).toLocaleString();
+  $('#bDebt').textContent = '-' + curSym + Math.round(debt).toLocaleString();
+  $('#bNet').textContent = curSym + Math.round(net).toLocaleString();
+  $('#bNisab').textContent = curSym + Math.round(activeNisab).toLocaleString() + ` (${nisabMode === 'gold' ? '85g Gold' : '595g Silver'})`;
+  $('#zout').textContent = curSym + Math.round(due).toLocaleString();
+  $('#bMonth').textContent = curSym + Math.round(due / 12).toLocaleString() + ' / mo';
+
+  const pct = Math.min(1, net / activeNisab);
+  $('#ring').style.strokeDashoffset = 640 - (640 * pct);
+
+  const badge = $('#nisBadge');
+  if(net >= activeNisab && hawlMet){
+    badge.className = 'nisab-badge-strip due';
+    badge.innerHTML = `✓ Net wealth of <b>${curSym}${Math.round(net).toLocaleString()}</b> meets the ${nisabMode} Nisab (${curSym}${activeNisab.toLocaleString()}) with Ḥawl fulfilled. <b>Zakat of 2.5% is obligatory.</b>`;
+  } else if(net >= activeNisab && !hawlMet){
+    badge.className = 'nisab-badge-strip under';
+    badge.innerHTML = `Net wealth meets Nisab (${curSym}${activeNisab.toLocaleString()}), but <b>one lunar year (Ḥawl) has not yet passed</b>. Zakat is due when your Hawl completes.`;
+  } else {
+    badge.className = 'nisab-badge-strip under';
+    badge.innerHTML = `Net wealth (${curSym}${Math.round(net).toLocaleString()}) is below the active ${nisabMode} Nisab (${curSym}${activeNisab.toLocaleString()}). No Zakat is currently obligatory, though voluntary Sadaqah is beloved.`;
+  }
+}
+
+zSlides.forEach(s => {
+  s.oninput = () => {
+    const idx = +s.dataset.idx;
+    zNums[idx].value = s.value;
+    zakCalc();
+  };
+});
+zNums.forEach(inp => {
+  inp.oninput = () => {
+    const idx = +inp.dataset.idx;
+    zSlides[idx].value = Math.min(inp.value, zSlides[idx].max);
+    zakCalc();
+  };
+});
+
+$('#chkHawl').onchange = zakCalc;
+
+$('#curSelect').onchange = e => {
+  const opt = e.target.selectedOptions[0];
+  curSym = opt.dataset.sym || '$';
+  document.querySelectorAll('.csym').forEach(el => el.textContent = curSym);
+  zakCalc();
+};
+
+$('#btnNisabGold').onclick = () => {
+  $('#btnNisabGold').classList.add('active');
+  $('#btnNisabSilver').classList.remove('active');
+  nisabMode = 'gold';
+  zakCalc();
+};
+$('#btnNisabSilver').onclick = () => {
+  $('#btnNisabSilver').classList.add('active');
+  $('#btnNisabGold').classList.remove('active');
+  nisabMode = 'silver';
+  zakCalc();
+};
+
+zakCalc();
+
+/* ===== SCHOLAR QUOTES ===== */
+const quotesData = [
+  {
+    filter: 'qadhi',
+    author: 'Dr. Yasir Qadhi',
+    role: 'Dean of The Islamic Seminary of America',
+    avatar: 'YQ',
+    tag: 'Purification',
+    text: '“Linguistically, Zakat means both purification (taharah) and growth (namaa'). It removes the spiritual cancer of stinginess (shuhh) and guarantees that what remains of your wealth will be blessed and magnified.”',
+    source: 'Fiqh of Zakat Comprehensive Lectures'
+  },
+  {
+    filter: 'nak',
+    author: 'Ustadh Nouman Ali Khan',
+    role: 'Founder, Bayyinah Institute',
+    avatar: 'NK',
+    tag: 'Divine Parable',
+    text: '“When Allah gives the parable of the grain yielding 700 grains in Surah Al-Baqarah, He shows you that giving is never an expense. In Allah’s divine ledger, spending is the only wealth you actually get to keep forever.”',
+    source: 'Deep Dive: Surah Al-Baqarah 2:261'
+  },
+  {
+    filter: 'ghazali',
+    author: 'Imam Al-Ghazali (d. 1111 CE)',
+    role: 'Classical Master · Hujjat al-Islam',
+    avatar: 'AG',
+    tag: 'Inner Secrets',
+    text: '“Wealth is beloved by human nature. Zakat was commanded so a servant proves that their love for the Creator is greater than their attachment to silver and gold. It severs the bond of greed that paralyzes the heart.”',
+    source: 'Iḥyā' 'Ulūm al-Dīn (Book of Zakat)'
+  },
+  {
+    filter: 'qayyim',
+    author: 'Ibn Al-Qayyim (d. 1350 CE)',
+    role: 'Classical Scholar · Heart Specialist',
+    avatar: 'IQ',
+    tag: 'Spiritual Shield',
+    text: '“Charity has an astonishing effect in repelling calamities and lifting trials, even if given by an oppressor or sinner! Allah wards off tribulations through it, and expands the chest with tranquility.”',
+    source: 'Al-Wābil al-Ṣayyib'
+  }
+];
+
+function renderScholarQuotes(f='all'){
+  const list = f === 'all' ? quotesData : quotesData.filter(q => q.filter === f);
+  const grid = document.getElementById('quotesGrid');
+  grid.innerHTML = list.map(q => `
+    <div class="qcard">
+      <div>
+        <div class="qcard-top">
+          <div class="qcard-author">
+            <div class="qcard-avatar">${q.avatar}</div>
+            <div>
+              <div class="qcard-name">${q.author}</div>
+              <div class="qcard-role">${q.role}</div>
+            </div>
+          </div>
+          <span class="qcard-tag">${q.tag}</span>
+        </div>
+        <p class="qcard-text">${q.text}</p>
+      </div>
+      <div class="qcard-foot">
+        <span>📖 ${q.source}</span>
+        <button class="copy-q-btn" data-quote="${encodeURIComponent(q.text + ' — ' + q.author)}">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>Copy Quote</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.copy-q-btn').forEach(btn => {
+    btn.onclick = () => {
+      const txt = decodeURIComponent(btn.dataset.quote);
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(()=>{
+          const sp = btn.querySelector('span');
+          sp.textContent = 'Copied!';
+          setTimeout(()=>sp.textContent = 'Copy Quote', 2000);
+        });
+      }
+    };
+  });
+}
+
+document.querySelectorAll('.scholar-tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.scholar-tab').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    renderScholarQuotes(t.dataset.filter);
+  };
+});
+renderScholarQuotes('all');
+
+/* ===== SADAQAH JAR ===== */
+let coins=0;const jar=document.getElementById('jar');
+jar.onclick=()=>{
+  coins++;
+  playCoinChime();
+  document.getElementById('jn').textContent=coins;
+  document.getElementById('fill').style.height=Math.min(82, coins*4)+'%';
+  const c=document.createElement('div');
+  c.className='coin';
+  c.textContent=curSym;
+  c.style.left=(32+Math.random()*36)+'%';
+  jar.appendChild(c);
+  setTimeout(()=>c.remove(),1100);
+};
+
+/* ===== CELEBRATORY CONFETTI SHOWER ===== */
+const cc=document.getElementById('confetti'), cx2=cc.getContext('2d');let parts=[];
+const fitConfetti=()=>{cc.width=innerWidth;cc.height=innerHeight};fitConfetti();addEventListener('resize',fitConfetti);
+function triggerConfetti(){
+  const C=['#e3bd7a','#f6e0b0','#2fb1a0','#e88b6a','#f7f1e6'];
+  for(let i=0;i<180;i++){
+    parts.push({
+      x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*18,vy:Math.random()*-16-3,
+      s:Math.random()*7+3,c:C[i%5],r:Math.random()*6,vr:(Math.random()-.5)*.4,l:1
+    });
+  }
+}
+(function animConfetti(){
+  cx2.clearRect(0,0,cc.width,cc.height);
+  parts.forEach(p=>{
+    p.vy+=.32;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.008;
+    cx2.save();cx2.translate(p.x,p.y);cx2.rotate(p.r);cx2.globalAlpha=Math.max(p.l,0);
+    cx2.fillStyle=p.c;cx2.fillRect(-p.s/2,-p.s/2,p.s,p.s*.55);cx2.restore();
+  });
+  parts=parts.filter(p=>p.l>0&&p.y<cc.height+40);
+  requestAnimationFrame(animConfetti);
+})();
+
+$('#emptyJarBtn').onclick=()=>{
+  if(coins===0){ coins = 5; document.getElementById('fill').style.height='20%'; }
+  triggerConfetti();
+  openAllocModal(coins * 10, 'Sadaqah Jar Dedication');
+};
+
+/* ===== CAMPAIGNS ===== */
+const camps=[
+  {t:'Deep Borehole Wells, Sahel',g:'Water & Life',d:'A solar-powered deep aquifer well serving 600 villagers for over 25 years with continuous pure water.',r:76,a:'$76,000',n:'$100,000',u:1},
+  {t:'Winter Warmth Relief, Levant',g:'Emergency Aid',d:'Thermal blankets, woodstoves, heating oil, and winter jackets for displaced families in northern refugee settlements.',r:62,a:'$31,000',n:'$50,000',u:1},
+  {t:'Comprehensive Orphan Sponsorship',g:'Orphans & Vulnerable',d:'Monthly living stipends, nutrition packages, school tuition, uniforms, and regular pediatric medical checkups.',r:89,a:'$44,500',n:'$50,000'},
+  {t:'Feed 10,000 Fasting Families',g:'Food Security',d:'Essential food hampers with staple grains, dates, lentils, and cooking oil to nourish vulnerable homes through Ramadan.',r:42,a:'$21,000',n:'$50,000'},
+  {t:'Build a Community Schoolroom',g:'Sadaqah Jariyah',d:'Constructing insulated, durable classrooms equipped with solar power, desks, and books — continuous reward.',r:68,a:'$34,000',n:'$50,000'},
+  {t:'Cataract Restoration Surgeries',g:'Medical Treatment',d:'A simple 15-minute ophthalmic surgery restores full sight to someone blinded by preventable cataracts.',r:55,a:'$11,000',n:'$20,000',u:1}
+];
+
+document.getElementById('cards').innerHTML=camps.map(c=>`
+  <div class="card">${c.u?'<span class="pill">Urgent Need</span>':''}
+    <span class="tag">${c.g}</span><h3>${c.t}</h3><p>${c.d}</p>
+    <div class="row"><span>Funded <b>${c.a}</b></span><span>Goal: ${c.n}</span></div>
+    <div class="meter"><i data-p="${c.r}"></i></div>
+    <div class="go" onclick="openAllocModal(100, '${c.t}')">Donate to appeal →</div>
+  </div>`).join('');
+
+const mo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+  e.target.style.width=e.target.dataset.p+'%';mo.unobserve(e.target)}}),{threshold:.3});
+document.querySelectorAll('[data-p]').forEach(e=>mo.observe(e));
+
+/* ===== ALLOCATION MODAL ===== */
+const allocModal=document.getElementById('allocModal');
+function openAllocModal(val=100, causeName='100% Zakat Fund'){
+  document.getElementById('modalAmtInput').value=val;
+  document.getElementById('modalHeading').textContent=causeName;
+  document.getElementById('certAmt').textContent=curSym+val.toLocaleString();
+  document.getElementById('certDate').textContent='Date: ' + new Date().toISOString().slice(0,10);
+  allocModal.classList.add('open');
+}
+function closeAllocModal(){ allocModal.classList.remove('open'); }
+function closeModalOnBackdrop(e){ if(e.target === allocModal) closeAllocModal(); }
+
+document.addEventListener('keydown',e=>{ if(e.key === 'Escape' && allocModal.classList.contains('open')) closeAllocModal(); });
+
+$('#modalAmtInput').oninput=e=>{
+  const v = Math.max(1, +e.target.value||0);
+  document.getElementById('certAmt').textContent=curSym+v.toLocaleString();
+};
+
+$('#giveModalBtn').onclick=()=>openAllocModal(amt, causes[ci].k + ' Relief');
+$('#payZakatBtn').onclick=()=>{
+  const due = +$('#zout').textContent.replace(/[^0-9.]/g,'') || 100;
+  openAllocModal(due, 'Annual Zakat al-Māl Obligation');
+};
+
+$('#btnConfirmPledge').onclick=()=>{
+  playCoinChime();
+  triggerConfetti();
+  const btn = $('#btnConfirmPledge');
+  btn.innerHTML = '<span>Alhamdulillah! Pledged 🌿</span>';
+  setTimeout(()=>{
+    btn.innerHTML = '<span>Pledge &amp; Celebrate 🎉</span>';
+    closeAllocModal();
+  }, 2200);
+};
+
+/* ===== MAGNETIC CTA ===== */
+const mag=document.getElementById('mag'),mb=mag.querySelector('.btn');
+mag.addEventListener('mousemove',e=>{const r=mag.getBoundingClientRect();
+  mb.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.28}px) translateY(-3px)`});
+mag.addEventListener('mouseleave',()=>mb.style.transform='');
+
+/* ===== ARABIC SCALER ===== */
+(function initArabicScaler() {
+  const SCALES = [1.0, 1.15, 1.30, 1.45, 0.85];
+  let curIdx = 0;
+  const saved = parseFloat(localStorage.getItem('nq_ar_scale'));
+  if (saved) {
+    const closest = SCALES.reduce((prev, curr) => Math.abs(curr - saved) < Math.abs(prev - saved) ? curr : prev, 1.0);
+    curIdx = SCALES.indexOf(closest);
+    if (curIdx === -1) curIdx = 0;
+  }
+  function applyScale(idx) {
+    curIdx = (idx % SCALES.length + SCALES.length) % SCALES.length;
+    const scale = SCALES[curIdx];
+    document.documentElement.style.setProperty('--ar-scale', scale);
+    localStorage.setItem('nq_ar_scale', scale);
+    const el = document.getElementById('arScaleVal');
+    if (el) el.textContent = Math.round(scale * 100) + '%';
+  }
+  applyScale(curIdx);
+  const btn = document.getElementById('arScaleBtn');
+  if (btn) btn.onclick = () => applyScale(curIdx + 1);
+})();
+
+/* ===== AYAH AUDIO PLAYER ===== */
+(function initAyahAudio() {
+  let activeAudio = null, activeBtn = null;
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.nq-play-btn');
+    if (!btn) return;
+    const url = btn.dataset.audio;
+    if (!url) return;
+    if (activeBtn === btn && activeAudio) {
+      if (activeAudio.paused) {
+        activeAudio.play();
+        btn.classList.add('playing');
+      } else {
+        activeAudio.pause();
+        btn.classList.remove('playing');
+      }
+      return;
+    }
+    if (activeAudio) {
+      activeAudio.pause();
+      if (activeBtn) activeBtn.classList.remove('playing', 'loading');
+    }
+    activeBtn = btn;
+    btn.classList.add('loading');
+    activeAudio = new Audio(url);
+    activeAudio.play().then(() => {
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+    }).catch(() => {
+      btn.classList.remove('loading', 'playing');
+      activeAudio = null;
+    });
+    activeAudio.onended = () => {
+      btn.classList.remove('playing', 'loading');
+      activeAudio = null;
+      activeBtn = null;
+    };
+  });
+})();
+</script>
+</body>
+</html>
