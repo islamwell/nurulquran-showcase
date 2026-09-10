@@ -47,7 +47,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--ink); color:var(--cream);
   font-family:'Outfit',system-ui,sans-serif; overflow-x:hidden;
-  -webkit-font-smoothing:antialiased; cursor:none;
+  -webkit-font-smoothing:antialiased; cursor:default;
 }
 @media (max-width:900px){body{cursor:auto}}
 ::selection{background:var(--gold);color:var(--ink)}
@@ -79,7 +79,7 @@ body.hot #cur{width:76px;height:76px;margin:-38px 0 0 -38px;background:rgba(227,
 /* ============ PRELOADER ============ */
 #pre{position:fixed;inset:0;background:var(--ink);z-index:9000;display:grid;place-items:center;
   transition:opacity .8s .3s,visibility .8s .3s}
-#pre.done{opacity:0;visibility:hidden}
+#pre.done{opacity:0;visibility:hidden;pointer-events:none !important}
 #pre .m{text-align:center}
 #pre svg{width:96px;height:96px;overflow:visible}
 #pre circle,#pre path{fill:none;stroke:var(--gold);stroke-width:1.1}
@@ -1169,19 +1169,32 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
     <a href="#zakat">Zakat Guide</a>
     <a href="#recipients">The 8 Beneficiaries</a>
     <div class="footer-version-tag">
-      v1.0.24 (updated 2026-09-10 07:29)
+      v1.0.25 (updated 2026-09-10 19:16)
     </div>
   </div>
 </div></footer>
 
 <script>
 /* ===== PRELOADER ===== */
+function dismissPreloader() {
+  const pre = document.getElementById('pre');
+  if (pre && !pre.classList.contains('done')) {
+    pre.classList.add('done');
+    setTimeout(() => { if (pre && pre.parentNode) pre.style.display = 'none'; }, 900);
+  }
+}
 if (location.search.includes('snap')) {
   document.body.classList.add('snap');
   const p = document.getElementById('pre');
   if (p) p.remove();
 } else {
-  addEventListener('load',()=>setTimeout(()=>document.getElementById('pre').classList.add('done'),800));
+  if (document.readyState === 'complete') {
+    setTimeout(dismissPreloader, 300);
+  } else {
+    window.addEventListener('load', () => setTimeout(dismissPreloader, 300));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(dismissPreloader, 600));
+    setTimeout(dismissPreloader, 1200);
+  }
 }
 
 /* ===== HERO WORD SPLIT ===== */
@@ -1221,9 +1234,14 @@ document.querySelectorAll('[data-cnt]').forEach(e=>co.observe(e));
 
 /* ===== HERO GEOMETRY CANVAS ===== */
 (()=>{
-  const c=document.getElementById('geo'),x=c.getContext('2d');let W,H,stars=[],dust=[];
+  const c=document.getElementById('geo');
+  if(!c) return;
+  const x=c.getContext('2d');
+  if(!x) return;
+  let W,H,stars=[],dust=[];
   const rs=()=>{
-    W=c.width=innerWidth;H=c.height=c.parentElement.offsetHeight;
+    W=c.width=innerWidth;
+    H=c.height=(c.parentElement ? c.parentElement.offsetHeight : innerHeight);
     stars=[...Array(9)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:60+Math.random()*150,a:Math.random()*6,s:(Math.random()-.5)*.003,o:.05+Math.random()*.12}));
     dust=[...Array(60)].map(()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,vy:-.1-Math.random()*.3,o:Math.random()*.6}));
   };
@@ -1294,7 +1312,10 @@ function playCoinChime(){
 
 /* ===== RIPPLE POOL ===== */
 (()=>{
-  const pool=document.getElementById('pool'),cv=document.getElementById('rc'),x=cv.getContext('2d');
+  const pool=document.getElementById('pool'),cv=document.getElementById('rc');
+  if(!pool || !cv) return;
+  const x=cv.getContext('2d');
+  if(!x) return;
   let W,H,rips=[],n=0;
   const words=["1 month of clean drinking water","3 warm hot meals","school books for a child","a malaria net","medicine for a mother","a winter blanket in the Levant","seeds for a family farm"];
   const rs=()=>{W=cv.width=pool.offsetWidth;H=cv.height=pool.offsetHeight};rs();addEventListener('resize',rs);
@@ -1446,7 +1467,7 @@ const quotesData = [
     role: 'Dean of The Islamic Seminary of America',
     avatar: 'YQ',
     tag: 'Purification',
-    text: '“Linguistically, Zakat means both purification (taharah) and growth (namaa'). It removes the spiritual cancer of stinginess (shuhh) and guarantees that what remains of your wealth will be blessed and magnified.”',
+    text: "“Linguistically, Zakat means both purification (taharah) and growth (namaa’). It removes the spiritual cancer of stinginess (shuhh) and guarantees that what remains of your wealth will be blessed and magnified.”",
     source: 'Fiqh of Zakat Comprehensive Lectures'
   },
   {
@@ -1465,7 +1486,7 @@ const quotesData = [
     avatar: 'AG',
     tag: 'Inner Secrets',
     text: '“Wealth is beloved by human nature. Zakat was commanded so a servant proves that their love for the Creator is greater than their attachment to silver and gold. It severs the bond of greed that paralyzes the heart.”',
-    source: 'Iḥyā' 'Ulūm al-Dīn (Book of Zakat)'
+    source: "Iḥyā’ ’Ulūm al-Dīn (Book of Zakat)"
   },
   {
     filter: 'qayyim',
