@@ -360,6 +360,27 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .rcard-example{margin-top:1rem;padding-top:.8rem;border-top:1px dashed rgba(227,189,122,.18);font-size:.75rem;color:var(--gold2)}
 .rcard-example b{color:var(--cream)}
 
+/* ============ QURANIC MOTIVATION CARDS ============ */
+.promises-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem;margin-top:2.5rem}
+.promise-card{
+  background:linear-gradient(150deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  border:1px solid rgba(227,189,122,.22);border-radius:var(--r);padding:2rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:.4s var(--ease);position:relative;
+}
+.promise-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 22px 45px -15px rgba(0,0,0,.8);background:rgba(255,255,255,.06)}
+.promise-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.promise-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--jade);font-weight:600;padding:.2rem .65rem;background:rgba(47,177,160,.12);border-radius:99px}
+.promise-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--cream);margin-bottom:.8rem;line-height:1.25}
+.promise-ar{font-size:calc(1.3rem * var(--ar-scale, 1));line-height:2.1;color:var(--gold2);margin-bottom:1rem;direction:rtl;text-align:right}
+.promise-trans{font-size:.92rem;line-height:1.65;color:#d8ebea;margin-bottom:.8rem;font-style:italic}
+.promise-ref{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:1.2rem;display:block}
+.promise-takeaway{
+  background:rgba(227,189,122,.08);border-left:3px solid var(--gold);
+  padding:.75rem 1rem;border-radius:0 10px 10px 0;font-size:.82rem;line-height:1.55;color:#fff;
+}
+.promise-takeaway b{color:var(--gold2)}
+
 /* ============ SCHOLAR WISDOM ============ */
 .scholar-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
 .scholar-tab{
@@ -543,6 +564,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
     <a href="#give">Give</a>
     <a href="#zakat">Zakat</a>
     <a href="#recipients">Beneficiaries</a>
+    <a href="#promises">Quran Promises</a>
     <a href="#wisdom">Wisdom</a>
     <a href="#causes">Causes</a>
     <a href="#jar-s">Jar</a>
@@ -562,11 +584,10 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
   <div class="glow g1"></div><div class="glow g2"></div>
   <div class="wrap in">
     <div>
-      <div class="eyebrow fadeUp" style="animation-delay:.9s">Sadaqah · Zakat · Waqf · 100% Policy</div>
+      <div class="eyebrow fadeUp" style="animation-delay:.9s">Sadaqah · Zakat · 100% Direct Giving Policy</div>
       <h1 id="hl">Drop one coin. <span class="it">Move an ocean.</span></h1>
       <p class="lede fadeUp" style="animation-delay:1.3s">
-        Charity never stays where you leave it. It travels — through a well, a lesson, a warm meal —
-        long after your hand lets go. Purify your wealth with precision and start the ripple today.
+        Charity never decreases your wealth. When you give, your hand opens a door for someone to receive clean water, food, or medicine. Calculate your obligatory Zakat with clarity or give voluntary Sadaqah today.
       </p>
       <div class="hero-cta fadeUp" style="animation-delay:1.5s">
         <a class="btn" href="#give"><span>Give Sadaqah</span><span class="arw">→</span></a>
@@ -574,9 +595,9 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
       </div>
       <div class="hstats fadeUp" style="animation-delay:1.7s">
         <div><b data-cnt="1284000" data-pre="$">$0</b><small>Given this year</small></div>
-        <div><b data-cnt="96">0</b><small>% to the field</small></div>
-        <div><b data-cnt="41">0</b><small>Countries</small></div>
-        <div><b data-cnt="8">0</b><small>Quranic Beneficiaries</small></div>
+        <div><b data-cnt="100">0</b><small>% to people in need</small></div>
+        <div><b data-cnt="41">0</b><small>Countries reached</small></div>
+        <div><b data-cnt="8">0</b><small>Quranic categories</small></div>
       </div>
     </div>
     <div class="plate tilt fadeUp" style="animation-delay:1.2s">
@@ -588,7 +609,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         </button>
       </div>
       <div class="ar">مَّثَلُ ٱلَّذِينَ يُنفِقُونَ أَمْوَٰلَهُمْ فِى سَبِيلِ ٱللَّهِ كَمَثَلِ حَبَّةٍ أَنۢبَتَتْ سَبْعَ سَنَابِلَ فِى كُلِّ سُنبُلَةٍ مِّا۟ئَةُ حَبَّةٍ ۗ وَٱللَّهُ يُضَٰعِفُ لِمَن يَشَآءُ ۗ وَٱللَّهُ وَٰسِعٌ عَلِيمٌ</div>
-      <q>“The likeness of those who spend their wealth in the way of Allah is as a grain that grows seven ears, in every ear a hundred grains. And Allah multiplies for whom He wills.”</q>
+      <q>“The example of those who spend their wealth in the way of Allah is like a seed of grain that sprouts seven ears, with a hundred grains in every ear. And Allah multiplies for whoever He wills. And Allah is All-Encompassing, All-Knowing.”</q>
       <cite>Surah Al-Baqarah · 2:261</cite>
     </div>
   </div>
@@ -602,9 +623,9 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="pool-s">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Interactive Canvas</div>
-      <h2>Touch the water.<br><em>Watch it travel.</em></h2>
-      <p>Every gift begins as a single point and refuses to stay one. Tap the pool below — each kinetic ripple unfolds a real human transformation.</p>
+      <div class="eyebrow">Interactive Experience</div>
+      <h2>Touch the water.<br><em>See charity travel.</em></h2>
+      <p>A small act of kindness creates waves of good. Tap anywhere in the pool below to see how a simple gift changes a family's life.</p>
     </div>
     <div class="reveal" id="pool">
       <canvas id="rc"></canvas>
@@ -612,7 +633,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
     </div>
     <div class="pool-bar reveal">
       <div class="c">Ripples sent: <b id="rcount">0</b></div>
-      <a class="btn ghost" href="#give"><span>Make it real with Sadaqah</span><span class="arw">→</span></a>
+      <a class="btn ghost" href="#give"><span>Give Sadaqah Now</span><span class="arw">→</span></a>
     </div>
   </div>
 </section>
@@ -622,8 +643,8 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
   <div class="wrap">
     <div class="head reveal">
       <div class="eyebrow">Choose your impact</div>
-      <h2>Pick a cause. <em>See the outcome.</em></h2>
-      <p>No vague promises. Move the slider and read exactly what your sadaqah becomes in lives around the globe.</p>
+      <h2>Pick a cause. <em>See the result.</em></h2>
+      <p>Clear results, no guessing. Move the slider to see what your charity provides to families around the world.</p>
     </div>
     <div class="picker reveal">
       <div>
@@ -640,12 +661,12 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
           <input type="range" id="slide" min="5" max="2500" step="5" value="100">
         </div>
         <div class="freq" id="freq">
-          <button class="on" data-f="1">One-off Gift</button>
+          <button class="on" data-f="1">One-time Gift</button>
           <button data-f="12">Monthly Sustainer</button>
           <button data-f="30">Daily · Jariyah</button>
         </div>
         <p style="font-size:.84rem;color:var(--mute);line-height:1.7;margin-top:1rem">
-          Monthly giving is <b style="color:var(--gold)">sadaqah jariyah</b> — an uninterrupted current of good deeds that outlives your breath.
+          Giving monthly is <b style="color:var(--gold)">sadaqah jariyah</b> (ongoing charity) — continuous charity that keeps helping others and earning you rewards even after this life.
         </p>
       </div>
       <div class="impact-card">
@@ -669,9 +690,9 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
   <div class="wrap">
     <div class="head reveal">
       <div class="eyebrow">The Third Pillar · فَرِيضَةً مِّنَ ٱللَّهِ</div>
-      <h2>Zakat is not charity.<br><em>It is a divine right.</em></h2>
+      <h2>Zakat is not optional charity.<br><em>It is a right that belongs to the poor.</em></h2>
       <p>
-        2.5% (one fortieth) of your surplus zakatable wealth above the Nisab threshold held for a full lunar year (Hawl). Calculate your obligation with complete accuracy below.
+        Zakat is the 3rd pillar of Islam. If your savings stay above the minimum threshold (Nisab) for one full year, you owe 2.5% (one fortieth) of your surplus wealth to those in need. Use the simple calculator below to find your exact amount.
       </p>
     </div>
 
@@ -684,7 +705,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         </button>
       </div>
       <div class="ar" style="font-size:calc(1.4rem * var(--ar-scale, 1));margin-bottom:.6rem">خُذْ مِنْ أَمْوَٰلِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَوٰتَكَ سَكَنٌ لَّهُمْ ۗ وَٱللَّهُ سَمِيعٌ عَلِيمٌ</div>
-      <q style="font-size:1.15rem">“Take, [O Muhammad], from their wealth a charity by which you purify them and cause them to increase...”</q>
+      <q style="font-size:1.15rem">“Take charity from their wealth to purify them and cause them to grow...”</q>
       <cite>Surah At-Tawbah · 9:103</cite>
     </div>
 
@@ -717,7 +738,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         <div class="calc-option-group">
           <label style="display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:#c2d8da;cursor:pointer">
             <input type="checkbox" id="chkHawl" checked style="accent-color:var(--gold)">
-            <span>Hawl (1 lunar year) completed</span>
+            <span>Hawl (1 full year) completed</span>
           </label>
         </div>
       </div>
@@ -738,7 +759,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box">
             <div class="field-row">
-              <span class="field-name">2. Gold &amp; Silver Value <small>Bullion, coins, or scrap jewelry for investment</small></span>
+              <span class="field-name">2. Gold &amp; Silver <small>Gold coins, bars, or jewelry kept as investments</small></span>
               <div class="field-val-wrap">
                 <span class="csym">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="1" value="3200" min="0" step="100">
@@ -749,7 +770,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box">
             <div class="field-row">
-              <span class="field-name">3. Stocks, ETFs &amp; Shares <small>Trading shares (100%) or zakatable fund assets (~30%)</small></span>
+              <span class="field-name">3. Stocks &amp; Investments <small>Tradeable shares, ETFs, or investment funds</small></span>
               <div class="field-val-wrap">
                 <span class="csym">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="2" value="2500" min="0" step="100">
@@ -760,7 +781,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box">
             <div class="field-row">
-              <span class="field-name">4. Business Merchandise &amp; Stock <small>Wholesale/cost value of items intended for resale ('urūd)</small></span>
+              <span class="field-name">4. Business Inventory <small>Wholesale cost of goods bought to sell for profit</small></span>
               <div class="field-val-wrap">
                 <span class="csym">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="3" value="0" min="0" step="250">
@@ -771,7 +792,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box">
             <div class="field-row">
-              <span class="field-name">5. Receivables &amp; Good Debts <small>Loans to trustworthy people expected to be repaid</small></span>
+              <span class="field-name">5. Money Lent to Others <small>Loans to people who are able and expected to repay you</small></span>
               <div class="field-val-wrap">
                 <span class="csym">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="4" value="0" min="0" step="100">
@@ -782,7 +803,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box">
             <div class="field-row">
-              <span class="field-name">6. Crypto &amp; Digital Assets <small>Bitcoin, stablecoins, liquid tokens held for growth</small></span>
+              <span class="field-name">6. Crypto &amp; Digital Assets <small>Bitcoin, stablecoins, or tradeable crypto assets</small></span>
               <div class="field-val-wrap">
                 <span class="csym">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="5" value="0" min="0" step="100">
@@ -793,7 +814,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 
           <div class="field-box" style="border-color:rgba(232,139,106,.25);background:rgba(232,139,106,.03)">
             <div class="field-row">
-              <span class="field-name" style="color:#ffc4b0">7. Deductible Debts &amp; Bills Due <small>Immediate overdue bills, monthly rent, immediate liabilities</small></span>
+              <span class="field-name" style="color:#ffc4b0">7. Debts &amp; Bills Due Now <small>Unpaid bills, monthly rent, and immediate living expenses</small></span>
               <div class="field-val-wrap">
                 <span class="csym" style="color:var(--rose)">$</span>
                 <input type="number" class="field-num-input z-num" data-idx="6" value="700" min="0" step="50" style="color:var(--rose);border-color:rgba(232,139,106,.4)">
@@ -819,7 +840,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
                   stroke-dasharray="640" stroke-dashoffset="640"/>
               </svg>
               <div class="mid">
-                <small>Zakat Obligation</small>
+                <small>Your Zakat to Pay</small>
                 <b id="zout">$0</b>
                 <span class="rate-pill">2.5% Rate</span>
               </div>
@@ -849,10 +870,10 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="recipients">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Quranic Jurisprudence · 9:60</div>
-      <h2>The Eight Beneficiaries.<br><em>Divinely Chosen Recipients.</em></h2>
+      <div class="eyebrow">Quranic Categories · 9:60</div>
+      <h2>The Eight Beneficiaries.<br><em>Who is Eligible for Zakat.</em></h2>
       <p>
-        Allah Himself designated the exact categories eligible to receive Zakat in Surah At-Tawbah (9:60). No human, caliph, or scholar has authority to invent a ninth category.
+        Allah Himself specified the eight groups eligible to receive Zakat in Surah At-Tawbah (9:60). Zakat must be given directly to these exact categories.
       </p>
     </div>
 
@@ -869,7 +890,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         ۞ إِنَّمَا ٱلصَّدَقَٰتُ لِلْفُقَرَآءِ وَٱلْمَسَٰكِينِ وَٱلْعَٰمِلِينَ عَلَيْهَا وَٱلْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِى ٱلرِّقَابِ وَٱلْغَٰرِمِينَ وَفِى سَبِيلِ ٱللَّهِ وَٱبْنِ ٱلسَّبِيلِ ۖ فَرِيضَةً مِّنَ ٱللَّهِ ۗ وَٱللَّهُ عَلِيمٌ حَكِيمٌ
       </div>
       <q style="font-size:1.18rem">
-        “Zakat expenditures are only for the poor and for the needy and for those employed to collect [zakat] and for bringing hearts together [for Islam] and for freeing captives [or slaves] and for those in debt and for the cause of Allah and for the [stranded] traveler - an obligation [imposed] by Allah. And Allah is Knowing and Wise.”
+        “Zakat is only for the poor, the needy, those who collect it, bringing hearts together, freeing captives, those in debt, in the cause of Allah, and the stranded traveler. This is an obligation from Allah. And Allah is All-Knowing, All-Wise.”
       </q>
       <cite>Surah At-Tawbah · 9:60</cite>
     </div>
@@ -880,22 +901,22 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         <span class="rcard-num">01 / 08</span>
         <div class="rcard-ar">الفُقَرَاء</div>
         <h3 class="rcard-title">Al-Fuqarā'</h3>
-        <div class="rcard-trans">The Destitute</div>
+        <div class="rcard-trans">The Extremely Poor</div>
         <p class="rcard-desc">
-          Those who possess virtually nothing — no income, no assets, or less than half of what is necessary to meet life's basic human requirements for food, water, and shelter.
+          People who have virtually no income or belongings, and cannot afford basic necessities like food, clean water, or safe shelter.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Displaced families with zero assets, refugees in famine conditions.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Families with zero assets, refugees facing severe hunger.</div>
       </div>
 
       <div class="rcard">
         <span class="rcard-num">02 / 08</span>
         <div class="rcard-ar">المَسَاكِين</div>
         <h3 class="rcard-title">Al-Masākīn</h3>
-        <div class="rcard-trans">The Working Needy</div>
+        <div class="rcard-trans">The Working Poor</div>
         <p class="rcard-desc">
-          Those who work or earn income, yet whose earnings fall short of fulfilling their essential monthly needs. They maintain dignity and do not beg, yet suffer in silence.
+          People who earn a living, but their income is not enough to cover basic daily living expenses. They do not beg out of dignity.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Underpaid workers unable to afford rent, healthcare, or winter utilities.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Low-income workers struggling to pay rent or essential heating.</div>
       </div>
 
       <div class="rcard">
@@ -904,42 +925,42 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         <h3 class="rcard-title">Al-'Āmilīna 'Alayhā</h3>
         <div class="rcard-trans">Zakat Administrators</div>
         <p class="rcard-desc">
-          Those appointed or employed by legitimate authorities to collect, account for, safeguard, and faithfully distribute Zakat to verified beneficiaries.
+          Trustworthy workers hired by legitimate charities to collect, account for, safeguard, and deliver Zakat to verified recipients.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Field workers, auditable caseworkers, and distribution logistics staff.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Caseworkers, verification officers, and field distribution teams.</div>
       </div>
 
       <div class="rcard">
         <span class="rcard-num">04 / 08</span>
         <div class="rcard-ar">المُؤَلَّفَةِ قُلُوبُهُمْ</div>
         <h3 class="rcard-title">Al-Mu'allafah</h3>
-        <div class="rcard-trans">Reconciling Hearts</div>
+        <div class="rcard-trans">New Muslims &amp; Friends</div>
         <p class="rcard-desc">
-          Individuals whose hearts are drawn to Islam, new converts who have lost family and financial support, or those whose harm against the community is averted through goodwill.
+          New Muslims who lost family or financial support after accepting Islam, or individuals whose hearts need encouragement and care.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Relieving ostracized converts, social integration, and bridge-building.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Supporting vulnerable converts and building community ties.</div>
       </div>
 
       <div class="rcard">
         <span class="rcard-num">05 / 08</span>
         <div class="rcard-ar">فِي الرِّقَاب</div>
         <h3 class="rcard-title">Fī Ar-Riqāb</h3>
-        <div class="rcard-trans">Emancipating Bondage</div>
+        <div class="rcard-trans">Freeing Captives</div>
         <p class="rcard-desc">
-          Historically used to purchase freedom for enslaved individuals. In contemporary jurisprudence, applied to ransom unjust captives and rescue victims of human trafficking.
+          Historically used to free slaves. Today, scholars apply this to rescue victims of human trafficking and modern forced labor.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Anti-trafficking legal rescues, bonded brick-kiln laborers, prison bond aid.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Legal rescue of bonded laborers and human trafficking victims.</div>
       </div>
 
       <div class="rcard">
         <span class="rcard-num">06 / 08</span>
         <div class="rcard-ar">الغَارِمِين</div>
         <h3 class="rcard-title">Al-Ghārimīn</h3>
-        <div class="rcard-trans">Debt-Stricken Souls</div>
+        <div class="rcard-trans">People in Debt</div>
         <p class="rcard-desc">
-          Those overwhelmed by inescapable debts incurred for permissible and necessary causes (e.g. emergency surgery, natural disaster loss, basic sustenance) without means to pay.
+          People overwhelmed by unavoidable debt from basic survival needs, emergency medical care, or natural disasters, with no way to repay.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Catastrophic hospital bills, earthquake victims who lost homes to debt.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Emergency hospital bills, disaster victims who lost their homes.</div>
       </div>
 
       <div class="rcard">
@@ -948,20 +969,155 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         <h3 class="rcard-title">Fī Sabīlillāh</h3>
         <div class="rcard-trans">In the Cause of Allah</div>
         <p class="rcard-desc">
-          Activities dedicated to defending the oppressed Muslim community, spreading the truth of Islam, public religious education, and establishing righteous community welfare.
+          Activities dedicated to sharing the message of Islam, teaching the faith, protecting the oppressed, and serving community welfare.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Authentic Islamic scholarship, dawah institutes, and defending persecuted communities.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Authentic Islamic education, dawah projects, and humanitarian relief.</div>
       </div>
 
       <div class="rcard">
         <span class="rcard-num">08 / 08</span>
         <div class="rcard-ar">ابْنِ السَّبِيل</div>
         <h3 class="rcard-title">Ibn As-Sabīl</h3>
-        <div class="rcard-trans">The Wayfarer</div>
+        <div class="rcard-trans">The Stranded Traveler</div>
         <p class="rcard-desc">
-          The stranded traveler who is cut off from their wealth while away from home, even if they are wealthy in their homeland, until they can safely return.
+          Travelers or refugees who are cut off from their funds while away from home, even if they have money in their homeland, until they can get home.
         </p>
-        <div class="rcard-example"><b>Modern Impact:</b> Displaced asylum seekers, stranded students abroad whose funding collapsed.</div>
+        <div class="rcard-example"><b>Real Impact:</b> Displaced asylum seekers, students stranded abroad in emergencies.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QURANIC MOTIVATION: DIVINE PROMISES -->
+<section id="promises" style="background:linear-gradient(180deg,transparent,rgba(47,177,160,.05),transparent)">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="eyebrow">Motivation from the Quran</div>
+      <h2>What Allah Promises to Those Who Give.<br><em>Never Fear That Charity Makes You Poor.</em></h2>
+      <p>
+        Throughout the Quran, Allah reminds us that giving for His sake is the greatest investment a human can make. Listen to and reflect on these six clear promises:
+      </p>
+    </div>
+
+    <div class="promises-grid reveal">
+      <!-- PROMISE 1 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 01</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002261.mp3" aria-label="Listen to Ayah 2:261" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">Allah Multiplies What You Give 700 Times and More</h3>
+          <div class="ar promise-ar">مَّثَلُ ٱلَّذِينَ يُنفِقُونَ أَمْوَٰلَهُمْ فِى سَبِيلِ ٱللَّهِ كَمَثَلِ حَبَّةٍ أَنۢبَتَتْ سَبْعَ سَنَابِلَ فِى كُلِّ سُنبُلَةٍ مِّا۟ئَةُ حَبَّةٍ ۗ وَٱللَّهُ يُضَٰعِفُ لِمَن يَشَآءُ</div>
+          <p class="promise-trans">“The example of those who spend their wealth in the way of Allah is like a grain of wheat that grows seven ears, with a hundred grains in every ear. And Allah multiplies for whom He wills.”</p>
+          <span class="promise-ref">Surah Al-Baqarah · 2:261</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> A single dollar given with sincere intention is multiplied into hundreds of rewards in Allah's sight.
+        </div>
+      </div>
+
+      <!-- PROMISE 2 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 02</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/034039.mp3" aria-label="Listen to Ayah 34:39" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">You Never Lose: Allah Guarantees He Will Replace It</h3>
+          <div class="ar promise-ar">وَمَا أَنفَقْتُم مِّن شَيْءٍ فَهُوَ يُخْلِفُهُ ۖ وَهُوَ خَيْرُ الرَّازِقِينَ</div>
+          <p class="promise-trans">“Whatever you spend of anything in charity, He will replace it. And He is the best of providers.”</p>
+          <span class="promise-ref">Surah Saba · 34:39</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> You cannot become poor by giving for Allah's sake. He promises to replace whatever you give with something greater.
+        </div>
+      </div>
+
+      <!-- PROMISE 3 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 03</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002274.mp3" aria-label="Listen to Ayah 2:274" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">Giving Charity Brings Total Peace of Mind</h3>
+          <div class="ar promise-ar">الَّذِينَ يُنفِقُونَ أَمْوَالَهُم بِاللَّيْلِ وَالنَّهَارِ سِرًّا وَعَلَانِيَةً فَلَهُمْ أَجْرُهُمْ عِندَ رَبِّهِمْ وَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ</div>
+          <p class="promise-trans">“Those who spend their wealth night and day, secretly and openly, will have their reward with their Lord. They will have no fear, nor will they grieve.”</p>
+          <span class="promise-ref">Surah Al-Baqarah · 2:274</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> Charity cures anxiety. Allah takes away your fear of the future and grief over the past, giving you true peace in your heart.
+        </div>
+      </div>
+
+      <!-- PROMISE 4 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 04</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/057018.mp3" aria-label="Listen to Ayah 57:18" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">A Goodly Loan to Allah with a Noble Reward</h3>
+          <div class="ar promise-ar">إِنَّ الْمُصَّدِّقِينَ وَالْمُصَّدِّقَاتِ وَأَقْرَضُوا اللَّهَ قَرْضًا حَسَنًا يُضَاعَفُ لَهُمْ وَلَهُمْ أَجْرٌ كَرِيمٌ</div>
+          <p class="promise-trans">“Indeed, the men and women who give charity and lend to Allah a good loan — it will be multiplied for them, and they will have an honorable reward.”</p>
+          <span class="promise-ref">Surah Al-Hadid · 57:18</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> Allah owns everything, yet He calls your charity a loan to Him, which He will repay with high honor in Jannah.
+        </div>
+      </div>
+
+      <!-- PROMISE 5 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 05</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002268.mp3" aria-label="Listen to Ayah 2:268" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">Fear of Poverty is from Satan — Allah Promises Abundance</h3>
+          <div class="ar promise-ar">الشَّيْطَانُ يَعِدُكُمُ الْفَقْرَ وَيَأْمُرُكُم بِالْفَحْشَاءِ ۖ وَاللَّهُ يَعِدُكُم مَّغْفِرَةً مِّنْهُ وَفَضْلًا ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ</div>
+          <p class="promise-trans">“Satan threatens you with poverty and orders you to be greedy. But Allah promises you forgiveness from Him and abundant bounty. And Allah is All-Bountiful, All-Knowing.”</p>
+          <span class="promise-ref">Surah Al-Baqarah · 2:268</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> When you hesitate to give, know that the fear of running out of money is a whisper from Satan. Allah's promise is forgiveness and abundance.
+        </div>
+      </div>
+
+      <!-- PROMISE 6 -->
+      <div class="promise-card">
+        <div>
+          <div class="promise-head">
+            <span class="promise-badge">Promise 06</span>
+            <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/063010.mp3" aria-label="Listen to Ayah 63:10" title="Listen · Sheikh Mishary Rashid Alafasy">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          </div>
+          <h3 class="promise-title">Give Today Before Death Comes</h3>
+          <div class="ar promise-ar">وَأَنفِقُوا مِن مَّا رَزَقْنَاكُم مِّن قَبْلِ أَن يَأْتِيَ أَحَدَكُمُ الْمَوْتُ فَيَقُولَ رَبِّ لَوْلَا أَخَّرْتَنِي إِلَىٰ أَجَلٍ قَرِيبٍ فَأَصَّدَّقَ وَأَكُن مِّنَ الصَّالِحِينَ</div>
+          <p class="promise-trans">“And spend from what We have provided you before death comes to one of you and he says: ‘My Lord, if only You would delay me for a little while so I could give charity and be among the righteous!’”</p>
+          <span class="promise-ref">Surah Al-Munafiqun · 63:10</span>
+        </div>
+        <div class="promise-takeaway">
+          <b>Key Motivation:</b> In the final moments of life, people do not ask for more time to enjoy wealth — their only wish is to return to life to give charity. Give while you have the chance.
+        </div>
       </div>
     </div>
   </div>
@@ -971,16 +1127,16 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="wisdom" style="background:linear-gradient(180deg,transparent,rgba(227,189,122,.04),transparent)">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Scholarly Depth &amp; Spiritual Reflections</div>
-      <h2>The Secrets of Purification.<br><em>What the Masters Taught.</em></h2>
+      <div class="eyebrow">Scholarly Reflections</div>
+      <h2>The Inner Blessings of Giving.<br><em>What Trusted Scholars Teach Us.</em></h2>
       <p>
-        Zakat is not a tax; it is spiritual chemotherapy for the greed of the ego (*shuhh al-nafs*). Explore profound insights from contemporary thinkers and classical luminaries.
+        Zakat is not just about money. It cleanses the heart from selfishness and reminds us that everything we have is a gift from Allah. Read reflections from respected teachers.
       </p>
     </div>
 
     <!-- TABS -->
     <div class="scholar-tabs reveal" id="scholarTabs">
-      <button class="scholar-tab on" data-filter="all">All Wisdom (4)</button>
+      <button class="scholar-tab on" data-filter="all">All Reflections (4)</button>
       <button class="scholar-tab" data-filter="qadhi">Dr. Yasir Qadhi</button>
       <button class="scholar-tab" data-filter="nak">Ustadh Nouman Ali Khan</button>
       <button class="scholar-tab" data-filter="ghazali">Imam Al-Ghazali</button>
@@ -996,10 +1152,10 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="comparison">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Clear Jurisprudence</div>
-      <h2>Zakat vs. Sadaqah Jariyah.<br><em>Know the Difference.</em></h2>
+      <div class="eyebrow">Simple Comparison</div>
+      <h2>Zakat vs. Sadaqah Jariyah.<br><em>Understanding the Difference.</em></h2>
       <p>
-        Both purify the soul, but their legal rulings, eligible beneficiaries, and calculation mechanics operate under distinct divine guidelines.
+        Both bring huge rewards, but Zakat is an obligatory duty with specific rules, while Sadaqah is voluntary and open to anyone at any time.
       </p>
     </div>
 
@@ -1007,36 +1163,36 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
       <table class="comp-table">
         <thead>
           <tr>
-            <th>Criterion</th>
-            <th>Zakat al-Māl (الزَّكَاة)</th>
-            <th>Sadaqah Jāriyah (صَدَقَة جَارِيَة)</th>
+            <th>Comparison</th>
+            <th>Zakat (Obligatory Duty)</th>
+            <th>Sadaqah Jariyah (Ongoing Voluntary Charity)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><b>Islamic Ruling</b></td>
-            <td><b style="color:var(--jade)">Farḍ 'Ayn (Obligatory)</b> — One of the 5 Pillars of Islam.</td>
-            <td><b style="color:var(--gold)">Mustaḥabb (Voluntary / Sunnah)</b> — Highly rewarded continuous charity.</td>
+            <td><b>Is it required?</b></td>
+            <td><b style="color:var(--jade)">Obligatory (Fard)</b> — One of the 5 Pillars of Islam. Every Muslim who meets the conditions must pay it.</td>
+            <td><b style="color:var(--gold)">Voluntary (Sunnah)</b> — Highly recommended by the Prophet ﷺ, with immense continuous rewards.</td>
           </tr>
           <tr>
-            <td><b>Required Amount</b></td>
-            <td>Fixed strictly at <b>2.5%</b> (1/40th) of qualifying surplus wealth.</td>
-            <td><b>Any amount</b> — from half a date, a smile, a borehole, to a grand university.</td>
+            <td><b>How much do you give?</b></td>
+            <td>Strictly fixed at <b>2.5%</b> of your surplus savings held for a full year.</td>
+            <td><b>Any amount you wish</b> — from a single dollar or a meal, to building a water well or school.</td>
           </tr>
           <tr>
-            <td><b>Eligible Recipients</b></td>
-            <td>Restricted strictly to the <b>8 Quranic categories</b> in Surah 9:60.</td>
-            <td><b>Open to all humans &amp; creations</b> — public utilities, relatives, non-Muslims, animals.</td>
+            <td><b>Who can receive it?</b></td>
+            <td>Restricted strictly to the <b>8 categories named in the Quran</b> (Surah 9:60).</td>
+            <td><b>Open to anyone in need</b> — schools, clinics, water wells, relatives, non-Muslim neighbors, and animals.</td>
           </tr>
           <tr>
-            <td><b>Threshold (Niṣāb)</b></td>
-            <td>Must exceed 85g gold or 595g silver net wealth.</td>
-            <td><b>No minimum threshold</b> — even someone receiving Zakat can give Sadaqah.</td>
+            <td><b>Minimum Savings (Nisab)?</b></td>
+            <td><b>Yes.</b> Your savings must reach the Nisab threshold (approx. value of 85g gold or 595g silver).</td>
+            <td><b>No minimum.</b> Anyone can give Sadaqah, even someone who has very little.</td>
           </tr>
           <tr>
-            <td><b>Time Horizon</b></td>
-            <td>Calculated after holding surplus for <b>one lunar year (Ḥawl)</b>.</td>
-            <td>Immediate; continuous rewards flow into the grave long after death.</td>
+            <td><b>When do you give?</b></td>
+            <td>Once every lunar year, after holding qualifying surplus wealth for 12 months.</td>
+            <td><b>Anytime.</b> The rewards keep reaching you even after passing away.</td>
           </tr>
         </tbody>
       </table>
@@ -1057,24 +1213,24 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
       </div>
       <div class="jar-note">Click the jar · <span id="jn">0</span> coins dropped</div>
       <div style="text-align:center;margin-top:1.2rem">
-        <button class="btn sm ghost" id="emptyJarBtn"><span>Pour Jar to Field 🕊️</span></button>
+        <button class="btn sm ghost" id="emptyJarBtn"><span>Pour Jar to Help Families 🕊️</span></button>
       </div>
     </div>
     <div class="reveal">
-      <div class="eyebrow">The Sunnah of Small &amp; Steady</div>
+      <div class="eyebrow">Small &amp; Consistent Giving</div>
       <h2 style="font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.08">The Prophet ﷺ said:<br>
-        <em style="color:var(--gold);font-weight:300">“Save yourselves from the Fire, even with half a date.”</em></h2>
+        <em style="color:var(--gold);font-weight:300">“Protect yourselves from the Fire, even with half a date.”</em></h2>
       <p style="margin-top:1.2rem;color:#a8c0c2;font-weight:300;line-height:1.8;max-width:48ch">
-        Nothing is too small in the sight of the Most Appreciative (*Ash-Shakūr*). A single recurring dirham turns into a wellspring of barakah.
+        Nothing is too small in the sight of Allah. Giving even a small amount regularly with a sincere heart protects you from hardship and brings blessings into your home.
       </p>
       <div class="grid2" style="margin-top:2.2rem">
         <div class="flip"><div class="fi">
           <div class="f"><div class="ar">مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ</div><small>Click / Hover to translate</small></div>
-          <div class="b"><q>“Charity never decreases wealth in the least.”</q><small>Ṣaḥīḥ Muslim · 2588</small></div>
+          <div class="b"><q>“Charity never decreases wealth.”</q><small>Sahih Muslim · 2588</small></div>
         </div></div>
         <div class="flip"><div class="fi">
           <div class="f"><div class="ar">وَٱلصَّدَقَةُ تُطْفِئُ ٱلْخَطِيئَةَ كَمَا يُطْفِئُ ٱلْمَاءُ ٱلنَّارَ</div><small>Click / Hover to translate</small></div>
-          <div class="b"><q>“Charity extinguishes sin just as water extinguishes fire.”</q><small>Jāmi' at-Tirmidhī · 614</small></div>
+          <div class="b"><q>“Charity puts out sins just like water puts out fire.”</q><small>Jami at-Tirmidhi · 614</small></div>
         </div></div>
       </div>
     </div>
@@ -1085,9 +1241,9 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="causes">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Active Humanitarian Appeals</div>
-      <h2>Where the water is <em>needed most.</em></h2>
-      <p>Transparent, auditable, and 100% Zakat-eligible emergency appeals.</p>
+      <div class="eyebrow">Current Needs</div>
+      <h2>Where help is <em>needed most right now.</em></h2>
+      <p>100% Zakat-eligible projects helping real families in need.</p>
     </div>
     <div class="grid3" id="cards"></div>
   </div>
@@ -1108,14 +1264,14 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <!-- CTA -->
 <section class="cta">
   <div class="wrap reveal">
-    <div class="eyebrow" style="justify-content:center">Your Turn to Give</div>
-    <h2>Be the reason<br>someone <em>breathes easier.</em></h2>
+    <div class="eyebrow" style="justify-content:center">Make a Difference Today</div>
+    <h2>Be the reason<br>a family <em>breathes easier.</em></h2>
     <div class="magnet" id="mag">
       <div class="orbit"><s></s></div>
-      <a class="btn" href="#give"><span>Start My Ripple</span><span class="arw">→</span></a>
+      <a class="btn" href="#give"><span>Give Charity Now</span><span class="arw">→</span></a>
     </div>
     <p style="margin-top:2.4rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)">
-      100% Zakat policy · No administrative deductions from Zakat funds · Instant Certificate
+      100% Zakat Policy · Every dollar reaches those in need · Instant Certificate
     </p>
   </div>
 </section>
@@ -1167,10 +1323,11 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
   </div>
   <div style="display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap">
     <a href="index.html">← Showcase Home</a>
+    <a href="#promises">Quran Promises</a>
     <a href="#zakat">Zakat Guide</a>
     <a href="#recipients">The 8 Beneficiaries</a>
     <div class="footer-version-tag">
-      v1.0.26 (updated 2026-09-10 23:19)
+      v1.0.27 (updated 2026-09-10 23:26)
     </div>
   </div>
 </div></footer>
@@ -1467,36 +1624,36 @@ const quotesData = [
     author: 'Dr. Yasir Qadhi',
     role: 'Dean of The Islamic Seminary of America',
     avatar: 'YQ',
-    tag: 'Purification',
-    text: "“Linguistically, Zakat means both purification (taharah) and growth (namaa’). It removes the spiritual cancer of stinginess (shuhh) and guarantees that what remains of your wealth will be blessed and magnified.”",
-    source: 'Fiqh of Zakat Comprehensive Lectures'
+    tag: 'Purification & Growth',
+    text: "“In Arabic, the word Zakat means both to purify and to grow. When you give Zakat, you cleanse your heart from greed, and Allah blesses whatever wealth you have left so it grows.”",
+    source: 'Fiqh of Zakat Lectures'
   },
   {
     filter: 'nak',
     author: 'Ustadh Nouman Ali Khan',
     role: 'Founder, Bayyinah Institute',
     avatar: 'NK',
-    tag: 'Divine Parable',
-    text: '“When Allah gives the parable of the grain yielding 700 grains in Surah Al-Baqarah, He shows you that giving is never an expense. In Allah’s divine ledger, spending is the only wealth you actually get to keep forever.”',
-    source: 'Deep Dive: Surah Al-Baqarah 2:261'
+    tag: 'Multiplied Reward',
+    text: '“In Surah Al-Baqarah, Allah compares giving charity to a grain that grows 700 new grains. When you give for Allah’s sake, you do not lose anything. In fact, it is the only wealth you truly keep forever in the next life.”',
+    source: 'Tafseer of Surah Al-Baqarah 2:261'
   },
   {
     filter: 'ghazali',
     author: 'Imam Al-Ghazali (d. 1111 CE)',
-    role: 'Classical Master · Hujjat al-Islam',
+    role: 'Classical Islamic Scholar',
     avatar: 'AG',
-    tag: 'Inner Secrets',
-    text: '“Wealth is beloved by human nature. Zakat was commanded so a servant proves that their love for the Creator is greater than their attachment to silver and gold. It severs the bond of greed that paralyzes the heart.”',
-    source: "Iḥyā’ ’Ulūm al-Dīn (Book of Zakat)"
+    tag: 'Proof of Love',
+    text: '“We naturally love money. Allah asked us to give Zakat so we can prove that our love for Him is stronger than our love for wealth. Giving charity breaks the hold that greed has on our hearts.”',
+    source: "Ihya Ulum al-Din"
   },
   {
     filter: 'qayyim',
     author: 'Ibn Al-Qayyim (d. 1350 CE)',
-    role: 'Classical Scholar · Heart Specialist',
+    role: 'Classical Islamic Scholar',
     avatar: 'IQ',
-    tag: 'Spiritual Shield',
-    text: '“Charity has an astonishing effect in repelling calamities and lifting trials, even if given by an oppressor or sinner! Allah wards off tribulations through it, and expands the chest with tranquility.”',
-    source: 'Al-Wābil al-Ṣayyib'
+    tag: 'Protection & Peace',
+    text: '“Charity has an amazing power to protect you from harm and lift hardships. Giving brings peace to your heart and invites Allah’s mercy into your life.”',
+    source: 'Al-Wabil al-Sayyib'
   }
 ];
 
@@ -1605,12 +1762,12 @@ if(ejb){
 
 /* ===== CAMPAIGNS ===== */
 const camps=[
-  {t:'Deep Borehole Wells, Sahel',g:'Water & Life',d:'A solar-powered deep aquifer well serving 600 villagers for over 25 years with continuous pure water.',r:76,a:'$76,000',n:'$100,000',u:1},
-  {t:'Winter Warmth Relief, Levant',g:'Emergency Aid',d:'Thermal blankets, woodstoves, heating oil, and winter jackets for displaced families in northern refugee settlements.',r:62,a:'$31,000',n:'$50,000',u:1},
-  {t:'Comprehensive Orphan Sponsorship',g:'Orphans & Vulnerable',d:'Monthly living stipends, nutrition packages, school tuition, uniforms, and regular pediatric medical checkups.',r:89,a:'$44,500',n:'$50,000'},
-  {t:'Feed 10,000 Fasting Families',g:'Food Security',d:'Essential food hampers with staple grains, dates, lentils, and cooking oil to nourish vulnerable homes through Ramadan.',r:42,a:'$21,000',n:'$50,000'},
-  {t:'Build a Community Schoolroom',g:'Sadaqah Jariyah',d:'Constructing insulated, durable classrooms equipped with solar power, desks, and books — continuous reward.',r:68,a:'$34,000',n:'$50,000'},
-  {t:'Cataract Restoration Surgeries',g:'Medical Treatment',d:'A simple 15-minute ophthalmic surgery restores full sight to someone blinded by preventable cataracts.',r:55,a:'$11,000',n:'$20,000',u:1}
+  {t:'Water Wells in Drought Areas',g:'Clean Water',d:'A solar-powered clean water well providing fresh drinking water to 600 villagers every single day.',r:76,a:'$76,000',n:'$100,000',u:1},
+  {t:'Winter Warmth Relief',g:'Emergency Aid',d:'Warm blankets, heating fuel, and winter coats for families living in cold refugee tents.',r:62,a:'$31,000',n:'$50,000',u:1},
+  {t:'Orphan Care & Support',g:'Orphan Care',d:'Monthly food, warm shelter, school fees, and medical care for children who lost their parents.',r:89,a:'$44,500',n:'$50,000'},
+  {t:'Feed Fasting Families',g:'Food Aid',d:'Essential food boxes with flour, rice, dates, and cooking oil to feed vulnerable families in Ramadan.',r:42,a:'$21,000',n:'$50,000'},
+  {t:'Build a Village Schoolroom',g:'Continuous Charity',d:'Building clean, safe classrooms with desks, books, and solar lights — continuous reward (Sadaqah Jariyah).',r:68,a:'$34,000',n:'$50,000'},
+  {t:'Sight-Restoring Eye Surgeries',g:'Medical Relief',d:'A simple 15-minute eye procedure that restores full sight to an elder or child suffering from cataracts.',r:55,a:'$11,000',n:'$20,000',u:1}
 ];
 
 document.getElementById('cards').innerHTML=camps.map(c=>`
