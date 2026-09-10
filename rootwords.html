@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>شَجَرَةُ الجُذُور · The Root Tree — Quranic Arabic Root Words</title>
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
 <meta name="description" content="Learn Quranic Arabic root words (الجذر) through a living tree: interactive root explorer, patterns, ayah x-ray, quizzes and a teacher's toolkit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1041,7 +1042,7 @@ html, body {
         </div>
       </div>
 
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.25 (updated 2026-09-10 19:16)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.26 (updated 2026-09-10 23:19)</div>
     </div>
   </div>
 </footer>
@@ -1579,14 +1580,17 @@ function buildScene(cfg){
 }
 function animateGrowth(host,id,maxR){
   const c=host.querySelector('.gmc'); if(!c) return;
-  if(RM){c.setAttribute('r',maxR);host.querySelectorAll('.wleaf').forEach(w=>w.classList.add('show'));return;}
-  const t0=performance.now(),dur=1650;
-  (function step(t){
-    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
-    c.setAttribute('r',(maxR*e).toFixed(1));
+  const safeR = Math.max(0, maxR);
+  if(RM){c.setAttribute('r',safeR);host.querySelectorAll('.wleaf').forEach(w=>w.classList.add('show'));return;}
+  let t0=null; const dur=1650;
+  function step(t){
+    if(t0===null) t0=t;
+    const p=Math.max(0,Math.min(1,(t-t0)/dur)), e=1-Math.pow(1-p,3);
+    c.setAttribute('r',Math.max(0,safeR*e).toFixed(1));
     if(p<1) requestAnimationFrame(step);
     else host.querySelectorAll('.wleaf').forEach(w=>w.classList.add('show'));
-  })(t0);
+  }
+  requestAnimationFrame(step);
 }
 
 /* =====================================================================

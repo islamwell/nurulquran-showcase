@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Ripple — Sadaqah & Comprehensive Zakat Calculator · NurulQuran</title>
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -228,7 +229,7 @@ section{padding:7rem 0;position:relative}
 .reveal.in{opacity:1;transform:none}
 
 /* ============ RIPPLE POOL ============ */
-#pool{position:relative;height:430px;border-radius:var(--r);overflow:hidden;cursor:crosshair;
+#pool{position:relative;height:430px;border-radius:var(--r);overflow:hidden;cursor:crosshair;touch-action:manipulation;
   background:radial-gradient(circle at 50% 120%,#0d3a42,#04141a 72%);
   border:1px solid rgba(227,189,122,.2);box-shadow:inset 0 0 60px rgba(0,0,0,.5)}
 #pool canvas{position:absolute;inset:0}
@@ -403,7 +404,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 /* ============ SADAQAH JAR ============ */
 .jarwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.4rem;align-items:center}
 @media(max-width:900px){.jarwrap{grid-template-columns:1fr}}
-#jar{position:relative;width:240px;height:310px;margin:0 auto;cursor:pointer}
+#jar{position:relative;width:240px;height:310px;margin:0 auto;cursor:pointer;touch-action:manipulation}
 #jar .glass{position:absolute;inset:0;border:2px solid rgba(227,189,122,.45);
   border-radius:20px 20px 65px 65px/20px 20px 45px 45px;overflow:hidden;
   background:linear-gradient(120deg,rgba(255,255,255,.08),rgba(255,255,255,.015));backdrop-filter:blur(4px);
@@ -1169,7 +1170,7 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
     <a href="#zakat">Zakat Guide</a>
     <a href="#recipients">The 8 Beneficiaries</a>
     <div class="footer-version-tag">
-      v1.0.25 (updated 2026-09-10 19:16)
+      v1.0.26 (updated 2026-09-10 23:19)
     </div>
   </div>
 </div></footer>
@@ -1552,23 +1553,26 @@ renderScholarQuotes('all');
 
 /* ===== SADAQAH JAR ===== */
 let coins=0;const jar=document.getElementById('jar');
-jar.onclick=()=>{
-  coins++;
-  playCoinChime();
-  document.getElementById('jn').textContent=coins;
-  document.getElementById('fill').style.height=Math.min(82, coins*4)+'%';
-  const c=document.createElement('div');
-  c.className='coin';
-  c.textContent=curSym;
-  c.style.left=(32+Math.random()*36)+'%';
-  jar.appendChild(c);
-  setTimeout(()=>c.remove(),1100);
-};
+if(jar){
+  jar.onclick=()=>{
+    coins++;
+    playCoinChime();
+    const jn=document.getElementById('jn'); if(jn) jn.textContent=coins;
+    const fl=document.getElementById('fill'); if(fl) fl.style.height=Math.min(82, coins*4)+'%';
+    const c=document.createElement('div');
+    c.className='coin';
+    c.textContent=curSym;
+    c.style.left=(32+Math.random()*36)+'%';
+    jar.appendChild(c);
+    setTimeout(()=>c.remove(),1100);
+  };
+}
 
 /* ===== CELEBRATORY CONFETTI SHOWER ===== */
-const cc=document.getElementById('confetti'), cx2=cc.getContext('2d');let parts=[];
-const fitConfetti=()=>{cc.width=innerWidth;cc.height=innerHeight};fitConfetti();addEventListener('resize',fitConfetti);
+const cc=document.getElementById('confetti'), cx2=cc?cc.getContext('2d'):null;let parts=[];
+const fitConfetti=()=>{if(cc){cc.width=innerWidth;cc.height=innerHeight}};fitConfetti();addEventListener('resize',fitConfetti);
 function triggerConfetti(){
+  if(!cx2) return;
   const C=['#e3bd7a','#f6e0b0','#2fb1a0','#e88b6a','#f7f1e6'];
   for(let i=0;i<180;i++){
     parts.push({
@@ -1578,21 +1582,26 @@ function triggerConfetti(){
   }
 }
 (function animConfetti(){
-  cx2.clearRect(0,0,cc.width,cc.height);
-  parts.forEach(p=>{
-    p.vy+=.32;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.008;
-    cx2.save();cx2.translate(p.x,p.y);cx2.rotate(p.r);cx2.globalAlpha=Math.max(p.l,0);
-    cx2.fillStyle=p.c;cx2.fillRect(-p.s/2,-p.s/2,p.s,p.s*.55);cx2.restore();
-  });
-  parts=parts.filter(p=>p.l>0&&p.y<cc.height+40);
+  if(cx2 && cc){
+    cx2.clearRect(0,0,cc.width,cc.height);
+    parts.forEach(p=>{
+      p.vy+=.32;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.008;
+      cx2.save();cx2.translate(p.x,p.y);cx2.rotate(p.r);cx2.globalAlpha=Math.max(p.l,0);
+      cx2.fillStyle=p.c;cx2.fillRect(-p.s/2,-p.s/2,p.s,p.s*.55);cx2.restore();
+    });
+    parts=parts.filter(p=>p.l>0&&p.y<cc.height+40);
+  }
   requestAnimationFrame(animConfetti);
 })();
 
-$('#emptyJarBtn').onclick=()=>{
-  if(coins===0){ coins = 5; document.getElementById('fill').style.height='20%'; }
-  triggerConfetti();
-  openAllocModal(coins * 10, 'Sadaqah Jar Dedication');
-};
+const ejb = $('#emptyJarBtn');
+if(ejb){
+  ejb.onclick=()=>{
+    if(coins===0){ coins = 5; const fl=document.getElementById('fill'); if(fl) fl.style.height='20%'; }
+    triggerConfetti();
+    openAllocModal(coins * 10, 'Sadaqah Jar Dedication');
+  };
+}
 
 /* ===== CAMPAIGNS ===== */
 const camps=[
