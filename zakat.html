@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
 <script>if(location.search.includes('snap')){document.documentElement.classList.add('snap');}</script>
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -117,6 +117,65 @@ nav .in{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .links a:hover::after{width:100%}
 @media(max-width:940px){.links{display:none}}
 .nav-right{display:flex;align-items:center;gap:.8rem}
+
+/* Language Switcher Buttons */
+.nq-lang-group{display:inline-flex;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(227,189,122,0.28);border-radius:999px;padding:3px;gap:4px}
+.nq-lang-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid transparent;color:var(--mute);font-family:'Outfit',sans-serif;font-weight:600;font-size:0.75rem;padding:4px 10px;border-radius:999px;cursor:pointer;transition:all 0.22s ease;user-select:none}
+.nq-lang-btn:hover{color:#fff;background:rgba(255,255,255,0.12)}
+.nq-lang-btn.on{color:var(--ink);background:var(--gold);border-color:var(--gold);font-weight:700;box-shadow:0 0 14px rgba(227,189,122,0.4)}
+.round-flag{width:18px;height:18px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.5);display:block}
+
+/* Urdu Typography & Directional Refinements */
+html[lang="ur"] {
+  --f-ur:'Noto Nastaliq Urdu', 'Noto Naskh Arabic', 'Amiri', serif;
+}
+html[lang="ur"] h1,
+html[lang="ur"] h2,
+html[lang="ur"] h3 {
+  font-family:'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  line-height:1.52;
+}
+html[lang="ur"] .lede,
+html[lang="ur"] .rcard-desc,
+html[lang="ur"] .promise-trans,
+html[lang="ur"] .qcard-text,
+html[lang="ur"] .card p {
+  font-family:'Noto Naskh Arabic', 'Amiri', serif;
+  font-size:1.06rem;
+  line-height:1.9;
+}
+html[lang="ur"] .rcard-trans {
+  font-family:'Noto Naskh Arabic', 'Amiri', serif;
+  font-size:0.95rem;
+}
+html[lang="ur"] .promise-takeaway,
+html[lang="ur"] .rcard-example {
+  font-family:'Noto Naskh Arabic', 'Amiri', serif;
+  border-left:none;
+  border-right:3px solid var(--gold);
+  text-align:right;
+  direction:rtl;
+  line-height:1.8;
+}
+html[lang="ur"] .rcard-desc,
+html[lang="ur"] .promise-trans,
+html[lang="ur"] .qcard-text {
+  text-align:right;
+  direction:rtl;
+}
+html[lang="ur"] .links a,
+html[lang="ur"] .nav-portal-link {
+  font-family:'Noto Naskh Arabic', 'Outfit', sans-serif;
+}
+html[lang="ur"] .scholar-tab {
+  font-family:'Noto Naskh Arabic', 'Outfit', sans-serif;
+  font-size:0.86rem;
+}
+html[lang="ur"] .pop {
+  font-family:'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  font-size:1.35rem;
+  line-height:1.6;
+}
 
 /* Arabic Scaler Button */
 .nq-ar-btn{
@@ -552,6 +611,38 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 </head>
 <body>
 
+<!-- FLAG SVG DEFINITIONS (USA & PAKISTAN) -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <!-- USA Round Flag -->
+    <g id="flag-us">
+      <clipPath id="usClipRound"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#usClipRound)">
+        <rect width="36" height="36" fill="#B22234"/>
+        <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+        <rect width="16" height="19.4" fill="#3C3B6E"/>
+        <g fill="#FFFFFF">
+          <circle cx="3.8" cy="4" r="1"/><circle cx="8" cy="4" r="1"/><circle cx="12.2" cy="4" r="1"/>
+          <circle cx="5.9" cy="7.2" r="1"/><circle cx="10.1" cy="7.2" r="1"/><circle cx="3.8" cy="10.4" r="1"/>
+          <circle cx="8" cy="10.4" r="1"/><circle cx="12.2" cy="10.4" r="1"/><circle cx="5.9" cy="13.6" r="1"/>
+          <circle cx="10.1" cy="13.6" r="1"/><circle cx="3.8" cy="16.8" r="1"/><circle cx="8" cy="16.8" r="1"/>
+          <circle cx="12.2" cy="16.8" r="1"/>
+        </g>
+      </g>
+    </g>
+    <!-- Pakistan Round Flag -->
+    <g id="flag-pk">
+      <clipPath id="pkClipRound"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#pkClipRound)">
+        <rect width="36" height="36" fill="#01411C"/>
+        <rect width="9" height="36" fill="#FFFFFF"/>
+        <path d="M24.5 13.5 a8 8 0 1 0 2.2 11.2 a7 7 0 1 1 -4.4 -11.8 z" fill="#FFFFFF"/>
+        <polygon points="26.5,12 27.4,14 29.5,14.3 27.9,15.7 28.4,17.8 26.5,16.6 24.6,17.8 25.1,15.7 23.5,14.3 25.6,14" fill="#FFFFFF"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
 <!-- CANVAS CONFETTI -->
 <canvas id="confetti"></canvas>
 
@@ -568,23 +659,35 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <!-- NAV -->
 <nav id="nav"><div class="wrap in">
   <div class="nav-left">
-    <a href="index.html" class="nav-portal-link" title="Return to NurulQuran Portal">← Showcase</a>
+    <a href="index.html" class="nav-portal-link" title="Return to NurulQuran Portal" id="navPortalLink">← Showcase</a>
     <a class="logo" href="#"><i><s></s></i> The&nbsp;<b>Ripple</b></a>
   </div>
-  <div class="links">
-    <a href="#pool-s">Ripple</a>
-    <a href="#recipients">Beneficiaries</a>
-    <a href="#promises">Quran Promises</a>
-    <a href="#wisdom">Wisdom</a>
-    <a href="#causes">Causes</a>
-    <a href="#jar-s">Sadaqah Jar</a>
+  <div class="links" id="mainNavLinks">
+    <a href="#pool-s" id="navLinkPool">Ripple</a>
+    <a href="#recipients" id="navLinkRecip">Beneficiaries</a>
+    <a href="#promises" id="navLinkPromises">Quran Promises</a>
+    <a href="#wisdom" id="navLinkWisdom">Wisdom</a>
+    <a href="#causes" id="navLinkCauses">Causes</a>
+    <a href="#jar-s" id="navLinkJar">Sadaqah Jar</a>
   </div>
   <div class="nav-right">
+    <!-- Bilingual Switcher: English (USA) / Urdu (Pakistan) -->
+    <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
+      <button type="button" class="nq-lang-btn on" id="btnLangEn" data-lang="en" role="radio" aria-checked="true" title="English (USA)">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-us" xlink:href="#flag-us"></use></svg>
+        <span>English</span>
+      </button>
+      <button type="button" class="nq-lang-btn" id="btnLangUr" data-lang="ur" role="radio" aria-checked="false" title="اردو (Pakistan)">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-pk" xlink:href="#flag-pk"></use></svg>
+        <span style="font-family:'Noto Nastaliq Urdu','Noto Naskh Arabic',serif;font-size:0.92rem">اردو</span>
+      </button>
+    </div>
+
     <button class="nq-ar-btn" id="arScaleBtn" title="Arabic Font Size (Click to loop sizes)" aria-label="Cycle Arabic font size">
       <span class="nq-ar-glyph">ع</span>
       <span id="arScaleVal">100%</span>
     </button>
-    <a class="btn sm" href="#causes"><span>Donate</span><span class="arw">→</span></a>
+    <a class="btn sm" href="#causes" id="navDonateBtn"><span>Donate</span><span class="arw">→</span></a>
   </div>
 </div></nav>
 
@@ -594,20 +697,20 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
   <div class="glow g1"></div><div class="glow g2"></div>
   <div class="wrap in">
     <div>
-      <div class="eyebrow fadeUp" style="animation-delay:.9s">Sadaqah &amp; Zakat · Giving for Allah</div>
+      <div class="eyebrow fadeUp" id="heroEyebrow" style="animation-delay:.9s">Sadaqah &amp; Zakat · Giving for Allah</div>
       <h1 id="hl">Drop one coin. <span class="it">Move an ocean.</span></h1>
-      <p class="lede fadeUp" style="animation-delay:1.3s">
+      <p class="lede fadeUp" id="heroLede" style="animation-delay:1.3s">
         Charity never decreases your wealth. When you give, your hand opens a door for someone to receive clean water, food, or medicine. Learn the Quranic promises of charity and give for the sake of Allah today.
       </p>
       <div class="hero-cta fadeUp" style="animation-delay:1.5s">
-        <a class="btn" href="#causes"><span>Donate Now</span><span class="arw">→</span></a>
-        <a class="btn ghost" href="#promises"><span>Quran Promises</span></a>
+        <a class="btn" href="#causes" id="heroBtnDonate"><span>Donate Now</span><span class="arw">→</span></a>
+        <a class="btn ghost" href="#promises" id="heroBtnPromises"><span>Quran Promises</span></a>
       </div>
       <div class="hstats fadeUp" style="animation-delay:1.7s">
-        <div><b data-cnt="0" data-pre="$">$0</b><small>Given this year</small></div>
-        <div><b data-cnt="0">0</b><small>People helped</small></div>
-        <div><b data-cnt="0">0</b><small>Countries reached</small></div>
-        <div><b data-cnt="0">0</b><small>Projects completed</small></div>
+        <div><b data-cnt="0" data-pre="$">$0</b><small id="hstat0">Given this year</small></div>
+        <div><b data-cnt="0">0</b><small id="hstat1">People helped</small></div>
+        <div><b data-cnt="0">0</b><small id="hstat2">Countries reached</small></div>
+        <div><b data-cnt="0">0</b><small id="hstat3">Projects completed</small></div>
       </div>
     </div>
     <div class="plate tilt fadeUp" style="animation-delay:1.2s">
@@ -619,8 +722,8 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
         </button>
       </div>
       <div class="ar">مَّثَلُ ٱلَّذِينَ يُنفِقُونَ أَمْوَٰلَهُمْ فِى سَبِيلِ ٱللَّهِ كَمَثَلِ حَبَّةٍ أَنۢبَتَتْ سَبْعَ سَنَابِلَ فِى كُلِّ سُنبُلَةٍ مِّا۟ئَةُ حَبَّةٍ ۗ وَٱللَّهُ يُضَٰعِفُ لِمَن يَشَآءُ ۗ وَٱللَّهُ وَٰسِعٌ عَلِيمٌ</div>
-      <q>“The example of those who spend their wealth in the way of Allah is like a seed of grain that sprouts seven ears, with a hundred grains in every ear. And Allah multiplies for whoever He wills. And Allah is All-Encompassing, All-Knowing.”</q>
-      <cite>Surah Al-Baqarah · 2:261</cite>
+      <q id="heroPlateQuote">“The example of those who spend their wealth in the way of Allah is like a seed of grain that sprouts seven ears, with a hundred grains in every ear. And Allah multiplies for whoever He wills. And Allah is All-Encompassing, All-Knowing.”</q>
+      <cite id="heroPlateCite">Surah Al-Baqarah · 2:261</cite>
     </div>
   </div>
   <div class="scroll-cue"><i></i></div>
@@ -633,17 +736,17 @@ canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9998}
 <section id="pool-s">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Interactive Experience</div>
-      <h2>Touch the water.<br><em>See charity travel.</em></h2>
-      <p>A small act of kindness creates waves of good. Tap anywhere in the pool below to see how a simple gift changes a family's life.</p>
+      <div class="eyebrow" id="poolEyebrow">Interactive Experience</div>
+      <h2 id="poolHeading">Touch the water.<br><em>See charity travel.</em></h2>
+      <p id="poolDesc">A small act of kindness creates waves of good. Tap anywhere in the pool below to see how a simple gift changes a family's life.</p>
     </div>
     <div class="reveal" id="pool">
       <canvas id="rc"></canvas>
-      <div class="hint" id="hint"><div><b>Tap anywhere in the pool</b><small>Send a golden ripple</small></div></div>
+      <div class="hint" id="hint"><div><b id="poolHintTitle">Tap anywhere in the pool</b><small id="poolHintSub">Send a golden ripple</small></div></div>
     </div>
     <div class="pool-bar reveal">
-      <div class="c">Ripples sent: <b id="rcount">0</b></div>
-      <a class="btn ghost" href="#causes"><span>Donate to Causes</span><span class="arw">→</span></a>
+      <div class="c"><span id="poolBarCountLabel">Ripples sent:</span> <b id="rcount">0</b></div>
+      <a class="btn ghost" href="#causes" id="poolBarBtn"><span>Donate to Causes</span><span class="arw">→</span></a>
     </div>
   </div>
 </section>
@@ -886,9 +989,9 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <section id="recipients">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Quranic Categories · 9:60</div>
-      <h2>The Eight Beneficiaries.<br><em>Who is Eligible for Zakat.</em></h2>
-      <p>
+      <div class="eyebrow" id="recipEyebrow">Quranic Categories · 9:60</div>
+      <h2 id="recipHeading">The Eight Beneficiaries.<br><em>Who is Eligible for Zakat.</em></h2>
+      <p id="recipDesc">
         Allah Himself specified the eight groups eligible to receive Zakat in Surah At-Tawbah (9:60). Zakat must be given directly to these exact categories.
       </p>
     </div>
@@ -896,7 +999,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
     <!-- AYAH 9:60 PLATE -->
     <div class="plate reveal" style="margin-bottom:3rem;padding:2.2rem">
       <div class="plate-header">
-        <span class="eyebrow" style="margin-bottom:0">Surah At-Tawbah · 9:60</span>
+        <span class="eyebrow" id="recipPlateEyebrow" style="margin-bottom:0">Surah At-Tawbah · 9:60</span>
         <button class="nq-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/009060.mp3" aria-label="Listen to Ayah 9:60" title="Listen · Sheikh Mishary Rashid Alafasy">
           <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
@@ -905,15 +1008,15 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       <div class="ar" style="font-size:calc(1.5rem * var(--ar-scale, 1));line-height:2.2">
         ۞ إِنَّمَا ٱلصَّدَقَٰتُ لِلْفُقَرَآءِ وَٱلْمَسَٰكِينِ وَٱلْعَٰمِلِينَ عَلَيْهَا وَٱلْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِى ٱلرِّقَابِ وَٱلْغَٰرِمِينَ وَفِى سَبِيلِ ٱللَّهِ وَٱبْنِ ٱلسَّبِيلِ ۖ فَرِيضَةً مِّنَ ٱللَّهِ ۗ وَٱللَّهُ عَلِيمٌ حَكِيمٌ
       </div>
-      <q style="font-size:1.18rem">
+      <q style="font-size:1.18rem" id="recipPlateQuote">
         “Zakat is only for the poor, the needy, those who collect it, bringing hearts together, freeing captives, those in debt, in the cause of Allah, and the stranded traveler. This is an obligation from Allah. And Allah is All-Knowing, All-Wise.”
       </q>
-      <cite>Surah At-Tawbah · 9:60</cite>
+      <cite id="recipPlateCite">Surah At-Tawbah · 9:60</cite>
     </div>
 
     <!-- 8 CARDS GRID -->
-    <div class="recipients-grid reveal">
-      <div class="rcard">
+    <div class="recipients-grid reveal" id="recipientsGrid">
+      <div class="rcard" data-ridx="0">
         <div class="rcard-ar">الفُقَرَاء</div>
         <h3 class="rcard-title">Al-Fuqarā'</h3>
         <div class="rcard-trans">The Extremely Poor</div>
@@ -923,7 +1026,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Families with zero assets, refugees facing severe hunger.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="1">
         <div class="rcard-ar">المَسَاكِين</div>
         <h3 class="rcard-title">Al-Masākīn</h3>
         <div class="rcard-trans">The Working Poor</div>
@@ -933,7 +1036,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Low-income workers struggling to pay rent or essential heating.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="2">
         <div class="rcard-ar">العَامِلِينَ عَلَيْهَا</div>
         <h3 class="rcard-title">Al-'Āmilīna 'Alayhā</h3>
         <div class="rcard-trans">Zakat Administrators</div>
@@ -943,7 +1046,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Caseworkers, verification officers, and field distribution teams.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="3">
         <div class="rcard-ar">المُؤَلَّفَةِ قُلُوبُهُمْ</div>
         <h3 class="rcard-title">Al-Mu'allafah</h3>
         <div class="rcard-trans">New Muslims &amp; Friends</div>
@@ -953,7 +1056,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Supporting vulnerable converts and building community ties.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="4">
         <div class="rcard-ar">فِي الرِّقَاب</div>
         <h3 class="rcard-title">Fī Ar-Riqāb</h3>
         <div class="rcard-trans">Freeing Captives</div>
@@ -963,7 +1066,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Legal rescue of bonded laborers and human trafficking victims.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="5">
         <div class="rcard-ar">الغَارِمِين</div>
         <h3 class="rcard-title">Al-Ghārimīn</h3>
         <div class="rcard-trans">People in Debt</div>
@@ -973,7 +1076,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Emergency hospital bills, disaster victims who lost their homes.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="6">
         <div class="rcard-ar">فِي سَبِيلِ اللَّهِ</div>
         <h3 class="rcard-title">Fī Sabīlillāh</h3>
         <div class="rcard-trans">In the Cause of Allah</div>
@@ -983,7 +1086,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
         <div class="rcard-example"><b>Real Impact:</b> Authentic Islamic education, dawah projects, and humanitarian relief.</div>
       </div>
 
-      <div class="rcard">
+      <div class="rcard" data-ridx="7">
         <div class="rcard-ar">ابْنِ السَّبِيل</div>
         <h3 class="rcard-title">Ibn As-Sabīl</h3>
         <div class="rcard-trans">The Stranded Traveler</div>
@@ -1000,16 +1103,16 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <section id="promises" style="background:linear-gradient(180deg,transparent,rgba(47,177,160,.05),transparent)">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Motivation from the Quran</div>
-      <h2>What Allah Promises to Those Who Give.<br><em>Never Fear That Charity Makes You Poor.</em></h2>
-      <p>
+      <div class="eyebrow" id="promisesEyebrow">Motivation from the Quran</div>
+      <h2 id="promisesHeading">What Allah Promises to Those Who Give.<br><em>Never Fear That Charity Makes You Poor.</em></h2>
+      <p id="promisesDesc">
         Throughout the Quran, Allah reminds us that giving for His sake is the greatest investment a human can make. Listen to and reflect on these six clear promises:
       </p>
     </div>
 
-    <div class="promises-grid reveal">
+    <div class="promises-grid reveal" id="promisesGrid">
       <!-- PROMISE 1 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="0">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 01</span>
@@ -1029,7 +1132,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       </div>
 
       <!-- PROMISE 2 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="1">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 02</span>
@@ -1049,7 +1152,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       </div>
 
       <!-- PROMISE 3 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="2">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 03</span>
@@ -1069,7 +1172,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       </div>
 
       <!-- PROMISE 4 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="3">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 04</span>
@@ -1089,7 +1192,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       </div>
 
       <!-- PROMISE 5 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="4">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 05</span>
@@ -1109,7 +1212,7 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
       </div>
 
       <!-- PROMISE 6 -->
-      <div class="promise-card">
+      <div class="promise-card" data-pidx="5">
         <div>
           <div class="promise-head">
             <span class="promise-badge">Promise 06</span>
@@ -1135,20 +1238,20 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <section id="wisdom" style="background:linear-gradient(180deg,transparent,rgba(227,189,122,.04),transparent)">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Scholarly Reflections</div>
-      <h2>The Inner Blessings of Giving.<br><em>What Trusted Scholars Teach Us.</em></h2>
-      <p>
+      <div class="eyebrow" id="wisdomEyebrow">Scholarly Reflections</div>
+      <h2 id="wisdomHeading">The Inner Blessings of Giving.<br><em>What Trusted Scholars Teach Us.</em></h2>
+      <p id="wisdomDesc">
         Zakat is not just about money. It cleanses the heart from selfishness and reminds us that everything we have is a gift from Allah. Read reflections from respected teachers.
       </p>
     </div>
 
     <!-- TABS -->
     <div class="scholar-tabs reveal" id="scholarTabs">
-      <button class="scholar-tab on" data-filter="all">All Reflections (4)</button>
-      <button class="scholar-tab" data-filter="qadhi">Purification</button>
-      <button class="scholar-tab" data-filter="nak">Multiplied Reward</button>
-      <button class="scholar-tab" data-filter="ghazali">Imam Al-Ghazali</button>
-      <button class="scholar-tab" data-filter="qayyim">Ibn Al-Qayyim</button>
+      <button class="scholar-tab on" data-filter="all" id="tabWisdomAll">All Reflections (4)</button>
+      <button class="scholar-tab" data-filter="qadhi" id="tabWisdomQadhi">Purification</button>
+      <button class="scholar-tab" data-filter="nak" id="tabWisdomNak">Multiplied Reward</button>
+      <button class="scholar-tab" data-filter="ghazali" id="tabWisdomGhazali">Imam Al-Ghazali</button>
+      <button class="scholar-tab" data-filter="qayyim" id="tabWisdomQayyim">Ibn Al-Qayyim</button>
     </div>
 
     <!-- QUOTES GRID -->
@@ -1167,26 +1270,26 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
           <div class="shine"></div>
         </div>
       </div>
-      <div class="jar-note">Click the jar · <span id="jn">0</span> coins dropped</div>
+      <div class="jar-note" id="jarNote">Click the jar · <span id="jn">0</span> coins dropped</div>
       <div style="text-align:center;margin-top:1.2rem">
-        <button class="btn sm ghost" id="emptyJarBtn"><span>Pour Jar to Help Families 🕊️</span></button>
+        <button class="btn sm ghost" id="emptyJarBtn"><span id="emptyJarBtnTxt">Pour Jar to Help Families 🕊️</span></button>
       </div>
     </div>
     <div class="reveal">
-      <div class="eyebrow">Small &amp; Consistent Giving</div>
-      <h2 style="font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.08">The Prophet ﷺ said:<br>
+      <div class="eyebrow" id="jarEyebrow">Small &amp; Consistent Giving</div>
+      <h2 id="jarHadithTitle" style="font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.08">The Prophet ﷺ said:<br>
         <span style="color:var(--gold);font-weight:400">“Protect yourselves from the Fire, even with half a date.”</span></h2>
-      <p style="margin-top:1.2rem;color:#a8c0c2;font-weight:300;line-height:1.8;max-width:48ch">
+      <p id="jarDesc" style="margin-top:1.2rem;color:#a8c0c2;font-weight:300;line-height:1.8;max-width:48ch">
         Nothing is too small in the sight of Allah. Giving even a small amount regularly with a sincere heart protects you from hardship and brings blessings into your home.
       </p>
       <div class="grid2" style="margin-top:2.2rem">
         <div class="flip"><div class="fi">
-          <div class="f"><div class="ar">مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ</div><small>Click / Hover to translate</small></div>
-          <div class="b"><q>“Charity never decreases wealth.”</q><small>Sahih Muslim · 2588</small></div>
+          <div class="f"><div class="ar">مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ</div><small id="flipHint1">Click / Hover to translate</small></div>
+          <div class="b"><q id="flipQuote1">“Charity never decreases wealth.”</q><small id="flipCite1">Sahih Muslim · 2588</small></div>
         </div></div>
         <div class="flip"><div class="fi">
-          <div class="f"><div class="ar">وَٱلصَّدَقَةُ تُطْفِئُ ٱلْخَطِيئَةَ كَمَا يُطْفِئُ ٱلْمَاءُ ٱلنَّارَ</div><small>Click / Hover to translate</small></div>
-          <div class="b"><q>“Charity puts out sins just like water puts out fire.”</q><small>Jami at-Tirmidhi · 614</small></div>
+          <div class="f"><div class="ar">وَٱلصَّدَقَةُ تُطْفِئُ ٱلْخَطِيئَةَ كَمَا يُطْفِئُ ٱلْمَاءُ ٱلنَّارَ</div><small id="flipHint2">Click / Hover to translate</small></div>
+          <div class="b"><q id="flipQuote2">“Charity puts out sins just like water puts out fire.”</q><small id="flipCite2">Jami at-Tirmidhi · 614</small></div>
         </div></div>
       </div>
     </div>
@@ -1197,9 +1300,9 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <section id="causes">
   <div class="wrap">
     <div class="head reveal">
-      <div class="eyebrow">Current Needs</div>
-      <h2>Where help is <span style="color:var(--gold)">needed most right now.</span></h2>
-      <p>Projects helping real families in need.</p>
+      <div class="eyebrow" id="causesEyebrow">Current Needs</div>
+      <h2 id="causesHeading">Where help is <span style="color:var(--gold)">needed most right now.</span></h2>
+      <p id="causesDesc">Projects helping real families in need.</p>
     </div>
     <div class="grid3" id="cards"></div>
   </div>
@@ -1209,10 +1312,10 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <section style="padding-top:0">
   <div class="wrap reveal">
     <div class="stats">
-      <div><b data-cnt="0">0</b><small>Wells dug</small></div>
-      <div><b data-cnt="0">0</b><small>Orphans supported</small></div>
-      <div><b data-cnt="0">0</b><small>Meals served</small></div>
-      <div><b data-cnt="0">0</b><small>Classrooms built</small></div>
+      <div><b data-cnt="0">0</b><small id="bstatWells">Wells dug</small></div>
+      <div><b data-cnt="0">0</b><small id="bstatOrphans">Orphans supported</small></div>
+      <div><b data-cnt="0">0</b><small id="bstatMeals">Meals served</small></div>
+      <div><b data-cnt="0">0</b><small id="bstatClassrooms">Classrooms built</small></div>
     </div>
   </div>
 </section>
@@ -1220,13 +1323,13 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <!-- CTA -->
 <section class="cta">
   <div class="wrap reveal">
-    <div class="eyebrow" style="justify-content:center">Make a Difference Today</div>
-    <h2>Give Allah a Beautiful Loan</h2>
+    <div class="eyebrow" id="ctaEyebrow" style="justify-content:center">Make a Difference Today</div>
+    <h2 id="ctaHeading">Give Allah a Beautiful Loan</h2>
     <div class="magnet" id="mag">
       <div class="orbit"><s></s></div>
-      <a class="btn" href="#causes"><span>Give Charity Now</span><span class="arw">→</span></a>
+      <a class="btn" href="#causes" id="ctaBtn"><span>Give Charity Now</span><span class="arw">→</span></a>
     </div>
-    <p style="margin-top:2.4rem;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500">
+    <p id="ctaSubtext" style="margin-top:2.4rem;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500">
       Purify your intention
     </p>
   </div>
@@ -1236,13 +1339,13 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <div class="modal-backdrop" id="allocModal" onclick="closeModalOnBackdrop(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeAllocModal()" aria-label="Close modal">✕</button>
-    <div class="eyebrow" style="margin-bottom:.5rem">NurulQuran Philanthropy</div>
+    <div class="eyebrow" id="modalEyebrow" style="margin-bottom:.5rem">NurulQuran Philanthropy</div>
     <h3 style="font-size:1.8rem;margin-bottom:.4rem" id="modalHeading">Zakat &amp; Sadaqah Allocation</h3>
-    <p style="font-size:.85rem;color:var(--mute);margin-bottom:1.4rem">Review your contribution, generate your formal calculation summary, and dedicate your gift.</p>
+    <p style="font-size:.85rem;color:var(--mute);margin-bottom:1.4rem" id="modalDesc">Review your contribution, generate your formal calculation summary, and dedicate your gift.</p>
     
     <div class="field-box" style="padding:1rem">
       <div class="field-row">
-        <span class="field-name">Gift Amount:</span>
+        <span class="field-name" id="modalAmtLabel">Gift Amount:</span>
         <div class="field-val-wrap">
           <span style="color:var(--gold);font-weight:600" class="csym">$</span>
           <input type="number" id="modalAmtInput" class="field-num-input" value="100" min="1" step="5">
@@ -1251,21 +1354,21 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
     </div>
 
     <div class="receipt-cert" id="receiptCert">
-      <div class="cert-logo">✦ NurulQuran · Zakat &amp; Sadaqah Statement ✦</div>
+      <div class="cert-logo" id="certLogo">✦ NurulQuran · Zakat &amp; Sadaqah Statement ✦</div>
       <div style="font-size:.75rem;color:var(--mute);letter-spacing:.1em;margin-top:.2rem" id="certDate">Date: 2026-09-09</div>
       <div class="dua-ar">اللَّهُمَّ اجْعَلْهَا مَغْنَمًا وَلَا تَجْعَلْهَا مَغْرَمًا</div>
-      <div class="dua-en">“O Allah! Make it an abundant gain, and do not make it a loss.”</div>
+      <div class="dua-en" id="certDuaEn">“O Allah! Make it an abundant gain, and do not make it a loss.”</div>
       <div style="margin-top:1rem;font-size:.85rem;line-height:1.7;color:#d8ebea">
-        Dedicated Amount: <b style="color:var(--gold2)" id="certAmt">$100</b> · <span id="certType">Zakat Eligible</span>
+        <span id="certDedLabel">Dedicated Amount:</span> <b style="color:var(--gold2)" id="certAmt">$100</b> · <span id="certType">Zakat Eligible</span>
       </div>
     </div>
 
     <div style="display:flex;gap:1rem;flex-wrap:wrap">
       <button class="btn" style="flex:1;justify-content:center" id="btnConfirmPledge">
-        <span>Pledge &amp; Celebrate 🎉</span>
+        <span id="btnConfirmPledgeTxt">Pledge &amp; Celebrate 🎉</span>
       </button>
-      <button class="btn ghost" style="flex:1;justify-content:center" onclick="window.print()">
-        <span>Print Statement 🖨️</span>
+      <button class="btn ghost" style="flex:1;justify-content:center" onclick="window.print()" id="btnPrintStatement">
+        <span id="btnPrintStatementTxt">Print Statement 🖨️</span>
       </button>
     </div>
   </div>
@@ -1274,17 +1377,29 @@ SECTIONS TEMPORARILY COMMENTED OUT (Numbers & rates pending)
 <!-- FOOTER -->
 <footer><div class="wrap in">
   <div>
-    <span>© 2026 The Ripple · <a href="index.html" style="color:var(--gold)">NurulQuran Institute</a></span>
-    <span style="display:block;font-size:.72rem;margin-top:4px;color:#7a9497">All Knowledge &amp; Calculations for the Sake of Allah</span>
+    <span id="footBrand">© 2026 The Ripple · <a href="index.html" style="color:var(--gold)">NurulQuran Institute</a></span>
+    <span style="display:block;font-size:.72rem;margin-top:4px;color:#7a9497" id="footTagline">All Knowledge &amp; Calculations for the Sake of Allah</span>
   </div>
-  <div style="display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap">
-    <a href="index.html">← Showcase Home</a>
-    <a href="#recipients">The 8 Beneficiaries</a>
-    <a href="#promises">Quran Promises</a>
-    <a href="#wisdom">Wisdom</a>
-    <a href="#causes">Causes</a>
+  <div style="display:flex;gap:1.4rem;align-items:center;flex-wrap:wrap">
+    <!-- Language Switcher in Footer -->
+    <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
+      <button type="button" class="nq-lang-btn on" id="btnLangEnFoot" data-lang="en" role="radio" aria-checked="true" title="English (USA)">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-us" xlink:href="#flag-us"></use></svg>
+        <span>English</span>
+      </button>
+      <button type="button" class="nq-lang-btn" id="btnLangUrFoot" data-lang="ur" role="radio" aria-checked="false" title="اردو (Pakistan)">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-pk" xlink:href="#flag-pk"></use></svg>
+        <span style="font-family:'Noto Nastaliq Urdu','Noto Naskh Arabic',serif;font-size:0.92rem">اردو</span>
+      </button>
+    </div>
+
+    <a href="index.html" id="footHome">← Showcase Home</a>
+    <a href="#recipients" id="footRecip">The 8 Beneficiaries</a>
+    <a href="#promises" id="footPromises">Quran Promises</a>
+    <a href="#wisdom" id="footWisdom">Wisdom</a>
+    <a href="#causes" id="footCauses">Causes</a>
     <div class="footer-version-tag">
-      v1.0.28 (updated 2026-09-11 07:20)
+      v1.0.29 (updated 2026-09-11 07:38)
     </div>
   </div>
 </div></footer>
@@ -1391,17 +1506,484 @@ document.addEventListener('mousemove',e=>{
   });
 });
 
-/* ===== MARQUEE ===== */
-const verses=[
-  "Whoever saves one life, it is as if he saved all humanity — 5:32",
-  "Charity does not decrease wealth in the least — Muslim",
-  "The upper giving hand is better than the lower receiving hand",
-  "Save yourselves from the Fire, even with half a date — Bukhari",
-  "Spend from what We have provided you — 2:3",
-  "A righteous smile at your brother is charity — Tirmidhi",
-  "Water given is forgiveness returned — Abu Dawud"
-];
-document.getElementById('marq').innerHTML=[...verses,...verses].map(v=>`<span>${v}</span>`).join('');
+/* ===== BILINGUAL I18N DICTIONARY (EASY URDU & ENGLISH) ===== */
+let LANG = localStorage.getItem('nq_zakat_lang') || 'en';
+if (LANG !== 'ur' && LANG !== 'en') LANG = 'en';
+
+const I18N_ZAKAT = {
+  en: {
+    pageTitle: "The Ripple — Sadaqah & Comprehensive Zakat Calculator · NurulQuran",
+    navShowcase: "← Showcase",
+    navLinks: ["Ripple", "Beneficiaries", "Quran Promises", "Wisdom", "Causes", "Sadaqah Jar"],
+    navDonate: "Donate",
+    heroEyebrow: "Sadaqah & Zakat · Giving for Allah",
+    heroTitle: 'Drop one coin. <span class="it">Move an ocean.</span>',
+    heroLede: "Charity never decreases your wealth. When you give, your hand opens a door for someone to receive clean water, food, or medicine. Learn the Quranic promises of charity and give for the sake of Allah today.",
+    heroBtnDonate: "Donate Now",
+    heroBtnPromises: "Quran Promises",
+    heroStats: ["Given this year", "People helped", "Countries reached", "Projects completed"],
+    heroPlateQuote: "“The example of those who spend their wealth in the way of Allah is like a seed of grain that sprouts seven ears, with a hundred grains in every ear. And Allah multiplies for whoever He wills. And Allah is All-Encompassing, All-Knowing.”",
+    heroPlateCite: "Surah Al-Baqarah · 2:261",
+    marquee: [
+      "Whoever saves one life, it is as if he saved all humanity — 5:32",
+      "Charity does not decrease wealth in the least — Muslim",
+      "The upper giving hand is better than the lower receiving hand",
+      "Save yourselves from the Fire, even with half a date — Bukhari",
+      "Spend from what We have provided you — 2:3",
+      "A righteous smile at your brother is charity — Tirmidhi",
+      "Water given is forgiveness returned — Abu Dawud"
+    ],
+    poolEyebrow: "Interactive Experience",
+    poolHeading: "Touch the water.<br><em>See charity travel.</em>",
+    poolDesc: "A small act of kindness creates waves of good. Tap anywhere in the pool below to see how a simple gift changes a family's life.",
+    poolHintTitle: "Tap anywhere in the pool",
+    poolHintSub: "Send a golden ripple",
+    poolBarCountLabel: "Ripples sent:",
+    poolBarBtn: "Donate to Causes",
+    rippleWords: [
+      "🤍 Help an orphan",
+      "👟 Give shoes and clothes",
+      "🕊️ Save a life",
+      "🍲 Feed a starving person",
+      "💧 Bring clean drinking water",
+      "🏠 Shelter a homeless family",
+      "🩺 Medicine for a sick child",
+      "🧥 Warm coat for the winter cold",
+      "📖 Gift education to a child",
+      "🤲 Comfort a grieving mother"
+    ],
+    recipEyebrow: "Quranic Categories · 9:60",
+    recipHeading: "The Eight Beneficiaries.<br><em>Who is Eligible for Zakat.</em>",
+    recipDesc: "Allah Himself specified the eight groups eligible to receive Zakat in Surah At-Tawbah (9:60). Zakat must be given directly to these exact categories.",
+    recipPlateEyebrow: "Surah At-Tawbah · 9:60",
+    recipPlateQuote: "“Zakat is only for the poor, the needy, those who collect it, bringing hearts together, freeing captives, those in debt, in the cause of Allah, and the stranded traveler. This is an obligation from Allah. And Allah is All-Knowing, All-Wise.”",
+    recipPlateCite: "Surah At-Tawbah · 9:60",
+    recipients: [
+      {
+        trans: "The Extremely Poor",
+        desc: "People who have virtually no income or belongings, and cannot afford basic necessities like food, clean water, or safe shelter.",
+        example: "<b>Real Impact:</b> Families with zero assets, refugees facing severe hunger."
+      },
+      {
+        trans: "The Working Poor",
+        desc: "People who earn a living, but their income is not enough to cover basic daily living expenses. They do not beg out of dignity.",
+        example: "<b>Real Impact:</b> Low-income workers struggling to pay rent or essential heating."
+      },
+      {
+        trans: "Zakat Administrators",
+        desc: "Trustworthy workers hired by legitimate charities to collect, account for, safeguard, and deliver Zakat to verified recipients.",
+        example: "<b>Real Impact:</b> Caseworkers, verification officers, and field distribution teams."
+      },
+      {
+        trans: "New Muslims & Friends",
+        desc: "New Muslims who lost family or financial support after accepting Islam, or individuals whose hearts need encouragement and care.",
+        example: "<b>Real Impact:</b> Supporting vulnerable converts and building community ties."
+      },
+      {
+        trans: "Freeing Captives",
+        desc: "Historically used to free slaves. Today, scholars apply this to rescue victims of human trafficking and modern forced labor.",
+        example: "<b>Real Impact:</b> Legal rescue of bonded laborers and human trafficking victims."
+      },
+      {
+        trans: "People in Debt",
+        desc: "People overwhelmed by unavoidable debt from basic survival needs, emergency medical care, or natural disasters, with no way to repay.",
+        example: "<b>Real Impact:</b> Emergency hospital bills, disaster victims who lost their homes."
+      },
+      {
+        trans: "In the Cause of Allah",
+        desc: "Activities dedicated to sharing the message of Islam, teaching the faith, protecting the oppressed, and serving community welfare.",
+        example: "<b>Real Impact:</b> Authentic Islamic education, dawah projects, and humanitarian relief."
+      },
+      {
+        trans: "The Stranded Traveler",
+        desc: "Travelers or refugees who are cut off from their funds while away from home, even if they have money in their homeland, until they can get home.",
+        example: "<b>Real Impact:</b> Displaced asylum seekers, students stranded abroad in emergencies."
+      }
+    ],
+    promisesEyebrow: "Motivation from the Quran",
+    promisesHeading: "What Allah Promises to Those Who Give.<br><em>Never Fear That Charity Makes You Poor.</em>",
+    promisesDesc: "Throughout the Quran, Allah reminds us that giving for His sake is the greatest investment a human can make. Listen to and reflect on these six clear promises:",
+    promises: [
+      {
+        badge: "Promise 01",
+        title: "Allah Multiplies What You Give 700 Times and More",
+        trans: "“The example of those who spend their wealth in the way of Allah is like a grain of wheat that grows seven ears, with a hundred grains in every ear. And Allah multiplies for whom He wills.”",
+        ref: "Surah Al-Baqarah · 2:261",
+        takeaway: "<b>Key Motivation:</b> A single dollar given with sincere intention is multiplied into hundreds of rewards in Allah's sight."
+      },
+      {
+        badge: "Promise 02",
+        title: "You Never Lose: Allah Guarantees He Will Replace It",
+        trans: "“Whatever you spend of anything in charity, He will replace it. And He is the best of providers.”",
+        ref: "Surah Saba · 34:39",
+        takeaway: "<b>Key Motivation:</b> You cannot become poor by giving for Allah's sake. He promises to replace whatever you give with something greater."
+      },
+      {
+        badge: "Promise 03",
+        title: "Giving Charity Brings Total Peace of Mind",
+        trans: "“Those who spend their wealth night and day, secretly and openly, will have their reward with their Lord. They will have no fear, nor will they grieve.”",
+        ref: "Surah Al-Baqarah · 2:274",
+        takeaway: "<b>Key Motivation:</b> Charity cures anxiety. Allah takes away your fear of the future and grief over the past, giving you true peace in your heart."
+      },
+      {
+        badge: "Promise 04",
+        title: "A Goodly Loan to Allah with a Noble Reward",
+        trans: "“Indeed, the men and women who give charity and lend to Allah a good loan — it will be multiplied for them, and they will have an honorable reward.”",
+        ref: "Surah Al-Hadid · 57:18",
+        takeaway: "<b>Key Motivation:</b> Allah owns everything, yet He calls your charity a loan to Him, which He will repay with high honor in Jannah."
+      },
+      {
+        badge: "Promise 05",
+        title: "Fear of Poverty is from Satan — Allah Promises Abundance",
+        trans: "“Satan threatens you with poverty and orders you to be greedy. But Allah promises you forgiveness from Him and abundant bounty. And Allah is All-Bountiful, All-Knowing.”",
+        ref: "Surah Al-Baqarah · 2:268",
+        takeaway: "<b>Key Motivation:</b> When you hesitate to give, know that the fear of running out of money is a whisper from Satan. Allah's promise is forgiveness and abundance."
+      },
+      {
+        badge: "Promise 06",
+        title: "Give Today Before Death Comes",
+        trans: "“And spend from what We have provided you before death comes to one of you and he says: ‘My Lord, if only You would delay me for a little while so I could give charity and be among the righteous!’”",
+        ref: "Surah Al-Munafiqun · 63:10",
+        takeaway: "<b>Key Motivation:</b> In the final moments of life, people do not ask for more time to enjoy wealth — their only wish is to return to life to give charity. Give while you have the chance."
+      }
+    ],
+    wisdomEyebrow: "Scholarly Reflections",
+    wisdomHeading: "The Inner Blessings of Giving.<br><em>What Trusted Scholars Teach Us.</em>",
+    wisdomDesc: "Zakat is not just about money. It cleanses the heart from selfishness and reminds us that everything we have is a gift from Allah. Read reflections from respected teachers.",
+    wisdomTabs: {
+      all: "All Reflections (4)",
+      qadhi: "Purification",
+      nak: "Multiplied Reward",
+      ghazali: "Imam Al-Ghazali",
+      qayyim: "Ibn Al-Qayyim"
+    },
+    quotes: [
+      {
+        filter: 'qadhi',
+        author: 'Scholar Reflection',
+        role: 'Contemporary Teacher',
+        avatar: '📖',
+        tag: 'Purification & Growth',
+        text: "“In Arabic, the word Zakat means both to purify and to grow. When you give Zakat, you cleanse your heart from greed, and Allah blesses whatever wealth you have left so it grows.”",
+        source: 'Lessons on Zakat'
+      },
+      {
+        filter: 'nak',
+        author: 'Quranic Reflection',
+        role: 'Contemporary Teacher',
+        avatar: '🌱',
+        tag: 'Multiplied Reward',
+        text: '“In Surah Al-Baqarah, Allah compares giving charity to a grain that grows 700 new grains. When you give for Allah’s sake, you do not lose anything. In fact, it is the only wealth you truly keep forever in the next life.”',
+        source: 'Reflection on Surah Al-Baqarah 2:261'
+      },
+      {
+        filter: 'ghazali',
+        author: 'Imam Al-Ghazali (d. 1111 CE)',
+        role: 'Classical Islamic Scholar',
+        avatar: 'AG',
+        tag: 'Proof of Love',
+        text: '“We naturally love money. Allah asked us to give Zakat so we can prove that our love for Him is stronger than our love for wealth. Giving charity breaks the hold that greed has on our hearts.”',
+        source: "Ihya Ulum al-Din"
+      },
+      {
+        filter: 'qayyim',
+        author: 'Ibn Al-Qayyim (d. 1350 CE)',
+        role: 'Classical Islamic Scholar',
+        avatar: 'IQ',
+        tag: 'Protection & Peace',
+        text: '“Charity has an amazing power to protect you from harm and lift hardships. Giving brings peace to your heart and invites Allah’s mercy into your life.”',
+        source: 'Al-Wabil al-Sayyib'
+      }
+    ],
+    jarNotePrefix: "Click the jar · ",
+    jarNoteSuffix: " coins dropped",
+    emptyJarBtn: "Pour Jar to Help Families 🕊️",
+    jarEyebrow: "Small & Consistent Giving",
+    jarHadithTitle: 'The Prophet ﷺ said:<br><span style="color:var(--gold);font-weight:400">“Protect yourselves from the Fire, even with half a date.”</span>',
+    jarDesc: "Nothing is too small in the sight of Allah. Giving even a small amount regularly with a sincere heart protects you from hardship and brings blessings into your home.",
+    flipHint: "Click / Hover to translate",
+    flip1Quote: "“Charity never decreases wealth.”",
+    flip1Cite: "Sahih Muslim · 2588",
+    flip2Quote: "“Charity puts out sins just like water puts out fire.”",
+    flip2Cite: "Jami at-Tirmidhi · 614",
+    causesEyebrow: "Current Needs",
+    causesHeading: 'Where help is <span style="color:var(--gold)">needed most right now.</span>',
+    causesDesc: "Projects helping real families in need.",
+    campaigns: [
+      {t:'Water Wells in Drought Areas',g:'Clean Water',d:'A solar-powered clean water well providing fresh drinking water to 600 villagers every single day.',r:0,a:'$0',n:'$5,000'},
+      {t:'Winter Warmth Relief',g:'Emergency Aid',d:'Warm blankets, heating fuel, and winter coats for families living in cold refugee tents.',r:0,a:'$0',n:'$5,000'},
+      {t:'Orphan Care & Support',g:'Orphan Care',d:'Monthly food, warm shelter, school fees, and medical care for children who lost their parents.',r:0,a:'$0',n:'$5,000'},
+      {t:'Feed Fasting Families',g:'Food Aid',d:'Essential food boxes with flour, rice, dates, and cooking oil to feed vulnerable families in Ramadan.',r:0,a:'$0',n:'$5,000'},
+      {t:'Build a Village Schoolroom',g:'Continuous Charity',d:'Building clean, safe classrooms with desks, books, and solar lights — continuous reward (Sadaqah Jariyah).',r:0,a:'$0',n:'$5,000'},
+      {t:'Sight-Restoring Eye Surgeries',g:'Medical Relief',d:'A simple 15-minute eye procedure that restores full sight to an elder or child suffering from cataracts.',r:0,a:'$0',n:'$5,000'}
+    ],
+    cardFunded: "Funded",
+    cardGoal: "Goal:",
+    cardDonate: "Donate to appeal →",
+    bottomStats: ["Wells dug", "Orphans supported", "Meals served", "Classrooms built"],
+    ctaEyebrow: "Make a Difference Today",
+    ctaHeading: "Give Allah a Beautiful Loan",
+    ctaBtn: "Give Charity Now",
+    ctaSubtext: "Purify your intention",
+    modalEyebrow: "NurulQuran Philanthropy",
+    modalHeading: "Zakat & Sadaqah Allocation",
+    modalDesc: "Review your contribution, generate your formal calculation summary, and dedicate your gift.",
+    modalAmtLabel: "Gift Amount:",
+    certLogo: "✦ NurulQuran · Zakat & Sadaqah Statement ✦",
+    certDatePrefix: "Date: ",
+    certDuaEn: "“O Allah! Make it an abundant gain, and do not make it a loss.”",
+    certDedLabel: "Dedicated Amount:",
+    certType: "Zakat Eligible",
+    btnConfirmPledge: "Pledge & Celebrate 🎉",
+    btnConfirmPledged: "Alhamdulillah! Pledged 🌿",
+    btnPrintStatement: "Print Statement 🖨️",
+    footBrand: "© 2026 The Ripple · <a href=\"index.html\" style=\"color:var(--gold)\">NurulQuran Institute</a>",
+    footTagline: "All Knowledge & Calculations for the Sake of Allah",
+    footHome: "← Showcase Home",
+    footRecip: "The 8 Beneficiaries",
+    footPromises: "Quran Promises",
+    footWisdom: "Wisdom",
+    footCauses: "Causes",
+    copyQuote: "Copy Quote",
+    copied: "Copied!"
+  },
+  ur: {
+    pageTitle: "دی رپل — صدقہ اور جامع زکوٰۃ گائیڈ · نور القرآن",
+    navShowcase: "← شوکیس",
+    navLinks: ["نیکی کی لہر", "حقدار (مصارف)", "قرآنی وعدے", "حکمت و دانائی", "مدد کی پکار", "صدقہ جار"],
+    navDonate: "عطیہ دیں",
+    heroEyebrow: "صدقہ اور زکوٰۃ · اللہ کی رضا کے لیے خرچ کریں",
+    heroTitle: 'ایک سکہ گرائیں، <span class="it">رحمت کا سمندر جگائیں۔</span>',
+    heroLede: "صدقہ دینے سے مال میں کبھی کمی نہیں آتی۔ جب آپ کسی کی مدد کرتے ہیں، تو کسی ضرورت مند کو پینے کا صاف پانی، کھانا یا دوا مل جاتی ہے۔ اللہ کی خوشنودی کے لیے آج ہی دل کھول کر خرچ کریں۔",
+    heroBtnDonate: "ابھی عطیہ دیں",
+    heroBtnPromises: "قرآنی وعدے",
+    heroStats: ["اس سال کا عطیہ", "مدد پانے والے افراد", "شامل ممالک", "مکمل منصوبے"],
+    heroPlateQuote: "”جو لوگ اللہ کی راہ میں اپنا مال خرچ کرتے ہیں، ان کے خرچ کی مثال ایسی ہے جیسے ایک دانہ بویا جائے جس سے سات بالیاں نکلیں اور ہر بالی میں سو دانے ہوں۔ اور اللہ جس کے لیے چاہتا ہے اس سے بھی زیادہ بڑھا دیتا ہے۔ اللہ بڑی وسعت والا اور سب کچھ جاننے والا ہے۔“",
+    heroPlateCite: "سورۃ البقرہ · 2:261",
+    marquee: [
+      "”جس نے ایک جان کو بچایا، گویا اس نے پوری انسانیت کو بچا لیا — 5:32“",
+      "”صدقہ دینے سے مال میں ذرا برابر بھی کمی نہیں آتی — صحیح مسلم“",
+      "”دینے والا ہاتھ لینے والے ہاتھ سے بہتر ہے — صحیح بخاری“",
+      "”آگ سے بچو، چاہے کھجور کے ایک ٹکڑے کا صدقہ دے کر ہی کیوں نہ ہو — صحیح بخاری“",
+      "”اور جو کچھ ہم نے انہیں دیا ہے اس میں سے خرچ کرتے ہیں — 2:3“",
+      "”اپنے مسلمان بھائی کے سامنے مسکرانا بھی صدقہ ہے — جامع ترمذی“",
+      "”پیاسے کو پانی پلانا مغفرت کا ذریعہ ہے — ابو داؤد“"
+    ],
+    poolEyebrow: "دل کو چھو لینے والا تجربہ",
+    poolHeading: "پانی کو چھوئیں۔<br><em>دیکھیں نیکی کیسے پھیلتی ہے۔</em>",
+    poolDesc: "چھوٹی سی نیکی بھی دور تک خیر پھیلا دیتی ہے۔ نیچے تالاب میں کہیں بھی کلک کریں اور دیکھیں کہ آپ کا معمولی سا تحفہ کسی گھرانے کی زندگی کیسے بدل دیتا ہے۔",
+    poolHintTitle: "تالاب میں کہیں بھی کلک کریں",
+    poolHintSub: "سنہری لہر پیدا کریں",
+    poolBarCountLabel: "پھیلائی گئی لہریں:",
+    poolBarBtn: "منصوبوں کے لیے عطیہ دیں",
+    rippleWords: [
+      "🤍 یتیم بچے کی کفالت",
+      "👟 کپڑے اور جوتے فراہم کرنا",
+      "🕊️ کسی کی جان بچانا",
+      "🍲 بھوکے کو پیٹ بھر کر کھانا کھلانا",
+      "💧 پینے کا صاف پانی پہنچانا",
+      "🏠 بے گھر خاندان کو چھت دینا",
+      "🩺 بیمار بچے کے لیے دوا",
+      "🧥 سردی سے بچاؤ کے لیے گرم کپڑے",
+      "📖 غریب بچے کو تعلیم دلانا",
+      "🤲 غمزدہ ماں کے آنسو پونچھنا"
+    ],
+    recipEyebrow: "قرآنی مصارف · 9:60",
+    recipHeading: "زکوٰۃ کے آٹھ حقدار۔<br><em>زکوٰۃ کن لوگوں کو دینی چاہیے۔</em>",
+    recipDesc: "اللہ تعالیٰ نے سورۃ التوبہ (9:60) میں خود وہ آٹھ گروہ بیان فرمائے ہیں جو زکوٰۃ کے حقدار ہیں۔ زکوٰۃ صرف انہی مستحقین تک پہنچائی جانی چاہیے۔",
+    recipPlateEyebrow: "سورۃ التوبہ · 9:60",
+    recipPlateQuote: "”زکوٰۃ تو صرف فقیروں، مسکینوں، زکوٰۃ کا انتظام کرنے والوں، جن کی دلجوئی مقصود ہو، گردنیں چھڑانے، قرض داروں کی مدد، اللہ کی راہ میں، اور مسافروں کے لیے ہے۔ یہ اللہ کا مقرر کردہ فریضہ ہے، اور اللہ سب کچھ جاننے والا اور بڑی حکمت والا ہے۔“",
+    recipPlateCite: "سورۃ التوبہ · 9:60",
+    recipients: [
+      {
+        trans: "نہایت نادار و مفلس",
+        desc: "وہ لوگ جن کے پاس زندگی گزارنے کا کوئی ذریعہ یا مال و دولت نہ ہو، اور جو دو وقت کی روٹی، پینے کے صاف پانی اور چھت کے محتاج ہوں۔",
+        example: "<b>حقیقی اثر:</b> ایسے خاندان جن کا کوئی سہارا نہ ہو، فاقہ کشی کے شکار پناہ گزین۔"
+      },
+      {
+        trans: "کم آمدنی والے سفید پوش",
+        desc: "وہ محنتی لوگ جو کماتے تو ہیں لیکن ان کی آمدنی گھر کے ضروری اخراجات کے لیے ناکافی ہوتی ہے، اور وہ غیرت کی وجہ سے کسی کے آگے ہاتھ نہیں پھیلاتے۔",
+        example: "<b>حقیقی اثر:</b> محنت کش مزدور جو کرایہ یا بجلی کا بل ادا کرنے کے لیے پریشان ہوں۔"
+      },
+      {
+        trans: "زکوٰۃ کا نظام چلانے والا عملہ",
+        desc: "وہ دیانت دار افراد جو زکوٰۃ جمع کرنے، اس کا حساب رکھنے، جانچ پڑتال کرنے اور حقداروں تک پہنچانے کی باقاعدہ ذمہ داری نبھاتے ہیں۔",
+        example: "<b>حقیقی اثر:</b> فیلڈ ورکرز، مستحقین کی تصدیق کرنے والے اور امداد تقسیم کرنے والی ٹیمیں۔"
+      },
+      {
+        trans: "نو مسلم اور دلجوئی کے مستحق",
+        desc: "وہ نئے مسلمان جنہیں اسلام قبول کرنے پر گھر والوں نے بے دخل کر دیا ہو یا مالی مدد کی ضرورت ہو، تاکہ ان کا حوصلہ بڑھے اور دل جڑے رہیں۔",
+        example: "<b>حقیقی اثر:</b> نئے مسلمانوں کو معاشی سہارا دینا اور معاشرتی محبت قائم کرنا۔"
+      },
+      {
+        trans: "قیدیوں اور غلاموں کی رہائی",
+        desc: "پہلے زمانے میں غلاموں کو آزاد کرانے کے لیے، اور آج کے دور میں جبری مشقت، قید اور انسانی اسمگلنگ کے شکار مظلوموں کو چھڑانے کے لیے۔",
+        example: "<b>حقیقی اثر:</b> بندھوا مشقت سے رہائی اور قید بے گناہوں کی قانونی مدد۔"
+      },
+      {
+        trans: "مجبور قرض دار",
+        desc: "وہ مجبور لوگ جو علاج معالجے، ناگہانی آفت یا بنیادی ضروریات کی وجہ سے بھاری قرضوں تلے دب چکے ہوں اور قرض اتارنے کی کوئی صورت نہ ہو۔",
+        example: "<b>حقیقی اثر:</b> اسپتال کے ایمرجنسی اخراجات اور حادثات کا شکار بننے والے مقروض۔"
+      },
+      {
+        trans: "اللہ کی راہ میں",
+        desc: "دین اسلام کی تعلیم و تبلیغ، مظلوموں کے دفاع، دینی علم کے فروغ اور خلقِ خدا کی اجتماعی بھلائی کے خالص کام۔",
+        example: "<b>حقیقی اثر:</b> قرآنی تعلیمات کا فروغ، دینی ادارے اور مظلوموں کی امداد۔"
+      },
+      {
+        trans: "پردیسی و مسافر",
+        desc: "ایسے مسافر یا پناہ گزین جو سفر میں بے یار و مددگار ہو جائیں اور ان کے پاس خرچ ختم ہو جائے، چاہے اپنے وطن میں وہ صاحبِ حیثیت ہی کیوں نہ ہوں۔",
+        example: "<b>حقیقی اثر:</b> سفر میں لٹے ہوئے مسافر اور بیرونِ ملک پھنس جانے والے طلبہ۔"
+      }
+    ],
+    promisesEyebrow: "قرآن مجید سے ترغیب و امید",
+    promisesHeading: "اللہ تعالیٰ کا صدقہ دینے والوں سے وعدہ۔<br><em>کبھی نہ ڈریں کہ صدقہ آپ کو غریب کر دے گا۔</em>",
+    promisesDesc: "قرآنِ پاک میں بار بار یاد دہانی کرائی گئی ہے کہ اللہ کی راہ میں خرچ کرنا انسان کی سب سے بڑی تجارت اور سرمایہ کاری ہے۔ ان چھ وعدوں پر غور کریں:",
+    promises: [
+      {
+        badge: "وعدہ نمبر 1",
+        title: "اللہ آپ کے دیے ہوئے کو 700 گنا اور اس سے بھی زیادہ بڑھا دیتا ہے",
+        trans: "”جو لوگ اللہ کی راہ میں اپنا مال خرچ کرتے ہیں، ان کی مثال ایک ایسے دانے کی ہے جس سے سات بالیاں اگیں، اور ہر بالی میں سو دانے ہوں۔ اور اللہ جس کے لیے چاہتا ہے بڑھا دیتا ہے۔“",
+        ref: "سورۃ البقرہ · 2:261",
+        takeaway: "<b>اہم سبق:</b> خلوصِ نیت سے دیا گیا ایک روپیہ بھی اللہ کے ہاں سینکڑوں گنا ثواب میں بدل جاتا ہے۔"
+      },
+      {
+        badge: "وعدہ نمبر 2",
+        title: "آپ کا کبھی نقصان نہیں ہوگا: اللہ نے اس کا نعم البدل دینے کا وعدہ فرمایا ہے",
+        trans: "”اور جو کچھ بھی تم (اللہ کی راہ میں) خرچ کرو گے، وہ اس کا بدلہ دے گا۔ اور وہ بہترین رزق دینے والا ہے۔“",
+        ref: "سورۃ سبا · 34:39",
+        takeaway: "<b>اہم سبق:</b> اللہ کی راہ میں دینے سے انسان کبھی کنگال نہیں ہوتا، بلکہ اللہ اس سے کہیں بہتر نعمت عطا کرتا ہے۔"
+      },
+      {
+        badge: "وعدہ نمبر 3",
+        title: "صدقہ و خیرات دل کا سکون اور ہر خوف سے نجات لاتا ہے",
+        trans: "”جو لوگ رات اور دن، چھپ کر اور اعلانیہ اپنے مال خرچ کرتے ہیں، ان کا اجر ان کے رب کے پاس ہے۔ ان پر نہ کوئی خوف ہوگا اور نہ وہ غمگین ہوں گے۔“",
+        ref: "سورۃ البقرہ · 2:274",
+        takeaway: "<b>اہم سبق:</b> صدقہ پریشانی اور بے چینی کا علاج ہے۔ اللہ دل سے مستقبل کا خوف اور ماضی کا غم مٹا دیتا ہے۔"
+      },
+      {
+        badge: "وعدہ نمبر 4",
+        title: "اللہ کو دیا جانے والا پاکیزہ قرض جس پر عزت والا بدلہ ہے",
+        trans: "”بے شک صدقہ دینے والے مرد اور صدقہ دینے والی عورتیں، اور جنہوں نے اللہ کو قرضِ حسن دیا، ان کے لیے اسے کئی گنا بڑھایا جائے گا اور ان کے لیے عزت والا اجر ہے۔“",
+        ref: "سورۃ الحدید · 57:18",
+        takeaway: "<b>اہم سبق:</b> کائنات کی ہر چیز کا مالک اللہ ہے، پھر بھی وہ آپ کے صدقے کو اپنے ذمے قرض قرار دیتا ہے جس کا وہ جنت میں شاندار صلہ دے گا۔"
+      },
+      {
+        badge: "وعدہ نمبر 5",
+        title: "غربت کا خوف شیطان کی طرف سے ہے — اللہ بخشش اور کشادگی کا وعدہ کرتا ہے",
+        trans: "”شیطان تمہیں تنگدستی سے ڈراتا ہے اور بے حیائی کا حکم دیتا ہے، جبکہ اللہ تم سے اپنی بخشش اور فضل کا وعدہ فرماتا ہے۔ اور اللہ بڑی وسعت والا، سب کچھ جاننے والا ہے۔“",
+        ref: "سورۃ البقرہ · 2:268",
+        takeaway: "<b>اہم سبق:</b> جب دل میں پیسے کم ہونے کا خیال آئے، تو یاد رکھیں یہ شیطان کا وسوسہ ہے۔ اللہ کا وعدہ کشادگی اور رحمت کا ہے۔"
+      },
+      {
+        badge: "وعدہ نمبر 6",
+        title: "آج ہی خرچ کریں، اس سے پہلے کہ موت کا وقت آ پہنچے",
+        trans: "”اور جو کچھ ہم نے تمہیں دیا ہے اس میں سے خرچ کرو اس سے پہلے کہ تم میں سے کسی کو موت آ جائے اور وہ کہے: اے میرے رب! تو نے مجھے تھوڑی مہلت کیوں نہ دی تاکہ میں صدقہ کرتا اور نیک لوگوں میں شامل ہو جاتا!“",
+        ref: "سورۃ المنافقون · 63:10",
+        takeaway: "<b>اہم سبق:</b> آخری وقت میں انسان دنیا کی عیاشی کے لیے وقت نہیں مانگے گا، بلکہ صرف صدقہ کرنے کی مہلت مانگے گا۔ موقع کو غنیمت جانیں۔"
+      }
+    ],
+    wisdomEyebrow: "اہلِ علم کی حکمت بھری باتیں",
+    wisdomHeading: "صدقہ دینے کی باطنی برکات۔<br><em>معتبر اساتذہ اور علمائے کرام کی نصیحتیں۔</em>",
+    wisdomDesc: "زکوٰۃ محض رقم دینے کا نام نہیں، بلکہ یہ دل کو لالچ سے پاک کرتی ہے اور یاد دلاتی ہے کہ سب کچھ اللہ کی دی ہوئی امانت ہے۔ علمائے کرام کے یہ خوبصورت اقوال پڑھیں:",
+    wisdomTabs: {
+      all: "تمام اقوال (4)",
+      qadhi: "طہارت و برکت",
+      nak: "کئی گنا اجر",
+      ghazali: "امام الغزالیؒ",
+      qayyim: "ابن القیمؒ"
+    },
+    quotes: [
+      {
+        filter: 'qadhi',
+        author: 'علمائے کرام کی بصیرت',
+        role: 'عصرِ حاضر کے استاد',
+        avatar: '📖',
+        tag: 'پاکیزگی اور بڑھوتری',
+        text: "”عربی زبان میں لفظ زکوٰۃ کا مطلب پاک کرنا بھی ہے اور بڑھانا بھی۔ جب آپ زکوٰۃ ادا کرتے ہیں تو دل لالچ سے پاک ہوتا ہے، اور اللہ آپ کے باقی مال میں اتنی برکت دیتا ہے کہ وہ بڑھتا ہے۔“",
+        source: 'زکوٰۃ کے اسباق'
+      },
+      {
+        filter: 'nak',
+        author: 'قرآنی بصیرت',
+        role: 'قرآنی استاد',
+        avatar: '🌱',
+        tag: 'کئی گنا اجر',
+        text: '”سورۃ البقرہ میں اللہ تعالیٰ نے صدقے کو ایک ایسے دانے سے تشبیہ دی ہے جس سے 700 دانے اگتے ہیں۔ جب آپ اللہ کے لیے دیتے ہیں تو کچھ کھوتے نہیں، درحقیقت یہی وہ واحد مال ہے جو آخرت میں ہمیشہ آپ کا رہے گا۔“',
+        source: 'سورۃ البقرہ کی تفسیر'
+      },
+      {
+        filter: 'ghazali',
+        author: 'امام الغزالیؒ (وفات 1111ء)',
+        role: 'عظیم کلاسیکی عالمِ دین',
+        avatar: 'AG',
+        tag: 'محبت کا ثبوت',
+        text: '”انسان کو فطری طور پر مال سے محبت ہوتی ہے۔ اللہ نے زکوٰۃ فرض اس لیے کی تاکہ ہم ثابت کر سکیں کہ ہماری اللہ سے محبت مال کی محبت سے کہیں زیادہ ہے۔ صدقہ دل سے دنیا کا لالچ توڑ دیتا ہے۔“',
+        source: "احیاء علوم الدین"
+      },
+      {
+        filter: 'qayyim',
+        author: 'علامہ ابن القیمؒ (وفات 1350ء)',
+        role: 'عظیم محقق و عالمِ دین',
+        avatar: 'IQ',
+        tag: 'حفاظت اور دلی سکون',
+        text: '”صدقہ میں بلاؤں کو ٹالنے اور مصیبتوں کو دور کرنے کی حیرت انگیز طاقت ہے۔ اللہ کی راہ میں خرچ کرنے سے دل کو سکون ملتا ہے اور رحمت کے دروازے کھل جاتے ہیں۔“',
+        source: 'الوابل الصیب'
+      }
+    ],
+    jarNotePrefix: "جار پر کلک کریں · ",
+    jarNoteSuffix: " سکے گرائے گئے",
+    emptyJarBtn: "ضرورت مندوں کی مدد کے لیے صدقہ جمع کریں 🕊️",
+    jarEyebrow: "چھوٹا لیکن باقاعدہ صدقہ",
+    jarHadithTitle: 'رسول اللہ ﷺ نے فرمایا:<br><span style="color:var(--gold);font-weight:400">”جہنم کی آگ سے بچو، چاہے آدھی کھجور کا صدقہ دے کر ہی ہو۔“</span>',
+    jarDesc: "اللہ کے ہاں کوئی نیکی چھوٹی نہیں ہوتی۔ روزانہ تھوڑا سا بھی خلوصِ دل سے دیا گیا صدقہ آپ کو بلاؤں سے بچاتا ہے اور گھر میں برکت لاتا ہے۔",
+    flipHint: "ترجمہ دیکھنے کے لیے کلک یا ہوور کریں",
+    flip1Quote: "”صدقہ سے مال میں کبھی کمی نہیں ہوتی۔“",
+    flip1Cite: "صحیح مسلم · 2588",
+    flip2Quote: "”صدقہ گناہوں کو اس طرح بجھا دیتا ہے جیسے پانی آگ کو بجھاتا ہے۔“",
+    flip2Cite: "جامع ترمذی · 614",
+    causesEyebrow: "فوری ضروریات",
+    causesHeading: 'جہاں اس وقت <span style="color:var(--gold)">مدد کی سب سے زیادہ ضرورت ہے۔</span>',
+    causesDesc: "مستحق اور ضرورت مند خاندانوں کی مدد کے منصوبے۔",
+    campaigns: [
+      {t:'خشک سالی زدہ علاقوں میں میٹھے پانی کے کنویں',g:'صاف پانی',d:'شمسی توانائی سے چلنے والا کنواں جو روزانہ 600 دیہاتیوں کو پینے کا صاف پانی فراہم کرتا ہے۔',r:0,a:'$0',n:'$5,000'},
+      {t:'سردی سے بچاؤ کی ہنگامی امداد',g:'ہنگامی امداد',d:'سرد خیموں میں رہنے والے پناہ گزین خاندانوں کے لیے گرم کمبل، ایندھن اور گرم جیکٹیں۔',r:0,a:'$0',n:'$5,000'},
+      {t:'یتیم بچوں کی کفالت و دیکھ بھال',g:'یتیموں کی کفالت',d:'ماں باپ کے سائے سے محروم بچوں کے لیے ماہانہ خوراک، رہائش، اسکول کی فیس اور علاج۔',r:0,a:'$0',n:'$5,000'},
+      {t:'مستحق خاندانوں کے لیے راشن پیک',g:'خوراک کی فراہمی',d:'آٹا، چاول، دالیں، گھی اور کھجوروں پر مشتمل راشن باکس تاکہ غریب گھرانے عزت سے سحری و افطاری کر سکیں۔',r:0,a:'$0',n:'$5,000'},
+      {t:'دیہاتی اسکول کے کمرے کی تعمیر',g:'صدقہ جاریہ',d:'کتابوں، ڈیسک اور سولر لائٹس کے ساتھ صاف ستھرے کلاس رومز کی تعمیر — مستقل ثواب (صدقہ جاریہ)۔',r:0,a:'$0',n:'$5,000'},
+      {t:'آنکھوں کے مفت آپریشن اور بینائی کی بحالی',g:'طبی امداد',d:'موتیا کے شکار غریب مریضوں اور بچوں کا آسان آپریشن تاکہ وہ دوبارہ دنیا کی رونقیں دیکھ سکیں۔',r:0,a:'$0',n:'$5,000'}
+    ],
+    cardFunded: "جمع شدہ",
+    cardGoal: "ہدف:",
+    cardDonate: "اس مہم میں حصہ لیں →",
+    bottomStats: ["کنویں کھدوائے گئے", "یتیموں کی کفالت کی گئی", "کھانے فراہم کیے گئے", "کلاس رومز تعمیر کیے گئے"],
+    ctaEyebrow: "آج ہی نیکی میں حصہ لیں",
+    ctaHeading: "اللہ کو قرضِ حسنہ دیجیے",
+    ctaBtn: "ابھی صدقہ دیں",
+    ctaSubtext: "اپنی نیت کو خالص رکھیے",
+    modalEyebrow: "نور القرآن فلاحی ٹرسٹ",
+    modalHeading: "زکوٰۃ و صدقات کی تخصیص",
+    modalDesc: "اپنے عطیے کی تفصیلات کا جائزہ لیں، تصدیقی سند بنائیں اور نیک مقصد کے لیے مخصوص کریں۔",
+    modalAmtLabel: "عطیے کی رقم:",
+    certLogo: "✦ نور القرآن · زکوٰۃ و صدقات کا تصدیقی بیان ✦",
+    certDatePrefix: "تاریخ: ",
+    certDuaEn: "”اے اللہ! اس عطیے کو ہمارے لیے نفع کا ذریعہ بنا اور خسارہ نہ بنا۔“",
+    certDedLabel: "مخصوص رقم:",
+    certType: "زکوٰۃ کے لیے اہل",
+    btnConfirmPledge: "عہد کریں اور خوشی منائیں 🎉",
+    btnConfirmPledged: "الحمد للہ! عہد مکمل ہوا 🌿",
+    btnPrintStatement: "بیان پرنٹ کریں 🖨️",
+    footBrand: "© 2026 The Ripple · <a href=\"index.html\" style=\"color:var(--gold)\">نور القرآن انسٹی ٹیوٹ</a>",
+    footTagline: "تمام علم اور حساب صرف اللہ کی رضا کے لیے",
+    footHome: "← شوکیس کا مرکزی صفحہ",
+    footRecip: "زکوٰۃ کے آٹھ حقدار",
+    footPromises: "قرآنی وعدے",
+    footWisdom: "حکمت و دانائی",
+    footCauses: "فلاحی منصوبے",
+    copyQuote: "قول کاپی کریں",
+    copied: "کاپی ہو گیا!"
+  }
+};
 
 /* ===== AUDIO CHIME SYNTHESIZER (0 DEPENDENCIES) ===== */
 let audioCtx=null;
@@ -1426,24 +2008,13 @@ function playCoinChime(){
 }
 
 /* ===== RIPPLE POOL ===== */
+let poolAddRipple = null;
 (()=>{
   const pool=document.getElementById('pool'),cv=document.getElementById('rc');
   if(!pool || !cv) return;
   const x=cv.getContext('2d');
   if(!x) return;
   let W,H,rips=[],n=0;
-  const words=[
-    "🤍 Help an orphan",
-    "👟 Give shoes and clothes",
-    "🕊️ Save a life",
-    "🍲 Feed a starving person",
-    "💧 Bring clean drinking water",
-    "🏠 Shelter a homeless family",
-    "🩺 Medicine for a sick child",
-    "🧥 Warm coat for the winter cold",
-    "📖 Gift education to a child",
-    "🤲 Comfort a grieving mother"
-  ];
   const rs=()=>{W=cv.width=pool.offsetWidth;H=cv.height=pool.offsetHeight};rs();addEventListener('resize',rs);
   const add=(px,py,auto)=>{
     rips.push({x:px,y:py,r:0,a:1});
@@ -1451,11 +2022,15 @@ function playCoinChime(){
       n++;document.getElementById('rcount').textContent=n;
       document.getElementById('hint').style.opacity=0;
       playCoinChime();
-      const p=document.createElement('div');p.className='pop';p.textContent='+ '+words[Math.floor(Math.random()*words.length)];
+      const p=document.createElement('div');
+      p.className='pop';
+      const words = I18N_ZAKAT[LANG].rippleWords;
+      p.textContent='+ '+words[Math.floor(Math.random()*words.length)];
       p.style.left=px+'px';p.style.top=py+'px';pool.appendChild(p);setTimeout(()=>p.remove(),4800);
       setTimeout(()=>add(px,py,1),260);setTimeout(()=>add(px,py,1),520);
     }
   };
+  poolAddRipple = add;
   pool.addEventListener('click',e=>{const r=pool.getBoundingClientRect();add(e.clientX-r.left,e.clientY-r.top)});
   pool.addEventListener('mousemove',e=>{if(Math.random()>.94){const r=pool.getBoundingClientRect();rips.push({x:e.clientX-r.left,y:e.clientY-r.top,r:0,a:.35})}});
   setInterval(()=>rips.push({x:Math.random()*W,y:Math.random()*H,r:0,a:.28}),1500);
@@ -1471,63 +2046,16 @@ function playCoinChime(){
   })();
 })();
 
-/* ===== IMPACT PICKER & ZAKAT CALCULATOR (Commented out - numbers pending) ===== */
-let curSym = '$';
-const $=s=>document.querySelector(s);
-/*
-const causes=[
-  {k:'Water',i:'💧',unit:35,txt:a=>`<b>$${a}</b> provides <b>${Math.max(1,Math.round(a/35))} people</b> with clean running water for an entire year.`},
-  {k:'Food',i:'🍲',unit:2,txt:a=>`<b>$${a}</b> prepares and serves <b>${Math.round(a/2)} warm nutritious meals</b> to families in crisis.`},
-  {k:'Orphans',i:'🕊️',unit:45,txt:a=>`<b>$${a}</b> covers <b>${(a/45).toFixed(1)} months</b> of comprehensive shelter, nutrition and schooling for an orphan.`},
-  {k:'Education',i:'📖',unit:20,txt:a=>`<b>$${a}</b> outfits <b>${Math.round(a/20)} children</b> with classrooms, uniforms, and textbooks.`},
-  {k:'Emergency',i:'⛑️',unit:60,txt:a=>`<b>$${a}</b> deploys <b>${Math.max(1,Math.round(a/60))} emergency trauma relief kits</b> in disaster zones.`}
-];
-let ci=0,amt=100,freq=1;
-*/
-
 /* ===== SCHOLAR QUOTES ===== */
-const quotesData = [
-  {
-    filter: 'qadhi',
-    author: 'Scholar Reflection',
-    role: 'Contemporary Teacher',
-    avatar: '📖',
-    tag: 'Purification & Growth',
-    text: "“In Arabic, the word Zakat means both to purify and to grow. When you give Zakat, you cleanse your heart from greed, and Allah blesses whatever wealth you have left so it grows.”",
-    source: 'Lessons on Zakat'
-  },
-  {
-    filter: 'nak',
-    author: 'Quranic Reflection',
-    role: 'Contemporary Teacher',
-    avatar: '🌱',
-    tag: 'Multiplied Reward',
-    text: '“In Surah Al-Baqarah, Allah compares giving charity to a grain that grows 700 new grains. When you give for Allah’s sake, you do not lose anything. In fact, it is the only wealth you truly keep forever in the next life.”',
-    source: 'Reflection on Surah Al-Baqarah 2:261'
-  },
-  {
-    filter: 'ghazali',
-    author: 'Imam Al-Ghazali (d. 1111 CE)',
-    role: 'Classical Islamic Scholar',
-    avatar: 'AG',
-    tag: 'Proof of Love',
-    text: '“We naturally love money. Allah asked us to give Zakat so we can prove that our love for Him is stronger than our love for wealth. Giving charity breaks the hold that greed has on our hearts.”',
-    source: "Ihya Ulum al-Din"
-  },
-  {
-    filter: 'qayyim',
-    author: 'Ibn Al-Qayyim (d. 1350 CE)',
-    role: 'Classical Islamic Scholar',
-    avatar: 'IQ',
-    tag: 'Protection & Peace',
-    text: '“Charity has an amazing power to protect you from harm and lift hardships. Giving brings peace to your heart and invites Allah’s mercy into your life.”',
-    source: 'Al-Wabil al-Sayyib'
-  }
-];
+let currentScholarFilter = 'all';
 
 function renderScholarQuotes(f='all'){
-  const list = f === 'all' ? quotesData : quotesData.filter(q => q.filter === f);
+  currentScholarFilter = f;
+  const quotesList = I18N_ZAKAT[LANG].quotes;
+  const list = f === 'all' ? quotesList : quotesList.filter(q => q.filter === f);
   const grid = document.getElementById('quotesGrid');
+  if(!grid) return;
+  const t = I18N_ZAKAT[LANG];
   grid.innerHTML = list.map(q => `
     <div class="qcard">
       <div>
@@ -1547,7 +2075,7 @@ function renderScholarQuotes(f='all'){
         <span>📖 ${q.source}</span>
         <button class="copy-q-btn" data-quote="${encodeURIComponent(q.text + ' — ' + q.author)}">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span>Copy Quote</span>
+          <span>${t.copyQuote}</span>
         </button>
       </div>
     </div>
@@ -1559,8 +2087,8 @@ function renderScholarQuotes(f='all'){
       if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(txt).then(()=>{
           const sp = btn.querySelector('span');
-          sp.textContent = 'Copied!';
-          setTimeout(()=>sp.textContent = 'Copy Quote', 2000);
+          sp.textContent = t.copied;
+          setTimeout(()=>sp.textContent = t.copyQuote, 2000);
         });
       }
     };
@@ -1574,15 +2102,26 @@ document.querySelectorAll('.scholar-tab').forEach(t => {
     renderScholarQuotes(t.dataset.filter);
   };
 });
-renderScholarQuotes('all');
 
 /* ===== SADAQAH JAR ===== */
-let coins=0;const jar=document.getElementById('jar');
+let coins=0;
+const jar=document.getElementById('jar');
+let curSym = '$';
+const $=s=>document.querySelector(s);
+
+function updateJarNote() {
+  const jn = document.getElementById('jarNote');
+  if (jn) {
+    const t = I18N_ZAKAT[LANG];
+    jn.innerHTML = t.jarNotePrefix + '<span id="jn">' + coins + '</span>' + t.jarNoteSuffix;
+  }
+}
+
 if(jar){
   jar.onclick=()=>{
     coins++;
     playCoinChime();
-    const jn=document.getElementById('jn'); if(jn) jn.textContent=coins;
+    updateJarNote();
     const fl=document.getElementById('fill'); if(fl) fl.style.height=Math.min(82, coins*4)+'%';
     const c=document.createElement('div');
     c.className='coin';
@@ -1622,33 +2161,30 @@ function triggerConfetti(){
 const ejb = $('#emptyJarBtn');
 if(ejb){
   ejb.onclick=()=>{
-    if(coins===0){ coins = 5; const fl=document.getElementById('fill'); if(fl) fl.style.height='20%'; }
+    if(coins===0){ coins = 5; const fl=document.getElementById('fill'); if(fl) fl.style.height='20%'; updateJarNote(); }
     triggerConfetti();
-    openAllocModal(coins * 10, 'Sadaqah Jar Dedication');
+    const t = I18N_ZAKAT[LANG];
+    openAllocModal(coins * 10, LANG === 'ur' ? 'صدقہ جار عطیہ' : 'Sadaqah Jar Dedication');
   };
 }
 
 /* ===== CAMPAIGNS ===== */
-const camps=[
-  {t:'Water Wells in Drought Areas',g:'Clean Water',d:'A solar-powered clean water well providing fresh drinking water to 600 villagers every single day.',r:0,a:'$0',n:'$5,000'},
-  {t:'Winter Warmth Relief',g:'Emergency Aid',d:'Warm blankets, heating fuel, and winter coats for families living in cold refugee tents.',r:0,a:'$0',n:'$5,000'},
-  {t:'Orphan Care & Support',g:'Orphan Care',d:'Monthly food, warm shelter, school fees, and medical care for children who lost their parents.',r:0,a:'$0',n:'$5,000'},
-  {t:'Feed Fasting Families',g:'Food Aid',d:'Essential food boxes with flour, rice, dates, and cooking oil to feed vulnerable families in Ramadan.',r:0,a:'$0',n:'$5,000'},
-  {t:'Build a Village Schoolroom',g:'Continuous Charity',d:'Building clean, safe classrooms with desks, books, and solar lights — continuous reward (Sadaqah Jariyah).',r:0,a:'$0',n:'$5,000'},
-  {t:'Sight-Restoring Eye Surgeries',g:'Medical Relief',d:'A simple 15-minute eye procedure that restores full sight to an elder or child suffering from cataracts.',r:0,a:'$0',n:'$5,000'}
-];
+function renderCampaigns() {
+  const cardsEl = document.getElementById('cards');
+  if (!cardsEl) return;
+  const t = I18N_ZAKAT[LANG];
+  cardsEl.innerHTML = t.campaigns.map(c => `
+    <div class="card">
+      <span class="tag">${c.g}</span><h3>${c.t}</h3><p>${c.d}</p>
+      <div class="row"><span>${t.cardFunded} <b>${c.a}</b></span><span>${t.cardGoal} ${c.n}</span></div>
+      <div class="meter"><i data-p="${c.r}"></i></div>
+      <div class="go" onclick="openAllocModal(100, '${c.t.replace(/'/g, "\\'")}')">${t.cardDonate}</div>
+    </div>`).join('');
 
-document.getElementById('cards').innerHTML=camps.map(c=>`
-  <div class="card">
-    <span class="tag">${c.g}</span><h3>${c.t}</h3><p>${c.d}</p>
-    <div class="row"><span>Funded <b>${c.a}</b></span><span>Goal: ${c.n}</span></div>
-    <div class="meter"><i data-p="${c.r}"></i></div>
-    <div class="go" onclick="openAllocModal(100, '${c.t}')">Donate to appeal →</div>
-  </div>`).join('');
-
-const mo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
-  e.target.style.width=e.target.dataset.p+'%';mo.unobserve(e.target)}}),{threshold:.3});
-document.querySelectorAll('[data-p]').forEach(e=>mo.observe(e));
+  document.querySelectorAll('#cards [data-p]').forEach(e => {
+    e.style.width = e.dataset.p + '%';
+  });
+}
 
 /* ===== ALLOCATION MODAL ===== */
 const allocModal=document.getElementById('allocModal');
@@ -1656,7 +2192,8 @@ function openAllocModal(val=100, causeName='Zakat Fund'){
   document.getElementById('modalAmtInput').value=val;
   document.getElementById('modalHeading').textContent=causeName;
   document.getElementById('certAmt').textContent=curSym+val.toLocaleString();
-  document.getElementById('certDate').textContent='Date: ' + new Date().toISOString().slice(0,10);
+  const t = I18N_ZAKAT[LANG];
+  document.getElementById('certDate').textContent = t.certDatePrefix + new Date().toISOString().slice(0,10);
   allocModal.classList.add('open');
 }
 function closeAllocModal(){ allocModal.classList.remove('open'); }
@@ -1670,17 +2207,18 @@ $('#modalAmtInput').oninput=e=>{
 };
 
 const gmb = $('#giveModalBtn');
-if (gmb) gmb.onclick = () => openAllocModal(100, 'Charity Relief');
+if (gmb) gmb.onclick = () => openAllocModal(100, LANG === 'ur' ? 'امدادی فنڈ' : 'Charity Relief');
 const pzb = $('#payZakatBtn');
-if (pzb) pzb.onclick = () => openAllocModal(100, 'Zakat Obligation');
+if (pzb) pzb.onclick = () => openAllocModal(100, LANG === 'ur' ? 'فریضہ زکوٰۃ' : 'Zakat Obligation');
 
 $('#btnConfirmPledge').onclick=()=>{
   playCoinChime();
   triggerConfetti();
   const btn = $('#btnConfirmPledge');
-  btn.innerHTML = '<span>Alhamdulillah! Pledged 🌿</span>';
+  const t = I18N_ZAKAT[LANG];
+  btn.innerHTML = '<span>' + t.btnConfirmPledged + '</span>';
   setTimeout(()=>{
-    btn.innerHTML = '<span>Pledge &amp; Celebrate 🎉</span>';
+    btn.innerHTML = '<span id="btnConfirmPledgeTxt">' + t.btnConfirmPledge + '</span>';
     closeAllocModal();
   }, 2200);
 };
@@ -1753,6 +2291,188 @@ mag.addEventListener('mouseleave',()=>mb.style.transform='');
     };
   });
 })();
+
+/* ===== LANGUAGE SWITCH FUNCTION ===== */
+function switchLang(lang) {
+  if (lang !== 'ur' && lang !== 'en') lang = 'en';
+  LANG = lang;
+  localStorage.setItem('nq_zakat_lang', lang);
+  document.documentElement.lang = lang;
+
+  // Toggle button active states across both nav and footer
+  document.querySelectorAll('.nq-lang-btn').forEach(btn => {
+    const isThis = btn.dataset.lang === lang;
+    btn.classList.toggle('on', isThis);
+    btn.setAttribute('aria-checked', isThis ? 'true' : 'false');
+  });
+
+  const t = I18N_ZAKAT[lang];
+
+  // Document Title
+  document.title = t.pageTitle;
+
+  // Nav
+  const navPort = document.getElementById('navPortalLink');
+  if (navPort) navPort.textContent = t.navShowcase;
+  const navIds = ['navLinkPool', 'navLinkRecip', 'navLinkPromises', 'navLinkWisdom', 'navLinkCauses', 'navLinkJar'];
+  navIds.forEach((id, idx) => {
+    const el = document.getElementById(id);
+    if (el && t.navLinks[idx]) el.textContent = t.navLinks[idx];
+  });
+  const navDon = document.getElementById('navDonateBtn');
+  if (navDon) {
+    const sp = navDon.querySelector('span');
+    if (sp) sp.textContent = t.navDonate;
+  }
+
+  // Hero
+  const hEye = document.getElementById('heroEyebrow');
+  if (hEye) hEye.textContent = t.heroEyebrow;
+  const hLede = document.getElementById('heroLede');
+  if (hLede) hLede.textContent = t.heroLede;
+  const hBtnDon = document.getElementById('heroBtnDonate');
+  if (hBtnDon) { const sp = hBtnDon.querySelector('span'); if (sp) sp.textContent = t.heroBtnDonate; }
+  const hBtnProm = document.getElementById('heroBtnPromises');
+  if (hBtnProm) { const sp = hBtnProm.querySelector('span'); if (sp) sp.textContent = t.heroBtnPromises; }
+  t.heroStats.forEach((st, idx) => {
+    const el = document.getElementById('hstat' + idx);
+    if (el) el.textContent = st;
+  });
+  const hQuote = document.getElementById('heroPlateQuote');
+  if (hQuote) hQuote.textContent = t.heroPlateQuote;
+  const hCite = document.getElementById('heroPlateCite');
+  if (hCite) hCite.textContent = t.heroPlateCite;
+
+  // Animate hero headline
+  const hl = document.getElementById('hl');
+  if (hl) {
+    hl.innerHTML = t.heroTitle;
+    hl.innerHTML = hl.innerHTML.replace(/([^\s<>]+)(?![^<]*>)/g, m => m.trim() ? `<span class="word"><s>${m}</s></span>` : m);
+    [...hl.querySelectorAll('s')].forEach((s, i) => s.style.animationDelay = (.55 + i * .08) + 's');
+  }
+
+  // Marquee
+  const marq = document.getElementById('marq');
+  if (marq) {
+    marq.innerHTML = [...t.marquee, ...t.marquee].map(v => `<span>${v}</span>`).join('');
+  }
+
+  // Ripple Pool
+  const pEye = document.getElementById('poolEyebrow'); if (pEye) pEye.textContent = t.poolEyebrow;
+  const pH = document.getElementById('poolHeading'); if (pH) pH.innerHTML = t.poolHeading;
+  const pD = document.getElementById('poolDesc'); if (pD) pD.textContent = t.poolDesc;
+  const pHT = document.getElementById('poolHintTitle'); if (pHT) pHT.textContent = t.poolHintTitle;
+  const pHS = document.getElementById('poolHintSub'); if (pHS) pHS.textContent = t.poolHintSub;
+  const pBCL = document.getElementById('poolBarCountLabel'); if (pBCL) pBCL.textContent = t.poolBarCountLabel;
+  const pBBtn = document.getElementById('poolBarBtn'); if (pBBtn) { const sp = pBBtn.querySelector('span'); if (sp) sp.textContent = t.poolBarBtn; }
+
+  // 8 Beneficiaries
+  const rEye = document.getElementById('recipEyebrow'); if (rEye) rEye.textContent = t.recipEyebrow;
+  const rH = document.getElementById('recipHeading'); if (rH) rH.innerHTML = t.recipHeading;
+  const rD = document.getElementById('recipDesc'); if (rD) rD.textContent = t.recipDesc;
+  const rPEye = document.getElementById('recipPlateEyebrow'); if (rPEye) rPEye.textContent = t.recipPlateEyebrow;
+  const rPQ = document.getElementById('recipPlateQuote'); if (rPQ) rPQ.textContent = t.recipPlateQuote;
+  const rPC = document.getElementById('recipPlateCite'); if (rPC) rPC.textContent = t.recipPlateCite;
+  document.querySelectorAll('.rcard[data-ridx]').forEach(card => {
+    const idx = +card.dataset.ridx;
+    const item = t.recipients[idx];
+    if (item) {
+      const transEl = card.querySelector('.rcard-trans'); if (transEl) transEl.textContent = item.trans;
+      const descEl = card.querySelector('.rcard-desc'); if (descEl) descEl.textContent = item.desc;
+      const exEl = card.querySelector('.rcard-example'); if (exEl) exEl.innerHTML = item.example;
+    }
+  });
+
+  // 6 Promises
+  const prEye = document.getElementById('promisesEyebrow'); if (prEye) prEye.textContent = t.promisesEyebrow;
+  const prH = document.getElementById('promisesHeading'); if (prH) prH.innerHTML = t.promisesHeading;
+  const prD = document.getElementById('promisesDesc'); if (prD) prD.textContent = t.promisesDesc;
+  document.querySelectorAll('.promise-card[data-pidx]').forEach(card => {
+    const idx = +card.dataset.pidx;
+    const item = t.promises[idx];
+    if (item) {
+      const bEl = card.querySelector('.promise-badge'); if (bEl) bEl.textContent = item.badge;
+      const tEl = card.querySelector('.promise-title'); if (tEl) tEl.textContent = item.title;
+      const trEl = card.querySelector('.promise-trans'); if (trEl) trEl.textContent = item.trans;
+      const refEl = card.querySelector('.promise-ref'); if (refEl) refEl.textContent = item.ref;
+      const takeEl = card.querySelector('.promise-takeaway'); if (takeEl) takeEl.innerHTML = item.takeaway;
+    }
+  });
+
+  // Scholar Wisdom
+  const wEye = document.getElementById('wisdomEyebrow'); if (wEye) wEye.textContent = t.wisdomEyebrow;
+  const wH = document.getElementById('wisdomHeading'); if (wH) wH.innerHTML = t.wisdomHeading;
+  const wD = document.getElementById('wisdomDesc'); if (wD) wD.textContent = t.wisdomDesc;
+  const tabAll = document.getElementById('tabWisdomAll'); if (tabAll) tabAll.textContent = t.wisdomTabs.all;
+  const tabQad = document.getElementById('tabWisdomQadhi'); if (tabQad) tabQad.textContent = t.wisdomTabs.qadhi;
+  const tabNak = document.getElementById('tabWisdomNak'); if (tabNak) tabNak.textContent = t.wisdomTabs.nak;
+  const tabGhz = document.getElementById('tabWisdomGhazali'); if (tabGhz) tabGhz.textContent = t.wisdomTabs.ghazali;
+  const tabQay = document.getElementById('tabWisdomQayyim'); if (tabQay) tabQay.textContent = t.wisdomTabs.qayyim;
+  renderScholarQuotes(currentScholarFilter);
+
+  // Sadaqah Jar
+  updateJarNote();
+  const ejbTxt = document.getElementById('emptyJarBtnTxt'); if (ejbTxt) ejbTxt.textContent = t.emptyJarBtn;
+  const jEye = document.getElementById('jarEyebrow'); if (jEye) jEye.textContent = t.jarEyebrow;
+  const jHT = document.getElementById('jarHadithTitle'); if (jHT) jHT.innerHTML = t.jarHadithTitle;
+  const jD = document.getElementById('jarDesc'); if (jD) jD.textContent = t.jarDesc;
+  const fh1 = document.getElementById('flipHint1'); if (fh1) fh1.textContent = t.flipHint;
+  const fq1 = document.getElementById('flipQuote1'); if (fq1) fq1.textContent = t.flip1Quote;
+  const fc1 = document.getElementById('flipCite1'); if (fc1) fc1.textContent = t.flip1Cite;
+  const fh2 = document.getElementById('flipHint2'); if (fh2) fh2.textContent = t.flipHint;
+  const fq2 = document.getElementById('flipQuote2'); if (fq2) fq2.textContent = t.flip2Quote;
+  const fc2 = document.getElementById('flipCite2'); if (fc2) fc2.textContent = t.flip2Cite;
+
+  // Causes
+  const cEye = document.getElementById('causesEyebrow'); if (cEye) cEye.textContent = t.causesEyebrow;
+  const cH = document.getElementById('causesHeading'); if (cH) cH.innerHTML = t.causesHeading;
+  const cD = document.getElementById('causesDesc'); if (cD) cD.textContent = t.causesDesc;
+  renderCampaigns();
+
+  // Bottom Stats
+  const bsW = document.getElementById('bstatWells'); if (bsW) bsW.textContent = t.bottomStats[0];
+  const bsO = document.getElementById('bstatOrphans'); if (bsO) bsO.textContent = t.bottomStats[1];
+  const bsM = document.getElementById('bstatMeals'); if (bsM) bsM.textContent = t.bottomStats[2];
+  const bsC = document.getElementById('bstatClassrooms'); if (bsC) bsC.textContent = t.bottomStats[3];
+
+  // CTA
+  const ctaEye = document.getElementById('ctaEyebrow'); if (ctaEye) ctaEye.textContent = t.ctaEyebrow;
+  const ctaH = document.getElementById('ctaHeading'); if (ctaH) ctaH.textContent = t.ctaHeading;
+  const ctaB = document.getElementById('ctaBtn'); if (ctaB) { const sp = ctaB.querySelector('span'); if (sp) sp.textContent = t.ctaBtn; }
+  const ctaSub = document.getElementById('ctaSubtext'); if (ctaSub) ctaSub.textContent = t.ctaSubtext;
+
+  // Modal
+  const mEye = document.getElementById('modalEyebrow'); if (mEye) mEye.textContent = t.modalEyebrow;
+  const mH = document.getElementById('modalHeading'); if (mH) mH.textContent = t.modalHeading;
+  const mD = document.getElementById('modalDesc'); if (mD) mD.textContent = t.modalDesc;
+  const mAL = document.getElementById('modalAmtLabel'); if (mAL) mAL.textContent = t.modalAmtLabel;
+  const cLogo = document.getElementById('certLogo'); if (cLogo) cLogo.textContent = t.certLogo;
+  const cDate = document.getElementById('certDate'); if (cDate) cDate.textContent = t.certDatePrefix + new Date().toISOString().slice(0, 10);
+  const cDua = document.getElementById('certDuaEn'); if (cDua) cDua.textContent = t.certDuaEn;
+  const cDL = document.getElementById('certDedLabel'); if (cDL) cDL.textContent = t.certDedLabel;
+  const cTyp = document.getElementById('certType'); if (cTyp) cTyp.textContent = t.certType;
+  const bCP = document.getElementById('btnConfirmPledgeTxt'); if (bCP) bCP.textContent = t.btnConfirmPledge;
+  const bPS = document.getElementById('btnPrintStatementTxt'); if (bPS) bPS.textContent = t.btnPrintStatement;
+
+  // Footer
+  const ft = document.getElementById('footTagline'); if (ft) ft.textContent = t.footTagline;
+  const fHome = document.getElementById('footHome'); if (fHome) fHome.textContent = t.footHome;
+  const fRecip = document.getElementById('footRecip'); if (fRecip) fRecip.textContent = t.footRecip;
+  const fProm = document.getElementById('footPromises'); if (fProm) fProm.textContent = t.footPromises;
+  const fWis = document.getElementById('footWisdom'); if (fWis) fWis.textContent = t.footWisdom;
+  const fCau = document.getElementById('footCauses'); if (fCau) fCau.textContent = t.footCauses;
+}
+
+// Global click listener for language toggle buttons
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.nq-lang-btn');
+  if (btn && btn.dataset.lang) {
+    switchLang(btn.dataset.lang);
+  }
+});
+
+// Initial invocation to set saved or default language
+switchLang(LANG);
 </script>
 </body>
 </html>
