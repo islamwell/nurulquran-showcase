@@ -10,6 +10,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@200;300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════
+   KING FAHD GLORIOUS QURAN PRINTING COMPLEX (KFGQPC)
+   Official Othmani Madina Mushaf Font Definition
+   ═══════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════
    00 — TOKENS
    ═══════════════════════════════════════════════════════════ */
 :root{
@@ -32,7 +54,7 @@
 
   --f-display:"Cormorant Garamond",Didot,"Times New Roman",serif;
   --f-ui:"Inter",-apple-system,"Segoe UI",sans-serif;
-  --f-ar:"Amiri","Scheherazade New",serif;
+  --f-ar:'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -170,7 +192,11 @@ h2.display em{font-style:italic;color:var(--gold-lt);font-weight:300}
   color:rgba(244,239,230,.6);max-width:42ch;
 }
 .body b{color:var(--bone);font-weight:400}
-.arabic{font-family:var(--f-ar);direction:rtl}
+.arabic, .ar, .q-ayah, .ayah, .hero-ar, .pre-ar{
+  font-family:var(--f-ar);direction:rtl;
+  font-feature-settings:"cv01" on, "locl" on;
+  text-rendering:optimizeLegibility;
+}
 
 .line{display:block;overflow:hidden;padding-bottom:.06em}
 .line>span{display:block;transform:translateY(112%);transition:transform 1.5s var(--e) var(--d,0s)}
@@ -396,6 +422,59 @@ h1.mark span{
 .dawn-copy{position:absolute;z-index:6;left:0;right:0;top:clamp(14%,18vh,22%);padding:0 clamp(20px,var(--rail),130px);text-align:center}
 .dawn-copy .display{color:#fdf6ea;text-shadow:0 8px 60px rgba(0,0,0,.5)}
 
+/* ── 05 · QUR'ANIC TAQWA SANCTUARY ──────────────────────── */
+#quran{
+  position:relative;z-index:20;background:linear-gradient(180deg,#02040a 0%,#050a12 35%,#08101a 65%,#030508 100%);
+  padding:clamp(80px,14vh,160px) 0 clamp(70px,12vh,140px);
+  border-top:1px solid rgba(244,239,230,.08);
+}
+.quran-wrap{max-width:1440px;margin:0 auto;padding:0 var(--pad)}
+.quran-header{text-align:center;margin-bottom:clamp(40px,7vh,80px)}
+.quran-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));
+  gap:clamp(22px,3.2vw,36px);
+}
+.q-card{
+  position:relative;background:rgba(8,13,20,.62);
+  border:1px solid rgba(244,239,230,.09);
+  border-radius:2px;padding:clamp(26px,3.2vw,40px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  backdrop-filter:blur(12px);
+  transition:border-color .6s var(--e),box-shadow .6s var(--e),transform .6s var(--e);
+}
+.q-card:hover{
+  border-color:rgba(201,164,92,.45);
+  box-shadow:0 18px 50px -12px rgba(0,0,0,.7),0 0 32px rgba(201,164,92,.09);
+  transform:translateY(-4px);
+}
+.q-card::before{
+  content:"";position:absolute;top:0;left:20px;right:20px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,164,92,.45),transparent);
+  opacity:0;transition:opacity .6s var(--e);
+}
+.q-card:hover::before{opacity:1}
+.q-tag{
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:20px;display:flex;align-items:center;gap:10px;
+}
+.q-tag i{width:5px;height:5px;border:1px solid rgba(201,164,92,.8);transform:rotate(45deg);display:inline-block}
+.q-ayah{
+  font-family:var(--f-ar);direction:rtl;
+  font-size:clamp(21px,2.1vw,27px);line-height:2.1;
+  color:#fffef8;text-shadow:0 0 24px rgba(232,211,162,.2);
+  margin-bottom:20px;letter-spacing:.01em;font-weight:400;
+}
+.q-trans{
+  font-family:var(--f-display);font-style:italic;font-size:clamp(15px,1.4vw,18px);
+  line-height:1.65;color:rgba(244,239,230,.82);margin-bottom:22px;flex-grow:1;
+}
+.q-ref{
+  font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,164,92,.75);
+  border-top:1px solid rgba(244,239,230,.08);padding-top:14px;display:flex;justify-content:space-between;
+  align-items:center;
+}
+.q-ref .ar-ref{font-family:var(--f-ar);letter-spacing:0;direction:rtl;font-size:14px;color:rgba(232,211,162,.65)}
+
 /* ── FOOTER ─────────────────────────────────────────────── */
 footer{
   position:relative;z-index:20;background:var(--abyss);
@@ -403,12 +482,13 @@ footer{
   border-top:1px solid rgba(244,239,230,.08);
 }
 .f-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:clamp(26px,4vw,60px);padding-bottom:clamp(48px,9vh,110px);
 }
 .f-grid dt{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(244,239,230,.32);margin-bottom:14px}
 .f-grid dd{font-family:var(--f-display);font-size:clamp(15px,1.5vw,21px);color:rgba(244,239,230,.8);line-height:1.5}
-.f-grid dd.ar{font-family:var(--f-ar);direction:rtl;color:var(--gold-lt)}
+.f-grid dd.ar{font-family:var(--f-ar);direction:rtl;color:var(--gold-lt);font-size:clamp(16px,1.6vw,22px);line-height:1.8}
+.f-grid dd.f-cite{font-family:var(--f-ui);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,239,230,.4);margin-top:4px}
 .f-big{
   font-family:var(--f-display);font-weight:300;font-size:clamp(40px,12.5vw,190px);
   line-height:.9;letter-spacing:.04em;color:rgba(244,239,230,.1);
@@ -421,6 +501,7 @@ footer{
   margin-top:clamp(30px,5vh,60px);font-size:9.5px;letter-spacing:.26em;
   text-transform:uppercase;color:rgba(244,239,230,.3);
 }
+.f-meta .ar{font-family:var(--f-ar);letter-spacing:0;direction:rtl;text-transform:none;color:var(--gold-lt);font-size:12px}
 .f-meta a{color:rgba(244,239,230,.5);text-decoration:none;border-bottom:1px solid rgba(201,164,92,.4);padding-bottom:2px;transition:color .5s ease}
 .f-meta a:hover{color:var(--gold-lt)}
 
@@ -449,7 +530,7 @@ body.snapshot *{transition-duration:0s!important}
 <div class="dot-cursor" id="dotCursor"></div>
 
 <div class="rail l"><span>Sūrah Āl ʿImrān &nbsp;·&nbsp; Verse 102 &nbsp;·&nbsp; Root و ق ي</span></div>
-<div class="rail r"><span>Scroll — a study in awe &nbsp;·&nbsp; No figures, only creation</span></div>
+<div class="rail r"><span><span class="ar" style="font-family:var(--f-ar);letter-spacing:0">وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ</span> &nbsp;·&nbsp; Sūrah Al-Baqarah 2:197</span></div>
 
 <nav class="ticks" id="ticks" aria-label="Scenes"></nav>
 
@@ -469,7 +550,7 @@ body.snapshot *{transition-duration:0s!important}
             <span style="--d:.30s">T</span><span style="--d:.40s">A</span><span style="--d:.50s">Q</span><span style="--d:.60s">W</span><span style="--d:.70s">A</span>
           </h1>
           <div class="hero-ar rv" style="--d:.9s">تَقْوَى</div>
-          <div class="hero-sub rv" style="--d:1.05s">The shield of the heart<br>An observance in five movements</div>
+          <div class="hero-sub rv" style="--d:1.05s">The shield of the heart<br>An observance in six movements</div>
         </div>
       </div>
 
@@ -499,7 +580,7 @@ body.snapshot *{transition-duration:0s!important}
             <div class="hair" style="--d:.7s;margin-top:clamp(22px,4vh,46px);max-width:340px"></div>
           </div>
           <div>
-            <p class="lede rv" style="--d:.45s">حَقَّ تُقَاتِهِ<br><span style="font-size:.62em;letter-spacing:.16em;text-transform:uppercase;font-family:var(--f-ui);color:rgba(244,239,230,.44)">ḥaqqa tuqātihi</span></p>
+            <p class="lede rv" style="--d:.45s"><span class="ar" style="display:block;font-size:1.35em;line-height:1.7;color:var(--gold-lt)">حَقَّ تُقَاتِهِۦ</span><span style="font-size:.62em;letter-spacing:.16em;text-transform:uppercase;font-family:var(--f-ui);color:rgba(244,239,230,.44)">ḥaqqa tuqātihi</span></p>
             <p class="body rv" style="--d:.6s;margin-top:26px">Not the panic of the shallows — the <b>gravity of the deep</b>. Awe is what the ocean teaches: that something can be measureless and still hold you.</p>
             <dl class="stat rv" style="--d:.78s">
               <div><dt>Root</dt><dd class="arabic">و ق ي</dd></div>
@@ -556,8 +637,8 @@ body.snapshot *{transition-duration:0s!important}
             <span class="line"><span style="--d:.22s">The shield is worn</span></span>
             <span class="line"><span style="--d:.34s"><em>inward.</em></span></span>
           </h2>
-          <p class="body rv" style="--d:.62s;margin:clamp(24px,4vh,44px) auto 0;text-align:center;max-width:44ch">
-            Taqwā is not distance from God — it is <b>armour against the self</b>. Wiqāyah: the shield raised in battle. Carried quietly, like snow held on stone.
+          <p class="body rv" style="--d:.62s;margin:clamp(24px,4vh,44px) auto 0;text-align:center;max-width:48ch">
+            Taqwā is the ultimate sanctuary and garment of the soul: <span class="ar" style="color:var(--gold-lt);font-size:1.15em">وَلِبَاسُ ٱلتَّقْوَىٰ ذَٰلِكَ خَيْرٌ</span>. Wiqāyah: sacred protection from whatever distances the heart from Allah. Carried quietly, like snow held on stone.
           </p>
         </div>
       </div>
@@ -621,23 +702,120 @@ body.snapshot *{transition-duration:0s!important}
     </div>
   </section>
 
+  <!-- ══════════ 05 · TAQWA IN THE QUR'AN — الآيات في التقوى ══════════ -->
+  <section id="quran" data-scene="Qur'ān">
+    <div class="wrap quran-wrap">
+      <div class="quran-header" data-reveal>
+        <div class="label rv" style="--d:.1s;justify-content:center"><i></i><b>05 — Taqwā in the Qur'ān · الآيات في التقوى</b><i></i></div>
+        <h2 class="display" style="margin-top:clamp(16px,3vh,32px);text-align:center">
+          <span class="line"><span style="--d:.2s">The Shield Defined</span></span>
+          <span class="line"><span style="--d:.32s"><em>In Divine Speech.</em></span></span>
+        </h2>
+        <p class="lede rv" style="--d:.45s;margin:clamp(18px,3vh,36px) auto 0;text-align:center;max-width:44ch">
+          Across the Qur'ān, Allah illuminates Taqwā as spiritual garment, essential provision, an unfailing compass, and the doorway to divine companionship.
+        </p>
+      </div>
+
+      <div class="quran-grid" data-reveal>
+        <!-- Card 1 -->
+        <article class="q-card rv" style="--d:.2s">
+          <div>
+            <div class="q-tag"><i></i><b>The Best Provision · خير الزاد</b></div>
+            <div class="q-ayah">وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ ۚ وَٱتَّقُونِ يَٰٓأُوْلِى ٱلْأَلْبَٰبِ</div>
+            <p class="q-trans">“And take provisions, but indeed, the best provision is Taqwā (God-consciousness). And fear Me, O you of understanding.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah Al-Baqarah · 2:197</span>
+            <span class="ar-ref">سورة البقرة</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="q-card rv" style="--d:.3s">
+          <div>
+            <div class="q-tag"><i></i><b>The Best Garment · لباس التقوى</b></div>
+            <div class="q-ayah">وَلِبَاسُ ٱلتَّقْوَىٰ ذَٰلِكَ خَيْرٌ ۚ ذَٰلِكَ مِنْ ءَايَٰتِ ٱللَّهِ لَعَلَّهُمْ يَذَّكَّرُونَ</div>
+            <p class="q-trans">“And the clothing of Taqwā — that is best. That is from the signs of Allah that perhaps they may remember.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah Al-Aʿrāf · 7:26</span>
+            <span class="ar-ref">سورة الأعراف</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="q-card rv" style="--d:.4s">
+          <div>
+            <div class="q-tag"><i></i><b>The Divine Measure · أكرمكم عند الله</b></div>
+            <div class="q-ayah">إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ ۚ إِنَّ ٱللَّهَ عَلِيمٌ خَبِيرٌ</div>
+            <p class="q-trans">“Indeed, the most noble of you in the sight of Allah is the most conscious of Him. Indeed, Allah is Knowing and Acquainted.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah Al-Ḥujurāt · 49:13</span>
+            <span class="ar-ref">سورة الحجرات</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="q-card rv" style="--d:.5s">
+          <div>
+            <div class="q-tag"><i></i><b>A Way Out & Ease · المخرج واليسر</b></div>
+            <div class="q-ayah">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ</div>
+            <p class="q-trans">“And whoever fears Allah — He will make for him a way out, and will provide for him from where he does not expect.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah Aṭ-Ṭalāq · 65:2–3</span>
+            <span class="ar-ref">سورة الطلاق</span>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="q-card rv" style="--d:.6s">
+          <div>
+            <div class="q-tag"><i></i><b>Criterion & Forgiveness · الفرقان</b></div>
+            <div class="q-ayah">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِن تَتَّقُوا۟ ٱللَّهَ يَجْعَل لَّكُمْ فُرْقَانًا وَيُكَفِّرْ عَنكُمْ سَيِّـَٔاتِكُمْ وَيَغْفِرْ لَكُمْ</div>
+            <p class="q-trans">“O you who have believed, if you fear Allah, He will grant you a criterion [furqān] and will remove for you your misdeeds and forgive you.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah Al-Anfāl · 8:29</span>
+            <span class="ar-ref">سورة الأنفال</span>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="q-card rv" style="--d:.7s">
+          <div>
+            <div class="q-tag"><i></i><b>Divine Companionship · معية الله</b></div>
+            <div class="q-ayah">إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَوا۟ وَّٱلَّذِينَ هُم مُّحْسِنُونَ</div>
+            <p class="q-trans">“Indeed, Allah is with those who fear Him and those who are doers of good.”</p>
+          </div>
+          <div class="q-ref">
+            <span>Sūrah An-Naḥl · 16:128</span>
+            <span class="ar-ref">سورة النحل</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════ FOOTER ══════════ -->
   <footer>
     <div class="wrap">
       <dl class="f-grid">
-        <div><dt>Verse</dt><dd>Sūrah Āl ʿImrān 3:102</dd></div>
-        <div><dt>Translation</dt><dd>Ṣaḥīḥ International</dd></div>
-        <div><dt>Root</dt><dd class="ar">و ق ي — وِقَايَة</dd></div>
-        <div><dt>Imagery</dt><dd>Ocean · Ridge · Cosmos · Dawn</dd></div>
-        <div><dt>Palette</dt><dd>Ink · Bone · Gilt</dd></div>
+        <div><dt>Primary Verse</dt><dd>Sūrah Āl ʿImrān 3:102</dd></div>
+        <div><dt>Sacred Root</dt><dd class="ar">و ق ي — وِقَايَة · حِفْظ</dd></div>
+        <div><dt>Best Provision</dt><dd class="ar">وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ</dd><dd class="f-cite">Al-Baqarah 2:197</dd></div>
+        <div><dt>Best Garment</dt><dd class="ar">وَلِبَاسُ ٱلتَّقْوَىٰ ذَٰلِكَ خَيْرٌ</dd><dd class="f-cite">Al-Aʿrāf 7:26</dd></div>
+        <div><dt>The Divine Way Out</dt><dd class="ar">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا</dd><dd class="f-cite">Aṭ-Ṭalāq 65:2</dd></div>
+        <div><dt>Divine Companionship</dt><dd class="ar">إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَوا۟</dd><dd class="f-cite">An-Naḥl 16:128</dd></div>
       </dl>
       <div class="f-big"><span>TAQWA</span><em>تَقْوَى</em></div>
       <div class="f-meta">
-        <span>Awareness as armour</span>
-        <span>Composed with restraint — no figures, only creation</span>
+        <span><span class="ar">إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ</span> &nbsp;·&nbsp; Sūrah Al-Ḥujurāt 49:13</span>
+        <span><span class="ar">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مِنْ أَمْرِهِۦ يُسْرًا</span> &nbsp;·&nbsp; Sūrah Aṭ-Ṭalāq 65:4</span>
         <span><a href="index.html">← Showcase Home</a></span>
         <span><a href="#hero">Return to origin ↑</a></span>
-        <span class="footer-version-tag" style="color:var(--gold)">v1.0.32 (updated 2026-09-11 08:18)</span>
+        <span class="footer-version-tag" style="color:var(--gold)">v1.0.33 (updated 2026-09-11 08:32)</span>
       </div>
     </div>
   </footer>
@@ -1140,7 +1318,20 @@ function typeset(){
     `<span class="w" style="--d:${(.22+i*.11).toFixed(2)}s">${w}</span>`).join(" ");
 
   /* marquee lexicon */
-  const items=["Taqwā","وِقَايَة","God-consciousness","و ق ي","Awareness as armour","تَقْوَى","Guard the heart","حَقَّ تُقَاتِهِ","Reverence","Shield"];
+  const items=[
+    "Taqwā",
+    "وِقَايَة",
+    "وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ",
+    "God-consciousness",
+    "وَلِبَاسُ ٱلتَّقْوَىٰ ذَٰلِكَ خَيْرٌ",
+    "و ق ي",
+    "إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ",
+    "تَقْوَى",
+    "وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا",
+    "حَقَّ تُقَاتِهِۦ",
+    "إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَوا۟",
+    "وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مِنْ أَمْرِهِۦ يُسْرًا"
+  ];
   const mq=document.getElementById("mq");
   const seq=items.map(x=>`<span class="${/[\u0600-\u06FF]/.test(x)?'ar':''}">${x}</span>`).join("");
   mq.innerHTML=seq+seq;
