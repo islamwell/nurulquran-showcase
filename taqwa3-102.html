@@ -79,6 +79,7 @@ img,canvas,svg{display:block;max-width:100%}
   border-radius:50%;background:var(--bone);pointer-events:none;mix-blend-mode:difference;
   opacity:0;transition:opacity .5s ease,transform .3s var(--e);
 }
+.dot-cursor.press{width:22px;height:22px;margin:-11px 0 0 -11px;background:transparent;border:1px solid var(--gold-lt);mix-blend-mode:normal}
 @media (max-width:900px){.glow-cursor,.dot-cursor{display:none}}
 
 /* progress hairline */
@@ -114,6 +115,12 @@ img,canvas,svg{display:block;max-width:100%}
   transition:all .6s var(--e);position:relative;
 }
 .ticks button.on{background:var(--gold);width:40px}
+.ticks button::after{
+  content:attr(data-l);position:absolute;right:32px;top:-6px;white-space:nowrap;
+  font-size:8.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);
+  opacity:0;transform:translateX(6px);transition:all .5s var(--e);
+}
+.ticks button:hover::after,.ticks button.on::after{opacity:1;transform:none}
 @media (max-width:1100px){.ticks{display:none}}
 
 /* ═══════════════════════════════════════════════════════════
@@ -282,9 +289,15 @@ h1.mark span{
 .mist.m1{bottom:12%;animation:drift 34s ease-in-out infinite alternate}
 .mist.m2{bottom:26%;opacity:.7;animation:drift 46s -8s ease-in-out infinite alternate-reverse}
 .mist.m3{bottom:2%;opacity:.55;animation:drift 28s -14s ease-in-out infinite alternate}
+.ridge-svg{transform:translate3d(0,var(--py,0px),0)}
+.moon{transform:translate(-50%,var(--py,0px))}
 @keyframes drift{
-  0%{transform:translate3d(-6%,0,0) scaleY(1)}
-  100%{transform:translate3d(8%,-3%,0) scaleY(1.22)}
+  0%{transform:translate3d(-6%,var(--py,0px),0) scaleY(1)}
+  100%{transform:translate3d(8%,calc(var(--py,0px) - 3vh),0) scaleY(1.22)}
+}
+@keyframes sunRise{
+  0%{transform:translate(-50%,calc(58% + var(--py,0px))) scale(.94);opacity:.85}
+  100%{transform:translate(-50%,calc(40% + var(--py,0px))) scale(1.04);opacity:1}
 }
 .ridge-copy{position:absolute;z-index:8;left:0;right:0;top:clamp(16%,20vh,24%);padding:0 clamp(20px,var(--rail),130px)}
 
@@ -294,9 +307,14 @@ h1.mark span{
 .rosette{
   position:absolute;top:50%;left:50%;width:min(148vh,124vw);aspect-ratio:1;
   transform:translate(-50%,-50%);z-index:3;opacity:.9;
+  filter:drop-shadow(0 0 26px rgba(201,164,92,.16));animation:rosBreathe 12s ease-in-out infinite;
 }
-.rosette .spin{transform-origin:300px 300px;animation:spin 190s linear infinite}
+.rosette .spin{transform-box:view-box;transform-origin:50% 50%;animation:spin 190s linear infinite}
 .rosette .spin.rev{animation-duration:250s;animation-direction:reverse}
+@keyframes rosBreathe{
+  0%,100%{opacity:.72;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.035)}
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 .rosette path{
   fill:none;stroke-linecap:round;
@@ -335,6 +353,13 @@ h1.mark span{
 }
 .ref{margin-top:clamp(22px,3.4vh,44px);font-size:9.5px;letter-spacing:.4em;text-transform:uppercase;color:rgba(201,164,92,.75)}
 .diamond{width:6px;height:6px;border:1px solid rgba(201,164,92,.8);transform:rotate(45deg);margin:0 auto clamp(22px,3.6vh,44px)}
+.sweep{
+  position:absolute;inset:0;z-index:7;pointer-events:none;mix-blend-mode:screen;opacity:0;
+  background:linear-gradient(104deg,transparent 38%,rgba(255,247,225,.10) 47%,rgba(255,247,225,.24) 50%,rgba(255,247,225,.10) 53%,transparent 62%);
+  background-size:260% 100%;
+}
+[data-reveal].in .sweep{opacity:1;animation:sweepRun 7.5s 2.2s var(--e2) infinite}
+@keyframes sweepRun{0%{background-position:130% 0}55%,100%{background-position:-130% 0}}
 
 /* ── DAWN ───────────────────────────────────────────────── */
 #dawn{height:270vh;background:#02040a}
@@ -345,7 +370,6 @@ h1.mark span{
   background:radial-gradient(circle,#fff7e4 0%,#ffd79a 38%,#e79c4f 62%,rgba(201,110,60,0) 74%);
   filter:blur(2px);animation:sunRise 11s ease-in-out infinite alternate;
 }
-@keyframes sunRise{0%{transform:translate(-50%,58%) scale(.94);opacity:.85}100%{transform:translate(-50%,40%) scale(1.04);opacity:1}}
 .rays{
   position:absolute;bottom:6%;left:50%;width:230vmax;aspect-ratio:1;transform:translate(-50%,50%);
   z-index:1;opacity:.16;mix-blend-mode:screen;
@@ -491,6 +515,7 @@ footer{
   <section id="ridge" data-scene="Ascent">
     <div class="stage">
       <div class="moon" data-par="-0.06"></div>
+      <canvas id="aurora" style="filter:blur(14px);opacity:.85;z-index:2"></canvas>
       <canvas id="snow"></canvas>
       <div class="mist m3" data-par="0.05"></div>
 
@@ -548,6 +573,10 @@ footer{
 
       <div class="verse-box" data-reveal>
         <div>
+          <div class="label rv" style="--d:.02s;justify-content:center;margin-bottom:clamp(20px,3vh,38px)">
+            <i></i><b>03 — The Verse</b><i></i>
+          </div>
+          <i class="sweep" aria-hidden="true"></i>
           <div class="diamond rv" style="--d:.05s"></div>
           <p class="ayah" id="ayah"></p>
           <p class="trans">
@@ -568,6 +597,12 @@ footer{
       <div class="sun" data-par="-0.05"></div>
       <div class="band b1"></div><div class="band b2"></div><div class="band b3"></div>
       <div class="sea-line"></div>
+      <svg class="ridge-svg" viewBox="0 0 1600 320" preserveAspectRatio="none" data-par="0.05" style="height:26%;opacity:.9">
+        <path fill="#1a1014" d="M0,150 C240,96 420,178 640,140 C880,98 1040,186 1260,146 C1420,118 1520,150 1600,132 L1600,320 L0,320 Z" opacity=".7"/>
+      </svg>
+      <svg class="ridge-svg" viewBox="0 0 1600 320" preserveAspectRatio="none" data-par="0.11" style="height:17%">
+        <path fill="#0b0609" d="M0,196 C220,150 400,224 620,192 C860,158 1020,232 1240,198 C1420,170 1520,204 1600,186 L1600,320 L0,320 Z"/>
+      </svg>
       <div class="fade-top"></div>
 
       <div class="dawn-copy" data-reveal>
@@ -599,7 +634,9 @@ footer{
       <div class="f-meta">
         <span>Awareness as armour</span>
         <span>Composed with restraint — no figures, only creation</span>
+        <span><a href="index.html">← Showcase Home</a></span>
         <span><a href="#hero">Return to origin ↑</a></span>
+        <span class="footer-version-tag" style="color:var(--gold)">v1.0.30 (updated 2026-09-11 07:42)</span>
       </div>
     </div>
   </footer>
@@ -612,6 +649,8 @@ const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const DPR = () => Math.min(devicePixelRatio||1, 2);
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+let AWAKE=true;
+document.addEventListener("visibilitychange",()=>AWAKE=!document.hidden);
 
 /* ═══════════ SIZING HELPER ═══════════ */
 function fit(cv){
@@ -724,7 +763,7 @@ function nebula(){
   const t0=performance.now();
   (function loop(now){
     requestAnimationFrame(loop);
-    if(!vis) return;
+    if(!vis||!AWAKE) return;
     mx=lerp(mx,tx,.045); my=lerp(my,ty,.045);
     gl.uniform2f(uRes,W,H);
     gl.uniform1f(uT,RM?12:(now-t0)/1000);
@@ -754,7 +793,7 @@ function motes(){
   let t=0;
   (function f(){
     requestAnimationFrame(f);
-    if(!vis||RM) return;
+    if(!vis||!AWAKE||RM) return;
     t+=.016;
     ctx.setTransform(S.d,0,0,S.d,0,0);
     ctx.clearRect(0,0,S.w,S.h);
@@ -793,7 +832,7 @@ function ocean(){
   let t=RM?8:0;
   (function f(){
     requestAnimationFrame(f);
-    if(!vis) return;
+    if(!vis||!AWAKE) return;
     if(!RM) t+=.0125;
     const {w,h,d}=S, hor=h*.20;
     ctx.setTransform(d,0,0,d,0,0);
@@ -892,7 +931,7 @@ function snow(){
   let t=0;
   (function f(){
     requestAnimationFrame(f);
-    if(!vis||RM) return;
+    if(!vis||!AWAKE||RM) return;
     t+=.01;
     const {w,h,d}=S;
     ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,w,h);
@@ -904,6 +943,38 @@ function snow(){
       if(p.x<-8)p.x=w+8; if(p.x>w+8)p.x=-8;
       ctx.fillStyle=`rgba(232,240,246,${.08+p.z*.34})`;
       ctx.beginPath(); ctx.arc(p.x,p.y,sc*1.25,0,6.283); ctx.fill();
+    }
+    ctx.globalCompositeOperation="source-over";
+  })();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   D2 · AURORA CURTAIN (ridge shield motif)
+   ═══════════════════════════════════════════════════════════ */
+function aurora(){
+  const cv=document.getElementById("aurora"); if(!cv) return;
+  const ctx=cv.getContext("2d"); let S=fit(cv),vis=true,t=RM?3:0;
+  addEventListener("resize",()=>S=fit(cv));
+  new IntersectionObserver(e=>vis=e[0].isIntersecting,{threshold:0}).observe(cv);
+  const COLS=64;
+  (function f(){
+    requestAnimationFrame(f); if(!vis||!AWAKE) return; if(!RM) t+=.0042;
+    const {w,h,d}=S; ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,w,h);
+    ctx.globalCompositeOperation="lighter";
+    for(let b=0;b<3;b++){
+      const off=b*2.1, cw=w/COLS+1.5;
+      for(let i=0;i<COLS;i++){
+        const p=i/COLS, x=p*w;
+        const top=h*(.05+.09*Math.sin(p*4.1+t*2+off)+.025*Math.sin(p*11-t*3.4));
+        const len=h*(.34+.15*Math.sin(p*6.3-t*1.7+off));
+        const a=(.055+.055*Math.sin(p*Math.PI))*(1-b*.26);
+        const g=ctx.createLinearGradient(x,top,x,top+len);
+        g.addColorStop(0,"rgba(143,185,196,0)");
+        g.addColorStop(.32,`rgba(${140+b*30},${206},${190-b*18},${a})`);
+        g.addColorStop(.75,`rgba(201,164,92,${a*.45})`);
+        g.addColorStop(1,"rgba(201,164,92,0)");
+        ctx.fillStyle=g; ctx.fillRect(x,top,cw,len);
+      }
     }
     ctx.globalCompositeOperation="source-over";
   })();
@@ -930,7 +1001,7 @@ function cosmos(){
   let t=RM?5:0;
   (function f(){
     requestAnimationFrame(f);
-    if(!vis) return;
+    if(!vis||!AWAKE) return;
     if(!RM) t+=.01;
     const {w,h,d}=S,cx=w/2,cy=h/2;
     ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,w,h);
@@ -981,7 +1052,7 @@ function dawnStars(){
   let t=0;
   (function f(){
     requestAnimationFrame(f);
-    if(!vis) return;
+    if(!vis||!AWAKE) return;
     t+=.01;
     const {w,h,d}=S;
     ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,w,h);
@@ -1094,10 +1165,18 @@ function scrollSystem(){
   secs.forEach((s,i)=>{
     const b=document.createElement("button");
     b.title=s.dataset.scene;
+    b.dataset.l = String(i).padStart(2,"0")+" · "+s.dataset.scene;
+    b.setAttribute("aria-label",s.dataset.scene);
     b.addEventListener("click",()=>s.scrollIntoView({behavior:"smooth"}));
     ticks.appendChild(b);
   });
   const btns=[...ticks.children];
+
+  addEventListener("keydown",e=>{
+    const k={ArrowDown:1,PageDown:1,ArrowUp:-1,PageUp:-1}[e.key]; if(!k) return;
+    const cur=btns.findIndex(b=>b.classList.contains("on"));
+    const nx=secs[clamp(cur+k,0,secs.length-1)]; if(nx){e.preventDefault();nx.scrollIntoView({behavior:"smooth"});}
+  });
 
   let y=scrollY,ry=y,raf=0;
   const onScroll=()=>{ y=scrollY; if(!raf) raf=requestAnimationFrame(tick); };
@@ -1113,11 +1192,14 @@ function scrollSystem(){
     heroMid.style.opacity=String(1-Math.pow(hp,1.25));
     heroMid.style.filter=`blur(${hp*9}px)`;
 
+    const cue=document.querySelector(".scroll-cue");
+    if(cue){cue.style.opacity=String(clamp(1-ry/300,0,1));}
+
     /* layer parallax */
     for(const el of pars){
       const r=el.getBoundingClientRect();
       const mid=(r.top+r.height/2-innerHeight/2)/innerHeight;
-      el.style.setProperty("transform",`translate3d(0,${(mid*parseFloat(el.dataset.par)*260).toFixed(2)}px,0)`);
+      el.style.setProperty("--py", (mid*parseFloat(el.dataset.par)*260).toFixed(2)+"px");
     }
 
     /* active scene */
@@ -1144,8 +1226,10 @@ function cursor(){
     g.style.opacity="1";d.style.opacity="1";
     d.style.transform=`translate3d(${x}px,${y}px,0)`;
   },{passive:true});
-  addEventListener("pointerdown",()=>d.style.transform+=" scale(2.4)");
+  addEventListener("pointerdown",()=>d.classList.add("press"));
+  addEventListener("pointerup",()=>d.classList.remove("press"));
   (function f(){requestAnimationFrame(f);
+    if(!AWAKE) return;
     gx=lerp(gx,x,.075);gy=lerp(gy,y,.075);
     g.style.transform=`translate3d(${gx}px,${gy}px,0)`;
   })();
@@ -1156,7 +1240,7 @@ function cursor(){
    ═══════════════════════════════════════════════════════════ */
 function boot(){
   /* 1. graphics */
-  nebula(); motes(); ocean(); snow(); cosmos(); dawnStars(); rosette();
+  nebula(); motes(); ocean(); snow(); aurora(); cosmos(); dawnStars(); rosette();
   /* 2. behaviour */
   scrollSystem(); cursor();
 
@@ -1178,6 +1262,11 @@ function boot(){
       },520);
     }
   },170);
+
+  setTimeout(()=>{ if(!document.body.classList.contains("loaded")){
+    document.getElementById("pre").classList.add("done");
+    document.body.classList.add("loaded"); typeset();
+  }},4200);
 }
 document.readyState!=="loading" ? boot() : addEventListener("DOMContentLoaded",boot);
 })();
