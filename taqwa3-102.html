@@ -428,6 +428,7 @@ footer{
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
 }
+body.snapshot *{transition-duration:0s!important}
 </style>
 </head>
 <body>
@@ -636,7 +637,7 @@ footer{
         <span>Composed with restraint — no figures, only creation</span>
         <span><a href="index.html">← Showcase Home</a></span>
         <span><a href="#hero">Return to origin ↑</a></span>
-        <span class="footer-version-tag" style="color:var(--gold)">v1.0.30 (updated 2026-09-11 07:42)</span>
+        <span class="footer-version-tag" style="color:var(--gold)">v1.0.31 (updated 2026-09-11 08:04)</span>
       </div>
     </div>
   </footer>
@@ -1246,6 +1247,15 @@ function boot(){
 
   /* 3. preloader → then typography */
   const pre=document.getElementById("pre"),bar=document.getElementById("preBar"),num=document.getElementById("preNum");
+  if (location.hash === "#snapshot") {
+    pre.classList.add("done");
+    pre.style.display = "none";
+    document.body.classList.add("loaded", "snapshot");
+    typeset();
+    const hr = document.querySelector("#hero [data-reveal]");
+    if (hr) hr.classList.add("in");
+    return;
+  }
   let v=0;
   const t=setInterval(()=>{
     v=Math.min(100,v+Math.random()*11+3);
