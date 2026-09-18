@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surah As-Sajdah · 1 — 30 · NurulQuran</title>
+<meta name="description" content="An interactive visual and auditory reflection on Surah As-Sajdah, all 30 verses with kinetic typography, Quranic recitation, and contemplation.">
+<meta property="og:title" content="Surah As-Sajdah 32:1–30 · NurulQuran">
+<meta property="og:description" content="An interactive visual reflection on Surah As-Sajdah, all 30 verses.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/snapshots/surah32.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Surah As-Sajdah 32:1–30">
+<meta name="twitter:description" content="An interactive visual reflection on Surah As-Sajdah, all 30 verses.">
+<meta name="theme-color" content="#06060a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Amiri:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Authentic King Fahd Glorious Quran Printing Complex font */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('assets/fonts/KFGQPC_HAFS.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'UthmanicHafs';
+  src: url('assets/fonts/UthmanicHafs.woff2') format('woff2'),
+       url('https://verses.quran.foundation/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{
+  --ink:#06060a; --bone:#F3ECE1; --gold:#E3C089; --amber:#C98F45; --mute:rgba(243,236,225,.52);
+  --f-ar:'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'Amiri Quran', 'Amiri', serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--bone)}
+body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smoothing:antialiased;touch-action:none}
+
+#field{position:fixed;inset:0;display:block;z-index:0}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+   radial-gradient(58% 46% at 50% 46%, rgba(227,192,137,.10), transparent 70%),
+   radial-gradient(120% 100% at 50% 120%, rgba(201,143,69,.07), transparent 60%),
+   radial-gradient(100% 80% at 50% 50%, transparent 42%, rgba(3,3,6,.78) 100%);
+  mix-blend-mode:screen}
+.grain{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  animation:grain 1.1s steps(3,end) infinite}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}100%{transform:translate(0,0)}}
+
+.stage{position:fixed;inset:0;z-index:3;display:grid;place-items:center;padding:clamp(20px,6vw,90px)}
+.scene{position:absolute;width:min(1180px,92vw);text-align:center;will-change:transform,opacity;transform-origin:50% 50%}
+.scene[data-off]{opacity:0;visibility:hidden}
+
+.ref{display:none}
+.ar{font-family:var(--f-ar);direction:rtl;font-size:clamp(28px,4.1vw,58px);line-height:2.05;
+  color:var(--gold);margin-bottom:clamp(22px,3.6vw,52px);letter-spacing:.01em}
+.en{font-size:clamp(24px,4.2vw,60px);font-weight:300;line-height:1.08;letter-spacing:-.02em}
+.en em{font-style:italic;color:var(--gold)}
+.w{display:inline-block;will-change:transform,opacity;transform-origin:50% 60%;
+  padding:.02em .11em; text-shadow:0 0 44px rgba(227,192,137,.16); box-decoration-break:clone; -webkit-box-decoration-break:clone}
+.note{max-width:900px;margin:clamp(16px,2.4vw,28px) auto 0;font-size:clamp(15px,1.55vw,22px);line-height:1.42;color:rgba(243,236,225,.72);font-weight:300}
+.note::before{content:"REFLECTION";display:block;font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.32em;color:rgba(227,192,137,.62);margin-bottom:8px}
+.sajdah-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:3px 10px;border-radius:999px;background:rgba(227,192,137,.15);border:1px solid rgba(227,192,137,.45);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.hairline{display:none}
+
+.hud{position:fixed;z-index:5;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--mute);pointer-events:none}
+.hud.tl{top:24px;left:26px;line-height:1.8}
+.hud.tr{top:24px;right:26px;text-align:right;line-height:1.8}
+.hud.bl{bottom:24px;left:26px}
+.hud .g{color:var(--gold)}
+
+.portal-back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);text-decoration:none;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;
+  padding:6px 12px;border-radius:20px;
+  border:1px solid rgba(227,192,137,.32);
+  background:rgba(6,6,10,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:all .22s ease;pointer-events:auto;
+}
+.portal-back-btn:hover{
+  border-color:rgba(227,192,137,.85);
+  background:rgba(227,192,137,.15);
+  transform:translateX(-2px);
+}
+.portal-back-btn svg{width:12px;height:12px;stroke-width:2.5}
+
+.scrub-wrap{
+  position:fixed;z-index:6;left:50%;bottom:25px;transform:translateX(-50%);
+  width:min(620px,68vw);display:flex;flex-direction:column;align-items:center;gap:8px
+}
+.ayah-bottom{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.34em;
+  color:var(--gold);text-transform:uppercase;opacity:.92;pointer-events:none
+}
+.scrub{
+  --progress:0%;
+  width:100%;height:22px;margin:0;appearance:none;-webkit-appearance:none;
+  background:transparent;cursor:pointer;touch-action:none
+}
+.scrub::-webkit-slider-runnable-track{
+  height:2px;border-radius:99px;
+  background:linear-gradient(90deg,var(--gold) 0 var(--progress),rgba(243,236,225,.18) var(--progress) 100%);
+  box-shadow:0 0 10px rgba(227,192,137,.10)
+}
+.scrub::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  margin-top:-6px;background:var(--gold);border:2px solid rgba(6,6,10,.9);
+  box-shadow:0 0 14px rgba(227,192,137,.55)
+}
+.scrub::-moz-range-track{
+  height:2px;border-radius:99px;background:rgba(243,236,225,.18)
+}
+.scrub::-moz-range-progress{
+  height:2px;border-radius:99px;background:var(--gold)
+}
+.scrub::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--gold);
+  border:2px solid rgba(6,6,10,.9);box-shadow:0 0 14px rgba(227,192,137,.55)
+}
+
+.cursor{position:fixed;z-index:9;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;
+  border:1px solid rgba(227,192,137,.6);border-radius:50%;pointer-events:none;
+  transition:width .3s,height .3s,margin .3s,background .3s;mix-blend-mode:screen}
+.cursor::after{content:"";position:absolute;inset:15px;background:var(--gold);border-radius:50%}
+body.press .cursor{width:74px;height:74px;margin:-37px 0 0 -37px;background:rgba(227,192,137,.06)}
+.actions{position:fixed;z-index:7;right:24px;bottom:22px;display:flex;gap:10px;align-items:center}
+.iconbtn{width:44px;height:44px;border:1px solid rgba(227,192,137,.28);border-radius:50%;
+  display:grid;place-items:center;background:rgba(6,6,10,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:var(--gold);cursor:pointer;transition:transform .22s ease,border-color .22s ease,background .22s ease}
+.iconbtn:hover,.iconbtn:focus-visible{transform:translateY(-2px);border-color:rgba(227,192,137,.75);background:rgba(227,192,137,.12);outline:none}
+.iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.iconbtn[aria-pressed="true"]{background:rgba(227,192,137,.18);border-color:rgba(227,192,137,.75)}
+.iconbtn .playfill{fill:currentColor;stroke:none}
+
+.en em.fear{color:#ff625c;text-shadow:0 0 22px rgba(255,98,92,.22)}
+.en em.hope{color:#6fdc91;text-shadow:0 0 22px rgba(111,220,145,.22)}
+.kw-red{color:#ff6b63 !important;text-shadow:0 0 18px rgba(255,107,99,.28) !important}
+.kw-green{color:#74e19a !important;text-shadow:0 0 18px rgba(116,225,154,.28) !important}
+.scene{
+  border-radius:24px;
+  padding:clamp(18px,3vw,42px) clamp(16px,4vw,54px);
+  background:transparent;
+  box-shadow:none;
+  transition:none;
+}
+.scene.readable{
+  background:transparent;
+  box-shadow:none;
+}
+.scene.readable .w{
+  background:rgba(6,6,10,.34);
+  border-radius:.28em;
+  box-shadow:0 0 10px rgba(6,6,10,.38),0 0 22px rgba(6,6,10,.26);
+}
+.scene.readable .ar .w,
+.scene.readable .en .w{
+  text-shadow:
+    0 0 6px rgba(6,6,10,.96),
+    0 0 14px rgba(6,6,10,.86),
+    0 0 24px rgba(6,6,10,.68),
+    0 0 38px rgba(6,6,10,.46);
+}
+.toast{
+  position:fixed;z-index:12;left:50%;top:24px;transform:translate(-50%,-18px);
+  padding:10px 14px;border-radius:999px;background:rgba(6,6,10,.88);
+  border:1px solid rgba(227,192,137,.35);color:var(--bone);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;
+  opacity:0;pointer-events:none;transition:opacity .24s ease,transform .24s ease;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.scene.long .ar{font-size:clamp(21px,2.85vw,42px);line-height:1.72;margin-bottom:clamp(14px,2.2vw,28px)}
+.scene.long .en{font-size:clamp(19px,2.85vw,42px);line-height:1.12}
+
+@media (max-height:720px){
+  .scene{padding-top:14px;padding-bottom:14px}
+  .ar{font-size:clamp(24px,3.3vw,44px);line-height:1.7;margin-bottom:18px}
+  .en{font-size:clamp(22px,3.5vw,46px)}
+  .ref{display:none}
+  .note{max-width:900px;margin:clamp(14px,2vw,22px) auto 0;font-size:clamp(14px,1.4vw,19px);line-height:1.38}
+}
+
+@media (pointer:coarse){.cursor{display:none}}
+@media (max-width:680px){
+  .hud.tl{top:12px;left:14px;max-width:calc(100vw - 28px)}
+  .hud.tr{display:none}
+  .hud.bl{display:none}
+  .hud-mob-ver{display:block !important}
+  .actions{right:12px;bottom:54px;gap:6px}
+  .iconbtn{width:38px;height:38px}
+  .iconbtn svg{width:16px;height:16px}
+  .scrub-wrap{bottom:14px;width:min(500px,82vw)}
+  .ar{font-size:clamp(22px,6.2vw,38px);line-height:1.85;margin-bottom:14px}
+  .en{font-size:clamp(17px,4.5vw,26px);line-height:1.2}
+  .note{font-size:clamp(12px,3.2vw,15px);margin-top:12px}
+}
+</style>
+</head>
+<body>
+<canvas id="field"></canvas>
+<div class="veil"></div><div class="grain"></div>
+
+<!-- TOP LEFT HUD WITH BACK LINK -->
+<div class="hud tl" style="pointer-events:auto">
+  <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    <span>NURULQURAN PORTAL</span>
+  </a>
+  <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.34 (updated 2026-09-18 23:48)</div>
+</div>
+
+<!-- TOP RIGHT HUD -->
+<div class="hud tr">
+  <div>RECITER: <span class="g">NASSER AL-QATAMI</span></div>
+  <div>AUTOPLAY: <span class="g" id="hudAutoplay">ACTIVE</span></div>
+</div>
+
+<!-- BOTTOM LEFT VERSION HUD -->
+<div class="hud bl">
+  <div class="footer-version-tag">v1.0.34 (updated 2026-09-18 23:48)</div>
+</div>
+
+<div class="stage" id="stage"></div>
+
+<div class="scrub-wrap">
+  <div class="ayah-bottom" id="ayahBottom">32 : 1</div>
+  <input class="scrub" id="scrub" type="range" min="0" max="29.999" step="0.001" value="0.001"
+         aria-label="Scrub through Surah As-Sajdah verses 1 to 30">
+</div>
+<div class="cursor" id="cursor"></div>
+<div class="actions" aria-label="Verse controls">
+  <button class="iconbtn" id="audioBtn" type="button" aria-label="Play from current āyah and continue" aria-pressed="false" title="Play from this āyah and continue (A)">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 8.5a5 5 0 0 1 0 7"/><path d="M19.5 6a8.5 8.5 0 0 1 0 12"/></svg>
+  </button>
+  <button class="iconbtn" id="pauseBtn" type="button" aria-label="Pause autoplay" aria-pressed="false" title="Play / pause autoplay (P)">
+    <svg id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+  </button>
+  <button class="iconbtn" id="shareBtn" type="button" aria-label="Share current verse" title="Share current verse (S)">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.9l7.6-4.7M8.2 13.1l7.6 4.7"/></svg>
+  </button>
+</div>
+<audio id="ayahAudio" preload="none"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ─────────── content ─────────── */
+const V=[
+  {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"The sūrah opens with letters that immediately remind the listener: revelation begins on Allah’s terms, not ours.","theme":"letters"},
+  {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"The first claim is not about the messenger; it is about the source. The Qur’an comes from the Lord who owns and sustains every world.","theme":"book"},
+  {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ ۚ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًۭا مَّآ أَتَىٰهُم مِّن نَّذِيرٍۢ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"The accusation of fabrication is answered by returning attention to purpose: warning is mercy when it can lead a people back to guidance.","theme":"warning"},
+  {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍۢ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ ۖ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّۢ وَلَا شَفِيعٍ ۚ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The One who created and governs the entire cosmos is also the One people must ultimately depend on. Creation and worship belong together.","theme":"cosmos"},
+  {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍۢ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍۢ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"Human beings see fragments of events. Allah sees the full movement of every matter from beginning to return.","theme":"ascent"},
+  {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"His power does not cancel His mercy, and His mercy is not weakness. Both qualities appear together.","theme":"seen"},
+  {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ ۖ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍۢ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"The verse asks us to look at creation not as random material, but as something deliberately fashioned with excellence.","theme":"clay"},
+  {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍۢ مِّن مَّآءٍۢ مَّهِينٍۢ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Human pride is challenged by remembering how physically small and unimpressive our beginning is.","theme":"drop"},
+  {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ ۖ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ ۚ قَلِيلًۭا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"The gifts named are not passive organs; they are tools for recognizing truth. Gratitude means using them for the purpose they were given.","theme":"senses"},
+  {"n":"32 : 10","ar":"وَقَالُوٓا۟ أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍۢ جَدِيدٍۭ ۚ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"The objection sounds like a question about resurrection, but the verse exposes a deeper issue: reluctance to face accountability before Allah.","theme":"dust"},
+  {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"Death is not disappearance. It is a transfer followed by return.","theme":"death"},
+  {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا۟ رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"There comes a point when seeing and hearing are no longer tests of faith; certainty arrives after the opportunity to choose has ended.","theme":"bowed"},
+  {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Guidance was not designed as forced programming. Moral choice is real, and therefore accountability is real.","theme":"choice"},
+  {"n":"32 : 14","ar":"فَذُوقُوا۟ بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ ۖ وَذُوقُوا۟ عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"Forgetting the Hereafter here is not a memory lapse; it is living as though it does not matter.","theme":"forgotten"},
+  {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا۟ بِهَا خَرُّوا۟ سُجَّدًۭا وَسَبَّحُوا۟ بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ۩","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"The test of revelation is not merely whether it impresses the mind; it is whether the heart becomes humble enough to submit.","theme":"prostration","sajdah":true},
+  {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًۭا وَطَمَعًۭا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Real faith changes what a person does when no one is watching: comfort is left, Allah is called upon, and blessings are shared.","theme":"night"},
+  {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌۭ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍۢ جَزَآءًۢ بِمَا كَانُوا۟ يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Some rewards are hidden because ordinary imagination is too small to contain them.","theme":"hidden"},
+  {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًۭا كَمَن كَانَ فَاسِقًۭا ۚ لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"The verse rejects the idea that faithfulness and deliberate rebellion finally arrive at the same destination.","theme":"contrast"},
+  {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًۢا بِمَا كَانُوا۟ يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"The image is not merely of entering a garden, but of finally reaching a true home and place of welcome.","theme":"garden"},
+  {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا۟ فَمَأْوَىٰهُمُ ٱلنَّارُ ۖ كُلَّمَآ أَرَادُوٓا۟ أَن يَخْرُجُوا۟ مِنْهَآ أُعِيدُوا۟ فِيهَا وَقِيلَ لَهُمْ ذُوقُوا۟ عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"The contrast with the previous āyah is severe: both groups receive a “home,” but the homes reflect the lives they chose.","theme":"fire"},
+  {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Some hardship can function as a wake-up call before a far greater loss. The purpose of the warning is still return.","theme":"warning2"},
+  {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ ۚ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"The problem is not ignorance after no message arrived; it is consciously turning away after the reminder became clear.","theme":"turnaway"},
+  {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍۢ مِّن لِّقَآئِهِۦ ۖ وَجَعَلْنَـٰهُ هُدًۭى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Qur’an is placed in a chain of revelation. Guidance is not a new human experiment; Allah has guided nations before.","theme":"scripture"},
+  {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةًۭ يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا۟ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Leadership in guidance is tied to two inner qualities: patience under pressure and certainty that does not collapse when tested.","theme":"leadership"},
+  {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا۟ فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Not every dispute is resolved in history. The final and perfectly informed judgment belongs to Allah.","theme":"judgment"},
+  {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ ۖ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"History becomes evidence when people walk through the ruins yet still refuse to hear what those ruins are saying.","theme":"ruins"},
+  {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا۟ أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًۭا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ ۖ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Resurrection is placed before their eyes in nature: dead land receives water, life emerges, and what looked finished becomes productive again.","theme":"water"},
+  {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Mockery often asks for the consequence to be hurried, assuming delay means it will never arrive.","theme":"challenge"},
+  {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا۟ إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"There is a deadline built into moral choice. Faith after the test has visibly ended is not the same as faith before it.","theme":"deadline"},
+  {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah closes with calm confidence: the messenger does not have to force the outcome. Truth can be delivered, and then one waits for Allah’s decision.","theme":"wait"}
+];
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ─────────── build scenes ─────────── */
+const stage=document.getElementById("stage"), scrub=document.getElementById("scrub"), ayahBottom=document.getElementById("ayahBottom");
+const hudAutoplay=document.getElementById("hudAutoplay");
+const stripArabic=t=>t.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,"").replace(/ٱ/g,"ا").replace(/ـ/g,"");
+const stripEnglish=t=>t.toLowerCase().replace(/[^a-z]/g,"");
+const arRed=new Set(["كافرون","المجرمون","المجرمين","جهنم","عذاب","العذاب","النار","فاسقا","أعرض","منتقمون","كفروا"]);
+const arGreen=new Set(["الحق","يهتدون","الرحيم","أحسن","تشكرون","مؤمنا","آمنوا","الصالحات","جنات","المأوى","طمعا","يرجعون","هدى","صبروا","يوقنون","سجدا"]);
+const enRed=new Set(["fear","fire","punishment","reject","rejected","denial","guilty","hell","criminals","rebellion","rebelled","unjust","death"]);
+const enGreen=new Set(["hope","truth","guidance","guided","merciful","believer","believed","gardens","return","patience","certainty","righteous"]);
+
+const scenes=V.map((v,i)=>{
+  const s=document.createElement("div");s.className="scene";if(v.en.length>145)s.classList.add("long");s.dataset.off="1";
+  const wrap=t=>t.split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ");
+  const sajdahHtml=v.sajdah?`<div class="sajdah-badge"><span>۩</span> <span>Āyah of Sajdah · Prostration</span></div>`:'';
+  s.innerHTML=`${sajdahHtml}
+    <div class="ref">${v.n}</div>
+    <div class="ar">${wrap(v.ar)}</div>
+    <div class="en">${v.en.replace(/(<em>|<\/em>)/g,"\u0001$1\u0001").split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ").replace(/\u0001/g,"")}</div>
+    <div class="note">${v.note}</div>
+    <div class="hairline"></div>`;
+  s.querySelectorAll(".en em").forEach(em=>{
+    const word=stripEnglish(em.textContent.trim());
+    if(word==="fear") em.classList.add("fear");
+    if(word==="hope") em.classList.add("hope");
+  });
+  s.querySelectorAll(".ar .w").forEach(w=>{
+    const word=stripArabic(w.textContent.trim());
+    if(arRed.has(word)) w.classList.add("kw-red");
+    if(arGreen.has(word)) w.classList.add("kw-green");
+  });
+  s.querySelectorAll(".en .w").forEach(w=>{
+    const word=stripEnglish(w.textContent.trim());
+    if(enRed.has(word)) w.classList.add("kw-red");
+    if(enGreen.has(word)) w.classList.add("kw-green");
+  });
+  stage.appendChild(s);
+  return {el:s,words:[...s.querySelectorAll(".w")],ref:s.querySelector(".ref"),
+          line:s.querySelector(".hairline"),
+          seed:v.en.length%7, dur:8.5+v.en.split(" ").length*0.30};
+});
+
+/* ─────────── timeline ─────────── */
+let T=0.0001, N=V.length, last=performance.now(), auto=true, idle=0;
+let userPaused=false, lastPointerX=null, simTime=0;
+const audio=document.getElementById("ayahAudio"), audioBtn=document.getElementById("audioBtn");
+const pauseBtn=document.getElementById("pauseBtn"), pauseIcon=document.getElementById("pauseIcon");
+const shareBtn=document.getElementById("shareBtn"), toast=document.getElementById("toast");
+const audioUrls=[
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032001.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032002.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032003.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032004.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032005.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032006.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032007.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032008.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032009.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032010.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032011.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032012.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032013.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032014.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032015.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032016.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032017.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032018.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032019.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032020.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032021.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032022.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032023.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032024.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032025.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032026.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032027.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032028.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032029.mp3",
+  "https://everyayah.com/data/Nasser_Alqatami_128kbps/032030.mp3"
+];
+function currentIndex(){return Math.floor(T)%N}
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t=setTimeout(()=>toast.classList.remove("show"),1700);
+}
+function syncPauseButton(){
+  pauseBtn.setAttribute("aria-pressed",String(userPaused));
+  pauseBtn.setAttribute("aria-label",userPaused?"Resume motion":"Pause motion");
+  pauseIcon.innerHTML=userPaused
+    ? '<path class="playfill" d="M8 5l11 7-11 7z"/>'
+    : '<path d="M9 6v12M15 6v12"/>';
+  if(hudAutoplay){
+    hudAutoplay.textContent=userPaused?"PAUSED":"ACTIVE";
+    hudAutoplay.style.color=userPaused?"var(--mute)":"var(--gold)";
+  }
+}
+function stopAudio(){
+  audioSequence=false;
+  audio.pause(); audio.currentTime=0;
+  audioBtn.setAttribute("aria-pressed","false");
+}
+let audioSequence=false;
+function playCurrentAudio(){
+  const i=currentIndex();
+  if(!audio.paused){audioSequence=false;stopAudio();return;}
+  audioSequence=true; auto=false;
+  audio.src=audioUrls[i];
+  audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>showToast("Audio could not start"));
+}
+async function copyText(text){
+  try{ if(navigator.clipboard && location.protocol!=="file:"){ await navigator.clipboard.writeText(text); return true; } }catch(_){}
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=text; ta.setAttribute("readonly","");
+    ta.style.position="fixed"; ta.style.opacity="0"; ta.style.left="-9999px";
+    document.body.appendChild(ta); ta.select();
+    const ok=document.execCommand("copy");
+    ta.remove(); if(ok) return true;
+  }catch(_){}
+  return false;
+}
+audio.addEventListener("ended",()=>{
+  audioBtn.setAttribute("aria-pressed","false");
+  if(!audioSequence) return;
+  const i=currentIndex();
+  if(i>=N-1){audioSequence=false;return;}
+  T=i+1+.001; setScrubFromT();
+  audio.src=audioUrls[currentIndex()];
+  audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>{audioSequence=false;});
+});
+audioBtn.addEventListener("click",playCurrentAudio);
+pauseBtn.addEventListener("click",()=>{
+  userPaused=!userPaused;
+  if(userPaused){ auto=false; stopAudio(); }
+  else { auto=true; }
+  idle=0;
+  syncPauseButton();
+});
+shareBtn.addEventListener("click",async(e)=>{
+  e.preventDefault(); e.stopPropagation();
+  const i=currentIndex(), verse=V[i];
+  const base=location.href.split("#")[0], url=`${base}#${1+i}`;
+  const bodyText=`Surah As-Sajdah ${verse.n}\n\n${verse.ar}\n\n${verse.en.replace(/<[^>]+>/g,"")}\n\n${url}`;
+  if(navigator.share && location.protocol!=="file:"){
+    try{
+      await navigator.share({title:`Surah As-Sajdah ${verse.n}`,text:`${verse.ar}\n\n${verse.en.replace(/<[^>]+>/g,"")}`,url});
+      showToast("Shared");
+      return;
+    }catch(err){
+      if(err && err.name==="AbortError") return;
+    }
+  }
+  if(await copyText(bodyText)) showToast("Share text copied");
+  else { window.prompt("Copy and share this text:", bodyText); showToast("Copy text shown"); }
+});
+syncPauseButton();
+
+let scrubbing=false;
+function setScrubFromT(){
+  const value=Math.max(0,Math.min(29.999,T));
+  scrub.value=value.toFixed(3);
+  scrub.style.setProperty("--progress",`${(value/29.999)*100}%`);
+  ayahBottom.textContent=`32 : ${1+Math.floor(value)}`;
+}
+scrub.addEventListener("pointerdown",e=>{
+  e.stopPropagation();scrubbing=true;auto=false;idle=0;stopAudio();
+});
+scrub.addEventListener("input",e=>{
+  T=Math.max(0,Math.min(29.999,Number(scrub.value)));
+  idle=0;setScrubFromT();
+});
+scrub.addEventListener("pointerup",e=>{
+  e.stopPropagation();scrubbing=false;if(!userPaused) auto=true;idle=0;
+});
+scrub.addEventListener("pointercancel",()=>{scrubbing=false;if(!userPaused) auto=true;});
+const clamp=(a,b,c)=>Math.max(b,Math.min(c,a));
+const eo=t=>1-Math.pow(1-t,4), ei=t=>t*t*t;
+
+/* ─────────── pointer ─────────── */
+const M={x:innerWidth/2,y:innerHeight/2,lx:innerWidth/2,ly:innerHeight/2,press:0,down:false};
+const cur=document.getElementById("cursor");
+addEventListener("pointermove",e=>{M.x=e.clientX;M.y=e.clientY;
+  if(M.down&&lastPointerX!==null){
+    const dx=e.clientX-lastPointerX;
+    T=(T-dx*0.0018+N)%N;lastPointerX=e.clientX;if(!userPaused) auto=false;idle=0;stopAudio();
+  }});
+addEventListener("pointerdown",e=>{
+  if(e.target.closest("a, button, input")) return;
+  M.down=true;lastPointerX=e.clientX;document.body.classList.add("press");auto=false;idle=0;
+});
+addEventListener("pointerup",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
+addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
+addEventListener("wheel",e=>{T=(T+e.deltaY*0.00075+N)%N;if(!userPaused) auto=false;idle=0;stopAudio();},{passive:true});
+addEventListener("keydown",e=>{
+  const k=e.key;
+  if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
+  if(k==="ArrowRight"||k===" "){T=(Math.floor(T)+1)%N+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="ArrowLeft"){T=(Math.floor(T)-1+N)%N+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="Home"){T=.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="End"){T=N-1+.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(/^[1-9]$/.test(k)){T=(+k-1)+.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k.toLowerCase()==="p"){userPaused=!userPaused;if(userPaused){auto=false;stopAudio();}else{auto=true;}idle=0;syncPauseButton();}
+  else if(k.toLowerCase()==="a"){playCurrentAudio();}
+  else if(k.toLowerCase()==="s"){shareBtn.click();}
+  else if(k==="Escape"){userPaused=true;auto=false;idle=0;stopAudio();syncPauseButton();}
+});
+
+/* ─────────── canvas ─────────── */
+const cv=document.getElementById("field"), g=cv.getContext("2d",{alpha:false});
+let W,H,DPR,bloomGradient;
+function size(){
+  DPR=Math.min(devicePixelRatio||1,2);
+  W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
+  g.setTransform(DPR,0,0,DPR,0,0);g.fillStyle="#06060a";g.fillRect(0,0,innerWidth,innerHeight);
+  bloomGradient=g.createRadialGradient(innerWidth/2,innerHeight/2,0,innerWidth/2,innerHeight/2,Math.min(innerWidth,innerHeight)*.5);
+  bloomGradient.addColorStop(0,"rgba(227,192,137,.08)");
+  bloomGradient.addColorStop(1,"rgba(0,0,0,0)");
+}
+size();addEventListener("resize",()=>{size();P.forEach(p=>{p.x=Math.random()*innerWidth;p.y=Math.random()*innerHeight;p.px=p.x;p.py=p.y;});});
+
+/* value-noise fbm */
+const hs=(x,y)=>{let n=x*374761393+y*668265263;n=(n^(n>>13))*1274126177;return((n^(n>>16))>>>0)/4294967295;};
+const sm=t=>t*t*(3-2*t);
+function nz(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=sm(x-xi),yf=sm(y-yi);
+  const a=hs(xi,yi),b=hs(xi+1,yi),c=hs(xi,yi+1),d=hs(xi+1,yi+1);
+  return (a+(b-a)*xf)*(1-yf)+(c+(d-c)*xf)*yf;}
+function fbm(x,y){let v=0,a=.5,f=1;for(let i=0;i<3;i++){v+=nz(x*f,y*f)*a;f*=2.07;a*=.5;}return v;}
+
+const area=innerWidth*innerHeight;
+const NP=RM?120:Math.min(700,Math.max(220,Math.round(area/2600))), P=[];
+for(let i=0;i<NP;i++)P.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  px:0,py:0,s:.35+Math.random()*1.15,l:Math.random()*420,a:.06+Math.random()*.3,w:Math.random()<.08?1.1:.45});
+P.forEach(p=>{p.px=p.x;p.py=p.y;});
+
+/* islamic 16-fold geometry */
+function geom(t,scale,alpha){
+  const cx=innerWidth/2+(M.lx-innerWidth/2)*.03, cy=innerHeight/2+(M.ly-innerHeight/2)*.03;
+  const R=Math.min(innerWidth,innerHeight)*0.42*scale;
+  g.save();g.translate(cx,cy);g.globalCompositeOperation="lighter";
+  for(let ring=0;ring<4;ring++){
+    const k=[1,.74,.5,.29][ring], dir=ring%2?-1:1, pts=[16,16,12,8][ring];
+    g.save();g.rotate(t*0.006*dir+ring*0.31);
+    g.strokeStyle=`rgba(227,192,137,${alpha*[.16,.20,.13,.26][ring]})`;
+    g.lineWidth=ring===3?.9:.55;
+    g.beginPath();
+    for(let i=0;i<pts;i++){const step=[7,5,5,3][ring];
+      const a1=i/pts*Math.PI*2, a2=((i+step)%pts)/pts*Math.PI*2;
+      g.moveTo(Math.cos(a1)*R*k,Math.sin(a1)*R*k);
+      g.lineTo(Math.cos(a2)*R*k,Math.sin(a2)*R*k);}
+    g.stroke();
+    g.beginPath();g.arc(0,0,R*k,0,Math.PI*2);
+    g.strokeStyle=`rgba(227,192,137,${alpha*.09})`;g.lineWidth=.5;g.stroke();
+    g.restore();
+  }
+  /* arc gate */
+  g.rotate(-t*0.0025);
+  for(let i=0;i<3;i++){g.beginPath();g.arc(0,0,R*(1.06+i*.11),0,Math.PI*2);
+    g.strokeStyle=`rgba(201,143,69,${alpha*(.07-i*.018)})`;g.lineWidth=.6;g.stroke();}
+  g.restore();
+}
+
+const THEMES=V.map((v,i)=>{
+  const pals=[
+    [[227,192,137],[243,236,225]],[[227,192,137],[154,194,255]],[[227,192,137],[111,220,145]],
+    [[154,194,255],[227,192,137]],[[227,192,137],[154,194,255]],[[227,192,137],[243,236,225]],
+    [[201,143,69],[227,192,137]],[[227,192,137],[201,143,69]],[[154,194,255],[111,220,145]],
+    [[207,190,157],[227,192,137]],[[207,190,157],[243,236,225]],[[227,192,137],[255,98,92]],
+    [[227,192,137],[255,98,92]],[[255,98,92],[201,143,69]],[[227,192,137],[111,220,145]],
+    [[227,192,137],[111,220,145]],[[227,192,137],[245,238,214]],[[227,192,137],[243,236,225]],
+    [[111,220,145],[227,192,137]],[[255,132,72],[255,98,92]],[[201,143,69],[255,98,92]],
+    [[207,190,157],[227,192,137]],[[154,194,255],[227,192,137]],[[111,220,145],[227,192,137]],
+    [[227,192,137],[243,236,225]],[[207,190,157],[201,143,69]],[[111,220,145],[154,194,255]],
+    [[227,192,137],[201,143,69]],[[255,98,92],[227,192,137]],[[227,192,137],[243,236,225]]
+  ];
+  const [c1,c2]=pals[i];
+  return{c1,c2,lift:(i%5===0?-.18:(i%4===0?.08:-.04)),wind:((i%3)-1)*.008,spin:.006+(i%5)*.0015,geom:.55+(i%4)*.08,flow:.00105+(i%6)*.00008,name:v.theme};
+});
+const mix=(a,b,t)=>a+(b-a)*t;
+const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
+function glow(x,y,r,color,alpha){
+  const rg=g.createRadialGradient(x,y,0,x,y,r);
+  rg.addColorStop(0,rgba(color,alpha));rg.addColorStop(1,rgba(color,0));
+  g.fillStyle=rg;g.fillRect(0,0,innerWidth,innerHeight);
+}
+function drawMetaphor(idx,t,p){
+  const cx=innerWidth/2,cy=innerHeight/2,th=THEMES[idx],type=V[idx].theme;
+  g.save();
+  switch(type){
+    case"letters":glow(cx,cy,innerWidth*.24,th.c1,.08);break;
+    case"book":glow(cx,cy,innerWidth*.22,th.c1,.09);break;
+    case"warning":glow(cx,cy,innerWidth*.28,th.c2,.065);break;
+    case"cosmos":glow(cx,cy,innerWidth*.38,th.c2,.06);for(let r=0;r<3;r++){g.beginPath();g.arc(cx,cy,Math.min(innerWidth,innerHeight)*(.12+r*.11),0,Math.PI*2);g.strokeStyle=rgba(th.c1,.045);g.stroke();}break;
+    case"ascent":for(let r=0;r<5;r++)glow(cx,innerHeight*(.88-r*.15),innerWidth*.14,th.c2,.035);break;
+    case"seen":glow(innerWidth*.34,cy,innerWidth*.22,th.c1,.06);glow(innerWidth*.66,cy,innerWidth*.22,th.c2,.05);break;
+    case"clay":glow(cx,innerHeight*.83,innerWidth*.34,[201,143,69],.11);break;
+    case"drop":glow(cx,cy,innerWidth*.18,[154,194,255],.07);break;
+    case"senses":glow(cx*.75,cy,innerWidth*.15,th.c1,.05);glow(cx*1.25,cy,innerWidth*.15,th.c2,.05);break;
+    case"dust":glow(cx,innerHeight*.84,innerWidth*.38,[207,190,157],.08);break;
+    case"death":glow(cx,cy,innerWidth*.30,[207,190,157],.045);break;
+    case"bowed":glow(cx,innerHeight*.72,innerWidth*.28,th.c2,.07);break;
+    case"choice":glow(innerWidth*.32,cy,innerWidth*.22,th.c1,.045);glow(innerWidth*.68,cy,innerWidth*.22,th.c2,.045);break;
+    case"forgotten":g.fillStyle="rgba(0,0,0,.14)";g.fillRect(0,0,innerWidth,innerHeight);glow(cx,cy,innerWidth*.18,th.c1,.025);break;
+    case"prostration":glow(cx,innerHeight*.78,innerWidth*.30,[111,220,145],.10);break;
+    case"night":{const gr=g.createLinearGradient(0,innerHeight,0,0);gr.addColorStop(0,"rgba(201,143,69,.12)");gr.addColorStop(.28,"rgba(227,192,137,.035)");gr.addColorStop(1,"rgba(6,6,10,0)");g.fillStyle=gr;g.fillRect(0,0,innerWidth,innerHeight);}break;
+    case"hidden":g.fillStyle="rgba(0,0,0,.16)";g.fillRect(0,0,innerWidth,innerHeight);glow(M.lx,M.ly,innerWidth*.24,[245,238,214],.12);break;
+    case"contrast":break;
+    case"garden":glow(cx,innerHeight*.88,innerWidth*.44,[111,220,145],.11);break;
+    case"fire":{const gr=g.createLinearGradient(0,innerHeight,0,innerHeight*.12);gr.addColorStop(0,"rgba(255,98,92,.14)");gr.addColorStop(.22,"rgba(255,132,72,.07)");gr.addColorStop(1,"rgba(6,6,10,0)");g.fillStyle=gr;g.fillRect(0,0,innerWidth,innerHeight);}break;
+    case"warning2":for(let r=0;r<3;r++){g.beginPath();g.arc(cx,cy,Math.min(innerWidth,innerHeight)*(.13+r*.10+.008*Math.sin(t*.4+r)),0,Math.PI*2);g.strokeStyle=rgba(th.c1,.045-r*.008);g.stroke();}break;
+    case"turnaway":glow(innerWidth*.33,cy,innerWidth*.22,th.c1,.055);glow(innerWidth*.72,cy,innerWidth*.20,th.c2,.028);break;
+    case"scripture":glow(cx,cy,innerWidth*.21,th.c1,.08);break;
+    case"leadership":glow(cx,innerHeight*.74,innerWidth*.30,[111,220,145],.07);break;
+    case"judgment":glow(cx,cy,innerWidth*.30,th.c1,.05);break;
+    case"ruins":glow(cx,innerHeight*.82,innerWidth*.42,[207,190,157],.075);break;
+    case"water":{const gr=g.createLinearGradient(0,innerHeight,0,innerHeight*.35);gr.addColorStop(0,"rgba(111,220,145,.10)");gr.addColorStop(.34,"rgba(154,194,255,.07)");gr.addColorStop(1,"rgba(6,6,10,0)");g.fillStyle=gr;g.fillRect(0,0,innerWidth,innerHeight);}break;
+    case"challenge":glow(cx,cy,innerWidth*.28,th.c1,.05);break;
+    case"deadline":glow(cx,cy,innerWidth*.22,[255,98,92],.05);break;
+    case"wait":glow(cx,cy,innerWidth*.32,th.c1,.04);break;
+  }
+  g.restore();
+}
+
+/* ─────────── loop ─────────── */
+function frame(now){
+  const rawDt=Math.min((now-last)/1000,.05); last=now;
+  const dt=userPaused?0:rawDt;
+  if(!userPaused){
+    M.lx+=(M.x-M.lx)*.08; M.ly+=(M.y-M.ly)*.08;
+    M.press+=((M.down?1:0)-M.press)*.09;
+    idle+=dt; if(!M.down&&idle>4) auto=true;
+    simTime+=dt;
+  }
+  cur.style.transform=`translate(${M.x}px,${M.y}px)`;
+  const t=simTime;
+
+  /* advance */
+  const idx=Math.floor(T)%N, sc=scenes[idx], p=T-Math.floor(T), theme=THEMES[idx];
+  if(auto&&!audioSequence&&!M.down&&!userPaused) T=(T+dt/sc.dur)%N;
+
+  /* ── background ── */
+  g.globalCompositeOperation="source-over";
+  g.fillStyle=idx===2?"#06060a":"rgba(6,6,10,0.11)"; g.fillRect(0,0,innerWidth,innerHeight);
+  g.globalCompositeOperation="lighter";
+  const flow=theme.flow+Math.sin(t*(.07+theme.spin*.15))*0.00035;
+  for(const q of P){
+    const a=fbm(q.x*flow,q.y*flow+t*(.045+theme.spin*.08))*Math.PI*4+t*(.10+theme.spin);
+    let vx=Math.cos(a)+theme.wind, vy=Math.sin(a)+theme.lift;
+    const dx=q.x-M.lx,dy=q.y-M.ly,d2=dx*dx+dy*dy,rad=(140+M.press*260)**2;
+    if(d2<rad){const d=Math.sqrt(d2)||1,f=(1-d2/rad)*(1.9+M.press*3.2);vx+=dx/d*f;vy+=dy/d*f;}
+    const sp=q.s*(1+M.press*1.4)*(60*dt*1.6);
+    q.px=q.x; q.py=q.y; q.x+=vx*sp; q.y+=vy*sp; q.l-=userPaused?0:1;
+    if(q.l<0||q.x<-40||q.x>innerWidth+40||q.y<-40||q.y>innerHeight+40){
+      q.x=Math.random()*innerWidth; q.y=Math.random()*innerHeight; q.px=q.x; q.py=q.y; q.l=200+Math.random()*380;
+    }
+    const mixT=q.w>1?.78:.28;
+    const c=[Math.round(mix(theme.c1[0],theme.c2[0],mixT)),Math.round(mix(theme.c1[1],theme.c2[1],mixT)),Math.round(mix(theme.c1[2],theme.c2[2],mixT))];
+    g.strokeStyle=rgba(c,q.a*(.42+M.press*.45));
+    g.lineWidth=q.w; g.beginPath(); g.moveTo(q.px,q.py); g.lineTo(q.x,q.y); g.stroke();
+  }
+  drawMetaphor(idx,t,p);
+  geom(t,0.82+theme.geom*.12+p*0.18+M.press*0.04,0.42+theme.geom*.38+M.press*0.25);
+
+  /* core bloom */
+  g.save();
+  g.globalAlpha=.42+.12*Math.sin(t*.6)+M.press*.18;
+  g.fillStyle=bloomGradient; g.fillRect(0,0,innerWidth,innerHeight);
+  g.restore();
+
+  /* ── type ── */
+  scenes.forEach((s,i)=>{
+    if(i!==idx){
+      s.el.classList.remove("readable");
+      if(!s.el.dataset.off){s.el.dataset.off="1";}
+      return;
+    }
+    delete s.el.dataset.off;
+    s.el.classList.toggle("readable", p > Math.min(.34, 3/sc.dur));
+    const ex=clamp((p-.855)/.145,0,1), enter=clamp(p/.10,0,1);
+    const gs=0.855+p*0.30+ex*0.55, gr=(-2.6+p*5.2)+ex*7, drift=Math.sin(t*.28)*1.1;
+    const px=(M.lx-innerWidth/2)*.014, py=(M.ly-innerHeight/2)*.014;
+    s.el.style.opacity=(1-ex)*(0.15+0.85*eo(enter));
+    s.el.style.transform=`translate(${px}px,${py-ex*70}px) rotate(${gr+drift}deg) scale(${gs})`;
+    const nW=s.words.length;
+    s.words.forEach((w,k)=>{
+      const st=(k/nW)*0.42, lt=clamp((p-st)/0.26,0,1), e=eo(lt);
+      const sd=((k*7919+s.seed*131)%1000)/1000, sgn=sd<.5?-1:1;
+      const rot=(1-e)*sgn*(14+sd*30) + Math.sin(t*.6+k*.55)*1.5*(1-ex) + ex*sgn*(9+sd*16);
+      const ty=(1-e)*(34+sd*46)*sgn*0.4 - ex*(30+sd*90);
+      const scl=(0.52+0.48*e)*(1+ex*0.85);
+      w.style.opacity=(e*(1-ex)).toFixed(3);
+      w.style.transform=`translate(${(1-e)*sgn*10}px,${ty}px) rotate(${rot}deg) scale(${scl})`;
+      w.style.filter="none";
+    });
+    s.line.style.transform=`scaleX(${0.25+eo(clamp(p/.6,0,1))*(1-ex)})`;
+  });
+
+  if(!scrubbing) setScrubFromT();
+  if(idx!==lastHash){
+    lastHash=idx;
+    ayahBottom.textContent=`32 : ${1+idx}`;
+    history.replaceState(null,"",`#${1+idx}`);
+  }
+  requestAnimationFrame(frame);
+}
+const hashVerse=Number(location.hash.replace("#",""));
+if(hashVerse>=1&&hashVerse<=30) T=(hashVerse-1)+.001;
+setScrubFromT();
+let lastHash=-1;
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
