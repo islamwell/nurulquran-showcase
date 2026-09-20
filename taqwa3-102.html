@@ -75,7 +75,7 @@ img,canvas,svg{display:block;max-width:100%}
    01 — ATMOSPHERE : grain, vignette, cursor, rails
    ═══════════════════════════════════════════════════════════ */
 .grain{
-  position:fixed;inset:-150%;z-index:900;pointer-events:none;
+  position:fixed;inset:-50%;z-index:900;pointer-events:none;will-change:transform;
   opacity:.05;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation:grainShift 7s steps(6) infinite;
@@ -94,12 +94,12 @@ img,canvas,svg{display:block;max-width:100%}
   position:fixed;top:0;left:0;width:520px;height:520px;z-index:870;
   margin:-260px 0 0 -260px;pointer-events:none;mix-blend-mode:screen;
   background:radial-gradient(circle,rgba(201,164,92,.14),rgba(143,185,196,.06) 40%,transparent 68%);
-  opacity:0;transition:opacity .8s ease;
+  opacity:0;transition:opacity .8s ease;will-change:transform;
 }
 .dot-cursor{
   position:fixed;top:0;left:0;width:7px;height:7px;z-index:960;margin:-3.5px 0 0 -3.5px;
   border-radius:50%;background:var(--bone);pointer-events:none;mix-blend-mode:difference;
-  opacity:0;transition:opacity .5s ease,transform .3s var(--e);
+  opacity:0;transition:opacity .5s ease,transform .3s var(--e);will-change:transform;
 }
 .dot-cursor.press{width:22px;height:22px;margin:-11px 0 0 -11px;background:transparent;border:1px solid var(--gold-lt);mix-blend-mode:normal}
 @media (max-width:900px){.glow-cursor,.dot-cursor{display:none}}
@@ -332,7 +332,7 @@ h1.mark span{
 #verse .stage{background:radial-gradient(120% 110% at 50% 50%,#0a1018 0%,#04070c 46%,#000102 100%)}
 .rosette{
   position:absolute;top:50%;left:50%;width:min(148vh,124vw);aspect-ratio:1;
-  transform:translate(-50%,-50%);z-index:3;opacity:.9;
+  transform:translate(-50%,-50%);z-index:3;opacity:.9;will-change:transform;
   filter:drop-shadow(0 0 26px rgba(201,164,92,.16));animation:rosBreathe 12s ease-in-out infinite;
 }
 .rosette .spin{transform-box:view-box;transform-origin:50% 50%;animation:spin 190s linear infinite}
@@ -351,7 +351,7 @@ h1.mark span{
 #verse .stage.drawn .rosette path{stroke-dashoffset:0;opacity:1}
 .halo{
   position:absolute;top:50%;left:50%;width:min(88vh,80vw);aspect-ratio:1;transform:translate(-50%,-50%);
-  z-index:2;border-radius:50%;
+  z-index:2;border-radius:50%;will-change:transform;
   background:radial-gradient(circle,rgba(201,164,92,.14),rgba(143,185,196,.05) 45%,transparent 70%);
   animation:halo 9s ease-in-out infinite;
 }
@@ -510,6 +510,12 @@ footer{
   html{scroll-behavior:auto}
 }
 body.snapshot *{transition-duration:0s!important}
+/* off-screen animation freezing */
+section.offscreen .spin,section.offscreen .halo,
+section.offscreen .mist,section.offscreen .band,
+section.offscreen .rays,section.offscreen .sun,
+section.offscreen .moon,section.offscreen .rosette,
+.marquee.offscreen .marquee-track{animation-play-state:paused!important}
 </style>
 </head>
 <body>
@@ -815,7 +821,7 @@ body.snapshot *{transition-duration:0s!important}
         <span><span class="ar">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مِنْ أَمْرِهِۦ يُسْرًا</span> &nbsp;·&nbsp; Sūrah Aṭ-Ṭalāq 65:4</span>
         <span><a href="index.html">← Showcase Home</a></span>
         <span><a href="#hero">Return to origin ↑</a></span>
-        <span class="footer-version-tag" style="color:var(--gold)">v1.0.34 (updated 2026-09-18 23:48)</span>
+        <span class="footer-version-tag" style="color:var(--gold)">v1.0.35 (updated 2026-09-21 00:02)</span>
       </div>
     </div>
   </footer>
@@ -958,7 +964,7 @@ function motes(){
   const cv=document.getElementById("dust"),ctx=cv.getContext("2d");
   let S=fit(cv),P=[],vis=true;
   const make=()=>{
-    const n=Math.round(clamp(S.w*S.h/16000,40,150));
+    const n=Math.round(clamp(S.w*S.h/20000,36,120));
     P=Array.from({length:n},()=>({
       x:Math.random()*S.w,y:Math.random()*S.h,
       r:Math.random()*1.5+.25,
@@ -997,7 +1003,7 @@ function motes(){
 function ocean(){
   const cv=document.getElementById("sea"),ctx=cv.getContext("2d");
   let S=fit(cv),glit=[],vis=true;
-  const ROWS=64;
+  const ROWS=48;
   const build=()=>{
     glit=Array.from({length:170},()=>{
       const p=Math.pow(Math.random(),.6);
@@ -1056,7 +1062,7 @@ function ocean(){
       const fr=(0.030-p*.020)*(600/Math.max(320,w))*1.6;
       const sp=.35+p*1.7;
       ctx.beginPath();
-      for(let x=0;x<=w;x+=7){
+      for(let x=0;x<=w;x+=9){
         const yy=y
           +Math.sin(x*fr+t*sp+i*.55)*amp
           +Math.sin(x*fr*2.37-t*sp*.8+i*.31)*amp*.42
@@ -1099,7 +1105,7 @@ function snow(){
   const cv=document.getElementById("snow"),ctx=cv.getContext("2d");
   let S=fit(cv),P=[],vis=true;
   const build=()=>{
-    const n=Math.round(clamp(S.w*S.h/9000,60,240));
+    const n=Math.round(clamp(S.w*S.h/12000,50,180));
     P=Array.from({length:n},()=>({
       x:Math.random()*S.w,y:Math.random()*S.h,z:Math.random(),
       ph:Math.random()*6.28
@@ -1135,7 +1141,7 @@ function aurora(){
   const ctx=cv.getContext("2d"); let S=fit(cv),vis=true,t=RM?3:0;
   addEventListener("resize",()=>S=fit(cv));
   new IntersectionObserver(e=>vis=e[0].isIntersecting,{threshold:0}).observe(cv);
-  const COLS=64;
+  const COLS=48;
   (function f(){
     requestAnimationFrame(f); if(!vis||!AWAKE) return; if(!RM) t+=.0042;
     const {w,h,d}=S; ctx.setTransform(d,0,0,d,0,0); ctx.clearRect(0,0,w,h);
@@ -1166,7 +1172,7 @@ function cosmos(){
   const cv=document.getElementById("cosmos"),ctx=cv.getContext("2d");
   let S=fit(cv),P=[],shoot=[],vis=true;
   const build=()=>{
-    const n=Math.round(clamp(S.w*S.h/2600,140,620));
+    const n=Math.round(clamp(S.w*S.h/4200,100,400));
     P=Array.from({length:n},()=>({
       a:Math.random()*6.283,
       r:Math.pow(Math.random(),.55)*Math.hypot(S.w,S.h)*.62,
@@ -1428,13 +1434,24 @@ function cursor(){
 }
 
 /* ═══════════════════════════════════════════════════════════
+   J2 · OFFSCREEN ANIMATION FREEZE
+   ═══════════════════════════════════════════════════════════ */
+function pauseOffscreen(){
+  const targets=[...document.querySelectorAll('section, .marquee')];
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>e.target.classList.toggle('offscreen',!e.isIntersecting));
+  },{threshold:0,rootMargin:'200px'});
+  targets.forEach(t=>io.observe(t));
+}
+
+/* ═══════════════════════════════════════════════════════════
    K · BOOT — graphics first, then type
    ═══════════════════════════════════════════════════════════ */
 function boot(){
   /* 1. graphics */
   nebula(); motes(); ocean(); snow(); aurora(); cosmos(); dawnStars(); rosette();
   /* 2. behaviour */
-  scrollSystem(); cursor();
+  scrollSystem(); cursor(); pauseOffscreen();
 
   /* 3. preloader → then typography */
   const pre=document.getElementById("pre"),bar=document.getElementById("preBar"),num=document.getElementById("preNum");
