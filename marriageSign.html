@@ -228,6 +228,10 @@ h1 {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
   font-size: clamp(2.4rem, 6.5vw, 5rem); line-height: 1.1; letter-spacing: -0.01em;
 }
+.hero h1 {
+  font-size: clamp(1.68rem, 4.55vw, 3.5rem);
+  line-height: 1.2;
+}
 h2 {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
   font-size: clamp(1.85rem, 4.2vw, 3.2rem); line-height: 1.22; margin-bottom: 1.1rem;
@@ -399,15 +403,6 @@ footer {
 .d3 { transition-delay: 0.36s; }
 .d4 { transition-delay: 0.48s; }
 
-/* Scroll Hint */
-.hint { position: absolute; bottom: 4vh; left: 50%; transform: translateX(-50%); text-align: center; }
-.hint span { display: block; font-size: 0.72rem; letter-spacing: 0.3em; color: #8fbdd0; margin-bottom: 0.6rem; }
-.hint i {
-  display: block; width: 1px; height: 48px; margin: 0 auto;
-  background: linear-gradient(var(--aqua), transparent); animation: hintfall 2.2s ease-in-out infinite;
-}
-@keyframes hintfall { 0% { opacity: 0; transform: translateY(-10px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rv { opacity: 1; transform: none; filter: none; }
@@ -501,22 +496,15 @@ footer {
 
     <!-- Ayah Audio Player 2:187 -->
     <div class="ayah-audio-bar rv d4">
-      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Recitation Sheikh Alafasy" title="Listen to Ayah 2:187">
+      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Play Recitation" title="Listen to Ayah 2:187">
         <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
       <div class="ayah-audio-info">
-        <span class="t-en"><strong>Recitation · 2:187</strong> Sheikh Mishary Alafasy</span>
-        <span class="t-no"><strong>Resitasjon · 2:187</strong> Sjeik Mishary Alafasy</span>
+        <span class="t-en"><strong>Recitation · 2:187</strong></span>
+        <span class="t-no"><strong>Resitasjon · 2:187</strong></span>
       </div>
     </div>
-  </div>
-  <div class="hint rv d4">
-    <span>
-      <span class="t-en">FLOW DOWN</span>
-      <span class="t-no">RULL NED</span>
-    </span>
-    <i></i>
   </div>
 </section>
 
@@ -683,13 +671,13 @@ footer {
 
     <!-- Ayah Audio Player 30:21 -->
     <div class="ayah-audio-bar rv d4">
-      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/030021.mp3" aria-label="Recitation Sheikh Alafasy" title="Listen to Ayah 30:21">
+      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/030021.mp3" aria-label="Play Recitation" title="Listen to Ayah 30:21">
         <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
       <div class="ayah-audio-info">
-        <span class="t-en"><strong>Recitation · 30:21</strong> Sheikh Mishary Alafasy</span>
-        <span class="t-no"><strong>Resitasjon · 30:21</strong> Sjeik Mishary Alafasy</span>
+        <span class="t-en"><strong>Recitation · 30:21</strong></span>
+        <span class="t-no"><strong>Resitasjon · 30:21</strong></span>
       </div>
     </div>
   </div>
@@ -892,7 +880,7 @@ footer {
     <span class="t-en">NurulQuran Trust · Clothing for One Another · A Divine Sign</span>
     <span class="t-no">NurulQuran Trust · Ekteskapet som et tegn fra Allah</span>
   </div>
-  <div class="footer-version-tag">v1.0.38 (updated 2026-09-21 12:26)</div>
+  <div class="footer-version-tag">v1.0.39 (updated 2026-09-21 12:38)</div>
 </footer>
 
 <script>
