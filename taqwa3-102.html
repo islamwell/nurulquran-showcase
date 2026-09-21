@@ -4,7 +4,28 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>TAQWA — وِقَايَة · Āl ʿImrān 3:102</title>
-<meta name="description" content="A meditation on Taqwa — the shield of the heart. Qur'an 3:102." />
+<meta name="description" content="A cinematic meditation on Taqwa — the shield of the heart. Explore the root و ق ي across six immersive movements. Qur'an 3:102." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
+
+<!-- Theme colour (mobile browser chrome) -->
+<meta name="theme-color" content="#04060a">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="NurulQuran">
+<meta property="og:title"       content="TAQWA — وِقَايَة · Āl ʿImrān 3:102">
+<meta property="og:description" content="A cinematic meditation on Taqwa — the shield of the heart. Explore the root و ق ي across six immersive movements.">
+<meta property="og:image"       content="assets/snapshots/taqwa3-102.webp">
+<meta property="og:url"         content="https://nurulquran-showcase.pages.dev/taqwa3-102">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="TAQWA — وِقَايَة · Āl ʿImrān 3:102">
+<meta name="twitter:description" content="A cinematic meditation on Taqwa — the shield of the heart. Explore the root و ق ي across six immersive movements.">
+<meta name="twitter:image"       content="assets/snapshots/taqwa3-102.webp">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@200;300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -516,9 +537,104 @@ section.offscreen .mist,section.offscreen .band,
 section.offscreen .rays,section.offscreen .sun,
 section.offscreen .moon,section.offscreen .rosette,
 .marquee.offscreen .marquee-track{animation-play-state:paused!important}
+/* ── SKIP TO CONTENT ────────────────────────────────────── */
+.skip-link{
+  position:fixed;top:-100%;left:50%;transform:translateX(-50%);z-index:9999;
+  padding:12px 28px;background:var(--gold);color:var(--ink);font-family:var(--f-ui);
+  font-size:13px;font-weight:500;letter-spacing:.08em;text-decoration:none;border-radius:2px;
+  transition:top .3s var(--e);white-space:nowrap;
+}
+.skip-link:focus{top:16px;}
+
+/* ── BISMILLAH FRAME ────────────────────────────────────── */
+.bismillah{
+  position:fixed;top:0;left:0;right:0;z-index:995;pointer-events:none;
+  text-align:center;padding:10px 0 0;
+  font-family:var(--f-ar);font-size:13px;color:rgba(201,164,92,.32);letter-spacing:.04em;
+  transition:opacity 1s ease;
+}
+.bismillah.hidden{opacity:0;}
+
+/* ── WORD TOOLTIP ───────────────────────────────────────── */
+.w{position:relative;cursor:default;}
+.w[data-meaning]::after{
+  content:attr(data-meaning);
+  position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);
+  white-space:nowrap;
+  font-family:var(--f-ui);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bone);
+  background:rgba(4,6,10,.92);border:1px solid rgba(201,164,92,.38);
+  padding:6px 12px;border-radius:2px;pointer-events:none;
+  opacity:0;transition:opacity .3s ease,transform .3s var(--e);
+  z-index:30;
+}
+.w[data-meaning]:hover::after,.w[data-meaning].tip-open::after{
+  opacity:1;transform:translateX(-50%) translateY(0);
+}
+
+/* ── CARD SHINE SWEEP ───────────────────────────────────── */
+.q-card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,248,225,.06) 50%,transparent 70%);
+  background-size:300% 100%;background-position:130% 0;
+  transition:background-position 0.7s var(--e),opacity .4s ease;
+  opacity:0;
+}
+.q-card:hover::after{background-position:-30% 0;opacity:1;}
+
+/* ── STAGGERED CARD ENTRANCE ────────────────────────────── */
+.q-card.rv{
+  transform:translateY(30px) scale(.97);
+  transition:opacity 1.2s var(--e) var(--d,0s),
+             transform 1.2s var(--e) var(--d,0s),
+             filter 1.2s var(--e) var(--d,0s),
+             border-color .6s var(--e),
+             box-shadow .6s var(--e);
+}
+[data-reveal].in .q-card.rv{transform:none;}
+
+/* ── MOBILE BOTTOM NAV ──────────────────────────────────── */
+.mob-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:820;
+  background:rgba(2,4,7,.88);backdrop-filter:blur(16px);
+  border-top:1px solid rgba(244,239,230,.08);
+  padding:10px 0 max(10px,env(safe-area-inset-bottom));
+}
+@media (max-width:900px){.mob-nav{display:flex;justify-content:space-around;align-items:center;}}
+.mob-nav-btn{
+  all:unset;display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:4px 10px;cursor:pointer;
+}
+.mob-nav-btn .m-dot{
+  width:18px;height:2px;background:rgba(244,239,230,.22);
+  border-radius:1px;transition:all .45s var(--e);
+}
+.mob-nav-btn.on .m-dot{background:var(--gold);width:28px;}
+.mob-nav-btn .m-lbl{
+  font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(244,239,230,.34);transition:color .45s var(--e);white-space:nowrap;
+}
+.mob-nav-btn.on .m-lbl{color:var(--gold-lt);}
+
+/* ── FOOTER LOGO ────────────────────────────────────────── */
+.f-logo{
+  display:flex;justify-content:center;
+  margin-bottom:clamp(36px,6vh,64px);opacity:.55;
+  transition:opacity .5s ease;
+}
+.f-logo:hover{opacity:.85;}
+.f-logo img{height:clamp(28px,3.2vw,40px);width:auto;filter:invert(1) sepia(1) saturate(.4) brightness(1.2);}
+
 </style>
 </head>
 <body>
+
+<!-- Skip to content (accessibility) -->
+<a class="skip-link" href="#hero">Skip to content</a>
+
+<!-- Bismillah spiritual frame -->
+<div class="bismillah" id="bismillah" aria-hidden="true">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
 
 <!-- ═══ PRELOADER ═══ -->
 <div class="pre" id="pre">
@@ -539,8 +655,9 @@ section.offscreen .moon,section.offscreen .rosette,
 <div class="rail r"><span><span class="ar" style="font-family:var(--f-ar);letter-spacing:0">وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ</span> &nbsp;·&nbsp; Sūrah Al-Baqarah 2:197</span></div>
 
 <nav class="ticks" id="ticks" aria-label="Scenes"></nav>
+<nav class="mob-nav" id="mobNav" aria-label="Sections"></nav>
 
-<main>
+<main id="main-content" aria-label="Taqwa — six movements">
 
   <!-- ══════════ 00 · HERO — NEBULA FIELD ══════════ -->
   <section id="hero" data-scene="Origin">
@@ -724,11 +841,11 @@ section.offscreen .moon,section.offscreen .rosette,
 
       <div class="quran-grid" data-reveal>
         <!-- Card 1 -->
-        <article class="q-card rv" style="--d:.2s">
+        <article class="q-card rv" style="--d:.15s">
           <div>
             <div class="q-tag"><i></i><b>The Best Provision · خير الزاد</b></div>
             <div class="q-ayah">وَتَزَوَّدُوا۟ فَإِنَّ خَيْرَ ٱلزَّادِ ٱلتَّقْوَىٰ ۚ وَٱتَّقُونِ يَٰٓأُوْلِى ٱلْأَلْبَٰبِ</div>
-            <p class="q-trans">“And take provisions, but indeed, the best provision is Taqwā (God-consciousness). And fear Me, O you of understanding.”</p>
+            <p class="q-trans">"And take provisions, but indeed, the best provision is Taqwā (God-consciousness). And fear Me, O you of understanding."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah Al-Baqarah · 2:197</span>
@@ -737,11 +854,11 @@ section.offscreen .moon,section.offscreen .rosette,
         </article>
 
         <!-- Card 2 -->
-        <article class="q-card rv" style="--d:.3s">
+        <article class="q-card rv" style="--d:.30s">
           <div>
             <div class="q-tag"><i></i><b>The Best Garment · لباس التقوى</b></div>
             <div class="q-ayah">وَلِبَاسُ ٱلتَّقْوَىٰ ذَٰلِكَ خَيْرٌ ۚ ذَٰلِكَ مِنْ ءَايَٰتِ ٱللَّهِ لَعَلَّهُمْ يَذَّكَّرُونَ</div>
-            <p class="q-trans">“And the clothing of Taqwā — that is best. That is from the signs of Allah that perhaps they may remember.”</p>
+            <p class="q-trans">"And the clothing of Taqwā — that is best. That is from the signs of Allah that perhaps they may remember."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah Al-Aʿrāf · 7:26</span>
@@ -750,11 +867,11 @@ section.offscreen .moon,section.offscreen .rosette,
         </article>
 
         <!-- Card 3 -->
-        <article class="q-card rv" style="--d:.4s">
+        <article class="q-card rv" style="--d:.45s">
           <div>
             <div class="q-tag"><i></i><b>The Divine Measure · أكرمكم عند الله</b></div>
             <div class="q-ayah">إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ ۚ إِنَّ ٱللَّهَ عَلِيمٌ خَبِيرٌ</div>
-            <p class="q-trans">“Indeed, the most noble of you in the sight of Allah is the most conscious of Him. Indeed, Allah is Knowing and Acquainted.”</p>
+            <p class="q-trans">"Indeed, the most noble of you in the sight of Allah is the most conscious of Him. Indeed, Allah is Knowing and Acquainted."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah Al-Ḥujurāt · 49:13</span>
@@ -763,11 +880,11 @@ section.offscreen .moon,section.offscreen .rosette,
         </article>
 
         <!-- Card 4 -->
-        <article class="q-card rv" style="--d:.5s">
+        <article class="q-card rv" style="--d:.60s">
           <div>
-            <div class="q-tag"><i></i><b>A Way Out & Ease · المخرج واليسر</b></div>
+            <div class="q-tag"><i></i><b>A Way Out &amp; Ease · المخرج واليسر</b></div>
             <div class="q-ayah">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ</div>
-            <p class="q-trans">“And whoever fears Allah — He will make for him a way out, and will provide for him from where he does not expect.”</p>
+            <p class="q-trans">"And whoever fears Allah — He will make for him a way out, and will provide for him from where he does not expect."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah Aṭ-Ṭalāq · 65:2–3</span>
@@ -776,11 +893,11 @@ section.offscreen .moon,section.offscreen .rosette,
         </article>
 
         <!-- Card 5 -->
-        <article class="q-card rv" style="--d:.6s">
+        <article class="q-card rv" style="--d:.75s">
           <div>
-            <div class="q-tag"><i></i><b>Criterion & Forgiveness · الفرقان</b></div>
+            <div class="q-tag"><i></i><b>Criterion &amp; Forgiveness · الفرقان</b></div>
             <div class="q-ayah">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِن تَتَّقُوا۟ ٱللَّهَ يَجْعَل لَّكُمْ فُرْقَانًا وَيُكَفِّرْ عَنكُمْ سَيِّـَٔاتِكُمْ وَيَغْفِرْ لَكُمْ</div>
-            <p class="q-trans">“O you who have believed, if you fear Allah, He will grant you a criterion [furqān] and will remove for you your misdeeds and forgive you.”</p>
+            <p class="q-trans">"O you who have believed, if you fear Allah, He will grant you a criterion [furqān] and will remove for you your misdeeds and forgive you."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah Al-Anfāl · 8:29</span>
@@ -789,11 +906,11 @@ section.offscreen .moon,section.offscreen .rosette,
         </article>
 
         <!-- Card 6 -->
-        <article class="q-card rv" style="--d:.7s">
+        <article class="q-card rv" style="--d:.90s">
           <div>
             <div class="q-tag"><i></i><b>Divine Companionship · معية الله</b></div>
             <div class="q-ayah">إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَوا۟ وَّٱلَّذِينَ هُم مُّحْسِنُونَ</div>
-            <p class="q-trans">“Indeed, Allah is with those who fear Him and those who are doers of good.”</p>
+            <p class="q-trans">"Indeed, Allah is with those who fear Him and those who are doers of good."</p>
           </div>
           <div class="q-ref">
             <span>Sūrah An-Naḥl · 16:128</span>
@@ -805,8 +922,13 @@ section.offscreen .moon,section.offscreen .rosette,
   </section>
 
   <!-- ══════════ FOOTER ══════════ -->
-  <footer>
+  <footer aria-label="Page footer">
     <div class="wrap">
+      <div class="f-logo">
+        <a href="index.html" title="NurulQuran Showcase Home">
+          <img src="assets/nurulquran-logo.svg" alt="NurulQuran" loading="lazy">
+        </a>
+      </div>
       <dl class="f-grid">
         <div><dt>Primary Verse</dt><dd>Sūrah Āl ʿImrān 3:102</dd></div>
         <div><dt>Sacred Root</dt><dd class="ar">و ق ي — وِقَايَة · حِفْظ</dd></div>
@@ -821,7 +943,7 @@ section.offscreen .moon,section.offscreen .rosette,
         <span><span class="ar">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مِنْ أَمْرِهِۦ يُسْرًا</span> &nbsp;·&nbsp; Sūrah Aṭ-Ṭalāq 65:4</span>
         <span><a href="index.html">← Showcase Home</a></span>
         <span><a href="#hero">Return to origin ↑</a></span>
-        <span class="footer-version-tag" style="color:var(--gold)">v1.0.35 (updated 2026-09-21 00:02)</span>
+        <span class="footer-version-tag" style="color:var(--gold)">v1.0.36 (updated 2026-09-21 06:52)</span>
       </div>
     </div>
   </footer>
@@ -1317,11 +1439,30 @@ function rosette(){
    H · TEXT — set last, over finished graphics
    ═══════════════════════════════════════════════════════════ */
 function typeset(){
-  /* the ayah, word by word (RTL preserved) */
-  const words=["يَٰٓأَيُّهَا","ٱلَّذِينَ","ءَامَنُواْ","ٱتَّقُواْ","ٱللَّهَ","حَقَّ","تُقَاتِهِۦ","وَلَا","تَمُوتُنَّ","إِلَّا","وَأَنتُم","مُّسْلِمُونَ"];
+  /* the ayah, word by word (RTL preserved) — with hover meanings */
+  const words=[
+    {ar:"يَٰٓأَيُّهَا",  en:"O"},
+    {ar:"ٱلَّذِينَ",    en:"those who"},
+    {ar:"ءَامَنُواْ",  en:"have believed"},
+    {ar:"ٱتَّقُواْ",   en:"fear Allah"},
+    {ar:"ٱللَّهَ",    en:"Allah"},
+    {ar:"حَقَّ",      en:"truly as"},
+    {ar:"تُقَاتِهِۦ", en:"He deserves"},
+    {ar:"وَلَا",      en:"and do not"},
+    {ar:"تَمُوتُنَّ", en:"die"},
+    {ar:"إِلَّا",     en:"except"},
+    {ar:"وَأَنتُم",   en:"while you are"},
+    {ar:"مُّسْلِمُونَ",en:"in full submission"}
+  ];
   const el=document.getElementById("ayah");
   el.innerHTML = words.map((w,i)=>
-    `<span class="w" style="--d:${(.22+i*.11).toFixed(2)}s">${w}</span>`).join(" ");
+    `<span class="w" data-meaning="${w.en}" style="--d:${(.22+i*.11).toFixed(2)}s">${w.ar}</span>`).join(" ");
+  /* mobile tap-to-show tooltip */
+  el.addEventListener("click",e=>{
+    const t=e.target.closest(".w[data-meaning]"); if(!t) return;
+    document.querySelectorAll(".w.tip-open").forEach(o=>{if(o!==t)o.classList.remove("tip-open");});
+    t.classList.toggle("tip-open");
+  });
 
   /* marquee lexicon */
   const items=[
@@ -1359,16 +1500,29 @@ function scrollSystem(){
   const pars=[...document.querySelectorAll("[data-par]")];
   const secs=[...document.querySelectorAll("section[data-scene]")];
   const ticks=document.getElementById("ticks");
+  const mobNav=document.getElementById("mobNav");
+  const bismillah=document.getElementById("bismillah");
 
+  /* build desktop ticks + mobile bottom nav together */
   secs.forEach((s,i)=>{
+    /* desktop tick */
     const b=document.createElement("button");
     b.title=s.dataset.scene;
     b.dataset.l = String(i).padStart(2,"0")+" · "+s.dataset.scene;
     b.setAttribute("aria-label",s.dataset.scene);
     b.addEventListener("click",()=>s.scrollIntoView({behavior:"smooth"}));
     ticks.appendChild(b);
+
+    /* mobile nav button */
+    const mb=document.createElement("button");
+    mb.className="mob-nav-btn";
+    mb.setAttribute("aria-label",s.dataset.scene);
+    mb.innerHTML=`<span class="m-dot"></span><span class="m-lbl">${s.dataset.scene}</span>`;
+    mb.addEventListener("click",()=>s.scrollIntoView({behavior:"smooth"}));
+    mobNav.appendChild(mb);
   });
   const btns=[...ticks.children];
+  const mbtns=[...mobNav.children];
 
   addEventListener("keydown",e=>{
     const k={ArrowDown:1,PageDown:1,ArrowUp:-1,PageUp:-1}[e.key]; if(!k) return;
@@ -1390,6 +1544,9 @@ function scrollSystem(){
     heroMid.style.opacity=String(1-Math.pow(hp,1.25));
     heroMid.style.filter=`blur(${hp*9}px)`;
 
+    /* hide bismillah after scrolling a little */
+    if(bismillah) bismillah.classList.toggle("hidden", ry > 120);
+
     const cue=document.querySelector(".scroll-cue");
     if(cue){cue.style.opacity=String(clamp(1-ry/300,0,1));}
 
@@ -1400,10 +1557,11 @@ function scrollSystem(){
       el.style.setProperty("--py", (mid*parseFloat(el.dataset.par)*260).toFixed(2)+"px");
     }
 
-    /* active scene */
+    /* active scene — sync both desktop ticks and mobile nav */
     let act=0;
     secs.forEach((s,i)=>{const r=s.getBoundingClientRect(); if(r.top<=innerHeight*.5&&r.bottom>innerHeight*.5) act=i;});
     btns.forEach((b,i)=>b.classList.toggle("on",i===act));
+    mbtns.forEach((b,i)=>b.classList.toggle("on",i===act));
 
     if(Math.abs(ry-y)>.4) raf=requestAnimationFrame(tick);
   }
