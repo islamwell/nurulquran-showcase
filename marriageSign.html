@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clothing for One Another — Marriage as a Sign from Allah | NurulQuran</title>
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ BASE & CSS TOKENS ============ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --deep: #020f18;
+  --night: #041824;
+  --mid: #082d42;
+  --teal: #0e6b7d;
+  --aqua: #57d3d8;
+  --aqua-glow: rgba(87, 211, 216, 0.35);
+  --gold: #f5c97b;
+  --gold-glow: rgba(245, 201, 123, 0.28);
+  --foam: #d9f6ff;
+  --ink: #eaf9ff;
+  --muted: #a6c9d8;
+  --dim: #6d94a8;
+  --glass-bg: rgba(7, 34, 50, 0.55);
+  --glass-border: rgba(217, 246, 255, 0.16);
+  --card-hover-border: rgba(87, 211, 216, 0.45);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  background: var(--deep);
+  overflow-x: hidden;
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ============ DUAL-LANGUAGE VISIBILITY ============ */
+html[lang="en"] .t-no { display: none !important; }
+html[lang="no"] .t-en { display: none !important; }
+
+/* ============ ATMOSPHERIC BACKGROUND ============ */
+.sky {
+  position: fixed; inset: 0; z-index: -3;
+  background: radial-gradient(circle at 50% 20%, #082c40 0%, #03141f 60%, #010a11 100%);
+  background-size: 200% 200%;
+}
+.glow {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(45vw 45vw at 18% 18%, rgba(87, 211, 216, 0.14), transparent 70%),
+    radial-gradient(55vw 55vw at 82% 55%, rgba(14, 107, 125, 0.20), transparent 70%),
+    radial-gradient(40vw 40vw at 50% 92%, rgba(217, 246, 255, 0.08), transparent 70%);
+  animation: breathe 14s ease-in-out infinite alternate;
+}
+@keyframes breathe {
+  from { opacity: 0.65; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.08); }
+}
+
+/* ============ CANVAS WATERFALL (HARDWARE ACCELERATED) ============ */
+.rain-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mist {
+  position: fixed; left: -10%; bottom: -12vh; width: 120%; height: 38vh; z-index: 1; pointer-events: none;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(217, 246, 255, 0.25), transparent 72%);
+  filter: blur(28px);
+  animation: mist 12s ease-in-out infinite alternate;
+}
+@keyframes mist {
+  from { transform: translateY(12px) scaleX(1); opacity: 0.55; }
+  to { transform: translateY(-12px) scaleX(1.15); opacity: 0.88; }
+}
+
+/* ============ PROGRESS BAR ============ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100;
+  background: linear-gradient(90deg, #0e6b7d, var(--aqua), var(--foam));
+  box-shadow: 0 0 14px rgba(87, 211, 216, 0.9);
+  transition: width 0.1s ease-out;
+}
+
+/* ============ TOP NAV & LANGUAGE SWITCHER ============ */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 4vw;
+  background: rgba(2, 15, 24, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(217, 246, 255, 0.10);
+  transition: background 0.3s ease;
+}
+.nav-brand-wrap {
+  display: flex; align-items: center; gap: 0.85rem; text-decoration: none;
+}
+.nav-back-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500;
+  padding: 0.4rem 0.85rem; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(217, 246, 255, 0.12);
+  transition: all 0.25s ease;
+}
+.nav-back-btn:hover {
+  color: #fff; background: rgba(87, 211, 216, 0.12); border-color: var(--aqua);
+  transform: translateX(-3px);
+}
+.nav-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600;
+  color: var(--ink); letter-spacing: 0.02em; display: none;
+}
+@media (min-width: 768px) { .nav-title { display: block; } }
+
+.lang-switch {
+  display: inline-flex; align-items: center;
+  background: rgba(4, 24, 36, 0.85);
+  border: 1px solid rgba(217, 246, 255, 0.18);
+  border-radius: 999px; padding: 3px; gap: 3px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 0.38rem;
+  background: transparent; border: none; outline: none;
+  color: var(--muted); padding: 0.35rem 0.85rem; border-radius: 999px;
+  font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, rgba(87, 211, 216, 0.25), rgba(14, 107, 125, 0.45));
+  color: #fff; border: 1px solid rgba(87, 211, 216, 0.5);
+  box-shadow: 0 0 12px rgba(87, 211, 216, 0.35);
+}
+.lang-btn:hover:not(.active) { color: #fff; background: rgba(255, 255, 255, 0.06); }
+.flag-svg { width: 15px; height: 15px; border-radius: 50%; object-fit: cover; }
+
+/* ============ AUDIO PLAY BUTTON ============ */
+.ayah-audio-bar {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  margin: 1.2rem auto 0; padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: rgba(87, 211, 216, 0.08);
+  border: 1px solid rgba(87, 211, 216, 0.28);
+}
+.ayah-play-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--aqua), #0e6b7d);
+  border: none; color: #020f18; display: grid; place-items: center;
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 14px rgba(87, 211, 216, 0.4);
+}
+.ayah-play-btn:hover { transform: scale(1.08); box-shadow: 0 0 20px rgba(87, 211, 216, 0.6); }
+.ayah-audio-info { font-size: 0.8rem; color: var(--muted); text-align: left; }
+.ayah-audio-info strong { color: var(--foam); display: block; font-size: 0.85rem; font-weight: 500; }
+
+/* ============ LAYOUT & STREAM LINE ============ */
+main {
+  position: relative; max-width: 1040px; margin: 0 auto;
+  padding: 0 5vw; z-index: 2;
+}
+.central-stream {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, transparent, rgba(87, 211, 216, 0.35) 6%, rgba(87, 211, 216, 0.35) 94%, transparent);
+  overflow: hidden; pointer-events: none; z-index: -1;
+}
+.central-stream::after {
+  content: ""; position: absolute; left: -2px; width: 6px; height: 22vh; border-radius: 99px;
+  background: linear-gradient(to bottom, transparent, var(--foam), transparent);
+  filter: blur(2px); animation: flow 5.5s linear infinite;
+}
+@keyframes flow { from { top: -25vh; } to { top: 105vh; } }
+@media (max-width: 780px) { .central-stream { left: 22px; } }
+
+/* ============ SECTIONS ============ */
+section {
+  position: relative; min-height: 85vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 13vh 0;
+}
+.hero { min-height: 100vh; padding-top: 17vh; }
+.wrap { max-width: 760px; position: relative; z-index: 2; width: 100%; }
+
+/* Droplet node on the stream line */
+.node {
+  position: absolute; left: 50%; top: 5vh; transform: translateX(-50%);
+  width: 14px; height: 14px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--foam);
+  box-shadow: 0 0 0 0 rgba(87, 211, 216, 0.6), 0 0 18px 4px rgba(87, 211, 216, 0.5);
+  animation: pulse 3.6s ease-out infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(87, 211, 216, 0.55), 0 0 18px 4px rgba(87, 211, 216, 0.5); }
+  100% { box-shadow: 0 0 0 24px rgba(87, 211, 216, 0), 0 0 18px 4px rgba(87, 211, 216, 0.2); }
+}
+@media (max-width: 780px) { .node { left: 22px; } }
+
+/* ============ TYPOGRAPHY ============ */
+h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(2.4rem, 6.5vw, 5rem); line-height: 1.1; letter-spacing: -0.01em;
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(1.85rem, 4.2vw, 3.2rem); line-height: 1.22; margin-bottom: 1.1rem;
+}
+.shine {
+  background: linear-gradient(105deg, #ffffff, var(--aqua), #9ff0e4, #ffffff, var(--aqua));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 9s linear infinite;
+}
+@keyframes shine { from { background-position: 0% 50%; } to { background-position: 300% 50%; } }
+
+p {
+  font-weight: 300; font-size: clamp(1.02rem, 1.85vw, 1.22rem);
+  color: #cfeaf5; max-width: 62ch; margin: 0 auto 1.1rem;
+}
+.lead { font-size: clamp(1.1rem, 2.1vw, 1.42rem); color: #e8fbff; font-weight: 400; }
+.soft {
+  color: var(--muted); font-size: 0.94rem; letter-spacing: 0.15em;
+  text-transform: uppercase; font-weight: 500;
+}
+strong { color: #fff; font-weight: 600; }
+
+/* Arabic Typography */
+.ar {
+  font-family: 'Amiri', serif; direction: rtl;
+  font-size: clamp(1.65rem, 4.8vw, 3rem); line-height: 2.1;
+  color: #fff; text-shadow: 0 0 32px rgba(87, 211, 216, 0.45);
+  margin-bottom: 1.2rem;
+}
+.ar.small { font-size: clamp(1.25rem, 3.2vw, 1.95rem); line-height: 2.2; }
+
+/* ============ GLASS CONTAINERS ============ */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px; padding: clamp(1.6rem, 4vw, 3rem);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  position: relative; overflow: hidden;
+}
+.glass::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--aqua), var(--foam), transparent);
+  background-size: 200% 100%; animation: shine 6s linear infinite;
+}
+
+/* ============ SLIDE 3: 4 QUALITIES OF CLOTHING ============ */
+.attr-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem; margin-top: 2rem; text-align: left;
+}
+.attr-card {
+  background: linear-gradient(170deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(217, 246, 255, 0.14);
+  border-radius: 18px; padding: 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+}
+.attr-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(87, 211, 216, 0.55);
+  box-shadow: 0 20px 40px rgba(87, 211, 216, 0.18);
+}
+.attr-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--aqua); line-height: 1;
+}
+.attr-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600;
+  color: #fff; margin: 0.35rem 0 0.5rem;
+}
+.attr-card p { font-size: 0.95rem; line-height: 1.6; color: #b7dbe9; margin: 0; }
+
+/* ============ THREE SIGNS GRID ============ */
+.signs {
+  display: grid; gap: 1.3rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 2.4rem; text-align: left;
+}
+.sign {
+  background: linear-gradient(170deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(217, 246, 255, 0.14); border-radius: 20px; padding: 1.8rem;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s, border-color 0.45s;
+}
+.sign:hover {
+  transform: translateY(-8px); border-color: rgba(87, 211, 216, 0.55);
+  box-shadow: 0 22px 48px rgba(87, 211, 216, 0.2);
+}
+.sign .n { font-family: 'Cormorant Garamond', serif; font-size: 2.3rem; color: var(--aqua); line-height: 1; }
+.sign h3 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.4rem;
+  margin: 0.4rem 0 0.6rem; color: #fff;
+}
+.sign p { font-size: 0.98rem; margin: 0; color: #c3e3f0; line-height: 1.65; }
+
+/* ============ TWO VOICES (SLIDE 18) ============ */
+.voices {
+  display: grid; gap: 1.3rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 2.2rem;
+}
+.voice {
+  border-radius: 20px; padding: 2rem; border: 1px solid rgba(217, 246, 255, 0.14);
+  background: linear-gradient(150deg, rgba(14, 107, 125, 0.25), rgba(255, 255, 255, 0.02));
+  text-align: left;
+}
+.voice .was {
+  color: #8fb4c4; text-decoration: line-through; font-size: 1.05rem; display: block;
+}
+.voice .now {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  color: #fff; margin-top: 0.5rem; display: block; font-weight: 600;
+}
+
+/* ============ 5 PILLARS / STEPS ============ */
+.steps { list-style: none; margin: 2rem auto 0; max-width: 660px; text-align: left; }
+.steps li {
+  position: relative; padding: 1rem 0 1rem 2.5rem;
+  border-bottom: 1px solid rgba(217, 246, 255, 0.1); color: #d6eef8; font-weight: 300;
+  font-size: 1.05rem;
+}
+.steps li:last-child { border-bottom: none; }
+.steps li::before {
+  content: ""; position: absolute; left: 0; top: 1.55rem; width: 9px; height: 9px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--aqua); box-shadow: 0 0 12px var(--aqua);
+}
+
+/* ============ POOL & RIPPLES (SLIDE 20) ============ */
+.pool { min-height: 100vh; justify-content: center; }
+.ripples { position: relative; width: min(420px, 72vw); height: min(420px, 72vw); margin: 0 auto; }
+.ripples i {
+  position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(217, 246, 255, 0.35);
+  animation: ripple 6s ease-out infinite;
+}
+.ripples i:nth-child(2) { animation-delay: 1.5s; }
+.ripples i:nth-child(3) { animation-delay: 3s; }
+.ripples i:nth-child(4) { animation-delay: 4.5s; }
+@keyframes ripple {
+  0% { transform: scale(0.25); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+.pool .wrap { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(680px, 88vw); }
+.poolbox { position: relative; display: grid; place-items: center; }
+
+/* ============ FOOTER ============ */
+footer {
+  text-align: center; padding: 8vh 5vw 10vh; color: var(--muted);
+  font-size: 0.92rem; border-top: 1px solid rgba(217, 246, 255, 0.1);
+  position: relative; z-index: 2;
+}
+.footer-verse {
+  font-family: 'Amiri', serif; font-size: 1.5rem; color: #fff;
+  margin-bottom: 0.8rem; direction: rtl;
+}
+.footer-version-tag {
+  margin-top: 14px; font-size: 0.74rem; letter-spacing: 0.08em;
+  opacity: 0.7; font-family: monospace; color: var(--aqua);
+}
+
+/* ============ SCROLL REVEAL ============ */
+.rv {
+  opacity: 0; transform: translateY(42px); filter: blur(6px);
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), filter 1.1s ease;
+}
+.rv.in { opacity: 1; transform: none; filter: blur(0); }
+.d1 { transition-delay: 0.12s; }
+.d2 { transition-delay: 0.24s; }
+.d3 { transition-delay: 0.36s; }
+.d4 { transition-delay: 0.48s; }
+
+/* Scroll Hint */
+.hint { position: absolute; bottom: 4vh; left: 50%; transform: translateX(-50%); text-align: center; }
+.hint span { display: block; font-size: 0.72rem; letter-spacing: 0.3em; color: #8fbdd0; margin-bottom: 0.6rem; }
+.hint i {
+  display: block; width: 1px; height: 48px; margin: 0 auto;
+  background: linear-gradient(var(--aqua), transparent); animation: hintfall 2.2s ease-in-out infinite;
+}
+@keyframes hintfall { 0% { opacity: 0; transform: translateY(-10px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Atmosphere & Background -->
+<div class="sky"></div>
+<div class="glow"></div>
+<canvas id="rainCanvas" class="rain-canvas" aria-hidden="true"></canvas>
+<div class="mist"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Top Sticky Nav -->
+<header class="top-nav">
+  <a href="index.html" class="nav-back-btn" title="Return to Main Showcase">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    <span class="t-en">Showcase</span>
+    <span class="t-no">Oversikt</span>
+  </a>
+
+  <div class="nav-title">
+    <span class="t-en">Clothing for One Another · A Divine Sign</span>
+    <span class="t-no">Kledning for hverandre · Et tegn fra Allah</span>
+  </div>
+
+  <div class="lang-switch" role="radiogroup" aria-label="Language selection">
+    <button type="button" class="lang-btn active" id="btnLangEn" data-lang="en" role="radio" aria-checked="true" title="Switch to English">
+      <span>EN</span>
+    </button>
+    <button type="button" class="lang-btn" id="btnLangNo" data-lang="no" role="radio" aria-checked="false" title="Bytt til Norsk">
+      <span>NO</span>
+    </button>
+  </div>
+</header>
+
+<main>
+<div class="central-stream"></div>
+
+<!-- SECTION 1: HERO (Slide 1 & 2) -->
+<section class="hero">
+  <div class="wrap">
+    <p class="soft rv">
+      <span class="t-en">Al-Baqarah · 187</span>
+      <span class="t-no">Koranen · 2:187</span>
+    </p>
+    <p class="ar rv d1">هُنَّ لِبَاسٌۭ لَّكُمْ وَأَنتُمْ لِبَاسٌۭ لَّهُنَّ</p>
+    <h1 class="rv d2">
+      <span class="shine t-en">They are clothing for you,<br>and you are clothing for them.</span>
+      <span class="shine t-no">«De er en kledning for dere,<br>og dere er en kledning for dem.»</span>
+    </h1>
+    <p class="lead rv d3" style="margin-top:1.6rem">
+      <span class="t-en">Clothing gives respect. It protects. It covers what you would rather hide. It makes you beautiful. Your husband, your wife — this is what they are to you.</span>
+      <span class="t-no">Klær gir verdighet, beskyttelse, skjuler feil og gjør oss vakrere. Slik er ektefellen din også ment å være for deg.</span>
+    </p>
+
+    <!-- Ayah Audio Player 2:187 -->
+    <div class="ayah-audio-bar rv d4">
+      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Recitation Sheikh Alafasy" title="Listen to Ayah 2:187">
+        <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="ayah-audio-info">
+        <span class="t-en"><strong>Recitation · 2:187</strong> Sheikh Mishary Alafasy</span>
+        <span class="t-no"><strong>Resitasjon · 2:187</strong> Sjeik Mishary Alafasy</span>
+      </div>
+    </div>
+  </div>
+  <div class="hint rv d4">
+    <span>
+      <span class="t-en">FLOW DOWN</span>
+      <span class="t-no">RULL NED</span>
+    </span>
+    <i></i>
+  </div>
+</section>
+
+<!-- SECTION 2: THE 4 QUALITIES OF CLOTHING (Slide 3) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap" style="max-width:960px">
+    <p class="soft rv">
+      <span class="t-en">The Wisdom of the Garment</span>
+      <span class="t-no">Kledningens dype visdom</span>
+    </p>
+    <h2 class="rv d1">
+      <span class="t-en">Four Dimensions of Clothing</span>
+      <span class="t-no">Fire gaver i én kledning</span>
+    </h2>
+    <div class="attr-grid">
+      <div class="attr-card rv d1">
+        <div class="attr-num">01</div>
+        <h3>
+          <span class="t-en">Dignity</span>
+          <span class="t-no">Verdighet</span>
+        </h3>
+        <p>
+          <span class="t-en">Clothing honors the wearer with mutual respect, nobility, and status in every situation.</span>
+          <span class="t-no">Klær gir verdighet og respekt. Å løfte hverandre og vokte ektefellens ære og anseelse.</span>
+        </p>
+      </div>
+
+      <div class="attr-card rv d2">
+        <div class="attr-num">02</div>
+        <h3>
+          <span class="t-en">Protection</span>
+          <span class="t-no">Beskyttelse</span>
+        </h3>
+        <p>
+          <span class="t-en">A shield against cold, harsh elements, temptation, and emotional vulnerability.</span>
+          <span class="t-no">Et vern mot kulde og ytre prøvelser. Å gi trygghet når hverdagen stormer.</span>
+        </p>
+      </div>
+
+      <div class="attr-card rv d3">
+        <div class="attr-num">03</div>
+        <h3>
+          <span class="t-en">Covers Faults</span>
+          <span class="t-no">Skjuler Feil</span>
+        </h3>
+        <p>
+          <span class="t-en">Veils imperfections quietly. Never exposes weaknesses to onlookers or critics.</span>
+          <span class="t-no">Dekker over mangler og sårbarheter. Å aldri utlevere den andres feil til andre.</span>
+        </p>
+      </div>
+
+      <div class="attr-card rv d4">
+        <div class="attr-num">04</div>
+        <h3>
+          <span class="t-en">Beautifies</span>
+          <span class="t-no">Forskjønner</span>
+        </h3>
+        <p>
+          <span class="t-en">Highlights the finest in you, bringing warmth, elegance, and natural radiance.</span>
+          <span class="t-no">Løfter frem det beste i deg, og gjør hjemmet og hjertet varmt og vakkert.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: LESSON FROM THE NORTH (Slide 4 & 5) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <p class="soft rv">
+      <span class="t-en">A lesson from Norway</span>
+      <span class="t-no">Noe av det første jeg lærte i Norge</span>
+    </p>
+    <h2 class="rv d1">
+      <span class="t-en">A timeless proverb:</span>
+      <span class="t-no">Et tidløst ordtak:</span>
+    </h2>
+    <div class="glass rv d2">
+      <p class="lead" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;color:#fff;margin:0">
+        <span class="t-en">“There is no such thing as bad weather — only bad clothing.”</span>
+        <span class="t-no">«Det finnes ikke dårlig vær, bare dårlige klær.»</span>
+      </p>
+    </div>
+    <h2 class="rv d3" style="margin-top:2.6rem">
+      <span class="t-en">And there is no such thing as a bad marriage —<br><span class="shine">only bad clothing.</span></span>
+      <span class="t-no">Og det finnes ikke noe slikt som et dårlig ekteskap —<br><span class="shine">bare dårlig «bekledning».</span></span>
+    </h2>
+    <p class="rv d4" style="color:var(--muted)">
+      <span class="t-en">What kind of clothing are we being for one another when cold winds blow?</span>
+      <span class="t-no">Hva slags «kledning» er vi for hverandre når stormen setter inn?</span>
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 4: LOOK AROUND YOU (Slide 6) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <p class="soft rv">
+      <span class="t-en">Take a look around you</span>
+      <span class="t-no">Se deg rundt</span>
+    </p>
+    <h2 class="rv d1">
+      <span class="t-en">People are lonely.<br>Homes are quiet.</span>
+      <span class="t-no">Mange er ensomme.<br>Hjem er stille.</span>
+    </h2>
+    <p class="rv d2">
+      <span class="t-en">Some marriages begin with joy and keep going all the way to Jannah. Others end in anger. We chase love. We find it. Then somehow we lose it.</span>
+      <span class="t-no">Noen ekteskap begynner med glede og fortsetter mot Jannah. Andre ender i sinne. Vi jager kjærlighet. Vi finner den. Og så mister vi den.</span>
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 5: WHY? & THE VOID (Slide 7, 8, 9) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <h1 class="rv" style="font-size:clamp(3.2rem,10vw,7rem)">
+      <span class="shine t-en">Why?</span>
+      <span class="shine t-no">Hvorfor?</span>
+    </h1>
+    <p class="lead rv d1" style="margin-top:1.4rem">
+      <span class="t-en">Because we look for the source of love in the wrong place.</span>
+      <span class="t-no">Fordi vi leter etter kjærlighetens kilde på feil sted.</span>
+    </p>
+    <div class="glass rv d2" style="margin-top:2rem">
+      <p style="margin:0">
+        <span class="t-en">We look for someone to fill the empty space inside us. We ask a husband or a wife to be everything — the peace, the joy, the cure for every quiet ache.</span>
+        <span class="t-no">Vi leter etter noen som kan fylle tomheten. Vi forventer at en mann eller en kone skal fylle hvert tomrom i hjertet. Et hjerte kan ikke fylles av et annet menneske alene.</span>
+      </p>
+      <p style="margin:1.3rem 0 0">
+        <span class="t-en"><strong>No human being can carry that.</strong> When we ask a person to be everything, we set them up to fail — and we set ourselves up to break. A spouse is a gift. Not a god.</span>
+        <span class="t-no"><strong>Ingen menneske kan gjøre det.</strong> Når vi krever at ett menneske skal være alt, gjør vi det umulig for dem å lykkes — og vi gjør oss selv sårbare for å knuses. En ektefelle er en gave. Ikke en gud.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: THE SOLUTION (Slide 10) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <p class="soft rv">
+      <span class="t-en">The Divine Solution · Ar-Rum 30:21</span>
+      <span class="t-no">Løsningen · Ar-Rum 30:21</span>
+    </p>
+    <h2 class="rv d1">
+      <span class="t-en">Allah says in the Qur’an</span>
+      <span class="t-no">Allah sier i Koranen</span>
+    </h2>
+    <p class="ar small rv d2" style="margin-top:1rem">وَمِنْ ءَايَـٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
+    <div class="glass rv d3">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.15rem,2.4vw,1.6rem);font-style:italic;color:#fff;margin:0">
+        <span class="t-en">“And among His signs is that He created for you spouses from among yourselves, so that you may find peace in them. And He placed between you love and mercy. Surely in this are signs for people who reflect.”</span>
+        <span class="t-no">«Og blant Hans tegn er at Han skapte ektefeller for dere … så dere kan finne ro hos dem. Og Han la kjærlighet og barmhjertighet mellom dere. I dette er det tegn for mennesker som tenker etter.»</span>
+      </p>
+      <p class="soft" style="margin:1.2rem 0 0">
+        <span class="t-en">Surah Ar-Rum · 21</span>
+        <span class="t-no">Sura Ar-Rum · 21</span>
+      </p>
+    </div>
+
+    <!-- Ayah Audio Player 30:21 -->
+    <div class="ayah-audio-bar rv d4">
+      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/030021.mp3" aria-label="Recitation Sheikh Alafasy" title="Listen to Ayah 30:21">
+        <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="ayah-audio-info">
+        <span class="t-en"><strong>Recitation · 30:21</strong> Sheikh Mishary Alafasy</span>
+        <span class="t-no"><strong>Resitasjon · 30:21</strong> Sjeik Mishary Alafasy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: THREE SIGNS (Slide 11 to 15) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap" style="max-width:1000px">
+    <h2 class="rv">
+      <span class="t-en">Notice Three Realities</span>
+      <span class="t-no">Legg merke til tre ting</span>
+    </h2>
+    <p class="soft rv d1">
+      <span class="t-en">Three words that reshape how we look at marriage</span>
+      <span class="t-no">Tre ord som forandrer hvordan vi ser på ekteskapet</span>
+    </p>
+
+    <div class="signs">
+      <!-- 1 -->
+      <div class="sign rv d1">
+        <div class="n">١</div>
+        <h3>
+          <span class="t-en">“Among His Signs”</span>
+          <span class="t-no">«Blant Hans tegn»</span>
+        </h3>
+        <p>
+          <span class="t-en">Marriage is more than a legal contract. It is an Āyah (sign) — and a sign always points to something greater than itself. Your spouse is not the final destination. Your spouse is the road that leads you back to Allah.</span>
+          <span class="t-no">Ekteskapet er mer enn en kontrakt. Det er et tegn. Et tegn peker på noe større enn seg selv. Ektefellen din er ikke målet — men en vei som kan føre deg tilbake til Allah. Din ektefelle er ikke destinasjonen.</span>
+        </p>
+      </div>
+
+      <!-- 2 -->
+      <div class="sign rv d2">
+        <div class="n">٢</div>
+        <h3>
+          <span class="t-en">“He Placed Love & Mercy”</span>
+          <span class="t-no">«Han la kjærlighet og barmhjertighet»</span>
+        </h3>
+        <p>
+          <span class="t-en">Who placed it? Allah. Not you, and not your partner alone. The affection in your home is a gift from the One who made you both. When you know where love comes from, you know where to turn when it runs low.</span>
+          <span class="t-no">Hvem la den der? Allah. Ikke du. Ikke partneren din. Kjærligheten i hjemmet er en gave fra Den som skapte dere begge. Kjærlighet er en gave — ikke en eiendom. Når kjærligheten blir svak, vet du hvor du skal vende deg.</span>
+        </p>
+      </div>
+
+      <!-- 3 -->
+      <div class="sign rv d3">
+        <div class="n">٣</div>
+        <h3>
+          <span class="t-en">“To Find Peace (Sakīnah)”</span>
+          <span class="t-no">«Finne ro (Sakīnah)»</span>
+        </h3>
+        <p>
+          <span class="t-en">Peace is the goal — not perfection, not perpetual excitement. Peace means sanctuary, protection, comfort, and safety. And that peace only endures as long as both hearts keep returning to Allah.</span>
+          <span class="t-no">Målet er sakīnah (ro) — ikke perfeksjon, ikke konstant spenning. Beskyttelse, trygghet og komfort. Og denne roen varer når dere sammen vender tilbake til Allah.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: TAWHEED IN THE HOME (Slide 16 & 17) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <p class="ar rv">لَا إِلٰهَ إِلَّا اللّٰه</p>
+    <h2 class="rv d1">
+      <span class="shine t-en">None is worthy of worship but Allah.</span>
+      <span class="shine t-no">Ingen har rett til å bli tilbedt uten Allah.</span>
+    </h2>
+    <p class="lead rv d2">
+      <span class="t-en">He alone gives. He alone sustains. He alone deserves to be worshipped. When a husband and wife both truly know this, the atmosphere transforms.</span>
+      <span class="t-no">Han alene gir. Han alene opprettholder. Han alene er verdig tilbedelse. Når mann og kone begge vet dette, forandres noe dypt inne i hjemmet.</span>
+    </p>
+    <p class="rv d3">
+      <span class="t-en">They stop demanding from each other what only Allah can give. They stop worshipping each other — and they begin worshipping Allah together.</span>
+      <span class="t-no">De slutter å kreve fra hverandre det bare Allah kan gi. De slutter å gjøre hverandre til sentrum for tilbedelsen. De begynner å tilbe Allah sammen.</span>
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 9: SAMME RETNING / THE WORDS CHANGE (Slide 18) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap" style="max-width:880px">
+    <h2 class="rv">
+      <span class="t-en">The Words Change Too</span>
+      <span class="t-no">Samme retning — ordene forandres</span>
+    </h2>
+    <div class="voices">
+      <div class="voice rv d1">
+        <p class="soft" style="margin:0 0 .8rem">
+          <span class="t-en">The Husband</span>
+          <span class="t-no">Mannen</span>
+        </p>
+        <span class="was">
+          <span class="t-en">“Obey me.”</span>
+          <span class="t-no">«Adlyd meg.»</span>
+        </span>
+        <span class="now">
+          <span class="t-en">“Let us obey Allah.”</span>
+          <span class="t-no">«La oss adlyde Allah.»</span>
+        </span>
+      </div>
+
+      <div class="voice rv d2">
+        <p class="soft" style="margin:0 0 .8rem">
+          <span class="t-en">The Wife</span>
+          <span class="t-no">Kvinnen</span>
+        </p>
+        <span class="was">
+          <span class="t-en">“I need this from you.”</span>
+          <span class="t-no">«Jeg trenger dette fra deg.»</span>
+        </span>
+        <span class="now">
+          <span class="t-en">“Let us ask Allah.”</span>
+          <span class="t-no">«La oss be Allah.»</span>
+        </span>
+      </div>
+    </div>
+
+    <h2 class="rv d3" style="margin-top:2.8rem">
+      <span class="t-en">Two people, <span class="shine">one direction</span> — toward their Master.<br>
+        <span style="font-size:.6em;color:#bfe3f0">That is a marriage that lasts forever.</span>
+      </span>
+      <span class="t-no">To mennesker, <span class="shine">én retning</span> — mot sin Herre.<br>
+        <span style="font-size:.6em;color:#bfe3f0">Ikke «meg mot deg» — men «oss mot Allah».</span>
+      </span>
+    </h2>
+  </div>
+</section>
+
+<!-- SECTION 10: 5 PILLARS TO BUILD A HOME (Slide 19) -->
+<section>
+  <div class="node"></div>
+  <div class="wrap">
+    <p class="soft rv">
+      <span class="t-en">Actionable Foundation</span>
+      <span class="t-no">Praktisk handling</span>
+    </p>
+    <h2 class="rv d1">
+      <span class="t-en">Build Your Home on Islam</span>
+      <span class="t-no">Bygg ditt hjem på islam</span>
+    </h2>
+    <ul class="steps rv d2">
+      <li>
+        <span class="t-en"><strong>Pray together</strong> — let salah unite and anchor the heart.</span>
+        <span class="t-no"><strong>Be sammen</strong> — la salah samle hjertet.</span>
+      </li>
+      <li>
+        <span class="t-en"><strong>Forgive quickly</strong> — because Allah forgives you.</span>
+        <span class="t-no"><strong>Tilgi raskt</strong> — fordi Allah tilgir dere.</span>
+      </li>
+      <li>
+        <span class="t-en"><strong>Show mercy</strong> — because Allah is the One who placed mercy between you.</span>
+        <span class="t-no"><strong>Vis barmhjertighet</strong> — fordi Allah har lagt barmhjertighet mellom dere.</span>
+      </li>
+      <li>
+        <span class="t-en"><strong>When love feels weak</strong>, do not blame or punish your spouse.</span>
+        <span class="t-no"><strong>Når kjærligheten føles svak</strong>, ikke legg skylden på ektefellen.</span>
+      </li>
+      <li>
+        <span class="t-en"><strong>Turn to the One who gave it</strong>, and ask Him for more love and more mercy.</span>
+        <span class="t-no"><strong>Vend dere til Den som ga den</strong> — og be om mer kjærlighet og barmhjertighet.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 11: POOL & REFLECTION (Slide 20) -->
+<section class="pool">
+  <div class="node"></div>
+  <div class="poolbox">
+    <div class="ripples"><i></i><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1 class="rv" style="font-size:clamp(2.1rem,5.5vw,3.6rem)">
+        <span class="shine t-en">Your spouse is a sign.</span>
+        <span class="shine t-no">Ekteskapet er et tegn.</span>
+      </h1>
+      <p class="lead rv d1" style="margin-top:1.2rem">
+        <span class="t-en">Is it leading you to something greater?</span>
+        <span class="t-no">Leder ekteskapet ditt deg til noe større?</span>
+      </p>
+      <p class="rv d2" style="margin-top:1.6rem">
+        <span class="t-en">Read the Qur’an. Share the light.<br>Let the Qur’an lead you to Allah.</span>
+        <span class="t-no">Les Koranen. Del lyset.<br>La Koranen lede dere til Allah.</span>
+      </p>
+      <p class="soft rv d3" style="margin-top:1.4rem">
+        <span class="t-en">That is the purpose. That is the peace.</span>
+        <span class="t-no">Det er hensikten. Det er freden.</span>
+      </p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-verse">هُنَّ لِبَاسٌۭ لَّكُمْ وَأَنتُمْ لِبَاسٌۭ لَّهُنَّ</div>
+  <div>
+    <span class="t-en">NurulQuran Trust · Clothing for One Another · A Divine Sign</span>
+    <span class="t-no">NurulQuran Trust · Ekteskapet som et tegn fra Allah</span>
+  </div>
+  <div class="footer-version-tag">v1.0.37 (updated 2026-09-21 07:32)</div>
+</footer>
+
+<script>
+/* =========================================================================
+   1. BILINGUAL TRANSLATION CONTROLLER (ENGLISH / NORSK)
+   ========================================================================= */
+const btnEn = document.getElementById('btnLangEn');
+const btnNo = document.getElementById('btnLangNo');
+
+function setLanguage(lang) {
+  const targetLang = (lang === 'no') ? 'no' : 'en';
+  document.documentElement.lang = targetLang;
+  localStorage.setItem('nq_marriage_lang', targetLang);
+
+  if (targetLang === 'no') {
+    btnNo.classList.add('active');
+    btnNo.setAttribute('aria-checked', 'true');
+    btnEn.classList.remove('active');
+    btnEn.setAttribute('aria-checked', 'false');
+    document.title = 'Kledning for hverandre — Ekteskapet som et tegn fra Allah | NurulQuran';
+  } else {
+    btnEn.classList.add('active');
+    btnEn.setAttribute('aria-checked', 'true');
+    btnNo.classList.remove('active');
+    btnNo.setAttribute('aria-checked', 'false');
+    document.title = 'Clothing for One Another — Marriage as a Sign from Allah | NurulQuran';
+  }
+
+  // Refresh collision boxes so mask matches newly displayed text dimensions
+  requestAnimationFrame(refreshTextGeometry);
+}
+
+const savedLang = localStorage.getItem('nq_marriage_lang') || 'en';
+setLanguage(savedLang);
+
+btnEn.addEventListener('click', () => setLanguage('en'));
+btnNo.addEventListener('click', () => setLanguage('no'));
+
+
+/* =========================================================================
+   2. HARDWARE-ACCELERATED FALLING WATERFALL WITH LETTER OCCLUSION
+      - Zero layout thrashing: Absolute document coordinates cached on resize/load.
+      - 60 FPS GPU blit: 'destination-out' punches out text zones directly.
+      - Adapts to low-end devices: Halves particle count, pauses when hidden.
+   ========================================================================= */
+const canvas = document.getElementById('rainCanvas');
+const ctx = canvas.getContext('2d');
+
+let dpr = Math.min(window.devicePixelRatio || 1, 2);
+let width = 0;
+let height = 0;
+let streaks = [];
+let cachedTextRects = [];
+let isLowEnd = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function resizeCanvas() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  ctx.scale(dpr, dpr);
+  refreshTextGeometry();
+}
+
+// Pre-calculate visible text bounding rectangles relative to DOCUMENT top
+// Run only on resize, language switch, or initial load — NEVER inside RAF loop!
+function refreshTextGeometry() {
+  const elements = document.querySelectorAll(
+    'h1, h2, h3, p, span.was, span.now, ul.steps li, .node, .attr-card, .sign, .voice, .ayah-audio-bar'
+  );
+  const scrollY = window.scrollY || window.pageYOffset || 0;
+  const list = [];
+  const padX = 7;
+  const padY = 4;
+
+  for (let i = 0; i < elements.length; i++) {
+    const el = elements[i];
+    // Skip hidden elements (like the unselected language)
+    if (el.offsetParent === null && el.offsetWidth === 0 && el.offsetHeight === 0) continue;
+
+    // Use getClientRects() for natural line-wrapping instead of huge empty paragraph boxes
+    const rects = el.getClientRects();
+    for (let j = 0; j < rects.length; j++) {
+      const r = rects[j];
+      if (r.width > 2 && r.height > 2) {
+        list.push({
+          docLeft: r.left - padX,
+          docTop: r.top + scrollY - padY,
+          width: r.width + padX * 2,
+          height: r.height + padY * 2
+        });
+      }
+    }
+  }
+  cachedTextRects = list;
+}
+
+// Initialize particles pool
+function initStreaks() {
+  streaks = [];
+  const isMobile = window.innerWidth < 768;
+  const count = prefersReducedMotion ? 0 : (isMobile || isLowEnd ? 34 : 70);
+
+  for (let i = 0; i < count; i++) {
+    streaks.push({
+      x: Math.random() * width,
+      y: Math.random() * (height + 200) - 100,
+      len: 25 + Math.random() * 85,
+      w: Math.random() < 0.2 ? 1.8 : 1.0,
+      speed: 4.5 + Math.random() * 6.5,
+      alpha: 0.18 + Math.random() * 0.45,
+      hasDrop: Math.random() < 0.35
+    });
+  }
+}
+
+let animFrameId = null;
+
+function animate() {
+  if (prefersReducedMotion) return;
+
+  ctx.clearRect(0, 0, width, height);
+
+  // 1. Draw falling streaks
+  ctx.save();
+  for (let i = 0; i < streaks.length; i++) {
+    const s = streaks[i];
+    const grad = ctx.createLinearGradient(s.x, s.y, s.x, s.y + s.len);
+    grad.addColorStop(0, 'rgba(217, 246, 255, 0)');
+    grad.addColorStop(0.5, `rgba(87, 211, 216, ${s.alpha})`);
+    grad.addColorStop(1, `rgba(217, 246, 255, ${s.alpha * 1.3})`);
+
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = s.w;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x, s.y + s.len);
+    ctx.stroke();
+
+    if (s.hasDrop) {
+      ctx.fillStyle = `rgba(217, 246, 255, ${s.alpha * 1.5})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y + s.len, s.w * 1.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Move streak
+    s.y += s.speed;
+    if (s.y > height + s.len) {
+      s.y = -s.len - Math.random() * 60;
+      s.x = Math.random() * width;
+    }
+  }
+  ctx.restore();
+
+  // 2. HARDWARE OCCLUSION: Punch out transparent areas where streaks intersect letters!
+  // Uses GPU destination-out blit. Zero DOM reading in this frame.
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = '#000000';
+
+  const curScroll = window.scrollY || window.pageYOffset || 0;
+  for (let i = 0; i < cachedTextRects.length; i++) {
+    const item = cachedTextRects[i];
+    const screenY = item.docTop - curScroll;
+
+    // Viewport bounds culling
+    if (screenY + item.height >= -20 && screenY <= height + 20) {
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(item.docLeft, screenY, item.width, item.height, 6);
+        ctx.fill();
+      } else {
+        ctx.fillRect(item.docLeft, screenY, item.width, item.height);
+      }
+    }
+  }
+  ctx.restore();
+
+  animFrameId = requestAnimationFrame(animate);
+}
+
+// Pause animation when tab is inactive to conserve battery and CPU
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    if (animFrameId) {
+      cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+    }
+  } else {
+    if (!animFrameId && !prefersReducedMotion) {
+      animFrameId = requestAnimationFrame(animate);
+    }
+  }
+});
+
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    resizeCanvas();
+    initStreaks();
+  }, 150);
+}, { passive: true });
+
+// Document and font readiness
+window.addEventListener('load', () => {
+  resizeCanvas();
+  initStreaks();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refreshTextGeometry);
+  }
+  if (!prefersReducedMotion) {
+    animFrameId = requestAnimationFrame(animate);
+  }
+});
+
+// Periodic geometry refresh if images/fonts settle
+setTimeout(refreshTextGeometry, 600);
+setTimeout(refreshTextGeometry, 2000);
+
+
+/* =========================================================================
+   3. SCROLL PROGRESS & INTERSECTION OBSERVER REVEAL
+   ========================================================================= */
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop || document.body.scrollTop;
+  const maxScroll = doc.scrollHeight - doc.clientHeight;
+  if (maxScroll > 0) {
+    progressBar.style.width = (scrolled / maxScroll * 100) + '%';
+  }
+}, { passive: true });
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+
+/* =========================================================================
+   4. AUDIO RECITATION CONTROLLER (2:187 & 30:21)
+   ========================================================================= */
+let currentAudio = null;
+let currentBtn = null;
+
+document.querySelectorAll('.ayah-play-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const audioUrl = btn.dataset.audio;
+    if (!audioUrl) return;
+
+    // Toggle if clicking same button
+    if (currentAudio && currentBtn === btn) {
+      if (currentAudio.paused) {
+        currentAudio.play();
+        setPlayBtnState(btn, true);
+      } else {
+        currentAudio.pause();
+        setPlayBtnState(btn, false);
+      }
+      return;
+    }
+
+    // Stop any previously playing audio
+    if (currentAudio) {
+      currentAudio.pause();
+      if (currentBtn) setPlayBtnState(currentBtn, false);
+    }
+
+    currentAudio = new Audio(audioUrl);
+    currentBtn = btn;
+    setPlayBtnState(btn, true);
+
+    currentAudio.play().catch(err => {
+      console.warn('Audio playback prevented:', err);
+      setPlayBtnState(btn, false);
+    });
+
+    currentAudio.onended = () => {
+      setPlayBtnState(btn, false);
+      currentAudio = null;
+      currentBtn = null;
+    };
+  });
+});
+
+function setPlayBtnState(btn, isPlaying) {
+  const iconPlay = btn.querySelector('.icon-play');
+  const iconPause = btn.querySelector('.icon-pause');
+  if (isPlaying) {
+    if (iconPlay) iconPlay.style.display = 'none';
+    if (iconPause) iconPause.style.display = 'block';
+  } else {
+    if (iconPlay) iconPlay.style.display = 'block';
+    if (iconPause) iconPause.style.display = 'none';
+  }
+}
+</script>
+
+<script src="assets/editor.js" defer></script>
+</body>
+</html>
