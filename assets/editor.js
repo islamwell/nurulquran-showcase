@@ -42,7 +42,7 @@
 
     const verEl = document.querySelector(".nq-version-tag, .footer-version-tag");
     if (verEl) {
-      const m = verEl.textContent.match(/v(\\d+)\\.(\\d+)\\.(\\d+)/);
+      const m = verEl.textContent.match(/v(\d+)\.(\d+)\.(\d+)/);
       if (m) {
         const major = parseInt(m[1], 10);
         const minor = parseInt(m[2], 10);
