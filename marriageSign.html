@@ -120,29 +120,47 @@ html[lang="no"] .t-en { display: none !important; }
   font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600;
   color: var(--ink); letter-spacing: 0.02em; display: none;
 }
-@media (min-width: 768px) { .nav-title { display: block; } }
+.central-stream::after {
+  content: ""; position: absolute; left: -2px; width: 6px; height: 22vh; border-radius: 99px;
+  background: linear-gradient(to bottom, transparent, var(--foam), transparent);
+  filter: blur(2px); animation: flow 22s linear infinite;
+}
+@keyframes flow { from { top: -25vh; } to { top: 105vh; } }
+@media (max-width: 780px) { .central-stream { left: 22px; } }
 
-.lang-switch {
-  display: inline-flex; align-items: center;
-  background: rgba(4, 24, 36, 0.85);
-  border: 1px solid rgba(217, 246, 255, 0.18);
-  border-radius: 999px; padding: 3px; gap: 3px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+.lang-toggle-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(7, 34, 50, 0.85);
+  border: 1px solid rgba(87, 211, 216, 0.35);
+  padding: 0.35rem 0.85rem; border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 10px rgba(87, 211, 216, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
-.lang-btn {
-  display: inline-flex; align-items: center; gap: 0.38rem;
-  background: transparent; border: none; outline: none;
-  color: var(--muted); padding: 0.35rem 0.85rem; border-radius: 999px;
-  font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 600;
-  cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+.lang-toggle-btn:hover {
+  background: rgba(14, 107, 125, 0.4);
+  border-color: var(--aqua);
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(87, 211, 216, 0.3);
 }
-.lang-btn.active {
-  background: linear-gradient(135deg, rgba(87, 211, 216, 0.25), rgba(14, 107, 125, 0.45));
-  color: #fff; border: 1px solid rgba(87, 211, 216, 0.5);
-  box-shadow: 0 0 12px rgba(87, 211, 216, 0.35);
+.round-flag {
+  width: 22px; height: 22px; border-radius: 50%; display: block; flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.35);
 }
-.lang-btn:hover:not(.active) { color: #fff; background: rgba(255, 255, 255, 0.06); }
-.flag-svg { width: 15px; height: 15px; border-radius: 50%; object-fit: cover; }
+.flag-wrap {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+}
+.flag-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem; font-weight: 600; color: #fff;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 480px) {
+  .flag-text { display: none; }
+  .lang-toggle-btn { padding: 0.35rem; }
+}
 
 /* ============ AUDIO PLAY BUTTON ============ */
 .ayah-audio-bar {
@@ -418,14 +436,47 @@ footer {
     <span class="t-no">Kledning for hverandre · Et tegn fra Allah</span>
   </div>
 
-  <div class="lang-switch" role="radiogroup" aria-label="Language selection">
-    <button type="button" class="lang-btn active" id="btnLangEn" data-lang="en" role="radio" aria-checked="true" title="Switch to English">
-      <span>EN</span>
-    </button>
-    <button type="button" class="lang-btn" id="btnLangNo" data-lang="no" role="radio" aria-checked="false" title="Bytt til Norsk">
-      <span>NO</span>
-    </button>
-  </div>
+  <button type="button" class="lang-toggle-btn" id="langToggleBtn" aria-label="Toggle language between English and Norwegian" title="Switch language / Bytt språk">
+    <span class="flag-wrap t-en">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true" width="22" height="22">
+        <clipPath id="noRound"><circle cx="18" cy="18" r="18"/></clipPath>
+        <g clip-path="url(#noRound)">
+          <rect width="36" height="36" fill="#BA0C2F"/>
+          <rect x="10" y="0" width="7" height="36" fill="#FFFFFF"/>
+          <rect x="0" y="14.5" width="36" height="7" fill="#FFFFFF"/>
+          <rect x="11.75" y="0" width="3.5" height="36" fill="#00205B"/>
+          <rect x="0" y="16.25" width="36" height="3.5" fill="#00205B"/>
+        </g>
+      </svg>
+      <span class="flag-text">Norsk</span>
+    </span>
+    <span class="flag-wrap t-no">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true" width="22" height="22">
+        <clipPath id="usRound"><circle cx="18" cy="18" r="18"/></clipPath>
+        <g clip-path="url(#usRound)">
+          <rect width="36" height="36" fill="#B22234"/>
+          <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+          <rect width="16" height="19.4" fill="#3C3B6E"/>
+          <g fill="#FFFFFF">
+            <circle cx="3.8" cy="4" r="1"/>
+            <circle cx="8" cy="4" r="1"/>
+            <circle cx="12.2" cy="4" r="1"/>
+            <circle cx="5.9" cy="7.2" r="1"/>
+            <circle cx="10.1" cy="7.2" r="1"/>
+            <circle cx="3.8" cy="10.4" r="1"/>
+            <circle cx="8" cy="10.4" r="1"/>
+            <circle cx="12.2" cy="10.4" r="1"/>
+            <circle cx="5.9" cy="13.6" r="1"/>
+            <circle cx="10.1" cy="13.6" r="1"/>
+            <circle cx="3.8" cy="16.8" r="1"/>
+            <circle cx="8" cy="16.8" r="1"/>
+            <circle cx="12.2" cy="16.8" r="1"/>
+          </g>
+        </g>
+      </svg>
+      <span class="flag-text">English</span>
+    </span>
+  </button>
 </header>
 
 <main>
@@ -841,15 +892,14 @@ footer {
     <span class="t-en">NurulQuran Trust · Clothing for One Another · A Divine Sign</span>
     <span class="t-no">NurulQuran Trust · Ekteskapet som et tegn fra Allah</span>
   </div>
-  <div class="footer-version-tag">v1.0.37 (updated 2026-09-21 12:12)</div>
+  <div class="footer-version-tag">v1.0.38 (updated 2026-09-21 12:26)</div>
 </footer>
 
 <script>
 /* =========================================================================
-   1. BILINGUAL TRANSLATION CONTROLLER (ENGLISH / NORSK)
+   1. BILINGUAL TRANSLATION CONTROLLER (ENGLISH / NORSK - SINGLE TOGGLE)
    ========================================================================= */
-const btnEn = document.getElementById('btnLangEn');
-const btnNo = document.getElementById('btnLangNo');
+const langToggleBtn = document.getElementById('langToggleBtn');
 
 function setLanguage(lang) {
   const targetLang = (lang === 'no') ? 'no' : 'en';
@@ -857,16 +907,8 @@ function setLanguage(lang) {
   localStorage.setItem('nq_marriage_lang', targetLang);
 
   if (targetLang === 'no') {
-    btnNo.classList.add('active');
-    btnNo.setAttribute('aria-checked', 'true');
-    btnEn.classList.remove('active');
-    btnEn.setAttribute('aria-checked', 'false');
     document.title = 'Kledning for hverandre — Ekteskapet som et tegn fra Allah | NurulQuran';
   } else {
-    btnEn.classList.add('active');
-    btnEn.setAttribute('aria-checked', 'true');
-    btnNo.classList.remove('active');
-    btnNo.setAttribute('aria-checked', 'false');
     document.title = 'Clothing for One Another — Marriage as a Sign from Allah | NurulQuran';
   }
 
@@ -877,8 +919,12 @@ function setLanguage(lang) {
 const savedLang = localStorage.getItem('nq_marriage_lang') || 'en';
 setLanguage(savedLang);
 
-btnEn.addEventListener('click', () => setLanguage('en'));
-btnNo.addEventListener('click', () => setLanguage('no'));
+if (langToggleBtn) {
+  langToggleBtn.addEventListener('click', () => {
+    const currentLang = document.documentElement.lang || 'en';
+    setLanguage(currentLang === 'en' ? 'no' : 'en');
+  });
+}
 
 
 /* =========================================================================
@@ -886,6 +932,7 @@ btnNo.addEventListener('click', () => setLanguage('no'));
       - Zero layout thrashing: Absolute document coordinates cached on resize/load.
       - 60 FPS GPU blit: 'destination-out' punches out text zones directly.
       - Adapts to low-end devices: Halves particle count, pauses when hidden.
+      - Tranquil speed: Reduced by 80% for meditative, gentle descent.
    ========================================================================= */
 const canvas = document.getElementById('rainCanvas');
 const ctx = canvas.getContext('2d');
@@ -941,7 +988,7 @@ function refreshTextGeometry() {
   cachedTextRects = list;
 }
 
-// Initialize particles pool
+// Initialize particles pool (speed reduced by 80% for gentle, peaceful motion)
 function initStreaks() {
   streaks = [];
   const isMobile = window.innerWidth < 768;
@@ -953,7 +1000,7 @@ function initStreaks() {
       y: Math.random() * (height + 200) - 100,
       len: 25 + Math.random() * 85,
       w: Math.random() < 0.2 ? 1.8 : 1.0,
-      speed: 4.5 + Math.random() * 6.5,
+      speed: (4.5 + Math.random() * 6.5) * 0.2, // Reduced by 80%
       alpha: 0.18 + Math.random() * 0.45,
       hasDrop: Math.random() < 0.35
     });
