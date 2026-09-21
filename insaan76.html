@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Al-Insān 76:1 — The Unmentioned</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   QURAN 76:1 — INTRO SCENE (Surah Al-Insān)
+   Single-file hero. Everything is scoped to #scene so it can be
+   pasted at the top of any existing page.
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#04060c;color:#c9d4e6;
+     font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+     -webkit-font-smoothing:antialiased}
+
+#scene{
+  --void:#04060c;
+  --mist:#c9d4e6;
+  --gold:#e0b877;
+  --gold-dim:rgba(224,184,119,.45);
+  position:relative;
+  height:100svh; min-height:600px;
+  overflow:hidden;
+  isolation:isolate;
+  cursor:crosshair;
+  user-select:none;
+  touch-action:manipulation;
+  background:var(--void);
+}
+
+/* ---------- canvas (dust, eons, star formations) ---------- */
+#voidCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* ---------- vignette + film grain ---------- */
+.veil{position:absolute;inset:0;pointer-events:none;z-index:2}
+.veil.vignette{
+  background:
+    radial-gradient(120% 90% at 50% 46%, transparent 0 38%, rgba(2,4,9,.55) 72%, #02040a 100%),
+    linear-gradient(180deg, rgba(2,4,9,.65), transparent 22% 78%, rgba(2,4,9,.8));
+}
+.veil.grain{
+  opacity:.055; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter>\
+<rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- text stage ---------- */
+.stage{
+  position:absolute;inset:0;z-index:3;
+  display:grid;place-content:center;justify-items:center;
+  gap:clamp(18px,3.2vh,34px);
+  padding:clamp(20px,6vw,60px);
+  text-align:center;
+  pointer-events:none;            /* clicks fall through to the void */
+  will-change:transform;
+}
+.stage > *{max-width:min(94vw,940px)}
+
+.block{transition:opacity .9s ease}
+.w{
+  display:inline-block;
+  opacity:0; filter:blur(10px);
+  transform:translateY(16px) scale(.96);
+  transition:opacity 1.2s cubic-bezier(.22,.61,.36,1),
+             filter  1.2s cubic-bezier(.22,.61,.36,1),
+             transform 1.2s cubic-bezier(.22,.61,.36,1);
+  transition-delay:calc(var(--i) * .105s);
+}
+.block.is-on .w{opacity:1;filter:blur(0);transform:none}
+.w.key{color:var(--gold);text-shadow:0 0 26px rgba(224,184,119,.35)}
+
+/* eyebrow */
+.eyebrow{
+  font-size:clamp(.6rem,1.5vw,.72rem);letter-spacing:.42em;text-transform:uppercase;
+  color:rgba(201,212,230,.5);
+}
+.eyebrow .rule{display:inline-block;width:clamp(28px,7vw,64px);height:1px;vertical-align:middle;
+  background:linear-gradient(90deg,transparent,var(--gold-dim));margin:0 .9em}
+.eyebrow .rule.r{background:linear-gradient(270deg,transparent,var(--gold-dim))}
+
+/* arabic ayah */
+.ayah{
+  direction:rtl;
+  font-family:"Amiri","Scheherazade New","Traditional Arabic","Geeza Pro",serif;
+  font-size:clamp(1.75rem,5.4vw,3.9rem);
+  line-height:2.05; font-weight:400;
+  color:#f0f4fb;
+  text-shadow:0 0 40px rgba(150,180,255,.18);
+  word-spacing:.18em;
+}
+.ayah .w{margin-inline:.12em}
+.rosette{
+  font-family:"Amiri",serif;font-size:.42em;color:var(--gold);
+  display:inline-grid;place-items:center;width:2.1em;height:2.1em;
+  border:1px solid var(--gold-dim);border-radius:50%;margin-inline-start:.5em;
+  vertical-align:.35em;
+}
+
+/* translation */
+.trans{
+  font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;
+  font-size:clamp(1.05rem,2.7vw,1.7rem);line-height:1.62;
+  color:rgba(233,239,248,.9);
+}
+.ref{
+  font-size:clamp(.62rem,1.5vw,.74rem);letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(201,212,230,.45);
+}
+
+/* the empty name-plate: a name that was never written */
+.plate{
+  position:relative;
+  width:min(78vw,420px);padding:clamp(14px,3vw,22px) clamp(18px,4vw,30px);
+  border:1px solid rgba(224,184,119,.22);border-radius:2px;
+  background:linear-gradient(180deg,rgba(224,184,119,.05),rgba(224,184,119,0));
+  opacity:0;transform:translateY(14px) scale(.97);
+  transition:opacity 1.2s .35s ease,transform 1.2s .35s cubic-bezier(.22,.61,.36,1);
+}
+.plate::before,.plate::after{
+  content:"";position:absolute;left:50%;translate:-50% 0;width:34%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
+}
+.plate::before{top:-1px}.plate::after{bottom:-1px}
+.block.is-on .plate{opacity:1;transform:none}
+.plate .slot{
+  display:flex;align-items:center;justify-content:center;gap:.35em;height:1.9em;
+  border-bottom:1px dashed rgba(201,212,230,.18);
+}
+.caret{display:inline-block;width:2px;height:1.15em;background:var(--gold);
+  animation:blink 1.25s steps(1,end) infinite;box-shadow:0 0 12px var(--gold)}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.plate .cap{margin-top:.9em;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(201,212,230,.4)}
+
+/* ---------- controls / chrome ---------- */
+.ui{position:absolute;z-index:4;pointer-events:auto}
+.hint{
+  left:50%;bottom:clamp(64px,9vh,96px);translate:-50% 0;
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(201,212,230,.45);animation:breathe 3.4s ease-in-out infinite;
+  display:flex;align-items:center;gap:.7em;pointer-events:none;
+}
+.hint .ring{width:9px;height:9px;border:1px solid var(--gold-dim);border-radius:50%;
+  animation:ping 2.6s ease-out infinite}
+@keyframes breathe{0%,100%{opacity:.35}50%{opacity:.95}}
+@keyframes ping{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.4);opacity:0}}
+#scene[data-stage="3"] .hint{opacity:0;transition:opacity .5s}
+
+.dots{left:50%;bottom:clamp(26px,4vh,40px);translate:-50% 0;display:flex;gap:14px}
+.dots button{
+  width:26px;height:26px;padding:0;border:0;background:none;cursor:pointer;
+  display:grid;place-items:center;border-radius:50%;
+}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(201,212,230,.22);
+  transition:all .45s ease;display:block}
+.dots button[aria-current="true"] i{background:var(--gold);box-shadow:0 0 14px var(--gold);width:8px;height:8px}
+.dots button:hover i{background:rgba(224,184,119,.7)}
+.dots button:focus-visible{outline:1px solid var(--gold-dim);outline-offset:2px}
+
+.tools{right:clamp(14px,3vw,26px);top:clamp(14px,3vw,26px);display:flex;gap:8px}
+.tools button{
+  width:34px;height:34px;border:1px solid rgba(201,212,230,.14);border-radius:50%;
+  background:rgba(255,255,255,.02);color:rgba(201,212,230,.6);cursor:pointer;
+  font-size:13px;line-height:1;display:grid;place-items:center;
+  transition:all .3s ease;backdrop-filter:blur(3px);
+}
+.tools button:hover{color:var(--gold);border-color:var(--gold-dim);transform:translateY(-1px)}
+.tools button:focus-visible{outline:1px solid var(--gold-dim);outline-offset:2px}
+
+.meta{left:clamp(14px,3vw,26px);bottom:clamp(20px,3vw,28px);font-size:.62rem;
+  letter-spacing:.22em;color:rgba(201,212,230,.3);pointer-events:none;line-height:1.9}
+.meta .eons{font-variant-numeric:tabular-nums;color:rgba(224,184,119,.55)}
+
+.enter{
+  left:50%;bottom:clamp(64px,9vh,96px);translate:-50% 0;
+  opacity:0;visibility:hidden;transition:opacity .8s .6s ease,visibility .8s .6s;
+}
+#scene[data-stage="3"] .enter{opacity:1;visibility:visible}
+.enter a{
+  display:inline-flex;align-items:center;gap:.8em;text-decoration:none;
+  padding:.85em 1.9em;border:1px solid var(--gold-dim);border-radius:999px;
+  color:var(--gold);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  background:rgba(224,184,119,.04);transition:all .35s ease;
+}
+.enter a:hover{background:rgba(224,184,119,.12);box-shadow:0 0 40px rgba(224,184,119,.14)}
+.enter .arrow{animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+.skip{position:absolute;left:12px;top:12px;z-index:9;padding:.7em 1.2em;
+  background:#0b1222;color:var(--gold);border:1px solid var(--gold-dim);border-radius:3px;
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+  transform:translateY(-160%);transition:transform .25s ease}
+.skip:focus{transform:none}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- portal nav back button ---------- */
+.portal-back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);text-decoration:none;
+  font-family:"Inter",system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;
+  padding:7px 14px;border-radius:20px;
+  border:1px solid rgba(224,184,119,.32);
+  background:rgba(4,6,12,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:all .25s ease;
+}
+.portal-back-btn:hover{
+  border-color:rgba(224,184,119,.85);
+  background:rgba(224,184,119,.15);
+  transform:translateX(-2px);
+  box-shadow:0 0 16px rgba(224,184,119,.2);
+}
+.portal-back-btn svg{width:12px;height:12px;stroke-width:2.5}
+
+/* ---------- study & reflection body ---------- */
+.after{max-width:880px;margin:0 auto;padding:clamp(50px,10vh,110px) 24px 60px}
+.study-header{text-align:center;margin-bottom:clamp(36px,6vh,64px)}
+.study-badge{display:inline-block;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);background:rgba(224,184,119,.08);border:1px solid rgba(224,184,119,.24);
+  padding:5px 14px;border-radius:999px;margin-bottom:16px}
+.study-title{font-family:"Cormorant Garamond",serif;font-weight:300;
+  font-size:clamp(1.9rem,4.5vw,3rem);color:#f0f4fb;margin:0 0 .4em;line-height:1.25}
+.study-subtitle{color:rgba(201,212,230,.7);font-size:clamp(.95rem,1.8vw,1.15rem);max-width:620px;margin:0 auto;line-height:1.65}
+
+.verse-card{
+  background:rgba(12,18,34,.6);border:1px solid rgba(224,184,119,.16);border-radius:12px;
+  padding:clamp(22px,4vw,36px);margin-bottom:28px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:border-color .3s ease,transform .3s ease,box-shadow .3s ease;
+}
+.verse-card:hover{border-color:rgba(224,184,119,.35);box-shadow:0 12px 36px -10px rgba(0,0,0,.6)}
+.verse-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.verse-pill{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.verse-ar{
+  direction:rtl;text-align:right;font-family:"Amiri","KFGQPC Uthmanic Script HAFS",serif;
+  font-size:clamp(1.5rem,3.8vw,2.4rem);line-height:2.1;color:#f8fafc;margin-bottom:16px;
+  text-shadow:0 0 24px rgba(150,180,255,.1);
+}
+.verse-en{
+  font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.1rem,2.2vw,1.4rem);
+  line-height:1.65;color:rgba(233,239,248,.92);margin-bottom:18px;font-style:normal;
+}
+.verse-note{
+  font-size:.92rem;line-height:1.8;color:rgba(201,212,230,.72);
+  border-top:1px solid rgba(201,212,230,.1);padding-top:16px;
+}
+.verse-note strong{color:var(--gold);font-weight:500}
+
+.site-footer{
+  padding:50px 24px 36px;text-align:center;border-top:1px solid rgba(224,184,119,.15);
+  margin-top:70px;background:rgba(2,4,10,.6);
+}
+.site-footer a{color:var(--gold);text-decoration:none;transition:color .2s ease}
+.site-footer a:hover{color:#fff;text-decoration:underline}
+.footer-version-tag{
+  display:inline-block;font-family:monospace;font-size:0.72rem;letter-spacing:0.08em;
+  color:var(--gold);padding:4px 12px;border-radius:6px;
+  background:rgba(224,184,119,0.08);border:1px solid rgba(224,184,119,0.2);
+  margin-top:10px;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .w,.plate{transition-duration:.001s !important;transition-delay:0s !important}
+  .hint,.hint .ring,.caret,.enter .arrow{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= INTRO SCENE ======================= -->
+<header id="scene" data-stage="0" aria-label="Introduction: Qur'an 76:1, Surah Al-Insan">
+  <a class="skip" href="#content">Skip intro</a>
+
+  <div class="top-nav" style="position:absolute;left:clamp(14px,3vw,26px);top:clamp(14px,3vw,26px);z-index:10;pointer-events:auto">
+    <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>NURULQURAN PORTAL</span>
+    </a>
+  </div>
+
+  <canvas id="voidCanvas" aria-hidden="true"></canvas>
+  <div class="veil vignette" aria-hidden="true"></div>
+  <div class="veil grain" aria-hidden="true"></div>
+
+  <p class="sr-only">
+    Qur'an, Surah Al-Insan (The Human), verse 1: “Has there [not] come upon man a period of time
+    when he was not a thing [even] mentioned?” Interactive scene — click or press space to reveal.
+  </p>
+
+  <div class="stage" id="stageText">
+
+    <p class="block eyebrow" data-from="1" data-words="chars">
+      <span class="rule" aria-hidden="true"></span><span class="t">Before the first mention</span><span class="rule r" aria-hidden="true"></span>
+    </p>
+
+    <p class="block ayah" data-from="1" id="arLine" lang="ar"></p>
+
+    <p class="block trans" data-from="2" id="enLine"></p>
+
+    <p class="block ref" data-from="2" data-words="chars"><span class="t">Al-Insān · The Human · 76 : 1</span></p>
+
+    <div class="block" data-from="3">
+      <div class="plate">
+        <div class="slot" aria-hidden="true"><span class="caret"></span></div>
+        <div class="cap">no name &nbsp;·&nbsp; no record &nbsp;·&nbsp; not yet mentioned</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- chrome -->
+  <div class="ui tools">
+    <button id="btnAudio" type="button" title="Listen to Ayah 76:1 (Alafasy)" aria-label="Listen to Ayah 76:1" aria-pressed="false">
+      <svg class="play-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <button id="btnReplay" type="button" title="Replay from the void" aria-label="Replay intro">↺</button>
+    <button id="btnMotion" type="button" title="Pause motion" aria-label="Pause motion" aria-pressed="false">॥</button>
+  </div>
+
+  <div class="ui hint" id="hint" aria-hidden="true">
+    <span class="ring"></span><span>click the void</span>
+  </div>
+
+  <nav class="ui dots" id="dots" aria-label="Intro chapters"></nav>
+
+  <div class="ui meta" aria-hidden="true">
+    <div><span class="eons" id="eons">0</span> ages elapsed</div>
+  </div>
+
+  <div class="ui enter">
+    <a href="#content" id="enterLink">Then he was mentioned <span class="arrow">↓</span></a>
+  </div>
+</header>
+
+<!-- ======================= REST OF PAGE ======================= -->
+<main class="after" id="content" tabindex="-1">
+  <div class="study-header">
+    <span class="study-badge">Qur'anic Contemplation · Surah Al-Insān</span>
+    <h2 class="study-title">From Non-Existence to Divine Guidance</h2>
+    <p class="study-subtitle">Contemplating our humble beginnings, the bestowing of conscious perception, and the ultimate test of gratitude.</p>
+  </div>
+
+  <!-- VERSE 1 -->
+  <article class="verse-card">
+    <div class="verse-card-header">
+      <span class="verse-pill">76 : 1 · The Void Before Creation</span>
+    </div>
+    <div class="verse-ar" lang="ar">هَلْ أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ لَمْ يَكُن شَيْئًا مَّذْكُورًا</div>
+    <div class="verse-en">“Has there come upon man a period of time when he was not a thing mentioned?”</div>
+    <div class="verse-note">
+      <strong>Reflection:</strong> Before humankind came to be, vast stretches of created time (الدَّهْر) passed in utter silence. Man had no physical existence, no remembrance, and no name. Remembering this primordial non-existence shatters arrogance and anchors the human heart in profound humility and awe before the Creator.
+    </div>
+  </article>
+
+  <!-- VERSE 2 -->
+  <article class="verse-card">
+    <div class="verse-card-header">
+      <span class="verse-pill">76 : 2 · Endowed With Perception</span>
+    </div>
+    <div class="verse-ar" lang="ar">إِنَّا خَلَقْنَا الْإِنسَانَ مِن نُّطْفَةٍ أَمْشَاجٍ نَّبْتَلِيهِ فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا</div>
+    <div class="verse-en">“Indeed, We created man from a sperm-drop mixture that We may test him; and We made him hearing and seeing.”</div>
+    <div class="verse-note">
+      <strong>Reflection:</strong> From the humblest origin — a mingled drop — Allah fashioned the complex human being for a supreme purpose: testing and spiritual refinement (نَّبْتَلِيهِ). He equipped humanity with hearing and sight (سَمِيعًا بَصِيرًا) as the primary gateways to observe signs, comprehend revelation, and exercise discernment.
+    </div>
+  </article>
+
+  <!-- VERSE 3 -->
+  <article class="verse-card">
+    <div class="verse-card-header">
+      <span class="verse-pill">76 : 3 · The Crossroads of Gratitude</span>
+    </div>
+    <div class="verse-ar" lang="ar">إِنَّا هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا</div>
+    <div class="verse-en">“Indeed, We guided him to the way, be he grateful or be he ungrateful.”</div>
+    <div class="verse-note">
+      <strong>Reflection:</strong> Allah did not leave humanity to wander in darkness; He made the clear path evident through fitrah and prophetic messengers. The fundamental moral divergence in human life is here: either acknowledging the Creator with active gratitude (شَاكِرًا) or denying the divine bounty through ungratefulness (كَفُورًا).
+    </div>
+  </article>
+
+  <div style="text-align:center;margin-top:40px">
+    <a href="#scene" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;border:1px solid rgba(224,184,119,0.3);color:var(--gold);text-decoration:none;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;background:rgba(224,184,119,0.06);transition:all 0.25s ease">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      <span>Back to the Cosmic Void</span>
+    </a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div style="margin-bottom:14px;color:rgba(201,212,230,0.7);font-size:0.88rem">
+    <a href="index.html" style="color:var(--gold);text-decoration:none;letter-spacing:0.08em">← Return to NurulQuran Portal</a>
+  </div>
+  <div style="font-size:0.75rem;color:rgba(201,212,230,0.45);margin-bottom:10px">
+    © 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah
+  </div>
+  <div class="footer-version-tag">
+    v1.0.43 (updated 2026-09-21 22:35)
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+
+/* ─────────────────────────────  CONTENT  ───────────────────────────── */
+// Verse text verified against Sahih International / Uthmani rendering.
+const AR = [
+  {t:'هَلْ'},{t:'أَتَىٰ'},{t:'عَلَى'},{t:'الْإِنسَانِ'},
+  {t:'حِينٌ',k:1},{t:'مِّنَ',k:1},{t:'الدَّهْرِ',k:1},
+  {t:'لَمْ'},{t:'يَكُن'},{t:'شَيْئًا',k:1},{t:'مَّذْكُورًا',k:1}
+];
+const EN = [
+  {t:'Has'},{t:'there'},{t:'[not]'},{t:'come'},{t:'upon'},{t:'man'},
+  {t:'a'},{t:'period'},{t:'of'},{t:'time'},{t:'when'},{t:'he'},{t:'was'},
+  {t:'not',k:1},{t:'a',k:1},{t:'thing',k:1},{t:'[even]',k:1},{t:'mentioned?',k:1}
+];
+const STAGES = 4;                       // 0 void · 1 ayah · 2 meaning · 3 the blank name
+
+/* ─────────────────────────────  DOM  ───────────────────────────── */
+const scene   = document.getElementById('scene');
+const cv      = document.getElementById('voidCanvas');
+const ctx     = cv.getContext('2d', {alpha:false});
+const stageEl = document.getElementById('stageText');
+const blocks  = [...scene.querySelectorAll('.block')];
+const dotsNav = document.getElementById('dots');
+const eonsEl  = document.getElementById('eons');
+const hintEl  = document.getElementById('hint');
+
+/* build word spans (one <span class="w"> per word → staggered reveal) */
+function fill(el, items){
+  el.innerHTML = '';
+  items.forEach((it,i) => {
+    const s = document.createElement('span');
+    s.className = 'w' + (it.k ? ' key' : '');
+    s.style.setProperty('--i', i);
+    s.textContent = it.t;
+    el.append(s, document.createTextNode(' '));
+  });
+  return items.length;
+}
+const nAr = fill(document.getElementById('arLine'), AR);
+const rose = document.createElement('span');
+rose.className = 'w rosette'; rose.style.setProperty('--i', nAr);
+rose.textContent = '١'; rose.setAttribute('aria-hidden','true');
+document.getElementById('arLine').append(rose);
+
+fill(document.getElementById('enLine'), EN);
+// single-run blocks (eyebrow / ref) get one span
+scene.querySelectorAll('[data-words="chars"] .t').forEach(el=>{
+  const s = document.createElement('span'); s.className='w'; s.style.setProperty('--i',0);
+  s.textContent = el.textContent; el.replaceWith(s);
+});
+
+/* chapter dots */
+const dotBtns = [];
+const LABELS = ['The void','The recitation','The meaning','The unwritten name'];
+for(let i=0;i<STAGES;i++){
+  const b = document.createElement('button');
+  b.type='button'; b.innerHTML='<i></i>';
+  b.setAttribute('aria-label',`${i+1}. ${LABELS[i]}`);
+  b.addEventListener('click', e => { e.stopPropagation(); setStage(i, true); });
+  dotsNav.append(b); dotBtns.push(b);
+}
+
+/* ─────────────────────────────  SCENE STATE  ───────────────────────────── */
+const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+let motion = !reduceMQ.matches;
+let stage = 0, W = 0, H = 0, DPR = 1, eons = 0, glow = 0, lastPointer = performance.now();
+const pointer = {x:-999, y:-999, tx:-999, ty:-999, active:false};
+const dust = [], ripples = [], forms = [];
+const rnd = (a,b) => a + Math.random()*(b-a);
+const clamp = (v,a,b) => v<a?a:v>b?b:v;
+const easeOut = t => 1-Math.pow(1-t,3);
+const easeIn  = t => t*t*t;
+
+/* glow sprites — far cheaper than arc() per particle */
+function sprite(size, r,g,b){
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const x = c.getContext('2d'), h = size/2;
+  const grd = x.createRadialGradient(h,h,0,h,h,h);
+  grd.addColorStop(0,   `rgba(${r},${g},${b},1)`);
+  grd.addColorStop(.22, `rgba(${r},${g},${b},.5)`);
+  grd.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+  x.fillStyle = grd; x.fillRect(0,0,size,size);
+  return c;
+}
+const SP_DUST = sprite(48, 214,228,255);
+const SP_GOLD = sprite(48, 236,198,132);
+
+/* ─────────────────────────────  SIZING  ───────────────────────────── */
+function resize(){
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  const r = scene.getBoundingClientRect();
+  W = Math.max(1, r.width); H = Math.max(1, r.height);
+  cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  seedDust();
+}
+function seedDust(){
+  const target = clamp(Math.round(W*H/1900), 260, 1400);
+  if (Math.abs(dust.length - target) < 60 && dust.length){
+    dust.forEach(p => { p.x = (p.x+W)%W; p.y = (p.y+H)%H; });
+    return;
+  }
+  dust.length = 0;
+  for(let i=0;i<target;i++){
+    const z = Math.pow(Math.random(), 1.7);          // most particles deep/faint
+    dust.push({
+      x:Math.random()*W, y:Math.random()*H, z,
+      r: 0.5 + z*2.6,
+      a: .06 + z*.5,
+      vx: rnd(-.004,.004)*(.3+z), vy: rnd(-.010,-.002)*(.3+z),
+      ph: Math.random()*Math.PI*2, tw: rnd(.0006,.0022),
+      gold: Math.random() < .07,
+      fx:0, fy:0, form:null, ft:0
+    });
+  }
+}
+
+/* ─────────────────────────────  INTERACTION  ───────────────────────────── */
+// 8-pointed star (rub-el-hizb inspired) sampled evenly along its perimeter
+function starPoints(cx,cy,R,count,spikes=8,inner=.46,rot=-Math.PI/2){
+  const v = [];
+  for(let i=0;i<spikes*2;i++){
+    const a = rot + i*Math.PI/spikes, rad = (i%2) ? R*inner : R;
+    v.push([cx+Math.cos(a)*rad, cy+Math.sin(a)*rad]);
+  }
+  const segs = v.map((p,i)=>{ const q=v[(i+1)%v.length];
+    return {p,q,len:Math.hypot(q[0]-p[0],q[1]-p[1])}; });
+  const total = segs.reduce((s,x)=>s+x.len,0), step = total/count;
+  const pts=[]; let si=0, acc=0;
+  for(let i=0;i<count;i++){
+    const d = i*step;
+    while(si<segs.length-1 && acc+segs[si].len < d){ acc += segs[si].len; si++; }
+    const t = (d-acc)/segs[si].len, s = segs[si];
+    pts.push([s.p[0]+(s.q[0]-s.p[0])*t, s.p[1]+(s.q[1]-s.p[1])*t]);
+  }
+  return pts;
+}
+
+/* a click: the void ripples, dust rushes in, briefly takes a shape, then disperses */
+function gather(x,y){
+  ripples.push({x,y,t:0,life:1500});
+  if(forms.length > 2) forms.shift();
+
+  const R = clamp(Math.min(W,H)*0.17, 70, 190);
+  const n = clamp(Math.round(dust.length*0.34), 90, 420);
+
+  // nearest particles …
+  const idx = dust.map((p,i)=>[i,(p.x-x)**2+(p.y-y)**2])
+                  .sort((a,b)=>a[1]-b[1]).slice(0,n).map(a=>a[0]);
+  // … sorted by angle so the constellation lines never cross
+  idx.sort((a,b)=>Math.atan2(dust[a].y-y,dust[a].x-x) - Math.atan2(dust[b].y-y,dust[b].x-x));
+
+  let pts = starPoints(x,y,R,n);
+  pts = pts.map(p=>({p, ang:Math.atan2(p[1]-y,p[0]-x)})).sort((a,b)=>a.ang-b.ang).map(o=>o.p);
+
+  const f = {x,y,R,t:0,life:2700,members:idx};
+  idx.forEach((pi,k)=>{ const p = dust[pi]; p.form = f; p.fx = pts[k][0]; p.fy = pts[k][1]; });
+  forms.push(f);
+
+  // outward pressure wave on everything else
+  dust.forEach(p=>{
+    const dx=p.x-x, dy=p.y-y, d=Math.hypot(dx,dy)||1;
+    if(d < R*3.4){ const k = (1-d/(R*3.4))*0.42/d; p.vx += dx*k; p.vy += dy*k; }
+  });
+  glow = Math.min(1.4, glow + .55);
+}
+
+function setStage(n, fromUI){
+  stage = clamp(n, 0, STAGES-1);
+  scene.dataset.stage = stage;
+  blocks.forEach(b => b.classList.toggle('is-on', stage >= +b.dataset.from));
+  dotBtns.forEach((b,i) => b.setAttribute('aria-current', String(i === stage)));
+  glow = Math.min(1.6, glow + .5);
+  if (fromUI) gather(W/2, H*0.5);
+}
+
+function advance(dir = 1){ setStage(stage + dir); }
+
+/* pointer */
+scene.addEventListener('pointerdown', e => {
+  if (e.target.closest('button, a')) return;      // let real controls work
+  const r = cv.getBoundingClientRect();
+  gather(e.clientX - r.left, e.clientY - r.top);
+  if (stage < STAGES-1) advance(1);
+});
+scene.addEventListener('pointermove', e => {
+  const r = cv.getBoundingClientRect();
+  pointer.tx = e.clientX - r.left; pointer.ty = e.clientY - r.top;
+  pointer.active = true; lastPointer = performance.now();
+  // gentle text parallax
+  const nx = (pointer.tx/W - .5), ny = (pointer.ty/H - .5);
+  stageEl.style.transform = `translate3d(${(-nx*14).toFixed(2)}px,${(-ny*10).toFixed(2)}px,0)`;
+}, {passive:true});
+scene.addEventListener('pointerleave', () => { pointer.active = false; pointer.tx = pointer.ty = -999; });
+
+/* keyboard */
+addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea')) return;
+  if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); if(stage<STAGES-1) advance(1); else gather(W/2,H/2); }
+  else if (e.key === 'ArrowLeft') advance(-1);
+  else if (e.key.toLowerCase() === 'r') replay();
+  else if (e.key === 'Escape') document.getElementById('content').focus();
+});
+
+/* tools */
+const btnAudio = document.getElementById('btnAudio');
+if (btnAudio) {
+  const audio = new Audio('https://everyayah.com/data/Alafasy_128kbps/076001.mp3');
+  const playIcon = btnAudio.querySelector('.play-icon');
+  const pauseIcon = btnAudio.querySelector('.pause-icon');
+  btnAudio.addEventListener('click', e => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().catch(() => {});
+      btnAudio.setAttribute('aria-pressed', 'true');
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
+    } else {
+      audio.pause();
+      btnAudio.setAttribute('aria-pressed', 'false');
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+    }
+  });
+  audio.addEventListener('ended', () => {
+    btnAudio.setAttribute('aria-pressed', 'false');
+    if (playIcon) playIcon.style.display = 'block';
+    if (pauseIcon) pauseIcon.style.display = 'none';
+  });
+}
+
+function replay(){ setStage(0); eons = 0; forms.length = 0; ripples.length = 0;
+  dust.forEach(p=>p.form=null); seedDust(); glow = 1; }
+document.getElementById('btnReplay').addEventListener('click', e => { e.stopPropagation(); replay(); });
+
+const btnMotion = document.getElementById('btnMotion');
+btnMotion.addEventListener('click', e => {
+  e.stopPropagation(); motion = !motion;
+  btnMotion.textContent = motion ? '॥' : '▶';
+  btnMotion.setAttribute('aria-pressed', String(!motion));
+  btnMotion.title = motion ? 'Pause motion' : 'Resume motion';
+});
+if (!motion){ btnMotion.textContent = '▶'; btnMotion.setAttribute('aria-pressed','true'); }
+
+document.getElementById('enterLink').addEventListener('click', e => e.stopPropagation());
+
+/* ─────────────────────────────  RENDER LOOP  ───────────────────────────── */
+let last = performance.now();
+function frame(now){
+  const dt = Math.min(50, now - last); last = now;
+  if (motion) update(dt);
+  draw(now);
+  requestAnimationFrame(frame);
+}
+
+function update(dt){
+  // eons keep passing while nothing is mentioned; they stop at the final stage
+  if (stage < STAGES-1){ eons += dt * 0.62; eonsEl.textContent = Math.floor(eons).toLocaleString(); }
+
+  pointer.x += (pointer.tx - pointer.x) * 0.12;
+  pointer.y += (pointer.ty - pointer.y) * 0.12;
+  glow *= 0.965;
+
+  const wind = Math.sin(last*0.00007) * 0.004;
+
+  for(const p of dust){
+    // hover: dust leans toward the cursor and swirls — gathering, never forming
+    if (pointer.active){
+      const dx = pointer.x - p.x, dy = pointer.y - p.y, d2 = dx*dx + dy*dy, Rr = 190;
+      if (d2 < Rr*Rr){
+        const f = (1 - Math.sqrt(d2)/Rr) * (0.25 + p.z);
+        p.vx += ( dx*0.00012 - dy*0.00009) * f * dt;
+        p.vy += ( dy*0.00012 + dx*0.00009) * f * dt;
+      }
+    }
+    // formation spring
+    if (p.form){
+      const f = p.form, t = f.t / f.life;
+      const env = t < .30 ? easeOut(t/.30) : t < .58 ? 1 : 1 - easeIn((t-.58)/.42);
+      p.ft = env;
+      const k = 0.0085 * env * dt;
+      p.vx += (p.fx - p.x) * k * 0.06;
+      p.vy += (p.fy - p.y) * k * 0.06;
+      p.x += (p.fx - p.x) * k;
+      p.y += (p.fy - p.y) * k;
+      if (t >= 1){ p.form = null; p.ft = 0;
+        const a = Math.random()*Math.PI*2, s = rnd(.02,.09);
+        p.vx += Math.cos(a)*s; p.vy += Math.sin(a)*s; }
+    } else p.ft *= 0.94;
+
+    p.vx += wind * p.z * 0.02;
+    p.x += (p.vx + wind*p.z) * dt;
+    p.y += p.vy * dt;
+    p.vx *= 0.985; p.vy *= 0.985;
+    p.ph += p.tw * dt;
+
+    // wrap the void
+    if (p.x < -20) p.x = W+20; else if (p.x > W+20) p.x = -20;
+    if (p.y < -20) p.y = H+20; else if (p.y > H+20) p.y = -20;
+  }
+
+  for(let i=forms.length-1;i>=0;i--){ forms[i].t += dt; if(forms[i].t >= forms[i].life) forms.splice(i,1); }
+  for(let i=ripples.length-1;i>=0;i--){ ripples[i].t += dt; if(ripples[i].t >= ripples[i].life) ripples.splice(i,1); }
+
+  if (performance.now() - lastPointer > 2600) pointer.active = false;
+  hintEl.style.opacity = stage === 0 ? '' : '0';
+}
+
+function draw(now){
+  // 1 · the void
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#04060c'); bg.addColorStop(.55,'#070c17'); bg.addColorStop(1,'#03050a');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+  ctx.globalCompositeOperation = 'lighter';
+
+  // 2 · deep nebulae, drifting over ages
+  const t = now * 0.00004;
+  const clouds = [
+    [W*(.30+Math.sin(t)*.05),      H*(.34+Math.cos(t*1.3)*.05), Math.max(W,H)*.52, 'rgba(46,72,140,',  .13],
+    [W*(.74+Math.cos(t*.8)*.05),   H*(.66+Math.sin(t*1.1)*.05), Math.max(W,H)*.46, 'rgba(94,58,120,',  .10],
+    [W*.5, H*.5, Math.max(W,H)*(.30 + glow*.10), 'rgba(224,184,119,', .05 + glow*.10]
+  ];
+  for(const [x,y,r,col,a] of clouds){
+    const g = ctx.createRadialGradient(x,y,0,x,y,r);
+    g.addColorStop(0, col + a + ')'); g.addColorStop(1, col + '0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill();
+  }
+
+  // 3 · the ruler of time (ad-dahr) — ticks sliding past, unmeasured
+  const baseY = H - 1, span = 46, off = (now*0.014) % span;
+  ctx.lineWidth = 1;
+  for(let x = -off; x < W + span; x += span){
+    const k = 1 - Math.abs(x - W/2)/(W*0.62);
+    if (k <= 0) continue;
+    const major = Math.round((x+off)/span) % 8 === 0;
+    ctx.strokeStyle = `rgba(224,184,119,${(major?.22:.10)*k})`;
+    ctx.beginPath(); ctx.moveTo(x, baseY); ctx.lineTo(x, baseY - (major?16:7)); ctx.stroke();
+  }
+
+  // 4 · dust
+  for(const p of dust){
+    const tw = 0.72 + 0.28*Math.sin(p.ph);
+    const a  = p.a * tw * (1 + p.ft*2.6);
+    const s  = p.r * (1 + p.ft*0.9) * 6;
+    ctx.globalAlpha = Math.min(1, a);
+    ctx.drawImage(p.gold || p.ft>.15 ? SP_GOLD : SP_DUST, p.x - s/2, p.y - s/2, s, s);
+  }
+  ctx.globalAlpha = 1;
+
+  // 5 · constellation lines of the fleeting form
+  for(const f of forms){
+    const t2 = f.t/f.life;
+    const env = t2 < .30 ? easeOut(t2/.30) : t2 < .58 ? 1 : 1 - easeIn((t2-.58)/.42);
+    if (env < .18) continue;
+    ctx.strokeStyle = `rgba(224,184,119,${0.16*env})`;
+    ctx.lineWidth = 0.7; ctx.beginPath();
+    f.members.forEach((pi,i) => { const p = dust[pi];
+      i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y); });
+    ctx.closePath(); ctx.stroke();
+  }
+
+  // 6 · ripples
+  for(const r of ripples){
+    const k = r.t/r.life, rad = 18 + easeOut(k)*Math.min(W,H)*0.55;
+    ctx.strokeStyle = `rgba(224,184,119,${(1-k)*0.34})`;
+    ctx.lineWidth = 1.4*(1-k) + 0.25;
+    ctx.beginPath(); ctx.arc(r.x, r.y, rad, 0, 6.2832); ctx.stroke();
+  }
+
+  // 7 · the horizon of mention — a hairline that only appears at the last stage
+  if (stage === STAGES-1){
+    const g = ctx.createLinearGradient(W*0.18,0,W*0.82,0);
+    g.addColorStop(0,'rgba(224,184,119,0)');
+    g.addColorStop(.5,`rgba(224,184,119,${0.30 + 0.12*Math.sin(now*0.0016)})`);
+    g.addColorStop(1,'rgba(224,184,119,0)');
+    ctx.fillStyle = g; ctx.fillRect(W*0.18, H*0.5 + Math.min(200, H*0.30), W*0.64, 1);
+  }
+
+  ctx.globalCompositeOperation = 'source-over';
+}
+
+/* ─────────────────────────────  BOOT  ───────────────────────────── */
+addEventListener('resize', resize);
+if ('ResizeObserver' in window) new ResizeObserver(resize).observe(scene);
+reduceMQ.addEventListener?.('change', e => { motion = !e.matches; });
+
+resize();
+setStage(0);
+requestAnimationFrame(frame);
+// first breath of the void
+setTimeout(() => gather(W*0.5, H*0.42), 900);
+})();
+</script>
+</body>
+</html>
