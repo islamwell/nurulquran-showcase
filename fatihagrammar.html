@@ -292,13 +292,154 @@ h4 small { text-transform: none; letter-spacing: 0; font-weight: 500 }
 .key { margin-top: 6px; text-align: center; font-size: .68rem; color: var(--mute) }
 .note { margin-top: 8px; padding: 10px 14px; border-radius: 14px; font-size: .84rem; color: #334155; background: #f8fafc; border: 1px solid #e2e8f0 }
 
-.pw { direction: rtl; text-align: center; font: 400 2.5rem/1.7 var(--q); color: var(--fil) }
-.pw b { font-weight: 400; color: var(--pre); animation: flash .6s }
-@keyframes flash { from { color: #fbbf24; text-shadow: 0 0 14px #f59e0b } }
-.pb { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap }
-.pb button, .opts button { padding: 6px 16px; border-radius: 99px; font-size: .8rem; font-weight: 600; background: #f1f5f9; transition: .2s }
-.pb .on { background: var(--pre); color: #fff }
-.pe { margin-top: 6px; text-align: center; font-size: .82rem; color: var(--mute) }
+.opts button { padding: 6px 16px; border-radius: 99px; font-size: .8rem; font-weight: 600; background: #f1f5f9; transition: .2s; border: none; cursor: pointer; text-align: left }
+
+/* Verb Maker Component */
+.vmaker {
+  margin-top: 14px;
+  padding: 16px 14px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #f0fdf4 0%, #f8fafc 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.05);
+}
+.vm-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(16, 185, 129, 0.2);
+}
+.vm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #065f46;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+}
+.vm-note {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-style: italic;
+}
+.vm-controls {
+  display: grid;
+  gap: 9px;
+}
+.vm-ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.vm-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #475569;
+  min-width: 60px;
+}
+.vm-btns {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.vm-b {
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.vm-b:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+.vm-b.on {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+.vm-display {
+  margin-top: 12px;
+  padding: 14px 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+.vm-ar {
+  direction: rtl;
+  font: 400 2.7rem/1.35 var(--q);
+  color: #065f46;
+  margin-bottom: 2px;
+}
+.vm-affix {
+  color: #d97706;
+  font-weight: 700;
+}
+.vm-core {
+  color: #047857;
+}
+.vm-en {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+.vm-meta {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  font-size: 0.74rem;
+  color: #64748b;
+}
+.vm-wz {
+  background: #f1f5f9;
+  padding: 3px 9px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #334155;
+}
+.vm-desc {
+  background: #f8fafc;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.vm-quran {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: 1px solid #fde68a;
+  animation: pulseMatch 2.5s infinite ease-in-out;
+}
+@keyframes pulseMatch {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25); }
+  50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+}
 
 .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px }
 .fact { position: relative; height: 72px; perspective: 700px }
@@ -434,7 +575,7 @@ footer {
     <a href="rootwords.html">Quran Root Words</a>
   </div>
   <p>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</p>
-  <div class="footer-version" id="footerVersion">v1.0.46 (updated 2026-09-24 15:00)</div>
+  <div class="footer-version" id="footerVersion">v1.0.47 (updated 2026-09-24 15:19)</div>
 </footer>
 
 <script>
@@ -843,6 +984,267 @@ const pad=n=>String(n).padStart(3,'0');
 const think=([q,a])=>`<div class="think"><h4>💭 Think deeper</h4><p>${q}</p><button class="rev">⏳ Think first…</button><p class="ans">${a}</p></div>`;
 const quiz=(k,[q,o,why])=>`<div class="quiz" data-k="${k}"><h4>🎯 Quick check</h4><p>${q}</p><div class="opts">${
   o.map((x,i)=>[x,i]).sort(()=>Math.random()-.5).map(([x,i])=>`<button data-ok="${+!i}">${x}</button>`).join('')}</div><p class="why">✅ ${why}</p></div>`;
+const VERBS = {
+  nabudu: {
+    title: 'عَبَدَ / يَعْبُدُ',
+    badge: 'Form I · فِعْل ثُلَاثِي مُجَرَّد',
+    root: 'ع-ب-د · to worship, serve',
+    def: { tense: 'present', voice: 'active', pro: 'we' },
+    forms: {
+      present: {
+        active: {
+          i: { ar: 'أَعْبُدُ', en: 'I worship', wz: 'أَفْعُلُ', d: '1st Person Sing. (أَنَا)', p: ['أَ', 'عْبُدُ', ''] },
+          we: { ar: 'نَعْبُدُ', en: 'we worship', wz: 'نَفْعُلُ', d: '1st Person Plural (نَحْنُ)', p: ['نَ', 'عْبُدُ', ''], q: '⭐ Exactly as revealed in Ayah 5: إِيَّاكَ نَعْبُدُ' },
+          you: { ar: 'تَعْبُدُ', en: 'you worship', wz: 'تَفْعُلُ', d: '2nd Person Masc. (أَنْتَ)', p: ['تَ', 'عْبُدُ', ''] },
+          he: { ar: 'يَعْبُدُ', en: 'he worships', wz: 'يَفْعُلُ', d: '3rd Person Masc. (هُوَ)', p: ['يَ', 'عْبُدُ', ''] },
+          she: { ar: 'تَعْبُدُ', en: 'she worships', wz: 'تَفْعُلُ', d: '3rd Person Fem. (هِيَ)', p: ['تَ', 'عْبُدُ', ''] },
+          them: { ar: 'يَعْبُدُونَ', en: 'they worship', wz: 'يَفْعُلُونَ', d: '3rd Person Plural (هُمْ)', p: ['يَ', 'عْبُدُ', 'ونَ'] }
+        },
+        passive: {
+          i: { ar: 'أُعْبَدُ', en: 'I am worshipped', wz: 'أُفْعَلُ', d: 'Passive 1st Sing. (أَنَا)', p: ['أُ', 'عْبَدُ', ''] },
+          we: { ar: 'نُعْبَدُ', en: 'we are worshipped', wz: 'نُفْعَلُ', d: 'Passive 1st Plural (نَحْنُ)', p: ['نُ', 'عْبَدُ', ''] },
+          you: { ar: 'تُعْبَدُ', en: 'you are worshipped', wz: 'تُفْعَلُ', d: 'Passive 2nd Masc. (أَنْتَ)', p: ['تُ', 'عْبَدُ', ''] },
+          he: { ar: 'يُعْبَدُ', en: 'he is worshipped', wz: 'يُفْعَلُ', d: 'Passive 3rd Masc. (هُوَ)', p: ['يُ', 'عْبَدُ', ''] },
+          she: { ar: 'تُعْبَدُ', en: 'she is worshipped', wz: 'تُفْعَلُ', d: 'Passive 3rd Fem. (هِيَ)', p: ['تُ', 'عْبَدُ', ''] },
+          them: { ar: 'يُعْبَدُونَ', en: 'they are worshipped', wz: 'يُفْعَلُونَ', d: 'Passive 3rd Plural (هُمْ)', p: ['يُ', 'عْبَدُ', 'ونَ'] }
+        }
+      },
+      past: {
+        active: {
+          i: { ar: 'عَبَدْتُ', en: 'I worshipped', wz: 'فَعَلْتُ', d: 'Past 1st Sing. (أَنَا)', p: ['', 'عَبَدْ', 'تُ'] },
+          we: { ar: 'عَبَدْنَا', en: 'we worshipped', wz: 'فَعَلْنَا', d: 'Past 1st Plural (نَحْنُ)', p: ['', 'عَبَدْ', 'نَا'] },
+          you: { ar: 'عَبَدْتَ', en: 'you worshipped', wz: 'فَعَلْتَ', d: 'Past 2nd Masc. (أَنْتَ)', p: ['', 'عَبَدْ', 'تَ'] },
+          he: { ar: 'عَبَدَ', en: 'he worshipped', wz: 'فَعَلَ', d: 'Past 3rd Masc. (هُوَ)', p: ['', 'عَبَدَ', ''] },
+          she: { ar: 'عَبَدَتْ', en: 'she worshipped', wz: 'فَعَلَتْ', d: 'Past 3rd Fem. (هِيَ)', p: ['', 'عَبَدَ', 'تْ'] },
+          them: { ar: 'عَبَدُوا', en: 'they worshipped', wz: 'فَعَلُوا', d: 'Past 3rd Plural (هُمْ)', p: ['', 'عَبَدُ', 'وا'] }
+        },
+        passive: {
+          i: { ar: 'عُبِدْتُ', en: 'I was worshipped', wz: 'فُعِلْتُ', d: 'Passive Past 1st Sing. (أَنَا)', p: ['', 'عُبِدْ', 'تُ'] },
+          we: { ar: 'عُبِدْنَا', en: 'we were worshipped', wz: 'فُعِلْنَا', d: 'Passive Past 1st Plural (نَحْنُ)', p: ['', 'عُبِدْ', 'نَا'] },
+          you: { ar: 'عُبِدْتَ', en: 'you were worshipped', wz: 'فُعِلْتَ', d: 'Passive Past 2nd Masc. (أَنْتَ)', p: ['', 'عُبِدْ', 'تَ'] },
+          he: { ar: 'عُبِدَ', en: 'he was worshipped', wz: 'فُعِلَ', d: 'Passive Past 3rd Masc. (هُوَ)', p: ['', 'عُبِدَ', ''] },
+          she: { ar: 'عُبِدَتْ', en: 'she was worshipped', wz: 'فُعِلَتْ', d: 'Passive Past 3rd Fem. (هِيَ)', p: ['', 'عُبِدَ', 'تْ'] },
+          them: { ar: 'عُبِدُوا', en: 'they were worshipped', wz: 'فُعِلُوا', d: 'Passive Past 3rd Plural (هُمْ)', p: ['', 'عُبِدُ', 'وا'] }
+        }
+      }
+    }
+  },
+  nastaeen: {
+    title: 'ٱسْتَعَانَ / يَسْتَعِينُ',
+    badge: 'Form X · اِسْتَفْعَلَ (طلب العون)',
+    root: 'ع-و-ن · to ask for help, seek assistance',
+    def: { tense: 'present', voice: 'active', pro: 'we' },
+    forms: {
+      present: {
+        active: {
+          i: { ar: 'أَسْتَعِينُ', en: 'I ask for help', wz: 'أَسْتَفْعِلُ', d: '1st Person Sing. (أَنَا)', p: ['أَ', 'سْتَعِينُ', ''] },
+          we: { ar: 'نَسْتَعِينُ', en: 'we ask for help', wz: 'نَسْتَفْعِلُ', d: '1st Person Plural (نَحْنُ)', p: ['نَ', 'سْتَعِينُ', ''], q: '⭐ Exactly as revealed in Ayah 5: وَإِيَّاكَ نَسْتَعِينُ' },
+          you: { ar: 'تَسْتَعِينُ', en: 'you ask for help', wz: 'تَسْتَفْعِلُ', d: '2nd Person Masc. (أَنْتَ)', p: ['تَ', 'سْتَعِينُ', ''] },
+          he: { ar: 'يَسْتَعِينُ', en: 'he asks for help', wz: 'يَسْتَفْعِلُ', d: '3rd Person Masc. (هُوَ)', p: ['يَ', 'سْتَعِينُ', ''] },
+          she: { ar: 'تَسْتَعِينُ', en: 'she asks for help', wz: 'تَسْتَفْعِلُ', d: '3rd Person Fem. (هِيَ)', p: ['تَ', 'سْتَعِينُ', ''] },
+          them: { ar: 'يَسْتَعِينُونَ', en: 'they ask for help', wz: 'يَسْتَفْعِلُونَ', d: '3rd Person Plural (هُمْ)', p: ['يَ', 'سْتَعِينُ', 'ونَ'] }
+        },
+        passive: {
+          i: { ar: 'أُسْتَعَانُ', en: 'I am asked for help', wz: 'أُسْتَفْعَلُ', d: 'Passive 1st Sing. (أَنَا)', p: ['أُ', 'سْتَعَانُ', ''] },
+          we: { ar: 'نُسْتَعَانُ', en: 'we are asked for help', wz: 'نُسْتَفْعَلُ', d: 'Passive 1st Plural (نَحْنُ)', p: ['نُ', 'سْتَعَانُ', ''] },
+          you: { ar: 'تُسْتَعَانُ', en: 'you are asked for help', wz: 'تُسْتَفْعَلُ', d: 'Passive 2nd Masc. (أَنْتَ)', p: ['تُ', 'سْتَعَانُ', ''] },
+          he: { ar: 'يُسْتَعَانُ', en: 'he is asked for help', wz: 'يُسْتَفْعَلُ', d: 'Passive 3rd Masc. (هُوَ) · cf. 12:18 ٱلْمُسْتَعَان', p: ['يُ', 'سْتَعَانُ', ''] },
+          she: { ar: 'تُسْتَعَانُ', en: 'she is asked for help', wz: 'تُسْتَفْعَلُ', d: 'Passive 3rd Fem. (هِيَ)', p: ['تُ', 'سْتَعَانُ', ''] },
+          them: { ar: 'يُسْتَعَانُونَ', en: 'they are asked for help', wz: 'يُسْتَفْعَلُونَ', d: 'Passive 3rd Plural (هُمْ)', p: ['يُ', 'سْتَعَانُ', 'ونَ'] }
+        }
+      },
+      past: {
+        active: {
+          i: { ar: 'ٱسْتَعَنْتُ', en: 'I asked for help', wz: 'ٱسْتَفْعَلْتُ', d: 'Past 1st Sing. (أَنَا)', p: ['ٱسْتَ', 'عَنْ', 'تُ'] },
+          we: { ar: 'ٱسْتَعَنَّا', en: 'we asked for help', wz: 'ٱسْتَفْعَلْنَا', d: 'Past 1st Plural (نَحْنُ)', p: ['ٱسْتَ', 'عَنَّ', 'ا'] },
+          you: { ar: 'ٱسْتَعَنْتَ', en: 'you asked for help', wz: 'ٱسْتَفْعَلْتَ', d: 'Past 2nd Masc. (أَنْتَ)', p: ['ٱسْتَ', 'عَنْ', 'تَ'] },
+          he: { ar: 'ٱسْتَعَانَ', en: 'he asked for help', wz: 'ٱسْتَفْعَلَ', d: 'Past 3rd Masc. (هُوَ)', p: ['ٱسْتَ', 'عَانَ', ''] },
+          she: { ar: 'ٱسْتَعَانَتْ', en: 'she asked for help', wz: 'ٱسْتَفْعَلَتْ', d: 'Past 3rd Fem. (هِيَ)', p: ['ٱسْتَ', 'عَانَ', 'تْ'] },
+          them: { ar: 'ٱسْتَعَانُوا', en: 'they asked for help', wz: 'ٱسْتَفْعَلُوا', d: 'Past 3rd Plural (هُمْ)', p: ['ٱسْتَ', 'عَانُ', 'وا'] }
+        },
+        passive: {
+          i: { ar: 'ٱسْتُعِنْتُ', en: 'help was asked from me', wz: 'ٱسْتُفْعِلْتُ', d: 'Passive Past 1st Sing. (أَنَا)', p: ['ٱسْتُ', 'عِنْ', 'تُ'] },
+          we: { ar: 'ٱسْتُعِنَّا', en: 'help was asked from us', wz: 'ٱسْتُفْعِلْنَا', d: 'Passive Past 1st Plural (نَحْنُ)', p: ['ٱسْتُ', 'عِنَّ', 'ا'] },
+          you: { ar: 'ٱسْتُعِنْتَ', en: 'help was asked from you', wz: 'ٱسْتُفْعِلْتَ', d: 'Passive Past 2nd Masc. (أَنْتَ)', p: ['ٱسْتُ', 'عِنْ', 'تَ'] },
+          he: { ar: 'ٱسْتُعِينَ', en: 'he was asked for help', wz: 'ٱسْتُفْعِلَ', d: 'Passive Past 3rd Masc. (هُوَ)', p: ['ٱسْتُ', 'عِينَ', ''] },
+          she: { ar: 'ٱسْتُعِينَتْ', en: 'she was asked for help', wz: 'ٱسْتُفْعِلَتْ', d: 'Passive Past 3rd Fem. (هِيَ)', p: ['ٱسْتُ', 'عِينَ', 'تْ'] },
+          them: { ar: 'ٱسْتُعِينُوا', en: 'they were asked for help', wz: 'ٱسْتُفْعِلُوا', d: 'Passive Past 3rd Plural (هُمْ)', p: ['ٱسْتُ', 'عِينُ', 'وا'] }
+        }
+      }
+    }
+  },
+  ihdina: {
+    title: 'هَدَى / يَهْدِي',
+    badge: 'Form I · فِعْل مُعْتَلّ نَاقِص (ه-د-ي)',
+    root: 'ه-د-ي · to guide, direct to the path',
+    hasCommand: true,
+    def: { tense: 'command', voice: 'active', pro: 'you' },
+    forms: {
+      command: {
+        active: {
+          you: { ar: 'ٱهْدِ', en: 'Guide (You)!', wz: 'اِفْعِ', d: 'Imperative 2nd Masc. (أَنْتَ) · Drops weak letter ي', p: ['ٱ', 'هْدِ', ''], q: '⭐ In Ayah 6: ٱهْدِنَا (Guide us! with object نَا)' },
+          we: { ar: 'ٱهْدِنَا', en: 'Guide us!', wz: 'اِفْعِ + نَا', d: 'Imperative + Object Pronoun نَا (نَحْنُ)', p: ['ٱهْدِ', 'ـنَا', ''], q: '⭐ Exactly as revealed in Ayah 6: ٱهْدِنَا ٱلصِّرَٰطَ' },
+          them: { ar: 'ٱهْدُوا', en: 'Guide (all of you)!', wz: 'اِفْعُوا', d: 'Imperative Plural (أَنْتُمْ)', p: ['ٱ', 'هْدُ', 'وا'] },
+          i: { ar: 'لِأَهْدِ', en: 'Let me guide', wz: 'لِيَفْعِلْ', d: 'Imperative with Lām (أَنَا)', p: ['لِـ', 'أَهْدِ', ''] },
+          he: { ar: 'لِيَهْدِ', en: 'Let him guide', wz: 'لِيَفْعِلْ', d: '3rd Person Imperative with Lām (هُوَ)', p: ['لِـ', 'يَهْدِ', ''] },
+          she: { ar: 'ٱهْدِي', en: 'Guide (you, fem.)!', wz: 'اِفْعِي', d: 'Imperative Fem. Sing. (أَنْتِ)', p: ['ٱ', 'هْدِ', 'ي'] }
+        }
+      },
+      present: {
+        active: {
+          i: { ar: 'أَهْدِي', en: 'I guide', wz: 'أَفْعِلُ', d: '1st Person Sing. (أَنَا)', p: ['أَ', 'هْدِي', ''] },
+          we: { ar: 'نَهْدِي', en: 'we guide', wz: 'نَفْعِلُ', d: '1st Person Plural (نَحْنُ)', p: ['نَ', 'هْدِي', ''] },
+          you: { ar: 'تَهْدِي', en: 'you guide', wz: 'تَفْعِلُ', d: '2nd Person Masc. (أَنْتَ)', p: ['تَ', 'هْدِي', ''] },
+          he: { ar: 'يَهْدِي', en: 'he guides', wz: 'يَفْعِلُ', d: '3rd Person Masc. (هُوَ) · cf. 2:213', p: ['يَ', 'هْدِي', ''] },
+          she: { ar: 'تَهْدِي', en: 'she guides', wz: 'تَفْعِلُ', d: '3rd Person Fem. (هِيَ)', p: ['تَ', 'هْدِي', ''] },
+          them: { ar: 'يَهْدُونَ', en: 'they guide', wz: 'يَفْعُونَ', d: '3rd Person Plural (هُمْ)', p: ['يَ', 'هْدُ', 'ونَ'] }
+        },
+        passive: {
+          i: { ar: 'أُهْدَى', en: 'I am guided', wz: 'أُفْعَلُ', d: 'Passive 1st Sing. (أَنَا)', p: ['أُ', 'هْدَى', ''] },
+          we: { ar: 'نُهْدَى', en: 'we are guided', wz: 'نُفْعَلُ', d: 'Passive 1st Plural (نَحْنُ)', p: ['نُ', 'هْدَى', ''] },
+          you: { ar: 'تُهْدَى', en: 'you are guided', wz: 'تُفْعَلُ', d: 'Passive 2nd Masc. (أَنْتَ)', p: ['تُ', 'هْدَى', ''] },
+          he: { ar: 'يُهْدَى', en: 'he is guided', wz: 'يُفْعَلُ', d: 'Passive 3rd Masc. (هُوَ)', p: ['يُ', 'هْدَى', ''] },
+          she: { ar: 'تُهْدَى', en: 'she is guided', wz: 'تُفْعَلُ', d: 'Passive 3rd Fem. (هِيَ)', p: ['تُ', 'هْدَى', ''] },
+          them: { ar: 'يُهْدَوْنَ', en: 'they are guided', wz: 'يُفْعَوْنَ', d: 'Passive 3rd Plural (هُمْ)', p: ['يُ', 'هْدَ', 'وْنَ'] }
+        }
+      },
+      past: {
+        active: {
+          i: { ar: 'هَدَيْتُ', en: 'I guided', wz: 'فَعَلْتُ', d: 'Past 1st Sing. (أَنَا)', p: ['', 'هَدَيْ', 'تُ'] },
+          we: { ar: 'هَدَيْنَا', en: 'we guided', wz: 'فَعَلْنَا', d: 'Past 1st Plural (نَحْنُ) · cf. 6:87 هَدَيْنَٰهُمْ', p: ['', 'هَدَيْ', 'نَا'] },
+          you: { ar: 'هَدَيْتَ', en: 'you guided', wz: 'فَعَلْتَ', d: 'Past 2nd Masc. (أَنْتَ)', p: ['', 'هَدَيْ', 'تَ'] },
+          he: { ar: 'هَدَى', en: 'he guided', wz: 'فَعَلَ', d: 'Past 3rd Masc. (هُوَ)', p: ['', 'هَدَى', ''] },
+          she: { ar: 'هَدَتْ', en: 'she guided', wz: 'فَعَلَتْ', d: 'Past 3rd Fem. (هِيَ)', p: ['', 'هَدَ', 'تْ'] },
+          them: { ar: 'هَدَوْا', en: 'they guided', wz: 'فَعَلُوا', d: 'Past 3rd Plural (هُمْ)', p: ['', 'هَدَ', 'وْا'] }
+        },
+        passive: {
+          i: { ar: 'هُدِيتُ', en: 'I was guided', wz: 'فُعِلْتُ', d: 'Passive Past 1st Sing. (أَنَا)', p: ['', 'هُدِي', 'تُ'] },
+          we: { ar: 'هُدِينَا', en: 'we were guided', wz: 'فُعِلْنَا', d: 'Passive Past 1st Plural (نَحْنُ)', p: ['', 'هُدِي', 'نَا'] },
+          you: { ar: 'هُدِيتَ', en: 'you were guided', wz: 'فُعِلْتَ', d: 'Passive Past 2nd Masc. (أَنْتَ)', p: ['', 'هُدِي', 'تَ'] },
+          he: { ar: 'هُدِيَ', en: 'he was guided', wz: 'فُعِلَ', d: 'Passive Past 3rd Masc. (هُوَ)', p: ['', 'هُدِيَ', ''] },
+          she: { ar: 'هُدِيَتْ', en: 'she was guided', wz: 'فُعِلَتْ', d: 'Passive Past 3rd Fem. (هِيَ)', p: ['', 'هُدِيَ', 'تْ'] },
+          them: { ar: 'هُدُوا', en: 'they were guided', wz: 'فُعِلُوا', d: 'Passive Past 3rd Plural (هُمْ)', p: ['', 'هُدُ', 'وا'] }
+        }
+      }
+    }
+  },
+  anamta: {
+    title: 'أَنْعَمَ / يُنْعِمُ',
+    badge: 'Form IV · أَفْعَلَ (مزيد بالهمزة للتعدية)',
+    root: 'ن-ع-م · to bestow favor, grace, bliss',
+    def: { tense: 'past', voice: 'active', pro: 'you' },
+    forms: {
+      past: {
+        active: {
+          i: { ar: 'أَنْعَمْتُ', en: 'I bestowed favor', wz: 'أَفْعَلْتُ', d: 'Past 1st Sing. (أَنَا)', p: ['أَ', 'نْعَمْ', 'تُ'] },
+          we: { ar: 'أَنْعَمْنَا', en: 'we bestowed favor', wz: 'أَفْعَلْنَا', d: 'Past 1st Plural (نَحْنُ)', p: ['أَ', 'نْعَمْ', 'نَا'] },
+          you: { ar: 'أَنْعَمْتَ', en: 'You bestowed favor', wz: 'أَفْعَلْتَ', d: 'Past 2nd Masc. (أَنْتَ)', p: ['أَ', 'نْعَمْ', 'تَ'], q: '⭐ Exactly as revealed in Ayah 7: أَنْعَمْتَ عَلَيْهِمْ' },
+          he: { ar: 'أَنْعَمَ', en: 'he bestowed favor', wz: 'أَفْعَلَ', d: 'Past 3rd Masc. (هُوَ)', p: ['أَ', 'نْعَمَ', ''] },
+          she: { ar: 'أَنْعَمَتْ', en: 'she bestowed favor', wz: 'أَفْعَلَتْ', d: 'Past 3rd Fem. (هِيَ)', p: ['أَ', 'نْعَمَ', 'تْ'] },
+          them: { ar: 'أَنْعَمُوا', en: 'they bestowed favor', wz: 'أَفْعَلُوا', d: 'Past 3rd Plural (هُمْ)', p: ['أَ', 'نْعَمُ', 'وا'] }
+        },
+        passive: {
+          i: { ar: 'أُنْعِمْتُ', en: 'I was favored', wz: 'أُفْعِلْتُ', d: 'Passive Past 1st Sing. (أَنَا)', p: ['أُ', 'نْعِمْ', 'تُ'] },
+          we: { ar: 'أُنْعِمْنَا', en: 'we were favored', wz: 'أُفْعِلْنَا', d: 'Passive Past 1st Plural (نَحْنُ)', p: ['أُ', 'نْعِمْ', 'نَا'] },
+          you: { ar: 'أُنْعِمْتَ', en: 'you were favored', wz: 'أُفْعِلْتَ', d: 'Passive Past 2nd Masc. (أَنْتَ)', p: ['أُ', 'نْعِمْ', 'تَ'] },
+          he: { ar: 'أُنْعِمَ', en: 'he was favored', wz: 'أُفْعِلَ', d: 'Passive Past 3rd Masc. (هُوَ)', p: ['أُ', 'نْعِمَ', ''] },
+          she: { ar: 'أُنْعِمَتْ', en: 'she was favored', wz: 'أُفْعِلَتْ', d: 'Passive Past 3rd Fem. (هِيَ)', p: ['أُ', 'نْعِمَ', 'تْ'] },
+          them: { ar: 'أُنْعِمُوا', en: 'they were favored', wz: 'أُفْعِلُوا', d: 'Passive Past 3rd Plural (هُمْ)', p: ['أُ', 'نْعِمُ', 'وا'] }
+        }
+      },
+      present: {
+        active: {
+          i: { ar: 'أُنْعِمُ', en: 'I bestow favor', wz: 'أُفْعِلُ', d: '1st Person Sing. (أَنَا)', p: ['أُ', 'نْعِمُ', ''] },
+          we: { ar: 'نُنْعِمُ', en: 'we bestow favor', wz: 'نُفْعِلُ', d: '1st Person Plural (نَحْنُ)', p: ['نُ', 'نْعِمُ', ''] },
+          you: { ar: 'تُنْعِمُ', en: 'you bestow favor', wz: 'تُفْعِلُ', d: '2nd Person Masc. (أَنْتَ)', p: ['تُ', 'نْعِمُ', ''] },
+          he: { ar: 'يُنْعِمُ', en: 'he bestows favor', wz: 'يُفْعِلُ', d: '3rd Person Masc. (هُوَ)', p: ['يُ', 'نْعِمُ', ''] },
+          she: { ar: 'تُنْعِمُ', en: 'she bestows favor', wz: 'تُفْعِلُ', d: '3rd Person Fem. (هِيَ)', p: ['تُ', 'نْعِمُ', ''] },
+          them: { ar: 'يُنْعِمُونَ', en: 'they bestow favor', wz: 'يُفْعِلُونَ', d: '3rd Person Plural (هُمْ)', p: ['يُ', 'نْعِمُ', 'ونَ'] }
+        },
+        passive: {
+          i: { ar: 'أُنْعَمُ', en: 'I am favored', wz: 'أُفْعَلُ', d: 'Passive 1st Sing. (أَنَا)', p: ['أُ', 'نْعَمُ', ''] },
+          we: { ar: 'نُنْعَمُ', en: 'we are favored', wz: 'نُفْعَلُ', d: 'Passive 1st Plural (نَحْنُ)', p: ['نُ', 'نْعَمُ', ''] },
+          you: { ar: 'تُنْعَمُ', en: 'you are favored', wz: 'تُفْعَلُ', d: 'Passive 2nd Masc. (أَنْتَ)', p: ['تُ', 'نْعَمُ', ''] },
+          he: { ar: 'يُنْعَمُ', en: 'he is favored', wz: 'يُفْعَلُ', d: 'Passive 3rd Masc. (هُوَ)', p: ['يُ', 'نْعَمُ', ''] },
+          she: { ar: 'تُنْعَمُ', en: 'she is favored', wz: 'تُفْعَلُ', d: 'Passive 3rd Fem. (هِيَ)', p: ['تُ', 'نْعَمُ', ''] },
+          them: { ar: 'يُنْعَمُونَ', en: 'they are favored', wz: 'يُفْعَلُونَ', d: 'Passive 3rd Plural (هُمْ)', p: ['يُ', 'نْعَمُ', 'ونَ'] }
+        }
+      }
+    }
+  }
+};
+
+function getVerbForm(k, tense, voice, pro){
+  const vm = VERBS[k];
+  if(!vm) return null;
+  if(tense === 'command'){
+    const cObj = vm.forms.command && vm.forms.command.active;
+    if(cObj && cObj[pro]) return cObj[pro];
+    if(cObj && cObj['you']) return cObj['you'];
+  }
+  const tObj = vm.forms[tense] || vm.forms['present'] || vm.forms['past'];
+  const vObj = tObj[voice] || tObj['active'] || Object.values(tObj)[0];
+  const pObj = vObj[pro] || vObj['we'] || vObj['you'] || Object.values(vObj)[0];
+  return pObj;
+}
+
+function renderVerbWord(f){
+  if(!f || !f.p) return f ? f.ar : '';
+  const [pre, stem, suf] = f.p;
+  return `${pre ? `<span class="vm-affix">${pre}</span>` : ''}<span class="vm-core">${stem}</span>${suf ? `<span class="vm-affix">${suf}</span>` : ''}`;
+}
+
+function verbMaker(k){
+  const vm = VERBS[k];
+  if(!vm) return '';
+  const dt = vm.def.tense, dv = vm.def.voice, dp = vm.def.pro;
+  const f = getVerbForm(k, dt, dv, dp);
+  return `<h4>🎛️ Verb Maker <small>صَانِعُ الْأَفْعَالِ · Conjugate &amp; Transform</small></h4>
+  <div class="vmaker" data-k="${k}" data-tense="${dt}" data-voice="${dv}" data-pro="${dp}">
+    <div class="vm-top">
+      <div class="vm-badge">${vm.badge}</div>
+      <div class="vm-note">${vm.root}</div>
+    </div>
+    <div class="vm-controls">
+      <div class="vm-ctrl-row">
+        <span class="vm-lbl">Tense:</span>
+        <div class="vm-btns" data-type="tense">
+          <button class="vm-b ${dt==='present'?'on':''}" data-v="present">Present · مُضَارِع</button>
+          <button class="vm-b ${dt==='past'?'on':''}" data-v="past">Past · مَاضٍ</button>
+          ${vm.hasCommand ? `<button class="vm-b ${dt==='command'?'on':''}" data-v="command">Command · أَمْر</button>` : ''}
+        </div>
+      </div>
+      <div class="vm-ctrl-row vm-voice-row" style="${dt==='command'?'display:none':''}">
+        <span class="vm-lbl">Voice:</span>
+        <div class="vm-btns" data-type="voice">
+          <button class="vm-b ${dv==='active'?'on':''}" data-v="active">Active · مَعْلُوم</button>
+          <button class="vm-b ${dv==='passive'?'on':''}" data-v="passive">Passive · مَجْهُول</button>
+        </div>
+      </div>
+      <div class="vm-ctrl-row">
+        <span class="vm-lbl">Doer:</span>
+        <div class="vm-btns" data-type="pro">
+          <button class="vm-b ${dp==='i'?'on':''}" data-v="i">I · أَنَا</button>
+          <button class="vm-b ${dp==='we'?'on':''}" data-v="we">We · نَحْنُ</button>
+          <button class="vm-b ${dp==='you'?'on':''}" data-v="you">You · أَنْتَ</button>
+          <button class="vm-b ${dp==='he'?'on':''}" data-v="he">He · هُوَ</button>
+          <button class="vm-b ${dp==='she'?'on':''}" data-v="she">She · هِيَ</button>
+          <button class="vm-b ${dp==='them'?'on':''}" data-v="them">Them · هُمْ</button>
+        </div>
+      </div>
+    </div>
+    <div class="vm-display">
+      <div class="vm-ar">${renderVerbWord(f)}</div>
+      <div class="vm-en">${f.en}</div>
+      <div class="vm-meta">
+        <span class="vm-wz">⚖️ ${f.wz}</span>
+        <span class="vm-desc">${f.d}</span>
+      </div>
+      <div class="vm-quran" style="${f.q?'':'display:none'}">${f.q||''}</div>
+    </div>
+  </div>`;
+}
+
 const play=([st,v,v3])=>`<h4>🎛️ Change the doer <small>only the first letter changes</small></h4><div class="play"><div class="pw"><b>نَ</b>${st}</div><div class="pb">${
   PRE.map(([p,w,s])=>`<button data-p="${p}" data-e="${w} ${s?v3:v}" class="${p=='نَ'?'on':''}">${w}</button>`).join('')}</div><p class="pe">we ${v}</p></div>`;
 
@@ -866,7 +1268,7 @@ function wordHTML(k,a){
   ${d.wz?`<h4>📐 Pattern <small>${d.wn[0]} — ${d.wn[1]}</small></h4>
     <div class="wz">${d.wz.map(([p,w,r],i)=>`<span class="r${r} pop" style="--i:${i}"><i>${p}</i><small>↓</small><b>${w}</b></span>`).join('')}</div>
     <p class="key">🟩 root letter · ⬜ added · 🟧 changed</p>${d.wn[2]?`<p class="note">${d.wn[2]}</p>`:''}`:''}
-  ${d.play?play(d.play):''}
+  ${VERBS[k]?verbMaker(k):(d.play?play(d.play):'')}
   <h4>🔍 Facts <small>tap a card to flip it</small></h4>
   <div class="facts">${d.facts.map((f,i)=>`<button class="fact pop" style="--i:${i}"><span class="f">${f[0]}<br>${f[1]}</span><span class="b">${f[2]}</span></button>`).join('')}</div>
   ${think(d.think)}${quiz(k,d.quiz)}`;
@@ -1088,6 +1490,39 @@ document.addEventListener('click',e=>{
     } else {
       t.classList.add('wrong');
       t.disabled=true;
+    }
+  }
+  else if(t.classList.contains('vm-b')){
+    const vmEl = t.closest('.vmaker');
+    const group = t.closest('.vm-btns').dataset.type;
+    const val = t.dataset.v;
+    vmEl.dataset[group] = val;
+    t.closest('.vm-btns').querySelectorAll('.vm-b').forEach(x => x.classList.toggle('on', x === t));
+    
+    const voiceRow = vmEl.querySelector('.vm-voice-row');
+    if(voiceRow){
+      voiceRow.style.display = vmEl.dataset.tense === 'command' ? 'none' : '';
+    }
+    
+    const k = vmEl.dataset.k;
+    const form = getVerbForm(k, vmEl.dataset.tense, vmEl.dataset.voice, vmEl.dataset.pro);
+    if(form){
+      const arEl = vmEl.querySelector('.vm-ar');
+      arEl.innerHTML = renderVerbWord(form);
+      arEl.style.animation = 'none';
+      arEl.offsetWidth;
+      arEl.style.animation = 'pop .35s ease';
+      
+      vmEl.querySelector('.vm-en').textContent = form.en;
+      vmEl.querySelector('.vm-wz').textContent = '⚖️ ' + form.wz;
+      vmEl.querySelector('.vm-desc').textContent = form.d;
+      const qEl = vmEl.querySelector('.vm-quran');
+      if(form.q){
+        qEl.textContent = form.q;
+        qEl.style.display = '';
+      } else {
+        qEl.style.display = 'none';
+      }
     }
   }
   else if(d.p){
