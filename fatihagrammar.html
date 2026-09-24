@@ -393,10 +393,20 @@ h4 small { text-transform: none; letter-spacing: 0; font-weight: 500 }
 .vm-affix {
   color: #d97706;
   font-weight: 700;
+  animation: flash .6s ease;
 }
 .vm-core {
   color: #047857;
 }
+@keyframes flash {
+  from { color: #fbbf24; text-shadow: 0 0 14px #f59e0b; }
+}
+.pw { direction: rtl; text-align: center; font: 400 2.5rem/1.7 var(--q); color: var(--fil) }
+.pw b { font-weight: 400; color: var(--pre); animation: flash .6s }
+.pb { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap }
+.pb button { padding: 6px 16px; border-radius: 99px; font-size: .8rem; font-weight: 600; background: #f1f5f9; transition: .2s; border: none; cursor: pointer }
+.pb .on { background: var(--pre); color: #fff }
+.pe { margin-top: 6px; text-align: center; font-size: .82rem; color: var(--mute) }
 .vm-en {
   font-size: 1rem;
   font-weight: 600;
@@ -575,7 +585,7 @@ footer {
     <a href="rootwords.html">Quran Root Words</a>
   </div>
   <p>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</p>
-  <div class="footer-version" id="footerVersion">v1.0.48 (updated 2026-09-24 22:21)</div>
+  <div class="footer-version" id="footerVersion">v1.0.49 (updated 2026-09-24 22:30)</div>
 </footer>
 
 <script>
@@ -1083,10 +1093,10 @@ const VERBS = {
       command: {
         active: {
           you: { ar: 'ٱهْدِ', en: 'Guide (You)!', wz: 'اِفْعِ', d: 'Imperative 2nd Masc. (أَنْتَ) · Drops weak letter ي', p: ['ٱ', 'هْدِ', ''], q: '⭐ In Ayah 6: ٱهْدِنَا (Guide us! with object نَا)' },
-          we: { ar: 'ٱهْدِنَا', en: 'Guide us!', wz: 'اِفْعِ + نَا', d: 'Imperative + Object Pronoun نَا (نَحْنُ)', p: ['ٱهْدِ', 'ـنَا', ''], q: '⭐ Exactly as revealed in Ayah 6: ٱهْدِنَا ٱلصِّرَٰطَ' },
+          we: { ar: 'ٱهْدِنَا', en: 'Guide us!', wz: 'اِفْعِ + نَا', d: 'Imperative + Object Pronoun نَا (نَحْنُ)', p: ['ٱ', 'هْدِ', 'نَا'], q: '⭐ Exactly as revealed in Ayah 6: ٱهْدِنَا ٱلصِّرَٰطَ' },
           them: { ar: 'ٱهْدُوا', en: 'Guide (all of you)!', wz: 'اِفْعُوا', d: 'Imperative Plural (أَنْتُمْ)', p: ['ٱ', 'هْدُ', 'وا'] },
-          i: { ar: 'لِأَهْدِ', en: 'Let me guide', wz: 'لِيَفْعِلْ', d: 'Imperative with Lām (أَنَا)', p: ['لِـ', 'أَهْدِ', ''] },
-          he: { ar: 'لِيَهْدِ', en: 'Let him guide', wz: 'لِيَفْعِلْ', d: '3rd Person Imperative with Lām (هُوَ)', p: ['لِـ', 'يَهْدِ', ''] },
+          i: { ar: 'لِأَهْدِ', en: 'Let me guide', wz: 'لِيَفْعِلْ', d: 'Imperative with Lām (أَنَا)', p: ['لِأَ', 'هْدِ', ''] },
+          he: { ar: 'لِيَهْدِ', en: 'Let him guide', wz: 'لِيَفْعِلْ', d: '3rd Person Imperative with Lām (هُوَ)', p: ['لِيَ', 'هْدِ', ''] },
           she: { ar: 'ٱهْدِي', en: 'Guide (you, fem.)!', wz: 'اِفْعِي', d: 'Imperative Fem. Sing. (أَنْتِ)', p: ['ٱ', 'هْدِ', 'ي'] }
         }
       },
@@ -1191,7 +1201,7 @@ function getVerbForm(k, tense, voice, pro){
 function renderVerbWord(f){
   if(!f || !f.p) return f ? f.ar : '';
   const [pre, stem, suf] = f.p;
-  return `${pre ? `<span class="vm-affix">${pre}</span>` : ''}<span class="vm-core">${stem}</span>${suf ? `<span class="vm-affix">${suf}</span>` : ''}`;
+  return `<span class="vm-affix vm-pre">${pre || ''}</span><span class="vm-core">${stem || ''}</span><span class="vm-affix vm-suf">${suf || ''}</span>`;
 }
 
 function verbMaker(k){
@@ -1508,10 +1518,60 @@ document.addEventListener('click',e=>{
     const form = getVerbForm(k, vmEl.dataset.tense, vmEl.dataset.voice, vmEl.dataset.pro);
     if(form){
       const arEl = vmEl.querySelector('.vm-ar');
-      arEl.innerHTML = renderVerbWord(form);
+      let preEl = arEl.querySelector('.vm-pre');
+      let coreEl = arEl.querySelector('.vm-core');
+      let sufEl = arEl.querySelector('.vm-suf');
+      
+      if(!preEl || !coreEl || !sufEl){
+        arEl.innerHTML = renderVerbWord(form);
+        preEl = arEl.querySelector('.vm-pre');
+        coreEl = arEl.querySelector('.vm-core');
+        sufEl = arEl.querySelector('.vm-suf');
+      }
+      
+      const prevPre = preEl ? preEl.textContent : '';
+      const prevCore = coreEl ? coreEl.textContent : '';
+      const prevSuf = sufEl ? sufEl.textContent : '';
+      
+      const [newPre, newCore, newSuf] = form.p || ['', form.ar, ''];
+      
+      const preChanged = (newPre || '') !== prevPre;
+      const coreChanged = (newCore || '') !== prevCore;
+      const sufChanged = (newSuf || '') !== prevSuf;
+      const proTapped = (group === 'pro');
+      
+      // Update prefix: only flash if changed, or if a pronoun was tapped that activates this prefix
+      preEl.textContent = newPre || '';
+      if(newPre && (preChanged || (proTapped && !newSuf))){
+        preEl.style.animation = 'none';
+        preEl.offsetWidth;
+        preEl.style.animation = 'flash .6s ease';
+      } else if(!newPre){
+        preEl.style.animation = 'none';
+      }
+      
+      // Update core/stem: only flash if core letters actually changed (e.g. tense/voice shift)
+      coreEl.textContent = newCore || '';
+      if(newCore && coreChanged){
+        coreEl.style.animation = 'none';
+        coreEl.offsetWidth;
+        coreEl.style.animation = 'flash .6s ease';
+      } else {
+        coreEl.style.animation = 'none';
+      }
+      
+      // Update suffix: only flash if changed, or if a pronoun was tapped that activates this suffix
+      sufEl.textContent = newSuf || '';
+      if(newSuf && (sufChanged || (proTapped && !newPre) || (proTapped && preChanged))){
+        sufEl.style.animation = 'none';
+        sufEl.offsetWidth;
+        sufEl.style.animation = 'flash .6s ease';
+      } else if(!newSuf){
+        sufEl.style.animation = 'none';
+      }
+      
+      // Keep entire word container rock-steady (no whole-word pop or scale)
       arEl.style.animation = 'none';
-      arEl.offsetWidth;
-      arEl.style.animation = 'pop .35s ease';
       
       vmEl.querySelector('.vm-en').textContent = form.en;
       vmEl.querySelector('.vm-wz').textContent = '⚖️ ' + form.wz;
