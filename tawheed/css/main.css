@@ -1,0 +1,1019 @@
+/* ==========================================================================
+   King Fahad Glorious Quran Printing Complex (KFGQPC) - Madinah Mushaf Fonts
+   ========================================================================== */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('../fonts/kfgqpc-uthmanic-script-hafs.woff2') format('woff2'),
+       url('../fonts/kfgqpc-uthmanic-script-hafs.woff') format('woff'),
+       url('../fonts/kfgqpc-uthmanic-script-hafs.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KFGQPC Uthman Taha Naskh';
+  src: url('../fonts/kfgqpc-uthman-taha-naskh.woff2') format('woff2'),
+       url('../fonts/kfgqpc-uthman-taha-naskh.woff') format('woff'),
+       url('../fonts/kfgqpc-uthman-taha-naskh.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Tawheed (Asma-ul-Husna Experience) - Core Stylesheet
+   Design Language: Celestial Islamic Elegance, Modern Glassmorphism
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Midnight Sapphire Theme (Default) */
+  --bg-primary: #070B19;
+  --bg-secondary: #0D152D;
+  --bg-card: rgba(15, 23, 49, 0.72);
+  --bg-glass: rgba(20, 31, 64, 0.55);
+  --bg-glass-hover: rgba(30, 45, 90, 0.65);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-gold: rgba(212, 175, 55, 0.35);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-gold: #FCD34D;
+  --accent-gold: #D4AF37;
+  --accent-gold-glow: rgba(212, 175, 55, 0.3);
+  --accent-emerald: #10B981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.3);
+  --accent-sky: #38BDF8;
+  --accent-rose: #F43F5E;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-arabic: 'KFGQPC Uthmanic Script HAFS', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif;
+
+  /* Font Scaling for Quranic Arabic */
+  --arabic-card-size: 2.75rem;
+  --arabic-hero-size: 4.8rem;
+  --arabic-modal-size: 5.2rem;
+  --arabic-ayah-size: 2.2rem;
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-gold: 0 8px 30px rgba(212, 175, 55, 0.2);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Emerald Theme */
+[data-theme="emerald"] {
+  --bg-primary: #041410;
+  --bg-secondary: #07221B;
+  --bg-card: rgba(8, 38, 30, 0.72);
+  --bg-glass: rgba(12, 54, 43, 0.55);
+  --bg-glass-hover: rgba(18, 75, 60, 0.65);
+  --border-glass: rgba(16, 185, 129, 0.2);
+  --border-glass-gold: rgba(212, 175, 55, 0.4);
+}
+
+/* Pearl Theme */
+[data-theme="pearl"] {
+  --bg-primary: #F1F5F9;
+  --bg-secondary: #E2E8F0;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-hover: rgba(255, 255, 255, 0.95);
+  --border-glass: rgba(15, 23, 42, 0.1);
+  --border-glass-gold: rgba(180, 140, 20, 0.4);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-gold: #B45309;
+  --accent-gold: #B45309;
+}
+
+/* Arabic Font Size Preferences */
+[data-font-size="standard"] {
+  --arabic-card-size: 2.2rem;
+  --arabic-hero-size: 3.8rem;
+  --arabic-modal-size: 4.2rem;
+  --arabic-ayah-size: 1.8rem;
+}
+
+[data-font-size="large"] {
+  --arabic-card-size: 2.85rem;
+  --arabic-hero-size: 5rem;
+  --arabic-modal-size: 5.5rem;
+  --arabic-ayah-size: 2.3rem;
+}
+
+[data-font-size="xl"] {
+  --arabic-card-size: 3.5rem;
+  --arabic-hero-size: 6.2rem;
+  --arabic-modal-size: 6.8rem;
+  --arabic-ayah-size: 2.8rem;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Background Canvas */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* Quranic Arabic Styling */
+.quranic-arabic {
+  font-family: var(--font-arabic);
+  font-weight: 400;
+  direction: rtl;
+  text-align: center;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-shadow: 0 2px 14px rgba(212, 175, 55, 0.25);
+  font-feature-settings: "cv01" on, "cv02" on;
+}
+
+/* Layout Container */
+.app-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   Header & Navbar
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(7, 11, 25, 0.8);
+  border-bottom: 1px solid var(--border-glass);
+  transition: background var(--transition-normal);
+}
+
+[data-theme="pearl"] .site-header {
+  background: rgba(241, 245, 249, 0.85);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.85rem 0;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-symbol {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #D4AF37, #F59E0B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #070B19;
+  font-family: var(--font-arabic);
+  font-size: 1.6rem;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+}
+
+.logo-title-group h1 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #FFFFFF 0%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="pearl"] .logo-title-group h1 {
+  background: linear-gradient(90deg, #0F172A 0%, #B45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Header Action Buttons */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 0.42rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #D4AF37, #F59E0B);
+  color: #070B19;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.5);
+}
+
+.btn-glass {
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  border-color: var(--border-glass);
+  backdrop-filter: blur(12px);
+}
+
+.btn-glass:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-gold);
+  transform: translateY(-2px);
+}
+
+.btn-glass.active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  color: var(--text-gold);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+  transform: scale(1.08);
+}
+
+.icon-btn.active {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.15);
+}
+
+/* Header Progress Ring Widget */
+.header-progress-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+}
+
+.progress-ring-mini {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.progress-ring-mini svg {
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.ring-val {
+  stroke: var(--accent-gold);
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-text-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-gold);
+}
+
+/* Font Size Selector */
+.font-scale-group {
+  display: flex;
+  align-items: center;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+}
+
+.font-scale-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.font-scale-btn.active {
+  background: var(--accent-gold);
+  color: #070B19;
+}
+
+
+
+/* ==========================================================================
+   Hero: Name of the Day
+   ========================================================================== */
+.hero-name-section {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border-glass-gold);
+  box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.hero-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.9);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 3.5rem 3rem;
+}
+
+.hero-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid var(--border-glass-gold);
+  color: var(--text-gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.hero-main-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-arabic-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.2rem;
+  border-radius: var(--radius-lg);
+  background: rgba(7, 11, 25, 0.5);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(16px);
+}
+
+.hero-arabic {
+  font-size: var(--arabic-hero-size);
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+
+
+.hero-translit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.hero-number {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.15);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.hero-transliteration {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.hero-category-chip {
+  font-size: 0.78rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent-sky);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.hero-meaning {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.hero-insight-snippet {
+  font-size: 0.95rem;
+  color: #CBD5E1;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Situational Explorer ("Call Upon Him")
+   ========================================================================== */
+.section-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section-title-wrap h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-title-wrap p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.situational-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2.5rem;
+}
+
+.mood-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(12px);
+}
+
+.mood-card-btn:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-gold);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.mood-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.mood-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.mood-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+/* ==========================================================================
+   Filter, Search & Controls Bar
+   ========================================================================== */
+.controls-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(16px);
+}
+
+.controls-top-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+}
+
+.search-box svg.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.8rem 0.75rem 2.8rem;
+  border-radius: var(--radius-pill);
+  background: rgba(7, 11, 25, 0.6);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+[data-theme="pearl"] .search-input {
+  background: #FFFFFF;
+}
+
+.search-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: none;
+}
+
+.filter-select-wrap select {
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: rgba(7, 11, 25, 0.6);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  outline: none;
+  cursor: pointer;
+}
+
+[data-theme="pearl"] .filter-select-wrap select {
+  background: #FFFFFF;
+}
+
+.category-pills-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 0.4rem;
+}
+
+.pill-btn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.pill-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+  border-color: var(--border-glass-gold);
+}
+
+.pill-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(245, 158, 11, 0.35));
+  border-color: var(--accent-gold);
+  color: var(--text-gold);
+}
+
+/* ==========================================================================
+   Names Grid & Cards
+   ========================================================================== */
+.results-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.names-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.name-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 310px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  background: var(--bg-card);
+}
+
+.name-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md), 0 8px 24px rgba(212, 175, 55, 0.15);
+  border-color: var(--border-glass-gold);
+}
+
+.name-card.allah-intro-card,
+.name-card.supreme-card {
+  border: 2px solid var(--accent-gold);
+  box-shadow: var(--shadow-md), 0 0 25px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(7, 11, 25, 0.9));
+}
+
+.name-card.is-learned {
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.card-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.65) saturate(1.1);
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.name-card:hover .card-bg-image {
+  transform: scale(1.05);
+}
+
+.card-glass-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(7, 11, 25, 0.65) 0%, rgba(7, 11, 25, 0.88) 60%, rgba(7, 11, 25, 0.98) 100%);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+[data-theme="pearl"] .card-glass-overlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.92) 100%);
+}
+
+.card-top-bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.1rem 0.5rem 1.1rem;
+}
+
+.name-badge-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: rgba(7, 11, 25, 0.7);
+  border: 1px solid var(--border-glass);
+  color: var(--accent-gold);
+}
+
+.card-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card-body {
+  position: relative;
+  z-index: 3;
+  padding: 0.5rem 1.25rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-arabic {
+  font-size: var(--arabic-card-size);
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+  transition: font-size var(--transition-fast);
+}
+
+[data-theme="pearl"] .card-arabic {
+  color: #0F172A;
+}
+
+.card-transliteration {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-gold);
+  margin-bottom: 0.25rem;
+}
+
+.card-meaning {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(7, 11, 25, 0.5);
+}
+
+[data-theme="pearl"] .card-footer {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.card-root-badge {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.card-deep-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  color: var(--accent-gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.card-deep-link:hover {
+  transform: translateX(3px);
+  color: #FFFFFF;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  margin-bottom: 3rem;
+}
+
+.empty-state.hidden {
+  display: none;
+}
+
+.empty-state h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Footer & Versioning
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(7, 11, 25, 0.9);
+  padding: 3rem 0 2rem 0;
+  margin-top: 4rem;
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="pearl"] .site-footer {
+  background: rgba(241, 245, 249, 0.95);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.footer-ayah-banner {
+  max-width: 700px;
+  margin-bottom: 0.5rem;
+}
+
+.footer-ayah-arabic {
+  font-size: 1.8rem;
+  color: var(--text-gold);
+  margin-bottom: 0.35rem;
+}
+
+.footer-ayah-trans {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-credits {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-version-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--border-glass-gold);
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-gold);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-main-row {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .hero-content {
+    padding: 2.2rem 1.5rem;
+  }
+  .header-actions .btn span:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 0 1rem;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .header-actions {
+    justify-content: space-between;
+  }
+  .names-grid {
+    grid-template-columns: 1fr;
+  }
+}

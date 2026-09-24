@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight" data-font-size="large">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tawheed — The 99 Names of Allah | Asma-ul-Husna Experience</title>
+  <meta name="description" content="A spiritually sublime, visually stunning web experience exploring the 99 Names of Allah with profound classical theological insights, Quranic linguistic nuances, Quranic Arabic calligraphy, real nature visuals, and interactive memorization tools.">
+
+  <!-- Preload King Fahad Othmani Madinah Quran Font for Instant Rendering -->
+  <link rel="preload" href="fonts/kfgqpc-uthmanic-script-hafs.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/kfgqpc-uthman-taha-naskh.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/modal.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Stardust Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Sticky Top Header -->
+  <header class="site-header">
+    <div class="app-container">
+      <div class="header-inner">
+        <!-- Brand Logo -->
+        <a href="#" class="logo-wrap">
+          <div class="logo-symbol">ﷲ</div>
+          <div class="logo-title-group">
+            <h1>TAWHEED</h1>
+            <span class="logo-sub">The Beautiful Names of Allah</span>
+          </div>
+        </a>
+
+        <!-- Header Actions & Navigation -->
+        <div class="header-actions">
+          <!-- Back to Showcase Portal -->
+          <a href="../index.html" class="btn btn-glass" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit" title="Return to NurulQuran Showcase Portal">
+            <span>‹</span>
+            <span>Showcase Portal</span>
+          </a>
+
+          <!-- About This Collection Button -->
+          <button class="btn btn-glass" id="open-about-btn" title="About this collection & Ihsa of the Names">
+            <span>📖</span>
+            <span>About Collection</span>
+          </button>
+
+          <!-- Arabic Font Size Preference -->
+          <div class="font-scale-group" title="Adjust Quranic Arabic Font Size">
+            <button class="font-scale-btn" data-size="standard">Standard</button>
+            <button class="font-scale-btn active" data-size="large">Large</button>
+            <button class="font-scale-btn" data-size="xl">Extra Large</button>
+          </div>
+
+          <!-- Progress Ring Widget -->
+          <div class="header-progress-widget" title="99 Names Learning Progress">
+            <div class="progress-ring-mini">
+              <svg width="28" height="28" viewBox="0 0 36 36">
+                <path class="ring-bg" stroke-width="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path id="progress-ring-circle" class="ring-val" stroke-width="3.5" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+            </div>
+            <span class="progress-text-label" id="learned-count-text">0 / 99</span>
+          </div>
+
+          <!-- Feature Buttons -->
+          <button class="btn btn-glass" id="open-flashcards-btn" title="Practice with 3D Flashcards">
+            <span>🎴</span>
+            <span>Flashcards</span>
+          </button>
+
+          <button class="btn btn-glass" id="open-quiz-btn" title="Test your knowledge">
+            <span>🎯</span>
+            <span>Names Quiz</span>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button class="icon-btn" id="theme-toggle-btn" title="Switch Theme (Midnight / Emerald / Pearl)" aria-label="Toggle Theme">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="app-container">
+    
+    <!-- Hero: Name of the Day Showcase -->
+    <section class="hero-name-section" id="hero-name-day" aria-label="Name of the Day">
+      <!-- Injected by app.js -->
+    </section>
+
+    <!-- Situational Du'a Selector: Call Upon Him -->
+    <section class="situational-section" aria-label="Situational Du'as">
+      <div class="section-heading-row">
+        <div class="section-title-wrap">
+          <h2>Call Upon Him By His Names</h2>
+          <p>Choose a need or feeling to explore Names of Allah connected to its Qur’anic meaning. Call upon Allah sincerely, take lawful action, and use the authentic supplications taught in revelation.</p>
+        </div>
+      </div>
+      <div class="situational-grid" id="situational-chips">
+        <!-- Injected by app.js -->
+      </div>
+    </section>
+
+    <!-- Search, Filter & Categories Panel -->
+    <section class="controls-panel" aria-label="Filter names">
+      <div class="controls-top-row">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Search by English, Arabic, Transliteration, Root, or Meaning (Press / to search)..." autocomplete="off" spellcheck="false">
+          <button class="clear-search-btn" id="clear-search-btn" aria-label="Clear search">✕</button>
+        </div>
+
+        <div class="filter-select-wrap">
+          <select id="filter-select" aria-label="Filter status">
+            <option value="all">Allah + Traditional List of 99</option>
+            <option value="bookmarked">Bookmarked Only</option>
+            <option value="learned">Learned Only</option>
+            <option value="unlearned">Still Learning</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills-row" id="category-pills">
+        <!-- Injected by app.js -->
+      </div>
+    </section>
+
+    <!-- Results Meta Bar -->
+    <div class="results-meta-bar">
+      <span id="results-count">Showing 99 Names</span>
+      <span>Tap any card to explore meaning in revelation, evidence & supplication</span>
+    </div>
+
+    <!-- 99 Names Grid -->
+    <section class="names-grid" id="names-grid" aria-label="All Divine Names">
+      <!-- Injected by app.js -->
+    </section>
+
+    <!-- Empty State -->
+    <div class="empty-state hidden" id="empty-state">
+      <h3>No Divine Names Matched Your Search</h3>
+      <p>Try searching for a different Arabic root, transliteration, or meaning.</p>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       Modals & Dialogs
+       ========================================================================== -->
+
+  <!-- 0. About This Collection Modal -->
+  <dialog id="about-collection-modal" closedby="any">
+    <button class="modal-close-x-btn" aria-label="Close dialog">✕</button>
+    <div class="about-modal-content">
+      <div class="about-header">
+        <h2>About This Collection</h2>
+        <p>Understanding the Hadith of the 99 Names & the Meaning of <em>Iḥṣāʾ</em></p>
+      </div>
+
+      <div class="about-section-block">
+        <h3><span>📖</span> The Prophetic Hadith</h3>
+        <p>The Qur’an and authentic Sunnah teach us Allah’s Beautiful Names and encourage us to learn and call upon Him through them. An authentic hadith gives a special virtue to performing <em>iḥṣāʾ</em> of ninety-nine Names:</p>
+        
+        <div class="about-hadith-box">
+          <span class="arabic-quote quranic-arabic">إِنَّ لِلَّهِ تِسْعَةً وَتِسْعِينَ اسْمًا، مِائَةً إِلَّا وَاحِدًا، مَنْ أَحْصَاهَا دَخَلَ الْجَنَّةَ</span>
+          <span class="trans-quote">"Allah has ninety-nine Names—one hundred minus one; whoever performs iḥṣāʾ of them will enter Paradise."</span>
+          <span class="ref-citation">Ṣaḥīḥ al-Bukhārī 7392 • Ṣaḥīḥ Muslim 2677a</span>
+        </div>
+
+        <p>However, the soundest versions of that hadith do not enumerate the Names. The familiar numbered list is a respected traditional compilation, but scholars have produced different lists drawn directly from the Qur’an and Sunnah. This guide follows a widely circulated traditional list while explicitly noting where a Name’s evidence or formulation requires further scholarly review.</p>
+      </div>
+
+      <div class="about-section-block">
+        <h3><span>🌱</span> What Does <em>Iḥṣāʾ</em> (أَحْصَاهَا) Mean?</h3>
+        <p>Classical scholars clarify that <em>iḥṣāʾ</em> is far greater than merely memorizing sounds or ticking checkboxes. It is a comprehensive spiritual journey that encompasses:</p>
+        <ul style="margin: 0.75rem 0 0 1.25rem; color: #CBD5E1; line-height: 1.8;">
+          <li><strong>Preserving & Learning:</strong> Knowing the Names and memorizing them with accurate pronunciation.</li>
+          <li><strong>Understanding (Fahm):</strong> Contemplating their meanings, linguistic roots, and what they reveal about Allah.</li>
+          <li><strong>Belief & Affirmation (I'tiqad):</strong> Believing deeply and reverently in every attribute without distortion or denial.</li>
+          <li><strong>Supplication (Du'a):</strong> Calling upon Allah through them in worship (du'a 'ibadah) and in asking for needs (du'a mas'alah).</li>
+          <li><strong>Character & Conduct (Sulūk):</strong> Allowing this sacred knowledge to shape your heart, humility, ethics, and daily life.</li>
+        </ul>
+      </div>
+
+      <div class="about-section-block">
+        <h3><span>⚖️</span> Evidence Status in this Guide</h3>
+        <p>To preserve academic and theological integrity, every entry in this guide clearly displays its evidence classification:</p>
+        <ul style="margin: 0.75rem 0 0 1.25rem; color: #CBD5E1; line-height: 1.8;">
+          <li><span class="evidence-status-pill quran" style="margin-right: 0.5rem;">Explicit in the Qur'an</span> Mentioned explicitly as a Name in the Noble Qur'an.</li>
+          <li><span class="evidence-status-pill sunnah" style="margin-right: 0.5rem;">Explicit in authentic Sunnah</span> Affirmed explicitly in sound Hadith narrations.</li>
+          <li><span class="evidence-status-pill review" style="margin-right: 0.5rem;">Traditional-list formulation</span> A widely circulated traditional-list form whose status as an established standalone nominal Name requires scholarly review.</li>
+        </ul>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 1. Deep-Dive Name Modal -->
+  <dialog id="name-detail-modal" aria-labelledby="modal-arabic-title" closedby="any">
+    <button class="modal-close-x-btn" aria-label="Close dialog">✕</button>
+    <div class="modal-scroll-body" id="modal-inner-content">
+      <!-- Injected by app.js -->
+    </div>
+  </dialog>
+
+  <!-- 2. Interactive 3D Flashcard Modal -->
+  <dialog id="flashcard-modal" closedby="any">
+    <button class="modal-close-x-btn" aria-label="Close dialog">✕</button>
+    <div class="flashcard-modal-content" id="flashcard-deck-container">
+      <!-- Injected by app.js -->
+    </div>
+  </dialog>
+
+  <!-- 3. Hifz Memorization Quiz Modal -->
+  <dialog id="quiz-modal" closedby="any">
+    <button class="modal-close-x-btn" aria-label="Close dialog">✕</button>
+    <div class="quiz-modal-content" id="quiz-container">
+      <!-- Injected by app.js -->
+    </div>
+  </dialog>
+
+  <!-- 4. Situational Drawer Modal -->
+  <dialog id="situational-drawer-modal" closedby="any">
+    <button class="modal-close-x-btn" aria-label="Close dialog">✕</button>
+    <div class="sit-drawer-content" id="situational-drawer-body">
+      <!-- Injected by app.js -->
+    </div>
+  </dialog>
+
+  <!-- Celebration Toast -->
+  <div class="celebration-toast" id="celebration-toast"></div>
+
+  <!-- Site Footer with Global Automation Version Rule -->
+  <footer class="site-footer">
+    <div class="app-container">
+      <div class="footer-inner">
+        <div class="footer-ayah-banner">
+          <p class="footer-ayah-arabic quranic-arabic">وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا</p>
+          <p class="footer-ayah-trans">"And to Allah belong the most beautiful names, so invoke Him by them." (Surah Al-A'raf 7:180)</p>
+        </div>
+        <p class="footer-credits">
+          Brief reflections are provided for learning and personal application; they are not substitutes for formal tafsīr or qualified scholarly instruction. Where scholars differ regarding standalone list formulations, that context is noted.
+        </p>
+        <div class="footer-version-badge">
+          <span>v1.0.44 (updated 2026-09-24 11:59)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Module Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
