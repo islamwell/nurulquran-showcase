@@ -136,6 +136,63 @@ nav{position:sticky;top:0;z-index:55;background:rgba(5,9,7,.74);backdrop-filter:
 html[lang="ur"] .ur-text{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl}
 html[lang="ur"] .lead, html[lang="ur"] .mut, html[lang="ur"] .card p{font-size:1.06em;line-height:1.9}
 
+/* ============ DUAL-LANGUAGE / MULTILINGUAL VISIBILITY ============ */
+html[lang="en"] .t-no, html[lang="en"] .t-ur { display: none !important; }
+html[lang="no"] .t-en, html[lang="no"] .t-ur { display: none !important; }
+html[lang="ur"] .t-no { display: none !important; }
+html[lang="ur"] .t-en { display: none !important; }
+
+/* Top Nav Language Toggle Button */
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(125, 220, 149, 0.10);
+  border: 1px solid rgba(125, 220, 149, 0.32);
+  color: var(--txt);
+  padding: 4px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--ff);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.lang-toggle-btn:hover {
+  background: rgba(125, 220, 149, 0.22);
+  border-color: var(--leaf);
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(125, 220, 149, 0.3);
+}
+.flag-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lang-toggle-btn .round-flag {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  display: block;
+}
+.flag-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--txt);
+  letter-spacing: 0.02em;
+}
+@media (max-width: 520px) {
+  .flag-text { display: none; }
+  .lang-toggle-btn { padding: 4px 7px; }
+}
+
 /* ============ 4. HERO ============ */
 .hero{min-height:min(100svh,940px);padding:0;display:grid;align-items:center;position:relative;overflow:hidden}
 .herosvg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
@@ -486,6 +543,73 @@ html, body {
         <span class="nq-ar-glyph">ع</span>
         <span class="nq-ar-val" id="arScaleVal">100%</span>
       </button>
+    <button type="button" class="lang-toggle-btn" id="langToggleBtn" aria-label="Toggle language between English and Norwegian" title="Switch language / Bytt språk">
+      <span class="flag-wrap t-en">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+          <clipPath id="noRoundTop"><circle cx="18" cy="18" r="18"/></clipPath>
+          <g clip-path="url(#noRoundTop)">
+            <rect width="36" height="36" fill="#BA0C2F"/>
+            <rect x="10" y="0" width="7" height="36" fill="#FFFFFF"/>
+            <rect x="0" y="14.5" width="36" height="7" fill="#FFFFFF"/>
+            <rect x="11.75" y="0" width="3.5" height="36" fill="#00205B"/>
+            <rect x="0" y="16.25" width="36" height="3.5" fill="#00205B"/>
+          </g>
+        </svg>
+        <span class="flag-text">Norsk</span>
+      </span>
+      <span class="flag-wrap t-no">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+          <clipPath id="usRoundTop"><circle cx="18" cy="18" r="18"/></clipPath>
+          <g clip-path="url(#usRoundTop)">
+            <rect width="36" height="36" fill="#B22234"/>
+            <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+            <rect width="16" height="19.4" fill="#3C3B6E"/>
+            <g fill="#FFFFFF">
+              <circle cx="3.8" cy="4" r="1"/>
+              <circle cx="8" cy="4" r="1"/>
+              <circle cx="12.2" cy="4" r="1"/>
+              <circle cx="5.9" cy="7.2" r="1"/>
+              <circle cx="10.1" cy="7.2" r="1"/>
+              <circle cx="3.8" cy="10.4" r="1"/>
+              <circle cx="8" cy="10.4" r="1"/>
+              <circle cx="12.2" cy="10.4" r="1"/>
+              <circle cx="5.9" cy="13.6" r="1"/>
+              <circle cx="10.1" cy="13.6" r="1"/>
+              <circle cx="3.8" cy="16.8" r="1"/>
+              <circle cx="8" cy="16.8" r="1"/>
+              <circle cx="12.2" cy="16.8" r="1"/>
+            </g>
+          </g>
+        </svg>
+        <span class="flag-text">English</span>
+      </span>
+      <span class="flag-wrap t-ur">
+        <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true">
+          <clipPath id="usRoundTopUr"><circle cx="18" cy="18" r="18"/></clipPath>
+          <g clip-path="url(#usRoundTopUr)">
+            <rect width="36" height="36" fill="#B22234"/>
+            <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+            <rect width="16" height="19.4" fill="#3C3B6E"/>
+            <g fill="#FFFFFF">
+              <circle cx="3.8" cy="4" r="1"/>
+              <circle cx="8" cy="4" r="1"/>
+              <circle cx="12.2" cy="4" r="1"/>
+              <circle cx="5.9" cy="7.2" r="1"/>
+              <circle cx="10.1" cy="7.2" r="1"/>
+              <circle cx="3.8" cy="10.4" r="1"/>
+              <circle cx="8" cy="10.4" r="1"/>
+              <circle cx="12.2" cy="10.4" r="1"/>
+              <circle cx="5.9" cy="13.6" r="1"/>
+              <circle cx="10.1" cy="13.6" r="1"/>
+              <circle cx="3.8" cy="16.8" r="1"/>
+              <circle cx="8" cy="16.8" r="1"/>
+              <circle cx="12.2" cy="16.8" r="1"/>
+            </g>
+          </g>
+        </svg>
+        <span class="flag-text">English</span>
+      </span>
+    </button>
   </div>
 </nav>
 
@@ -770,15 +894,39 @@ html, body {
       <div class="grid g2">
         <div class="pcard" id="xrayCard" style="min-height:200px"></div>
         <div class="pcard">
-          <p class="kicker" style="margin-bottom:10px">Do the maths with your class</p>
-          <div class="grid" style="gap:12px">
-            <div class="trapline"><span>Words in the āyah</span><b class="b" style="letter-spacing:0">15</b></div>
-            <div class="trapline"><span>Distinct roots</span><b class="b" style="letter-spacing:0">11</b></div>
-            <div class="trapline"><span>Particles (no root)</span><b class="b" style="letter-spacing:0">3</b></div>
+          <div class="t-en">
+            <p class="kicker" style="margin-bottom:10px">Do the maths with your class</p>
+            <div class="grid" style="gap:12px">
+              <div class="trapline"><span>Words in the āyah</span><b class="b" style="letter-spacing:0">15</b></div>
+              <div class="trapline"><span>Distinct roots</span><b class="b" style="letter-spacing:0">11</b></div>
+              <div class="trapline"><span>Particles (no root)</span><b class="b" style="letter-spacing:0">3</b></div>
+            </div>
+            <p class="mut" style="margin-bottom:0">Learn 11 roots today and this āyah becomes <b>yours</b> — plus every
+              other āyah that uses them: <b class="ar">شَجَرَة</b> (27×), <b class="ar">مَثَل</b> (169×),
+              <b class="ar">كَلِمَة</b> (75×)…</p>
           </div>
-          <p class="mut" style="margin-bottom:0">Learn 11 roots today and this āyah becomes <b>yours</b> — plus every
-            other āyah that uses them: <b class="ar">شَجَرَة</b> (27×), <b class="ar">مَثَل</b> (169×),
-            <b class="ar">كَلِمَة</b> (75×)…</p>
+          <div class="t-no">
+            <p class="kicker" style="margin-bottom:10px">Gjør regnestykket med klassen din</p>
+            <div class="grid" style="gap:12px">
+              <div class="trapline"><span>Ord i verset</span><b class="b" style="letter-spacing:0">15</b></div>
+              <div class="trapline"><span>Ulike røtter</span><b class="b" style="letter-spacing:0">11</b></div>
+              <div class="trapline"><span>Partikler (uten rot)</span><b class="b" style="letter-spacing:0">3</b></div>
+            </div>
+            <p class="mut" style="margin-bottom:0">Lær 11 røtter i dag, og dette verset blir <b>ditt</b> – sammen med alle
+              andre vers som bruker dem: <b class="ar">شَجَرَة</b> (27×), <b class="ar">مَثَل</b> (169×),
+              <b class="ar">كَلِمَة</b> (75×)…</p>
+          </div>
+          <div class="t-ur">
+            <p class="kicker" style="margin-bottom:10px">کلاس کے ساتھ الفاظ کا حساب لگائیں</p>
+            <div class="grid" style="gap:12px">
+              <div class="trapline"><span>آیت کے کل الفاظ</span><b class="b" style="letter-spacing:0">15</b></div>
+              <div class="trapline"><span>منفرد جذور</span><b class="b" style="letter-spacing:0">11</b></div>
+              <div class="trapline"><span>حروف (بغیر روٹ)</span><b class="b" style="letter-spacing:0">3</b></div>
+            </div>
+            <p class="mut" style="margin-bottom:0">آج صرف 11 جذور سمجھ لیں تو یہ آیت <b>آپ کی اپنی</b> بن جائے گی — اور ساتھ ہی وہ
+              تمام آیات بھی جن میں یہ الفاظ آئے ہیں: <b class="ar">شَجَرَة</b> (27 بار)، <b class="ar">مَثَل</b> (169 بار)،
+              <b class="ar">كَلِمَة</b> (75 بار)…</p>
+          </div>
         </div>
       </div>
     </div>
@@ -793,56 +941,7 @@ html, body {
       <h2>Four traps that fool <span class="grad">every beginner</span></h2>
       <p class="lead">Teach these early. They turn “I can't find the root” into “ah, it's a weak root”.</p>
     </div>
-    <div class="grid g2" style="margin-top:32px">
-      <div class="card reveal">
-        <div class="badge sky">Trap 1</div>
-        <h3 style="margin-top:14px">The hiding weak letters <span class="ar mut">و / ي / ا</span></h3>
-        <p class="mut">They vanish, stretch, or turn into alif. Find a sibling word and they reappear.</p>
-        <div class="trap">
-          <div class="trapline"><span class="a">قَالَ</span><span class="b">ق و ل</span></div>
-          <div class="trapline"><span class="a">بَاعَ</span><span class="b">ب ي ع</span></div>
-          <div class="trapline"><span class="a">دَعَا</span><span class="b">د ع و</span></div>
-          <div class="trapline"><span class="a">صَلَاة</span><span class="b">ص ل و</span></div>
-          <div class="trapline"><span class="a">زَكَاة</span><span class="b">ز ك و</span></div>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="badge rose">Trap 2</div>
-        <h3 style="margin-top:14px">The shadda hides a twin <span class="ar mut">مُضَعَّف</span></h3>
-        <p class="mut">A doubled letter is <b>two letters</b> of the root wearing one hat.</p>
-        <div class="trap">
-          <div class="trapline"><span class="a">رَدَّ</span><span class="b">ر د د</span></div>
-          <div class="trapline"><span class="a">رَبّ</span><span class="b">ر ب ب</span></div>
-          <div class="trapline"><span class="a">مَسَّ</span><span class="b">م س س</span></div>
-          <div class="trapline"><span class="a">حَجّ</span><span class="b">ح ج ج</span></div>
-          <div class="trapline"><span class="a">أَشَدّ</span><span class="b">ش د د</span></div>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="badge gold">Trap 3</div>
-        <h3 style="margin-top:14px">Hamzah in disguise <span class="ar mut">أ إ آ ء ئ ؤ</span></h3>
-        <p class="mut">All of these are the <b>same root letter</b> <b class="ar">أ</b> in different costumes.</p>
-        <div class="trap">
-          <div class="trapline"><span class="a">آمَنَ / إِيمَان / مُؤْمِن</span><span class="b">أ م ن</span></div>
-          <div class="trapline"><span class="a">سُئِلَ / مَسْؤُول</span><span class="b">س أ ل</span></div>
-          <div class="trapline"><span class="a">أَخَذَ / مُؤَاخَذَة</span><span class="b">أ خ ذ</span></div>
-          <div class="trapline"><span class="a">قُرْآن / اقْرَأْ</span><span class="b">ق ر أ</span></div>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="badge">Trap 4</div>
-        <h3 style="margin-top:14px">Look-alikes that are <em>not</em> family</h3>
-        <p class="mut">Same first letters, different third letter = different tree entirely. Always confirm all three.</p>
-        <div class="trap">
-          <div class="trapline"><span class="a">عَلِمَ · knew</span><span class="b">ع ل م</span></div>
-          <div class="trapline"><span class="a">عَلَا · rose high</span><span class="b">ع ل و</span></div>
-          <div class="trapline"><span class="a">مَلَك · owned</span><span class="b">م ل ك</span></div>
-          <div class="trapline"><span class="a">مَلَأ · filled</span><span class="b">م ل أ</span></div>
-        </div>
-        <p class="mut" style="margin-bottom:0;font-size:.92rem">Bonus: four-letter roots exist —
-          <b class="ar">وَسْوَسَ ← و س و س</b>، <b class="ar">زَلْزَلَ ← ز ل ز ل</b>، <b class="ar">طَمْأَنَ ← ط م أ ن</b>.</p>
-      </div>
-    </div>
+    <div class="grid g2" id="trapsGrid" style="margin-top:32px"></div>
   </div>
 </section>
 
@@ -872,40 +971,107 @@ html, body {
     <div class="grid g3" id="activityGrid" style="margin-top:32px"></div>
 
     <div class="lab reveal" style="margin-top:34px">
-      <p class="kicker">Lesson shape · 45 minutes</p>
-      <h3 style="margin-top:0">One root per lesson. Every lesson the same rhythm.</h3>
-      <div class="tl">
-        <div class="tlrow"><b>0–5 min</b><p><b>Hook.</b> Show one āyah on the screen with 3 words from the same root
-          highlighted. Ask: “what do these three have in common?” Let them argue.</p></div>
-        <div class="tlrow"><b>5–12 min</b><p><b>Plant it.</b> Draw the tree on the board. Write the 3 letters in the
-          soil. Give the <em>core sense</em> in one short English phrase (e.g. ك ت ب = “making a lasting mark”).</p></div>
-        <div class="tlrow"><b>12–22 min</b><p><b>Derive.</b> Students fill the branches using the moulds:
-          فَاعِل (doer), مَفْعُول (done-to), مَفْعَل (place), فَعِيل (quality). Wrong-but-logical answers are gold —
-          discuss why Arabic didn't use them.</p></div>
-        <div class="tlrow"><b>22–32 min</b><p><b>Leaf hunt.</b> In pairs, open the muṣḥaf at one page and find every
-          word from today's root. Board tally. Fastest pair reads their āyah aloud.</p></div>
-        <div class="tlrow"><b>32–40 min</b><p><b>Game.</b> Root Relay or Odd Leaf Out (see cards above). Loud, fast,
-          teams, points.</p></div>
-        <div class="tlrow"><b>40–45 min</b><p><b>Seed Bank + duʿāʾ.</b> Everyone completes their notebook page and
-          writes one duʿāʾ using today's root (e.g. <span class="ar">يَا غَفُور، اغْفِرْ لِي</span>). Exit ticket:
-          3 words → find the root.</p></div>
+      <div class="t-en">
+        <p class="kicker">Lesson shape · 45 minutes</p>
+        <h3 style="margin-top:0">One root per lesson. Every lesson the same rhythm.</h3>
+        <div class="tl">
+          <div class="tlrow"><b>0–5 min</b><p><b>Hook.</b> Show one āyah on the screen with 3 words from the same root
+            highlighted. Ask: “what do these three have in common?” Let them argue.</p></div>
+          <div class="tlrow"><b>5–12 min</b><p><b>Plant it.</b> Draw the tree on the board. Write the 3 letters in the
+            soil. Give the <em>core sense</em> in one short English phrase (e.g. ك ت ب = “making a lasting mark”).</p></div>
+          <div class="tlrow"><b>12–22 min</b><p><b>Derive.</b> Students fill the branches using the moulds:
+            فَاعِل (doer), مَفْعُول (done-to), مَفْعَل (place), فَعِيل (quality). Wrong-but-logical answers are gold —
+            discuss why Arabic didn't use them.</p></div>
+          <div class="tlrow"><b>22–32 min</b><p><b>Leaf hunt.</b> In pairs, open the muṣḥaf at one page and find every
+            word from today's root. Board tally. Fastest pair reads their āyah aloud.</p></div>
+          <div class="tlrow"><b>32–40 min</b><p><b>Game.</b> Root Relay or Odd Leaf Out (see cards above). Loud, fast,
+            teams, points.</p></div>
+          <div class="tlrow"><b>40–45 min</b><p><b>Seed Bank + duʿāʾ.</b> Everyone completes their notebook page and
+            writes one duʿāʾ using today's root (e.g. <span class="ar">يَا غَفُور، اغْفِرْ لِي</span>). Exit ticket:
+            3 words → find the root.</p></div>
+        </div>
       </div>
+
+      <div class="t-no">
+        <p class="kicker">Leksjonsopplegg · 45 minutter</p>
+        <h3 style="margin-top:0">Én rot per time. Samme trygge rytme hver gang.</h3>
+        <div class="tl">
+          <div class="tlrow"><b>0–5 min</b><p><b>Knaggen.</b> Vis et vers på skjermen med tre ord fra samme rot
+            uthevet. Spør: «Hva har disse tre til felles?» La elevene resonnere.</p></div>
+          <div class="tlrow"><b>5–12 min</b><p><b>Plant frøet.</b> Tegn treet på tavlen. Skriv de tre bokstavene i
+            jorden. Gi <em>kjerneidéen</em> med en kort setning (f.eks. ك ت ب = «å sette et varig merke»).</p></div>
+          <div class="tlrow"><b>12–22 min</b><p><b>Avled ordene.</b> Elevene fyller grenene med mønstrene:
+            فَاعِل (den som gjør), مَفْعُول (den det gjøres mot), مَفْعَل (sted), فَعِيل (egenskap). Feil, men logiske svar er gull –
+            drøft hvorfor språket valgte annerledes.</p></div>
+          <div class="tlrow"><b>22–32 min</b><p><b>Bladjakt.</b> Parvis åpner de Koranen på en bestemt side og finner
+            hvert ord fra dagens rot. Raskeste par leser verset sitt høyt for klassen.</p></div>
+          <div class="tlrow"><b>32–40 min</b><p><b>Lek og konkurranse.</b> Rot-stafett eller Finn luringen (se kortene over).
+            Høyt tempo, lagånd og poeng.</p></div>
+          <div class="tlrow"><b>40–45 min</b><p><b>Frøbank + duʿāʾ.</b> Alle fyller ut notatboken sin og
+            skriver én bønn med dagens rot (f.eks. <span class="ar">يَا غَفُور، اغْفِرْ لِي</span>). Utsjekk:
+            finn roten i 3 ord.</p></div>
+        </div>
+      </div>
+
+      <div class="t-ur">
+        <p class="kicker">سبق کا خاکہ · 45 منٹ</p>
+        <h3 style="margin-top:0">ہر سبق میں ایک جذر۔ ہر روز ایک ہی منظم طریقہ۔</h3>
+        <div class="tl">
+          <div class="tlrow"><b>0–5 منٹ</b><p><b>توجہ حاصل کرنا۔</b> اسکرین پر ایک آیت دکھائیں جس میں ایک ہی جذر کے تین الفاظ نمایاں ہوں۔ پوچھیں: «ان تینوں میں کیا بات مشترک ہے؟» انہیں سوچنے دیں۔</p></div>
+          <div class="tlrow"><b>5–12 منٹ</b><p><b>بیج بونا۔</b> وائٹ بورڈ پر درخت بنائیں۔ مٹی میں تین حروف لکھیں۔ ایک مختصر جملے میں <em>بنیادی مفہوم</em> سمجھائیں (جیسے ك ت ب = «دیرپا نشان لگانا»)۔</p></div>
+          <div class="tlrow"><b>12–22 منٹ</b><p><b>شاخیں نکالنا۔</b> طلبہ سانچوں کی مدد سے شاخیں بھریں: فَاعِل (کام کرنے والا)، مَفْعُول (جس پر کام ہوا)، مَفْعَل (جگہ)، فَعِيل (صفت)۔</p></div>
+          <div class="tlrow"><b>22–32 منٹ</b><p><b>پتوں کا شکار۔</b> جوڑیاں مصحف کا کوئی صفحہ کھولیں اور آج کے جذر کا ہر لفظ تلاش کریں۔ سب سے تیز جوڑی اپنی آیت تلاوت کرے۔</p></div>
+          <div class="tlrow"><b>32–40 منٹ</b><p><b>کھیل اور مقابلہ۔</b> روٹ ریلے یا اجنبی پتے کی تلاش (اوپر والے کارڈز دیکھیں)۔ پرجوش اور تیز رفتار مشق۔</p></div>
+          <div class="tlrow"><b>40–45 منٹ</b><p><b>سیڈ بینک اور دعا۔</b> سبھی طلبہ اپنی نوٹ بک کا صفحہ مکمل کریں اور آج کے روٹ سے دعا لکھیں (مثلاً <span class="ar">يَا غَفُور، اغْفِرْ لِي</span>)۔ رخصتی ٹکٹ: 3 الفاظ کا جذر بتائیں۔</p></div>
+        </div>
+      </div>
+
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
-        <button class="btn p" id="printBtn">🖨 Print the Seed Bank worksheet</button>
-        <a class="btn s" href="#quiz">Use the quiz as an exit ticket →</a>
+        <button class="btn p" id="printBtn">
+          <span class="t-en">🖨 Print the Seed Bank worksheet</span>
+          <span class="t-no">🖨 Skriv ut Frøbank-oppgavearket</span>
+          <span class="t-ur">🖨 سیڈ بینک ورک شیٹ پرنٹ کریں</span>
+        </button>
+        <a class="btn s" href="#quiz">
+          <span class="t-en">Use the quiz as an exit ticket →</span>
+          <span class="t-no">Bruk quizen som utsjekk →</span>
+          <span class="t-ur">کوئز کو رخصتی ٹیسٹ بنائیں →</span>
+        </a>
       </div>
     </div>
 
     <!-- printable -->
     <div class="worksheet">
-      <h2>Seed Bank · صَفْحَةُ الجَذْر</h2>
-      <p>Name: ______________________ &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Root of the week: ____________</p>
-      <p>1 · The three letters: ______  ______  ______ &nbsp;&nbsp; 2 · Core idea in my own words: ____________________</p>
-      <p>3 · Draw your tree. Put one derived word on each leaf (aim for 8).</p>
-      <div style="height:260px;border:1px solid #999"></div>
-      <p>4 · Three āyāt where I met this root (sūrah : āyah): ______________ , ______________ , ______________</p>
-      <p>5 · One duʿāʾ I can make using this root: ______________________________________________</p>
-      <p>6 · A modern-Arabic word from the same root: ______________________</p>
+      <div class="t-en">
+        <h2>Seed Bank · صَفْحَةُ الجَذْر</h2>
+        <p>Name: ______________________ &nbsp;&nbsp; Date: ____________ &nbsp;&nbsp; Root of the week: ____________</p>
+        <p>1 · The three letters: ______  ______  ______ &nbsp;&nbsp; 2 · Core idea in my own words: ____________________</p>
+        <p>3 · Draw your tree. Put one derived word on each leaf (aim for 8).</p>
+        <div style="height:260px;border:1px solid #999"></div>
+        <p>4 · Three āyāt where I met this root (sūrah : āyah): ______________ , ______________ , ______________</p>
+        <p>5 · One duʿāʾ I can make using this root: ______________________________________________</p>
+        <p>6 · A modern-Arabic word from the same root: ______________________</p>
+      </div>
+      <div class="t-no">
+        <h2>Frøbank · صَفْحَةُ الجَذْر</h2>
+        <p>Navn: ______________________ &nbsp;&nbsp; Dato: ____________ &nbsp;&nbsp; Ukens rot: ____________</p>
+        <p>1 · De tre bokstavene: ______  ______  ______ &nbsp;&nbsp; 2 · Kjerneidé med egne ord: ____________________</p>
+        <p>3 · Tegn treet ditt. Skriv ett avledet ord på hvert blad (prøv å få 8).</p>
+        <div style="height:260px;border:1px solid #999"></div>
+        <p>4 · Tre vers hvor jeg møtte denne roten (surah : vers): ______________ , ______________ , ______________</p>
+        <p>5 · Én duʿāʾ jeg kan gjøre med denne roten: ______________________________________________</p>
+        <p>6 · Et moderne arabisk ord fra samme rot: ______________________</p>
+      </div>
+      <div class="t-ur">
+        <h2>سیڈ بینک · صَفْحَةُ الجَذْر</h2>
+        <p>نام: ______________________ &nbsp;&nbsp; تاریخ: ____________ &nbsp;&nbsp; ہفتے کا جذر: ____________</p>
+        <p>1 · تین حروفِ اصلیہ: ______  ______  ______ &nbsp;&nbsp; 2 · بنیادی مفہوم اپنے الفاظ میں: ____________________</p>
+        <p>3 · اپنا درخت بنائیے۔ ہر پتے پر ایک مشتق لفظ لکھیے (کم از کم 8 الفاظ)۔</p>
+        <div style="height:260px;border:1px solid #999"></div>
+        <p>4 · تین آیات جن میں یہ روٹ آیا (سورت : آیت): ______________ , ______________ , ______________</p>
+        <p>5 · ایک دعا جو میں اس روٹ سے مانگ سکتا ہوں: ______________________________________________</p>
+        <p>6 · اسی روٹ سے جدید عربی کا کوئی عام لفظ: ______________________</p>
+      </div>
     </div>
   </div>
 </section>
@@ -950,20 +1116,38 @@ html, body {
       <div>
         <p class="q" style="font-size:clamp(22px,2.6vw,32px);direction:rtl;text-align:right;color:#fff6e6;margin:0 0 10px">
           رَبِّ زِدْنِي عِلْمًا</p>
-        <p class="mut" style="margin:0">“My Lord, increase me in knowledge.” — Ṭā-Hā 20:114</p>
+        <p class="mut t-en" style="margin:0">“My Lord, increase me in knowledge.” — Ṭā-Hā 20:114</p>
+        <p class="mut t-no" style="margin:0">«Min Herre, øk min kunnskap.» — Tā-Hā 20:114</p>
+        <p class="mut t-ur" style="margin:0">”اے میرے رب، میرے علم میں اضافہ فرما۔“ — طٰہٰ 20:114</p>
       </div>
       <div>
-        <h3 style="font-size:1.15rem">Go deeper</h3>
-        <p class="mut" style="margin:0 0 8px">Root-organised references your students can grow into:
+        <h3 style="font-size:1.15rem">
+          <span class="t-en">Go deeper</span>
+          <span class="t-no">Gå dypere</span>
+          <span class="t-ur">مزید گہرائی میں جائیں</span>
+        </h3>
+        <p class="mut t-en" style="margin:0 0 8px">Root-organised references your students can grow into:
           <b>Qur'ānic Arabic Corpus</b> (word-by-word roots), <b>al-Muʿjam al-Mufahras</b> (ʿAbd al-Bāqī),
           <b>Mufradāt al-Qurʾān</b> (al-Rāghib al-Iṣfahānī), <b>Lisān al-ʿArab</b>, and <b>Lane's Lexicon</b> —
           all arranged by root, which is exactly why this skill unlocks them.</p>
-        <p class="mut" style="font-size:.86rem;margin:0">Word meanings here are simplified for classroom use; frequency
+        <p class="mut t-no" style="margin:0 0 8px">Klassiske ordbøker organisert etter rot:
+          <b>Qur'anic Arabic Corpus</b>, <b>al-Muʿjam al-Mufahras</b>, <b>Mufradāt al-Qurʾān</b>,
+          <b>Lisān al-ʿArab</b> og <b>Lane's Lexicon</b> — alle ordnet etter rot, som er nøkkelen til å forstå dem.</p>
+        <p class="mut t-ur" style="margin:0 0 8px">جذور پر مبنی مستند لغات:
+          <b>قرآنی عربی کارپس</b>، <b>المعجم المفهرس</b> (عبد الباقی)، <b>مفردات القرآن</b> (راغب اصفہانی)،
+          <b>لسان العرب</b> اور <b>لینز لغت</b> — یہ تمام کتب جذور پر مبنی ہیں۔</p>
+        <p class="mut t-en" style="font-size:.86rem;margin:0">Word meanings here are simplified for classroom use; frequency
           numbers are approximate. Always verify a root in a proper lexicon before teaching it as fact.</p>
+        <p class="mut t-no" style="font-size:.86rem;margin:0">Ordforklaringene er tilpasset undervisning; forekomster er omtrentlige. Sjekk alltid i en klassisk ordbok.</p>
+        <p class="mut t-ur" style="font-size:.86rem;margin:0">معانی تدریسی مقاصد کے لیے آسان رکھے گئے ہیں۔ تدریس سے قبل ہمیشہ مستند لغات سے تصدیق کر لیں۔</p>
       </div>
     </div>
-    <p class="mut" style="text-align:center;margin:40px 0 0;font-size:.86rem">
+    <p class="mut t-en" style="text-align:center;margin:40px 0 0;font-size:.86rem">
       شَجَرَةُ الجُذُور · The Root Tree — an interactive lesson page. Built for Qur'ān teachers and their students. 🌿</p>
+    <p class="mut t-no" style="text-align:center;margin:40px 0 0;font-size:.86rem">
+      شَجَرَةُ الجُذُور · The Root Tree — en interaktiv læringsside for lærere og studenter av Koranen. 🌿</p>
+    <p class="mut t-ur" style="text-align:center;margin:40px 0 0;font-size:.86rem">
+      شَجَرَةُ الجُذُور · شجرۂ الجذر — اساتذہ اور طلبہ کے لیے ایک انٹرایکٹو تعلیمی کاوش۔ 🌿</p>
     <div class="nq-footer-badge">
       <div class="nq-footer-logo-row">
         <svg class="nq-mini-logo" style="width:24px;height:24px" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1042,7 +1226,7 @@ html, body {
         </div>
       </div>
 
-      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.51 (updated 2026-09-28 23:15)</div>
+      <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.52 (updated 2026-09-29 11:32)</div>
     </div>
   </div>
 </footer>
@@ -2256,6 +2440,224 @@ function renderQuizQuestion(){
 })();
 
 /* =====================================================================
+   TRAPS & ACTIVITIES DATA + RENDERERS
+===================================================================== */
+const TRAPS = [
+  {
+    badge_en: 'Trap 1', badge_no: 'Felle 1', badge_ur: 'مغالطہ 1', badge_cls: 'sky',
+    title_ar: 'و / ي / ا',
+    title_en: 'The hiding weak letters',
+    title_no: 'De gjemte svake bokstavene',
+    title_ur: 'چھپے ہوئے حروفِ علت',
+    desc_en: 'They vanish, stretch, or turn into alif. Find a sibling word and they reappear.',
+    desc_no: 'De forsvinner, strekker seg eller blir til en alif. Finn et søskenord, og de dukker opp igjen.',
+    desc_ur: 'یہ غائب ہو جاتے ہیں یا الف میں بدل جاتے ہیں۔ خاندان کا دوسرا لفظ دیکھیں تو فورا سامنے آ جاتے ہیں۔',
+    lines: [
+      { a: 'قَالَ', b: 'ق و ل' },
+      { a: 'بَاعَ', b: 'ب ي ع' },
+      { a: 'دَعَا', b: 'د ع و' },
+      { a: 'صَلَاة', b: 'ص ل و' },
+      { a: 'زَكَاة', b: 'ز ك و' }
+    ]
+  },
+  {
+    badge_en: 'Trap 2', badge_no: 'Felle 2', badge_ur: 'مغالطہ 2', badge_cls: 'rose',
+    title_ar: 'مُضَعَّف',
+    title_en: 'The shadda hides a twin',
+    title_no: 'Shaddah skjuler en tvilling',
+    title_ur: 'تشدید میں جڑواں حرف چھپا ہے',
+    desc_en: 'A doubled letter is <b>two letters</b> of the root wearing one hat.',
+    desc_no: 'En dobbel konsonant er <b>to bokstaver</b> i roten som deler samme hatt.',
+    desc_ur: 'مشدد حرف دراصل روٹ کے <b>دو ایک جیسے حروف</b> ہیں جو ایک ہی ٹوپی پہنے ہوئے ہیں۔',
+    lines: [
+      { a: 'رَدَّ', b: 'ر د د' },
+      { a: 'رَبّ', b: 'ر ب ب' },
+      { a: 'مَسَّ', b: 'م س س' },
+      { a: 'حَجّ', b: 'ح ج ج' },
+      { a: 'أَشَدّ', b: 'ش د د' }
+    ]
+  },
+  {
+    badge_en: 'Trap 3', badge_no: 'Felle 3', badge_ur: 'مغالطہ 3', badge_cls: 'gold',
+    title_ar: 'أ إ آ ء ئ ؤ',
+    title_en: 'Hamzah in disguise',
+    title_no: 'Hamzah i forkledning',
+    title_ur: 'ہمزہ کے بدلتے روپ',
+    desc_en: 'All of these are the <b>same root letter</b> <b class="ar">أ</b> in different costumes.',
+    desc_no: 'Alle disse er <b>samme rotbokstav</b> <b class="ar">أ</b> i ulike drakter.',
+    desc_ur: 'یہ تمام مختلف شکلیں دراصل <b>ایک ہی حرف</b> <b class="ar">أ</b> کے مختلف لباس ہیں۔',
+    lines: [
+      { a: 'آمَنَ / إِيمَان / مُؤْمِن', b: 'أ م ن' },
+      { a: 'سُئِلَ / مَسْؤُول', b: 'س أ ل' },
+      { a: 'أَخَذَ / مُؤَاخَذَة', b: 'أ خ ذ' },
+      { a: 'قُرْآن / اقْرَأْ', b: 'ق ر أ' }
+    ]
+  },
+  {
+    badge_en: 'Trap 4', badge_no: 'Felle 4', badge_ur: 'مغالطہ 4', badge_cls: '',
+    title_ar: '',
+    title_en: 'Look-alikes that are <em>not</em> family',
+    title_no: 'Ord som ligner, men <em>ikke</em> er i familie',
+    title_ur: 'ہم شکل الفاظ جو رشتہ دار <em>نہیں</em> ہیں',
+    desc_en: 'Same first letters, different third letter = different tree entirely. Always confirm all three.',
+    desc_no: 'Like forbokstaver, men ulik siste bokstav = et helt annet tre. Sjekk alltid alle tre.',
+    desc_ur: 'شروع کے دو حروف ایک جیسے مگر تیسرا مختلف = بالکل الگ درخت۔ ہمیشہ تینوں حروف کی تصدیق کریں۔',
+    lines_en: [
+      { a: 'عَلِمَ · knew', b: 'ع ل م' },
+      { a: 'عَلَا · rose high', b: 'ع ل و' },
+      { a: 'مَلَك · owned', b: 'م ل ك' },
+      { a: 'مَلَأ · filled', b: 'م ل أ' }
+    ],
+    lines_no: [
+      { a: 'عَلِمَ · visste', b: 'ع ل م' },
+      { a: 'عَلَا · steg høyt', b: 'ع ل و' },
+      { a: 'مَلَك · eide', b: 'م ل ك' },
+      { a: 'مَلَأ · fylte', b: 'م ل أ' }
+    ],
+    lines_ur: [
+      { a: 'عَلِمَ · جانا', b: 'ع ل م' },
+      { a: 'عَلَا · بلند ہوا', b: 'ع ل و' },
+      { a: 'مَلَك · مالک بنا', b: 'م ل ك' },
+      { a: 'مَلَأ · بھر دیا', b: 'م ل أ' }
+    ],
+    bonus_en: 'Bonus: four-letter roots exist — <b class="ar">وَسْوَسَ ← و س و س</b>, <b class="ar">زَلْزَلَ ← ز ل ز ل</b>, <b class="ar">طَمْأَنَ ← ط م أ ن</b>.',
+    bonus_no: 'Bonus: Fire-bokstavers røtter finnes også — <b class="ar">وَسْوَسَ ← و س و س</b>, <b class="ar">زَلْزَلَ ← ز ل ز ل</b>, <b class="ar">طَمْأَنَ ← ط م أ ن</b>.',
+    bonus_ur: 'اضافی نکتہ: چار حرفی جذور (رباعی) بھی ہوتے ہیں — <b class="ar">وَسْوَسَ ← و س و س</b>، <b class="ar">زَلْزَلَ ← ز ل ز ل</b>، <b class="ar">طَمْأَنَ ← ط م أ ن</b>۔'
+  }
+];
+
+function renderTraps(){
+  const grid = $('#trapsGrid');
+  if(!grid) return;
+  grid.innerHTML = TRAPS.map(t => {
+    const badge = LANG==='ur'?t.badge_ur:(LANG==='no'?t.badge_no:t.badge_en);
+    const title = LANG==='ur'?t.title_ur:(LANG==='no'?t.title_no:t.title_en);
+    const desc = LANG==='ur'?t.desc_ur:(LANG==='no'?t.desc_no:t.desc_en);
+    const titleAr = t.title_ar ? ` <span class="ar mut">${t.title_ar}</span>` : '';
+    const badgeClass = t.badge_cls ? `badge ${t.badge_cls}` : 'badge';
+    
+    let lines = t.lines;
+    if(!lines){
+      lines = LANG==='ur'?t.lines_ur:(LANG==='no'?t.lines_no:t.lines_en);
+    }
+    const linesHtml = lines.map(l => `<div class="trapline"><span class="a">${l.a}</span><span class="b">${l.b}</span></div>`).join('');
+    
+    let bonusHtml = '';
+    if(t.bonus_en){
+      const bonus = LANG==='ur'?t.bonus_ur:(LANG==='no'?t.bonus_no:t.bonus_en);
+      bonusHtml = `<p class="mut" style="margin-bottom:0;font-size:.92rem;margin-top:14px">${bonus}</p>`;
+    }
+
+    return `<div class="card reveal">
+      <div class="${badgeClass}">${badge}</div>
+      <h3 style="margin-top:14px">${title}${titleAr}</h3>
+      <p class="mut">${desc}</p>
+      <div class="trap">${linesHtml}</div>
+      ${bonusHtml}
+    </div>`;
+  }).join('');
+}
+
+const ACTS = [
+  {
+    tag_en: 'Every lesson', tag_no: 'Hver leksjon', tag_ur: 'ہر سبق',
+    t_en: '1 · The Seed Bank notebook',
+    t_no: '1 · Notatboken: Frøbanken',
+    t_ur: '1 · سیڈ بینک نوٹ بک',
+    b_en: 'One page per root, for the whole year. Three letters in the soil, core meaning, a drawn tree, and a new leaf added every time the student meets the root in a new āyah. By June they own a forest they built themselves.',
+    b_no: 'Én side per rot gjennom hele året. Tre bokstaver i jorden, kjerneidéen, et tegnet tre, og et nytt blad for hver gang eleven møter roten i et nytt vers. Innen skoleslutt eier de en hel skog de har bygget selv.',
+    b_ur: 'پورے سال کے لیے ہر جذر کا ایک صفحہ۔ مٹی میں تین حروف، بنیادی مفہوم، ہاتھ سے بنا درخت، اور جب بھی طالب علم کسی نئی آیت میں جذر دیکھے، ایک نیا پتہ بنائے۔ سال کے آخر تک ان کے پاس اپنا اگایا ہوا پورا باغ ہوگا۔'
+  },
+  {
+    tag_en: 'Game · 8 min', tag_no: 'Lek · 8 min', tag_ur: 'کھیل · 8 منٹ',
+    t_en: '2 · Root Relay',
+    t_no: '2 · Rot-stafett',
+    t_ur: '2 · روٹ ریلے',
+    b_en: 'Two teams, one root on the board, 60 seconds. Each student runs up and writes ONE derived word. Repeats and non-words are challenged by the other team. Loud, fast, competitive, and pure derivation practice.',
+    b_no: 'To lag, én rot på tavlen, 60 sekunder. Hver elev løper frem og skriver ETT avledet ord. Gjentakelser eller feil ord utfordres av motstanderen. Høylytt, morsomt og lynrask morfologitrening.',
+    b_ur: 'دو ٹیمیں، تختے پر ایک جذر، 60 سیکنڈ۔ ہر طالب علم دوڑ کر ایک مشتق لفظ لکھے۔ دوسری ٹیم دہرائے گئے یا غلط لفظ کو چیلنج کر سکتی ہے۔ پرجوش، تیز رفتار اور حقیقی صرفی مشق۔'
+  },
+  {
+    tag_en: 'Pairs · 5 min', tag_no: 'Pararbeid · 5 min', tag_ur: 'جوڑی دار · 5 منٹ',
+    t_en: '3 · Leaf Hunt in the muṣḥaf',
+    t_no: '3 · Bladjakt i Koranen',
+    t_ur: '3 · مصحف میں پتوں کا شکار',
+    b_en: '“Find every word from ص ب ر on this page.” Pairs, 4 minutes, then a board tally. Trains the eye to see roots at reading speed — the single most transferable skill.',
+    b_no: '«Finn alle ord fra ص ب ر på denne siden.» Parvis, 4 minutter, så felles opptelling. Trener blikket til å oppdage røtter i normal lesehastighet – den mest verdifulle ferdigheten.',
+    b_ur: '“اس صفحے پر ص ب ر سے بننے والے تمام الفاظ تلاش کریں۔” جوڑیاں، 4 منٹ، اور پھر تختے پر گنتی۔ یہ آنکھوں کو تلاوت کی رفتار سے جذور پہچاننے کا عادی بناتی ہے۔'
+  },
+  {
+    tag_en: 'Warm-up · 3 min', tag_no: 'Oppvarming · 3 min', tag_ur: 'آغاز · 3 منٹ',
+    t_en: '4 · Odd Leaf Out',
+    t_no: '4 · Finn luringen',
+    t_ur: '4 · اجنبی پتے کی تلاش',
+    b_en: 'Show four words; three share a root, one is an impostor (عَلِيم، عَالِم، عَالَمِين، عَالِي). Students must justify the answer using the third letter. Brilliant for defeating look-alike traps.',
+    b_no: 'Vis fire ord: Tre deler samme rot, ett er en luring (عَلِيم، عَالِم، عَالَمِين، عَالِي). Elevene må begrunne svaret ut fra den tredje bokstaven. Perfekt for å unngå fellen med like ord.',
+    b_ur: 'چار الفاظ دکھائیں؛ تین کا جذر ایک ہے اور ایک اجنبی ہے (عَلِيم، عَالِم، عَالَمِين، عَالِي)۔ طلبہ کو تیسرے حرف کی بنیاد پر وجہ بتانی ہوگی۔ ہم شکل الفاظ کی الجھن دور کرنے کا بہترین طریقہ۔'
+  },
+  {
+    tag_en: 'Project · 40 min', tag_no: 'Prosjekt · 40 min', tag_ur: 'پروجیکٹ · 40 منٹ',
+    t_en: '5 · Family Tree poster',
+    t_no: '5 · Slektstre-plakat',
+    t_ur: '5 · شجرۂ نسب پوسٹر',
+    b_en: 'Groups of three get one root and A3 paper. Real tree drawing, 8+ leaves, one āyah per leaf, colour-coded by pattern. Display them around the room all term for passive revision.',
+    b_no: 'Grupper på tre får én rot og et stort A3-ark. De tegner et tre, minst 8 blader, ett vers per blad, fargekodet etter mønster. Heng dem opp i klasserommet for daglig repetisjon.',
+    b_ur: 'تین تین کے گروپ، ایک جذر اور بڑا چارٹ پیپر۔ خوبصورت درخت، 8 یا زائد پتے، ہر پتے پر ایک قرآنی آیت، اور وزن کے مطابق رنگ۔ کلاس روم میں آویزاں کیجیے تاکہ مستقل دہرائی ہوتی رہے۔'
+  },
+  {
+    tag_en: 'Hands-on', tag_no: 'Praktisk', tag_ur: 'عملی سرگرمی',
+    t_en: '6 · Mīzān Wheel',
+    t_no: '6 · Mīzān-hjulet',
+    t_ur: '6 · میزان وہیل',
+    b_en: 'A cardboard wheel: outer ring of patterns (فَاعِل، مَفْعُول، مَفْعَل، فَعِيل), inner ring of roots. Spin both, say the word, guess whether Arabic actually uses it, then check in the lexicon.',
+    b_no: 'Et papphjul: Ytre sirkel med mønstre (فَاعِل، مَفْعُول، مَفْعَل، فَعِيل), indre sirkel med røtter. Snurr begge, uttal ordet, gjett om arabisk faktisk bruker det, og slå opp.',
+    b_ur: 'گتے کا ایک گول چکر: باہر اوزان کے سانچے (فَاعِل، مَفْعُول، مَفْعَل، فَعِيل) اور اندر جذور۔ دونوں کو گھمائیں، لفظ بولیں، اندازہ لگائیں کہ کیا عربی میں یہ مستعمل ہے، پھر لغت دیکھیں۔'
+  },
+  {
+    tag_en: 'Closing · 3 min', tag_no: 'Avslutning · 3 min', tag_ur: 'اختتام · 3 منٹ',
+    t_en: '7 · Duʿāʾ from the root',
+    t_no: '7 · Duʿāʾ fra roten',
+    t_ur: '7 · جذر سے دعا',
+    b_en: 'End every lesson by building a duʿāʾ from today\'s root: غ ف ر → يَا غَفَّار، اغْفِرْ لِي. The root instantly becomes worship, not homework. This is the real fruit of the tree.',
+    b_no: 'Avslutt hver time med å forme en duʿāʾ fra dagens rot: غ ف ر → يَا غَفَّار، اغْفِرْ لِي. Roten blir straks til tilbedelse og bønn, ikke bare lekser. Dette er treets sanne frukt.',
+    b_ur: 'ہر سبق کا اختتام اسی جذر سے دعا بنا کر کریں: غ ف ر → يَا غَفَّار، اغْفِرْ لِي۔ یوں یہ علم محض ہوم ورک نہیں بلکہ عبادت بن جاتا ہے۔ یہی اس درخت کا حقیقی پھل ہے۔'
+  },
+  {
+    tag_en: 'Display', tag_no: 'Tavle', tag_ur: 'نوٹس بورڈ',
+    t_en: '8 · Root of the Week board',
+    t_no: '8 · Ukens rot-tavle',
+    t_ur: '8 · ہفتے کا جذر',
+    b_en: 'A dedicated wall space: the three letters huge, and room for students to pin words and āyāt they stumble upon during the week. Offer a small reward for the rarest find.',
+    b_no: 'Et eget hjørne på veggen: De tre bokstavene i stor skrift, og plass der elevene fester lapper med ord og vers de oppdager i løpet av uken. En liten premie for sjeldneste funn.',
+    b_ur: 'کلاس کی دیوار پر ایک مستقل گوشہ: تینوں حروف جلی حروف میں، اور طلبہ ہفتے کے دوران تلاوت میں ملنے والے الفاظ یہاں پن کریں۔ سب سے منفرد لفظ لانے والے کے لیے انعام۔'
+  },
+  {
+    tag_en: 'Assessment', tag_no: 'Vurdering', tag_ur: 'امتحانی تجاویز',
+    t_en: 'Assessment ideas',
+    t_no: 'Idéer til vurdering',
+    t_ur: 'امتحانی تجاویز',
+    b_en: 'Exit ticket: 3 words → find the root (30 seconds). Mid-term: give a root, student must produce doer, done-to, place and one āyah. Final: give an unseen short sūrah and mark 10 roots.',
+    b_no: 'Utsjekk: 3 ord → finn roten (30 sekunder). Halvveis: Gi en rot, eleven må oppgi handlende, handlingens mål, sted og ett vers. Sluttvurdering: Gi en ukjent kort surah og finn 10 røtter.',
+    b_ur: 'کلاس کا اختتام: 3 الفاظ → 30 سیکنڈ میں جذر بتائیں۔ سہ ماہی امتحان: ایک جذر دیں، طالب علم اسم فاعل، اسم مفعول، اسم ظرف اور ایک آیت بتائے۔ فائنل: کوئی سورت دیں اور 10 جذور کی نشان دہی کرائیں۔'
+  }
+];
+
+function renderActivities(){
+  const grid = $('#activityGrid');
+  if(!grid) return;
+  grid.innerHTML = ACTS.map(a => {
+    const tag = LANG==='ur'?a.tag_ur:(LANG==='no'?a.tag_no:a.tag_en);
+    const t = LANG==='ur'?a.t_ur:(LANG==='no'?a.t_no:a.t_en);
+    const b = LANG==='ur'?a.b_ur:(LANG==='no'?a.b_no:a.b_en);
+    return `<div class="card reveal">
+      <div class="badge gold">${tag}</div>
+      <h3 style="font-size:1.2rem;margin-top:14px">${t}</h3>
+      <p class="mut" style="margin:0">${b}</p>
+    </div>`;
+  }).join('');
+}
+
+/* =====================================================================
    11. LANGUAGE SWITCHER IMPLEMENTATION
 ===================================================================== */
 function switchLang(lang){
@@ -2343,6 +2745,7 @@ function switchLang(lang){
   const trK = $('#traps .kicker'); if(trK) trK.textContent = ui.trapsKicker;
   const trH = $('#traps h2'); if(trH) trH.innerHTML = ui.trapsHead;
   const trL = $('#traps .lead'); if(trL) trL.innerHTML = ui.trapsLead;
+  renderTraps();
   
   // Benefits
   const benK = $('#benefits .kicker'); if(benK) benK.textContent = ui.benefitsKicker;
@@ -2354,6 +2757,7 @@ function switchLang(lang){
   const tchK = $('#teach .kicker'); if(tchK) tchK.textContent = ui.teachKicker;
   const tchH = $('#teach h2'); if(tchH) tchH.innerHTML = ui.teachHead;
   const tchL = $('#teach .lead'); if(tchL) tchL.innerHTML = ui.teachLead;
+  renderActivities();
   
   // Quiz
   const qzK = $('#quiz .kicker'); if(qzK) qzK.textContent = ui.quizKicker;
@@ -2363,10 +2767,15 @@ function switchLang(lang){
 }
 
 // Language button listeners
-const bEn=$('#btnLangEn'), bUr=$('#btnLangUr'), bNo=$('#btnLangNo');
+const bEn=$('#btnLangEn'), bUr=$('#btnLangUr'), bNo=$('#btnLangNo'), langToggleBtn=$('#langToggleBtn');
 if(bEn) bEn.addEventListener('click',()=>switchLang('en'));
 if(bUr) bUr.addEventListener('click',()=>switchLang('ur'));
 if(bNo) bNo.addEventListener('click',()=>switchLang('no'));
+if(langToggleBtn) langToggleBtn.addEventListener('click',()=>switchLang(LANG==='no'?'en':'no'));
+
+// Print button listener
+const prBtn=$('#printBtn');
+if(prBtn) prBtn.addEventListener('click',()=>window.print());
 
 // Initial call to apply saved or default language
 switchLang(LANG);
