@@ -172,67 +172,184 @@ h1 .shine{background:linear-gradient(100deg,var(--gold),#fff8e2 35%,var(--emeral
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  width: 300px;
-  background: rgba(4, 22, 28, 0.96);
-  border: 1px solid rgba(247, 205, 118, 0.4);
+  width: 580px;
+  max-width: calc(100vw - 20px);
+  /* 100% SOLID OPAQUE BACKGROUND - ZERO TRANSPARENCY */
+  background: #04161c;
+  border: 1px solid rgba(247, 205, 118, 0.45);
   border-radius: 16px;
-  padding: 8px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(247, 205, 118, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  padding: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 24px rgba(247, 205, 118, 0.2);
   display: none;
   flex-direction: column;
-  gap: 3px;
-  z-index: 100;
-  max-height: 75vh;
-  overflow-y: auto;
+  gap: 8px;
+  z-index: 1000;
 }
 .islam-dropdown-menu.open {
   display: flex;
 }
-.dropdown-header {
-  font-size: 10px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding: 6px 10px 4px;
-  font-weight: 700;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 4px;
+.dropdown-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 4px 8px;
+  border-bottom: 1px solid rgba(247, 205, 118, 0.2);
 }
-.dropdown-item {
+.dropdown-header-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--text);
-  font-size: 12.5px;
-  transition: all .18s ease;
-}
-.dropdown-item:hover {
-  background: rgba(247, 205, 118, 0.15);
-  color: var(--gold);
-  transform: translateX(3px);
-}
-.dropdown-item.active-page {
-  background: rgba(247, 205, 118, 0.22);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
   color: var(--gold);
   font-weight: 700;
 }
-.item-badge {
+.dropdown-count-pill {
   font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.08);
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(38, 224, 143, 0.15);
+  color: #26e08f;
+  border: 1px solid rgba(38, 224, 143, 0.3);
+}
+.dropdown-search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #020c0f;
+  border: 1px solid rgba(247, 205, 118, 0.3);
+  border-radius: 8px;
+  padding: 5px 9px;
+  flex: 1;
+  max-width: 250px;
+  transition: all .2s ease;
+}
+.dropdown-search-box:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(247, 205, 118, 0.25);
+}
+.dropdown-search-box svg {
   color: var(--gold);
   flex-shrink: 0;
 }
-.item-title {
+.dropdown-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  width: 100%;
+  font-family: inherit;
+}
+.dropdown-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.dropdown-search-clear {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+  display: none;
+}
+.dropdown-grid-scroll {
+  max-height: min(65vh, 420px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+}
+.dropdown-grid-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.dropdown-grid-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+.dropdown-grid-scroll::-webkit-scrollbar-thumb {
+  background: rgba(247, 205, 118, 0.3);
+  border-radius: 4px;
+}
+.dropdown-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+.dropdown-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(247, 205, 118, 0.12);
+  color: var(--text);
+  font-size: 12px;
+  transition: all .18s ease;
+  min-height: 46px;
+}
+.dropdown-item:hover {
+  background: rgba(247, 205, 118, 0.15);
+  border-color: rgba(247, 205, 118, 0.45);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+.dropdown-item.active-page {
+  background: rgba(247, 205, 118, 0.22);
+  border-color: var(--gold);
+  color: var(--gold);
+  font-weight: 700;
+}
+.dropdown-item .item-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #26e08f;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 2px;
+}
+.dropdown-item .item-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 500;
+}
+.dropdown-no-results {
+  padding: 24px 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+  grid-column: 1 / -1;
+}
+@media (max-width: 640px) {
+  .islam-dropdown-menu {
+    position: fixed;
+    top: 54px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-width: calc(100vw - 16px);
+    max-height: min(80vh, 520px);
+    padding: 10px;
+  }
+  .dropdown-items-grid {
+    grid-template-columns: 1fr;
+  }
+  .dropdown-header-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .dropdown-search-box {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 /* Arabic Loop Scaler Button */
@@ -651,27 +768,45 @@ footer{position:relative;padding:120px 0 60px;text-align:center;z-index:1;border
       <span>Islam</span>
       <svg class="chevron-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
-    <div class="islam-dropdown-menu" id="islamDropdownMenu">
-      <div class="dropdown-header">Interactive Exhibits</div>
-      <a href="rootwords.html" class="dropdown-item"><span class="item-badge">Root Words</span><span class="item-title">شَجَرَةُ الجُذُور · The Root Tree</span></a>
-      <a href="miraclesQuran.html" class="dropdown-item"><span class="item-badge">Signs &amp; Science</span><span class="item-title">The Signs — Miracles of Qur'an</span></a>
-      <a href="witness.html" class="dropdown-item"><span class="item-badge">Witness</span><span class="item-title">شَهِدَ اللَّهُ · The Divine Testimony</span></a>
-      <a href="proofMessenger.html" class="dropdown-item"><span class="item-badge">Prophethood</span><span class="item-title">Ten Reasons for Muhammad ﷺ</span></a>
-      <a href="jahoolMeaning.html" class="dropdown-item"><span class="item-badge">Linguistics</span><span class="item-title">جَهُولًا · Jahūlā Word Study</span></a>
-      <a href="shortSentenceVerb.html" class="dropdown-item"><span class="item-badge">Grammar</span><span class="item-title">Twelve Words · The Qur'anic Verb</span></a>
-      <a href="sleepAdvice.html" class="dropdown-item"><span class="item-badge">Circadian</span><span class="item-title">The Golden Window · Sleep Science</span></a>
-      <a href="angerControl.html" class="dropdown-item"><span class="item-badge">Psychology</span><span class="item-title">Controlling Anger Toolkit</span></a>
-      <a href="fasting.html" class="dropdown-item"><span class="item-badge">Sanctuary</span><span class="item-title">Ar-Rayyān · Fasting Science</span></a>
-      <a href="hamdShukr.html" class="dropdown-item"><span class="item-badge">Praise</span><span class="item-title">Ḥamd &amp; Shukr · Gratitude Study</span></a>
-      <a href="woeDeny.html" class="dropdown-item"><span class="item-badge">Warning</span><span class="item-title">وَيْلٌ يَوْمَئِذٍ · Woe to the Deniers</span></a>
-      <a href="salah.html" class="dropdown-item active-page"><span class="item-badge">Salah</span><span class="item-title">أَقِمِ الصَّلَاةَ · Five Anchors for Your Day</span></a>
-      <a href="zakat.html" class="dropdown-item"><span class="item-badge">Zakat</span><span class="item-title">الزَّكَاةُ وَالصَّدَقَةُ · The Ripple Foundation</span></a>
-      <a href="Prayer-life-6.html" class="dropdown-item"><span class="item-badge">Life &amp; Prayer</span><span class="item-title">مَحْيَايَ وَمَمَاتِي · Sūrat Al-Anʿām</span></a>
-      <a href="taqwa3-102.html" class="dropdown-item"><span class="item-badge">Taqwa</span><span class="item-title">تَقْوَى · Āl ʿImrān 3:102</span></a>
-      <a href="surah32.html" class="dropdown-item"><span class="item-badge">As-Sajdah</span><span class="item-title">سُورَةُ السَّجْدَة · 32:1–30</span></a>
-      <a href="marriageSign.html" class="dropdown-item"><span class="item-badge">Marriage</span><span class="item-title">هُنَّ لِبَاسٌ · Clothing for One Another</span></a>
-      <a href="insaan76.html" class="dropdown-item"><span class="item-badge">Al-Insān</span><span class="item-title">هَلْ أَتَىٰ · The Unmentioned (76:1)</span></a>
-      <a href="tawheed/index.html" class="dropdown-item"><span class="item-badge">Tawheed</span><span class="item-title">الْأَسْمَاءُ الْحُسْنَىٰ · The 99 Names of Allah</span></a>
+    <div class="islam-dropdown-menu" id="islamDropdownMenu" role="region" aria-label="Islamic Exhibits Menu">
+      <div class="dropdown-header-bar">
+        <div class="dropdown-header-title">
+          <span>Exhibits</span>
+          <span class="dropdown-count-pill" id="dropdownCountPill">20</span>
+        </div>
+        <div class="dropdown-search-box">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="islamDropdownSearch" class="dropdown-search-input" placeholder="Quick find study..." autocomplete="off" aria-label="Filter exhibits">
+          <button type="button" class="dropdown-search-clear" id="dropdownSearchClear" aria-label="Clear search">&times;</button>
+        </div>
+      </div>
+      <div class="dropdown-grid-scroll">
+        <div class="dropdown-items-grid" id="islamDropdownGrid">
+          <a href="rootwords.html" class="dropdown-item" data-keywords="root words roots tree arabic morphology sarf jithr"><span class="item-badge">Root Words</span><span class="item-title">شَجَرَةُ الجُذُور · The Root Tree</span></a>
+          <a href="miraclesQuran.html" class="dropdown-item" data-keywords="miracles signs science ijaz ayaat cosmic historical"><span class="item-badge">Signs &amp; Science</span><span class="item-title">The Signs — Miracles of Qur'an</span></a>
+          <a href="witness.html" class="dropdown-item" data-keywords="witness shahida allah shahadah testimony angels"><span class="item-badge">Witness</span><span class="item-title">شَهِدَ اللَّهُ · The Divine Testimony</span></a>
+          <a href="proofMessenger.html" class="dropdown-item" data-keywords="proof messenger prophethood muhammad ten reasons logic"><span class="item-badge">Prophethood</span><span class="item-title">Ten Reasons for Muhammad ﷺ</span></a>
+          <a href="jahoolMeaning.html" class="dropdown-item" data-keywords="jahool jahula unknowing ahzab morphology faool"><span class="item-badge">Linguistics</span><span class="item-title">جَهُولًا · Jahūlā Word Study</span></a>
+          <a href="shortSentenceVerb.html" class="dropdown-item" data-keywords="twelve words quranic verb grammar syntax baqarah"><span class="item-badge">Grammar</span><span class="item-title">Twelve Words · The Qur'anic Verb</span></a>
+          <a href="sleepAdvice.html" class="dropdown-item" data-keywords="sleep golden window circadian melatonin sunnah naba"><span class="item-badge">Circadian</span><span class="item-title">The Golden Window · Sleep Science</span></a>
+          <a href="angerControl.html" class="dropdown-item" data-keywords="anger control psychology breathing calmness"><span class="item-badge">Psychology</span><span class="item-title">Controlling Anger Toolkit</span></a>
+          <a href="fasting.html" class="dropdown-item" data-keywords="fasting sawm ramadan rayyan calendar"><span class="item-badge">Sanctuary</span><span class="item-title">Ar-Rayyān · Fasting Science</span></a>
+          <a href="hamdShukr.html" class="dropdown-item" data-keywords="hamd shukr gratitude praise thankfulness alhamdulillah"><span class="item-badge">Praise</span><span class="item-title">Ḥamd &amp; Shukr · Gratitude Study</span></a>
+          <a href="woeDeny.html" class="dropdown-item" data-keywords="woe deniers warning qiyamah mursalat"><span class="item-badge">Warning</span><span class="item-title">وَيْلٌ يَوْمَئِذٍ · Woe to the Deniers</span></a>
+          <a href="salah.html" class="dropdown-item active-page" data-keywords="salah prayer five anchors appointments taha"><span class="item-badge">Salah</span><span class="item-title">أَقِمِ الصَّلَاةَ · Five Anchors for Your Day</span></a>
+          <a href="zakat.html" class="dropdown-item" data-keywords="zakat charity ripple foundation wealth purification"><span class="item-badge">Zakat</span><span class="item-title">الزَّكَاةُ وَالصَّدَقَةُ · The Ripple Foundation</span></a>
+          <a href="Prayer-life-6.html" class="dropdown-item" data-keywords="life prayer anam mahyaya wa mamati"><span class="item-badge">Life &amp; Prayer</span><span class="item-title">مَحْيَايَ وَمَمَاتِي · Sūrat Al-Anʿām</span></a>
+          <a href="taqwa3-102.html" class="dropdown-item" data-keywords="taqwa consciousness ali imran"><span class="item-badge">Taqwa</span><span class="item-title">تَقْوَى · Āl ʿImrān 3:102</span></a>
+          <a href="surah32.html" class="dropdown-item" data-keywords="surah sajdah prostration"><span class="item-badge">As-Sajdah</span><span class="item-title">سُورَةُ السَّجْدَة · 32:1–30</span></a>
+          <a href="marriageSign.html" class="dropdown-item" data-keywords="marriage clothing garments peace rum"><span class="item-badge">Marriage</span><span class="item-title">هُنَّ لِبَاسٌ · Clothing for One Another</span></a>
+          <a href="insaan76.html" class="dropdown-item" data-keywords="insan man dahr unmentioned hal ata"><span class="item-badge">Al-Insān</span><span class="item-title">هَلْ أَتَىٰ · The Unmentioned (76:1)</span></a>
+          <a href="tawheed/index.html" class="dropdown-item" data-keywords="tawheed 99 names asmaul husna attributes oneness"><span class="item-badge">Tawheed</span><span class="item-title">الْأَسْمَاءُ الْحُسْنَىٰ · The 99 Names of Allah</span></a>
+          <a href="fatihagrammar.html" class="dropdown-item" data-keywords="fatiha opening grammar sarf word lab"><span class="item-badge">Al-Fātiḥa</span><span class="item-title">سُورَةُ الفَاتِحَة · Word Lab (1:1–7)</span></a>
+        </div>
+        <div class="dropdown-no-results" id="dropdownNoResults" style="display:none;">
+          No exhibits found matching "<span id="dropdownSearchTerm"></span>"
+        </div>
+      </div>
     </div>
   </div>
   <b>Salah</b>
@@ -903,7 +1038,7 @@ footer{position:relative;padding:120px 0 60px;text-align:center;z-index:1;border
     </div>
     <p class="fnote">Built as an invitation — verify times with your local masjid.</p>
     <div class="footer-version-tag" style="margin-top:28px;display:inline-block;font-family:monospace;font-size:0.75rem;letter-spacing:0.08em;color:var(--gold);padding:5px 14px;border-radius:999px;background:rgba(247,205,118,0.08);border:1px solid rgba(247,205,118,0.22)">
-      v1.0.53 (updated 2026-09-29 19:50)
+      v1.0.54 (updated 2026-10-05 13:00)
     </div>
   </div>
 </footer>
@@ -1292,17 +1427,94 @@ addEventListener('scroll',()=>{const y=scrollY+140;
 (function initIslamDropdown() {
   const btn = $('#islamDropdownBtn'), menu = $('#islamDropdownMenu');
   if (!btn || !menu) return;
+
+  const searchInput = $('#islamDropdownSearch');
+  const clearBtn = $('#dropdownSearchClear');
+  const countPill = $('#dropdownCountPill');
+  const noResults = $('#dropdownNoResults');
+  const searchTermSpan = $('#dropdownSearchTerm');
+  const items = Array.from(menu.querySelectorAll('.dropdown-item'));
+
+  function openMenu() {
+    menu.classList.add('open');
+    btn.classList.add('active');
+    btn.setAttribute('aria-expanded', 'true');
+    if (searchInput) {
+      setTimeout(() => searchInput.focus(), 50);
+    }
+  }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    btn.classList.remove('active');
+    btn.setAttribute('aria-expanded', 'false');
+    if (searchInput && searchInput.value) {
+      searchInput.value = '';
+      filterItems('');
+    }
+  }
+
+  function filterItems(query) {
+    const q = query.trim().toLowerCase();
+    let visibleCount = 0;
+    if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+
+    items.forEach((item) => {
+      const text = (item.textContent + ' ' + (item.getAttribute('data-keywords') || '')).toLowerCase();
+      const match = !q || text.includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    if (countPill) {
+      countPill.textContent = q ? `${visibleCount}/${items.length}` : items.length;
+    }
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      if (searchTermSpan) searchTermSpan.textContent = query;
+    }
+  }
+
   btn.onclick = (e) => {
     e.stopPropagation();
-    const open = menu.classList.toggle('open');
-    btn.classList.toggle('active', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const isOpen = menu.classList.contains('open');
+    if (isOpen) closeMenu();
+    else openMenu();
   };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => filterItems(e.target.value));
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+        btn.focus();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const firstVisible = items.find(it => it.style.display !== 'none');
+        if (firstVisible) firstVisible.focus();
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (searchInput) {
+        searchInput.value = '';
+        filterItems('');
+        searchInput.focus();
+      }
+    });
+  }
+
   document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
-      menu.classList.remove('open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded', 'false');
+    if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      closeMenu();
+      btn.focus();
     }
   });
 })();
