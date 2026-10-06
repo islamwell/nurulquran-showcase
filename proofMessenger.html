@@ -317,20 +317,21 @@ section{padding:clamp(80px,11vh,140px) 0;position:relative}
   animation:spin 6s linear infinite;opacity:0;transition:opacity .4s}
 .reason:hover .r-num::after{opacity:1}
 .r-head h3{margin-bottom:6px}
-.r-tag{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal)}
+.r-tag{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);font-weight:600}
 .r-body{margin-top:20px;display:grid;gap:18px;grid-template-columns:1.55fr .95fr}
 @media(max-width:860px){.r-body{grid-template-columns:1fr}.r-num{width:54px;height:54px;font-size:1.4rem;border-radius:15px}}
 .r-body p{color:var(--ink-2);font-size:.99rem}
 .r-body p+p{margin-top:12px}
 .sidecard{border-left:2px solid var(--gold);padding:16px 18px;background:rgba(217,180,91,.05);border-radius:0 14px 14px 0}
-.sidecard h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600}
-.sidecard p,.sidecard li{font-size:.86rem;color:var(--ink-2)}
+.sidecard h4{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:700}
+.sidecard p,.sidecard li{font-size:.88rem;line-height:1.55;color:var(--ink-2)}
 .sidecard ul{padding-left:16px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.chip{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.09em;padding:6px 12px;
-  border-radius:99px;border:1px solid var(--line);color:var(--ink-3);transition:.3s;cursor:default}
-.chip:hover{color:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.82rem;font-weight:500;line-height:1.4;
+  padding:7px 15px;border-radius:99px;border:1px solid rgba(217,180,91,.22);
+  background:rgba(217,180,91,.06);color:var(--ink-2);transition:all .3s var(--ease);cursor:default}
+.chip:hover{color:var(--gold-lt);border-color:var(--gold);background:rgba(217,180,91,.13);transform:translateY(-2px)}
 .verse{margin-top:20px;padding:20px 24px;border-radius:16px;
   background:linear-gradient(100deg,rgba(46,198,176,.07),rgba(217,180,91,.05));border:1px solid var(--line)}
 .verse .ar{font-family:'Amiri',serif;font-size:1.5rem;direction:rtl;text-align:right;line-height:2;color:var(--gold-lt)}
@@ -340,15 +341,19 @@ section{padding:clamp(80px,11vh,140px) 0;position:relative}
 /* expandable */
 .disc{margin-top:22px;border-top:1px dashed var(--line);padding-top:16px}
 .disc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
-  font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.18em;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:.80rem;font-weight:600;letter-spacing:.04em;
   text-transform:uppercase;color:var(--teal);transition:.3s}
 .disc summary::-webkit-details-marker{display:none}
 .disc summary:hover{color:var(--gold)}
-.disc summary i{width:16px;height:16px;border:1px solid currentColor;border-radius:50%;
-  display:grid;place-items:center;font-style:normal;font-size:.7rem;transition:transform .4s}
+.disc summary i{width:18px;height:18px;border:1px solid currentColor;border-radius:50%;
+  display:grid;place-items:center;font-style:normal;font-size:.8rem;font-weight:700;transition:transform .4s}
 .disc[open] summary i{transform:rotate(135deg)}
-.disc .inner{padding-top:14px;font-size:.9rem;color:var(--ink-2);animation:fadeUp .55s var(--ease)}
-.disc .inner strong{color:var(--ink)}
+.disc .inner{padding:14px 18px;margin-top:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;font-size:.95rem;line-height:1.68;color:var(--ink-2);animation:fadeUp .4s var(--ease)}
+.disc .inner p{margin:0}
+.disc .inner p+p{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.disc .inner strong{color:var(--ink);font-weight:700;margin-right:6px}
+.disc .inner p:first-child strong{color:#f87171}
+.disc .inner p:last-child strong{color:var(--teal)}
 
 /* ============================================================
    9. TRILEMMA WIDGET
@@ -532,9 +537,9 @@ html, body {
     <span class="h1-line"><span style="animation-delay:.55s;font-size:.42em;letter-spacing:.02em;padding-top:.5em">Muhammad was a true Messenger of Allah</span></span>
   </h1>
   <p class="lead hero-sub" style="margin-inline:auto;text-align:center">
-    Not appeals to emotion. Not appeals to authority. Ten arguments built from history,
-    textual criticism, logic, sociology and the discipline of asking:
-    <em>what explanation best accounts for the evidence we actually have?</em>
+    No emotional appeals. No blind claims of authority. Just ten clear reasons based on real history,
+    ancient manuscripts, human psychology, and common sense—asking one honest question:
+    <em>what explanation truly makes sense of all the facts?</em>
   </p>
   <div class="hero-cta">
     <a href="#reasons" class="btn solid mag">Begin the argument</a>
@@ -548,21 +553,21 @@ html, body {
   <span class="eyebrow rv">00 — Ground Rules</span>
   <h2 class="rv split" data-d="1" style="margin-top:18px">How to judge a prophetic claim</h2>
   <p class="lead rv" data-d="2" style="margin-top:20px">
-    A claim this large deserves a real test, not a slogan. So before the arguments, here is the
-    standard this page holds itself to — including the conditions under which it would <strong>fail</strong>.
+    A claim this large deserves a real test, not an empty slogan. So before the arguments, here is the
+    standard this page holds itself to — including the exact conditions under which it would <strong>fail</strong>.
   </p>
   <div class="grid3">
     <div class="mcard rv" data-d="1"><span class="num">01</span>
-      <b>Inference to the best explanation</b>
-      <p>We do not claim mathematical proof. We compare rival hypotheses — deceiver, sincere but deluded, or genuinely receiving revelation — and ask which explains the total data with the fewest strained assumptions. This is how historians, forensic scientists and courts reason.</p>
+      <b>Finding the explanation that fits best</b>
+      <p>We don't promise a mathematical formula. Instead, we test the three real possibilities: was he a conscious liar, was he genuinely confused and mistaken, or was he truly speaking for God? We ask which answer fits the historical facts with the fewest excuses—the exact same way courts, historians, and investigators find the truth.</p>
     </div>
     <div class="mcard rv" data-d="2"><span class="num">02</span>
-      <b>Cumulative, not single-shot</b>
-      <p>No individual point below is a knock-down blow. Independent lines of evidence that all converge on one conclusion are far stronger than their sum — the same logic that convicts on circumstantial evidence or confirms a scientific theory.</p>
+      <b>Ten clues that point the same way</b>
+      <p>No single clue stands alone. When ten completely different lines of evidence—manuscripts, personal character, historical predictions, and social reform—all point to the exact same conclusion, their combined weight is powerful, just like pieces of a puzzle forming a clear picture.</p>
     </div>
     <div class="mcard rv" data-d="3"><span class="num">03</span>
-      <b>Falsifiability</b>
-      <p>This case would collapse if: the Qur'an's text were shown to be substantially rewritten after him; his biography's core were shown to be later fabrication; the Qur'an contained a confirmed self-contradiction; or a comparable literary rival to the Qur'an were produced in Arabic and acknowledged as such.</p>
+      <b>How this case could fail</b>
+      <p>An honest argument must have clear tests. This case would fall apart if: the Quran was rewritten centuries later, his historical life was proven to be a myth, the Quran had real contradictions, or anyone met its challenge by producing a chapter matching its unique literary level in Arabic.</p>
     </div>
   </div>
 </div></section>
@@ -571,45 +576,50 @@ html, body {
 <section id="reasons"><div class="container">
   <span class="eyebrow rv">The Case</span>
   <h2 class="rv split" data-d="1" style="margin-top:18px">The <span class="grad">Ten Reasons</span></h2>
-  <p class="lead rv" data-d="2" style="margin-top:18px">Hover a card to focus it. Open “Examine the objection” on each to see the strongest counter-argument and the reply — because an argument you can't attack is an argument you don't understand.</p>
+  <p class="lead rv" data-d="2" style="margin-top:18px">Hover or tap any card to focus on it. Click “Hear the counter-argument &amp; reply” to see the strongest objection and the answer—because an argument you can't test is an argument you don't really understand.</p>
 
   <div class="reasons">
 
     <!-- 1 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">1</div><div class="r-head">
-        <span class="r-tag">Argument from Character · The Trilemma</span>
-        <h3>The profile of a fraud does not fit him</h3></div></div>
+        <span class="r-tag">His Character &amp; Lifestyle</span>
+        <h3>His life does not fit the pattern of a fraud</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Before he claimed anything, the people of Makkah nicknamed him <em>al-Amīn</em> — the Trustworthy. His most determined enemies accused him of sorcery, poetry and madness. They did not accuse him of dishonesty, because that charge would not have been believed.</p>
-          <p>Consider the incentive structure of a liar. A fabricator seeks power, wealth or sex. Muhammad ﷺ gained political authority late, after thirteen years of persecution he could have ended at any time by accepting Makkah's explicit offer of kingship and riches. He died owning almost nothing, having refused to let his family inherit state wealth, sleeping on a mat that marked his skin, repairing his own sandals. A man who ruled Arabia and left no treasury for his heirs is not behaving like an opportunist.</p>
-          <p>And a fraud does not choose the hardest possible path for the longest possible time with the lowest possible payoff. Ibn Taymiyyah's observation cuts cleanly: a man who claims prophethood is either among the very noblest of humanity or among the most wicked — and no observer of his daily conduct for twenty-three consecutive years placed him in the second category.</p>
+          <p>Long before he announced his prophethood at age forty, the people of Makkah knew him by one title: <em>al-Amīn</em> — the Trustworthy. Even his fiercest enemies later accused him of poetry, magic, or madness. They never accused him of lying, because everyone in the city knew his unbroken honesty.</p>
+          <p>Consider why people invent lies. A con artist lies to gain money, power, or personal pleasure. But Muhammad ﷺ endured thirteen years of severe persecution, starvation, and exile in Makkah. He could have stopped the suffering at any time: the tribal leaders offered to make him their richest king if he would simply abandon his message. He refused every offer.</p>
+          <p>When he eventually governed all of Arabia, how did he live? He slept on a simple palm-fiber mat that left marks on his skin. He mended his own clothes and repaired his own shoes. He forbade his family from ever taking public charity, and when he died, he left behind no palace, no gold, and no personal wealth for his children. That is not how an impostor lives.</p>
         </div>
-        <div class="sidecard"><h4>Evidence type</h4>
-          <ul><li>Hostile-source attestation (his enemies' accusations)</li><li>Behaviour inconsistent with stated motive</li><li>Continuous public life, not a hidden one</li></ul>
+        <div class="sidecard"><h4>Evidence that stands out</h4>
+          <ul><li>Even his mortal enemies admitted he never lied</li><li>He rejected immense wealth and kingship to keep preaching</li><li>He lived completely in public view for 23 years</li></ul>
         </div>
       </div>
-      <div class="chips"><span class="chip">al-Amīn</span><span class="chip">Makkah's bribe rejected</span><span class="chip">no personal estate</span><span class="chip">23-year consistency</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Sincere people can still be sincerely wrong — good character proves honesty, not accuracy.</p>
-        <p><strong>Reply:</strong> Correct, and this is why Reason 1 is only the first step. It eliminates the <em>deceiver</em> hypothesis, narrowing the field to "sincerely mistaken" or "genuinely receiving revelation." Reasons 2–7 are aimed precisely at the "mistaken" option, since delusion does not produce a text that outperforms every trained poet in the language, nor rebukes its own author, nor legislates a functioning civilisation.</p>
+      <div class="chips">
+        <span class="chip">Trusted by everyone as al-Amīn</span>
+        <span class="chip">Refused offers of kingship &amp; wealth</span>
+        <span class="chip">Died owning almost nothing</span>
+        <span class="chip">Lived with total honesty for 23 years</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Someone can be completely sincere and still be mistaken. Being an honest person proves he was sincere, but it doesn't prove that what he believed was actually true.</p>
+        <p><strong>Reply:</strong> That is a fair point. His honest life simply rules out one possibility: that he was a deliberate fraud or liar. That leaves only two choices: was he deeply confused and mistaken, or was he truly telling the truth? The next reasons show why being confused makes no sense. Someone who is confused or delusional does not produce the greatest literary masterpiece in the Arabic language, accurately predict historical events years in advance, or build a thriving, fair society that changed world history.</p>
       </div></details>
     </article>
 
     <!-- 2 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">2</div><div class="r-head">
-        <span class="r-tag">Literary Argument · I'jāz al-Qur'ān</span>
+        <span class="r-tag">The Quran's Literary Power</span>
         <h3>An open challenge that has never been met</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Seventh-century Arabia was a civilisation of oral poetry. Eloquence was its Olympic sport, its scientific prestige and its political weapon. Tribes rose on the reputation of a poet.</p>
-          <p>Into that arena the Qur'an issued a falsifiable dare: produce something like it. Then it lowered the bar — ten chapters. Then lower still — <em>one</em> chapter, the shortest of which is three lines. The challenge was addressed to the people with the strongest motive on earth to win it: opponents whose entire social order the message was dismantling, who had the resources, the linguistic mastery and years of opportunity.</p>
-          <p>They chose war instead. They tried assassination, boycott, exile and battlefields. Attempts at literary imitation were made and are recorded — and were dismissed as embarrassments even by fellow Arabs. The Qur'an's form belongs to no existing category: not <em>shi'r</em> (metrical poetry), not <em>saj'</em> (rhymed prose), not <em>khutba</em> (oration), yet judged superior to all three by the native experts of the language.</p>
+          <p>Seventh-century Arabia was a culture obsessed with spoken poetry. Beautiful Arabic was their highest art, their greatest pride, and their ultimate weapon. A single skilled poet could raise the honor of an entire tribe or ruin its rivals.</p>
+          <p>Into this proud world, the Quran issued a direct challenge: if you think a human wrote this, produce a book like it. Then it made the challenge easier: just ten chapters. Then easier still: just <em>one single chapter</em>—the shortest of which is only three lines long. This dare was aimed straight at his enemies, who possessed the greatest poets in Arabic history and had every reason to destroy his message.</p>
+          <p>If they could have produced just three lines matching the Quran, Islam would have been stopped in its tracks. Instead, they risked their lives in warfare, boycotts, and battles. A few people tried to imitate it, but their attempts were so poor that even fellow pagan Arabs laughed them off. The Quran did not fit into existing poetry, rhymed prose, or speeches—yet native Arabic masters recognized it was far above them all.</p>
         </div>
-        <div class="sidecard"><h4>Why this is not circular</h4>
-          <p>The judgement was not made by Muslims about their own book. It was made by hostile native connoisseurs who conceded the aesthetic point and fought on other ground — the strongest possible form of testimony, because it runs against the witness's interest.</p>
+        <div class="sidecard"><h4>Why this matters</h4>
+          <p>This was not just Muslims praising their own book. His fiercest enemies—the master poets of the age—conceded that they could not match it, and chose dangerous warfare instead of winning the literary test.</p>
         </div>
       </div>
       <div class="verse">
@@ -623,48 +633,58 @@ html, body {
           </button>
         </div>
       </div>
-      <div class="chips"><span class="chip">falsifiable by design</span><span class="chip">1,400 years open</span><span class="chip">hostile expert concession</span><span class="chip">sui generis form</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Literary merit is subjective; and no neutral panel has ever adjudicated the challenge.</p>
-        <p><strong>Reply:</strong> Aesthetic judgement is not <em>arbitrary</em> — expert consensus in music, mathematics or poetry tracks something real, and near-unanimity among adversarial specialists is meaningful data. Note also the honest limit: this argument is strongest for those who read classical Arabic. It is offered as one converging line, not as a proof that a non-Arabic speaker can independently verify without study. That is precisely why nine other reasons follow.</p>
+      <div class="chips">
+        <span class="chip">An open challenge to write just one chapter</span>
+        <span class="chip">Stood undefeated for 1,400 years</span>
+        <span class="chip">Top Arabic poets admitted defeat</span>
+        <span class="chip">A unique style never seen before</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Whether writing is great is just a matter of personal taste. There was never an official neutral jury to judge whether anyone matched the Quran.</p>
+        <p><strong>Reply:</strong> While personal taste varies, true artistic mastery is not random. Just like master musicians recognize musical genius, the native poets of Arabia were undisputed masters of their language. If matching the Quran was easy, his mortal enemies would have simply composed a rival chapter instead of fighting costly wars. We also recognize an honest limit: this point is clearest to people who understand classical Arabic. That is exactly why this page provides nine other independent reasons that anyone can examine.</p>
       </div></details>
     </article>
 
     <!-- 3 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">3</div><div class="r-head">
-        <span class="r-tag">Argument from Discontinuity</span>
+        <span class="r-tag">Sudden Emergence Without Training</span>
         <h3>The forty silent years</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Genius leaves a trail. Poets compose before they are famous; philosophers argue before they publish; reformers agitate before they lead. Muhammad ﷺ produced <em>nothing</em> for forty years — no verse, no sermon, no treatise, no reputation as an orator or a scholar. He was a caretaker of livestock, then a merchant, unlettered in a society where writing was rare and literary training was a lifelong apprenticeship.</p>
-          <p>Then, abruptly, the most influential Arabic text in history begins arriving in fragments over twenty-three years, under wildly varying conditions — in hiding, in flight, in battle, in grief, in government — and coheres across all of it into a unified whole with a stable voice.</p>
-          <p>Add the sharpest detail: that voice is not his voice. His own recorded speech — thousands of preserved sayings — is beautiful but plainly distinguishable in register, structure and diction from Qur'anic Arabic. Arabs of the period could tell them apart instantly. A single author producing two consistently distinct idioms for twenty-three years, under stress, without slipping, is an extraordinary claim in itself.</p>
+          <p>True human genius always leaves a trail. Great poets write verses when they are young; thinkers debate before they write books; leaders make speeches before they rise. But for his first forty years, Muhammad ﷺ produced nothing of the sort. He composed no poetry, delivered no speeches, and wrote no essays. He worked as a shepherd and later as a merchant. He could not read or write, in a society where formal eloquence took years of practice.</p>
+          <p>Then suddenly at age forty, the most powerful and influential text in the Arabic language began to flow from his lips. It came in short passages over twenty-three years—during hardship, war, grief, and political rule—yet it all formed one seamless, consistent message.</p>
+          <p>Even more remarkable: the voice of the Quran is completely different from his own everyday speech. We have thousands of his personal sayings preserved in Hadith. While his speech was eloquent, native speakers can immediately tell the two styles apart. Maintaining two completely different speaking styles for twenty-three years without ever slipping up—especially under extreme stress—is virtually impossible for a human being.</p>
         </div>
-        <div class="sidecard"><h4>The forgery problem</h4>
-          <p>Forgers pick easy targets. Composing 23 years of unrevisable public oral text — with no drafts, before a hostile audience memorising every word to catch you — is the hardest forgery imaginable. Any inconsistency would have been fatal, and his enemies were listening for one.</p>
+        <div class="sidecard"><h4>No rough drafts</h4>
+          <p>He spoke the Quran out loud on the spot, in front of friends and enemies who memorized every word right away. He couldn't go back, delete mistakes, or edit drafts. Yet over 23 years, it remained completely consistent.</p>
         </div>
       </div>
-      <div class="chips"><span class="chip">no prior corpus</span><span class="chip">two distinct registers</span><span class="chip">unrevisable oral delivery</span><span class="chip">23 years, no drift</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> He could have absorbed material from Jewish and Christian traders, or from monks such as Waraqa and Bahira.</p>
-        <p><strong>Reply:</strong> Casual conversation does not transmit literary mastery, and the Qur'an conspicuously <em>diverges</em> from the biblical and apocryphal versions of shared narratives rather than reproducing them — correcting them on theological points at cost, e.g. denying the crucifixion of Jesus and denying Solomon's alleged idolatry, positions no Christian or Jewish informant would supply. Borrowing explains overlap; it does not explain principled contradiction of one's own alleged sources.</p>
+      <div class="chips">
+        <span class="chip">No poetry or public speaking before age 40</span>
+        <span class="chip">Spoke two completely different styles</span>
+        <span class="chip">Spoken live with no backspacing or drafts</span>
+        <span class="chip">Completely consistent over 23 years</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Couldn't he have learned these stories from Jewish and Christian merchants, or from people like Waraqa and the monk Bahira?</p>
+        <p><strong>Reply:</strong> Casual chats with passing travelers cannot teach someone supreme poetic mastery. More importantly, the Quran does not simply repeat Bible stories—it directly contradicts and corrects them on major points. For instance, it denies that Jesus was crucified, and it clears Solomon of the idolatry found in biblical accounts. No Christian monk or Jewish teacher would ever have taught him those ideas. Claiming he 'borrowed' stories fails to explain why he took bold, unpopular stances against the very people he supposedly learned from.</p>
       </div></details>
     </article>
 
     <!-- 4 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">4</div><div class="r-head">
-        <span class="r-tag">Criterion of Embarrassment</span>
-        <h3>The book corrects, rebukes and constrains him</h3></div></div>
+        <span class="r-tag">Public Rebukes &amp; Honest Vulnerability</span>
+        <h3>The book corrects, rebukes and limits him</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Historians use a well-known test: material that damages the interests of the person transmitting it is unlikely to be invented by him. The Qur'an is saturated with such material.</p>
-          <p>It publicly reprimands him — for turning away from a blind man because he was busy with tribal notables (80:1–10); for a decision on prisoners; for excusing hypocrites; for putting a legal matter ahead of divine instruction. It records his private domestic tensions. It tells him he has no power to guide anyone, cannot forgive sins, does not know the unseen, and will die like every other man. It warns him that if he fabricated anything against God, God would seize him and no one could help him (10:15; 17:73–75).</p>
-          <p>And it inserts long, awkward silences: when the Makkans demanded answers, revelation sometimes stopped for weeks, exposing him to public ridicule — the opposite of what an author in control of his own material would allow.</p>
+          <p>Historians look closely at historical evidence that makes the author look bad. If an ancient text contains harsh personal criticisms of its own leader, it is almost certainly genuine, because no fraud would invent verses that undermine his own authority.</p>
+          <p>The Quran contains dozens of these moments. It publicly scolds the Prophet for frowning and turning away from a poor blind man while talking to rich tribal chiefs (Surah 80). It corrects him for forgiving captives too early. It openly reminds him that he has no power to guide anyone on his own, cannot forgive sins by himself, does not know the future, and will die just like any ordinary human. It even issues severe warnings that if he ever invented a single lie in God's name, God would cut his life short.</p>
+          <p>Just as revealing are the painful silences. When his enemies asked tough questions, or when his wife Aisha was maliciously slandered, revelation stopped completely for weeks. He was left in agonizing uncertainty while his enemies mocked him. An author making up his own book would have invented a defense immediately to save face.</p>
         </div>
-        <div class="sidecard"><h4>Compare the alternative</h4>
-          <p>Invented scriptures flatter their founders: divine status, unlimited authority, convenient exemptions. This text does the reverse. It calls him a servant, restricts him, corrects him in front of his followers, and forbids his own veneration.</p>
+        <div class="sidecard"><h4>Contrast with false claims</h4>
+          <p>Cult leaders and false prophets always glorify themselves with special privileges and god-like status. The Quran does the opposite: it repeatedly calls him a simple human servant, limits his authority, and forbids people from worshiping him.</p>
         </div>
       </div>
       <div class="verse">
@@ -678,82 +698,98 @@ html, body {
           </button>
         </div>
       </div>
-      <div class="chips"><span class="chip">self-damaging testimony</span><span class="chip">no divine status claimed</span><span class="chip">revelation withheld</span><span class="chip">explicit limits on his power</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Self-criticism is a sophisticated credibility tactic — it builds trust precisely by appearing humble.</p>
-        <p><strong>Reply:</strong> This works as an explanation for one or two token admissions. It strains badly across a lifetime of rebukes delivered at the worst possible moments to the one person whose authority the whole project depended on, in an honour-shame culture where public correction was socially devastating. And it cannot explain the strategic silences, which offered no upside at all.</p>
+      <div class="chips">
+        <span class="chip">Publicly scolds him for his mistakes</span>
+        <span class="chip">Never claimed divine status—only human</span>
+        <span class="chip">Suffered weeks of silence when challenged</span>
+        <span class="chip">Forbidden to force anyone to believe</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Admitting your own faults can just be a clever psychological tactic to make people trust you and appear humble.</p>
+        <p><strong>Reply:</strong> A clever politician might admit a tiny, harmless flaw to look humble. But the Quran's rebukes of the Prophet were deep, public, and delivered in an Arabian honor-culture where losing face was devastating. Even more telling were the long, painful silences. When his enemies mocked him or his wife was slandered, he endured weeks of public humiliation, waiting for answers. If he were writing the script, he would have manufactured an answer right away.</p>
       </div></details>
     </article>
 
     <!-- 5 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">5</div><div class="r-head">
-        <span class="r-tag">Textual Criticism · Tawātur &amp; Manuscripts</span>
-        <h3>The message reaches us essentially unaltered</h3></div></div>
+        <span class="r-tag">Ancient Manuscripts &amp; Oral Memory</span>
+        <h3>Preserved word for word from the beginning</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Most ancient claims come to us through a fragile thread — a handful of manuscripts, centuries after the events, authors unknown. The Qur'an is a different kind of object.</p>
-          <p>It was designed to be transmitted through two independent channels simultaneously: mass memorisation and written record. <em>Tawātur</em> — transmission by so many independent narrators at every generation that coordinated fabrication becomes practically impossible — is not a devotional slogan; it is an epistemic mechanism, and it is why the recited text is uniform from Morocco to Indonesia today.</p>
-          <p>Physical evidence backs it. The Birmingham folios (radiocarbon-dated to a range that overlaps the Prophet's own lifetime or immediately after), the Sanaa palimpsest, the Topkapı and Samarkand codices, and the Cairo and Paris fragments all read — allowing for orthographic development — as the same text now recited. For a document from the 600s, this is an extraordinary evidentiary situation.</p>
-          <p>The same rigour was turned on his sayings: an entire science, <em>'ilm al-rijāl</em>, was built to audit the biography, birthplace, memory and moral reliability of every transmitter in every chain, and to reject reports that failed. Even sharply critical Western historians have granted that the <em>isnād</em> system gave Islamic historiography a professionalism without precedent in antiquity.</p>
+          <p>Most ancient historical texts reach us through fragile copies written centuries after the events, with unknown authors. The Quran is completely different.</p>
+          <p>From day one, it was preserved through two parallel methods: mass memorization and written parchment. When thousands of people across multiple cities memorize every syllable, it becomes impossible for anyone to secretly change the text. That is why the Quran recited today in Morocco is identical to the one recited in Indonesia, word for word and letter for letter.</p>
+          <p>Modern archaeology and manuscripts prove this. Ancient parchments like the Birmingham folios—radiocarbon-dated to the Prophet's lifetime or shortly after—contain the exact same verses we read today. Manuscripts in Istanbul, Cairo, Paris, and Tashkent confirm the same text.</p>
+          <p>The early Muslims also developed a strict system to verify his spoken sayings (Hadith). They tracked the biography, truthfulness, and memory of every single narrator in every transmission chain, discarding any report that had a weak link. Historians worldwide recognize that this level of verification was unmatched in ancient history.</p>
         </div>
-        <div class="sidecard"><h4>Why preservation matters to the argument</h4>
-          <p>Because it means we are evaluating <em>his</em> claim, not a legend about him. Many prophetic claims are unfalsifiable because the source text is unrecoverable. Here the primary evidence is on the table.</p>
+        <div class="sidecard"><h4>Why preservation matters</h4>
+          <p>Because the original text survived intact, we are examining what he actually taught—not myths or legends added centuries later. The primary evidence is directly in our hands.</p>
         </div>
       </div>
-      <div class="chips"><span class="chip">dual-channel transmission</span><span class="chip">1st-century manuscripts</span><span class="chip">isnād auditing</span><span class="chip">global recitational uniformity</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> The Sanaa palimpsest shows textual variants, and the caliph Uthman standardised the text — so it <em>was</em> edited.</p>
-        <p><strong>Reply:</strong> The variants documented are overwhelmingly orthographic, or reflect the recognised <em>qirā'āt</em> — parallel recitations transmitted from the Prophet himself — and no known variant alters a doctrine, a law or a narrative. Uthman's project was standardisation of <em>script and dialectal reading</em>, carried out within roughly twenty years, in public, before thousands of living memorisers who would have exposed any interpolation. That is not the profile of a redaction; it is the profile of an archival control measure with an enormous number of independent auditors.</p>
+      <div class="chips">
+        <span class="chip">Preserved by thousands of memorizers</span>
+        <span class="chip">Manuscripts dated to the 1st century</span>
+        <span class="chip">Strict verification of every narrator</span>
+        <span class="chip">Recited the exact same way worldwide</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Ancient manuscript fragments like the Sanaa parchment show minor wording variations, and Caliph Uthman standardized the copies—so wasn't the text edited?</p>
+        <p><strong>Reply:</strong> The tiny variations found by scholars in ancient fragments are simply minor spelling differences and dialect pronunciations that the Prophet himself allowed for different tribes. Not a single variant changes any belief, moral law, or story. When Caliph Uthman sent out official standard copies about twenty years after the Prophet passed away, he did so openly before thousands of companions who had the entire book memorized. If anyone had altered even a sentence, the whole community would have objected on the spot.</p>
       </div></details>
     </article>
 
     <!-- 6 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">6</div><div class="r-head">
-        <span class="r-tag">Predictive Content · Risk-Taking Claims</span>
-        <h3>Specific, dated, publicly recorded predictions</h3></div></div>
+        <span class="r-tag">High-Risk Predictions That Came True</span>
+        <h3>Clear predictions with deadlines that came true</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Vague prophecy is worthless — it survives any outcome. What matters evidentially is a prediction that is <strong>specific, timed, publicly recorded before the event, and capable of humiliating its author.</strong> Several of his qualify.</p>
-          <p>In roughly 615 CE, Byzantium had just been shattered by Persia; Jerusalem had fallen, the Byzantine state was near collapse, and the Makkan pagans were openly celebrating the defeat of the Christians as a bad omen for the monotheists. At that low point the Qur'an announced that Rome, "defeated in the nearest land," would be victorious "within a few years" (<em>biḍ' sinīn</em>, idiomatically three to nine). A wager was publicly struck on it in Makkah. Around 624 CE, against expectation, Heraclius broke Persia. This was recorded in a text his enemies were memorising in order to attack — a prediction with a countdown clock attached.</p>
-          <p>Others in the same class: the conquest of Makkah announced while he was being turned away from it; the fall of both Persia and Byzantine Syria promised to a starving, besieged community digging a trench in Madinah; the fate of specific named individuals; and Suraqa ibn Malik being told he would one day wear the bracelets of the Persian emperor — a claim so absurd at the time that it functioned as a public liability until it happened.</p>
+          <p>Vague prophecies are cheap: anyone can make blurry predictions that sound true no matter what happens. What truly matters is a prediction that is <strong>specific, gives a strict deadline, is spoken in public before the event, and would ruin its author if it failed.</strong></p>
+          <p>Around 615 CE, the mighty Persian Empire crushed the Christian Roman Empire (Byzantium). Jerusalem was captured, Roman armies were shattered, and the Roman state was near complete collapse. The pagans of Makkah mocked the Muslims, celebrating the Persian victory as proof that polytheism beats monotheism. Right at that hopeless moment, the Quran announced that the defeated Romans would reverse the war and defeat Persia “within a few years” (the Arabic word <em>biḍ' sinīn</em> means between 3 and 9 years).</p>
+          <p>His enemies in Makkah were so sure this was impossible that they placed public bets against it. Yet around 624 CE, against all odds, the Romans made an incredible comeback and broke the Persian army. A public countdown clock was attached to his prophethood, and it was fulfilled precisely on time.</p>
+          <p>Other examples followed: he promised Muslims would conquer Makkah at a moment when they were turned back as refugees; he promised the fall of the Persian and Roman superpowers to a starving group of Muslims trapped in a trench; and he told a tracker named Suraqa that he would one day wear the gold bracelets of the Emperor of Persia—which happened twenty years later under Caliph Umar.</p>
         </div>
-        <div class="sidecard"><h4>The falsifiability test</h4>
-          <p>Each of these had a deadline and an audience. A failed one would have ended the movement. A guesser making this many high-risk, low-probability, time-bound calls should have been destroyed by the base rates.</p>
+        <div class="sidecard"><h4>A strict deadline</h4>
+          <p>Every one of these predictions had a ticking clock and a hostile audience. A single failure would have destroyed Islam before it began. Someone just making wild guesses would have been exposed very quickly.</p>
         </div>
       </div>
       <div class="verse">
         <div class="ar">غُلِبَتِ الرُّومُ فِى أَدْنَى الْأَرْضِ وَهُمْ مِّن بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ فِى بِضْعِ سِنِينَ</div>
         <div class="tr">“The Romans have been defeated in the nearest land, but they will be victorious after their defeat — within a few years.”</div>
         <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
-          <cite style="margin:0">QUR'AN 30:2–4 — revealed at the nadir of Byzantine collapse</cite>
+          <cite style="margin:0">QUR'AN 30:2–4 — revealed at the lowest point of Roman collapse</cite>
           <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/030002.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
             <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           </button>
         </div>
       </div>
-      <div class="chips"><span class="chip">time-bounded</span><span class="chip">recorded pre-event</span><span class="chip">against expectation</span><span class="chip">publicly wagered on</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Empires oscillate; Byzantine recovery was a reasonable geopolitical bet, and hadith predictions were recorded after the fact.</p>
-        <p><strong>Reply:</strong> A fair challenge, and the strength varies by case, which is why they should be weighed by class. For 30:2–4 the manuscript and recitational tradition places it in the Makkan period, before 622, while the Persian ascendancy looked terminal — and the specific window is what makes it risky rather than the direction. For the hadith predictions, the honest position is that they carry force chiefly for those who accept the <em>isnād</em> dating, so they should be treated as supporting rather than load-bearing. This page deliberately does not rest on them.</p>
+      <div class="chips">
+        <span class="chip">Set a strict deadline of 3 to 9 years</span>
+        <span class="chip">Spoken publicly years before it happened</span>
+        <span class="chip">Rome was on the verge of total collapse</span>
+        <span class="chip">Enemies placed public bets against it</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Empires rise and fall all the time. Betting that Rome would bounce back was just a lucky political guess, and some prophecies might have been recorded after they happened.</p>
+        <p><strong>Reply:</strong> In 615 CE, Persia was completely dominating the Middle East, while Rome was bankrupt and falling apart. No military expert believed Rome could survive, let alone conquer Persia. What made the Quran's claim so risky wasn't just predicting a victory, but setting an exact deadline: within three to nine years. His enemies publicly took bets against it because it seemed impossible. If you are an impostor, you never tie your survival to a tight countdown clock that could destroy your credibility in a few years.</p>
       </div></details>
     </article>
 
     <!-- 7 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">7</div><div class="r-head">
-        <span class="r-tag">Science &amp; Epistemology · Handled Carefully</span>
-        <h3>A scripture that commands empirical inquiry — and dates its own errors none</h3></div></div>
+        <span class="r-tag">Reason, Science &amp; Freedom from Myth</span>
+        <h3>Encouraged observation and avoided the myths of its time</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Here the honest argument is not the loud one. The loud version — "the Qur'an contains modern physics" — is often overstated by enthusiasts, and reading current science back into old texts is a fallacy that discredits the person doing it. So consider two claims that survive scrutiny instead.</p>
-          <p><strong>First: an epistemology.</strong> Hundreds of verses do something no other scripture of its era does with such insistence — they make observation of the natural world a religious duty. <em>Look</em> at the camel, the rain cycle, the mountains, the alternation of night and day, the honeybee, the stages of your own growth. It demands evidence from opponents ("bring your proof"), condemns following claims without knowledge, ridicules ancestral conformity, and treats reason as a faculty one is accountable for. That posture is why, historically, the civilisation this message produced built the first research hospitals with licensing exams, gave us algebra and algorithms, ibn al-Haytham's experimental optics — the ancestor of the scientific method — and Alhazen's insistence that authority yields to controlled observation. An ideology hostile to inquiry does not generate that.</p>
-          <p><strong>Second: the absence of the expected.</strong> This is the underrated point. Every 7th-century text of comparable length is a museum of its era's cosmology — Ptolemaic spheres, humoral medicine, a flat cosmos on pillars, celestial gods, world-egg myths. The Qur'an declines to encode the surrounding pseudoscience it would have inherited by default. It contains no zodiac fatalism, no astrology, no alchemy, no numerological cosmogony. That silence is itself a datum: an author of that time and place writing 6,236 verses about the natural world should have left dozens of dated fingerprints. Note the direction of this argument — it is <em>not</em> "the Qur'an anticipated science." It is "the Qur'an did not inherit the errors it should have."</p>
+          <p>Let's be completely honest: claiming the Quran predicts modern quantum physics is an exaggeration that harms credibility. We don't make those far-fetched claims here. Instead, consider two powerful facts that stand up to any scrutiny.</p>
+          <p><strong>First: it made studying nature a religious duty.</strong> Unlike ancient religious books that discouraged questioning, the Quran repeatedly commands people to observe the natural world: look at how clouds form rain, how honeybees build hives, how mountains stand, and how human life develops. It constantly demands evidence from critics (<em>“Produce your proof if you are truthful”</em>), condemns following traditions blindly, and insists that people use their minds. This is why early Muslim civilization built the first modern hospitals, invented algebra, and pioneered experimental physics and optics under Ibn al-Haytham—the foundation of the modern scientific method.</p>
+          <p><strong>Second: it avoided the absurd myths of the 7th century.</strong> Every ancient book from that era is filled with the popular superstitions of its day: beliefs in a flat earth resting on pillars, gods living in the stars, magic potions, and astrology. A human author composing 6,236 verses in 7th-century Arabia should naturally have included dozens of these common errors. Yet the Quran stayed completely free from astrology, zodiac myths, and ancient superstitions. It is striking not because it claimed to be a modern science textbook, but because it didn't inherit the foolish blunders of its age.</p>
         </div>
-        <div class="sidecard"><h4>Where we refuse to overclaim</h4>
-          <p>Verses on embryonic stages, the expanding heavens, mountains as stabilisers or the barrier between waters are <em>consistent with</em> modern findings and were striking to some specialists — but consistency is weaker than prediction, and several popular versions of these claims rest on selective translation. We list them as suggestive, never as proof. A case that needs exaggeration isn't a case.</p>
+        <div class="sidecard"><h4>Honest boundaries</h4>
+          <p>We don't stretch ancient poetic words to match modern headlines. Verses describing nature are beautiful and remarkably accurate, but we rely on what the text plainly says—especially its command to seek knowledge and its freedom from common ancient myths.</p>
         </div>
       </div>
       <div class="verse">
@@ -767,77 +803,103 @@ html, body {
           </button>
         </div>
       </div>
-      <div class="chips"><span class="chip">evidentialist commands</span><span class="chip">no astrology or alchemy</span><span class="chip">absence-of-era-errors</span><span class="chip">generated an experimental tradition</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Critics argue the embryology derives from Galen, that "seven heavens" is ancient cosmology, and that hits are counted while misses are excused.</p>
-        <p><strong>Reply:</strong> This objection is largely <em>accepted</em> here, and it is why the page does not stake its case on scientific-miracle claims. Two notes remain. The Galenic-borrowing charge cuts both ways: Galen's actual scheme includes elements the Qur'an does not reproduce, and a borrower would ordinarily import the whole system, including its distinctive errors, which is what makes wholesale dependence hard to sustain. And methodologically, the argument from <em>absence</em> of era-specific error avoids the retrofitting fallacy entirely, because it makes no claim about what the text foresaw — only about what it declined to say.</p>
+      <div class="chips">
+        <span class="chip">Commands people to think &amp; observe nature</span>
+        <span class="chip">Free from 7th-century myths &amp; superstitions</span>
+        <span class="chip">Zero astrology, alchemy, or folklore</span>
+        <span class="chip">Inspired centuries of scientific discovery</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Critics say verses about nature just reflect ancient Greek ideas or old poetry, and Muslims only highlight verses that sound good while ignoring the rest.</p>
+        <p><strong>Reply:</strong> We agree that people shouldn't force modern science onto ancient verses—which is why this page never relies on cheap 'scientific miracle' claims. But notice what is missing: 7th-century Arabia was steeped in superstition. People believed solar eclipses happened because a king died, or that illnesses came from magic humors. When the Prophet's infant son Ibrahim died, a solar eclipse happened on the very same day. People shouted that the sun was mourning his son! An impostor would have gladly used that to claim supernatural power. Instead, the Prophet climbed the pulpit and stated plainly: <em>“The sun and the moon do not eclipse for the death or birth of anyone.”</em> That honesty is the exact opposite of an ancient mythmaker.</p>
       </div></details>
     </article>
 
     <!-- 8 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">8</div><div class="r-head">
-        <span class="r-tag">Sociology · Costly Signalling</span>
-        <h3>The early followers paid, and had nothing to gain</h3></div></div>
+        <span class="r-tag">Costly Sacrifice &amp; Genuine Conviction</span>
+        <h3>His earliest followers suffered everything with zero personal gain</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Ask an economist's question: who bought in first, and what was the return on investment?</p>
-          <p>Not opportunists. His first believers were his own wife, who knew him most intimately and privately; his closest friend, who had the most to lose in reputation; and — critically — the powerless: enslaved people, foreigners, women, the young. For them the price was torture, social death, a three-year total boycott that starved families in a mountain valley, and exile to Abyssinia. The payoff, for over a decade, was <em>negative</em>.</p>
-          <p>In evolutionary and behavioural science this is called costly signalling: a signal is credible in proportion to how expensive it is to fake. Bilal was tortured on burning sand and would not recant. Sumayyah was killed. Others were mutilated. Meanwhile the people best positioned to expose a hoax — his household, who saw him at 3 a.m., and his uncle's clan, who knew his every private hour — were among the most convinced.</p>
-          <p>Then compare the two halves of his life. Persecuted refugee for thirteen years; head of state for ten. The behaviour didn't change. Given absolute power over the city that had tried to kill him, the recorded response at Makkah's conquest was a general amnesty rather than reprisals. Fraudsters change when the incentives change. He didn't.</p>
+          <p>Look at the first people who accepted his message, and ask: what did they have to gain?</p>
+          <p>Certainly not money, safety, or power. His first follower was his wife Khadijah, who saw him in private every day and knew his character better than anyone. Then his closest friend Abu Bakr, a wealthy merchant who spent his fortune freeing slaves. Then came the most vulnerable: enslaved laborers, foreigners, women, and youth. For over thirteen years, their reward for believing in Islam was savage beatings, social isolation, and starvation during a brutal three-year boycott.</p>
+          <p>Bilal was pinned under heavy rocks on burning desert sands and refused to give up his faith. Sumayyah was killed for refusing to recant. People don't endure torture for a story they know is a made-up hoax. Even more telling: the people living under his roof—who saw him awake in the middle of the night—were the most devoted believers of all. If he were acting, his own household would have caught him immediately.</p>
+          <p>And notice how his character never changed. For thirteen years, he was a hunted refugee. In his last ten years, he became the ruler of all Arabia. Yet when he entered Makkah as a conqueror with ten thousand troops, he did not seek revenge against the people who had tortured his friends and tried to assassinate him. He granted a general pardon to all of them. Con men change as soon as they get power. Muhammad ﷺ remained the exact same humble servant.</p>
         </div>
-        <div class="sidecard"><h4>Group-delusion doesn't fit</h4>
-          <p>Mass delusion typically needs isolation, charisma without scrutiny, and short duration. This movement grew under maximal hostile scrutiny, across decades, in the open, among people who cross-examined each other — and included hardened sceptics who converted <em>after</em> trying to refute it.</p>
+        <div class="sidecard"><h4>Not a mass delusion</h4>
+          <p>Cults and delusions thrive in isolated bubbles with short lifespans. This movement grew under constant hostile scrutiny for 23 years, in public, winning over harsh skeptics who initially tried to destroy it.</p>
         </div>
       </div>
-      <div class="chips"><span class="chip">negative early ROI</span><span class="chip">closest witnesses convinced</span><span class="chip">power didn't corrupt behaviour</span><span class="chip">amnesty over revenge</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Martyrdom proves sincerity, not truth — many movements have devoted martyrs. Later expansion also brought worldly rewards.</p>
-        <p><strong>Reply:</strong> Agreed on both. The argument's target is narrower: it defeats the <em>conspiracy</em> hypothesis specifically. A conspiracy requires participants with something to gain and few enough to keep quiet; here the earliest cohort had everything to lose and included the very people who could have exposed him at any moment. Later material incentives are irrelevant to the credibility of the first thirteen years, which is where the claim was established.</p>
+      <div class="chips">
+        <span class="chip">First followers faced torture &amp; starvation</span>
+        <span class="chip">His own household &amp; closest friends believed first</span>
+        <span class="chip">Absolute power never corrupted his lifestyle</span>
+        <span class="chip">Forgave his worst enemies after victory</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> People die for false beliefs all the time. Being willing to suffer only proves you were sincere, not that your religion is actually true. And later on, Muslims gained land and wealth.</p>
+        <p><strong>Reply:</strong> People might die for a belief they were tricked into believing, but people do not endure thirteen years of torture and starvation for a secret lie they fabricated themselves. His closest companions were not naive followers in a distant town; they were his close family, roommates, and lifelong friends. A secret hoax requires conspirators who expect a payoff and keep quiet. Here, everyone had everything to lose, and not a single insider ever blew the whistle.</p>
       </div></details>
     </article>
 
     <!-- 9 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">9</div><div class="r-head">
-        <span class="r-tag">Legislative Argument · Measurable Reform</span>
-        <h3>Reforms that ran ahead of his environment, not with it</h3></div></div>
+        <span class="r-tag">Radical Social Justice &amp; Moral Reform</span>
+        <h3>Laws and reforms centuries ahead of his society</h3></div></div>
       <div class="r-body">
         <div>
-          <p>A man inventing a religion borrows his society's prejudices, because that is what sells. Test the hypothesis against the record: does his legislation flatter 7th-century Arabian norms, or attack them?</p>
-          <p>It abolished female infanticide and made it a crime. It gave women independent property rights, guaranteed inheritance shares, the right to contract their own marriage, to refuse it, to initiate divorce, to keep their own earnings and their own name — a legal package Europe reached in significant part only in the 19th and 20th centuries. It capped and regulated blood-vengeance, replacing endless tribal feud with adjudication. It made charity a compulsory annual tax on wealth, creating what functioned as a systematic welfare mechanism. It commanded the humane treatment of captives and animals, forbade the destruction of crops and trees in war, prohibited exploitative interest, and declared contracts and debts binding in writing before witnesses.</p>
-          <p>And on the deepest hierarchy of that world it was explicit: in his final sermon before roughly a hundred thousand people he declared no superiority of Arab over non-Arab, black over white — and elevated a formerly enslaved Black man, Bilal, to call the community to prayer from the top of the Ka'ba, the single most prestigious acoustic position in Arabia. That is not a concession to his culture. That is a direct assault on it.</p>
+          <p>If someone invents a religion to become popular, he flatters the prejudices and vices of his society. But Muhammad's laws directly attacked the greed and cruelty of 7th-century Arabia.</p>
+          <p>In a world where newborn baby girls were buried alive in the sand, he completely outlawed female infanticide and made raising daughters a pathway to Paradise. In a society where women were inherited like property, Islam granted women independent property rights, guaranteed shares of inheritance, the legal right to consent to marriage, the right to initiate divorce, and the right to keep their own earnings and family names—rights that European women did not secure until the late 19th and 20th centuries.</p>
+          <p>He replaced endless tribal blood-feuds with fair legal trials. He established Zakat—a mandatory annual wealth tax to feed and protect the poor. He banned predatory loan interest, gave strict military orders never to harm civilians, trees, or crops in warfare, and commanded kind treatment of animals and prisoners of war.</p>
+          <p>And in a deeply racist, tribal culture, his final public sermon declared: <em>“An Arab has no superiority over a non-Arab, nor does a non-Arab have superiority over an Arab; a white person has no superiority over a Black person, nor does a Black person have superiority over a white person, except by piety.”</em> He appointed Bilal, a formerly enslaved Black man from Abyssinia, to climb atop the Ka'ba to call the entire city to prayer. That was a revolutionary blow against the pride of Arabia's ruling elites.</p>
         </div>
-        <div class="sidecard"><h4>The tell</h4>
-          <p>Every reform above cost him support among exactly the constituency an impostor needs: powerful tribal men. He legislated against his own political interest, repeatedly and structurally.</p>
+        <div class="sidecard"><h4>Angering the powerful</h4>
+          <p>Every single one of these laws angered the powerful tribal chieftains whose favor an impostor would have desperately needed. He championed the weak at heavy political cost to himself.</p>
         </div>
       </div>
-      <div class="chips"><span class="chip">infanticide criminalised</span><span class="chip">women's property &amp; inheritance</span><span class="chip">racial equality declared</span><span class="chip">rules of war</span><span class="chip">compulsory welfare</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Some rulings look unjust by 21st-century standards — on slavery, warfare, or gender asymmetries in inheritance and testimony.</p>
-        <p><strong>Reply:</strong> The relevant comparison is not to 2024 but to 610, and against that baseline the movement is uniformly in one direction: toward restriction of violence and expansion of rights. Slavery, universal across every contemporary civilisation, was not romanticised but constrained and made expiable — manumission became the standard atonement, and freeing people the highest charity, dismantling the institution from the demand side in an economy built on it. Where asymmetries exist they sit inside a system that also assigned men unilateral financial liability for women's maintenance. One may still contest specific rulings; what cannot be contested is the vector, and the vector is what an argument about a reformer's origin turns on.</p>
+      <div class="chips">
+        <span class="chip">Banned female infanticide</span>
+        <span class="chip">Guaranteed women property, earnings &amp; rights</span>
+        <span class="chip">Outlawed racism &amp; tribal supremacy</span>
+        <span class="chip">Strict rules of war protecting civilians</span>
+        <span class="chip">Mandatory wealth tax (Zakat) for the poor</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Some ancient historical rulings look harsh or unfair by modern 21st-century standards—such as rules regarding warfare, slavery, or legal testimony.</p>
+        <p><strong>Reply:</strong> You have to compare his laws to the world of 610 CE, not 2026. In that brutal ancient world, Islam created a massive leap toward justice and compassion. Slavery was universal across the globe; rather than leaving it unchecked, the Quran made freeing slaves the primary way to wipe away sins and one of the highest acts of charity, steadily freeing people within an economy that had depended on it. On financial rules, while brothers and sisters inherited differently, the law placed 100% of the financial burden for housing, food, and family care on men, while a woman's money remained entirely her own. Every single law moved society forward toward mercy, justice, and human dignity.</p>
       </div></details>
     </article>
 
     <!-- 10 -->
     <article class="reason rv tilt">
       <div class="r-top"><div class="r-num">10</div><div class="r-head">
-        <span class="r-tag">Cumulative Case · Best Explanation</span>
-        <h3>Everything above needs one explanation, not ten</h3></div></div>
+        <span class="r-tag">The Big Picture · What Explains It All?</span>
+        <h3>All ten facts point to one simple truth</h3></div></div>
       <div class="r-body">
         <div>
-          <p>Set the data side by side. An unlettered forty-year-old with no literary history. A text that outclassed the world's most competitive poetic culture and survived its own open challenge. A message that rebuked its own bearer and limited his authority. A theology of one indivisible God with no intermediaries — coherent, non-anthropomorphic, and continuous with Abraham, Moses and Jesus rather than in rivalry with them. Time-bound predictions made in front of enemies. A preservation apparatus of unprecedented rigour. First followers who paid in blood for nothing. Legislation that attacked the interests of the powerful. A society transformed from tribal blood-feud to a literate, law-governed civilisation within a single lifetime — a rate of change with almost no parallel in recorded history.</p>
-          <p>Now try the alternatives. <strong>Deceiver?</strong> Contradicted by the self-damaging material, the rejected bribes, the empty estate and the unchanged behaviour after gaining power. <strong>Deluded?</strong> Delusion doesn't compose an unmatched literary corpus in a second register for twenty-three years, doesn't legislate a working civil order, doesn't make dated public bets and win them. <strong>Political genius who used religion instrumentally?</strong> Then explain why the instrument keeps stripping him of authority, exposing his errors publicly, and forbidding his own veneration.</p>
-          <p>Each objection can be patched individually. But every patch requires a new assumption, and Occam's razor counts assumptions. The hypothesis that requires the fewest — the one that accounts for the character, the text, the preservation, the predictions, the reforms and the transformation with a single premise — is the explanation he himself gave: that he did not author it, and was only its messenger.</p>
+          <p>Step back and look at all ten facts together:</p>
+          <p>An honest man who could not read or write. A book that defeated the finest poets in Arabic history. A message that publicly scolded its own messenger and limited his power. A pure belief in one God, continuing the message of Abraham, Moses, and Jesus. Specific historical predictions with strict deadlines that came true. A text preserved word for word across centuries. First followers who endured torture and starvation with no wealth to gain. Laws that protected women, orphans, and the poor while angering powerful tyrants. And a complete transformation of Arabia from warring tribes into a just, educated civilization within a single generation.</p>
+          <p>Now test the alternatives:
+          <br>• <strong>Was he a liar?</strong> That is contradicted by his lifelong honesty, his rejection of wealth and power, his empty estate, and his willingness to scold himself in public.
+          <br>• <strong>Was he confused or delusional?</strong> Confusion does not produce a poetic masterpiece that stunned the world, nor does it make accurate historical predictions with deadlines, nor does it create a lasting legal system that built a great civilization.
+          <br>• <strong>Was he just an ambitious politician?</strong> An ambitious politician never writes a book that strips away his own power, exposes his private mistakes, and forbids his followers from worshiping him.</p>
+          <p>The only explanation that makes sense of all ten facts without inventing strained excuses is the one he gave from the beginning: <strong>he was not the author of this message; he was simply God's messenger.</strong></p>
         </div>
-        <div class="sidecard"><h4>What follows</h4>
-          <p>Reason cannot force conviction; it can only clear the road. The Qur'an's own claim is modest about this: signs are given, and then the choice belongs to you. <em>"There is no compulsion in religion."</em> (2:256)</p>
+        <div class="sidecard"><h4>A free invitation</h4>
+          <p>Reason cannot force anyone to believe; its job is simply to clear away confusion. The Quran is completely clear on this: <em>“There is no compulsion in religion.”</em> (2:256). Truth stands out clearly from falsehood.</p>
         </div>
       </div>
-      <div class="chips"><span class="chip">convergence</span><span class="chip">Occam's razor</span><span class="chip">rival hypotheses tested</span><span class="chip">inference to best explanation</span></div>
-      <details class="disc"><summary><i>+</i>Examine the objection</summary><div class="inner">
-        <p><strong>Objection:</strong> Cumulative cases can stack weak arguments and feel strong — ten leaky buckets still hold no water.</p>
-        <p><strong>Reply:</strong> True when the buckets leak the same way. Convergence is only powerful when the lines of evidence are <em>independent</em> and would not be expected to align by chance — manuscript science, literary criticism, behavioural economics, legal history and historical sociology fail independently. The demand is therefore fair and specific: propose a single naturalistic account that handles all ten without inventing a new special assumption for each. That is the argument, and it stands or falls on whether such an account can be given.</p>
+      <div class="chips">
+        <span class="chip">All 10 clues point to one conclusion</span>
+        <span class="chip">Rules out fraud, delusion &amp; copying</span>
+        <span class="chip">The simplest answer with no wild excuses</span>
+        <span class="chip">He was truly speaking for God</span>
+      </div>
+      <details class="disc"><summary><i>+</i>Hear the counter-argument &amp; reply</summary><div class="inner">
+        <p><strong>Objection:</strong> Stacking up a bunch of weak arguments doesn't make a solid proof. Ten leaky buckets still can't hold any water.</p>
+        <p><strong>Reply:</strong> That would be true only if all the arguments leaked in the exact same spot. But these ten lines of evidence come from completely different directions: historical manuscripts, personal character, unmatched Arabic poetry, accurate predictions, psychological honesty, and real social reform. If someone claims he was an ambitious liar, that fails to explain his humble life and self-rebukes. If they claim he was delusional, that fails to explain his genius legislation and unmatched literature. The real challenge is: can any single theory explain all ten facts at once without making up wild, contradictory excuses?</p>
       </div></details>
     </article>
 
@@ -849,13 +911,13 @@ html, body {
   <span class="eyebrow rv">Interactive</span>
   <h2 class="rv split" data-d="1" style="margin-top:18px">The Logic Lab</h2>
   <p class="lead rv" data-d="2" style="margin-top:18px">
-    Three hypotheses compete to explain the historical record. Toggle each observation on or off and watch how well
-    each hypothesis copes. This is a <em>reasoning aid</em> that visualises explanatory strain — not a probability calculation.
+    Three possibilities compete to explain the historical record. Check or uncheck each historical fact below and see how well
+    each theory holds up. This is a visual guide to see which explanation fits the facts with the fewest excuses.
   </p>
 
   <div class="tri rv" data-d="2">
-    <div class="tri-head"><h3 style="font-size:1.35rem">Which hypothesis absorbs the evidence?</h3>
-      <p style="font-size:.88rem;color:var(--ink-3);margin-top:6px">Select the observations you accept as historically established.</p></div>
+    <div class="tri-head"><h3 style="font-size:1.35rem">Which explanation actually fits the facts?</h3>
+      <p style="font-size:.88rem;color:var(--ink-3);margin-top:6px">Select the facts you accept as historical events.</p></div>
     <div class="tri-grid">
       <div class="tri-obs" id="obsList"></div>
       <div class="tri-out">
@@ -864,7 +926,7 @@ html, body {
         <div class="bar-row b3"><b>H3 · Genuine messenger <em id="v3">—</em></b><div class="bar"><i id="i3"></i></div><p id="p3">Awaiting observations.</p></div>
       </div>
     </div>
-    <div class="tri-note">▸ Bars show <strong>explanatory fit</strong>: how much ad-hoc patching a hypothesis needs to survive the selected data. Fewer patches = higher fit. Your own weighting may differ — that's the point of showing the mechanism instead of a conclusion.</div>
+    <div class="tri-note">▸ The bars show <strong>how well each theory fits</strong>: the higher the bar, the fewer wild excuses needed. The genuine messenger explanation fits all facts naturally.</div>
   </div>
 
   <div class="stats rv" data-d="1">
@@ -880,17 +942,17 @@ html, body {
 <section id="timeline"><div class="container">
   <span class="eyebrow rv">Chronology</span>
   <h2 class="rv split" data-d="1" style="margin-top:18px">Twenty-three years, in public</h2>
-  <p class="lead rv" data-d="2" style="margin-top:18px">Every claim above is anchored to a datable, publicly witnessed sequence — the raw material any rival explanation must also account for.</p>
+  <p class="lead rv" data-d="2" style="margin-top:18px">Every point above is anchored to real, dated historical events witnessed openly by friends and enemies alike.</p>
   <div class="tl rv" data-d="1"><div class="fill" id="tlFill"></div>
-    <div class="tli"><em>c. 570 CE</em><h4>Born in Makkah</h4><p>Orphaned before birth and again at six. No schooling, no literary training, no religious office.</p></div>
-    <div class="tli"><em>c. 595–610</em><h4>Known as al-Amīn</h4><p>Two decades as a merchant with a public reputation for honesty — later cited even by his opponents.</p></div>
-    <div class="tli"><em>610</em><h4>First revelation</h4><p>At forty, in a cave outside the city. His first reaction is recorded as terror, not triumph — he fears he is ill or possessed.</p></div>
-    <div class="tli"><em>613–619</em><h4>Open preaching, persecution, boycott</h4><p>Followers tortured; a three-year total boycott starves his clan in a valley. He refuses offers of wealth and kingship to stop.</p></div>
-    <div class="tli"><em>c. 615</em><h4>The Byzantine prediction (30:2–4)</h4><p>Announced while Persia looked unstoppable; publicly wagered on in Makkah. Fulfilled c. 624.</p></div>
-    <div class="tli"><em>622</em><h4>Migration to Madinah</h4><p>A written constitution binds Muslims, Jewish tribes and others into one polity with defined mutual obligations — an early pluralist civic charter.</p></div>
-    <div class="tli"><em>624–628</em><h4>Statehood under pressure</h4><p>Badr, Uhud, the Trench, Hudaybiyyah. Revelation continues to rebuke him, restrict him, and withhold answers at the worst moments.</p></div>
-    <div class="tli"><em>630</em><h4>Makkah taken — general amnesty</h4><p>Absolute power over the city that tortured his companions and tried to kill him. The recorded outcome is pardon, not reprisal.</p></div>
-    <div class="tli"><em>632</em><h4>Farewell sermon, then death</h4><p>Declares racial equality, women's rights and the sanctity of life and property before a mass gathering. Dies leaving no wealth to heirs — and a text already memorised by thousands.</p></div>
+    <div class="tli"><em>c. 570 CE</em><h4>Born in Makkah</h4><p>Orphaned before birth and lost his mother at six. Received no schooling, no poetry lessons, and held no religious office.</p></div>
+    <div class="tli"><em>c. 595–610</em><h4>Known as al-Amīn</h4><p>Worked for twenty years as an honest merchant with a spotless public reputation—later acknowledged even by his enemies.</p></div>
+    <div class="tli"><em>610</em><h4>First revelation</h4><p>At age forty in a cave outside the city. His first reaction was trembling fear, not celebration—he ran home seeking comfort from his wife.</p></div>
+    <div class="tli"><em>613–619</em><h4>Open preaching, persecution, boycott</h4><p>His followers were tortured, and his entire clan was starved in a mountain valley for three years. He rejected immense wealth and power to stop.</p></div>
+    <div class="tli"><em>c. 615</em><h4>The Roman prediction (30:2–4)</h4><p>Announced while the Persian Empire looked unbeatable; opponents placed bets against it in Makkah. It came true around 624 CE.</p></div>
+    <div class="tli"><em>622</em><h4>Migration to Madinah</h4><p>Created a written constitution uniting Muslims, Jewish tribes, and others into one society with mutual protection and defined civil rights.</p></div>
+    <div class="tli"><em>624–628</em><h4>Building a community under siege</h4><p>Key battles and peace treaties. The Quran continued to correct him, set limits on his power, and withhold answers during difficult trials.</p></div>
+    <div class="tli"><em>630</em><h4>Makkah taken — complete forgiveness</h4><p>Held total military power over the very city that had tortured his friends and tried to kill him. His response was a complete general pardon.</p></div>
+    <div class="tli"><em>632</em><h4>Farewell sermon, then death</h4><p>Declared racial equality, women's rights, and the sacredness of human life before over one hundred thousand people. Died leaving no wealth to heirs—and a text memorized by thousands.</p></div>
   </div>
 </div></section>
 
@@ -901,11 +963,11 @@ html, body {
   <div class="honest rv" data-d="1">
     <h3>Five honest limits</h3>
     <ul>
-      <li><strong>This is not a mathematical proof.</strong> No historical argument about a person can be. It is an argument about which explanation is most reasonable given the evidence — the same standard used in history, law and forensic science.</li>
-      <li><strong>Popular "scientific miracle" claims are frequently overstated.</strong> Retrofitting current science onto old texts is a real fallacy, and several widely circulated examples rely on selective translation. That is why Reason 7 argues from the <em>absence of era-specific error</em> and from an evidentialist epistemology instead.</li>
-      <li><strong>Serious scholars disagree with much of this,</strong> and their objections are printed above in their own strength rather than paraphrased into weakness. Reading only one side is not reasoning.</li>
-      <li><strong>Some arguments require expertise you may not have.</strong> The literary case (Reason 2) is genuinely strongest for those who read classical Arabic. Stated plainly rather than glossed over.</li>
-      <li><strong>Conviction is not compelled by argument alone.</strong> The Qur'an's own position is that evidence is presented and the choice remains free: <em>"There is no compulsion in religion"</em> (2:256). Anyone pressuring you past your own reasoning is departing from the text they claim to defend.</li>
+      <li><strong>This is not a mathematical equation.</strong> No historical study of a human life can be. It is an argument about which explanation makes the best sense of the evidence—the exact same standard used by courts and historians.</li>
+      <li><strong>We do not rely on exaggerated "scientific miracle" claims.</strong> Trying to force modern science into ancient words is misleading and harms credibility. That is why Reason 7 focuses on something far more solid: how the Quran commanded people to observe nature and stayed remarkably free from the superstitions and medical errors of the 7th century.</li>
+      <li><strong>Critics raise thoughtful counter-arguments,</strong> which is why their strongest objections are printed openly above next to each reason. Real thinking requires looking at both sides fairly.</li>
+      <li><strong>Some arguments are clearest in their original language.</strong> The literary argument (Reason 2) is easiest to appreciate if you know classical Arabic. We state this honestly rather than pretending translation captures every poetic nuance.</li>
+      <li><strong>Faith cannot be forced by arguments alone.</strong> The Quran makes it clear that evidence is shared, but belief must always remain a personal choice: <em>“There is no compulsion in religion”</em> (2:256). Real faith comes from honest reflection, not pressure.</li>
     </ul>
   </div>
 </div></section>
@@ -919,11 +981,10 @@ html, body {
   </svg></div>
   <div class="container">
     <span class="eyebrow rv">Conclusion</span>
-    <h2 class="rv split" data-d="1" style="margin-top:18px;max-width:20ch;margin-inline:auto">One premise explains all ten</h2>
+    <h2 class="rv split" data-d="1" style="margin-top:18px;max-width:20ch;margin-inline:auto">One simple truth explains all ten</h2>
     <p class="lead rv" data-d="2" style="margin:22px auto 0;text-align:center">
-      The invitation is not to abandon reason but to follow it further than comfort allows:
-      read the primary sources, weigh the objections, and ask honestly which account of these facts
-      requires the fewest assumptions.
+      We invite you not to shut off your mind, but to follow the evidence wherever it leads:
+      read the history, weigh the counter-arguments, and ask honestly which explanation makes real sense of the facts.
     </p>
     <div class="hero-cta rv" data-d="3" style="animation:none;opacity:1">
       <a href="#reasons" class="btn solid mag">Re-read the ten</a>
@@ -936,16 +997,16 @@ html, body {
 <section id="refs"><div class="container">
   <span class="eyebrow rv">Go Deeper</span>
   <h2 class="rv split" data-d="1" style="margin-top:18px">Read the primary and opposing material</h2>
-  <p class="lead rv" data-d="2" style="margin-top:16px">Verify rather than trust. Sources below include both the case and its critics.</p>
+  <p class="lead rv" data-d="2" style="margin-top:16px">Verify rather than blindly trust. The sources below include both the case and its critics.</p>
   <div class="refs">
-    <div class="ref rv" data-d="1"><b>The Qur'an</b><span>Start with translations by Abdel Haleem (fluent), Nasr's <em>Study Quran</em> (annotated), or Arberry (literary).</span></div>
-    <div class="ref rv" data-d="1"><b>Early biography (sīra)</b><span>Ibn Ishaq/Ibn Hisham; Ibn Sa'd's <em>Tabaqat</em>; al-Tabari's <em>History</em> — the primary layer, with their own transmission debates.</span></div>
+    <div class="ref rv" data-d="1"><b>The Qur'an</b><span>Start with translations by Abdel Haleem (clear and fluent), Nasr's <em>Study Quran</em> (detailed commentary), or Arberry (poetic flow).</span></div>
+    <div class="ref rv" data-d="1"><b>Early biography (sīra)</b><span>Read early historical accounts: Ibn Hisham, Ibn Sa'd's <em>Tabaqat</em>, and al-Tabari's <em>History</em>.</span></div>
     <div class="ref rv" data-d="2"><b>Modern academic history</b><span>Montgomery Watt, <em>Muhammad at Mecca / at Medina</em>; Fred Donner, <em>Muhammad and the Believers</em>; Jonathan Brown, <em>Muhammad: A Very Short Introduction</em>.</span></div>
-    <div class="ref rv" data-d="2"><b>Hadith criticism</b><span>Jonathan A. C. Brown, <em>Hadith: Muhammad's Legacy</em> — on how the isnād system worked, and its real limits.</span></div>
-    <div class="ref rv" data-d="3"><b>Manuscript evidence</b><span>Birmingham Qur'an folios (Univ. of Birmingham); the Sanaa palimpsest studies of Behnam Sadeghi and Asma Hilali; the Corpus Coranicum project.</span></div>
-    <div class="ref rv" data-d="3"><b>Literary inimitability</b><span>Al-Baqillani, <em>I'jāz al-Qur'ān</em>; Navid Kermani, <em>God is Beautiful</em>; and the classical debate on <em>naẓm</em> in al-Jurjani.</span></div>
-    <div class="ref rv" data-d="4"><b>Character as evidence</b><span>Yaqeen Institute's research on the Prophet's character; Ibn Taymiyyah's argument on the two possible profiles of a prophethood claimant.</span></div>
-    <div class="ref rv" data-d="4"><b>The critical case</b><span>Patricia Crone &amp; Michael Cook, <em>Hagarism</em>; Tom Holland, <em>In the Shadow of the Sword</em>; and critiques of "scientific miracle" apologetics. Read these too.</span></div>
+    <div class="ref rv" data-d="2"><b>Hadith verification</b><span>Jonathan Brown, <em>Hadith: Muhammad's Legacy</em> — on how the transmission chains were rigorously tested.</span></div>
+    <div class="ref rv" data-d="3"><b>Ancient manuscripts</b><span>The Birmingham Quran folios; studies of the Sanaa palimpsest; and the Corpus Coranicum project.</span></div>
+    <div class="ref rv" data-d="3"><b>Literary mastery</b><span>Navid Kermani, <em>God is Beautiful</em>; and classical Arabic literary studies on the Quran's unique eloquence.</span></div>
+    <div class="ref rv" data-d="4"><b>Character as evidence</b><span>Yaqeen Institute's research on the Prophet's character; and historical studies on claimants to prophethood.</span></div>
+    <div class="ref rv" data-d="4"><b>Critical viewpoints</b><span>Academic historians like Patricia Crone, Michael Cook, and Tom Holland. Read opposing arguments to test your thinking.</span></div>
   </div>
 </div></section>
 
@@ -973,7 +1034,7 @@ html, body {
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:var(--gold)">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.55 (updated 2026-10-06 09:27)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.56 (updated 2026-10-06 19:39)</div>
   </div>
 </div></footer>
 
@@ -1154,16 +1215,16 @@ document.getElementById('theme').onclick=()=>{
    LOGIC LAB
    ============================================================ */
 const OBS=[
-  {t:"He was universally known as truthful before, and never accused of lying by enemies",s:[-3,0,1]},
-  {t:"He refused wealth and kingship offered to stop, and died with no personal estate",s:[-3,0,1]},
-  {t:"The Qur'an publicly rebukes and restricts him, and withholds answers at critical moments",s:[-3,-2,2]},
-  {t:"The text outperformed the era's finest poets; its open challenge was never met",s:[-2,-3,2]},
-  {t:"He produced no literature for 40 years, then two consistently distinct registers for 23",s:[-2,-3,2]},
-  {t:"Specific, time-bounded predictions were recorded before the events and fulfilled",s:[-1,-3,2]},
-  {t:"Earliest followers were the powerless, paid in torture and exile, with no worldly return",s:[-3,-1,1]},
-  {t:"Legislation attacked the interests of the powerful men whose support he needed",s:[-3,-1,2]},
-  {t:"His behaviour was identical in powerlessness and in absolute power (amnesty at Makkah)",s:[-3,0,1]},
-  {t:"The text is preserved via mass memorisation plus 1st-century manuscripts, essentially unchanged",s:[-1,-1,2]}
+  {t:"Known by all as strictly truthful; his enemies never accused him of lying",s:[-3,0,1]},
+  {t:"Refused offers of wealth and kingship to stop, and died owning almost nothing",s:[-3,0,1]},
+  {t:"The Quran publicly corrects and limits him, and withholds answers during difficult trials",s:[-3,-2,2]},
+  {t:"The Quran outperformed the greatest Arabic poets; its challenge was never matched",s:[-2,-3,2]},
+  {t:"Spoke no poetry or literature for 40 years, then delivered two completely distinct styles for 23 years",s:[-2,-3,2]},
+  {t:"Specific predictions with strict deadlines came true in public",s:[-1,-3,2]},
+  {t:"His earliest followers were poor and enslaved people who endured torture with no money to gain",s:[-3,-1,1]},
+  {t:"His laws protected the weak while taking away unfair privileges from powerful tribal leaders",s:[-3,-1,2]},
+  {t:"He remained humble and forgiving whether he was a hunted refugee or the ruler of Arabia",s:[-3,0,1]},
+  {t:"The Quran is preserved through thousands of memorizers and ancient 1st-century manuscripts",s:[-1,-1,2]}
 ];
 const list=document.getElementById('obsList');
 OBS.forEach((o,i)=>{
@@ -1173,12 +1234,12 @@ OBS.forEach((o,i)=>{
   list.appendChild(d);
 });
 const NOTE=[
-  ["Requires ever more ad-hoc motives: a liar with no payoff, damaging his own authority on purpose.",
-   "Strained: a deceiver who rejects power and self-sabotages.","Fits poorly with the selected data."],
-  ["Delusion cannot explain sustained literary mastery, correct dated predictions or working legislation.",
-   "Partially strained: sincerity fits, competence does not.","Fits some data, fails on output."],
-  ["Accounts for character, text, constraint, prediction and reform under a single premise.",
-   "Coherent with the selected data without added assumptions.","Requires accepting revelation as possible."]
+  ["Requires wild excuses: a liar who chased no money or power, and publicly scolded himself.",
+   "Strained: an impostor who refused riches and made himself look vulnerable.","Does not fit the historical evidence."],
+  ["Delusion cannot explain supreme poetic genius, accurate historical predictions, or working laws.",
+   "Partially strained: he was clearly sincere, but confused people do not produce unmatched mastery.","Fails to explain what he produced."],
+  ["Explains his character, the unmatched book, the predictions, and lasting reforms with one simple truth.",
+   "Completely fits the evidence without needing wild excuses.","The only explanation that makes sense of all facts."]
 ];
 function calc(){
   const on=[...document.querySelectorAll('.obs.on')].map(e=>OBS[+e.dataset.i]);
