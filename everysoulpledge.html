@@ -127,6 +127,7 @@ body.snap-mode .exhibit-footer {
   top: 12px;
   left: 0;
   right: 0;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -294,14 +295,25 @@ body.snap-mode .exhibit-footer {
     letter-spacing: .02em;
     padding: 0 16px;
   }
-  .top-nav-bar { padding: 0 8px; }
-  .nav-group-left, .nav-group-right { gap: 5px; }
-  .portal-back-btn, .nav-btn { font-size: 0.72rem; padding: 5px 8px; gap: 4px; }
+  .top-nav-bar {
+    top: 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .nav-group-left, .nav-group-right { gap: 4px; }
+  .portal-back-btn, .nav-btn {
+    font-size: 0.70rem;
+    padding: 4px 7px;
+    gap: 3px;
+    box-sizing: border-box;
+  }
   .nav-btn-text-full { display: none; }
   #btnPrev, #btnNext { display: none; }
-  .ayah-pill { font-size: 0.72rem; padding: 3px 6px; }
-  .audio-play-btn { width: 30px; height: 30px; }
-  .audio-play-btn svg { width: 13px; height: 13px; }
+  .ayah-pills { padding: 2px 3px; gap: 2px; }
+  .ayah-pill { font-size: 0.68rem; padding: 2px 5px; }
+  .audio-play-btn { width: 28px; height: 28px; }
+  .audio-play-btn svg { width: 12px; height: 12px; }
   #hint { bottom: 36px; font-size: 9px; letter-spacing: .22em; padding: 0 10px; }
 }
 </style>
@@ -328,6 +340,9 @@ body.snap-mode .exhibit-footer {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
+    </button>
+    <button type="button" class="nav-btn" id="btnFullVerse" aria-label="Show complete ayah" title="Show complete ayah immediately">
+      <span>Full<span class="nav-btn-text-full"> Ayah</span></span>
     </button>
     <button type="button" class="nav-btn" id="btnReplay" aria-label="Replay particle animation" title="Replay from start">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
@@ -359,7 +374,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.64 (updated 2026-10-19 12:28)</div>
+  <div class="nq-version-tag">v1.0.65 (updated 2026-10-19 12:59)</div>
 </footer>
 
 <script>
@@ -373,50 +388,80 @@ const c = document.querySelector('canvas'),
       hint = document.getElementById('hint'),
       audioBtn = document.getElementById('audioPlayBtn'),
       btnReplay = document.getElementById('btnReplay'),
+      btnFullVerse = document.getElementById('btnFullVerse'),
       btnPrev = document.getElementById('btnPrev'),
       btnNext = document.getElementById('btnNext'),
       ayahPillBtns = document.querySelectorAll('.ayah-pill'),
       F = 'px "Amiri Quran",serif',
-      S = [
+      AYAHS = [
         {
           num: 35,
           ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٥',
-          ar: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
-          arMobile: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
-          en: 'Indeed, it is one of the greatest [realities]',
-          enMobile: 'Indeed, it is one of<br>the greatest realities',
-          k: 0.72,
-          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074035.mp3'
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074035.mp3',
+          words: [
+            { ar: 'إِنَّهَا', en: 'Indeed, it is', k: 0.95 },
+            { ar: 'لَإِحْدَى', en: 'surely one of', k: 0.85 },
+            { ar: 'الْكُبَرِ', en: 'the greatest [realities]', k: 0.85 }
+          ],
+          full: {
+            ar: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
+            arMobile: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
+            en: 'Indeed, it is one of the greatest [realities]',
+            enMobile: 'Indeed, it is one of<br>the greatest realities',
+            k: 0.72
+          }
         },
         {
           num: 36,
           ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٦',
-          ar: 'نَذِيرًا لِّلْبَشَرِ',
-          arMobile: 'نَذِيرًا لِّلْبَشَرِ',
-          en: 'A warning to all humanity',
-          enMobile: 'A warning to all humanity',
-          k: 0.80,
-          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074036.mp3'
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074036.mp3',
+          words: [
+            { ar: 'نَذِيرًا', en: 'A warning', k: 0.95 },
+            { ar: 'لِّلْبَشَرِ', en: 'to all humanity', k: 0.85 }
+          ],
+          full: {
+            ar: 'نَذِيرًا لِّلْبَشَرِ',
+            arMobile: 'نَذِيرًا لِّلْبَشَرِ',
+            en: 'A warning to all humanity',
+            enMobile: 'A warning to all humanity',
+            k: 0.80
+          }
         },
         {
           num: 37,
           ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٧',
-          ar: 'لِمَن شَاءَ مِنكُمْ أَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
-          arMobile: 'لِمَن شَاءَ مِنكُمْ\nأَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
-          en: 'For whoever among you chooses to advance or lag behind',
-          enMobile: 'For whoever among you chooses<br>to advance or lag behind',
-          k: 0.50,
-          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074037.mp3'
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074037.mp3',
+          words: [
+            { ar: 'لِمَن شَاءَ', en: 'For whoever wills', k: 0.85 },
+            { ar: 'مِنكُمْ', en: 'among you', k: 0.90 },
+            { ar: 'أَن يَتَقَدَّمَ', en: 'to advance', k: 0.80 },
+            { ar: 'أَوْ يَتَأَخَّرَ', en: 'or lag behind', k: 0.80 }
+          ],
+          full: {
+            ar: 'لِمَن شَاءَ مِنكُمْ أَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
+            arMobile: 'لِمَن شَاءَ مِنكُمْ\nأَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
+            en: 'For whoever among you chooses to advance or lag behind',
+            enMobile: 'For whoever among you chooses<br>to advance or lag behind',
+            k: 0.50
+          }
         },
         {
           num: 38,
           ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٨',
-          ar: 'كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ',
-          arMobile: 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ',
-          en: 'Every soul, for what it has earned, is held in pledge',
-          enMobile: 'Every soul, for what it has earned,<br>is held in pledge',
-          k: 0.52,
-          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074038.mp3'
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074038.mp3',
+          words: [
+            { ar: 'كُلُّ', en: 'Every', k: 1.0 },
+            { ar: 'نَفْسٍۭ', en: 'soul', k: 0.75 },
+            { ar: 'بِمَا كَسَبَتْ', en: 'for what it has earned', k: 0.60 },
+            { ar: 'رَهِينَةٌ', en: 'is held in pledge', k: 0.75 }
+          ],
+          full: {
+            ar: 'كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ',
+            arMobile: 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ',
+            en: 'Every soul, for what it has earned, is held in pledge',
+            enMobile: 'Every soul, for what it has earned,<br>is held in pledge',
+            k: 0.52
+          }
         }
       ],
       spr = ['#fff4dc', '#f2c46d', '#e0913f', '#7fe3d4'].map(k => {
@@ -429,9 +474,11 @@ const c = document.querySelector('canvas'),
         return s;
       });
 
-let W, H, R, Z = 1, G = [0, 1], P = [], M = { x: -1e4, y: -1e4 }, st = -1, T0 = 0, t0 = 0, now = 0, wv = [];
+let W, H, R, Z = 1, G = [0, 1], P = [], M = { x: -1e4, y: -1e4 }, T0 = 0, now = 0, wv = [];
+let currentAyahIdx = 0;
+let currentStageIdx = -1;
+let stageStartTime = 0;
 let userInteracted = false;
-const AUTO_TIMINGS = [2200, 10000, 17500, 27500];
 
 function size() {
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || innerWidth < 768;
@@ -446,30 +493,45 @@ function size() {
   o.width = W;
   o.height = H;
   sv.style.width = sv.style.height = m + 'px';
-  if (st >= 0) go(st);
+  if (currentStageIdx >= 0) displayStage(currentAyahIdx, currentStageIdx, true);
 }
 
 function updatePills(idx) {
   ayahPillBtns.forEach((btn, i) => {
     btn.classList.toggle('active', i === idx);
+    btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
   });
 }
 
-function go(i, userTriggered = false) {
-  if (i < 0 || i >= S.length) return;
-  st = i;
-  T0 = now;
-  if (userTriggered) userInteracted = true;
-  updatePills(i);
+function displayStage(ayahIdx, stageIdx, instant = false) {
+  if (ayahIdx < 0 || ayahIdx >= AYAHS.length) return;
+  const ayah = AYAHS[ayahIdx];
+  const maxStage = ayah.words.length; // maxStage is full ayah
+  stageIdx = Math.max(0, Math.min(maxStage, stageIdx));
 
-  const item = S[i];
-  ref.textContent = item.ref;
-  sv.classList.toggle('lock', i === 3);
+  currentAyahIdx = ayahIdx;
+  currentStageIdx = stageIdx;
+  stageStartTime = now;
+  T0 = now;
+
+  updatePills(ayahIdx);
+  ref.textContent = ayah.ref;
+
+  const isFull = stageIdx >= maxStage;
+  sv.classList.toggle('lock', isFull);
 
   const isPortrait = W < H * 1.2;
-  const a = isPortrait ? item.arMobile : item.ar;
-  const e = isPortrait ? item.enMobile : item.en;
-  const k = item.k;
+  let a, e, k;
+  if (isFull) {
+    a = (isPortrait && ayah.full.arMobile) ? ayah.full.arMobile : ayah.full.ar;
+    e = (isPortrait && ayah.full.enMobile) ? ayah.full.enMobile : ayah.full.en;
+    k = ayah.full.k;
+  } else {
+    const w = ayah.words[stageIdx];
+    a = w.ar;
+    e = w.en;
+    k = w.k;
+  }
 
   const L = a.split('\n'), q = [];
   ox.font = 100 + F;
@@ -523,16 +585,29 @@ function go(i, userTriggered = false) {
   P.forEach((p, j) => {
     if (p.on = j < n) {
       [p.tx, p.ty] = q[j];
-      p.at = now + ((G[0] - p.tx) / tw + (L.length > 1 && p.ty > H / 2)) * 1000 + Math.random() * 300;
+      p.at = instant ? 0 : (now + ((G[0] - p.tx) / tw + (L.length > 1 && p.ty > H / 2)) * 1000 + Math.random() * 300);
+      if (instant) {
+        p.x = p.tx;
+        p.y = p.ty;
+        p.vx = p.vy = 0;
+      }
     }
-    p.vx += (p.y - H / 2) * .025;
-    p.vy -= (p.x - W / 2) * .025;
+    if (!instant) {
+      p.vx += (p.y - H / 2) * .025;
+      p.vy -= (p.x - W / 2) * .025;
+    }
   });
 
   en.innerHTML = `<span>${e}</span>`;
-  hint.style.opacity = i === 3 ? .6 : 0;
-  boom(W / 2, H / 2, i === 3 ? 1.2 : 0.8);
-  if (i === 3) setTimeout(() => { if (st === 3) boom(W / 2, H / 2, 1.4); }, 3400);
+  hint.style.opacity = (ayahIdx === 3 && isFull) ? .6 : 0;
+
+  if (!instant) {
+    if (ayahIdx === 0 && stageIdx === 0) boom(W / 2, H / 2);
+    if (isFull) {
+      boom(W / 2, H / 2, ayahIdx === 3 ? 1.2 : 0.85);
+      if (ayahIdx === 3) setTimeout(() => { if (currentAyahIdx === 3 && currentStageIdx === 4) boom(W / 2, H / 2, 1.4); }, 2800);
+    }
+  }
 }
 
 function boom(X, Y, w = 1) {
@@ -549,8 +624,36 @@ function tick(t) {
   now = t;
   const cx = W / 2, cy = H / 2, hold = M.p && t - M.t > 180, sx = G[0] + 200 - (t - T0) * .45 % (G[1] + 1400);
 
-  if (!userInteracted && !isAudioPlaying && st < 3 && t - t0 > AUTO_TIMINGS[st + 1]) {
-    go(st + 1);
+  // Auto progression:
+  if (isAudioPlaying && currentAudioIdx >= 0 && audioClips[currentAudioIdx]) {
+    const aud = audioClips[currentAudioIdx];
+    if (!aud.paused && aud.duration > 0) {
+      const cur = aud.currentTime;
+      const dur = aud.duration;
+      const words = AYAHS[currentAyahIdx].words;
+      const recitationRatio = 0.82;
+      const wordSpan = (dur * recitationRatio) / words.length;
+      let targetStage;
+      if (cur < dur * recitationRatio) {
+        targetStage = Math.min(words.length - 1, Math.floor(cur / wordSpan));
+      } else {
+        targetStage = words.length; // Full Ayah
+      }
+      if (targetStage !== currentStageIdx) {
+        displayStage(currentAyahIdx, targetStage);
+      }
+    }
+  } else if (!userInteracted && currentStageIdx >= 0) {
+    const ayah = AYAHS[currentAyahIdx];
+    const isFull = currentStageIdx >= ayah.words.length;
+    const waitTime = isFull ? 5200 : 3200;
+    if (t - stageStartTime > waitTime) {
+      if (!isFull) {
+        displayStage(currentAyahIdx, currentStageIdx + 1);
+      } else if (currentAyahIdx < AYAHS.length - 1) {
+        displayStage(currentAyahIdx + 1, 0);
+      }
+    }
   }
 
   x.globalCompositeOperation = 'destination-out';
@@ -559,22 +662,22 @@ function tick(t) {
   x.fillRect(0, 0, W, H);
 
   x.globalCompositeOperation = 'lighter';
-  if (st >= 0) {
+  if (currentStageIdx >= 0) {
     x.globalAlpha = Math.min(1, Math.max(0, (t - T0) / 1500 - .8)) * .025;
     x.drawImage(o, 0, 0, W, H);
   }
 
   x.beginPath();
   for (const p of P) {
-    const on = st >= 0 && p.on && t > p.at;
+    const on = currentStageIdx >= 0 && p.on && t > p.at;
     let tx = p.tx, ty = p.ty;
     if (!on) {
-      p.a -= p.w * (st === 3 ? .1 : 1);
-      const r = st < 0 ? p.s * (6 + 2 * Math.sin(t * .006)) : R * p.r * (1 + .02 * Math.sin(t * .001 + p.a * 3));
+      p.a -= p.w * (currentAyahIdx === 3 && currentStageIdx >= 4 ? .1 : 1);
+      const r = currentStageIdx < 0 ? p.s * (6 + 2 * Math.sin(t * .006)) : R * p.r * (1 + .02 * Math.sin(t * .001 + p.a * 3));
       tx = cx + Math.cos(p.a) * r;
       ty = cy + Math.sin(p.a) * r;
     }
-    const k = on ? (hold ? .0015 : .022 * p.k) : st < 0 ? .005 : .012;
+    const k = on ? (hold ? .0015 : .022 * p.k) : currentStageIdx < 0 ? .005 : .012;
     const dx = p.x - M.x, dy = p.y - M.y, d = Math.hypot(dx, dy) + 1;
     p.vx += (tx - p.x) * k;
     p.vy += (ty - p.y) * k;
@@ -625,14 +728,13 @@ function resetExperience() {
   isAudioPlaying = false;
   updateAudioUI(false);
   userInteracted = false;
-  t0 = now;
-  st = -1;
+  currentStageIdx = -1;
   en.innerHTML = '';
   hint.style.opacity = 0;
   sv.classList.remove('lock');
   ref.textContent = 'سُورَةُ المُدَّثِّر · ٧٤:٣٥-٣٨';
   updatePills(-1);
-  setTimeout(() => go(0), 400);
+  setTimeout(() => displayStage(0, 0), 400);
 }
 
 onresize = size;
@@ -658,9 +760,10 @@ ondblclick = e => {
 };
 
 /* ───────── Continuous Audio by Sheikh Nasser Al-Qatami ───────── */
-const audioClips = S.map(item => new Audio(item.audio));
+const audioClips = AYAHS.map(item => new Audio(item.audio));
 let currentAudioIdx = -1;
 let isAudioPlaying = false;
+let audioAdvanceTimeout = null;
 
 function updateAudioUI(playing) {
   if (!audioBtn) return;
@@ -670,8 +773,20 @@ function updateAudioUI(playing) {
   if (iconPlay) iconPlay.style.display = playing ? 'none' : 'inline-block';
   if (iconPause) iconPause.style.display = playing ? 'inline-block' : 'none';
   audioBtn.setAttribute('aria-label', playing ? 'Pause recitation' : 'Play recitation');
-  const currentAyahNum = (st >= 0 && st < S.length) ? S[st].num : '35–38';
-  audioBtn.setAttribute('title', playing ? `Pause recitation (${currentAyahNum})` : 'Play recitation · Sheikh Nasser Al-Qatami (74:35–38)');
+  const curNum = (currentAyahIdx >= 0 && currentAyahIdx < AYAHS.length) ? AYAHS[currentAyahIdx].num : '35–38';
+  audioBtn.setAttribute('title', playing ? `Pause recitation (${curNum})` : 'Play recitation · Sheikh Nasser Al-Qatami (74:35–38)');
+}
+
+function stopAllAudio() {
+  if (audioAdvanceTimeout) {
+    clearTimeout(audioAdvanceTimeout);
+    audioAdvanceTimeout = null;
+  }
+  audioClips.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+    a.onended = null;
+  });
 }
 
 function playAudioAyah(idx) {
@@ -690,10 +805,13 @@ function playAudioAyah(idx) {
   });
 
   audio.onended = () => {
-    if (currentAudioIdx < S.length - 1) {
-      const nextIdx = currentAudioIdx + 1;
-      go(nextIdx);
-      playAudioAyah(nextIdx);
+    if (currentAudioIdx < AYAHS.length - 1) {
+      audioAdvanceTimeout = setTimeout(() => {
+        if (!isAudioPlaying) return;
+        const nextIdx = currentAudioIdx + 1;
+        displayStage(nextIdx, 0);
+        playAudioAyah(nextIdx);
+      }, 2200);
     } else {
       isAudioPlaying = false;
       updateAudioUI(false);
@@ -701,24 +819,14 @@ function playAudioAyah(idx) {
   };
 }
 
-function stopAllAudio() {
-  audioClips.forEach(a => {
-    a.pause();
-    a.currentTime = 0;
-    a.onended = null;
-  });
-}
-
 function toggleAudio() {
   if (isAudioPlaying) {
-    if (currentAudioIdx >= 0 && audioClips[currentAudioIdx]) {
-      audioClips[currentAudioIdx].pause();
-    }
+    stopAllAudio();
     isAudioPlaying = false;
     updateAudioUI(false);
   } else {
-    const targetIdx = (st >= 0 && st < S.length) ? st : 0;
-    if (st !== targetIdx) go(targetIdx);
+    const targetIdx = (currentAyahIdx >= 0 && currentAyahIdx < AYAHS.length) ? currentAyahIdx : 0;
+    displayStage(targetIdx, 0);
     playAudioAyah(targetIdx);
   }
 }
@@ -730,40 +838,58 @@ if (audioBtn) {
   });
 }
 
-if (btnReplay) btnReplay.addEventListener('click', resetExperience);
+if (btnReplay) {
+  btnReplay.addEventListener('click', () => {
+    userInteracted = true;
+    displayStage(currentAyahIdx, 0);
+    if (isAudioPlaying) playAudioAyah(currentAyahIdx);
+  });
+}
+
+if (btnFullVerse) {
+  btnFullVerse.addEventListener('click', () => {
+    userInteracted = true;
+    displayStage(currentAyahIdx, AYAHS[currentAyahIdx].words.length);
+  });
+}
 
 if (btnPrev) {
   btnPrev.addEventListener('click', () => {
-    const prevIdx = (st <= 0 ? S.length - 1 : st - 1);
-    go(prevIdx, true);
+    userInteracted = true;
+    const prevIdx = (currentAyahIdx <= 0 ? AYAHS.length - 1 : currentAyahIdx - 1);
+    displayStage(prevIdx, 0);
     if (isAudioPlaying) playAudioAyah(prevIdx);
   });
 }
 
 if (btnNext) {
   btnNext.addEventListener('click', () => {
-    const nextIdx = (st >= S.length - 1 ? 0 : st + 1);
-    go(nextIdx, true);
+    userInteracted = true;
+    const nextIdx = (currentAyahIdx >= AYAHS.length - 1 ? 0 : currentAyahIdx + 1);
+    displayStage(nextIdx, 0);
     if (isAudioPlaying) playAudioAyah(nextIdx);
   });
 }
 
 ayahPillBtns.forEach(pill => {
   pill.addEventListener('click', () => {
+    userInteracted = true;
     const idx = parseInt(pill.getAttribute('data-idx'), 10);
-    go(idx, true);
+    displayStage(idx, 0);
     if (isAudioPlaying) playAudioAyah(idx);
   });
 });
 
 window.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-    const nextIdx = (st >= S.length - 1 ? 0 : st + 1);
-    go(nextIdx, true);
+    const nextIdx = (currentAyahIdx >= AYAHS.length - 1 ? 0 : currentAyahIdx + 1);
+    userInteracted = true;
+    displayStage(nextIdx, 0);
     if (isAudioPlaying) playAudioAyah(nextIdx);
   } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-    const prevIdx = (st <= 0 ? S.length - 1 : st - 1);
-    go(prevIdx, true);
+    const prevIdx = (currentAyahIdx <= 0 ? AYAHS.length - 1 : currentAyahIdx - 1);
+    userInteracted = true;
+    displayStage(prevIdx, 0);
     if (isAudioPlaying) playAudioAyah(prevIdx);
   } else if (e.key === ' ' && e.target === document.body) {
     e.preventDefault();
@@ -791,28 +917,25 @@ function initApp() {
       c: Math.random() < .05 ? 3 : (Math.random() * 3) | 0
     });
   }
-  t0 = now = performance.now();
+  now = performance.now();
   requestAnimationFrame(tick);
 
-  function snapToAyah(idx) {
-    go(idx, true);
-    P.forEach(p => {
-      if (p.on) {
-        p.at = 0;
-        p.x = p.tx;
-        p.y = p.ty;
-        p.vx = p.vy = 0;
-      }
-    });
-  }
-
   const hash = location.hash.toLowerCase();
-  if (hash.includes('35') || hash.includes('36') || hash.includes('37') || hash.includes('38') || hash.includes('snap') || hash.includes('full')) {
+  if (hash.includes('snap') || hash.includes('full')) {
     document.body.classList.add('snap-mode');
-    const idx = hash.includes('35') ? 0 : hash.includes('36') ? 1 : hash.includes('37') ? 2 : 3;
-    setTimeout(() => snapToAyah(idx), 120);
+    setTimeout(() => {
+      displayStage(3, AYAHS[3].words.length, true);
+    }, 150);
+  } else if (hash.includes('35')) {
+    setTimeout(() => displayStage(0, 0), 120);
+  } else if (hash.includes('36')) {
+    setTimeout(() => displayStage(1, 0), 120);
+  } else if (hash.includes('37')) {
+    setTimeout(() => displayStage(2, 0), 120);
+  } else if (hash.includes('38')) {
+    setTimeout(() => displayStage(3, 0), 120);
   } else {
-    setTimeout(() => go(0), 120);
+    setTimeout(() => displayStage(0, 0), 120);
   }
 }
 
