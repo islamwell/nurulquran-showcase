@@ -42,7 +42,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--bone)}
-body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smoothing:antialiased;touch-action:none}
+body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:none}
 
 #field{position:fixed;inset:0;display:block;z-index:0}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
@@ -61,13 +61,22 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
 .scene[data-off]{opacity:0;visibility:hidden}
 
 .ref{display:none}
-.ar{font-family:var(--f-ar);direction:rtl;font-size:clamp(28px,4.1vw,58px);line-height:2.05;
-  color:var(--gold);margin-bottom:clamp(22px,3.6vw,52px);letter-spacing:.01em}
-.en{font-size:clamp(24px,4.2vw,60px);font-weight:300;line-height:1.08;letter-spacing:-.02em}
+.ar{font-family:var(--f-ar);direction:rtl;font-size:clamp(30px,4.5vw,64px);line-height:2.05;
+  color:#FFF2D6;margin-bottom:clamp(22px,3.6vw,52px);letter-spacing:.01em;
+  text-shadow:0 0 28px rgba(227,192,137,.45), 0 0 60px rgba(201,143,69,.25), 0 2px 4px rgba(0,0,0,.8);
+  font-feature-settings:"cv01" on, "locl" on, "kern" on, "liga" on, "calt" on;
+  text-rendering:geometricPrecision;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-smooth:always}
+.scene.short .ar{font-size:clamp(56px,9vw,110px);line-height:1.75;margin-bottom:clamp(26px,4vw,56px)}
+.scene.short .en{font-size:clamp(28px,4.8vw,66px)}
+.en{font-size:clamp(24px,4.2vw,58px);font-weight:300;line-height:1.15;letter-spacing:-.015em;
+  color:#FBF6EE;text-shadow:0 2px 6px rgba(0,0,0,.7), 0 0 30px rgba(227,192,137,.18)}
 .en em{font-style:italic;color:var(--gold)}
 .w{display:inline-block;will-change:transform,opacity;transform-origin:50% 60%;
   padding:.02em .11em; text-shadow:0 0 44px rgba(227,192,137,.16); box-decoration-break:clone; -webkit-box-decoration-break:clone}
-.note{max-width:900px;margin:clamp(16px,2.4vw,28px) auto 0;font-size:clamp(15px,1.55vw,22px);line-height:1.42;color:rgba(243,236,225,.72);font-weight:300}
+.note{max-width:900px;margin:clamp(16px,2.4vw,28px) auto 0;font-size:clamp(15px,1.55vw,22px);line-height:1.48;color:rgba(243,236,225,.84);font-weight:300;text-shadow:0 1px 4px rgba(0,0,0,.8)}
 .note::before{content:"REFLECTION";display:block;font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.32em;color:rgba(227,192,137,.62);margin-bottom:8px}
 .sajdah-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:3px 10px;border-radius:999px;background:rgba(227,192,137,.15);border:1px solid rgba(227,192,137,.45);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
 .hairline{display:none}
@@ -129,11 +138,17 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
   border:2px solid rgba(6,6,10,.9);box-shadow:0 0 14px rgba(227,192,137,.55)
 }
 
-.cursor{position:fixed;z-index:9;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;
-  border:1px solid rgba(227,192,137,.6);border-radius:50%;pointer-events:none;
-  transition:width .3s,height .3s,margin .3s,background .3s;mix-blend-mode:screen}
-.cursor::after{content:"";position:absolute;inset:15px;background:var(--gold);border-radius:50%}
-body.press .cursor{width:74px;height:74px;margin:-37px 0 0 -37px;background:rgba(227,192,137,.06)}
+.cursor{position:fixed;z-index:9999;top:0;left:0;width:32px;height:32px;margin:-16px 0 0 -16px;
+  border:1.5px solid rgba(227,192,137,.88);border-radius:50%;pointer-events:none;
+  box-shadow:0 0 12px rgba(227,192,137,.45), inset 0 0 6px rgba(227,192,137,.25);
+  transition:width .22s ease,height .22s ease,margin .22s ease,background .22s ease,border-color .22s ease,opacity .2s ease;
+  will-change:transform;opacity:1}
+.cursor::after{content:"";position:absolute;top:50%;left:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;
+  background:#FFFFFF;border-radius:50%;box-shadow:0 0 8px #FFF, 0 0 12px var(--gold)}
+body.press .cursor{width:60px;height:60px;margin:-30px 0 0 -30px;
+  background:rgba(227,192,137,.14);border-color:rgba(255,246,229,.95);box-shadow:0 0 20px rgba(227,192,137,.6)}
+body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color:#FFF;background:rgba(227,192,137,.12)}
+@media (hover:none),(pointer:coarse){body{cursor:auto !important}.cursor{display:none !important}}
 .actions{position:fixed;z-index:7;right:24px;bottom:22px;display:flex;gap:10px;align-items:center}
 .iconbtn{width:44px;height:44px;border:1px solid rgba(227,192,137,.28);border-radius:50%;
   display:grid;place-items:center;background:rgba(6,6,10,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -218,7 +233,7 @@ body.press .cursor{width:74px;height:74px;margin:-37px 0 0 -37px;background:rgba
     <span>NURULQURAN PORTAL</span>
   </a>
   <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.67 (updated 2026-10-19 16:58)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.68 (updated 2026-10-19 19:58)</div>
 </div>
 
 <!-- TOP RIGHT HUD -->
@@ -229,7 +244,7 @@ body.press .cursor{width:74px;height:74px;margin:-37px 0 0 -37px;background:rgba
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">v1.0.67 (updated 2026-10-19 16:58)</div>
+  <div class="footer-version-tag">v1.0.68 (updated 2026-10-19 19:58)</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -257,36 +272,36 @@ body.press .cursor{width:74px;height:74px;margin:-37px 0 0 -37px;background:rgba
 <script>
 /* ─────────── content ─────────── */
 const V=[
-  {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"The sūrah opens with letters that immediately remind the listener: revelation begins on Allah’s terms, not ours.","theme":"letters"},
-  {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"The first claim is not about the messenger; it is about the source. The Qur’an comes from the Lord who owns and sustains every world.","theme":"book"},
-  {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ ۚ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًۭا مَّآ أَتَىٰهُم مِّن نَّذِيرٍۢ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"The accusation of fabrication is answered by returning attention to purpose: warning is mercy when it can lead a people back to guidance.","theme":"warning"},
-  {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍۢ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ ۖ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّۢ وَلَا شَفِيعٍ ۚ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The One who created and governs the entire cosmos is also the One people must ultimately depend on. Creation and worship belong together.","theme":"cosmos"},
-  {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍۢ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍۢ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"Human beings see fragments of events. Allah sees the full movement of every matter from beginning to return.","theme":"ascent"},
-  {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"His power does not cancel His mercy, and His mercy is not weakness. Both qualities appear together.","theme":"seen"},
-  {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ ۖ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍۢ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"The verse asks us to look at creation not as random material, but as something deliberately fashioned with excellence.","theme":"clay"},
-  {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍۢ مِّن مَّآءٍۢ مَّهِينٍۢ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Human pride is challenged by remembering how physically small and unimpressive our beginning is.","theme":"drop"},
-  {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ ۖ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ ۚ قَلِيلًۭا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"The gifts named are not passive organs; they are tools for recognizing truth. Gratitude means using them for the purpose they were given.","theme":"senses"},
-  {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍۢ جَدِيدٍۭ ۚ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"The objection sounds like a question about resurrection, but the verse exposes a deeper issue: reluctance to face accountability before Allah.","theme":"dust"},
-  {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"Death is not disappearance. It is a transfer followed by return.","theme":"death"},
-  {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"There comes a point when seeing and hearing are no longer tests of faith; certainty arrives after the opportunity to choose has ended.","theme":"bowed"},
-  {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Guidance was not designed as forced programming. Moral choice is real, and therefore accountability is real.","theme":"choice"},
-  {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ ۖ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"Forgetting the Hereafter here is not a memory lapse; it is living as though it does not matter.","theme":"forgotten"},
-  {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًۭا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ۩","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"The test of revelation is not merely whether it impresses the mind; it is whether the heart becomes humble enough to submit.","theme":"prostration","sajdah":true},
-  {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًۭا وَطَمَعًۭا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Real faith changes what a person does when no one is watching: comfort is left, Allah is called upon, and blessings are shared.","theme":"night"},
-  {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌۭ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍۢ جَزَآءًۢ بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Some rewards are hidden because ordinary imagination is too small to contain them.","theme":"hidden"},
-  {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًۭا كَمَن كَانَ فَاسِقًۭا ۚ لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"The verse rejects the idea that faithfulness and deliberate rebellion finally arrive at the same destination.","theme":"contrast"},
-  {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًۢا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"The image is not merely of entering a garden, but of finally reaching a true home and place of welcome.","theme":"garden"},
-  {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ ۖ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"The contrast with the previous āyah is severe: both groups receive a “home,” but the homes reflect the lives they chose.","theme":"fire"},
-  {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Some hardship can function as a wake-up call before a far greater loss. The purpose of the warning is still return.","theme":"warning2"},
-  {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ ۚ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"The problem is not ignorance after no message arrived; it is consciously turning away after the reminder became clear.","theme":"turnaway"},
-  {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍۢ مِّن لِّقَآئِهِۦ ۖ وَجَعَلْنَـٰهُ هُدًۭى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Qur’an is placed in a chain of revelation. Guidance is not a new human experiment; Allah has guided nations before.","theme":"scripture"},
-  {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةًۭ يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا ۖ وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Leadership in guidance is tied to two inner qualities: patience under pressure and certainty that does not collapse when tested.","theme":"leadership"},
-  {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Not every dispute is resolved in history. The final and perfectly informed judgment belongs to Allah.","theme":"judgment"},
-  {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ ۖ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"History becomes evidence when people walk through the ruins yet still refuse to hear what those ruins are saying.","theme":"ruins"},
-  {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًۭا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ ۖ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Resurrection is placed before their eyes in nature: dead land receives water, life emerges, and what looked finished becomes productive again.","theme":"water"},
-  {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Mockery often asks for the consequence to be hurried, assuming delay means it will never arrive.","theme":"challenge"},
-  {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"There is a deadline built into moral choice. Faith after the test has visibly ended is not the same as faith before it.","theme":"deadline"},
-  {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah closes with calm confidence: the messenger does not have to force the outcome. Truth can be delivered, and then one waits for Allah’s decision.","theme":"wait"}
+ {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"The sūrah opens with letters that immediately remind the listener: revelation begins on Allah’s terms, not ours.","theme":"letters"},
+ {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"The first claim is not about the messenger; it is about the source. The Qur’an comes from the Lord who owns and sustains every world.","theme":"book"},
+ {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"The accusation of fabrication is answered by returning attention to purpose: warning is mercy when it can lead a people back to guidance.","theme":"warning"},
+ {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The One who created and governs the entire cosmos is also the One people must ultimately depend on. Creation and worship belong together.","theme":"cosmos"},
+ {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"Human beings see fragments of events. Allah sees the full movement of every matter from beginning to return.","theme":"ascent"},
+ {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"His power does not cancel His mercy, and His mercy is not weakness. Both qualities appear together.","theme":"seen"},
+ {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"The verse asks us to look at creation not as random material, but as something deliberately fashioned with excellence.","theme":"clay"},
+ {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Human pride is challenged by remembering how physically small and unimpressive our beginning is.","theme":"drop"},
+ {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"The gifts named are not passive organs; they are tools for recognizing truth. Gratitude means using them for the purpose they were given.","theme":"senses"},
+ {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"The objection sounds like a question about resurrection, but the verse exposes a deeper issue: reluctance to face accountability before Allah.","theme":"dust"},
+ {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"Death is not disappearance. It is a transfer followed by return.","theme":"death"},
+ {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"There comes a point when seeing and hearing are no longer tests of faith; certainty arrives after the opportunity to choose has ended.","theme":"bowed"},
+ {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Guidance was not designed as forced programming. Moral choice is real, and therefore accountability is real.","theme":"choice"},
+ {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"Forgetting the Hereafter here is not a memory lapse; it is living as though it does not matter.","theme":"forgotten"},
+ {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"The test of revelation is not merely whether it impresses the mind; it is whether the heart becomes humble enough to submit.","theme":"prostration","sajdah":true},
+ {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Real faith changes what a person does when no one is watching: comfort is left, Allah is called upon, and blessings are shared.","theme":"night"},
+ {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Some rewards are hidden because ordinary imagination is too small to contain them.","theme":"hidden"},
+ {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"The verse rejects the idea that faithfulness and deliberate rebellion finally arrive at the same destination.","theme":"contrast"},
+ {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"The image is not merely of entering a garden, but of finally reaching a true home and place of welcome.","theme":"garden"},
+ {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"The contrast with the previous āyah is severe: both groups receive a “home,” but the homes reflect the lives they chose.","theme":"fire"},
+ {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Some hardship can function as a wake-up call before a far greater loss. The purpose of the warning is still return.","theme":"warning2"},
+ {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"The problem is not ignorance after no message arrived; it is consciously turning away after the reminder became clear.","theme":"turnaway"},
+ {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Qur’an is placed in a chain of revelation. Guidance is not a new human experiment; Allah has guided nations before.","theme":"scripture"},
+ {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Leadership in guidance is tied to two inner qualities: patience under pressure and certainty that does not collapse when tested.","theme":"leadership"},
+ {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Not every dispute is resolved in history. The final and perfectly informed judgment belongs to Allah.","theme":"judgment"},
+ {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"History becomes evidence when people walk through the ruins yet still refuse to hear what those ruins are saying.","theme":"ruins"},
+ {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Resurrection is placed before their eyes in nature: dead land receives water, life emerges, and what looked finished becomes productive again.","theme":"water"},
+ {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Mockery often asks for the consequence to be hurried, assuming delay means it will never arrive.","theme":"challenge"},
+ {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"There is a deadline built into moral choice. Faith after the test has visibly ended is not the same as faith before it.","theme":"deadline"},
+ {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah closes with calm confidence: the messenger does not have to force the outcome. Truth can be delivered, and then one waits for Allah’s decision.","theme":"wait"}
 ];
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -301,7 +316,10 @@ const enRed=new Set(["fear","fire","punishment","reject","rejected","denial","gu
 const enGreen=new Set(["hope","truth","guidance","guided","merciful","believer","believed","gardens","return","patience","certainty","righteous"]);
 
 const scenes=V.map((v,i)=>{
-  const s=document.createElement("div");s.className="scene";if(v.en.length>145)s.classList.add("long");s.dataset.off="1";
+  const s=document.createElement("div");s.className="scene";
+  if(v.en.length>145)s.classList.add("long");
+  if(v.ar.split(/\s+/).length<=3)s.classList.add("short");
+  s.dataset.off="1";
   const wrap=t=>t.split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ");
   const sajdahHtml=v.sajdah?`<div class="sajdah-badge"><span>۩</span> <span>Āyah of Sajdah · Prostration</span></div>`:'';
   s.innerHTML=`${sajdahHtml}
@@ -369,7 +387,7 @@ const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032029.mp3",
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032030.mp3"
 ];
-function currentIndex(){return Math.floor(T)%N}
+function currentIndex(){return ((Math.floor(T)%N)+N)%N}
 function showToast(msg){
   toast.textContent=msg;
   toast.classList.add("show");
@@ -472,26 +490,52 @@ const eo=t=>1-Math.pow(1-t,4), ei=t=>t*t*t;
 /* ─────────── pointer ─────────── */
 const M={x:innerWidth/2,y:innerHeight/2,lx:innerWidth/2,ly:innerHeight/2,press:0,down:false};
 const cur=document.getElementById("cursor");
-addEventListener("pointermove",e=>{M.x=e.clientX;M.y=e.clientY;
+if(cur) cur.style.transform=`translate(${M.x}px,${M.y}px)`;
+
+addEventListener("pointermove",e=>{
+  M.x=e.clientX; M.y=e.clientY;
+  if(cur){
+    cur.style.opacity="1";
+    cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
+  }
   if(M.down&&lastPointerX!==null){
     const dx=e.clientX-lastPointerX;
-    T=(T-dx*0.0018+N)%N;lastPointerX=e.clientX;if(!userPaused) auto=false;idle=0;stopAudio();
-  }});
+    T=(((T-dx*0.0018)%N)+N)%N;
+    lastPointerX=e.clientX;
+    if(!userPaused) auto=false;
+    idle=0;
+    stopAudio();
+  }
+},{passive:true});
+
+document.addEventListener("mouseleave",()=>{if(cur)cur.style.opacity="0";});
+document.addEventListener("mouseenter",()=>{if(cur)cur.style.opacity="1";});
+
+document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .scrub").forEach(el=>{
+  el.addEventListener("pointerenter",()=>document.body.classList.add("hovering"));
+  el.addEventListener("pointerleave",()=>document.body.classList.remove("hovering"));
+});
+
 addEventListener("pointerdown",e=>{
   if(e.target.closest("a, button, input")) return;
   M.down=true;lastPointerX=e.clientX;document.body.classList.add("press");auto=false;idle=0;
 });
 addEventListener("pointerup",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
 addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
-addEventListener("wheel",e=>{T=(T+e.deltaY*0.00075+N)%N;if(!userPaused) auto=false;idle=0;stopAudio();},{passive:true});
+addEventListener("wheel",e=>{
+  T=(((T+e.deltaY*0.00075)%N)+N)%N;
+  if(!userPaused) auto=false;
+  idle=0;
+  stopAudio();
+},{passive:true});
 addEventListener("keydown",e=>{
   const k=e.key;
   if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
-  if(k==="ArrowRight"||k===" "){T=(Math.floor(T)+1)%N+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="ArrowLeft"){T=(Math.floor(T)-1+N)%N+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="Home"){T=.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="End"){T=N-1+.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(/^[1-9]$/.test(k)){T=(+k-1)+.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="Home"){T=0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(k==="End"){T=N-1+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
+  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
   else if(k.toLowerCase()==="p"){userPaused=!userPaused;if(userPaused){auto=false;stopAudio();}else{auto=true;}idle=0;syncPauseButton();}
   else if(k.toLowerCase()==="a"){playCurrentAudio();}
   else if(k.toLowerCase()==="s"){shareBtn.click();}
@@ -615,7 +659,8 @@ function drawMetaphor(idx,t,p){
 
 /* ─────────── loop ─────────── */
 function frame(now){
-  const rawDt=Math.min((now-last)/1000,.05); last=now;
+  const rawDt = last ? Math.max(0, Math.min((now - last) / 1000, 0.05)) : 0.016;
+  last = now;
   const dt=userPaused?0:rawDt;
   if(!userPaused){
     M.lx+=(M.x-M.lx)*.08; M.ly+=(M.y-M.ly)*.08;
@@ -627,8 +672,14 @@ function frame(now){
   const t=simTime;
 
   /* advance */
-  const idx=Math.floor(T)%N, sc=scenes[idx], p=T-Math.floor(T), theme=THEMES[idx];
-  if(auto&&!audioSequence&&!M.down&&!userPaused) T=(T+dt/sc.dur)%N;
+  T = ((T % N) + N) % N;
+  const idx = ((Math.floor(T) % N) + N) % N;
+  const sc = scenes[idx] || scenes[0];
+  const p = Math.max(0, Math.min(0.9999, T - Math.floor(T)));
+  const theme = THEMES[idx] || THEMES[0];
+  if (auto && !audioSequence && !M.down && !userPaused) {
+    T = ((T + dt / (sc.dur || 8.5)) % N + N) % N;
+  }
 
   /* ── background ── */
   g.globalCompositeOperation="source-over";
@@ -669,22 +720,22 @@ function frame(now){
     delete s.el.dataset.off;
     s.el.classList.toggle("readable", p > Math.min(.34, 3/sc.dur));
     const ex=clamp((p-.855)/.145,0,1), enter=clamp(p/.10,0,1);
-    const gs=0.855+p*0.30+ex*0.55, gr=(-2.6+p*5.2)+ex*7, drift=Math.sin(t*.28)*1.1;
+    const gs=0.855+p*0.30+ex*0.55, drift=Math.sin(t*.28)*0.5;
     const px=(M.lx-innerWidth/2)*.014, py=(M.ly-innerHeight/2)*.014;
     s.el.style.opacity=(1-ex)*(0.15+0.85*eo(enter));
-    s.el.style.transform=`translate(${px}px,${py-ex*70}px) rotate(${gr+drift}deg) scale(${gs})`;
+    s.el.style.transform=`translate(${px}px,${py-ex*70}px) scale(${gs})`;
     const nW=s.words.length;
     s.words.forEach((w,k)=>{
-      const st=(k/nW)*0.42, lt=clamp((p-st)/0.26,0,1), e=eo(lt);
+      const st=(k/nW)*0.36, lt=clamp((p-st)/0.22,0,1), e=eo(lt);
       const sd=((k*7919+s.seed*131)%1000)/1000, sgn=sd<.5?-1:1;
-      const rot=(1-e)*sgn*(14+sd*30) + Math.sin(t*.6+k*.55)*1.5*(1-ex) + ex*sgn*(9+sd*16);
-      const ty=(1-e)*(34+sd*46)*sgn*0.4 - ex*(30+sd*90);
-      const scl=(0.52+0.48*e)*(1+ex*0.85);
+      const rot=(1-e)*sgn*(6+sd*12) + (1-ex)*Math.sin(t*.4+k*.4)*0.8;
+      const ty=(1-e)*(24+sd*32)*sgn*0.3 - ex*(24+sd*60);
+      const scl=(0.6+0.4*e)*(1+ex*0.6);
       w.style.opacity=(e*(1-ex)).toFixed(3);
-      w.style.transform=`translate(${(1-e)*sgn*10}px,${ty}px) rotate(${rot}deg) scale(${scl})`;
+      w.style.transform=`translate(${(1-e)*sgn*6}px,${ty}px) rotate(${rot}deg) scale(${scl})`;
       w.style.filter="none";
     });
-    s.line.style.transform=`scaleX(${0.25+eo(clamp(p/.6,0,1))*(1-ex)})`;
+    if(s.line) s.line.style.transform=`scaleX(${0.25+eo(clamp(p/.6,0,1))*(1-ex)})`;
   });
 
   if(!scrubbing) setScrubFromT();
@@ -695,8 +746,13 @@ function frame(now){
   }
   requestAnimationFrame(frame);
 }
-const hashVerse=Number(location.hash.replace("#",""));
-if(hashVerse>=1&&hashVerse<=30) T=(hashVerse-1)+.001;
+const rawHash=location.hash.replace("#","").trim();
+const hashVerse=Number(rawHash);
+if(!isNaN(hashVerse)&&hashVerse>=1&&hashVerse<=30){
+  T=(hashVerse-1)+0.001;
+}else{
+  T=0.001;
+}
 setScrubFromT();
 let lastHash=-1;
 requestAnimationFrame(frame);
