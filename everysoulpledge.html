@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Every Soul Held in Pledge · Surah Al-Muddaththir 74:38 · NurulQuran Showcase</title>
-<meta name="description" content="Contemplate Surah Al-Muddaththir 74:38: Every soul, for what it has earned, is held in pledge. Interactive particle calligraphy with recitation by Sheikh Nasser Al-Qatami.">
+<title>Surah Al-Muddaththir 74:35–38 · Every Soul Held in Pledge · NurulQuran Showcase</title>
+<meta name="description" content="Contemplate Surah Al-Muddaththir 74:35–38: Indeed it is one of the greatest realities, a warning to humanity, for whoever chooses to advance or lag behind; every soul for what it has earned is held in pledge. Interactive particle calligraphy with recitation by Sheikh Nasser Al-Qatami.">
 <meta name="theme-color" content="#0a0911">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,6 +182,45 @@ body.snap-mode .exhibit-footer {
   box-shadow: 0 0 16px rgba(242, 196, 109, 0.35);
 }
 
+.ayah-pills {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(22, 18, 30, 0.85);
+  border: 1px solid rgba(217, 181, 106, 0.35);
+  border-radius: 999px;
+  padding: 3px 4px;
+  gap: 3px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ayah-pill {
+  border: none;
+  background: transparent;
+  color: rgba(236, 217, 168, 0.72);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: all 0.2s ease;
+  user-select: none;
+  line-height: 1.2;
+}
+
+.ayah-pill:hover {
+  color: #fff;
+  background: rgba(217, 181, 106, 0.22);
+}
+
+.ayah-pill.active {
+  color: #fff;
+  background: rgba(217, 181, 106, 0.38);
+  box-shadow: 0 0 10px rgba(242, 196, 109, 0.45);
+}
+
 .audio-play-btn {
   pointer-events: auto !important;
   cursor: pointer !important;
@@ -256,9 +295,11 @@ body.snap-mode .exhibit-footer {
     padding: 0 16px;
   }
   .top-nav-bar { padding: 0 8px; }
-  .nav-group-left, .nav-group-right { gap: 6px; }
-  .portal-back-btn, .nav-btn { font-size: 0.72rem; padding: 5px 9px; gap: 4px; }
+  .nav-group-left, .nav-group-right { gap: 5px; }
+  .portal-back-btn, .nav-btn { font-size: 0.72rem; padding: 5px 8px; gap: 4px; }
   .nav-btn-text-full { display: none; }
+  #btnPrev, #btnNext { display: none; }
+  .ayah-pill { font-size: 0.72rem; padding: 3px 6px; }
   .audio-play-btn { width: 30px; height: 30px; }
   .audio-play-btn svg { width: 13px; height: 13px; }
   #hint { bottom: 36px; font-size: 9px; letter-spacing: .22em; padding: 0 10px; }
@@ -270,8 +311,24 @@ body.snap-mode .exhibit-footer {
 <header class="top-nav-bar">
   <div class="nav-group-left">
     <a href="index.html" class="portal-back-btn" title="Back to Showcase Portal">‹ Showcase</a>
+    <div class="ayah-pills" id="ayahPills" role="tablist" aria-label="Surah Al-Muddaththir Ayat">
+      <button type="button" class="ayah-pill active" data-idx="0" title="Ayah 35: Indeed it is one of the greatest">35</button>
+      <button type="button" class="ayah-pill" data-idx="1" title="Ayah 36: A warning to all humanity">36</button>
+      <button type="button" class="ayah-pill" data-idx="2" title="Ayah 37: For whoever chooses to advance or lag behind">37</button>
+      <button type="button" class="ayah-pill" data-idx="3" title="Ayah 38: Every soul is held in pledge">38</button>
+    </div>
   </div>
   <div class="nav-group-right">
+    <button type="button" class="nav-btn" id="btnPrev" aria-label="Previous Ayah" title="Previous Ayah">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button type="button" class="nav-btn" id="btnNext" aria-label="Next Ayah" title="Next Ayah">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
     <button type="button" class="nav-btn" id="btnReplay" aria-label="Replay particle animation" title="Replay from start">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
         <polyline points="1 4 1 10 7 10"></polyline>
@@ -279,10 +336,7 @@ body.snap-mode .exhibit-footer {
       </svg>
       <span class="nav-btn-text-full">Replay</span>
     </button>
-    <button type="button" class="nav-btn" id="btnFullVerse" aria-label="Show full verse now" title="Display complete verse immediately">
-      <span>Full<span class="nav-btn-text-full"> Verse</span></span>
-    </button>
-    <button type="button" class="audio-play-btn" id="audioPlayBtn" aria-label="Play recitation by Sheikh Nasser Al-Qatami" title="Play recitation · Sheikh Nasser Al-Qatami (74:38)">
+    <button type="button" class="audio-play-btn" id="audioPlayBtn" aria-label="Play recitation by Sheikh Nasser Al-Qatami" title="Play recitation · Sheikh Nasser Al-Qatami (74:35–38)">
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
         <path d="M8 5v14l11-7z"/>
       </svg>
@@ -305,7 +359,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.62 (updated 2026-10-19 12:08)</div>
+  <div class="nq-version-tag">v1.0.63 (updated 2026-10-19 12:23)</div>
 </footer>
 
 <script>
@@ -319,14 +373,51 @@ const c = document.querySelector('canvas'),
       hint = document.getElementById('hint'),
       audioBtn = document.getElementById('audioPlayBtn'),
       btnReplay = document.getElementById('btnReplay'),
-      btnFullVerse = document.getElementById('btnFullVerse'),
+      btnPrev = document.getElementById('btnPrev'),
+      btnNext = document.getElementById('btnNext'),
+      ayahPillBtns = document.querySelectorAll('.ayah-pill'),
       F = 'px "Amiri Quran",serif',
       S = [
-        ['كُلُّ', 'Every', 1],
-        ['نَفْسٍۭ', 'soul', .75],
-        ['بِمَا كَسَبَتْ', 'for what it has earned', .6],
-        ['رَهِينَةٌ', 'is held in pledge', .75],
-        ['كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ', 'Every soul, for what it has earned, is held in pledge', .5]
+        {
+          num: 35,
+          ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٥',
+          ar: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
+          arMobile: 'إِنَّهَا لَإِحْدَى الْكُبَرِ',
+          en: 'Indeed, it is one of the greatest [realities]',
+          enMobile: 'Indeed, it is one of<br>the greatest realities',
+          k: 0.72,
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074035.mp3'
+        },
+        {
+          num: 36,
+          ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٦',
+          ar: 'نَذِيرًا لِّلْبَشَرِ',
+          arMobile: 'نَذِيرًا لِّلْبَشَرِ',
+          en: 'A warning to all humanity',
+          enMobile: 'A warning to all humanity',
+          k: 0.80,
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074036.mp3'
+        },
+        {
+          num: 37,
+          ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٧',
+          ar: 'لِمَن شَاءَ مِنكُمْ أَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
+          arMobile: 'لِمَن شَاءَ مِنكُمْ\nأَن يَتَقَدَّمَ أَوْ يَتَأَخَّرَ',
+          en: 'For whoever among you chooses to advance or lag behind',
+          enMobile: 'For whoever among you chooses<br>to advance or lag behind',
+          k: 0.50,
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074037.mp3'
+        },
+        {
+          num: 38,
+          ref: 'سُورَةُ المُدَّثِّر · ٧٤:٣٨',
+          ar: 'كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ',
+          arMobile: 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ',
+          en: 'Every soul, for what it has earned, is held in pledge',
+          enMobile: 'Every soul, for what it has earned,<br>is held in pledge',
+          k: 0.52,
+          audio: 'https://everyayah.com/data/Nasser_Alqatami_128kbps/074038.mp3'
+        }
       ],
       spr = ['#fff4dc', '#f2c46d', '#e0913f', '#7fe3d4'].map(k => {
         const s = document.createElement('canvas'), g = s.getContext('2d');
@@ -339,6 +430,8 @@ const c = document.querySelector('canvas'),
       });
 
 let W, H, R, Z = 1, G = [0, 1], P = [], M = { x: -1e4, y: -1e4 }, st = -1, T0 = 0, t0 = 0, now = 0, wv = [];
+let userInteracted = false;
+const AUTO_TIMINGS = [2200, 10000, 17500, 27500];
 
 function size() {
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || innerWidth < 768;
@@ -356,15 +449,28 @@ function size() {
   if (st >= 0) go(st);
 }
 
-function go(i) {
+function updatePills(idx) {
+  ayahPillBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', i === idx);
+  });
+}
+
+function go(i, userTriggered = false) {
+  if (i < 0 || i >= S.length) return;
   st = i;
   T0 = now;
+  if (userTriggered) userInteracted = true;
+  updatePills(i);
+
+  const item = S[i];
+  ref.textContent = item.ref;
   sv.classList.toggle('lock', i === 3);
-  let [a, e, k] = S[i];
-  if (i > 3 && W < H * 1.2) {
-    a = 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ';
-    e = 'Every soul, for what it has earned,<br>is held in pledge';
-  }
+
+  const isPortrait = W < H * 1.2;
+  const a = isPortrait ? item.arMobile : item.ar;
+  const e = isPortrait ? item.enMobile : item.en;
+  const k = item.k;
+
   const L = a.split('\n'), q = [];
   ox.font = 100 + F;
   const mw = Math.max(10, ...L.map(l => ox.measureText(l).width));
@@ -423,10 +529,10 @@ function go(i) {
     p.vy -= (p.x - W / 2) * .025;
   });
 
-  en.innerHTML = `<span style="animation-delay:${i === 3 ? 3.6 : 0}s">${e}</span>`;
-  hint.style.opacity = i > 3 ? .6 : 0;
-  if (!i) boom(W / 2, H / 2);
-  if (i === 3) setTimeout(() => { if (st === 3) boom(W / 2, H / 2, 1.3); }, 3400);
+  en.innerHTML = `<span>${e}</span>`;
+  hint.style.opacity = i === 3 ? .6 : 0;
+  boom(W / 2, H / 2, i === 3 ? 1.2 : 0.8);
+  if (i === 3) setTimeout(() => { if (st === 3) boom(W / 2, H / 2, 1.4); }, 3400);
 }
 
 function boom(X, Y, w = 1) {
@@ -443,7 +549,7 @@ function tick(t) {
   now = t;
   const cx = W / 2, cy = H / 2, hold = M.p && t - M.t > 180, sx = G[0] + 200 - (t - T0) * .45 % (G[1] + 1400);
 
-  if (st < 4 && t - t0 > [3000, 9500, 16500, 24000, 33000][st + 1]) {
+  if (!userInteracted && !isAudioPlaying && st < 3 && t - t0 > AUTO_TIMINGS[st + 1]) {
     go(st + 1);
   }
 
@@ -515,11 +621,18 @@ function tick(t) {
 }
 
 function resetExperience() {
+  stopAllAudio();
+  isAudioPlaying = false;
+  updateAudioUI(false);
+  userInteracted = false;
   t0 = now;
   st = -1;
   en.innerHTML = '';
   hint.style.opacity = 0;
   sv.classList.remove('lock');
+  ref.textContent = 'سُورَةُ المُدَّثِّر · ٧٤:٣٥-٣٨';
+  updatePills(-1);
+  setTimeout(() => go(0), 400);
 }
 
 onresize = size;
@@ -544,11 +657,9 @@ ondblclick = e => {
   resetExperience();
 };
 
-if (btnReplay) btnReplay.addEventListener('click', resetExperience);
-if (btnFullVerse) btnFullVerse.addEventListener('click', () => go(4));
-
-/* ───────── Audio of Sheikh Nasser Al-Qatami ───────── */
-const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/074038.mp3');
+/* ───────── Continuous Audio by Sheikh Nasser Al-Qatami ───────── */
+const audioClips = S.map(item => new Audio(item.audio));
+let currentAudioIdx = -1;
 let isAudioPlaying = false;
 
 function updateAudioUI(playing) {
@@ -559,34 +670,58 @@ function updateAudioUI(playing) {
   if (iconPlay) iconPlay.style.display = playing ? 'none' : 'inline-block';
   if (iconPause) iconPause.style.display = playing ? 'inline-block' : 'none';
   audioBtn.setAttribute('aria-label', playing ? 'Pause recitation' : 'Play recitation');
-  audioBtn.setAttribute('title', playing ? 'Pause recitation' : 'Play recitation · Sheikh Nasser Al-Qatami (74:38)');
+  const currentAyahNum = (st >= 0 && st < S.length) ? S[st].num : '35–38';
+  audioBtn.setAttribute('title', playing ? `Pause recitation (${currentAyahNum})` : 'Play recitation · Sheikh Nasser Al-Qatami (74:35–38)');
+}
+
+function playAudioAyah(idx) {
+  stopAllAudio();
+  currentAudioIdx = idx;
+  const audio = audioClips[idx];
+  if (!audio) return;
+  audio.currentTime = 0;
+  audio.play().then(() => {
+    isAudioPlaying = true;
+    updateAudioUI(true);
+  }).catch(err => {
+    console.warn('Audio play error:', err);
+    isAudioPlaying = false;
+    updateAudioUI(false);
+  });
+
+  audio.onended = () => {
+    if (currentAudioIdx < S.length - 1) {
+      const nextIdx = currentAudioIdx + 1;
+      go(nextIdx);
+      playAudioAyah(nextIdx);
+    } else {
+      isAudioPlaying = false;
+      updateAudioUI(false);
+    }
+  };
+}
+
+function stopAllAudio() {
+  audioClips.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+    a.onended = null;
+  });
 }
 
 function toggleAudio() {
   if (isAudioPlaying) {
-    audio.pause();
+    if (currentAudioIdx >= 0 && audioClips[currentAudioIdx]) {
+      audioClips[currentAudioIdx].pause();
+    }
     isAudioPlaying = false;
     updateAudioUI(false);
   } else {
-    audio.play().then(() => {
-      isAudioPlaying = true;
-      updateAudioUI(true);
-    }).catch(err => {
-      console.warn('Audio playback error:', err);
-      updateAudioUI(false);
-    });
+    const targetIdx = (st >= 0 && st < S.length) ? st : 0;
+    if (st !== targetIdx) go(targetIdx);
+    playAudioAyah(targetIdx);
   }
 }
-
-audio.addEventListener('ended', () => {
-  isAudioPlaying = false;
-  updateAudioUI(false);
-});
-
-audio.addEventListener('error', () => {
-  isAudioPlaying = false;
-  updateAudioUI(false);
-});
 
 if (audioBtn) {
   audioBtn.addEventListener('click', (e) => {
@@ -594,6 +729,47 @@ if (audioBtn) {
     toggleAudio();
   });
 }
+
+if (btnReplay) btnReplay.addEventListener('click', resetExperience);
+
+if (btnPrev) {
+  btnPrev.addEventListener('click', () => {
+    const prevIdx = (st <= 0 ? S.length - 1 : st - 1);
+    go(prevIdx, true);
+    if (isAudioPlaying) playAudioAyah(prevIdx);
+  });
+}
+
+if (btnNext) {
+  btnNext.addEventListener('click', () => {
+    const nextIdx = (st >= S.length - 1 ? 0 : st + 1);
+    go(nextIdx, true);
+    if (isAudioPlaying) playAudioAyah(nextIdx);
+  });
+}
+
+ayahPillBtns.forEach(pill => {
+  pill.addEventListener('click', () => {
+    const idx = parseInt(pill.getAttribute('data-idx'), 10);
+    go(idx, true);
+    if (isAudioPlaying) playAudioAyah(idx);
+  });
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    const nextIdx = (st >= S.length - 1 ? 0 : st + 1);
+    go(nextIdx, true);
+    if (isAudioPlaying) playAudioAyah(nextIdx);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    const prevIdx = (st <= 0 ? S.length - 1 : st - 1);
+    go(prevIdx, true);
+    if (isAudioPlaying) playAudioAyah(prevIdx);
+  } else if (e.key === ' ' && e.target === document.body) {
+    e.preventDefault();
+    toggleAudio();
+  }
+});
 
 function initApp() {
   size();
@@ -618,22 +794,25 @@ function initApp() {
   t0 = now = performance.now();
   requestAnimationFrame(tick);
 
-  if (location.hash === '#full' || location.search.includes('full')) {
-    setTimeout(() => go(4), 120);
+  function snapToAyah(idx) {
+    go(idx, true);
+    P.forEach(p => {
+      if (p.on) {
+        p.at = 0;
+        p.x = p.tx;
+        p.y = p.ty;
+        p.vx = p.vy = 0;
+      }
+    });
   }
-  if (location.hash === '#snap' || location.search.includes('snap')) {
+
+  const hash = location.hash.toLowerCase();
+  if (hash.includes('35') || hash.includes('36') || hash.includes('37') || hash.includes('38') || hash.includes('snap') || hash.includes('full')) {
     document.body.classList.add('snap-mode');
-    setTimeout(() => {
-      go(4);
-      P.forEach(p => {
-        if (p.on) {
-          p.at = 0;
-          p.x = p.tx;
-          p.y = p.ty;
-          p.vx = p.vy = 0;
-        }
-      });
-    }, 150);
+    const idx = hash.includes('35') ? 0 : hash.includes('36') ? 1 : hash.includes('37') ? 2 : 3;
+    setTimeout(() => snapToAyah(idx), 120);
+  } else {
+    setTimeout(() => go(0), 120);
   }
 }
 

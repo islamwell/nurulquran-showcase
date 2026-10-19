@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>صراط مستقيم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Lexend:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#04050c;touch-action:none;user-select:none;-webkit-user-select:none}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+#scene{position:fixed;inset:0;display:grid;place-items:center;perspective:900px;pointer-events:none}
+#stage{text-align:center;padding:0 5vw;transform-style:preserve-3d;transition:transform .25s ease-out,translate .7s cubic-bezier(.2,.9,.2,1)}
+#stage.focus{translate:0 -17vh}
+.ar{direction:rtl;font:700 clamp(2.1rem,8.4vw,5rem)/2 'Amiri',serif;color:#fff8e6;
+  text-shadow:0 0 18px rgba(255,200,90,.45),0 3px 10px #000}
+.ar .ln{display:block}
+.w{display:inline-block;margin:0 .14em;opacity:0;
+  animation:zin 1.3s cubic-bezier(.16,.9,.2,1) forwards;animation-delay:calc(1.5s + var(--i)*.33s)}
+@keyframes zin{0%{opacity:0;transform:translateZ(600px) scale(3) rotate(-8deg);filter:blur(14px)}
+  55%{opacity:1}100%{opacity:1;transform:none;filter:blur(0)}}
+.gold{background:linear-gradient(100deg,#ffd77a 20%,#fff 45%,#ffb13b 60%,#ffd77a 80%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:zin 1.3s cubic-bezier(.16,.9,.2,1) forwards,shine 3.5s linear infinite;
+  animation-delay:calc(1.5s + var(--i)*.33s),5s;filter:drop-shadow(0 0 14px rgba(255,190,70,.7))}
+@keyframes shine{to{background-position:-250% 0}}
+.path{height:3px;margin:.4em auto .9em;width:min(80vw,640px);border-radius:3px;
+  background:linear-gradient(90deg,transparent,#5ff2d6,#ffd77a,#5ff2d6,transparent);
+  box-shadow:0 0 20px #ffd77a,0 0 50px #2fd3b5;transform:scaleX(0);animation:grow 1.8s cubic-bezier(.7,0,.2,1) 5.2s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.en{font:600 clamp(1.2rem,4.8vw,2rem)/1.5 'Lexend',sans-serif;color:#f4fffc;
+  text-shadow:0 0 14px rgba(80,240,210,.45),0 2px 4px #000,0 0 2px #000}
+.en .w{margin:0 .12em;animation-name:up;animation-duration:.9s;animation-delay:calc(5.6s + var(--i)*.12s)}
+@keyframes up{from{opacity:0;transform:translateY(.8em);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+#hint{position:fixed;bottom:max(18px,env(safe-area-inset-bottom));width:100%;text-align:center;
+  font:12px/1 system-ui;letter-spacing:.35em;color:#8fbfb5;opacity:0;animation:up 1s 8.5s forwards;pointer-events:none}
+.ar .w,.en .w{pointer-events:auto;cursor:pointer;transition:scale .4s}
+#stage.focus .w:not(.on){opacity:.2!important;filter:blur(1.5px)!important}
+#stage .w.on{opacity:1!important;scale:1.12;color:#ffe9a8;filter:drop-shadow(0 0 16px #ffd77a)!important}
+#card{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 44px);width:min(92vw,520px);max-height:44vh;overflow:auto;
+  padding:18px 22px 22px;border-radius:22px;text-align:center;pointer-events:auto;
+  background:linear-gradient(160deg,rgba(18,32,44,.75),rgba(6,8,18,.9));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,215,122,.35);box-shadow:0 0 50px rgba(47,211,181,.25),inset 0 0 40px rgba(255,215,122,.07);
+  transform:translate(-50%,140%);opacity:0;transition:.7s cubic-bezier(.2,.9,.2,1)}
+#card.open{transform:translate(-50%,0);opacity:1}
+#card::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#ffd77a,#5ff2d6,transparent);background-size:200% 100%;animation:shine 3s linear infinite}
+#card .cw{display:block;direction:rtl;font:700 2.6rem/1.4 'Amiri',serif;color:#ffd77a;text-shadow:0 0 20px rgba(255,190,70,.7);animation:up .6s both}
+#card .cm{display:block;font:600 .8rem/1.4 'Lexend';letter-spacing:.18em;text-transform:uppercase;color:#5ff2d6;margin:.2em 0 .7em;animation:up .6s .1s both}
+#card p{font:500 1.02rem/1.6 'Lexend',sans-serif;color:#e8f4f1;animation:up .6s .2s both}
+.exhibit-footer{position:fixed;bottom:max(4px,calc(env(safe-area-inset-bottom) - 10px));width:100%;text-align:center;pointer-events:none;z-index:40}
+.exhibit-footer .nq-version-tag{font-family:monospace;font-size:0.65rem;letter-spacing:0.08em;color:rgba(143,191,181,0.45)}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="scene"><div id="stage"></div></div>
+<div id="card"></div>
+<div id="hint">TAP A WORD · REFLECT &nbsp; HOLD · WARP</div>
+<footer class="exhibit-footer">
+  <div class="nq-version-tag">v1.0.63 (updated 2026-10-19 12:23)</div>
+</footer>
+<script>
+const AR=[["إِنَّ","ٱللَّهَ","هُوَ","رَبِّى","وَرَبُّكُمْ","فَٱعْبُدُوهُ"],["هَـٰذَا","صِرَٰطٌ","مُّسْتَقِيمٌ"]],
+EN="Indeed, Allah is my Lord and your Lord, so worship Him. This is a straight path.".split(" ");
+const K=[0,1,2,3,3,4,4,4,5,5,5,6,6,7,8,7];
+const TF=[
+["Indeed · certainty","It opens with إِنَّ, a word of emphasis. This is not a theory to debate. ʿĪsā (Jesus) said it to the very people who would later call him divine."],
+["Allah · the One","A proper name, not a title shared with anyone. Every other word in the ayah turns around this one."],
+["He · and only He","هُوَ adds exclusivity: Allah, He alone. The grammar itself shuts the door on any partner."],
+["My Lord · servant first","He says “my Lord” before “your Lord.” A messenger declares his own servitude first. Rabb means Master, Owner, and the One who raises you stage by stage."],
+["And your Lord · no gap","The same Lord, in the same way. Between the prophet and his people there is no middle rank of divinity. He is a servant, not the one served."],
+["So worship Him · the natural result","The فَ means “therefore.” Once you know who your Rabb is, worship is the logical response. ʿIbādah comes from ʿabd: devotion and obedience across your whole life, not only in rituals."],
+["This · right here","هَـٰذَا points to something near. The path is not far, hidden or complicated. It fits in one sentence: know your Lord, then worship Him."],
+["Path · a wide road","A ṣirāṭ is not a narrow trail. It is a broad, clear highway. Its root carries the sense of swallowing: a road so wide it takes in everyone who walks it."],
+["Straight · upright and firm","From the root q-w-m, “to stand.” No bends, no detours, no collapse. It is the shortest way from you to Allah, and it stays standing."]];
+const stage=document.getElementById('stage'),card=document.getElementById('card'),c=document.getElementById('c'),x=c.getContext('2d');
+let W,H,D,t0,boost=0,hold=false,px=0,py=0,sx=0,sy=0,open=null;
+function build(){hide();let i=0;
+  stage.innerHTML=`<div class="ar">${AR.map(l=>`<span class="ln">${l.map(w=>`<span class="w${w=="ٱللَّهَ"?" gold":""}" data-k="${i}" style="--i:${i++}">${w}</span>`).join(" ")}</span>`).join("")}</div>
+  <div class="path"></div><div class="en">${EN.map((w,j)=>`<span class="w" data-k="${K[j]}" style="--i:${j}">${w}</span>`).join(" ")}</div>`;
+  t0=performance.now();}
+function show(k){open=k;stage.classList.add('focus');
+  document.querySelectorAll('[data-k]').forEach(e=>e.classList.toggle('on',e.dataset.k==k));
+  card.innerHTML=`<b class="cw">${AR.flat()[k]}</b><i class="cm">${TF[k][0]}</i><p>${TF[k][1]}</p>`;card.classList.add('open');}
+function hide(){open=null;stage.classList.remove('focus');card.classList.remove('open');
+  document.querySelectorAll('.on').forEach(e=>e.classList.remove('on'));}
+function size(){D=Math.min(devicePixelRatio,2);W=c.width=innerWidth*D;H=c.height=innerHeight*D;}
+addEventListener('resize',size);size();build();
+
+const F=34,frames=[...Array(F)].map((_,i)=>({z:(i+1)/F})),
+P=[...Array(220)].map(()=>({x:Math.random()*2-1,y:Math.random()*2-1,z:Math.random()}));
+function star(cx,cy,R,rot){x.beginPath();for(let k=0;k<16;k++){const a=rot+k*Math.PI/8,r=k%2?R*.765:R;x.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));}x.closePath();x.stroke();}
+
+let last=performance.now();
+function loop(n){const dt=Math.min((n-last)/1000,.05);last=n;const t=(n-t0)/1000;
+  boost+=((hold?1:0)-boost)*.06;
+  const speed=(.06+2.2*Math.exp(-t/1.1)+boost*1.4)*(open!=null?.3:1);
+  sx+=(px-sx)*.05;sy+=(py-sy)*.05;
+  const vx=W/2+sx*W*.18,vy=H*.45+sy*H*.12,M=Math.min(W,H);
+  x.fillStyle=`rgba(4,5,12,${.22+.5*(1-Math.min(speed,1))*0.3})`;x.fillRect(0,0,W,H);
+  x.globalCompositeOperation='lighter';
+  // star tunnel
+  frames.sort((a,b)=>b.z-a.z);
+  for(const f of frames){f.z-=speed*dt*.35;if(f.z<=.02)f.z+=1;
+    const R=M*.09/f.z,a=Math.min(1,(1-f.z)*1.6)*Math.min(1,f.z*8);
+    x.lineWidth=Math.max(.6,2.2*D/f.z*.25);
+    x.strokeStyle=`hsla(${f.z*F%2<1?44:168},90%,${55+boost*15}%,${a*.55})`;
+    star(vx,vy,R,t*.15+f.z*2.4);}
+  // light streaks
+  x.lineCap='round';
+  for(const p of P){const oz=p.z;p.z-=speed*dt*.5;if(p.z<=.01){p.z=1;p.x=Math.random()*2-1;p.y=Math.random()*2-1;continue;}
+    const k=M*.6,X=vx+p.x/p.z*k,Y=vy+p.y/p.z*k,X0=vx+p.x/oz*k,Y0=vy+p.y/oz*k;
+    x.strokeStyle=`rgba(255,${220-p.z*80|0},150,${(1-p.z)*.9})`;x.lineWidth=(1-p.z)*2.5*D;
+    x.beginPath();x.moveTo(X0,Y0);x.lineTo(X,Y);x.stroke();}
+  // the straight path: a road of light to the horizon
+  const ra=Math.min(1,Math.max(0,(t-5.2)/2));
+  if(ra>0){const g=x.createLinearGradient(0,vy,0,H);g.addColorStop(0,`rgba(255,215,122,0)`);g.addColorStop(1,`rgba(95,242,214,${.35*ra})`);
+    x.fillStyle=g;x.beginPath();x.moveTo(vx-2*D,vy);x.lineTo(vx+2*D,vy);x.lineTo(W/2+W*.22*ra,H);x.lineTo(W/2-W*.22*ra,H);x.fill();
+    x.strokeStyle=`rgba(255,230,160,${.8*ra})`;x.lineWidth=2*D;x.beginPath();x.moveTo(vx,vy);x.lineTo(W/2,H);x.stroke();}
+  // opening burst
+  if(t<2.2){const r=M*(.05+t*.9),g=x.createRadialGradient(vx,vy,0,vx,vy,r);
+    g.addColorStop(0,`rgba(255,240,200,${1-t/2.2})`);g.addColorStop(1,'rgba(255,200,90,0)');x.fillStyle=g;x.fillRect(0,0,W,H);}
+  // central glow
+  const cg=x.createRadialGradient(vx,vy,0,vx,vy,M*.25);cg.addColorStop(0,`rgba(255,220,140,${.25+boost*.3})`);cg.addColorStop(1,'transparent');
+  x.fillStyle=cg;x.fillRect(0,0,W,H);
+  x.globalCompositeOperation='source-over';
+  stage.style.transform=`rotateX(${-sy*9}deg) rotateY(${sx*12}deg) scale(${1-boost*.04})`;
+  requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+
+let down=0;
+const mv=e=>{px=e.clientX/innerWidth*2-1;py=e.clientY/innerHeight*2-1;};
+addEventListener('pointermove',mv);
+addEventListener('pointerdown',e=>{mv(e);down=performance.now();hold=true;});
+addEventListener('pointerup',e=>{hold=false;if(performance.now()-down>250)return;
+  const w=e.target.closest('[data-k]');if(w)return show(+w.dataset.k);
+  if(open!=null)return hide();build();});
+addEventListener('deviceorientation',e=>{if(e.gamma!=null){px=Math.max(-1,Math.min(1,e.gamma/30));py=Math.max(-1,Math.min(1,(e.beta-45)/30));}});
+</script>
+</body>
+</html>
