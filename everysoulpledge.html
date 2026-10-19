@@ -35,6 +35,10 @@ body:after {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  body:after { display: none; }
+}
+
 .bg-rings, canvas {
   position: fixed;
   left: 50%;
@@ -243,12 +247,21 @@ body.snap-mode .exhibit-footer {
 @keyframes f { from { opacity: 0; } }
 
 @media (max-width: 640px) {
-  #ref { top: 56px; font-size: 16px; }
-  #en { top: calc(50% + min(32vw, 32vh)); font-size: clamp(20px, 5.2vw, 30px); padding: 0 16px; }
-  .top-nav-bar { padding: 0 10px; }
-  .portal-back-btn, .nav-btn { font-size: 0.75rem; padding: 5px 10px; gap: 5px; }
-  .audio-play-btn { width: 32px; height: 32px; }
-  #hint { bottom: 42px; font-size: 10px; letter-spacing: .3em; padding: 0 10px; }
+  #ref { top: 52px; font-size: 15px; }
+  #en {
+    top: calc(50% + min(28vw, 28vh));
+    font-size: clamp(18px, 4.8vw, 24px);
+    line-height: 1.35;
+    letter-spacing: .02em;
+    padding: 0 16px;
+  }
+  .top-nav-bar { padding: 0 8px; }
+  .nav-group-left, .nav-group-right { gap: 6px; }
+  .portal-back-btn, .nav-btn { font-size: 0.72rem; padding: 5px 9px; gap: 4px; }
+  .nav-btn-text-full { display: none; }
+  .audio-play-btn { width: 30px; height: 30px; }
+  .audio-play-btn svg { width: 13px; height: 13px; }
+  #hint { bottom: 36px; font-size: 9px; letter-spacing: .22em; padding: 0 10px; }
 }
 </style>
 </head>
@@ -264,10 +277,10 @@ body.snap-mode .exhibit-footer {
         <polyline points="1 4 1 10 7 10"></polyline>
         <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
       </svg>
-      <span>Replay</span>
+      <span class="nav-btn-text-full">Replay</span>
     </button>
     <button type="button" class="nav-btn" id="btnFullVerse" aria-label="Show full verse now" title="Display complete verse immediately">
-      <span>Full Verse</span>
+      <span>Full<span class="nav-btn-text-full"> Verse</span></span>
     </button>
     <button type="button" class="audio-play-btn" id="audioPlayBtn" aria-label="Play recitation by Sheikh Nasser Al-Qatami" title="Play recitation · Sheikh Nasser Al-Qatami (74:38)">
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
@@ -292,7 +305,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.61 (updated 2026-10-19 11:55)</div>
+  <div class="nq-version-tag">v1.0.62 (updated 2026-10-19 12:08)</div>
 </footer>
 
 <script>
@@ -328,7 +341,8 @@ const c = document.querySelector('canvas'),
 let W, H, R, Z = 1, G = [0, 1], P = [], M = { x: -1e4, y: -1e4 }, st = -1, T0 = 0, t0 = 0, now = 0, wv = [];
 
 function size() {
-  const d = Math.min(devicePixelRatio || 1, 2);
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || innerWidth < 768;
+  const d = Math.min(devicePixelRatio || 1, isMobile ? 1.5 : 2);
   const m = Math.min(W = innerWidth, H = innerHeight) * .92;
   R = m * .425;
   c.width = W * d;
@@ -347,13 +361,17 @@ function go(i) {
   T0 = now;
   sv.classList.toggle('lock', i === 3);
   let [a, e, k] = S[i];
-  if (i > 3 && W < H * 1.2) a = 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ';
+  if (i > 3 && W < H * 1.2) {
+    a = 'كُلُّ نَفْسٍۭ\nبِمَا كَسَبَتْ رَهِينَةٌ';
+    e = 'Every soul, for what it has earned,<br>is held in pledge';
+  }
   const L = a.split('\n'), q = [];
   ox.font = 100 + F;
   const mw = Math.max(10, ...L.map(l => ox.measureText(l).width));
   const fs = Math.min(R * k, Math.max(1.9 * R, Math.min(W * .8, 520)) * 100 / mw);
   const tw = Math.max(10, mw * fs / 100);
-  const g = fs < 70 ? 1 : 2;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || W < 768;
+  const g = isMobile ? 2 : (fs < 65 ? 1 : 2);
   G = [W / 2 + tw / 2, tw];
   Z = Math.min(1, .3 + fs / 100);
 
@@ -368,10 +386,25 @@ function go(i) {
     ox.fillText(l, W / 2, H / 2 + (j - (L.length - 1) / 2) * fs * 1.5 + (asc - desc) / 2);
   });
 
-  const d = ox.getImageData(0, 0, W, H).data;
-  for (let y = 0; y < H; y += g) {
-    for (let X = 0; X < W; X += g) {
-      if (d[(y * W + X) * 4 + 3] > 128) q.push([X, y]);
+  const padX = Math.max(30, (fs * .5) | 0);
+  const padY = Math.max(30, (fs * .75) | 0);
+  const totalH = L.length * fs * 1.5;
+  const rx0 = Math.max(0, ((W / 2 - tw / 2) - padX) | 0);
+  const rx1 = Math.min(W, ((W / 2 + tw / 2) + padX) | 0);
+  const ry0 = Math.max(0, ((H / 2 - totalH / 2 - fs * .5) - padY) | 0);
+  const ry1 = Math.min(H, ((H / 2 + totalH / 2 + fs * .5) + padY) | 0);
+  const rw = rx1 - rx0;
+  const rh = ry1 - ry0;
+
+  if (rw > 0 && rh > 0) {
+    const d = ox.getImageData(rx0, ry0, rw, rh).data;
+    for (let localY = 0; localY < rh; localY += g) {
+      const rowOffset = localY * rw;
+      for (let localX = 0; localX < rw; localX += g) {
+        if (d[(rowOffset + localX) * 4 + 3] > 128) {
+          q.push([rx0 + localX, ry0 + localY]);
+        }
+      }
     }
   }
 
@@ -564,7 +597,11 @@ if (audioBtn) {
 
 function initApp() {
   size();
-  for (let i = Math.min(3400, Math.max(1500, (W * H / 300) | 0)); i--; ) {
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || W < 768;
+  const maxP = isMobile ? 850 : 3200;
+  const minP = isMobile ? 480 : 1300;
+  const targetP = Math.min(maxP, Math.max(minP, (W * H / (isMobile ? 520 : 320)) | 0));
+  for (let i = targetP; i--; ) {
     P.push({
       x: Math.random() * W,
       y: Math.random() * H,
