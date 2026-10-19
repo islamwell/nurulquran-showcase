@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0a0911">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; }
 body {
@@ -75,14 +75,14 @@ p {
   top: calc(50% + min(27vw, 27vh));
   padding: 0 6%;
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(22px, 3.8vw, 40px);
+  font-size: clamp(23px, 3.8vw, 40px);
   font-style: italic;
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: .08em;
-  color: #fff3d4;
-  text-shadow: 0 0 24px rgba(242, 196, 109, 0.7), 0 2px 10px rgba(0, 0, 0, 0.85);
-  transition: color 0.8s ease, text-shadow 0.8s ease;
+  color: #fff8e7;
+  text-shadow: 0 0 22px rgba(242, 196, 109, 0.8), 0 2px 10px rgba(0, 0, 0, 0.9);
+  transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
 #en.full-ayah {
@@ -92,7 +92,7 @@ p {
 
 #en span {
   display: inline-block;
-  animation: rise 2s cubic-bezier(.2, .8, .2, 1) both;
+  animation: rise 0.35s ease-out both;
 }
 
 #hint {
@@ -380,6 +380,18 @@ body.snap-mode .exhibit-footer {
 }
 
 /* ───────── Action Buttons ───────── */
+.btn-pause-anim {
+  gap: 6px;
+}
+.btn-pause-anim.active-pause {
+  background: rgba(94, 234, 212, 0.22);
+  border-color: #5eead4;
+  color: #5eead4;
+  box-shadow: 0 0 14px rgba(94, 234, 212, 0.45);
+}
+.paused-rings .a, .paused-rings .b {
+  animation-play-state: paused !important;
+}
 .btn-full-ayah:hover {
   border-color: #5eead4;
   color: #5eead4;
@@ -447,7 +459,7 @@ body.snap-mode .exhibit-footer {
 
 @keyframes spin { to { transform: rotate(1turn); } }
 @keyframes ring { from { opacity: 0; transform: translate(-50%, -50%) scale(.8) rotate(-40deg); } }
-@keyframes rise { from { opacity: 0; letter-spacing: .6em; filter: blur(12px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(4px); } }
 @keyframes f { from { opacity: 0; } }
 
 @media (max-width: 640px) {
@@ -459,26 +471,39 @@ body.snap-mode .exhibit-footer {
     padding: 0 16px;
   }
   .top-nav-bar {
-    top: 8px;
-    padding: 0 8px;
+    top: 6px;
+    padding: 0 6px;
     box-sizing: border-box;
     width: 100%;
   }
-  .nav-group-left, .nav-group-right { gap: 4px; }
+  .nav-group-left, .nav-group-right { gap: 3px; }
   .portal-back-btn, .nav-btn, .ayah-dropdown-btn {
-    font-size: 0.70rem;
-    padding: 4px 8px;
-    gap: 4px;
+    font-size: 0.68rem;
+    padding: 4px 6px;
+    gap: 3px;
     box-sizing: border-box;
   }
-  .nav-btn-text-full { display: none; }
+  .dropdown-total-text { display: none; }
+  .nav-btn-text-full, .pause-btn-text { display: none; }
+  .btn-pause-anim, #btnReplay, #btnPrev, #btnNext {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-full-ayah { padding: 4px 7px; }
   .audio-play-btn { width: 28px; height: 28px; }
   .audio-play-btn svg { width: 12px; height: 12px; }
   #hint { bottom: 36px; font-size: 9px; letter-spacing: .22em; padding: 0 10px; }
   .ayah-dropdown-panel {
-    width: 320px;
+    width: min(92vw, 320px);
     max-height: 60vh;
   }
+}
+@media (max-width: 480px) {
+  .portal-back-text { display: none; }
 }
 </style>
 </head>
@@ -486,11 +511,11 @@ body.snap-mode .exhibit-footer {
 
 <header class="top-nav-bar">
   <div class="nav-group-left">
-    <a href="index.html" class="portal-back-btn" title="Back to Showcase Portal">‹ Showcase</a>
+    <a href="index.html" class="portal-back-btn" title="Back to Showcase Portal">‹ <span class="portal-back-text">Showcase</span></a>
     <div class="ayah-dropdown-wrap" id="ayahDropdownWrap">
       <button type="button" class="ayah-dropdown-btn" id="btnAyahDropdown" aria-haspopup="listbox" aria-expanded="false" title="Jump to any Ayah (1–56)">
         <span class="dropdown-surah-tag">74</span>
-        <span class="dropdown-ayah-text">Ayah <strong id="currentAyahBadge">1</strong> of 56</span>
+        <span class="dropdown-ayah-text">Ayah <strong id="currentAyahBadge">1</strong><span class="dropdown-total-text"> of 56</span></span>
         <svg class="dropdown-caret" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="ayah-dropdown-panel" id="ayahDropdownPanel" role="listbox" aria-label="Surah Al-Muddaththir Ayahs">
@@ -523,6 +548,15 @@ body.snap-mode .exhibit-footer {
     <button type="button" class="nav-btn btn-full-ayah" id="btnFullVerse" aria-label="Show complete ayah" title="Show complete ayah immediately (F)">
       <span>Full<span class="nav-btn-text-full"> Ayah</span></span>
     </button>
+        <button type="button" class="nav-btn btn-pause-anim" id="btnPauseAnim" aria-label="Pause animation" title="Pause / Resume animation (P)">
+      <svg class="icon-anim-pause" viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+      <svg class="icon-anim-play" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="display:none">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <span class="pause-btn-text">Pause</span>
+    </button>
     <button type="button" class="nav-btn" id="btnReplay" aria-label="Replay particle animation" title="Replay from start (R)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
         <polyline points="1 4 1 10 7 10"></polyline>
@@ -552,7 +586,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.66 (updated 2026-10-19 13:22)</div>
+  <div class="nq-version-tag">v1.0.67 (updated 2026-10-19 16:58)</div>
 </footer>
 
 <script>
@@ -576,7 +610,7 @@ const c = document.querySelector('canvas'),
       ayahDropdownList = document.getElementById('ayahDropdownList'),
       ayahSearchInput = document.getElementById('ayahSearchInput'),
       currentAyahBadge = document.getElementById('currentAyahBadge'),
-      F = 'px "Amiri Quran",serif';
+      F = 'px "Amiri", "Amiri Quran", "Scheherazade New", "Geeza Pro", serif';
 
 /* ───────── Dual Particle Sprite Palettes ───────── */
 // Words: Warm Celestial Gold
@@ -586,11 +620,15 @@ const sprFull = ['#ffffff', '#7fe3d4', '#48cae4', '#06d6a0'].map(makeSprite);
 
 function makeSprite(col) {
   const s = document.createElement('canvas'), g = s.getContext('2d');
-  s.width = s.height = 36;
-  const r = g.createRadialGradient(18, 18, 0, 18, 18, 18);
-  [[0, ''], [.2, 'cc'], [.5, '33'], [1, '00']].forEach(([v, a]) => r.addColorStop(v, col + a));
+  s.width = s.height = 24;
+  const r = g.createRadialGradient(12, 12, 0, 12, 12, 12);
+  r.addColorStop(0, '#ffffff');
+  r.addColorStop(0.25, col);
+  r.addColorStop(0.55, col + '66');
+  r.addColorStop(0.85, col + '15');
+  r.addColorStop(1, col + '00');
   g.fillStyle = r;
-  g.fillRect(0, 0, 36, 36);
+  g.fillRect(0, 0, 24, 24);
   return s;
 }
 
@@ -599,6 +637,63 @@ let currentAyahIdx = 0;
 let currentStageIdx = -1;
 let stageStartTime = 0;
 let userInteracted = false;
+let isAnimPaused = false;
+let pauseStartTime = 0;
+let audioWasPlayingBeforePause = false;
+const btnPauseAnim = document.getElementById('btnPauseAnim');
+
+function isFullVerse() {
+  return currentStageIdx >= (AYAHS[currentAyahIdx]?.words.length || 0);
+}
+
+function updatePauseUI() {
+  if (!btnPauseAnim) return;
+  btnPauseAnim.classList.toggle('active-pause', isAnimPaused);
+  const iconPause = btnPauseAnim.querySelector('.icon-anim-pause');
+  const iconPlay = btnPauseAnim.querySelector('.icon-anim-play');
+  const textSpan = btnPauseAnim.querySelector('.pause-btn-text');
+  if (iconPause) iconPause.style.display = isAnimPaused ? 'none' : 'inline-block';
+  if (iconPlay) iconPlay.style.display = isAnimPaused ? 'inline-block' : 'none';
+  if (textSpan) textSpan.textContent = isAnimPaused ? 'Resume' : 'Pause';
+  btnPauseAnim.setAttribute('aria-label', isAnimPaused ? 'Resume animation' : 'Pause animation');
+  btnPauseAnim.setAttribute('title', isAnimPaused ? 'Resume animation (P)' : 'Pause animation (P)');
+  if (hint) {
+    hint.textContent = isAnimPaused ? 'ANIMATION PAUSED · CLICK RESUME OR PRESS P TO CONTINUE' : 'HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED';
+    hint.style.opacity = isAnimPaused ? .85 : (currentAyahIdx === 37 && isFullVerse() ? .65 : 0);
+    hint.style.color = isAnimPaused ? '#5eead4' : 'rgba(94, 234, 212, 0.75)';
+    hint.style.textShadow = isAnimPaused ? '0 0 12px rgba(94, 234, 212, 0.6)' : 'none';
+  }
+}
+
+function togglePauseAnimation() {
+  isAnimPaused = !isAnimPaused;
+  if (isAnimPaused) {
+    pauseStartTime = performance.now();
+    if (isAudioPlaying && currentAudio && !currentAudio.paused) {
+      currentAudio.pause();
+      audioWasPlayingBeforePause = true;
+    }
+    sv.classList.add('paused-rings');
+  } else {
+    const pauseDuration = performance.now() - pauseStartTime;
+    stageStartTime += pauseDuration;
+    T0 += pauseDuration;
+    if (audioWasPlayingBeforePause && currentAudio) {
+      currentAudio.play().catch(() => {});
+      audioWasPlayingBeforePause = false;
+    }
+    sv.classList.remove('paused-rings');
+  }
+  updatePauseUI();
+}
+
+if (btnPauseAnim) {
+  btnPauseAnim.addEventListener('click', (e) => {
+    e.stopPropagation();
+    togglePauseAnimation();
+  });
+}
+
 
 /* ───────── Populate Ayah Dropdown List ───────── */
 function buildDropdownList(filter = '') {
@@ -740,30 +835,40 @@ function displayStage(ayahIdx, stageIdx, instant = false) {
   const L = a.split('\n'), q = [];
   ox.font = 100 + F;
   const mw = Math.max(10, ...L.map(l => ox.measureText(l).width));
-  const fs = Math.min(R * k, Math.max(1.9 * R, Math.min(W * .82, 540)) * 100 / mw);
-  const tw = Math.max(10, mw * fs / 100);
-  
-  // High Resolution: Sample every single pixel for full ayah!
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || W < 768;
-  const g = isFull ? 1 : (isMobile ? 2 : (fs < 65 ? 1 : 2));
+
+  let fs;
+  if (isFull) {
+    const maxFullFs = Math.min(R * 0.46, isMobile ? 38 : 58);
+    fs = Math.min(maxFullFs, Math.max(1.8 * R, Math.min(W * .82, 540)) * 100 / mw);
+    fs = Math.max(isMobile ? 24 : 30, fs);
+  } else {
+    const maxWordFs = Math.min(R * 0.62, isMobile ? 80 : 120);
+    fs = Math.min(maxWordFs, Math.max(1.8 * R, Math.min(W * .82, 540)) * 100 / mw);
+    fs = Math.max(isMobile ? 38 : 50, fs);
+  }
+  const tw = Math.max(10, mw * fs / 100);
+  const lineSpacing = isFull ? 1.68 : 1.52;
+  
+  // High Resolution: Sample every single pixel for ultra-crisp calligraphy
+  const g = 1;
   G = [W / 2 + tw / 2, tw];
-  Z = Math.min(1.1, .35 + fs / 95);
+  Z = Math.min(1.0, .35 + fs / 110);
 
   ox.clearRect(0, 0, W, H);
   ox.font = fs + F;
   ox.textAlign = 'center';
-  // Full Ayah in Radiant Turquoise; Words in Warm Gold
-  ox.fillStyle = isFull ? '#5eead4' : '#f2c46d';
+  ox.textBaseline = 'middle';
+  // Crystal-Clear Calligraphic rendering on offscreen canvas
+  ox.fillStyle = isFull ? '#f0fdfa' : '#fff5db';
   L.forEach((l, j) => {
-    const b = ox.measureText(l);
-    const asc = b.actualBoundingBoxAscent || fs * .75;
-    const desc = b.actualBoundingBoxDescent || 0;
-    ox.fillText(l, W / 2, H / 2 + (j - (L.length - 1) / 2) * fs * 1.48 + (asc - desc) / 2);
+    const yPos = H / 2 + (j - (L.length - 1) / 2) * fs * lineSpacing;
+    ox.fillText(l, W / 2, yPos);
   });
 
   const padX = Math.max(30, (fs * .5) | 0);
   const padY = Math.max(30, (fs * .75) | 0);
-  const totalH = L.length * fs * 1.48;
+  const totalH = L.length * fs * lineSpacing;
   const rx0 = Math.max(0, ((W / 2 - tw / 2) - padX) | 0);
   const rx1 = Math.min(W, ((W / 2 + tw / 2) + padX) | 0);
   const ry0 = Math.max(0, ((H / 2 - totalH / 2 - fs * .5) - padY) | 0);
@@ -832,8 +937,8 @@ function tick(t) {
 
   const isFull = currentStageIdx >= (AYAHS[currentAyahIdx]?.words.length || 0);
 
-  // Audio Sync Progression
-  if (isAudioPlaying && currentAudio) {
+  // Audio & Timer Sync (Skipped when animation is paused)
+  if (!isAnimPaused && isAudioPlaying && currentAudio) {
     if (!currentAudio.paused && currentAudio.duration > 0) {
       const cur = currentAudio.currentTime;
       const dur = currentAudio.duration;
@@ -850,9 +955,9 @@ function tick(t) {
         displayStage(currentAyahIdx, targetStage);
       }
     }
-  } else if (!userInteracted && currentStageIdx >= 0) {
+  } else if (!isAnimPaused && !userInteracted && currentStageIdx >= 0) {
     const ayah = AYAHS[currentAyahIdx];
-    const waitTime = isFull ? 5400 : 3200;
+    const waitTime = isFull ? 5800 : 3600;
     if (t - stageStartTime > waitTime) {
       if (!isFull) {
         displayStage(currentAyahIdx, currentStageIdx + 1);
@@ -867,11 +972,18 @@ function tick(t) {
   x.fillStyle = 'rgba(0,0,0,.22)';
   x.fillRect(0, 0, W, H);
 
-  // High-Resolution Underlying Font Luminescence for Full Ayah
+  // High-Definition Crisp Arabic Calligraphy
   if (currentStageIdx >= 0) {
+    const progress = isAnimPaused ? 1 : Math.min(1, Math.max(0, (t - T0) / 750));
+    
+    // 1. Soft subtle outer glow
     x.globalCompositeOperation = 'lighter';
-    const fontAlpha = isFull ? 0.18 : 0.025;
-    x.globalAlpha = Math.min(1, Math.max(0, (t - T0) / 1200 - .5)) * fontAlpha;
+    x.globalAlpha = (isFull ? 0.32 : 0.26) * progress;
+    x.drawImage(o, 0, 0, W, H);
+
+    // 2. Crisp vector calligraphy core for effortless legibility
+    x.globalCompositeOperation = 'source-over';
+    x.globalAlpha = (isFull ? 0.85 : 0.90) * progress;
     x.drawImage(o, 0, 0, W, H);
   }
 
@@ -880,7 +992,7 @@ function tick(t) {
 
   x.beginPath();
   for (const p of P) {
-    const on = currentStageIdx >= 0 && p.on && t > p.at;
+    const on = currentStageIdx >= 0 && p.on && (isAnimPaused || t > p.at);
     let tx = p.tx, ty = p.ty;
     if (!on) {
       p.a -= p.w * (isFull ? .1 : 1);
@@ -888,25 +1000,36 @@ function tick(t) {
       tx = cx + Math.cos(p.a) * r;
       ty = cy + Math.sin(p.a) * r;
     }
-    const k = on ? (hold ? .0015 : .022 * p.k) : currentStageIdx < 0 ? .005 : .012;
-    const dx = p.x - M.x, dy = p.y - M.y, d = Math.hypot(dx, dy) + 1;
-    p.vx += (tx - p.x) * k;
-    p.vy += (ty - p.y) * k;
-    if (hold) {
-      p.vx += (dy * .8 - dx) / d * 1.1;
-      p.vy -= (dy + dx * .8) / d * 1.1;
-    } else if (d < 120) {
-      p.vx += dx / d * (120 - d) / 30;
-      p.vy += dy / d * (120 - d) / 30;
+    
+    if (isAnimPaused) {
+      // Freeze particles exactly on target when paused for zero jitter
+      if (on) {
+        p.x = tx;
+        p.y = ty;
+        p.vx = p.vy = 0;
+      }
+    } else {
+      const k = on ? (hold ? .0015 : .026 * p.k) : currentStageIdx < 0 ? .005 : .012;
+      const dx = p.x - M.x, dy = p.y - M.y, d = Math.hypot(dx, dy) + 1;
+      p.vx += (tx - p.x) * k;
+      p.vy += (ty - p.y) * k;
+      if (hold) {
+        p.vx += (dy * .8 - dx) / d * 1.1;
+        p.vy -= (dy + dx * .8) / d * 1.1;
+      } else if (d < 120) {
+        p.vx += dx / d * (120 - d) / 30;
+        p.vy += dy / d * (120 - d) / 30;
+      }
+      p.x += p.vx *= .85;
+      p.y += p.vy *= .85;
     }
-    p.x += p.vx *= .88;
-    p.y += p.vy *= .88;
+
     if (on && Math.abs(p.x - tx) + Math.abs(p.y - ty) > 8) {
       x.moveTo(p.x, p.y);
       x.lineTo(tx, ty);
     }
-    x.globalAlpha = on ? .45 + .55 * Math.max(0, 1 - Math.abs(p.x - sx) / 60) : .25 + .2 * Math.sin(t * .003 + p.w * 4e3);
-    const z = p.s * (isFull ? 3.8 : 3.2) * (on ? Z : 1);
+    x.globalAlpha = on ? (.45 + .55 * Math.max(0, 1 - Math.abs(p.x - sx) / 60)) : (.25 + .2 * Math.sin(t * .003 + p.w * 4e3));
+    const z = p.s * (isFull ? 2.3 : 2.1) * (on ? Z : 1);
     x.drawImage(activeSprites[p.c], p.x - z / 2, p.y - z / 2, z, z);
   }
   x.globalAlpha = 1;
@@ -1095,6 +1218,8 @@ window.addEventListener('keydown', e => {
     toggleAudio();
   } else if (e.key === 'f' || e.key === 'F') {
     displayStage(currentAyahIdx, AYAHS[currentAyahIdx].words.length);
+  } else if (e.key === 'p' || e.key === 'P') {
+    togglePauseAnimation();
   } else if (e.key === 'r' || e.key === 'R') {
     displayStage(currentAyahIdx, 0);
   } else if (e.key === 'Escape') {
