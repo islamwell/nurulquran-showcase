@@ -152,11 +152,27 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 .actions{position:fixed;z-index:7;right:24px;bottom:22px;display:flex;gap:10px;align-items:center}
 .iconbtn{width:44px;height:44px;border:1px solid rgba(227,192,137,.28);border-radius:50%;
   display:grid;place-items:center;background:rgba(6,6,10,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  color:var(--gold);cursor:pointer;transition:transform .22s ease,border-color .22s ease,background .22s ease}
+  color:var(--gold);cursor:pointer;transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease}
 .iconbtn:hover,.iconbtn:focus-visible{transform:translateY(-2px);border-color:rgba(227,192,137,.75);background:rgba(227,192,137,.12);outline:none}
 .iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .iconbtn[aria-pressed="true"]{background:rgba(227,192,137,.18);border-color:rgba(227,192,137,.75)}
 .iconbtn .playfill{fill:currentColor;stroke:none}
+#pauseBtn[aria-pressed="true"],
+#pauseBtn.is-paused{
+  color:#74e19a;
+  border-color:rgba(116,225,154,.75);
+  background:rgba(116,225,154,.18);
+  box-shadow:0 0 16px rgba(116,225,154,.4), inset 0 0 8px rgba(116,225,154,.2);
+}
+#pauseBtn[aria-pressed="true"]:hover,
+#pauseBtn[aria-pressed="true"]:focus-visible,
+#pauseBtn.is-paused:hover,
+#pauseBtn.is-paused:focus-visible{
+  color:#86efac;
+  border-color:#86efac;
+  background:rgba(116,225,154,.28);
+  box-shadow:0 0 24px rgba(116,225,154,.6), inset 0 0 10px rgba(116,225,154,.3);
+}
 
 .en em.fear{color:#ff625c;text-shadow:0 0 22px rgba(255,98,92,.22)}
 .en em.hope{color:#6fdc91;text-shadow:0 0 22px rgba(111,220,145,.22)}
@@ -233,7 +249,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
     <span>NURULQURAN PORTAL</span>
   </a>
   <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.68 (updated 2026-10-19 19:58)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.69 (updated 2026-10-20 11:28)</div>
 </div>
 
 <!-- TOP RIGHT HUD -->
@@ -244,7 +260,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">v1.0.68 (updated 2026-10-19 19:58)</div>
+  <div class="footer-version-tag">v1.0.69 (updated 2026-10-20 11:28)</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -396,25 +412,28 @@ function showToast(msg){
 }
 function syncPauseButton(){
   pauseBtn.setAttribute("aria-pressed",String(userPaused));
+  pauseBtn.classList.toggle("is-paused",userPaused);
   pauseBtn.setAttribute("aria-label",userPaused?"Resume motion":"Pause motion");
   pauseIcon.innerHTML=userPaused
     ? '<path class="playfill" d="M8 5l11 7-11 7z"/>'
     : '<path d="M9 6v12M15 6v12"/>';
   if(hudAutoplay){
     hudAutoplay.textContent=userPaused?"PAUSED":"ACTIVE";
-    hudAutoplay.style.color=userPaused?"var(--mute)":"var(--gold)";
+    hudAutoplay.style.color=userPaused?"#74e19a":"var(--gold)";
   }
 }
+let audioSequence=false, audioWasPlaying=false;
 function stopAudio(){
   audioSequence=false;
+  audioWasPlaying=false;
   audio.pause(); audio.currentTime=0;
   audioBtn.setAttribute("aria-pressed","false");
 }
-let audioSequence=false;
 function playCurrentAudio(){
   const i=currentIndex();
-  if(!audio.paused){audioSequence=false;stopAudio();return;}
-  audioSequence=true; auto=false;
+  if(!audio.paused){stopAudio();return;}
+  audioSequence=true;
+  audioWasPlaying=false;
   audio.src=audioUrls[i];
   audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>showToast("Audio could not start"));
 }
@@ -442,8 +461,19 @@ audio.addEventListener("ended",()=>{
 audioBtn.addEventListener("click",playCurrentAudio);
 pauseBtn.addEventListener("click",()=>{
   userPaused=!userPaused;
-  if(userPaused){ auto=false; stopAudio(); }
-  else { auto=true; }
+  if(userPaused){
+    auto=false;
+    if(!audio.paused){
+      audioWasPlaying=true;
+      audio.pause();
+    }
+  } else {
+    auto=true;
+    if(audioWasPlaying){
+      audioWasPlaying=false;
+      audio.play().catch(()=>{});
+    }
+  }
   idle=0;
   syncPauseButton();
 });
@@ -502,7 +532,6 @@ addEventListener("pointermove",e=>{
     const dx=e.clientX-lastPointerX;
     T=(((T-dx*0.0018)%N)+N)%N;
     lastPointerX=e.clientX;
-    if(!userPaused) auto=false;
     idle=0;
     stopAudio();
   }
@@ -518,28 +547,28 @@ document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .scrub"
 
 addEventListener("pointerdown",e=>{
   if(e.target.closest("a, button, input")) return;
-  M.down=true;lastPointerX=e.clientX;document.body.classList.add("press");auto=false;idle=0;
+  M.down=true;lastPointerX=e.clientX;document.body.classList.add("press");idle=0;
 });
-addEventListener("pointerup",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
-addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");});
+addEventListener("pointerup",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
+addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
 addEventListener("wheel",e=>{
   T=(((T+e.deltaY*0.00075)%N)+N)%N;
-  if(!userPaused) auto=false;
+  if(!userPaused) auto=true;
   idle=0;
   stopAudio();
 },{passive:true});
 addEventListener("keydown",e=>{
   const k=e.key;
   if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
-  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="Home"){T=0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k==="End"){T=N-1+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;if(!userPaused) auto=false;idle=0;stopAudio();}
-  else if(k.toLowerCase()==="p"){userPaused=!userPaused;if(userPaused){auto=false;stopAudio();}else{auto=true;}idle=0;syncPauseButton();}
+  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
+  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
+  else if(k==="Home"){T=0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
+  else if(k==="End"){T=N-1+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
+  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
+  else if(k.toLowerCase()==="p"){pauseBtn.click();}
   else if(k.toLowerCase()==="a"){playCurrentAudio();}
   else if(k.toLowerCase()==="s"){shareBtn.click();}
-  else if(k==="Escape"){userPaused=true;auto=false;idle=0;stopAudio();syncPauseButton();}
+  else if(k==="Escape"){if(!userPaused) pauseBtn.click();}
 });
 
 /* ─────────── canvas ─────────── */
@@ -677,8 +706,11 @@ function frame(now){
   const sc = scenes[idx] || scenes[0];
   const p = Math.max(0, Math.min(0.9999, T - Math.floor(T)));
   const theme = THEMES[idx] || THEMES[0];
-  if (auto && !audioSequence && !M.down && !userPaused) {
-    T = ((T + dt / (sc.dur || 8.5)) % N + N) % N;
+  if (auto && !M.down && !userPaused) {
+    const dur = (audioSequence && !audio.paused && audio.duration && !isNaN(audio.duration) && audio.duration > 1)
+      ? audio.duration
+      : (sc.dur || 8.5);
+    T = ((T + dt / dur) % N + N) % N;
   }
 
   /* ── background ── */
