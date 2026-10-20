@@ -586,7 +586,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.69 (updated 2026-10-20 11:28)</div>
+  <div class="nq-version-tag">v1.0.70 (updated 2026-10-20 11:35)</div>
 </footer>
 
 <script>
@@ -832,6 +832,8 @@ function displayStage(ayahIdx, stageIdx, instant = false) {
     k = w.ar.length > 15 ? 0.75 : 0.95;
   }
 
+  // Strip any tajweed annotations (small meem, pause marks, etc.)
+  a = a.replace(/[\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]/g, '');
   const L = a.split('\n'), q = [];
   ox.font = 100 + F;
   const mw = Math.max(10, ...L.map(l => ox.measureText(l).width));

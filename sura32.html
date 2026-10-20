@@ -76,8 +76,27 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
 .en em{font-style:italic;color:var(--gold)}
 .w{display:inline-block;will-change:transform,opacity;transform-origin:50% 60%;
   padding:.02em .11em; text-shadow:0 0 44px rgba(227,192,137,.16); box-decoration-break:clone; -webkit-box-decoration-break:clone}
-.note{max-width:900px;margin:clamp(16px,2.4vw,28px) auto 0;font-size:clamp(15px,1.55vw,22px);line-height:1.48;color:rgba(243,236,225,.84);font-weight:300;text-shadow:0 1px 4px rgba(0,0,0,.8)}
-.note::before{content:"REFLECTION";display:block;font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.32em;color:rgba(227,192,137,.62);margin-bottom:8px}
+.note{
+  max-width:920px;
+  margin:clamp(16px,2.4vw,28px) auto 0;
+  font-size:clamp(15px,1.6vw,22px);
+  line-height:1.52;
+  color:#FFFBF2;
+  font-weight:600;
+  text-shadow:0 2px 6px rgba(0,0,0,.92), 0 0 16px rgba(0,0,0,.6);
+  letter-spacing:0.01em;
+}
+.note::before{
+  content:"REFLECTION · USTADH NOUMAN ALI KHAN";
+  display:block;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.26em;
+  color:var(--gold);
+  margin-bottom:8px;
+  text-shadow:0 0 12px rgba(227,192,137,.35);
+}
 .sajdah-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:3px 10px;border-radius:999px;background:rgba(227,192,137,.15);border:1px solid rgba(227,192,137,.45);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
 .hairline{display:none}
 
@@ -249,7 +268,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
     <span>NURULQURAN PORTAL</span>
   </a>
   <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.69 (updated 2026-10-20 11:28)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.70 (updated 2026-10-20 11:35)</div>
 </div>
 
 <!-- TOP RIGHT HUD -->
@@ -260,7 +279,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">v1.0.69 (updated 2026-10-20 11:28)</div>
+  <div class="footer-version-tag">v1.0.70 (updated 2026-10-20 11:35)</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -288,36 +307,36 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 <script>
 /* ─────────── content ─────────── */
 const V=[
- {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"The sūrah opens with letters that immediately remind the listener: revelation begins on Allah’s terms, not ours.","theme":"letters"},
- {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"The first claim is not about the messenger; it is about the source. The Qur’an comes from the Lord who owns and sustains every world.","theme":"book"},
- {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"The accusation of fabrication is answered by returning attention to purpose: warning is mercy when it can lead a people back to guidance.","theme":"warning"},
- {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The One who created and governs the entire cosmos is also the One people must ultimately depend on. Creation and worship belong together.","theme":"cosmos"},
- {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"Human beings see fragments of events. Allah sees the full movement of every matter from beginning to return.","theme":"ascent"},
- {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"His power does not cancel His mercy, and His mercy is not weakness. Both qualities appear together.","theme":"seen"},
- {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"The verse asks us to look at creation not as random material, but as something deliberately fashioned with excellence.","theme":"clay"},
- {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Human pride is challenged by remembering how physically small and unimpressive our beginning is.","theme":"drop"},
- {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"The gifts named are not passive organs; they are tools for recognizing truth. Gratitude means using them for the purpose they were given.","theme":"senses"},
- {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"The objection sounds like a question about resurrection, but the verse exposes a deeper issue: reluctance to face accountability before Allah.","theme":"dust"},
- {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"Death is not disappearance. It is a transfer followed by return.","theme":"death"},
- {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"There comes a point when seeing and hearing are no longer tests of faith; certainty arrives after the opportunity to choose has ended.","theme":"bowed"},
- {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Guidance was not designed as forced programming. Moral choice is real, and therefore accountability is real.","theme":"choice"},
- {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"Forgetting the Hereafter here is not a memory lapse; it is living as though it does not matter.","theme":"forgotten"},
- {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"The test of revelation is not merely whether it impresses the mind; it is whether the heart becomes humble enough to submit.","theme":"prostration","sajdah":true},
- {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Real faith changes what a person does when no one is watching: comfort is left, Allah is called upon, and blessings are shared.","theme":"night"},
- {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Some rewards are hidden because ordinary imagination is too small to contain them.","theme":"hidden"},
- {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"The verse rejects the idea that faithfulness and deliberate rebellion finally arrive at the same destination.","theme":"contrast"},
- {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"The image is not merely of entering a garden, but of finally reaching a true home and place of welcome.","theme":"garden"},
- {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"The contrast with the previous āyah is severe: both groups receive a “home,” but the homes reflect the lives they chose.","theme":"fire"},
- {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Some hardship can function as a wake-up call before a far greater loss. The purpose of the warning is still return.","theme":"warning2"},
- {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"The problem is not ignorance after no message arrived; it is consciously turning away after the reminder became clear.","theme":"turnaway"},
- {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Qur’an is placed in a chain of revelation. Guidance is not a new human experiment; Allah has guided nations before.","theme":"scripture"},
- {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Leadership in guidance is tied to two inner qualities: patience under pressure and certainty that does not collapse when tested.","theme":"leadership"},
- {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Not every dispute is resolved in history. The final and perfectly informed judgment belongs to Allah.","theme":"judgment"},
- {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"History becomes evidence when people walk through the ruins yet still refuse to hear what those ruins are saying.","theme":"ruins"},
- {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Resurrection is placed before their eyes in nature: dead land receives water, life emerges, and what looked finished becomes productive again.","theme":"water"},
- {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Mockery often asks for the consequence to be hurried, assuming delay means it will never arrive.","theme":"challenge"},
- {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"There is a deadline built into moral choice. Faith after the test has visibly ended is not the same as faith before it.","theme":"deadline"},
- {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah closes with calm confidence: the messenger does not have to force the outcome. Truth can be delivered, and then one waits for Allah’s decision.","theme":"wait"}
+ {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"Notice how Allah begins: three distinct Arabic letters that leave human intellect completely humbled. Right at the doorstep, the Qur’an reminds us that real knowledge starts by admitting what we don’t know.","theme":"letters"},
+ {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"Allah doesn’t say “Muhammad wrote this”—He calls it Tanzīl, an intentional descent straight from the Master of all worlds. When you understand who the sender is, doubts naturally dissolve.","theme":"book"},
+ {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"They accuse the Prophet of making it up, but look at the compassion in the response: this warning isn’t harshness; it’s an urgent act of mercy to wake up people who never had a guide before.","theme":"warning"},
+ {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The very same Lord who engineered galaxies and planets across cosmic epochs is your only real guardian. If the Creator of the universe is on your side, who else could you possibly need?","theme":"cosmos"},
+ {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"We only catch isolated snapshots of our lives, getting stressed over today, but Allah is steering every single affair across cosmic timelines. His plan is always in motion.","theme":"ascent"},
+ {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"He pairs Al-Azīz (the All-Powerful) with Ar-Rahīm (the Always-Merciful). His absolute power never makes Him tyrannical, and His tender mercy is never out of helplessness.","theme":"seen"},
+ {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"Look closely at everything around you—every leaf, every cell is designed with intentional beauty and precision. And your own origin started from basic, unpretentious clay.","theme":"clay"},
+ {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Whenever ego or arrogance starts creeping in, remember where we all physically began: from a humble, despised drop of fluid. Humility is our true baseline.","theme":"drop"},
+ {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"You were given ears to hear the truth, eyes to recognize beauty and purpose, and a heart to feel empathy. Gratitude isn’t just saying thanks; it’s using these gifts for what they were made for.","theme":"senses"},
+ {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"Notice their excuse: “When we vanish into dust, can we be recreated?” Deep down, it’s not intellectual skepticism about biology—it’s an emotional refusal to stand accountable before their Maker.","theme":"dust"},
+ {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"The word yatawaffā means to receive in full. Death isn’t your annihilation or turning into nothingness; it’s a transfer of custody back to the One who gave you life.","theme":"death"},
+ {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"Picture this chilling scene: those who walked the earth with their heads held high in arrogance now standing before Allah with heads bowed in deep shame, desperately begging for one more chance.","theme":"bowed"},
+ {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Allah could have pre-programmed every soul to obey like robots, but He honored humanity with genuine choice. Because your choices matter, your actions carry real moral weight.","theme":"choice"},
+ {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"“Forgetting” that day doesn’t mean a memory slip; it means living your day-to-day life as if standing before Allah simply doesn’t matter. Indifference has real consequences.","theme":"forgotten"},
+ {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"When true believers hear Allah’s words, their immediate reaction isn’t debate or stubborn pride—they drop into prostration, glorifying Him without an ounce of arrogance.","theme":"prostration","sajdah":true},
+ {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Look at the beauty of this phrasing: their sides literally detach and pull away from warm, cozy beds. Longing, love, and awe of Allah pull them into the quiet night prayer.","theme":"night"},
+ {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Just like they hid their good deeds in the darkness of the night, Allah hides a reward for them—a coolness for their eyes that no human imagination could ever picture.","theme":"hidden"},
+ {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"Can someone who lived with consciousness of Allah and someone who lived in blatant defiance end up the same? True divine justice guarantees they never will.","theme":"contrast"},
+ {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"Notice the word Ma’wā—it’s not just a paradise garden, it’s a sanctuary, a refuge, a true welcoming home where the weary traveler finally rests forever.","theme":"garden"},
+ {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"Every time they try to claw their way out of despair, they are returned to it. Living life burning down moral boundaries leads to the exact environment one prepared for themselves.","theme":"fire"},
+ {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Even when life gives you setbacks, trials, or losses in this world, look at the mercy behind it: it’s a wake-up call to turn back before you reach the ultimate loss.","theme":"warning2"},
+ {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"Who does greater wrong than someone who is lovingly reminded of their Lord’s guidance with crystal-clear signs, and then simply shrugs their shoulders and walks away?","theme":"turnaway"},
+ {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Prophet is reminded that he is not alone; this journey of revelation connects him directly with Moses and the messengers of old. Truth has an unbroken lineage.","theme":"scripture"},
+ {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Real spiritual leadership isn’t about status or charisma. Allah grants leadership to those with relentless patience under hardship and unshakable conviction in His words.","theme":"leadership"},
+ {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Don’t burn yourself out trying to settle every ideological battle or dispute today. Allah Himself will deliver the final, flawless verdict on the Day of Judgment.","theme":"judgment"},
+ {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"When you travel and walk through historical ruins, don’t just admire the stonework like tourists—open your ears and listen to what those fallen civilizations are telling you.","theme":"ruins"},
+ {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Watch how Allah brings dead, cracked desert soil back to vibrant life with rain. If He can revive a barren wasteland before your eyes, reviving your soul and body is effortless for Him.","theme":"water"},
+ {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Skeptics always mockingly ask, “When is this judgment coming?” They confuse Allah’s divine patience and delay with permission to stay careless.","theme":"challenge"},
+ {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"When the exam papers are collected, saying “now I know the answers” is too late. The beauty of faith is trusting and choosing good while the test is still ongoing.","theme":"deadline"},
+ {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah ends with quiet, serene dignity: turn away from their ridicule and wait with peace in your heart. You fulfill your responsibility, and let Allah take care of the rest.","theme":"wait"}
 ];
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -423,6 +442,7 @@ function syncPauseButton(){
   }
 }
 let audioSequence=false, audioWasPlaying=false;
+const LOW_VOLUME = 0.30;
 function stopAudio(){
   audioSequence=false;
   audioWasPlaying=false;
@@ -434,6 +454,7 @@ function playCurrentAudio(){
   if(!audio.paused){stopAudio();return;}
   audioSequence=true;
   audioWasPlaying=false;
+  audio.volume=LOW_VOLUME;
   audio.src=audioUrls[i];
   audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>showToast("Audio could not start"));
 }
@@ -455,6 +476,7 @@ audio.addEventListener("ended",()=>{
   const i=currentIndex();
   if(i>=N-1){audioSequence=false;return;}
   T=i+1+.001; setScrubFromT();
+  audio.volume=LOW_VOLUME;
   audio.src=audioUrls[currentIndex()];
   audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>{audioSequence=false;});
 });
@@ -471,6 +493,7 @@ pauseBtn.addEventListener("click",()=>{
     auto=true;
     if(audioWasPlaying){
       audioWasPlaying=false;
+      audio.volume=LOW_VOLUME;
       audio.play().catch(()=>{});
     }
   }
@@ -787,6 +810,38 @@ if(!isNaN(hashVerse)&&hashVerse>=1&&hashVerse<=30){
 }
 setScrubFromT();
 let lastHash=-1;
+
+function startLowVolumeAudio(){
+  if(userPaused || !audio.paused) return;
+  audio.volume = LOW_VOLUME;
+  audioSequence = true;
+  audio.src = audioUrls[currentIndex()];
+  const playPromise = audio.play();
+  if(playPromise !== undefined){
+    playPromise.then(()=>{
+      audioBtn.setAttribute("aria-pressed","true");
+    }).catch(()=>{
+      const onFirstGesture = ()=>{
+        if(!userPaused && audio.paused){
+          audio.volume = LOW_VOLUME;
+          audioSequence = true;
+          audio.src = audioUrls[currentIndex()];
+          audio.play().then(()=>{
+            audioBtn.setAttribute("aria-pressed","true");
+          }).catch(()=>{});
+        }
+        window.removeEventListener("pointerdown", onFirstGesture);
+        window.removeEventListener("keydown", onFirstGesture);
+        window.removeEventListener("touchstart", onFirstGesture);
+      };
+      window.addEventListener("pointerdown", onFirstGesture, {once:true});
+      window.addEventListener("keydown", onFirstGesture, {once:true});
+      window.addEventListener("touchstart", onFirstGesture, {once:true});
+    });
+  }
+}
+startLowVolumeAudio();
+
 requestAnimationFrame(frame);
 </script>
 </body>
