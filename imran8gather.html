@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Gatherer · 3:9</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;500&display=swap">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{--bg:#0a0c18;--ink:oklch(.94 .015 85);--mute:oklch(.72 .02 260);--gold:oklch(.85 .13 82);--ember:oklch(.7 .17 48);--ar:"Amiri Quran",serif;--se:"Instrument Serif",serif;--e:cubic-bezier(.2,.8,.2,1);color-scheme:dark}
+*{margin:0;box-sizing:border-box}
+html{background:var(--bg);color:var(--ink);font:300 clamp(1rem,.92rem+.35vw,1.15rem)/1.65 Inter,system-ui,sans-serif}
+body{overflow-x:clip}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.45;background:radial-gradient(1px 1px at 20% 30%,#fff 50%,#0000),radial-gradient(1px 1px at 70% 60%,#fffa 50%,#0000),radial-gradient(1.5px 1.5px at 40% 85%,#fff8 50%,#0000);background-size:230px 230px,330px 330px,470px 470px}
+.ar{font-family:var(--ar);direction:rtl;font-weight:400}
+.g{background:linear-gradient(var(--a),var(--ink) 15%,var(--gold) 45%,var(--ember) 60%,var(--ink) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:spin 8s linear infinite}
+@keyframes spin{to{--a:360deg}}
+.kick,.tag{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--mute)}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:100svh;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab;
+  &:active{cursor:grabbing}
+  &::before{content:'';position:absolute;inset:0;background:radial-gradient(45% 30% at 50% 40%,oklch(.7 .15 65/.22),#0000 70%);opacity:0;transition:opacity 3s}
+  &.done::before{opacity:1}
+  & canvas{position:absolute;inset:0;width:100%;height:100%}}
+.line{position:absolute;inset:50% 0 auto;translate:0 -50%;padding:0 6vw;text-align:center;font:italic 400 clamp(1.9rem,1rem+3.6vw,4rem)/1.1 var(--se);text-wrap:balance;opacity:0;filter:blur(16px);letter-spacing:.3em;transition:1.4s var(--e);pointer-events:none;
+  &.on{opacity:1;filter:none;letter-spacing:0}}
+.after{position:absolute;inset:auto 0 12svh;text-align:center;opacity:0;translate:0 2rem;transition:1.6s var(--e);pointer-events:none;
+  &.on{opacity:1;translate:0}
+  & h1{font:400 clamp(2.4rem,1.4rem+3.4vw,4.6rem)/1 var(--se);letter-spacing:-.02em;margin:.6rem 0 1.4rem}
+  & em{color:var(--gold)}}
+.hint{display:inline-flex;align-items:center;gap:.7em;font-size:.8rem;color:var(--mute);
+  &::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 2s infinite}}
+@keyframes pulse{50%{scale:.4;opacity:.3}}
+.cue{position:absolute;left:50%;bottom:3svh;width:1px;height:6svh;overflow:hidden;opacity:0;transition:opacity 2s 1s;
+  .done &{opacity:1}
+  &::after{content:'';position:absolute;inset:0;background:linear-gradient(#0000,var(--gold));animation:drip 2.2s var(--e) infinite}}
+@keyframes drip{from{translate:0 -100%}to{translate:0 100%}}
+
+/* ===== VERSE ===== */
+section{padding:16vh 6vw;position:relative}
+#verse{min-height:100svh;display:grid;place-content:center;text-align:center;gap:2.4rem}
+.tag{color:var(--gold)}
+.ayah{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;font-size:clamp(2.3rem,1.2rem+4.6vw,5.6rem);max-width:1100px;margin:auto}
+.w{all:unset;display:inline-block;line-height:1.9;padding:0 .08em;cursor:pointer;transition:scale .5s var(--e),opacity .5s,filter .5s;
+  &:hover,&:focus-visible{scale:1.1;filter:drop-shadow(0 0 .25em oklch(.85 .13 82/.55))}}
+.ayah:has(.w:hover) .w:not(:hover){opacity:.3}
+#verse:not(.show) .w{opacity:0}
+.show .w{animation:spin 8s linear calc(var(--i)*-.4s) infinite,in 1.4s var(--e) calc(var(--i)*.09s) backwards}
+@keyframes in{from{opacity:0;translate:0 .5em;filter:blur(14px)}}
+.num{color:var(--gold);font-size:.55em;align-self:center}
+.tr{font:italic 400 clamp(1.3rem,1rem+1.2vw,2rem)/1.35 var(--se);color:var(--mute);max-width:30ch;margin:auto;text-wrap:balance;
+  & span{display:inline-block;opacity:0;filter:blur(6px);transition:1s calc(1.4s + var(--i)*.05s)}}
+.show .tr span{opacity:1;filter:none}
+
+/* ===== WORD CARD ===== */
+#card{inset:0;margin:auto;width:min(90vw,26rem);height:fit-content;padding:2.4rem 2rem 2rem;border:1px solid oklch(1 0 0/.12);border-radius:2rem;background:oklch(.2 .03 265/.65);backdrop-filter:blur(24px) saturate(1.5);color:var(--ink);text-align:center;box-shadow:0 40px 100px -30px #000,inset 0 1px oklch(1 0 0/.12);transition:opacity .4s,scale .5s var(--e),display .5s allow-discrete,overlay .5s allow-discrete;
+  &:not(:popover-open){opacity:0;scale:.94}
+  &::backdrop{background:oklch(.08 .02 265/.6);backdrop-filter:blur(8px)}}
+@starting-style{#card:popover-open{opacity:0;scale:.94}}
+#cAr{font-size:clamp(3.5rem,12vw,5rem);line-height:1.8}
+#cEn{font:italic 2rem/1.1 var(--se)}
+#cRoot{direction:rtl;display:flex;justify-content:center;gap:.5rem;margin:1.3rem 0;
+  &:empty{display:none}
+  & b{display:grid;place-items:center;width:2.6rem;aspect-ratio:1;border:1px solid oklch(.85 .13 82/.35);border-radius:50%;font:400 1.3rem/1 var(--ar);color:var(--gold)}}
+#cNote{color:var(--mute);text-wrap:pretty;margin-top:1rem}
+.x{all:unset;position:absolute;top:1rem;right:1rem;width:2.2rem;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;cursor:pointer;color:var(--mute);font-size:1.4rem;transition:.3s;
+  &:hover{background:oklch(1 0 0/.08);color:var(--ink);rotate:90deg}}
+::view-transition-group(w){animation-duration:.7s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+
+/* ===== INSIGHTS ===== */
+.tafsir{max-width:56rem;margin:auto;
+  & h2{width:fit-content;margin:0 auto 8vh;font:400 clamp(2.6rem,1.6rem+4vw,5rem)/1.1 var(--se);letter-spacing:-.02em}}
+article{display:grid;grid-template-columns:clamp(3.2rem,10vw,6rem) 1fr;gap:1.5rem;padding:3.5rem 0;border-top:1px solid oklch(1 0 0/.08);
+  & .n{font:italic 400 clamp(2.5rem,6vw,4rem)/1 var(--se);color:#0000;-webkit-text-stroke:1px var(--gold)}
+  & h3{font:400 clamp(1.7rem,1.3rem+1.4vw,2.4rem)/1.15 var(--se);margin-bottom:.7rem;text-wrap:balance}
+  & p{color:var(--mute);text-wrap:pretty;max-width:38rem}
+  & p+p{margin-top:.8rem}
+  & strong,& em{color:var(--ink);font-weight:500}}
+.q{font:400 1.4em/1 var(--ar);color:var(--gold);direction:rtl;unicode-bidi:isolate;padding-inline:.1em}
+.viz{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem;margin-top:1.6rem}
+.chip{display:grid;justify-items:center;padding:.4rem 1.4rem 1rem;border:1px solid oklch(1 0 0/.1);border-radius:1.2rem;background:oklch(1 0 0/.03);
+  & .ar{font-size:clamp(2rem,1.5rem+2vw,3rem);line-height:1.9}
+  & small{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}}
+.off .ar{text-decoration:line-through 2px var(--ember);opacity:.45}
+.arr{position:relative;width:3rem;height:1px;background:linear-gradient(90deg,#0000,var(--gold));
+  &::after{content:'';position:absolute;top:-3px;right:0;width:7px;aspect-ratio:1;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:slide 2s var(--e) infinite}}
+@keyframes slide{from{right:100%;opacity:0}}
+.echo{display:grid;gap:.6rem;margin-top:1.6rem;
+  & p{display:flex;flex-wrap:wrap-reverse;justify-content:space-between;align-items:center;gap:0 1rem;padding:.3rem 1.2rem;border:1px solid oklch(1 0 0/.08);border-radius:1rem;background:oklch(1 0 0/.03);max-width:none}
+  & .ar{font-size:clamp(1.6rem,1.2rem+1.6vw,2.4rem);line-height:2;color:var(--ink)}
+  & mark{background:none;color:var(--gold);text-shadow:0 0 18px oklch(.85 .13 82/.7);animation:glow 3s ease-in-out infinite}
+  & small{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}}
+@keyframes glow{50%{text-shadow:0 0 2px #0000}}
+
+/* ===== FINALE ===== */
+.fin{min-height:100svh;display:grid;place-items:center;align-content:center;text-align:center;gap:2.5rem;
+  & h2{font:400 clamp(2rem,1.3rem+3vw,3.8rem)/1.15 var(--se);text-wrap:balance}
+  & em{color:var(--gold)}
+  & p{color:var(--mute)}}
+.ring{position:relative;width:min(72vw,22rem);aspect-ratio:1;display:grid;place-items:center;view-timeline-name:--r;
+  & svg{position:absolute;inset:0;rotate:-90deg;overflow:visible}
+  & circle{fill:none;stroke-width:1.2}
+  & .track{stroke:oklch(1 0 0/.08)}
+  & .arc{stroke:var(--gold);stroke-linecap:round;stroke-dasharray:1;filter:drop-shadow(0 0 6px var(--gold))}
+  & .ar{font-size:clamp(2.6rem,10vw,4.4rem);line-height:2}}
+footer{text-align:center;padding:3rem;color:var(--mute);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
+
+/* ===== SCROLL-DRIVEN ===== */
+.hud.tl{position:fixed;top:18px;left:18px;z-index:20}
+.portal-back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);text-decoration:none;
+  font:500 11px/1 Inter,system-ui,sans-serif;letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:8px 14px;border-radius:999px;
+  border:1px solid oklch(1 0 0/.15);
+  background:oklch(.15 .02 265/.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:all .25s var(--e);
+}
+.portal-back-btn:hover{
+  border-color:var(--gold);
+  background:oklch(.25 .05 82/.2);
+  translate:-2px 0;
+}
+.portal-back-btn svg{width:12px;height:12px;stroke-width:2.5}
+
+.verse-meta-row{display:inline-flex;align-items:center;justify-content:center;gap:.8rem}
+.ayah-audio-btn{
+  all:unset;display:inline-flex;align-items:center;justify-content:center;
+  width:2.2rem;height:2.2rem;border-radius:50%;
+  border:1px solid oklch(1 0 0/.18);
+  background:oklch(1 0 0/.05);color:var(--gold);
+  cursor:pointer;transition:all .25s var(--e);
+}
+.ayah-audio-btn:hover{scale:1.08;border-color:var(--gold);background:oklch(.85 .13 82/.15)}
+.ayah-audio-btn svg{width:14px;height:14px}
+
+.bar{position:fixed;inset:0 0 auto;height:2px;z-index:9;background:linear-gradient(90deg,var(--ember),var(--gold));transform-origin:0;scale:0 1}
+.dawn{position:fixed;z-index:-1;left:50%;bottom:-70vmax;width:140vmax;aspect-ratio:1;translate:-50% 30%;border-radius:50%;background:radial-gradient(closest-side,oklch(.72 .16 62/.5),oklch(.45 .14 30/.25) 45%,#0000);opacity:.2;pointer-events:none}
+@supports (animation-timeline:view()){
+  .bar{animation:grow linear both;animation-timeline:scroll()}
+  .dawn{animation:rise linear both;animation-timeline:scroll()}
+  article{animation:rev linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  .arc{animation:draw linear both;animation-timeline:--r;animation-range:entry 30% cover 55%}
+  .ring .ar{animation:lit linear both;animation-timeline:--r;animation-range:cover 35% cover 55%}
+}
+@keyframes grow{to{scale:1 1}}
+@keyframes rise{to{translate:-50% 0;opacity:1}}
+@keyframes rev{from{opacity:0;translate:0 4rem;filter:blur(10px)}}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes lit{from{opacity:.2;filter:blur(6px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<i class="bar" aria-hidden="true"></i><i class="dawn" aria-hidden="true"></i>
+
+<div class="hud tl">
+  <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    <span>NURULQURAN PORTAL</span>
+  </a>
+</div>
+
+<header class="hero">
+  <canvas id="c" aria-label="Points of light gathering into the words: Gatherer of the people"></canvas>
+  <p class="line" id="l1">Every person who ever lived.</p>
+  <p class="line" id="l2">Scattered across lands and centuries.</p>
+  <div class="after">
+    <p class="kick">The Gatherer of all people</p>
+    <h1>One Day. <em>No doubt.</em></h1>
+    <p class="hint">Press and hold to scatter</p>
+  </div>
+  <span class="cue"></span>
+</header>
+
+<main>
+<section id="verse">
+  <div class="verse-meta-row">
+    <p class="tag" style="margin:0">Chapter 3 · Verse 9</p>
+    <button class="ayah-audio-btn" id="audioBtn" aria-label="Play recitation of 3:9" title="Recitation · Sheikh Nasser Al-Qatami">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+  </div>
+  <div class="ayah ar" id="ayah"></div>
+  <p class="tr">Our Lord, You will surely gather all people for a Day with no doubt in it. Allah never breaks His appointment.</p>
+  <p class="kick">Tap any word</p>
+</section>
+
+<div id="card" popover>
+  <button class="x" aria-label="Close">×</button>
+  <p class="kick" id="cN"></p>
+  <p class="ar g" id="cAr"></p>
+  <p id="cEn"></p>
+  <div id="cRoot"></div>
+  <p id="cNote"></p>
+</div>
+
+<section class="tafsir">
+  <h2 class="g">Inside the verse</h2>
+
+  <article><span class="n">01</span><div>
+    <h3>Who's saying this?</h3>
+    <p>Verse 7 splits readers in two. Some have a tilt in their hearts. They chase the unclear verses to stir up confusion.</p>
+    <p>Others are rooted in knowledge. They say, <strong>“We believe in all of it. It's all from our Lord.”</strong> This prayer is theirs.</p>
+  </div></article>
+
+  <article><span class="n">02</span><div>
+    <h3>Why bring up that Day here?</h3>
+    <p>The tilted hearts want the final meaning of everything, right now. The rooted ones can wait.</p>
+    <p>They know the full picture comes on one Day. Verse 7:53 says it plainly: <strong>“On the Day its final meaning arrives…”</strong> Being sure of that Day makes you patient with what you don't know yet.</p>
+  </div></article>
+
+  <article><span class="n">03</span><div>
+    <h3>It asks for nothing</h3>
+    <p>Verse 8 asks, <strong>“Don't let our hearts slip.”</strong> Verse 9 asks for nothing. It just says what they're sure of.</p>
+    <p>That's how a heart stays steady. You keep reminding it where everything ends.</p>
+  </div></article>
+
+  <article><span class="n">04</span><div>
+    <h3>A noun, not a verb</h3>
+    <p>It doesn't say “You will gather.” It says “You are <strong>the Gatherer</strong>.”</p>
+    <p>A verb is something that will happen. A noun is who He is. It's already settled.</p>
+    <div class="viz">
+      <div class="chip off"><span class="ar">سَتَجْمَعُ</span><small>You will gather</small></div><i class="arr"></i>
+      <div class="chip"><span class="ar g">جَامِعُ</span><small>The Gatherer</small></div>
+    </div>
+  </div></article>
+
+  <article><span class="n">05</span><div>
+    <h3>The same three words, twice</h3>
+    <p>Chapter 2 opens with: “That Book. No doubt in it.” This verse says: “A Day. No doubt in it.”</p>
+    <p>The Book with no doubt tells you about the Day with no doubt. Trust the first, and you're ready for the second.</p>
+    <div class="echo">
+      <p><span class="ar">ذَٰلِكَ ٱلْكِتَٰبُ <mark>لَا رَيْبَ فِيهِ</mark></span><small>2:2 · The Book</small></p>
+      <p><span class="ar">لِيَوْمٍ <mark>لَّا رَيْبَ فِيهِ</mark></span><small>3:9 · The Day</small></p>
+    </div>
+  </div></article>
+
+  <article><span class="n">06</span><div>
+    <h3>Not just “unsure”</h3>
+    <p><b class="q">رَيْب</b> isn't plain doubt. It's the restless kind. The nagging feeling that won't let you settle.</p>
+    <p>The verse wipes it out completely. About this Day, your heart can be still.</p>
+  </div></article>
+
+  <article><span class="n">07</span><div>
+    <h3>From “You” to “Allah”</h3>
+    <p>They start by talking <em>to</em> Him: “Surely You…” Then they switch: “Surely Allah…”</p>
+    <p>Now they're talking <em>about</em> Him, out loud, to anyone listening and to themselves. The prayer becomes a declaration. Some read that last line as Allah Himself confirming their words.</p>
+    <div class="viz">
+      <div class="chip"><span class="ar g">إِنَّكَ</span><small>Surely You</small></div><i class="arr"></i>
+      <div class="chip"><span class="ar g">إِنَّ ٱللَّهَ</span><small>Surely Allah</small></div>
+    </div>
+  </div></article>
+
+  <article><span class="n">08</span><div>
+    <h3>An appointment, not just a promise</h3>
+    <p><b class="q">وَعْد</b> is a promise. <b class="q">مِيعَاد</b> is a promise with a set time and place. The date is already fixed.</p>
+    <p>And <b class="q">يُخْلِفُ</b> comes from <b class="q">خَلْف</b>, “behind.” Allah never leaves a promise behind.</p>
+  </div></article>
+</section>
+
+<section class="fin">
+  <div class="ring">
+    <svg viewBox="0 0 200 200" aria-hidden="true"><circle class="track" cx="100" cy="100" r="96"/><circle class="arc" cx="100" cy="100" r="96" pathLength="1"/></svg>
+    <span class="ar g">ٱلْمِيعَادَ</span>
+  </div>
+  <h2>Everything scattered gets gathered.<br><em>Every appointment gets kept.</em></h2>
+  <p>Live like it's on the calendar. It is.</p>
+</section>
+</main>
+<footer>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:.6rem">
+    <div>Chapter 3 · Verse 9 · Sūrah Āl ʿImrān</div>
+    <div style="display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mute)">
+      <a href="index.html" style="color:var(--gold);text-decoration:none">← NurulQuran Showcase</a>
+      <a href="#c" style="color:var(--mute);text-decoration:none">Return to Origin ↑</a>
+    </div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.74 (updated 2026-10-22 22:18)</div>
+  </div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s),cv=$('#c'),x=cv.getContext('2d'),hero=$('.hero');
+const TXT='جَامِعُ ٱلنَّاسِ',COL=['#f5d27a','#f5d27a','#e8893a','#fff4dc'];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W=0,H=0,P=[],G=false,mx=-1e4,my=-1e4,t=0,intro=true,T=[],rt;
+
+/* --- particles: sample the Arabic text into target points --- */
+function init(){
+  const r=Math.min(devicePixelRatio,2),w=cv.clientWidth,h=cv.clientHeight;
+  if(w===W&&h===H)return;W=w;H=h;
+  cv.width=W*r;cv.height=H*r;x.setTransform(r,0,0,r,0,0);
+  const c=new OffscreenCanvas(W,H).getContext('2d'),F='"Amiri Quran", serif';
+  c.font=`100px ${F}`;
+  const f=Math.min(100*W*.84/c.measureText(TXT).width,H*.22);
+  c.font=`${f}px ${F}`;c.textAlign='center';c.textBaseline='middle';c.fillText(TXT,W/2,H*.4);
+  const d=c.getImageData(0,0,W,H).data,g=Math.max(2,Math.round(f/60)),pts=[];
+  for(let y=0;y<H;y+=g)for(let i=0;i<W;i+=g)d[(y*W+i)*4+3]>140&&pts.push([i,y]);
+  pts.sort(()=>Math.random()-.5);
+  P=Array.from({length:Math.min(pts.length,W<700?1600:3200)},(_,i)=>{
+    const p=P[i]||{x:Math.random()*W,y:Math.random()*H,vx:0,vy:0,k:.008+Math.random()*.014,s:Math.random()*1.4+.9,c:i%4};
+    [p.tx,p.ty]=pts[i];if(RM){p.x=p.tx;p.y=p.ty}return p});
+}
+function frame(){
+  requestAnimationFrame(frame);
+  if(scrollY>H)return;t+=.006;
+  x.globalCompositeOperation='destination-out';x.fillStyle=`rgba(0,0,0,${G?.3:.12})`;x.fillRect(0,0,W,H);
+  x.globalCompositeOperation='source-over';
+  for(const p of P){
+    if(G){p.vx=(p.vx+(p.tx-p.x)*p.k)*.88;p.vy=(p.vy+(p.ty-p.y)*p.k)*.88}
+    else{const a=(Math.sin(p.x*.003+t)+Math.cos(p.y*.004-t))*3.14;p.vx=p.vx*.97+Math.cos(a)*.07;p.vy=p.vy*.97+Math.sin(a)*.07;p.x=(p.x+W)%W;p.y=(p.y+H)%H}
+    const dx=p.x-mx,dy=p.y-my,dd=dx*dx+dy*dy;
+    if(dd<1e4){const q=(1-dd/1e4)*2/Math.sqrt(dd||1);p.vx+=dx*q;p.vy+=dy*q}
+    p.x+=p.vx;p.y+=p.vy;
+  }
+  COL.forEach((c,k)=>{x.fillStyle=c;x.beginPath();for(const p of P)p.c===k&&x.rect(p.x,p.y,p.s,p.s);x.fill()});
+}
+
+/* --- intro sequence --- */
+const on=(s,v=1)=>$(s).classList.toggle('on',!!v);
+function finish(){T.forEach(clearTimeout);intro=false;on('#l1',0);on('#l2',0);G=true;hero.classList.add('done');setTimeout(()=>on('.after'),RM?0:1300)}
+function start(){init();frame();if(RM)return finish();
+  T=[setTimeout(()=>on('#l1'),500),setTimeout(()=>{on('#l1',0);on('#l2')},2800),setTimeout(finish,5200)]}
+Promise.race([document.fonts.load(`40px "Amiri Quran"`,TXT),new Promise(r=>setTimeout(r,2500))]).then(start);
+addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(init,150)});
+
+hero.onpointermove=e=>{mx=e.clientX;my=e.clientY+scrollY};
+hero.onpointerleave=()=>{mx=my=-1e4};
+hero.onpointerdown=e=>{if(intro)return finish();G=false;
+  for(const p of P){const a=Math.random()*6.28,s=Math.random()*12;p.vx+=Math.cos(a)*s;p.vy+=Math.sin(a)*s}};
+hero.onpointerup=hero.onpointercancel=()=>{if(!intro)G=true};
+hero.oncontextmenu=e=>e.preventDefault();
+
+/* --- clickable words --- */
+const D=[
+["رَبَّنَآ","Our Lord","ر ب ب","Not “my Lord.” “Our.” A prayer about gathering everyone is said together."],
+["إِنَّكَ","Surely You","","No request. Just certainty, said straight to Him."],
+["جَامِعُ","Gatherer","ج م ع","A noun, not a verb. Not “You will gather.” “You are the Gatherer.” Already settled."],
+["ٱلنَّاسِ","the people","أ ن س","All of them. First to last. Not one is missed."],
+["لِيَوْمٍ","for a Day","ي و م","“For”: the gathering has one purpose. “A Day,” not “the Day.” Left open because it's too huge to describe."],
+["لَّا","no","","The kind of “no” that wipes out the whole category. Not a little doubt. None."],
+["رَيْبَ","doubt","ر ي ب","Not plain doubt. The restless kind that won't let you settle."],
+["فِيهِ","in it","","Doubt can live in people's heads. Not in the Day."],
+["إِنَّ","Surely","","Certainty again. The prayer opens with “surely” and closes with it."],
+["ٱللَّهَ","Allah","","They were saying “You.” Now they say “Allah.” From talking to Him to announcing Him."],
+["لَا","never","","Present tense. Not now. Not ever."],
+["يُخْلِفُ","breaks (a promise)","خ ل ف","From “behind.” To leave a promise behind you. He never does."],
+["ٱلْمِيعَادَ","the appointment","و ع د","Not just a promise. A promise with a set time and place. Already on the calendar."]];
+
+const A=$('#ayah'),card=$('#card'),cA=$('#cAr');let cur;
+const vt=f=>document.startViewTransition?document.startViewTransition(f).finished:Promise.resolve(f());
+D.forEach(([ar,en],i)=>{const b=document.createElement('button');b.className='w g';b.textContent=ar;b.style.setProperty('--i',i);b.setAttribute('aria-label',en);b.onclick=()=>openW(b,i);A.append(b)});
+A.insertAdjacentHTML('beforeend','<span class="num">﴿٩﴾</span>');
+
+function openW(b,i){
+  const[ar,en,root,note]=D[i];cur=b;b.style.viewTransitionName='w';
+  vt(()=>{b.style.viewTransitionName='';cA.style.viewTransitionName='w';cA.textContent=ar;
+    $('#cN').textContent=`Word ${i+1} of ${D.length}`;$('#cEn').textContent=en;
+    $('#cRoot').innerHTML=root?root.split(' ').map(l=>`<b>${l}</b>`).join(''):'';
+    $('#cNote').textContent=note;card.showPopover()});
+}
+$('.x').onclick=()=>vt(()=>{cA.style.viewTransitionName='';cur.style.viewTransitionName='w';card.hidePopover()}).then(()=>cur.style.viewTransitionName='');
+card.ontoggle=e=>{if(e.newState==='closed')cA.style.viewTransitionName=''};
+
+/* --- reveal verse on view --- */
+const tr=$('.tr');tr.innerHTML=tr.textContent.trim().split(/\s+/).map((w,i)=>`<span style="--i:${i}">${w}</span>`).join(' ');
+new IntersectionObserver(([e],o)=>{if(e.isIntersecting){e.target.classList.add('show');o.disconnect()}},{threshold:.3}).observe($('#verse'));
+
+/* --- audio recitation --- */
+const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/003009.mp3');
+const ab = $('#audioBtn');
+if (ab) {
+  const pI = ab.querySelector('.icon-play'), psI = ab.querySelector('.icon-pause');
+  ab.onclick = () => {
+    if (audio.paused) {
+      audio.play().then(() => { pI.style.display = 'none'; psI.style.display = 'block'; }).catch(() => {});
+    } else {
+      audio.pause();
+      pI.style.display = 'block'; psI.style.display = 'none';
+    }
+  };
+  audio.onended = () => { pI.style.display = 'block'; psI.style.display = 'none'; };
+}
+</script>
+</body>
+</html>
