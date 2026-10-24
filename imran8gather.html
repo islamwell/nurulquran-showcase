@@ -71,7 +71,10 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;op
 section{padding:14vh 6vw;position:relative}
 #verse{min-height:100svh;display:grid;place-content:center;text-align:center;gap:2.2rem;padding:12vh 6vw}
 .tag{color:var(--gold)}
-.ayah{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;font-size:clamp(2.4rem,1.4rem+4.8vw,5.5rem);max-width:1100px;margin:auto}
+.ayah{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .3em;font-size:clamp(3.2rem,2rem+5.8vw,7.8rem);max-width:1150px;margin:auto}
+@media (min-width: 1200px) {
+  .ayah{font-size:7.8rem}
+}
 .w{all:unset;display:inline-block;line-height:1.9;padding:0 .08em;cursor:pointer;transition:scale .4s var(--e),opacity .4s,filter .4s;
   &:hover,&:focus-visible{scale:1.08;filter:drop-shadow(0 0 .25em var(--gold-glow))}}
 .ayah:has(.w:hover) .w:not(:hover){opacity:.3}
@@ -110,9 +113,13 @@ section{padding:14vh 6vw;position:relative}
 @starting-style{#card:popover-open{opacity:0;scale:.94}}
 #cAr{font-size:clamp(3.6rem,12vw,5.2rem);line-height:1.7}
 #cEn{font-family:var(--sans);font-size:clamp(1.4rem,1.25rem + .8vw,1.85rem);font-weight:600;line-height:1.3;color:var(--gold);margin-top:.4rem}
-#cRoot{direction:rtl;display:flex;justify-content:center;gap:.6rem;margin:1.4rem 0 1rem;
-  &:empty{display:none}
-  & b{display:grid;place-items:center;width:2.8rem;aspect-ratio:1;border:1.5px solid oklch(.85 .13 82/.45);border-radius:50%;font:500 1.4rem/1 var(--ar);color:var(--gold);background:oklch(1 0 0/.04)}}
+.root-nav-row{display:flex;align-items:center;justify-content:center;gap:.8rem;margin:1.4rem 0 1rem}
+.modal-nav-btn{all:unset;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid oklch(1 0 0/.15);background:oklch(1 0 0/.05);color:var(--gold);cursor:pointer;transition:all .2s var(--e)}
+.modal-nav-btn:hover{background:oklch(1 0 0/.12);border-color:var(--gold);scale:1.08;color:var(--ink)}
+.modal-nav-btn svg{width:16px;height:16px;stroke-width:2.5}
+#cRoot{direction:rtl;display:flex;justify-content:center;gap:.6rem}
+#cRoot:empty{display:none}
+#cRoot b{display:flex;align-items:center;justify-content:center;width:2.8rem;height:2.8rem;border:1.5px solid oklch(.85 .13 82/.45);border-radius:50%;font:500 1.5rem/1 var(--ar);color:var(--gold);background:oklch(1 0 0/.04);text-align:center;box-sizing:border-box}
 #cNote{font-family:var(--sans);font-size:clamp(1.15rem,1.05rem + .45vw,1.35rem);font-weight:400;line-height:1.7;color:oklch(.94 .01 85);text-wrap:pretty;margin-top:1.2rem;padding:0 .4rem}
 .x{all:unset;position:absolute;top:1rem;right:1rem;width:2.2rem;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;cursor:pointer;color:var(--mute);font-size:1.4rem;transition:.3s;
   &:hover{background:oklch(1 0 0/.08);color:var(--ink);rotate:90deg}}
@@ -149,6 +156,20 @@ article{display:grid;grid-template-columns:clamp(3.2rem,8vw,5rem) 1fr;gap:1.5rem
   & h2{font:400 clamp(2.1rem,1.4rem+2.8vw,3.8rem)/1.2 var(--se);text-wrap:balance;color:var(--ink)}
   & em{color:var(--gold)}
   & p{font-family:var(--sans);font-size:clamp(1.2rem,1.08rem + .6vw,1.55rem);font-weight:400;line-height:1.7;color:oklch(.92 .01 85);max-width:36ch}}
+.whatsapp-share-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.75rem;
+  padding:1rem 2.2rem;border-radius:999px;
+  background:#25D366;color:#052e16;
+  font-family:var(--sans);font-size:clamp(1.1rem,1rem+.4vw,1.35rem);font-weight:700;letter-spacing:.02em;
+  text-decoration:none;box-shadow:0 12px 32px rgba(37,211,102,.32);
+  transition:all .25s var(--e);
+  cursor:pointer;border:none;margin-top:.6rem;
+}
+.whatsapp-share-btn:hover{
+  background:#2fe671;transform:translateY(-3px) scale(1.03);
+  box-shadow:0 16px 40px rgba(37,211,102,.45);
+}
+.whatsapp-share-btn svg{width:26px;height:26px;fill:currentColor;flex-shrink:0}
 .ring{position:relative;width:min(72vw,22rem);aspect-ratio:1;display:grid;place-items:center;view-timeline-name:--r;
   & svg{position:absolute;inset:0;rotate:-90deg;overflow:visible}
   & circle{fill:none;stroke-width:1.2}
