@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3:104 · Those Who Call to Good</title>
+<title id="docTitle">3:104 · Those Who Call to Good</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Outfit:wght@300;500;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Outfit:wght@300;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap">
 <style>
 @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
 :root{--bg:oklch(14% .03 265);--ink:oklch(95% .02 90);--dim:oklch(74% .03 260);--gold:oklch(84% .15 85);--jade:oklch(78% .14 165);--rose:oklch(66% .21 22);--leaf:oklch(83% .17 130);--glass:oklch(100% 0 0/.04);--line:oklch(100% 0 0/.09);color-scheme:dark}
@@ -14,7 +14,7 @@ body{background:radial-gradient(70vmax 50vmax at 90% 0,oklch(28% .09 290/.6),tra
 .ar{font-family:'Amiri Quran',serif;font-weight:400;direction:rtl}
 section{--c:var(--gold);position:relative;isolation:isolate;overflow:clip;min-height:100svh;display:grid;grid-template-columns:min(64rem,100%);place-content:center;justify-items:center;gap:1.8rem;padding:14vh 6vw;text-align:center}
 section::before{content:attr(data-w);position:absolute;inset:0;z-index:-1;display:grid;place-items:center;font:38vw/1 'Amiri Quran';white-space:nowrap;color:oklch(100% 0 0/.025);pointer-events:none}
-h2{font:800 clamp(2rem,1rem + 4vw,4.4rem)/1.05 Outfit;letter-spacing:-.03em;max-width:17ch;text-wrap:balance}
+h2{font:800 clamp(2rem,1rem + 4vw,4.4rem)/1.08 Outfit;letter-spacing:-.03em;max-width:18ch;text-wrap:balance}
 h2 em{font-style:normal;background:linear-gradient(90deg,var(--c),var(--ink));-webkit-background-clip:text;background-clip:text;color:transparent}
 h3{font:800 1.25rem Outfit;margin-bottom:.3rem}
 p{max-width:60ch;color:var(--dim);text-wrap:pretty}
@@ -31,27 +31,28 @@ p .ar{color:var(--c);font-size:1.35em}
 #verse{font-size:clamp(2rem,1rem + 4.4vw,4.6rem);line-height:2.1;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.4em;text-shadow:0 0 .6em var(--bg)}
 #verse button{all:unset;cursor:pointer;color:var(--c);transition:scale .3s,text-shadow .3s;animation:in 1.4s calc(var(--i)*.15s + .3s) backwards}
 #verse button:is(:hover,:focus-visible,.on){scale:1.12;text-shadow:0 0 .5em var(--c)}
-.tr{font-size:clamp(1.1rem,.9rem + 1vw,1.6rem);color:var(--ink);max-width:42ch;animation:in 1.6s 2.4s backwards}
+.tr{font-size:clamp(1.1rem,.9rem + 1vw,1.6rem);color:var(--ink);max-width:44ch;animation:in 1.6s 2.4s backwards}
 .hint{color:var(--dim);animation:in 1s 3.4s backwards,bob 2s 4.4s infinite}
 @keyframes in{from{opacity:0;filter:blur(14px);translate:0 .4em}}
 @keyframes bob{50%{translate:0 6px}}
 
 /* WORD POPOVER (anchor positioning) */
 .on{anchor-name:--w}
-#pop{inset:auto;margin:.6rem 0;position-anchor:--w;position-area:bottom;position-try-fallbacks:flip-block;width:min(22rem,90vw);padding:1.2rem 1.5rem;border-radius:1.4rem;border:1px solid var(--c);background:oklch(18% .03 265/.75);backdrop-filter:blur(18px) saturate(1.4);color:var(--ink);text-align:center;box-shadow:0 20px 60px -20px var(--c);opacity:0;translate:0 12px;transition:opacity .35s,translate .35s,display .35s allow-discrete,overlay .35s allow-discrete}
+#pop{inset:auto;margin:.6rem 0;position-anchor:--w;position-area:bottom;position-try-fallbacks:flip-block;width:min(22rem,90vw);padding:1.2rem 1.5rem;border-radius:1.4rem;border:1px solid var(--c);background:oklch(18% .03 265/.85);backdrop-filter:blur(18px) saturate(1.4);color:var(--ink);text-align:center;box-shadow:0 20px 60px -20px var(--c);opacity:0;translate:0 12px;transition:opacity .35s,translate .35s,display .35s allow-discrete,overlay .35s allow-discrete}
 #pop:popover-open{opacity:1;translate:0}
 @starting-style{#pop:popover-open{opacity:0;translate:0 12px}}
 @supports not (position-area:bottom){#pop{inset:0;margin:auto;height:fit-content}}
 #pop b{display:block;font-size:2.2rem;line-height:1.8;color:var(--c)}
-#pop i{display:block;font-style:normal;font-weight:500}
+#pop i{display:block;font-style:normal;font-weight:600;font-size:1.05rem;color:var(--ink);margin-top:.2rem}
 #pop p{font-size:.95rem;margin-top:.4rem}
 
 /* ROPE */
 .rope{position:relative;display:grid;gap:1.2rem;width:min(40rem,100%);padding-left:3.5rem;text-align:left}
 .rope svg{position:absolute;left:0;top:0;width:40px;height:100%;overflow:visible}
 .rope path{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:1}
-.rope div{padding:1rem 1.3rem;border-radius:1rem;background:var(--glass);border:1px solid var(--line);color:var(--dim)}
-.rope b{color:var(--jade);margin-right:.7rem;font-weight:800}
+.rope div{padding:1rem 1.3rem;border-radius:1rem;background:var(--glass);border:1px solid var(--line);color:var(--dim);display:flex;align-items:baseline;gap:.7rem}
+.rope b{color:var(--jade);font-weight:800;flex-shrink:0}
+.rope span{flex:1}
 .rope .now{color:var(--ink);border-color:var(--gold);box-shadow:0 0 50px -10px var(--gold)}
 .now b{color:var(--gold)}
 
@@ -64,7 +65,7 @@ p .ar{color:var(--c);font-size:1.35em}
 
 /* KNOWN vs STRANGE */
 #ks{width:min(34rem,100%);overflow:visible;filter:drop-shadow(0 0 24px oklch(100% 0 0/.12))}
-#ks text{fill:var(--dim);font:500 14px Outfit;text-anchor:middle;letter-spacing:.25em}
+#ks text{fill:var(--dim);font:600 14px Outfit;text-anchor:middle;letter-spacing:.2em}
 input[type=range]{accent-color:var(--rose);width:min(22rem,55vw);vertical-align:middle;margin:0 .8rem}
 label{color:var(--dim);font-size:.9rem}
 output{color:var(--ink);font-weight:500;min-height:1.7em}
@@ -78,10 +79,11 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 .rip{position:absolute;width:1rem;aspect-ratio:1;border-radius:50%;border:2px solid var(--rc);box-shadow:0 0 24px var(--rc),inset 0 0 24px var(--rc);translate:-50% -50%;pointer-events:none;animation:rip 2s cubic-bezier(.2,.6,.3,1) forwards}
 @keyframes rip{to{width:22rem;opacity:0}}
 
-/* HUD & PORTAL BACK */
+/* HUD & PORTAL BACK & LANGUAGE SWITCHER */
 .hud{position:fixed;z-index:20;display:flex;align-items:center;gap:.6rem;padding:1rem 1.2rem;pointer-events:none}
 .hud>*{pointer-events:auto}
 .hud.tl{top:0;left:0}
+.hud.tr{top:0;right:0}
 .portal-back-btn{
   display:inline-flex;align-items:center;gap:7px;
   color:var(--gold);text-decoration:none;
@@ -95,6 +97,68 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 .portal-back-btn:hover{
   border-color:var(--gold);background:oklch(22% .05 265/.9);
   transform:translateX(-2px);box-shadow:0 0 20px -5px var(--gold);
+}
+
+/* Multilingual Switcher */
+.nq-lang-group{
+  display:inline-flex;align-items:center;
+  background:oklch(15% .02 265/.85);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid oklch(100% 0 0/.16);
+  border-radius:999px;padding:3px 4px;gap:3px;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+.nq-lang-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:transparent;border:1px solid transparent;
+  color:var(--dim);
+  font:600 0.78rem Outfit,sans-serif;
+  padding:5px 9px;border-radius:999px;
+  cursor:pointer;transition:all .2s ease;
+  user-select:none;
+}
+.nq-lang-btn:hover{color:var(--ink);background:oklch(100% 0 0/.08)}
+.nq-lang-btn.on{
+  color:#04140a;background:var(--gold);border-color:var(--gold);
+  font-weight:700;box-shadow:0 0 14px color-mix(in oklch,var(--gold) 45%,transparent);
+}
+.round-flag{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:block;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.nq-lang-selector-wrap{margin:1.4rem auto .8rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+
+/* Urdu Typography & RTL Enhancements */
+html[lang="ur"] {
+  --ur-font:'Noto Naskh Arabic','Amiri Quran',Outfit,sans-serif;
+}
+html[lang="ur"] h2 {
+  font-family:var(--ur-font);
+  font-weight:700;
+  line-height:1.38;
+}
+html[lang="ur"] h3 {
+  font-family:var(--ur-font);
+  font-weight:700;
+}
+html[lang="ur"] p,
+html[lang="ur"] .tr,
+html[lang="ur"] .hint,
+html[lang="ur"] label,
+html[lang="ur"] output,
+html[lang="ur"] .btn,
+html[lang="ur"] #fh {
+  font-family:var(--ur-font);
+  line-height:1.95;
+}
+html[lang="ur"] .tr {
+  font-size:clamp(1.15rem,.95rem + 1vw,1.7rem);
+}
+html[lang="ur"] .rope div span {
+  direction:rtl;
+  text-align:right;
+}
+html[lang="ur"] #pop i,
+html[lang="ur"] #pop p {
+  font-family:var(--ur-font);
+  line-height:1.85;
 }
 
 /* CIRCULAR AUDIO RING PLAYER */
@@ -137,15 +201,15 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 }
 .audio-ring-fill {
   fill: none;
-  stroke: #e53935; /* Red when stopped/paused */
+  stroke: #e53935;
   stroke-width: 3;
   stroke-linecap: round;
   stroke-dasharray: 113.097;
-  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  stroke-dashoffset: 113.097;
   transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
 }
 .btn-audio-ring.is-playing .audio-ring-fill {
-  stroke: #43a047; /* Green when playing */
+  stroke: #43a047;
 }
 .audio-ring-icon {
   position: relative;
@@ -153,11 +217,11 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e53935; /* Red icon when paused */
+  color: #e53935;
   transition: color 0.25s ease;
 }
 .btn-audio-ring.is-playing .audio-ring-icon {
-  color: #43a047; /* Green icon when playing */
+  color: #43a047;
 }
 .audio-ring-icon .icon-play { display: block; }
 .audio-ring-icon .icon-pause { display: none; }
@@ -177,14 +241,98 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 @keyframes grow{from{scale:0 1}}
 @keyframes draw{from{stroke-dashoffset:1}}
 @media (prefers-reduced-motion:reduce){:not(.rip),::before{animation:none!important}}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hud { padding: .7rem .8rem; }
+  .portal-back-btn span { display: none; }
+  .portal-back-btn::after { content: 'PORTAL'; font-size: 10px; letter-spacing: .12em; }
+  .nq-lang-btn { padding: 4px 7px; font-size: 0.72rem; gap: 3px; }
+  .round-flag { width: 14px; height: 14px; }
+}
 </style>
 </head>
 <body>
+
+<!-- SVG Flag Symbols (Reusable) -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <!-- US / English Flag -->
+    <g id="flag-en">
+      <clipPath id="clip-en"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#clip-en)">
+        <rect width="36" height="36" fill="#B22234"/>
+        <path d="M0 2.77h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0zm0 5.54h36v2.77H0z" fill="#FFFFFF"/>
+        <rect width="16" height="19.4" fill="#3C3B6E"/>
+        <g fill="#FFFFFF">
+          <circle cx="3.8" cy="4" r="1"/><circle cx="8" cy="4" r="1"/><circle cx="12.2" cy="4" r="1"/>
+          <circle cx="5.9" cy="7.2" r="1"/><circle cx="10.1" cy="7.2" r="1"/>
+          <circle cx="3.8" cy="10.4" r="1"/><circle cx="8" cy="10.4" r="1"/><circle cx="12.2" cy="10.4" r="1"/>
+          <circle cx="5.9" cy="13.6" r="1"/><circle cx="10.1" cy="13.6" r="1"/>
+          <circle cx="3.8" cy="16.8" r="1"/><circle cx="8" cy="16.8" r="1"/><circle cx="12.2" cy="16.8" r="1"/>
+        </g>
+      </g>
+    </g>
+    <!-- Pakistan / Urdu Flag -->
+    <g id="flag-ur">
+      <clipPath id="clip-ur"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#clip-ur)">
+        <rect width="36" height="36" fill="#01411C"/>
+        <rect width="9" height="36" fill="#FFFFFF"/>
+        <path d="M24.5 13.5 a8 8 0 1 0 2.2 11.2 a7 7 0 1 1 -4.4 -11.8 z" fill="#FFFFFF"/>
+        <polygon points="26.5,12 27.4,14 29.5,14.3 27.9,15.7 28.4,17.8 26.5,16.6 24.6,17.8 25.1,15.7 23.5,14.3 25.6,14" fill="#FFFFFF"/>
+      </g>
+    </g>
+    <!-- Norway / Norsk Flag -->
+    <g id="flag-no">
+      <clipPath id="clip-no"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#clip-no)">
+        <rect width="36" height="36" fill="#BA0C2F"/>
+        <rect x="10" y="0" width="7" height="36" fill="#FFFFFF"/>
+        <rect x="0" y="14.5" width="36" height="7" fill="#FFFFFF"/>
+        <rect x="11.75" y="0" width="3.5" height="36" fill="#00205B"/>
+        <rect x="0" y="16.25" width="36" height="3.5" fill="#00205B"/>
+      </g>
+    </g>
+    <!-- France / French Flag -->
+    <g id="flag-fr">
+      <clipPath id="clip-fr"><circle cx="18" cy="18" r="18"/></clipPath>
+      <g clip-path="url(#clip-fr)">
+        <rect width="12" height="36" fill="#002654"/>
+        <rect x="12" width="12" height="36" fill="#FFFFFF"/>
+        <rect x="24" width="12" height="36" fill="#ED2939"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- Top HUD Navigation & Language Switcher -->
 <div class="hud tl">
   <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="15 18 9 12 15 6"></polyline></svg>
     <span>NURULQURAN PORTAL</span>
   </a>
+</div>
+
+<div class="hud tr">
+  <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
+    <button type="button" class="nq-lang-btn on" data-lang="en" role="radio" aria-checked="true" title="English">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-en"></use></svg>
+      <span>EN</span>
+    </button>
+    <button type="button" class="nq-lang-btn" data-lang="ur" role="radio" aria-checked="false" title="اردو (Urdu)">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-ur"></use></svg>
+      <span>اردو</span>
+    </button>
+    <button type="button" class="nq-lang-btn" data-lang="no" role="radio" aria-checked="false" title="Norsk">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-no"></use></svg>
+      <span>NO</span>
+    </button>
+    <button type="button" class="nq-lang-btn" data-lang="fr" role="radio" aria-checked="false" title="Français">
+      <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-fr"></use></svg>
+      <span>FR</span>
+    </button>
+  </div>
 </div>
 
 <div id="bar"></div>
@@ -194,7 +342,7 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 <section id="hero">
   <canvas id="sky"></canvas>
   <div class="hero-header-row">
-    <a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" class="tag" style="text-decoration:none" title="Open 3:104 in Iqra Reader">The Family of Imran · 3:104 ↗</a>
+    <a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" class="tag" style="text-decoration:none" title="Open 3:104 in Iqra Reader" id="headerAyahTag">The Family of Imran · 3:104 ↗</a>
     <!-- Circular Audio Ring Player Button -->
     <button type="button" class="btn-audio-ring" id="btn-audio-play" aria-label="Play recitation of 3:104" aria-pressed="false" title="Recitation · Sheikh Nasser Al-Qatami">
       <!-- Progress Ring (SVG) -->
@@ -218,53 +366,53 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
     </button>
   </div>
   <h1 id="verse" class="ar"></h1>
-  <p class="tr">Let there be among you a community that invites to all that is good, urges what is right, and forbids what is wrong. They are the truly successful.</p>
-  <small class="hint">Tap any word to open it ↓</small>
+  <p class="tr" id="verseTr">Let there be among you a community that invites to all that is good, urges what is right, and forbids what is wrong. They are the truly successful.</p>
+  <small class="hint" id="heroHint">Tap any word to open it ↓</small>
 </section>
 
 <!-- 2 · CONTEXT -->
-<section data-w="حبل" style="--c:var(--jade)">
-  <span class="tag">Read the neighbors</span>
-  <h2>This verse lives <em>inside a rope</em></h2>
+<section data-w="حبل" style="--c:var(--jade)" id="secContext">
+  <span class="tag" id="sec2Tag">Read the neighbors</span>
+  <h2 id="sec2H2">This verse lives <em>inside a rope</em></h2>
   <div class="rope">
     <svg viewBox="0 0 40 400" preserveAspectRatio="none">
       <path pathLength="1" style="stroke:var(--jade)" d="M20 0Q4 25 20 50T20 100T20 150T20 200T20 250T20 300T20 350T20 400"/>
       <path pathLength="1" style="stroke:var(--gold)" d="M20 0Q36 25 20 50T20 100T20 150T20 200T20 250T20 300T20 350T20 400"/>
     </svg>
-    <div><b>102</b>Be mindful of Allah as He truly deserves.</div>
-    <div><b>103</b>Hold on to the rope of Allah, all together. Do not split apart.</div>
-    <div class="now"><b>104</b>Let there be a community that calls to good.</div>
-    <div><b>105</b>Do not be like those who split up after clear signs came to them.</div>
+    <div id="rope102"><b>102</b><span>Be mindful of Allah as He truly deserves.</span></div>
+    <div id="rope103"><b>103</b><span>Hold on to the rope of Allah, all together. Do not split apart.</span></div>
+    <div class="now" id="rope104"><b>104</b><span>Let there be a community that calls to good.</span></div>
+    <div id="rope105"><b>105</b><span>Do not be like those who split up after clear signs came to them.</span></div>
   </div>
-  <p>Before it: <b>hold together.</b> After it: <b>don't split.</b> Calling to good sits right in the middle, because it is what holds a people together. When people stop reminding each other, the rope starts to slip.</p>
+  <p id="sec2P">Before it: <b>hold together.</b> After it: <b>don't split.</b> Calling to good sits right in the middle, because it is what holds a people together. When people stop reminding each other, the rope starts to slip.</p>
 </section>
 
 <!-- 3 · COMMUNITY = DIRECTION -->
-<section data-w="أمة">
-  <span class="tag">A community</span>
-  <h2>A crowd becomes a community <em>when it faces one way</em></h2>
+<section data-w="أمة" id="secCommunity">
+  <span class="tag" id="sec3Tag">A community</span>
+  <h2 id="sec3H2">A crowd becomes a community <em>when it faces one way</em></h2>
   <canvas id="dir" class="box"></canvas>
   <button class="btn" id="align">Give them one direction</button>
-  <p>The word <b class="ar">أُمَّةٌ</b> comes from a root meaning <b>to aim, to head toward</b>. The same root gives <b class="ar">أُمّ</b>, mother, the one a family gathers around, and <b class="ar">إِمَام</b>, the one who stands in front. Being in the same place doesn't make people one community. Sharing a direction does. And the verse says <b class="ar">مِّنكُمْ</b>, "from among you". This is not someone else's job. It has to grow from inside.</p>
+  <p id="sec3P">The word <b class="ar">أُمَّةٌ</b> comes from a root meaning <b>to aim, to head toward</b>. The same root gives <b class="ar">أُمّ</b>, mother, the one a family gathers around, and <b class="ar">إِمَام</b>, the one who stands in front. Being in the same place doesn't make people one community. Sharing a direction does. And the verse says <b class="ar">مِّنكُمْ</b>, "from among you". This is not someone else's job. It has to grow from inside.</p>
 </section>
 
 <!-- 4 · THE ORDER -->
-<section data-w="دعوة" style="--c:var(--leaf)">
-  <span class="tag">Three verbs · one order</span>
-  <h2>Invite first. <em>Correct later.</em></h2>
+<section data-w="دعوة" style="--c:var(--leaf)" id="secOrder">
+  <span class="tag" id="sec4Tag">Three verbs · one order</span>
+  <h2 id="sec4H2">Invite first. <em>Correct later.</em></h2>
   <div class="steps">
-    <article style="--c:var(--gold)"><span class="ar">يَدْعُونَ</span><h3>1 · Invite</h3><p>Open the door to all that is good. An invitation is warm. Nobody is dragged to a feast.</p></article>
-    <article style="--c:var(--jade)"><span class="ar">يَأْمُرُونَ</span><h3>2 · Urge</h3><p>Encourage what every healthy heart already knows is right.</p></article>
-    <article style="--c:var(--rose)"><span class="ar">يَنْهَوْنَ</span><h3>3 · Warn</h3><p>Only then, speak against the wrong. With care, never cruelty.</p></article>
+    <article style="--c:var(--gold)"><span class="ar">يَدْعُونَ</span><h3 id="step1H3">1 · Invite</h3><p id="step1P">Open the door to all that is good. An invitation is warm. Nobody is dragged to a feast.</p></article>
+    <article style="--c:var(--jade)"><span class="ar">يَأْمُرُونَ</span><h3 id="step2H3">2 · Urge</h3><p id="step2P">Encourage what every healthy heart already knows is right.</p></article>
+    <article style="--c:var(--rose)"><span class="ar">يَنْهَوْنَ</span><h3 id="step3H3">3 · Warn</h3><p id="step3P">Only then, speak against the wrong. With care, never cruelty.</p></article>
   </div>
-  <p>Many people start with "don't". This verse starts with an invitation. All three verbs are in the present tense: <b>they keep inviting, keep urging, keep warning.</b> It is a way of life, not a one-time speech.</p>
-  <p>Everyone has a share. The Prophet ﷺ taught: change a wrong with your hand. If you can't, then with your words. If you can't, then at least hate it in your heart. <b>(Muslim)</b></p>
+  <p id="sec4P1">Many people start with "don't". This verse starts with an invitation. All three verbs are in the present tense: <b>they keep inviting, keep urging, keep warning.</b> It is a way of life, not a one-time speech.</p>
+  <p id="sec4P2">Everyone has a share. The Prophet ﷺ taught: change a wrong with your hand. If you can't, then with your words. If you can't, then at least hate it in your heart. <b>(Muslim)</b></p>
 </section>
 
 <!-- 5 · KNOWN vs STRANGE -->
-<section data-w="معروف" style="--c:var(--rose)">
-  <span class="tag">The known &amp; the strange</span>
-  <h2>What happens when <em>everyone stays quiet?</em></h2>
+<section data-w="معروف" style="--c:var(--rose)" id="secKnown">
+  <span class="tag" id="sec5Tag">The known &amp; the strange</span>
+  <h2 id="sec5H2">What happens when <em>everyone stays quiet?</em></h2>
   <svg id="ks" viewBox="0 0 400 210">
     <filter id="j" x="-50%" y="-50%" width="200%" height="200%">
       <feTurbulence baseFrequency=".03" numOctaves="2"><animate attributeName="baseFrequency" values=".03;.05;.03" dur="5s" repeatCount="indefinite"/></feTurbulence>
@@ -272,28 +420,28 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
     </filter>
     <circle cx="110" cy="95" r="58" style="fill:var(--jade)"/>
     <circle id="bad" cx="290" cy="95" r="58" filter="url(#j)"/>
-    <text x="110" y="200">KNOWN</text><text x="290" y="200" id="bt">STRANGE</text>
+    <text x="110" y="200" id="ksKnownText">KNOWN</text><text x="290" y="200" id="bt">STRANGE</text>
   </svg>
-  <label>Voices <input type="range" id="s" value="0"> Silence</label>
+  <label id="sliderLabel"><span id="lblVoices">Voices</span> <input type="range" id="s" value="0"> <span id="lblSilence">Silence</span></label>
   <output id="msg"></output>
-  <p>The word for right, <b class="ar">ٱلْمَعْرُوف</b>, means <b>"the known"</b>: the good every healthy heart recognizes, like honesty, mercy and fairness. The word for wrong, <b class="ar">ٱلْمُنكَر</b>, means <b>"the unrecognized"</b>: what feels strange to a clean conscience. Both roots meet in the story of Prophet Yusuf: <b>"he recognized them, but they did not recognize him"</b> (12:58). When no one speaks, the strange slowly starts to look normal. This community keeps the good familiar and the wrong strange.</p>
+  <p id="sec5P">The word for right, <b class="ar">ٱلْمَعْرُوف</b>, means <b>"the known"</b>: the good every healthy heart recognizes, like honesty, mercy and fairness. The word for wrong, <b class="ar">ٱلْمُنكَر</b>, means <b>"the unrecognized"</b>: what feels strange to a clean conscience. Both roots meet in the story of Prophet Yusuf: <b>"he recognized them, but they did not recognize him"</b> (12:58). When no one speaks, the strange slowly starts to look normal. This community keeps the good familiar and the wrong strange.</p>
 </section>
 
 <!-- 6 · THE FARMER'S SUCCESS -->
-<section data-w="فلاح" style="--c:var(--leaf)">
-  <span class="tag">The truly successful</span>
-  <h2>Success, <em>the farmer's way</em></h2>
+<section data-w="فلاح" style="--c:var(--leaf)" id="secFarmer">
+  <span class="tag" id="sec6Tag">The truly successful</span>
+  <h2 id="sec6H2">Success, <em>the farmer's way</em></h2>
   <canvas id="farm" class="box"></canvas>
   <b id="fh">Press and hold the soil to plant a seed</b>
-  <p>The word <b class="ar">ٱلْمُفْلِحُونَ</b> comes from a root meaning <b>to split the soil</b>. It is the same root as the Arabic word for farmer. A farmer plows, plants and waters, but cannot force one seed to grow. That belongs to Allah. Your part is to invite, urge and warn. <b>Success is the sincere effort, not the number of people who listen.</b></p>
-  <p><b class="ar">أُو۟لَـٰٓئِكَ</b> "those" is a pointer for something far away, as if lifting them to a high rank. <b class="ar">هُمُ</b> "they" adds focus: it is <b>they</b> who truly succeed.</p>
+  <p id="sec6P1">The word <b class="ar">ٱلْمُفْلِحُونَ</b> comes from a root meaning <b>to split the soil</b>. It is the same root as the Arabic word for farmer. A farmer plows, plants and waters, but cannot force one seed to grow. That belongs to Allah. Your part is to invite, urge and warn. <b>Success is the sincere effort, not the number of people who listen.</b></p>
+  <p id="sec6P2"><b class="ar">أُو۟لَـٰٓئِكَ</b> "those" is a pointer for something far away, as if lifting them to a high rank. <b class="ar">هُمُ</b> "they" adds focus: it is <b>they</b> who truly succeed.</p>
 </section>
 
 <!-- 7 · RIPPLES -->
 <section id="end" data-w="خير">
-  <span class="tag">Your turn</span>
-  <h2>Tap anywhere. <em>One call travels far.</em></h2>
-  <p>"Whoever calls to guidance gets a reward like those who follow it, without their reward being reduced at all." <b>The Prophet Muhammad ﷺ (Muslim)</b></p>
+  <span class="tag" id="sec7Tag">Your turn</span>
+  <h2 id="sec7H2">Tap anywhere. <em>One call travels far.</em></h2>
+  <p id="sec7Quote">"Whoever calls to guidance gets a reward like those who follow it, without their reward being reduced at all." <b>The Prophet Muhammad ﷺ (Muslim)</b></p>
   <output id="rc">Tap to begin</output>
   <p class="ar big">وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ</p>
 </section>
@@ -301,17 +449,44 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 <!-- FOOTER -->
 <footer style="padding:4rem 1.5rem 3rem;text-align:center;border-top:1px solid var(--line);background:radial-gradient(ellipse at bottom, oklch(22% .04 265), transparent 70%);position:relative;z-index:2">
   <div style="display:flex;flex-direction:column;align-items:center;gap:.7rem">
-    <div><a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:500;font-size:1.05rem">3:104 · Sūrah Āl ʿImrān ↗</a></div>
-    <div style="display:flex;gap:1.5rem;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">
-      <a href="index.html" style="color:var(--gold);text-decoration:none">← NurulQuran Showcase</a>
-      <a href="#hero" style="color:var(--dim);text-decoration:none">Return to Top ↑</a>
+    <div><a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:500;font-size:1.05rem" id="footerSurahLink">3:104 · Sūrah Āl ʿImrān ↗</a></div>
+    
+    <!-- Footer Language Switcher -->
+    <div class="nq-lang-selector-wrap">
+      <div id="footerLangHeading" style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--dim);text-transform:uppercase">Language · زبان · Språk · Langue</div>
+      <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
+        <button type="button" class="nq-lang-btn on" data-lang="en" role="radio" aria-checked="true" title="English">
+          <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-en"></use></svg>
+          <span>English</span>
+        </button>
+        <button type="button" class="nq-lang-btn" data-lang="ur" role="radio" aria-checked="false" title="اردو (Urdu)">
+          <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-ur"></use></svg>
+          <span style="font-family:'Noto Naskh Arabic',serif;font-size:0.92rem">اردو</span>
+        </button>
+        <button type="button" class="nq-lang-btn" data-lang="no" role="radio" aria-checked="false" title="Norsk">
+          <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-no"></use></svg>
+          <span>Norsk</span>
+        </button>
+        <button type="button" class="nq-lang-btn" data-lang="fr" role="radio" aria-checked="false" title="Français">
+          <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-fr"></use></svg>
+          <span>Français</span>
+        </button>
+      </div>
     </div>
-    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.77 (updated 2026-10-26 11:45)</div>
+
+    <div style="display:flex;gap:1.5rem;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">
+      <a href="index.html" style="color:var(--gold);text-decoration:none" id="footerShowcaseLink">← NurulQuran Showcase</a>
+      <a href="#hero" style="color:var(--dim);text-decoration:none" id="footerTopLink">Return to Top ↑</a>
+    </div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.78 (updated 2026-10-26 20:46)</div>
   </div>
 </footer>
 
 <script>
-const $=s=>document.querySelector(s),R=Math.random,TAU=Math.PI*2,M={x:-999,y:-999},
+/* =====================================================================
+   0. CORE HELPERS & STATE
+===================================================================== */
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),R=Math.random,TAU=Math.PI*2,M={x:-999,y:-999},
   cv=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim(),
   [gold,jade,leaf]=['--gold','--jade','--leaf'].map(cv),gold0=gold.replace(')',' / 0)'),
   on=c=>{const r=c.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight},
@@ -319,27 +494,624 @@ const $=s=>document.querySelector(s),R=Math.random,TAU=Math.PI*2,M={x:-999,y:-99
   fit=c=>{const d=devicePixelRatio||1,x=c.getContext('2d');c.width=c.clientWidth*d;c.height=c.clientHeight*d;x.setTransform(d,0,0,d,0,0);return x};
 for(const t of['pointermove','pointerdown'])addEventListener(t,e=>{M.x=e.clientX;M.y=e.clientY});
 
-/* WORDS */
-const W=[
- ['وَلْتَكُن','And let there be','Not a wish. A command: make this happen.'],
- ['مِّنكُمْ','from among you','Not from outside. It must rise from within you.'],
- ['أُمَّةٌ','a community','From a root meaning "to aim". People joined by one direction.','gold'],
- ['يَدْعُونَ','who invite','They keep inviting. An invitation is gentle. It can never be forced.','gold'],
- ['إِلَى ٱلْخَيْرِ','to all that is good','The widest door: faith, kindness, knowledge, mercy.','gold'],
- ['وَيَأْمُرُونَ','and urge','They don\'t just wait. They actively encourage.','jade'],
- ['بِٱلْمَعْرُوفِ','what is right','Literally "the known": good that every sound heart recognizes.','jade'],
- ['وَيَنْهَوْنَ','and forbid','They speak up to hold back what harms.','rose'],
- ['عَنِ ٱلْمُنكَرِ','what is wrong','Literally "the unrecognized": what feels strange to a clean conscience.','rose'],
- ['وَأُو۟لَـٰٓئِكَ','and those','A pointer for the far, lifting them to a high rank.','leaf'],
- ['هُمُ','they','Adds focus: it is they, truly.','leaf'],
- ['ٱلْمُفْلِحُونَ','are the successful','From "splitting the soil", like a farmer. Success grown by patient work.','leaf']];
-const V=$('#verse'),pop=$('#pop');
-V.innerHTML=W.map((w,i)=>`<button style="--i:${i};--c:var(--${w[3]||'ink'})">${w[0]}</button>`).join('');
-V.onclick=e=>{const b=e.target.closest('button');if(!b)return;const[a,en,note]=W[[...V.children].indexOf(b)];
-  $('.on')?.classList.remove('on');b.classList.add('on');pop.style.cssText=b.style.cssText;
-  pop.innerHTML=`<b class="ar">${a}</b><i>${en}</i><p>${note}</p>`;pop.matches(':popover-open')||pop.showPopover()};
+/* =====================================================================
+   1. CIRCULAR AUDIO PLAYER (3:104 · Sheikh Nasser Al-Qatami)
+===================================================================== */
+const audioBtn = document.querySelector('#btn-audio-play');
+const ring = document.querySelector('#audio-ring-fill');
+const CIRCUMFERENCE = 113.097;
+const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/003104.mp3');
 
-/* HERO: light gathering into an 8-point star */
+function updateButtonUI() {
+  const isPlaying = !audio.paused && !audio.ended;
+  audioBtn.classList.toggle('is-playing', isPlaying);
+  audioBtn.setAttribute('aria-pressed', String(isPlaying));
+  if (window.I18N && window.CUR_LANG) {
+    audioBtn.setAttribute('aria-label', isPlaying ? I18N[CUR_LANG].audioLabelPause : I18N[CUR_LANG].audioLabelPlay);
+  }
+  if (!isPlaying && (audio.ended || audio.currentTime === 0)) {
+    ring.style.strokeDashoffset = CIRCUMFERENCE;
+  }
+}
+
+audioBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(err => console.warn('Playback error:', err));
+  } else {
+    audio.pause();
+  }
+});
+audio.addEventListener('play', updateButtonUI);
+audio.addEventListener('pause', updateButtonUI);
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const pct = audio.currentTime / audio.duration;
+    ring.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+  }
+});
+audio.addEventListener('ended', () => {
+  ring.style.strokeDashoffset = CIRCUMFERENCE;
+  updateButtonUI();
+});
+
+/* =====================================================================
+   2. MULTILINGUAL I18N DATA & CONTROLLER
+===================================================================== */
+let CUR_LANG = 'en';
+const urlParams = new URLSearchParams(location.search);
+const paramLang = urlParams.get('lang');
+if (paramLang && ['en', 'ur', 'no', 'fr'].includes(paramLang)) {
+  CUR_LANG = paramLang;
+} else {
+  const saved = localStorage.getItem('nq-nation-lang');
+  if (saved && ['en', 'ur', 'no', 'fr'].includes(saved)) CUR_LANG = saved;
+}
+window.CUR_LANG = CUR_LANG;
+
+const W_DATA = {
+  "en": [
+    [
+      "وَلْتَكُن",
+      "And let there be",
+      "Not a wish. A command: make this happen."
+    ],
+    [
+      "مِّنكُمْ",
+      "from among you",
+      "Not from outside. It must rise from within you."
+    ],
+    [
+      "أُمَّةٌ",
+      "a community",
+      "From a root meaning \"to aim\". People joined by one direction.",
+      "gold"
+    ],
+    [
+      "يَدْعُونَ",
+      "who invite",
+      "They keep inviting. An invitation is gentle. It can never be forced.",
+      "gold"
+    ],
+    [
+      "إِلَى ٱلْخَيْرِ",
+      "to all that is good",
+      "The widest door: faith, kindness, knowledge, mercy.",
+      "gold"
+    ],
+    [
+      "وَيَأْمُرُونَ",
+      "and urge",
+      "They don't just wait. They actively encourage.",
+      "jade"
+    ],
+    [
+      "بِٱلْمَعْرُوفِ",
+      "what is right",
+      "Literally \"the known\": good that every sound heart recognizes.",
+      "jade"
+    ],
+    [
+      "وَيَنْهَوْنَ",
+      "and forbid",
+      "They speak up to hold back what harms.",
+      "rose"
+    ],
+    [
+      "عَنِ ٱلْمُنكَرِ",
+      "what is wrong",
+      "Literally \"the unrecognized\": what feels strange to a clean conscience.",
+      "rose"
+    ],
+    [
+      "وَأُو۟لَـٰٓئِكَ",
+      "and those",
+      "A pointer for the far, lifting them to a high rank.",
+      "leaf"
+    ],
+    [
+      "هُمُ",
+      "they",
+      "Adds focus: it is they, truly.",
+      "leaf"
+    ],
+    [
+      "ٱلْمُفْلِحُونَ",
+      "are the successful",
+      "From \"splitting the soil\", like a farmer. Success grown by patient work.",
+      "leaf"
+    ]
+  ],
+  "ur": [
+    [
+      "وَلْتَكُن",
+      "اور ضرور ہونی چاہیے",
+      "یہ محض خواہش نہیں، ایک حکم ہے: اسے عملی طور پر ممکن بناؤ۔"
+    ],
+    [
+      "مِّنكُمْ",
+      "تم میں سے ہی",
+      "باہر سے نہیں؛ یہ جذبہ تمہارے اپنے اندر سے ابھرنا چاہیے۔"
+    ],
+    [
+      "أُمَّةٌ",
+      "ایک جماعت / امت",
+      "اصل مادہ \"قصد و سمت\" ہے۔ وہ لوگ جو ایک رخ اور ایک مقصد پر متفق ہوں۔",
+      "gold"
+    ],
+    [
+      "يَدْعُونَ",
+      "جو دعوت دیتے رہیں",
+      "وہ مسلسل بلاتے ہیں۔ دعوت ہمیشہ نرمی اور پیار سے ہوتی ہے، زبردستی نہیں۔",
+      "gold"
+    ],
+    [
+      "إِلَى ٱلْخَيْرِ",
+      "ہر بھلائی کی طرف",
+      "سب سے کشادہ دروازہ: ایمان، ہمدردی، سچائی اور رحمت۔",
+      "gold"
+    ],
+    [
+      "وَيَأْمُرُونَ",
+      "اور اچھائی کی تاکید کریں",
+      "وہ خاموش تماشائی نہیں بنتے، بلکہ نیکی کا پرجوش حوصلہ بڑھاتے ہیں۔",
+      "jade"
+    ],
+    [
+      "بِٱلْمَعْرُوفِ",
+      "جو سب کے نزدیک بھلا ہو",
+      "لفظی معنی \"جانا پہچانا\": وہ نیکی جسے ہر پاکیزہ دل فطرتاً پہچان لیتا ہے۔",
+      "jade"
+    ],
+    [
+      "وَيَنْهَوْنَ",
+      "اور روکتے رہیں",
+      "وہ برائی اور نقصان کے راستے میں خیرخواہی کے ساتھ رکاوٹ بنتے ہیں۔",
+      "rose"
+    ],
+    [
+      "عَنِ ٱلْمُنكَرِ",
+      "ناپسندیدہ اور برے کاموں سے",
+      "لفظی معنی \"اجنبی اور ناپسندیدہ\": وہ بات جو سچے ضمیر کو کھٹکتی ہے۔",
+      "rose"
+    ],
+    [
+      "وَأُو۟لَـٰٓئِكَ",
+      "اور یہی وہ لوگ ہیں",
+      "دور کا اشارہ، جو ان کے بلند مقام اور اونچے مرتبے کو نمایاں کرتا ہے۔",
+      "leaf"
+    ],
+    [
+      "هُمُ",
+      "جو حقیقت میں وہی ہیں",
+      "خاص زور اور توجہ: دراصل یہی ہیں، اور کوئی نہیں۔",
+      "leaf"
+    ],
+    [
+      "ٱلْمُفْلِحُونَ",
+      "جو حقیقی فلاح پانے والے ہیں",
+      "جیسے کسان زمین چیر کر بیج بوتا ہے؛ مسلسل محنت سے اگنے والی پائیدار کامیابی۔",
+      "leaf"
+    ]
+  ],
+  "no": [
+    [
+      "وَلْتَكُن",
+      "Og la det være",
+      "Ikke bare et ønske, men en oppfordring: få dette til å skje."
+    ],
+    [
+      "مِّنكُمْ",
+      "blant dere",
+      "Ikke fra utsiden. Det må vokse frem innenfra dere selv."
+    ],
+    [
+      "أُمَّةٌ",
+      "et fellesskap",
+      "Fra en rot som betyr «å sikte mot». Mennesker forent i felles retning.",
+      "gold"
+    ],
+    [
+      "يَدْعُونَ",
+      "som inviterer",
+      "De fortsetter å invitere. En invitasjon er hjertevarm; aldri tvunget.",
+      "gold"
+    ],
+    [
+      "إِلَى ٱلْخَيْرِ",
+      "til alt som er godt",
+      "Den videste døren: tro, omtanke, kunnskap og barmhjertighet.",
+      "gold"
+    ],
+    [
+      "وَيَأْمُرُونَ",
+      "og oppmuntrer",
+      "De sitter ikke passive; de heier aktivt frem det gode.",
+      "jade"
+    ],
+    [
+      "بِٱلْمَعْرُوفِ",
+      "det som er rett",
+      "Bokstavelig «det kjente»: det gode ethvert sunt hjerte gjenkjenner.",
+      "jade"
+    ],
+    [
+      "وَيَنْهَوْنَ",
+      "og advarer mot",
+      "De sier fra for å verne mot det som skader.",
+      "rose"
+    ],
+    [
+      "عَنِ ٱلْمُنكَرِ",
+      "det som er galt",
+      "Bokstavelig «det fremmede»: det som skurrer for en ren samvittighet.",
+      "rose"
+    ],
+    [
+      "وَأُو۟لَـٰٓئِكَ",
+      "og nettopp disse",
+      "Peker langt frem og opp, og hedrer dem med en høy posisjon.",
+      "leaf"
+    ],
+    [
+      "هُمُ",
+      "er de som",
+      "Gir full oppmerksomhet: det er virkelig dem det gjelder.",
+      "leaf"
+    ],
+    [
+      "ٱلْمُفْلِحُونَ",
+      "oppnår sann suksess",
+      "Fra å «pløye jorden», som en bonde. Suksess grodd frem av tålmodig arbeid.",
+      "leaf"
+    ]
+  ],
+  "fr": [
+    [
+      "وَلْتَكُن",
+      "Et qu'il y ait",
+      "Pas un simple vœu, mais un appel clair : faites que cela existe."
+    ],
+    [
+      "مِّنكُمْ",
+      "parmi vous",
+      "Pas de l'extérieur. Cela doit jaillir de votre propre sein."
+    ],
+    [
+      "أُمَّةٌ",
+      "une communauté",
+      "D'une racine signifiant « viser un but ». Des personnes unies par une même direction.",
+      "gold"
+    ],
+    [
+      "يَدْعُونَ",
+      "qui invitent",
+      "Ils ne cessent d'inviter. Une invitation est douce et bienveillante ; jamais forcée.",
+      "gold"
+    ],
+    [
+      "إِلَى ٱلْخَيْرِ",
+      "vers tout le bien",
+      "La porte la plus ouverte : la foi, la bonté, le savoir et la clémence.",
+      "gold"
+    ],
+    [
+      "وَيَأْمُرُونَ",
+      "et encouragent",
+      "Ils ne restent pas passifs ; ils motivent activement au bien.",
+      "jade"
+    ],
+    [
+      "بِٱلْمَعْرُوفِ",
+      "au bien reconnu",
+      "Littéralement « le connu » : ce que tout cœur pur reconnaît d'instinct.",
+      "jade"
+    ],
+    [
+      "وَيَنْهَوْنَ",
+      "et déconseillent",
+      "Ils s'élèvent pour freiner ce qui nuit, avec sollicitude.",
+      "rose"
+    ],
+    [
+      "عَنِ ٱلْمُنكَرِ",
+      "ce qui est blâmable",
+      "Littéralement « l'inconnu / l'étrange » : ce qui heurte une saine conscience.",
+      "rose"
+    ],
+    [
+      "وَأُو۟لَـٰٓئِكَ",
+      "et ce sont ceux-là",
+      "Pronom d'éloignement qui souligne l'élévation de leur rang.",
+      "leaf"
+    ],
+    [
+      "هُمُ",
+      "qui sont eux seuls",
+      "Mise en valeur : ce sont bien eux, en toute vérité.",
+      "leaf"
+    ],
+    [
+      "ٱلْمُفْلِحُونَ",
+      "les vrais gagnants",
+      "De « fendre le sol », comme le semeur. Une réussite récoltée par un travail patient.",
+      "leaf"
+    ]
+  ]
+};
+
+const I18N = {
+  "en": {
+    "pageTitle": "3:104 · Those Who Call to Good",
+    "headerTag": "The Family of Imran · 3:104 ↗",
+    "audioLabelPlay": "Play recitation of 3:104",
+    "audioLabelPause": "Pause audio",
+    "audioTitle": "Recitation · Sheikh Nasser Al-Qatami",
+    "verseTr": "Let there be among you a community that invites to all that is good, urges what is right, and forbids what is wrong. They are the truly successful.",
+    "hint": "Tap any word to open it ↓",
+    "sec2Tag": "Read the neighbors",
+    "sec2H2": "This verse lives <em>inside a rope</em>",
+    "rope102": "Be mindful of Allah as He truly deserves.",
+    "rope103": "Hold on to the rope of Allah, all together. Do not split apart.",
+    "rope104": "Let there be a community that calls to good.",
+    "rope105": "Do not be like those who split up after clear signs came to them.",
+    "sec2P": "Before it: <b>hold together.</b> After it: <b>don't split.</b> Calling to good sits right in the middle, because it is what holds a people together. When people stop reminding each other, the rope starts to slip.",
+    "sec3Tag": "A community",
+    "sec3H2": "A crowd becomes a community <em>when it faces one way</em>",
+    "btnAlign": "Give them one direction",
+    "btnScatter": "Let them scatter",
+    "sec3P": "The word <b class=\"ar\">أُمَّةٌ</b> comes from a root meaning <b>to aim, to head toward</b>. The same root gives <b class=\"ar\">أُمّ</b>, mother, the one a family gathers around, and <b class=\"ar\">إِمَام</b>, the one who stands in front. Being in the same place doesn't make people one community. Sharing a direction does. And the verse says <b class=\"ar\">مِّنكُمْ</b>, \"from among you\". This is not someone else's job. It has to grow from inside.",
+    "sec4Tag": "Three verbs · one order",
+    "sec4H2": "Invite first. <em>Correct later.</em>",
+    "step1H3": "1 · Invite",
+    "step1P": "Open the door to all that is good. An invitation is warm. Nobody is dragged to a feast.",
+    "step2H3": "2 · Urge",
+    "step2P": "Encourage what every healthy heart already knows is right.",
+    "step3H3": "3 · Warn",
+    "step3P": "Only then, speak against the wrong. With care, never cruelty.",
+    "sec4P1": "Many people start with \"don't\". This verse starts with an invitation. All three verbs are in the present tense: <b>they keep inviting, keep urging, keep warning.</b> It is a way of life, not a one-time speech.",
+    "sec4P2": "Everyone has a share. The Prophet ﷺ taught: change a wrong with your hand. If you can't, then with your words. If you can't, then at least hate it in your heart. <b>(Muslim)</b>",
+    "sec5Tag": "The known & the strange",
+    "sec5H2": "What happens when <em>everyone stays quiet?</em>",
+    "ksKnown": "KNOWN",
+    "ksStrange": "STRANGE",
+    "ksNormal": "NORMAL?",
+    "lblVoices": "Voices",
+    "lblSilence": "Silence",
+    "msgLow": "Voices are raised. The wrong still looks wrong.",
+    "msgMed": "Fewer voices. Its sharp edges begin to soften.",
+    "msgHigh": "Silence. The strange now looks normal.",
+    "sec5P": "The word for right, <b class=\"ar\">ٱلْمَعْرُوف</b>, means <b>\"the known\"</b>: the good every healthy heart recognizes, like honesty, mercy and fairness. The word for wrong, <b class=\"ar\">ٱلْمُنكَر</b>, means <b>\"the unrecognized\"</b>: what feels strange to a clean conscience. Both roots meet in the story of Prophet Yusuf: <b>\"he recognized them, but they did not recognize him\"</b> (12:58). When no one speaks, the strange slowly starts to look normal. This community keeps the good familiar and the wrong strange.",
+    "sec6Tag": "The truly successful",
+    "sec6H2": "Success, <em>the farmer's way</em>",
+    "farmPrompt": "Press and hold the soil to plant a seed",
+    "farmHold": "Keep going. The effort is yours.",
+    "farmMid": "Don't stop now…",
+    "farmDone": "Your part is done. The growth is from Allah. (Press to plant again)",
+    "sec6P1": "The word <b class=\"ar\">ٱلْمُفْلِحُونَ</b> comes from a root meaning <b>to split the soil</b>. It is the same root as the Arabic word for farmer. A farmer plows, plants and waters, but cannot force one seed to grow. That belongs to Allah. Your part is to invite, urge and warn. <b>Success is the sincere effort, not the number of people who listen.</b>",
+    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> \"those\" is a pointer for something far away, as if lifting them to a high rank. <b class=\"ar\">هُمُ</b> \"they\" adds focus: it is <b>they</b> who truly succeed.",
+    "sec7Tag": "Your turn",
+    "sec7H2": "Tap anywhere. <em>One call travels far.</em>",
+    "sec7Quote": "\"Whoever calls to guidance gets a reward like those who follow it, without their reward being reduced at all.\" <b>The Prophet Muhammad ﷺ (Muslim)</b>",
+    "ripStart": "Tap to begin",
+    "footerSurah": "3:104 · Sūrah Āl ʿImrān ↗",
+    "footerShowcase": "← NurulQuran Showcase",
+    "footerTop": "Return to Top ↑",
+    "langHeading": "Language · زبان · Språk · Langue"
+  },
+  "ur": {
+    "pageTitle": "3:104 · بھلائی کی طرف بلانے والے",
+    "headerTag": "سورۃ آل عمران · 3:104 ↗",
+    "audioLabelPlay": "تلاوت سنیں · 3:104",
+    "audioLabelPause": "آڈیو روکیں",
+    "audioTitle": "تلاوت · شیخ ناصر القطامی",
+    "verseTr": "اور تم میں سے ایک ایسی جماعت ضرور ہونی چاہیے جو بھلائی کی طرف بلائے، نیکی کی ترغیب دے اور برائی سے روکے۔ اور یہی لوگ حقیقی فلاح پانے والے ہیں۔",
+    "hint": "کسی بھی لفظ پر ٹیپ کریں ↓",
+    "sec2Tag": "آگے پیچھے کی آیات",
+    "sec2H2": "یہ آیت <em>ایک مضبوط رسی کے درمیان</em> ہے",
+    "rope102": "اللہ سے ڈرو جیسا کہ اس سے ڈرنے کا حق ہے۔",
+    "rope103": "سب مل کر اللہ کی رسی کو مضبوطی سے تھام لو اور تفرقے میں نہ پڑو۔",
+    "rope104": "تم میں ایک جماعت ایسی ضرور ہو جو بھلائی کی طرف بلائے۔",
+    "rope105": "ان لوگوں کی طرح نہ بنو جو واضح نشانیاں آنے کے بعد آپس میں بٹ گئے۔",
+    "sec2P": "اس سے پہلے: <b>مل کر جڑے رہو۔</b> اس کے بعد: <b>بکھر مت جانا۔</b> بھلائی کی طرف بلانا ٹھیک درمیان میں ہے، کیونکہ یہی وہ روح ہے جو امت کو جوڑے رکھتی ہے۔ جب لوگ ایک دوسرے کو خیر کی یاد دہانی چھوڑ دیتے ہیں، تو رسی ہاتھ سے چھوٹنے لگتی ہے۔",
+    "sec3Tag": "ایک زندہ امت",
+    "sec3H2": "ہجوم ایک امت تب بنتا ہے <em>جب سب کا رخ ایک ہو</em>",
+    "btnAlign": "انہیں ایک رخ دیں",
+    "btnScatter": "انہیں بکھرنے دیں",
+    "sec3P": "لفظ <b class=\"ar\">أُمَّةٌ</b> کا اصل مادہ <b>قصد کرنا اور کسی سمت چلنا</b> ہے۔ اسی مادے سے <b class=\"ar\">أُمّ</b> (ماں) ہے جس کے گرد پورا گھر اکٹھا ہوتا ہے، اور <b class=\"ar\">إِمَام</b> جو سب سے آگے رہنمائی کرتا ہے۔ محض ایک جگہ اکٹھے ہو جانا جماعت نہیں بناتا؛ مشترکہ سمت اور ایک منزل بناتی ہے۔ اور آیت کہتی ہے <b class=\"ar\">مِّنكُمْ</b> یعنی \"تم میں سے\"۔ یہ کسی اور کا کام نہیں، یہ تمہارے اپنے اندر سے شروع ہونا چاہیے۔",
+    "sec4Tag": "تین افعال · ایک خوبصورت ترتیب",
+    "sec4H2": "پہلے محبت سے دعوت۔ <em>اصلاح بعد میں۔</em>",
+    "step1H3": "1 · دعوت و خیر مقدم",
+    "step1P": "ہر بھلائی کا دروازہ کھولو۔ دعوت ہمیشہ گرمجوش ہوتی ہے؛ کسی کو زبردستی ضیافت میں نہیں لایا جاتا۔",
+    "step2H3": "2 · نیکی کی ترغیب",
+    "step2P": "اس نیکی کو ابھارو جسے ہر پاکیزہ دل پہلے سے سچ اور اچھا جانتا ہے۔",
+    "step3H3": "3 · نرمی سے روکنا",
+    "step3P": "پھر نقصان دہ باتوں سے روکو، پوری خیرخواہی سے، سختی سے نہیں۔",
+    "sec4P1": "بہت سے لوگ \"مت کرو\" سے بات شروع کرتے ہیں، مگر یہ آیت خوش دلی سے بلانے سے شروع ہوتی ہے۔ تینوں افعال فعل مضارع میں ہیں: <b>وہ مسلسل بلاتے ہیں، ترغیب دیتے ہیں اور روکتے ہیں۔</b> یہ مستقل طرزِ زندگی ہے، ایک بار کا وعظ نہیں۔",
+    "sec4P2": "ہر ایک کا اپنا حصہ ہے۔ نبی کریم ﷺ نے فرمایا: برائی کو اپنے ہاتھ سے بدلو، اگر استطاعت نہ ہو تو زبان سے، اور اگر اتنی بھی نہ ہو تو کم از کم دل میں برا جانو۔ <b>(صحیح مسلم)</b>",
+    "sec5Tag": "معروف اور منکر",
+    "sec5H2": "کیا ہوتا ہے جب <em>سب خاموش ہو جائیں؟</em>",
+    "ksKnown": "معروف",
+    "ksStrange": "منکر",
+    "ksNormal": "معمول؟",
+    "lblVoices": "آوازیں",
+    "lblSilence": "خاموشی",
+    "msgLow": "جب سچائی کی آوازیں بلند رہتی ہیں، تو برائی صاف دکھائی دیتی ہے۔",
+    "msgMed": "آوازیں مدہم ہوں تو غلط باتوں پر سے جھجھک ختم ہونے لگتی ہے۔",
+    "msgHigh": "خاموشی۔ اجنبی اور غلط باتیں بھی رفتہ رفتہ معمول دکھائی دینے لگتی ہیں۔",
+    "sec5P": "نیکی کے لیے قرآنی لفظ <b class=\"ar\">ٱلْمَعْرُوف</b> ہے، یعنی <b>\"جانا پہچانا\"</b>: وہ بھلائی جسے ہر سلیم الطبع دل پہچانتا ہے، جیسے سچائی، رحم دلی اور عدل۔ اور برائی کے لیے لفظ <b class=\"ar\">ٱلْمُنكَر</b> ہے، یعنی <b>\"اجنبی اور غیر مانوس\"</b>: وہ جو صاف ضمیر کو کھٹکتا ہے۔ دونوں مادے حضرت یوسفؑ کے واقعے میں ملتے ہیں: <b>\"یوسف نے انہیں پہچان لیا اور وہ ان سے ناواقف رہے\"</b> (12:58)۔ جب کوئی نہیں بولتا تو اجنبی برائی بھی رفتہ رفتہ معمول لگنے لگتی ہے۔ یہ جماعت اچھائی کو مانوس اور برائی کو اجنبی رکھتی ہے۔",
+    "sec6Tag": "حقیقی فلاح پانے والے",
+    "sec6H2": "کامیابی، <em>ایک کسان کے انداز میں</em>",
+    "farmPrompt": "بیج بونے کے لیے مٹی کو دبا کر رکھیں",
+    "farmHold": "جاری رکھیں۔ محنت آپ کا حصہ ہے۔",
+    "farmMid": "ابھی مت رکیں…",
+    "farmDone": "آپ کا کام مکمل ہوا۔ نمو اللہ کے فضل سے ہے۔ (دوبارہ بونے کے لیے ٹیپ کریں)",
+    "sec6P1": "لفظ <b class=\"ar\">ٱلْمُفْلِحُونَ</b> کا مادہ <b>زمین کو چیرنا</b> ہے۔ عربی میں کسان کو بھی اسی مادے سے پکارا جاتا ہے۔ کسان ہل چلاتا ہے، بیج بوتا ہے اور پانی دیتا ہے، لیکن کسی بیج کو زبردستی اگا نہیں سکتا؛ نمو اور پھل اللہ کے ہاتھ میں ہے۔ آپ کی ذمہ داری سچے دل سے دعوت دینا، ترغیب دینا اور برائی سے روکنا ہے۔ <b>کامیابی اخلاص اور کوشش کا نام ہے، اس بات کا نہیں کہ کتنے لوگوں نے بات سنی۔</b>",
+    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> \"وہی لوگ\" دور کا اشارہ ہے، گویا ان کے بلند مرتبے کی طرف اشارہ کر رہا ہو۔ اور <b class=\"ar\">هُمُ</b> \"صرف وہی\" خصوصیت پیدا کرتا ہے: یعنی <b>یہی</b> وہ لوگ ہیں جو حقیقت میں فلاح پانے والے ہیں۔",
+    "sec7Tag": "اب آپ کی باری",
+    "sec7H2": "کہیں بھی ٹیپ کریں۔ <em>نیکی کی ایک پکار دور تک پھیلتی ہے۔</em>",
+    "sec7Quote": "\"جس نے بھلائی کی طرف بلایا، اسے اس پر عمل کرنے والوں جتنا ثواب ملے گا، بغیر اس کے کہ ان کے ثواب میں کوئی کمی ہو۔\" <b>نبی کریم محمد ﷺ (صحیح مسلم)</b>",
+    "ripStart": "شروع کرنے کے لیے ٹیپ کریں",
+    "footerSurah": "3:104 · سورۃ آل عمران ↗",
+    "footerShowcase": "← نور القرآن شوکیس",
+    "footerTop": "اوپر جائیں ↑",
+    "langHeading": "زبان منتخب کریں · Language · Språk · Langue"
+  },
+  "no": {
+    "pageTitle": "3:104 · De som kaller til det gode",
+    "headerTag": "Imrans familie · 3:104 ↗",
+    "audioLabelPlay": "Spill resitasjon av 3:104",
+    "audioLabelPause": "Sett på pause",
+    "audioTitle": "Resitasjon · Sheikh Nasser Al-Qatami",
+    "verseTr": "La det være et fellesskap blant dere som inviterer til alt som er godt, oppmuntrer til det rette og advarer mot det gale. Det er de som virkelig lykkes.",
+    "hint": "Trykk på et ord for å utforske det ↓",
+    "sec2Tag": "Se sammenhengen",
+    "sec2H2": "Dette verset hviler <em>inni et tau</em>",
+    "rope102": "Vær bevisst på Allah slik Han rettmessig fortjener.",
+    "rope103": "Hold fast i Allahs tau, alle sammen. Bli ikke splittet.",
+    "rope104": "La det være et fellesskap som kaller til det gode.",
+    "rope105": "Ikke vær som de som skilte lag etter at klare tegn nådde dem.",
+    "sec2P": "Før det: <b>hold sammen.</b> Etter det: <b>ikke splittes.</b> Å kalle til det gode står midt i midten, for det er nettopp dette som binder folk sammen. Når man slutter å minne hverandre, begynner tauet å glippe.",
+    "sec3Tag": "Et fellesskap",
+    "sec3H2": "En folkemengde blir et fellesskap <em>når alle vender samme vei</em>",
+    "btnAlign": "Gi dem én felles retning",
+    "btnScatter": "La dem spre seg",
+    "sec3P": "Ordet <b class=\"ar\">أُمَّةٌ</b> stammer fra en rot som betyr <b>å sikte mot, å gå i en retning</b>. Samme rot gir <b class=\"ar\">أُمّ</b> (mor), den familien samler seg rundt, og <b class=\"ar\">إِمَام</b> (imam), den som står foran og leder. Å være på samme sted gjør ikke folk til et fellesskap — felles retning gjør det. Og verset sier <b class=\"ar\">مِّنكُمْ</b>, «blant dere». Dette er ikke noen andres oppgave; det må vokse frem innenfra.",
+    "sec4Tag": "Tre handlinger · én rekkefølge",
+    "sec4H2": "Inviter først. <em>Veiled etterpå.</em>",
+    "step1H3": "1 · Inviter",
+    "step1P": "Åpne døren til alt som er godt. En invitasjon er hjertevarm; ingen dras motvillig til et festmåltid.",
+    "step2H3": "2 · Oppmuntre",
+    "step2P": "Støtt opp under det ethvert sunt hjerte allerede vet er rett og vakkert.",
+    "step3H3": "3 · Advare",
+    "step3P": "Først da sier man fra mot det som skader — med omtanke, aldri med hardhet.",
+    "sec4P1": "Mange begynner med «ikke gjør det». Dette verset åpner derimot med en varm invitasjon. Alle de tre verbene står i nåtid: <b>de inviterer stadig, oppmuntrer stadig, og advarer stadig.</b> Det er en måte å leve på, ikke bare en enkelt tale.",
+    "sec4P2": "Alle har en rolle. Profeten ﷺ lærte oss: forandre det gale med hånden. Hvis du ikke kan, så med ordene. Og hvis du heller ikke kan det, så ta avstand i hjertet. <b>(Muslim)</b>",
+    "sec5Tag": "Det kjente og det fremmede",
+    "sec5H2": "Hva skjer når <em>alle forholder seg tause?</em>",
+    "ksKnown": "KJENT",
+    "ksStrange": "FREMMED",
+    "ksNormal": "NORMALT?",
+    "lblVoices": "Stemmer",
+    "lblSilence": "Taushet",
+    "msgLow": "Stemmer heves. Det gale oppleves fortsatt som feil.",
+    "msgMed": "Færre stemmer. De skarpe kantene begynner å viskes ut.",
+    "msgHigh": "Full taushet. Det fremmede fremstår nå som helt normalt.",
+    "sec5P": "Ordet for det rette, <b class=\"ar\">ٱلْمَعْرُوف</b>, betyr <b>«det kjente»</b>: det gode ethvert sunt hjerte umiddelbart gjenkjenner, som ærlighet, barmhjertighet og rettferdighet. Ordet for det gale, <b class=\"ar\">ٱلْمُنكَر</b>, betyr <b>«det ukjente/fremmede»</b>: det som skurrer for en ren samvittighet. Begge røttene møtes i historien om profeten Yusuf: <b>«Han gjenkjente dem, men de gjenkjente ikke ham»</b> (12:58). Når ingen snakker, begynner det fremmede sakte å virke normalt. Dette fellesskapet holder det gode kjent og det gale fremmed.",
+    "sec6Tag": "De som virkelig lykkes",
+    "sec6H2": "Suksess, <em>på bondens vis</em>",
+    "farmPrompt": "Trykk og hold på jorden for å så et frø",
+    "farmHold": "Fortsett. Innsatsen er din del.",
+    "farmMid": "Ikke gi opp nå…",
+    "farmDone": "Din del er gjort. Veksten kommer fra Allah. (Trykk for å så på nytt)",
+    "sec6P1": "Ordet <b class=\"ar\">ٱلْمُفْلِحُونَ</b> kommer fra en rot som betyr <b>å pløye og åpne jorden</b>. Det er samme rot som det arabiske ordet for bonde. Bonden pløyer, sår og vanner, men kan ikke tvinge et eneste frø til å spire. Det er Allahs verk. Din oppgave er å invitere, oppmuntre og rettlede. <b>Suksess måles i den oppriktige innsatsen, ikke i hvor mange som lytter.</b>",
+    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> («disse») peker langt opp og frem, som for å løfte dem til en ærefull posisjon. <b class=\"ar\">هُمُ</b> («nettopp de») understreker: det er <b>de</b> som i sannhet oppnår suksess.",
+    "sec7Tag": "Din tur",
+    "sec7H2": "Trykk hvor som helst. <em>Én oppfordring sprer seg vidt.</em>",
+    "sec7Quote": "«Den som kaller til rettledning, får en belønning tilsvarende dem som følger den, uten at deres belønning reduseres i det hele tatt.» <b>Profeten Muhammad ﷺ (Muslim)</b>",
+    "ripStart": "Trykk for å starte",
+    "footerSurah": "3:104 · Sūrah Āl ʿImrān ↗",
+    "footerShowcase": "← NurulQuran Utstilling",
+    "footerTop": "Til toppen ↑",
+    "langHeading": "Språk · Language · زبان · Langue"
+  },
+  "fr": {
+    "pageTitle": "3:104 · Ceux qui appellent au bien",
+    "headerTag": "La famille d'Imran · 3:104 ↗",
+    "audioLabelPlay": "Écouter la récitation de 3:104",
+    "audioLabelPause": "Mettre en pause",
+    "audioTitle": "Récitation · Cheikh Nasser Al-Qatami",
+    "verseTr": "Qu'il y ait parmi vous une communauté qui invite au bien, ordonne le convenable et interdise le blâmable. Ce sont eux qui réussissent vraiment.",
+    "hint": "Touchez un mot pour le découvrir ↓",
+    "sec2Tag": "Regardez le contexte",
+    "sec2H2": "Ce verset vit <em>au cœur d'une corde</em>",
+    "rope102": "Soyez conscients d'Allah comme Il mérite de l'être.",
+    "rope103": "Attachez-vous tous ensemble au câble d'Allah. Ne vous divisez pas.",
+    "rope104": "Qu'il y ait une communauté qui appelle au bien.",
+    "rope105": "Ne soyez pas comme ceux qui se sont divisés après avoir reçu les preuves claires.",
+    "sec2P": "Avant : <b>restez unis.</b> Après : <b>ne vous divisez pas.</b> L'appel au bien se trouve au centre exact, car c'est lui qui maintient le lien entre les cœurs. Quand on cesse de s'encourager mutuellement, la corde commence à glisser.",
+    "sec3Tag": "Une communauté",
+    "sec3H2": "Une foule devient communauté <em>lorsqu'elle regarde dans la même direction</em>",
+    "btnAlign": "Donnez-leur une direction",
+    "btnScatter": "Laissez-les se disperser",
+    "sec3P": "Le mot <b class=\"ar\">أُمَّةٌ</b> découle d'une racine qui signifie <b>viser un but, s'orienter vers</b>. La même racine donne <b class=\"ar\">أُمّ</b> (la mère), autour de qui la famille se réunit, et <b class=\"ar\">إِمَام</b> (l'imam), qui se tient devant pour guider. Être au même endroit ne suffit pas à faire une communauté ; c'est une direction commune qui la forge. Et le verset précise <b class=\"ar\">مِّنكُمْ</b>, « parmi vous ». Ce n'est pas le rôle de quelqu'un d'autre : cela doit grandir de l'intérieur.",
+    "sec4Tag": "Trois verbes · un ordre réfléchi",
+    "sec4H2": "Inviter d'abord. <em>Corriger ensuite.</em>",
+    "step1H3": "1 · Inviter",
+    "step1P": "Ouvrez la porte à tout ce qui est bien. Une invitation est chaleureuse ; nul n'est traîné de force à un banquet.",
+    "step2H3": "2 · Encourager",
+    "step2P": "Mettez en valeur ce que tout cœur pur sait déjà être noble et juste.",
+    "step3H3": "3 · Déconseiller",
+    "step3P": "Alors seulement, préservez du mal — avec bienveillance, jamais avec dureté.",
+    "sec4P1": "Beaucoup commencent par « ne fais pas ceci ». Ce verset commence au contraire par une invitation bienveillante. Les trois verbes sont au présent : <b>ils invitent sans cesse, encouragent sans cesse, et déconseillent sans cesse.</b> C'est un mode de vie au quotidien, pas un sermon d'un jour.",
+    "sec4P2": "Chacun a sa part. Le Prophète ﷺ a enseigné : que celui qui voit un mal le change de sa main. S'il ne le peut pas, par sa parole. Et s'il ne le peut pas, alors par son cœur. <b>(Muslim)</b>",
+    "sec5Tag": "Le connu et l'inconnu",
+    "sec5H2": "Que se passe-t-il quand <em>chacun garde le silence ?</em>",
+    "ksKnown": "CONNU",
+    "ksStrange": "ÉTRANGE",
+    "ksNormal": "NORMAL ?",
+    "lblVoices": "Voix",
+    "lblSilence": "Silence",
+    "msgLow": "Des voix s'élèvent. Le mal reste clairement perçu comme tel.",
+    "msgMed": "Moins de voix. Ses contours commencent à s'atténuer.",
+    "msgHigh": "Silence total. Ce qui était étrange paraît désormais normal.",
+    "sec5P": "Le terme pour le bien, <b class=\"ar\">ٱلْمَعْرُوف</b>, signifie <b>« le connu »</b> : le bien que tout cœur sain reconnaît d'emblée, comme la sincérité, la miséricorde et l'équité. Le terme pour le mal, <b class=\"ar\">ٱلْمُنكَر</b>, signifie <b>« l'inconnu ou l'étrange »</b> : ce qui dérange une conscience pure. Ces deux racines se croisent dans l'histoire du prophète Yusuf : <b>« Il les reconnut, mais ils ne le reconnurent pas »</b> (12:58). Quand personne ne parle, l'anormal commence peu à peu à sembler ordinaire. Cette communauté garde le bien familier et le mal étranger.",
+    "sec6Tag": "Les véritables gagnants",
+    "sec6H2": "La réussite, <em>à la manière du semeur</em>",
+    "farmPrompt": "Appuyez longuement sur la terre pour semer",
+    "farmHold": "Continuez. L'effort est entre vos mains.",
+    "farmMid": "Ne vous arrêtez pas en si bon chemin…",
+    "farmDone": "Votre part est faite. La croissance vient d'Allah. (Touchez pour semer à nouveau)",
+    "sec6P1": "Le mot <b class=\"ar\">ٱلْمُفْلِحُونَ</b> vient d'une racine qui signifie <b>fendre la terre</b>. C'est la même racine que le mot arabe désignant le paysan. Le cultivateur laboure, sème et arrose, mais il ne peut forcer aucune graine à germer ; cela appartient à Allah. Votre rôle est d'inviter, d'encourager et de conseiller. <b>La vraie réussite réside dans la sincérité de l'effort, non dans le nombre de ceux qui écoutent.</b>",
+    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> (« ceux-là ») est un pronom d'éloignement, comme pour les élever à un rang noble. <b class=\"ar\">هُمُ</b> (« eux seuls ») insiste : ce sont <b>eux</b> qui réussissent vraiment.",
+    "sec7Tag": "À vous de jouer",
+    "sec7H2": "Touchez n'importe où. <em>Un seul appel rayonne au loin.</em>",
+    "sec7Quote": "« Quiconque appelle à une bonne voie aura une récompense égale à celle de ceux qui la suivent, sans que leurs récompenses n'en soient diminuées en rien. » <b>Le Prophète Muhammad ﷺ (Muslim)</b>",
+    "ripStart": "Touchez pour commencer",
+    "footerSurah": "3:104 · Sourate Âl 'Imrân ↗",
+    "footerShowcase": "← Portail NurulQuran",
+    "footerTop": "Haut de page ↑",
+    "langHeading": "Langue · Language · زبان · Språk"
+  }
+};
+window.I18N = I18N;
+
+function getRipText(lang, count) {
+  if (count <= 0) return I18N[lang].ripStart;
+  if (lang === 'ur') return 'نیکی کی ' + count + ' لہریں';
+  if (lang === 'no') return count + ' bølger av godhet';
+  if (lang === 'fr') return count + ' ondes de bien';
+  return count + ' ripples of good';
+}
+
+/* =====================================================================
+   3. WORDS & POPOVER
+===================================================================== */
+let activeWordIdx = -1;
+const V=$('#verse'),pop=$('#pop');
+V.innerHTML=W_DATA.en.map((w,i)=>`<button style="--i:${i};--c:var(--${w[3]||'ink'})">${w[0]}</button>`).join('');
+
+V.onclick=e=>{
+  const b=e.target.closest('button');
+  if(!b)return;
+  activeWordIdx=[...V.children].indexOf(b);
+  updatePopover();
+  pop.matches(':popover-open')||pop.showPopover();
+};
+
+function updatePopover(){
+  if(activeWordIdx < 0) return;
+  const b = V.children[activeWordIdx];
+  if(!b) return;
+  const [a, tr, note] = W_DATA[CUR_LANG][activeWordIdx];
+  $('.on')?.classList.remove('on');
+  b.classList.add('on');
+  pop.style.cssText = b.style.cssText;
+  pop.innerHTML = `<b class="ar">${a}</b><i>${tr}</i><p>${note}</p>`;
+}
+
+/* =====================================================================
+   4. HERO SKY CANVAS
+===================================================================== */
 const S=$('#sky'),P=Array.from({length:1400},()=>({x:R()*innerWidth,y:R()*innerHeight,t:R(),o:R()*TAU,s:R()<.68?0:R()<.6?1:2,hx:R(),hy:R(),c:R()<.85?gold:jade}));
 function sky(t){const w=S.clientWidth,h=S.clientHeight,cx=w/2,cy=h/2,r0=Math.min(w,h)*.44,rot=t/3e4,[mx,my]=rel(S);sx.clearRect(0,0,w,h);
  for(const p of P){let tx,ty;
@@ -350,24 +1122,33 @@ function sky(t){const w=S.clientWidth,h=S.clientHeight,cx=w/2,cy=h/2,r0=Math.min
   const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy)+.1;if(d<120){p.x+=dx/d*(120-d)*.2;p.y+=dy/d*(120-d)*.2}
   sx.globalAlpha=.3+.7*Math.abs(Math.sin(t/800+p.o));sx.fillStyle=p.c;sx.fillRect(p.x,p.y,1.7,1.7)}}
 
-/* COMMUNITY: arrows find one direction */
+/* =====================================================================
+   5. COMMUNITY DIRECTION CANVAS
+===================================================================== */
 const D=$('#dir');let A=[],al=false,Lx=0,Ly=0;
 const initDir=()=>{const w=D.clientWidth,h=D.clientHeight;Lx=w/2;Ly=h/2;A=[];for(let x=22;x<w;x+=36)for(let y=22;y<h;y+=36)A.push({x:x+R()*12-6,y:y+R()*12-6,a:R()*TAU,w:R()*TAU,k:0})};
 function dir(){const w=D.clientWidth,h=D.clientHeight,[mx,my]=rel(D);
  if(mx>0&&my>0&&mx<w&&my<h){Lx+=(mx-Lx)*.08;Ly+=(my-Ly)*.08}
- const g=dx.createRadialGradient(Lx,Ly,0,Lx,Ly,al?220:120);g.addColorStop(0,gold);g.addColorStop(1,gold0);
- dx.clearRect(0,0,w,h);dx.globalAlpha=al?.55:.25;dx.fillStyle=g;dx.fillRect(0,0,w,h);dx.globalAlpha=1;dx.lineWidth=2;dx.lineCap='round';
- for(const p of A){p.w+=(R()-.5)*.2;const ta=al?Math.atan2(Ly-p.y,Lx-p.x):p.w,df=((ta-p.a+Math.PI)%TAU+TAU)%TAU-Math.PI;p.a+=df*.07;p.k+=(al-p.k)*.04;
-  const c=Math.cos(p.a)*8,s=Math.sin(p.a)*8,hx=p.x+c,hy=p.y+s;dx.strokeStyle=`oklch(${50+34*p.k}% ${.03+.12*p.k} 85)`;
-  dx.beginPath();dx.moveTo(p.x-c,p.y-s);dx.lineTo(hx,hy);for(const o of[-.6,.6]){dx.moveTo(hx,hy);dx.lineTo(hx-Math.cos(p.a+o)*6,hy-Math.sin(p.a+o)*6)}dx.stroke()}}
-$('#align').onclick=e=>{const f=()=>{al=!al;e.target.textContent=al?'Let them scatter':'Give them one direction'};document.startViewTransition?document.startViewTransition(f):f()};
+  const g=dx.createRadialGradient(Lx,Ly,0,Lx,Ly,al?220:120);g.addColorStop(0,gold);g.addColorStop(1,gold0);
+  dx.clearRect(0,0,w,h);dx.globalAlpha=al?.55:.25;dx.fillStyle=g;dx.fillRect(0,0,w,h);dx.globalAlpha=1;dx.lineWidth=2;dx.lineCap='round';
+  for(const p of A){p.w+=(R()-.5)*.2;const ta=al?Math.atan2(Ly-p.y,Lx-p.x):p.w,df=((ta-p.a+Math.PI)%TAU+TAU)%TAU-Math.PI;p.a+=df*.07;p.k+=(al-p.k)*.04;
+   const c=Math.cos(p.a)*8,s=Math.sin(p.a)*8,hx=p.x+c,hy=p.y+s;dx.strokeStyle=`oklch(${50+34*p.k}% ${0.03+0.12*p.k} 85)`;
+   dx.beginPath();dx.moveTo(p.x-c,p.y-s);dx.lineTo(hx,hy);for(const o of[-0.6,0.6]){dx.moveTo(hx,hy);dx.lineTo(hx-Math.cos(p.a+o)*6,hy-Math.sin(p.a+o)*6)}dx.stroke()}}
+$('#align').onclick=e=>{const f=()=>{al=!al;e.target.textContent=al?I18N[CUR_LANG].btnScatter:I18N[CUR_LANG].btnAlign};document.startViewTransition?document.startViewTransition(f):f()};
 
-/* KNOWN vs STRANGE */
-const sl=$('#s');sl.oninput=()=>{const v=+sl.value;$('#dm').setAttribute('scale',60*(1-v/100));
- $('#bad').style.fill=`color-mix(in oklch,var(--rose),var(--jade) ${v}%)`;$('#bt').textContent=v>80?'NORMAL?':'STRANGE';
- $('#msg').textContent=v<30?'Voices are raised. The wrong still looks wrong.':v<75?'Fewer voices. Its sharp edges begin to soften.':'Silence. The strange now looks normal.'};sl.oninput();
+/* =====================================================================
+   6. KNOWN vs STRANGE
+===================================================================== */
+const sl=$('#s');
+sl.oninput=()=>{const v=+sl.value;$('#dm').setAttribute('scale',60*(1-v/100));
+ $('#bad').style.fill=`color-mix(in oklch,var(--rose),var(--jade) ${v}%)`;
+ $('#bt').textContent=v>80?I18N[CUR_LANG].ksNormal:I18N[CUR_LANG].ksStrange;
+ $('#msg').textContent=v<30?I18N[CUR_LANG].msgLow:v<75?I18N[CUR_LANG].msgMed:I18N[CUR_LANG].msgHigh};
+sl.oninput();
 
-/* FARMER: press & hold to grow */
+/* =====================================================================
+   7. FARMER CANVAS
+===================================================================== */
 const F=$('#farm');let g=0,hold=false,msg='';
 F.onpointerdown=()=>{if(g>=1)g=0;hold=true};onpointerup=onpointercancel=()=>hold=false;F.oncontextmenu=e=>e.preventDefault();
 function br(x,y,l,a,d,t,n){const k=Math.min(1,Math.max(0,g*10-d));if(!k)return;const X=x+Math.cos(a)*l*k,Y=y+Math.sin(a)*l*k;
@@ -378,61 +1159,122 @@ function farm(t,dt){if(hold)g=Math.min(1,g+dt/6000);const w=F.clientWidth,h=F.cl
  fx.clearRect(0,0,w,h);fx.fillStyle='oklch(24% .04 55)';fx.fillRect(0,gy,w,h-gy);
  if(g){fx.fillStyle='oklch(10% .02 55)';fx.beginPath();fx.ellipse(w/2,gy+3,Math.min(1,g*8)*70,4,0,0,TAU);fx.fill()}
  fx.lineCap='round';br(w/2,gy,h*.2,-Math.PI/2,0,t,1);
- const m=g>=1?'Your part is done. The growth is from Allah. (Press to plant again)':hold?'Keep going. The effort is yours.':g?'Don\'t stop now…':'Press and hold the soil to plant a seed';
+ const curT = I18N[CUR_LANG];
+ const m=g>=1?curT.farmDone:hold?curT.farmHold:g?curT.farmMid:curT.farmPrompt;
  if(m!==msg)$('#fh').textContent=msg=m}
 
-/* RIPPLES: one call spreads */
+/* =====================================================================
+   8. RIPPLES CANVAS & COUNTER
+===================================================================== */
 const E=$('#end');let n=0;
 const rip=(x,y,d)=>{const s=document.createElement('i');s.className='rip';s.style.cssText=`left:${x}px;top:${y}px;--rc:${[gold,jade,leaf][d]}`;
- E.append(s);s.onanimationend=()=>s.remove();$('#rc').textContent=`${++n} ripples of good`;
+ E.append(s);s.onanimationend=()=>s.remove();$('#rc').textContent=getRipText(CUR_LANG, ++n);
  d<2&&setTimeout(()=>{for(let k=0;k<3;k++){const a=R()*TAU,m=90+R()*90;rip(x+Math.cos(a)*m,y+Math.sin(a)*m,d+1)}},450)};
 E.onclick=e=>{const r=E.getBoundingClientRect();rip(e.clientX-r.left,e.clientY-r.top,0)};
 
-/* CIRCULAR AUDIO PLAYER (3:104 · Sheikh Nasser Al-Qatami) */
-const btn = document.querySelector('#btn-audio-play');
-const ring = document.querySelector('#audio-ring-fill');
-const CIRCUMFERENCE = 113.097;
-const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/003104.mp3');
+/* =====================================================================
+   9. MULTILINGUAL SWITCHER CONTROLLER
+===================================================================== */
+function setLang(lang) {
+  if (!I18N[lang]) return;
+  CUR_LANG = lang;
+  window.CUR_LANG = lang;
+  localStorage.setItem('nq-nation-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
 
-function updateButtonUI() {
-  const isPlaying = !audio.paused && !audio.ended;
-  btn.classList.toggle('is-playing', isPlaying);
-  btn.setAttribute('aria-pressed', String(isPlaying));
-  btn.setAttribute('aria-label', isPlaying ? 'Pause audio' : 'Play recitation of 3:104');
+  // Sync all radio buttons in both HUD and footer
+  $$('.nq-lang-btn').forEach(b => {
+    const isCur = b.dataset.lang === lang;
+    b.classList.toggle('on', isCur);
+    b.setAttribute('aria-checked', String(isCur));
+  });
 
-  if (!isPlaying && (audio.ended || audio.currentTime === 0)) {
-    ring.style.strokeDashoffset = CIRCUMFERENCE;
-  }
+  const t = I18N[lang];
+  $('#docTitle').textContent = t.pageTitle;
+  $('#headerAyahTag').textContent = t.headerTag;
+  audioBtn.setAttribute('aria-label', (!audio.paused && !audio.ended) ? t.audioLabelPause : t.audioLabelPlay);
+  audioBtn.setAttribute('title', t.audioTitle);
+  $('#verseTr').innerHTML = t.verseTr;
+  $('#heroHint').textContent = t.hint;
+
+  // Sec 2
+  $('#sec2Tag').textContent = t.sec2Tag;
+  $('#sec2H2').innerHTML = t.sec2H2;
+  $('#rope102 span').textContent = t.rope102;
+  $('#rope103 span').textContent = t.rope103;
+  $('#rope104 span').textContent = t.rope104;
+  $('#rope105 span').textContent = t.rope105;
+  $('#sec2P').innerHTML = t.sec2P;
+
+  // Sec 3
+  $('#sec3Tag').textContent = t.sec3Tag;
+  $('#sec3H2').innerHTML = t.sec3H2;
+  $('#align').textContent = al ? t.btnScatter : t.btnAlign;
+  $('#sec3P').innerHTML = t.sec3P;
+
+  // Sec 4
+  $('#sec4Tag').textContent = t.sec4Tag;
+  $('#sec4H2').innerHTML = t.sec4H2;
+  $('#step1H3').textContent = t.step1H3;
+  $('#step1P').textContent = t.step1P;
+  $('#step2H3').textContent = t.step2H3;
+  $('#step2P').textContent = t.step2P;
+  $('#step3H3').textContent = t.step3H3;
+  $('#step3P').textContent = t.step3P;
+  $('#sec4P1').innerHTML = t.sec4P1;
+  $('#sec4P2').innerHTML = t.sec4P2;
+
+  // Sec 5
+  $('#sec5Tag').textContent = t.sec5Tag;
+  $('#sec5H2').innerHTML = t.sec5H2;
+  $('#ksKnownText').textContent = t.ksKnown;
+  $('#lblVoices').textContent = t.lblVoices;
+  $('#lblSilence').textContent = t.lblSilence;
+  sl.oninput();
+  $('#sec5P').innerHTML = t.sec5P;
+
+  // Sec 6
+  $('#sec6Tag').textContent = t.sec6Tag;
+  $('#sec6H2').innerHTML = t.sec6H2;
+  $('#sec6P1').innerHTML = t.sec6P1;
+  $('#sec6P2').innerHTML = t.sec6P2;
+  msg = '';
+  farm(last, 0);
+
+  // Sec 7
+  $('#sec7Tag').textContent = t.sec7Tag;
+  $('#sec7H2').innerHTML = t.sec7H2;
+  $('#sec7Quote').innerHTML = t.sec7Quote;
+  $('#rc').textContent = getRipText(lang, n);
+
+  // Footer
+  $('#footerSurahLink').textContent = t.footerSurah;
+  $('#footerShowcaseLink').textContent = t.footerShowcase;
+  $('#footerTopLink').textContent = t.footerTop;
+  $('#footerLangHeading').textContent = t.langHeading;
+
+  // Popover update if open
+  updatePopover();
 }
 
-btn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play().catch(err => console.warn('Playback error:', err));
-  } else {
-    audio.pause();
+// Bind language switcher buttons
+document.addEventListener('click', e => {
+  const b = e.target.closest('.nq-lang-btn');
+  if (b && b.dataset.lang) {
+    setLang(b.dataset.lang);
   }
 });
 
-audio.addEventListener('play', updateButtonUI);
-audio.addEventListener('pause', updateButtonUI);
-
-audio.addEventListener('timeupdate', () => {
-  if (audio.duration) {
-    const pct = audio.currentTime / audio.duration;
-    ring.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
-  }
-});
-
-audio.addEventListener('ended', () => {
-  ring.style.strokeDashoffset = CIRCUMFERENCE;
-  updateButtonUI();
-});
-
-/* LOOP */
+/* =====================================================================
+   10. RENDER LOOP
+===================================================================== */
 let sx,dx,fx,lw,last=0;
 const size=()=>{sx=fit(S);dx=fit(D);fx=fit(F);if(innerWidth!==lw){lw=innerWidth;initDir()}};
 size();addEventListener('resize',size);
 (function loop(t){const dt=Math.min(t-last,50);last=t;on(S)&&sky(t);on(D)&&dir();on(F)&&farm(t,dt);requestAnimationFrame(loop)})(0);
+
+// Initialize active language
+setLang(CUR_LANG);
 </script>
 </body>
 </html>
