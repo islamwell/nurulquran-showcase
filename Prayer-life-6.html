@@ -243,6 +243,79 @@ h2.title em{font-style:italic;color:var(--gold)}
 .verse-play-btn.playing{background:var(--gold);color:var(--ink)}
 .verse-play-btn.playing .play-icon{display:none}
 .verse-play-btn.playing .pause-icon{display:block}
+
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097;
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047;
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935;
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047;
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+
 </style>
 </head>
 <body>
@@ -284,7 +357,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">160</span>
-    <p class="tag"><s></s>I · Tenfold <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006160.mp3" aria-label="Listen to Ayah 6:160" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>I · Tenfold <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006160.mp3" aria-label="Listen to Ayah 6:160" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">The <em>arithmetic</em> of mercy</h2>
     <p class="ayah">مَن جَآءَ بِٱلْحَسَنَةِ فَلَهُۥ عَشْرُ أَمْثَالِهَا وَمَن جَآءَ بِٱلسَّيِّئَةِ فَلَا يُجْزَىٰٓ إِلَّا مِثْلَهَا وَهُمْ لَا يُظْلَمُونَ</p>
     <p class="trans split">Whoever comes [on the Day of Judgement] with a good deed will have <b>ten times the like thereof</b> [to his credit], and whoever comes with an evil deed will not be recompensed except by the like thereof; and they will not be wronged.</p>
@@ -304,7 +391,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">161</span>
-    <p class="tag"><s></s>II · The Road <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006161.mp3" aria-label="Listen to Ayah 6:161" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>II · The Road <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006161.mp3" aria-label="Listen to Ayah 6:161" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">A path with <em>no bend</em> in it</h2>
     <p class="ayah">قُلْ إِنَّنِى هَدَىٰنِى رَبِّىٓ إِلَىٰ صِرَٰطٍ مُّسْتَقِيمٍ دِينًا قِيَمًا مِّلَّةَ إِبْرَٰهِيمَ حَنِيفًا وَمَا كَانَ مِنَ ٱلْمُشْرِكِينَ</p>
     <p class="trans split">Say, "Indeed, my Lord has guided me to <b>a straight path</b> — a correct religion — the way of Abraham, inclining toward truth. And he was not among those who associated others with Allah."</p>
@@ -323,7 +424,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">162</span>
-    <p class="tag"><s></s>III · Living &amp; Dying <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006162.mp3" aria-label="Listen to Ayah 6:162" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>III · Living &amp; Dying <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006162.mp3" aria-label="Listen to Ayah 6:162" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">The whole of it, <em>offered</em></h2>
     <p class="ayah">قُلْ إِنَّ صَلَاتِى وَنُسُكِى وَمَحْيَاىَ وَمَمَاتِى لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ</p>
     <p class="trans split">Say, "Indeed, my prayer, my rites of sacrifice, <b>my living and my dying</b> are for Allah, Lord of the worlds."</p>
@@ -343,7 +458,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">163</span>
-    <p class="tag"><s></s>IV · No Partner <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006163.mp3" aria-label="Listen to Ayah 6:163" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>IV · No Partner <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006163.mp3" aria-label="Listen to Ayah 6:163" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">One light, and <em>no second</em></h2>
     <p class="ayah">لَا شَرِيكَ لَهُۥ وَبِذَٰلِكَ أُمِرْتُ وَأَنَا أَوَّلُ ٱلْمُسْلِمِينَ</p>
     <p class="trans split"><b>No partner has He.</b> And this I have been commanded, and I am the first [among you] of the Muslims."</p>
@@ -362,7 +491,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">164</span>
-    <p class="tag"><s></s>V · The Burden <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006164.mp3" aria-label="Listen to Ayah 6:164" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>V · The Burden <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006164.mp3" aria-label="Listen to Ayah 6:164" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">Each drop carries <em>its own weight</em></h2>
     <p class="ayah">قُلْ أَغَيْرَ ٱللَّهِ أَبْغِى رَبًّا وَهُوَ رَبُّ كُلِّ شَىْءٍ وَلَا تَكْسِبُ كُلُّ نَفْسٍ إِلَّا عَلَيْهَا وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ ثُمَّ إِلَىٰ رَبِّكُم مَّرْجِعُكُمْ فَيُنَبِّئُكُم بِمَا كُنتُمْ فِيهِ تَخْتَلِفُونَ</p>
     <p class="trans split">Say, "Is it other than Allah I should desire as a lord while He is the Lord of all things? And every soul earns not [blame] except against itself, and <b>no bearer of burdens will bear the burden of another.</b> Then to your Lord is your return, and He will inform you concerning that over which you used to differ."</p>
@@ -381,7 +524,21 @@ h2.title em{font-style:italic;color:var(--gold)}
   </div>
   <article class="copy">
     <span class="ghost">165</span>
-    <p class="tag"><s></s>VI · Successors <button class="verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006165.mp3" aria-label="Listen to Ayah 6:165" title="Listen · Sheikh Mishary Alafasy"><svg class="play-icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><svg class="pause-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="4" height="16"></rect><rect x="15" y="4" width="4" height="16"></rect></svg></button></p>
+    <p class="tag"><s></s>VI · Successors <button type="button" class="btn-audio-ring verse-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/006165.mp3" aria-label="Listen to Ayah 6:165" title="Listen · Sheikh Mishary Alafasy" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button></p>
     <h2 class="title split">The earth, <em>handed forward</em></h2>
     <p class="ayah">وَهُوَ ٱلَّذِى جَعَلَكُمْ خَلَٰٓئِفَ ٱلْأَرْضِ وَرَفَعَ بَعْضَكُمْ فَوْقَ بَعْضٍ دَرَجَٰتٍ لِّيَبْلُوَكُمْ فِى مَآ ءَاتَىٰكُمْ إِنَّ رَبَّكَ سَرِيعُ ٱلْعِقَابِ وَإِنَّهُۥ لَغَفُورٌ رَّحِيمٌ</p>
     <p class="trans split">And it is He who has made you <b>successors upon the earth</b> and has raised some of you above others in degrees [of rank] that He may try you through what He has given you. Indeed, your Lord is swift in penalty; but indeed, He is Forgiving and Merciful.</p>
@@ -406,7 +563,7 @@ h2.title em{font-style:italic;color:var(--gold)}
       <span>Translation<b>Saheeh International</b></span>
       <span>Imagery<b>Generated in-browser · no photographs</b></span>
       <span>Portal<b><a href="index.html" style="color:var(--gold);text-decoration:underline">NurulQuran Showcase</a></b></span>
-      <span>Version<b>v1.0.76 (updated 2026-10-26 08:35)</b></span>
+      <span>Version<b>v1.0.77 (updated 2026-10-26 11:45)</b></span>
     </div>
   </div>
 </footer>
@@ -1311,42 +1468,68 @@ function boot(){
 }
 
 
-  /* Audio Recitation Player (Mishary Alafasy) */
-  var activeAudio=null, activeBtn=null;
+  /* Audio Recitation Player Engine (Circular Progress Ring) */
+  var activeAudio=null, activeBtn=null, activeRing=null;
+  var CIRCUMFERENCE = 113.097;
+
+  function resetAudioBtn() {
+    if (activeBtn) {
+      activeBtn.classList.remove("playing", "is-playing");
+      activeBtn.setAttribute("aria-pressed", "false");
+    }
+    if (activeRing) activeRing.style.strokeDashoffset = CIRCUMFERENCE;
+  }
+
   document.addEventListener("click",function(e){
-    var btn=e.target.closest(".verse-play-btn");
+    var btn=e.target.closest(".btn-audio-ring, .verse-play-btn");
     if(!btn) return;
     var url=btn.getAttribute("data-audio");
     if(!url) return;
     if(activeBtn===btn && activeAudio){
-      if(activeAudio.paused){
-        activeAudio.play();
-        btn.classList.add("playing");
-      } else {
+      if(!activeAudio.paused){
         activeAudio.pause();
-        btn.classList.remove("playing");
+        btn.classList.remove("playing", "is-playing");
+        btn.setAttribute("aria-pressed", "false");
+      } else {
+        activeAudio.play();
+        btn.classList.add("playing", "is-playing");
+        btn.setAttribute("aria-pressed", "true");
       }
       return;
     }
     if(activeAudio){
       activeAudio.pause();
-      if(activeBtn) activeBtn.classList.remove("playing");
+      resetAudioBtn();
     }
     activeBtn=btn;
+    activeRing=btn.querySelector(".audio-ring-fill");
     activeAudio=new Audio(url);
+    btn.classList.add("playing", "is-playing");
+    btn.setAttribute("aria-pressed", "true");
     activeAudio.play().then(function(){
-      btn.classList.add("playing");
+      btn.classList.add("playing", "is-playing");
     }).catch(function(err){
-      btn.classList.remove("playing");
-    });
-    activeAudio.onended=function(){
-      btn.classList.remove("playing");
+      resetAudioBtn();
       activeAudio=null;
       activeBtn=null;
+      activeRing=null;
+      console.warn("Audio error:", err);
+    });
+    activeAudio.addEventListener("timeupdate", function(){
+      if (activeAudio && activeAudio.duration && activeRing) {
+        var pct = activeAudio.currentTime / activeAudio.duration;
+        activeRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+      }
+    });
+    activeAudio.onended=function(){
+      resetAudioBtn();
+      activeAudio=null;
+      activeBtn=null;
+      activeRing=null;
     };
   });
 
-if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot);
 else boot();
 })();
 </script>

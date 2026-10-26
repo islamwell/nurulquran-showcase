@@ -406,6 +406,77 @@ footer {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rv { opacity: 1; transform: none; filter: none; }
 }
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
 </style>
 <link rel="stylesheet" type="text/css" href="chrome-extension://mfidniedemcgceagapgdekdbmanojomk/css/content-shared.css"><link rel="stylesheet" type="text/css" href="chrome-extension://mfidniedemcgceagapgdekdbmanojomk/css/content-lite.css"></head>
 <body>
@@ -495,9 +566,20 @@ footer {
 
     <!-- Ayah Audio Player 2:187 -->
     <div class="ayah-audio-bar rv d4 in">
-      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Play Recitation" title="Listen to Ayah 2:187">
-        <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-        <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+      <button type="button" class="btn-audio-ring ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Play Recitation" title="Listen to Ayah 2:187" aria-pressed="false">
+        <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+          <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+          <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+        </svg>
+        <span class="audio-ring-icon" aria-hidden="true">
+          <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <polygon points="7 4 21 12 7 20 7 4" />
+          </svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <rect x="5" y="4" width="4" height="16" rx="1" />
+            <rect x="15" y="4" width="4" height="16" rx="1" />
+          </svg>
+        </span>
       </button>
       <div class="ayah-audio-info">
         <span class="t-en"><strong>Recitation · 2:187</strong></span>
@@ -668,9 +750,20 @@ footer {
 
     <!-- Ayah Audio Player 30:21 -->
     <div class="ayah-audio-bar rv d4">
-      <button class="ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/030021.mp3" aria-label="Play Recitation" title="Listen to Ayah 30:21">
-        <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-        <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+      <button type="button" class="btn-audio-ring ayah-play-btn" data-audio="https://everyayah.com/data/Alafasy_128kbps/030021.mp3" aria-label="Play Recitation" title="Listen to Ayah 30:21" aria-pressed="false">
+        <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+          <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+          <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+        </svg>
+        <span class="audio-ring-icon" aria-hidden="true">
+          <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <polygon points="7 4 21 12 7 20 7 4" />
+          </svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <rect x="5" y="4" width="4" height="16" rx="1" />
+            <rect x="15" y="4" width="4" height="16" rx="1" />
+          </svg>
+        </span>
       </button>
       <div class="ayah-audio-info">
         <span class="t-en"><strong>Recitation · 30:21</strong></span>
@@ -877,7 +970,7 @@ footer {
     <span class="t-en">NurulQuran Trust · Clothing for One Another · A Divine Sign</span>
     <span class="t-no">NurulQuran Trust · Ekteskapet som et tegn fra Allah</span>
   </div>
-  <div class="footer-version-tag">v1.0.76 (updated 2026-10-26 08:35)</div>
+  <div class="footer-version-tag">v1.0.77 (updated 2026-10-26 11:45)</div>
 </footer>
 
 <script>
@@ -1128,8 +1221,10 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
    ========================================================================= */
 let currentAudio = null;
 let currentBtn = null;
+let currentRing = null;
+const CIRCUMFERENCE = 113.097;
 
-document.querySelectorAll('.ayah-play-btn').forEach(btn => {
+document.querySelectorAll('.btn-audio-ring, .ayah-play-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const audioUrl = btn.dataset.audio;
     if (!audioUrl) return;
@@ -1154,6 +1249,7 @@ document.querySelectorAll('.ayah-play-btn').forEach(btn => {
 
     currentAudio = new Audio(audioUrl);
     currentBtn = btn;
+    currentRing = btn.querySelector('.audio-ring-fill');
     setPlayBtnState(btn, true);
 
     currentAudio.play().catch(err => {
@@ -1161,23 +1257,30 @@ document.querySelectorAll('.ayah-play-btn').forEach(btn => {
       setPlayBtnState(btn, false);
     });
 
+    currentAudio.addEventListener('timeupdate', () => {
+      if (currentAudio && currentAudio.duration && currentRing) {
+        const pct = currentAudio.currentTime / currentAudio.duration;
+        currentRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+      }
+    });
+
     currentAudio.onended = () => {
       setPlayBtnState(btn, false);
       currentAudio = null;
       currentBtn = null;
+      currentRing = null;
     };
   });
 });
 
 function setPlayBtnState(btn, isPlaying) {
-  const iconPlay = btn.querySelector('.icon-play');
-  const iconPause = btn.querySelector('.icon-pause');
-  if (isPlaying) {
-    if (iconPlay) iconPlay.style.display = 'none';
-    if (iconPause) iconPause.style.display = 'block';
-  } else {
-    if (iconPlay) iconPlay.style.display = 'block';
-    if (iconPause) iconPause.style.display = 'none';
+  if (!btn) return;
+  btn.classList.toggle('playing', isPlaying);
+  btn.classList.toggle('is-playing', isPlaying);
+  btn.setAttribute('aria-pressed', String(isPlaying));
+  btn.setAttribute('aria-label', isPlaying ? 'Pause Recitation' : 'Play Recitation');
+  if (!isPlaying && currentRing) {
+    currentRing.style.strokeDashoffset = CIRCUMFERENCE;
   }
 }
 </script>

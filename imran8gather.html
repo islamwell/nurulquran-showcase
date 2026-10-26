@@ -199,16 +199,71 @@ footer{text-align:center;padding:3rem 1.5rem;color:var(--mute);font-size:.82rem;
 }
 .portal-back-btn svg{width:12px;height:12px;stroke-width:2.5}
 
-.verse-meta-row{display:inline-flex;align-items:center;justify-content:center;gap:.8rem}
-.ayah-audio-btn{
-  all:unset;display:inline-flex;align-items:center;justify-content:center;
-  width:2.4rem;height:2.4rem;border-radius:50%;
-  border:1px solid oklch(1 0 0/.2);
-  background:oklch(1 0 0/.06);color:var(--gold);
-  cursor:pointer;transition:all .25s var(--e);
+.verse-meta-row{display:inline-flex;align-items:center;justify-content:center;gap:.9rem}
+
+/* Button Container */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
-.ayah-audio-btn:hover{scale:1.08;border-color:var(--gold);background:oklch(.85 .13 82/.18)}
-.ayah-audio-btn svg{width:15px;height:15px}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause { display: block; }
 
 .bar{position:fixed;inset:0 0 auto;height:2px;z-index:9;background:linear-gradient(90deg,var(--ember),var(--gold));transform-origin:0;scale:0 1}
 .dawn{position:fixed;z-index:-1;left:50%;bottom:-70vmax;width:140vmax;aspect-ratio:1;translate:-50% 30%;border-radius:50%;background:radial-gradient(closest-side,oklch(.72 .16 62/.5),oklch(.45 .14 30/.25) 45%,#0000);opacity:.2;pointer-events:none}
@@ -307,9 +362,25 @@ footer{text-align:center;padding:3rem 1.5rem;color:var(--mute);font-size:.82rem;
 <section id="verse">
   <div class="verse-meta-row">
     <a href="https://iqra.nurulquran.com/#/surah/3?ayah=9" target="_blank" rel="noopener" class="tag" style="margin:0;text-decoration:none;border-bottom:1px solid oklch(.87 .13 82/.4);padding-bottom:2px">3:9 ↗</a>
-    <button class="ayah-audio-btn" id="audioBtn" aria-label="Play recitation of 3:9" title="Recitation · Sheikh Nasser Al-Qatami">
-      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    <button type="button" class="btn-audio-ring" id="audioBtn" aria-label="Play recitation of 3:9" aria-pressed="false" title="Recitation · Sheikh Nasser Al-Qatami">
+      <!-- Progress Ring (SVG) -->
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+
+      <!-- Play / Pause Icon -->
+      <span class="audio-ring-icon" aria-hidden="true">
+        <!-- Play Triangle -->
+        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <polygon points="7 4 21 12 7 20 7 4" />
+        </svg>
+        <!-- Pause Bars -->
+        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="5" y="4" width="4" height="16" rx="1" />
+          <rect x="15" y="4" width="4" height="16" rx="1" />
+        </svg>
+      </span>
     </button>
   </div>
   <div class="ayah ar" id="ayah"></div>
@@ -418,7 +489,7 @@ footer{text-align:center;padding:3rem 1.5rem;color:var(--mute);font-size:.82rem;
       <a href="index.html" style="color:var(--gold);text-decoration:none">← NurulQuran Showcase</a>
       <a href="#c" style="color:var(--mute);text-decoration:none">Return to Origin ↑</a>
     </div>
-    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.76 (updated 2026-10-26 08:35)</div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.77 (updated 2026-10-26 11:45)</div>
   </div>
 </footer>
 
@@ -531,20 +602,46 @@ card.ontoggle=e=>{if(e.newState==='closed')cA.style.viewTransitionName=''};
 const tr=$('.tr');tr.innerHTML=tr.textContent.trim().split(/\s+/).map((w,i)=>`<span style="--i:${i}">${w}</span>`).join(' ');
 new IntersectionObserver(([e],o)=>{if(e.isIntersecting){e.target.classList.add('show');o.disconnect()}},{threshold:.3}).observe($('#verse'));
 
-/* --- audio recitation --- */
+/* --- circular audio player (3:9) --- */
+const btn = document.querySelector('#audioBtn');
+const ring = document.querySelector('#audio-ring-fill');
+const CIRCUMFERENCE = 113.097;
 const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/003009.mp3');
-const ab = $('#audioBtn');
-if (ab) {
-  const pI = ab.querySelector('.icon-play'), psI = ab.querySelector('.icon-pause');
-  ab.onclick = () => {
+
+function updateButtonUI() {
+  const isPlaying = !audio.paused && !audio.ended;
+  btn.classList.toggle('is-playing', isPlaying);
+  btn.setAttribute('aria-pressed', String(isPlaying));
+  btn.setAttribute('aria-label', isPlaying ? 'Pause audio' : 'Play audio');
+
+  if (!isPlaying && (audio.ended || audio.currentTime === 0)) {
+    ring.style.strokeDashoffset = CIRCUMFERENCE;
+  }
+}
+
+if (btn && ring) {
+  btn.addEventListener('click', () => {
     if (audio.paused) {
-      audio.play().then(() => { pI.style.display = 'none'; psI.style.display = 'block'; }).catch(() => {});
+      audio.play().catch(err => console.warn('Playback error:', err));
     } else {
       audio.pause();
-      pI.style.display = 'block'; psI.style.display = 'none';
     }
-  };
-  audio.onended = () => { pI.style.display = 'block'; psI.style.display = 'none'; };
+  });
+
+  audio.addEventListener('play', updateButtonUI);
+  audio.addEventListener('pause', updateButtonUI);
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const pct = audio.currentTime / audio.duration;
+      ring.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+    }
+  });
+
+  audio.addEventListener('ended', () => {
+    ring.style.strokeDashoffset = CIRCUMFERENCE;
+    updateButtonUI();
+  });
 }
 </script>
 </body>

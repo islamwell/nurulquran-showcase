@@ -384,6 +384,79 @@ html, body {
   font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
 }
 
+
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+
 </style>
 </head>
 <body>
@@ -643,10 +716,21 @@ html, body {
     <div style="font-size:0.95rem;color:#f0e9d9;margin-bottom:12px;font-style:italic">“And of His signs is your sleep by night and day and your seeking of His bounty.”</div>
     <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap">
       <span style="font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim)">Sūrat ar-Rūm 30:23</span>
-      <button class="nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/030023.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami">
-        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
+      <button type="button" class="btn-audio-ring nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/030023.mp3" aria-label="Listen" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button>
     </div>
   </div>
 </div></section>
@@ -670,7 +754,7 @@ html, body {
       <span style="font-weight:600;letter-spacing:0.12em;font-size:0.88rem;color:#F5C26B">NURULQURAN · نُورُ القُرْآن</span>
     </div>
     <p style="font-size:0.75rem;opacity:0.75;margin-top:6px">An Interactive Digital Exhibit by NurulQuran</p>
-    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.76 (updated 2026-10-26 08:35)</div>
+    <div class="nq-version-tag" style="margin-top:8px;font-size:0.72rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.77 (updated 2026-10-26 11:45)</div>
   </div>
   <p style="margin-top:30px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)">Return to dusk ↑</p>
 </div></footer>
@@ -1134,48 +1218,87 @@ onScroll();
 })();
 
 /* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+/* Quran Ayah Audio Player Engine (Circular Progress Ring) */
 (function initAyahAudioPlayer(){
-  let activeAudio=null, activeBtn=null;
-  document.addEventListener('click',(e)=>{
-    const btn=e.target.closest('.nq-play-btn');
-    if(!btn) return;
-    const url=btn.dataset.audio;
-    if(!url) return;
+  const CIRCUMFERENCE = 113.097;
+  let activeAudio = null, activeBtn = null, activeRing = null;
 
-    if(activeBtn===btn && activeAudio){
-      if(activeAudio.paused){
-        activeAudio.play();
-        btn.classList.add('playing');
+  function resetActiveAudioBtn() {
+    if (activeBtn) {
+      activeBtn.classList.remove('is-playing', 'playing', 'loading');
+      activeBtn.setAttribute('aria-pressed', 'false');
+    }
+    if (activeRing) {
+      activeRing.style.strokeDashoffset = CIRCUMFERENCE;
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-audio-ring, .nq-play-btn');
+    if (!btn) return;
+    const url = btn.dataset.audio;
+    if (!url) return;
+
+    if (activeBtn === btn && activeAudio) {
+      if (activeAudio.paused) {
+        activeAudio.play().then(() => {
+          btn.classList.add('is-playing', 'playing');
+          btn.setAttribute('aria-pressed', 'true');
+        }).catch(() => {});
       } else {
         activeAudio.pause();
-        btn.classList.remove('playing');
+        btn.classList.remove('is-playing', 'playing');
+        btn.setAttribute('aria-pressed', 'false');
       }
       return;
     }
 
-    if(activeAudio){
+    if (activeAudio) {
       activeAudio.pause();
-      if(activeBtn){
-        activeBtn.classList.remove('playing','loading');
-      }
+      resetActiveAudioBtn();
     }
 
-    activeBtn=btn;
-    btn.classList.add('loading');
-    activeAudio=new Audio(url);
-    activeAudio.play().then(()=>{
-      btn.classList.remove('loading');
-      btn.classList.add('playing');
-    }).catch(err=>{
-      btn.classList.remove('loading','playing');
+    activeBtn = btn;
+    activeRing = btn.querySelector('.audio-ring-fill');
+    activeAudio = new Audio(url);
+    btn.classList.add('is-playing', 'playing');
+    btn.setAttribute('aria-pressed', 'true');
+
+    activeAudio.play().catch(err => {
       console.warn('Audio playback error:', err);
+      resetActiveAudioBtn();
+      activeAudio = null;
+      activeBtn = null;
+      activeRing = null;
     });
 
-    activeAudio.onended=()=>{
-      btn.classList.remove('playing','loading');
-      activeAudio=null;
-      activeBtn=null;
-    };
+    activeAudio.addEventListener('timeupdate', () => {
+      if (activeAudio && activeAudio.duration && activeRing) {
+        const pct = activeAudio.currentTime / activeAudio.duration;
+        activeRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+      }
+    });
+
+    activeAudio.addEventListener('ended', () => {
+      resetActiveAudioBtn();
+      activeAudio = null;
+      activeBtn = null;
+      activeRing = null;
+    });
+
+    activeAudio.addEventListener('pause', () => {
+      if (activeBtn) {
+        activeBtn.classList.remove('is-playing', 'playing');
+        activeBtn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    activeAudio.addEventListener('play', () => {
+      if (activeBtn) {
+        activeBtn.classList.add('is-playing', 'playing');
+        activeBtn.setAttribute('aria-pressed', 'true');
+      }
+    });
   });
 })();
 </script>

@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3:104 · Those Who Call to Good</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Outfit:wght@300;500;800&display=swap">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{--bg:oklch(14% .03 265);--ink:oklch(95% .02 90);--dim:oklch(74% .03 260);--gold:oklch(84% .15 85);--jade:oklch(78% .14 165);--rose:oklch(66% .21 22);--leaf:oklch(83% .17 130);--glass:oklch(100% 0 0/.04);--line:oklch(100% 0 0/.09);color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(70vmax 50vmax at 90% 0,oklch(28% .09 290/.6),transparent 70%),radial-gradient(60vmax 50vmax at 0 90%,oklch(28% .08 170/.4),transparent 70%),var(--bg);background-attachment:fixed;color:var(--ink);font:300 clamp(1rem,.85rem + .5vw,1.2rem)/1.7 Outfit,sans-serif;overflow-x:clip}
+.ar{font-family:'Amiri Quran',serif;font-weight:400;direction:rtl}
+section{--c:var(--gold);position:relative;isolation:isolate;overflow:clip;min-height:100svh;display:grid;grid-template-columns:min(64rem,100%);place-content:center;justify-items:center;gap:1.8rem;padding:14vh 6vw;text-align:center}
+section::before{content:attr(data-w);position:absolute;inset:0;z-index:-1;display:grid;place-items:center;font:38vw/1 'Amiri Quran';white-space:nowrap;color:oklch(100% 0 0/.025);pointer-events:none}
+h2{font:800 clamp(2rem,1rem + 4vw,4.4rem)/1.05 Outfit;letter-spacing:-.03em;max-width:17ch;text-wrap:balance}
+h2 em{font-style:normal;background:linear-gradient(90deg,var(--c),var(--ink));-webkit-background-clip:text;background-clip:text;color:transparent}
+h3{font:800 1.25rem Outfit;margin-bottom:.3rem}
+p{max-width:60ch;color:var(--dim);text-wrap:pretty}
+p b{color:var(--ink);font-weight:500}
+p .ar{color:var(--c);font-size:1.35em}
+.tag{font:500 .75rem Outfit;letter-spacing:.35em;text-transform:uppercase;color:var(--c)}
+.box{width:100%;height:55svh;border-radius:2rem;background:var(--glass);border:1px solid var(--line)}
+.btn{font:500 1rem Outfit;padding:.9rem 1.7rem;border-radius:99px;border:1px solid var(--c);background:color-mix(in oklch,var(--c) 14%,transparent);color:var(--ink);cursor:pointer;transition:.3s}
+.btn:hover{background:var(--c);color:var(--bg)}
+
+/* HERO */
+#hero{grid-template-columns:min(72rem,100%)}
+#sky{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+#verse{font-size:clamp(2rem,1rem + 4.4vw,4.6rem);line-height:2.1;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.4em;text-shadow:0 0 .6em var(--bg)}
+#verse button{all:unset;cursor:pointer;color:var(--c);transition:scale .3s,text-shadow .3s;animation:in 1.4s calc(var(--i)*.15s + .3s) backwards}
+#verse button:is(:hover,:focus-visible,.on){scale:1.12;text-shadow:0 0 .5em var(--c)}
+.tr{font-size:clamp(1.1rem,.9rem + 1vw,1.6rem);color:var(--ink);max-width:42ch;animation:in 1.6s 2.4s backwards}
+.hint{color:var(--dim);animation:in 1s 3.4s backwards,bob 2s 4.4s infinite}
+@keyframes in{from{opacity:0;filter:blur(14px);translate:0 .4em}}
+@keyframes bob{50%{translate:0 6px}}
+
+/* WORD POPOVER (anchor positioning) */
+.on{anchor-name:--w}
+#pop{inset:auto;margin:.6rem 0;position-anchor:--w;position-area:bottom;position-try-fallbacks:flip-block;width:min(22rem,90vw);padding:1.2rem 1.5rem;border-radius:1.4rem;border:1px solid var(--c);background:oklch(18% .03 265/.75);backdrop-filter:blur(18px) saturate(1.4);color:var(--ink);text-align:center;box-shadow:0 20px 60px -20px var(--c);opacity:0;translate:0 12px;transition:opacity .35s,translate .35s,display .35s allow-discrete,overlay .35s allow-discrete}
+#pop:popover-open{opacity:1;translate:0}
+@starting-style{#pop:popover-open{opacity:0;translate:0 12px}}
+@supports not (position-area:bottom){#pop{inset:0;margin:auto;height:fit-content}}
+#pop b{display:block;font-size:2.2rem;line-height:1.8;color:var(--c)}
+#pop i{display:block;font-style:normal;font-weight:500}
+#pop p{font-size:.95rem;margin-top:.4rem}
+
+/* ROPE */
+.rope{position:relative;display:grid;gap:1.2rem;width:min(40rem,100%);padding-left:3.5rem;text-align:left}
+.rope svg{position:absolute;left:0;top:0;width:40px;height:100%;overflow:visible}
+.rope path{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:1}
+.rope div{padding:1rem 1.3rem;border-radius:1rem;background:var(--glass);border:1px solid var(--line);color:var(--dim)}
+.rope b{color:var(--jade);margin-right:.7rem;font-weight:800}
+.rope .now{color:var(--ink);border-color:var(--gold);box-shadow:0 0 50px -10px var(--gold)}
+.now b{color:var(--gold)}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.2rem;width:100%}
+.steps article{padding:2rem 1.6rem;border-radius:1.6rem;border:1px solid transparent;background:linear-gradient(oklch(17% .03 265),oklch(17% .03 265)) padding-box,conic-gradient(from var(--a),transparent 60%,var(--c)) border-box;animation:spin 5s linear infinite;transition:translate .4s}
+.steps article:hover{translate:0 -8px}
+.steps .ar{display:block;font-size:3rem;line-height:1.6;color:var(--c)}
+@keyframes spin{to{--a:360deg}}
+
+/* KNOWN vs STRANGE */
+#ks{width:min(34rem,100%);overflow:visible;filter:drop-shadow(0 0 24px oklch(100% 0 0/.12))}
+#ks text{fill:var(--dim);font:500 14px Outfit;text-anchor:middle;letter-spacing:.25em}
+input[type=range]{accent-color:var(--rose);width:min(22rem,55vw);vertical-align:middle;margin:0 .8rem}
+label{color:var(--dim);font-size:.9rem}
+output{color:var(--ink);font-weight:500;min-height:1.7em}
+
+/* FARM + END */
+#farm{cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#dir{touch-action:pan-y}
+#fh{color:var(--leaf);font-weight:500}
+#end{cursor:crosshair}
+p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;line-height:1.8;text-shadow:0 0 .6em oklch(84% .15 85/.5)}
+.rip{position:absolute;width:1rem;aspect-ratio:1;border-radius:50%;border:2px solid var(--rc);box-shadow:0 0 24px var(--rc),inset 0 0 24px var(--rc);translate:-50% -50%;pointer-events:none;animation:rip 2s cubic-bezier(.2,.6,.3,1) forwards}
+@keyframes rip{to{width:22rem;opacity:0}}
+
+/* HUD & PORTAL BACK */
+.hud{position:fixed;z-index:20;display:flex;align-items:center;gap:.6rem;padding:1rem 1.2rem;pointer-events:none}
+.hud>*{pointer-events:auto}
+.hud.tl{top:0;left:0}
+.portal-back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);text-decoration:none;
+  font:500 11.5px/1 Outfit,sans-serif;letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:8px 14px;border-radius:999px;
+  border:1px solid oklch(100% 0 0/.18);
+  background:oklch(15% .02 265/.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:all .25s ease;
+}
+.portal-back-btn:hover{
+  border-color:var(--gold);background:oklch(22% .05 265/.9);
+  transform:translateX(-2px);box-shadow:0 0 20px -5px var(--gold);
+}
+
+/* CIRCULAR AUDIO RING PLAYER */
+.hero-header-row{
+  display:flex;align-items:center;justify-content:center;gap:1.1rem;flex-wrap:wrap;z-index:2;
+}
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause { display: block; }
+
+/* SCROLL-DRIVEN */
+@supports (animation-timeline:view()){
+  #bar{position:fixed;inset:0 0 auto;height:3px;z-index:9;background:linear-gradient(90deg,var(--gold),var(--jade),var(--rose),var(--leaf));transform-origin:left;animation:grow linear;animation-timeline:scroll()}
+  section:not(#hero)>:not(.rip){animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
+  section::before{animation:drift linear both;animation-timeline:view()}
+  .rope{view-timeline:--rope}
+  .rope path{animation:draw linear both;animation-timeline:--rope;animation-range:entry 30% cover 60%}
+}
+@keyframes rise{from{opacity:0;translate:0 4rem;filter:blur(10px)}}
+@keyframes drift{from{translate:0 15%}to{translate:0 -15%}}
+@keyframes grow{from{scale:0 1}}
+@keyframes draw{from{stroke-dashoffset:1}}
+@media (prefers-reduced-motion:reduce){:not(.rip),::before{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="hud tl">
+  <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    <span>NURULQURAN PORTAL</span>
+  </a>
+</div>
+
+<div id="bar"></div>
+<div id="pop" popover></div>
+
+<!-- 1 · HERO -->
+<section id="hero">
+  <canvas id="sky"></canvas>
+  <div class="hero-header-row">
+    <a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" class="tag" style="text-decoration:none" title="Open 3:104 in Iqra Reader">The Family of Imran · 3:104 ↗</a>
+    <!-- Circular Audio Ring Player Button -->
+    <button type="button" class="btn-audio-ring" id="btn-audio-play" aria-label="Play recitation of 3:104" aria-pressed="false" title="Recitation · Sheikh Nasser Al-Qatami">
+      <!-- Progress Ring (SVG) -->
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+
+      <!-- Play / Pause Icon -->
+      <span class="audio-ring-icon" aria-hidden="true">
+        <!-- Play Triangle -->
+        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <polygon points="7 4 21 12 7 20 7 4" />
+        </svg>
+        <!-- Pause Bars -->
+        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="5" y="4" width="4" height="16" rx="1" />
+          <rect x="15" y="4" width="4" height="16" rx="1" />
+        </svg>
+      </span>
+    </button>
+  </div>
+  <h1 id="verse" class="ar"></h1>
+  <p class="tr">Let there be among you a community that invites to all that is good, urges what is right, and forbids what is wrong. They are the truly successful.</p>
+  <small class="hint">Tap any word to open it ↓</small>
+</section>
+
+<!-- 2 · CONTEXT -->
+<section data-w="حبل" style="--c:var(--jade)">
+  <span class="tag">Read the neighbors</span>
+  <h2>This verse lives <em>inside a rope</em></h2>
+  <div class="rope">
+    <svg viewBox="0 0 40 400" preserveAspectRatio="none">
+      <path pathLength="1" style="stroke:var(--jade)" d="M20 0Q4 25 20 50T20 100T20 150T20 200T20 250T20 300T20 350T20 400"/>
+      <path pathLength="1" style="stroke:var(--gold)" d="M20 0Q36 25 20 50T20 100T20 150T20 200T20 250T20 300T20 350T20 400"/>
+    </svg>
+    <div><b>102</b>Be mindful of Allah as He truly deserves.</div>
+    <div><b>103</b>Hold on to the rope of Allah, all together. Do not split apart.</div>
+    <div class="now"><b>104</b>Let there be a community that calls to good.</div>
+    <div><b>105</b>Do not be like those who split up after clear signs came to them.</div>
+  </div>
+  <p>Before it: <b>hold together.</b> After it: <b>don't split.</b> Calling to good sits right in the middle, because it is what holds a people together. When people stop reminding each other, the rope starts to slip.</p>
+</section>
+
+<!-- 3 · COMMUNITY = DIRECTION -->
+<section data-w="أمة">
+  <span class="tag">A community</span>
+  <h2>A crowd becomes a community <em>when it faces one way</em></h2>
+  <canvas id="dir" class="box"></canvas>
+  <button class="btn" id="align">Give them one direction</button>
+  <p>The word <b class="ar">أُمَّةٌ</b> comes from a root meaning <b>to aim, to head toward</b>. The same root gives <b class="ar">أُمّ</b>, mother, the one a family gathers around, and <b class="ar">إِمَام</b>, the one who stands in front. Being in the same place doesn't make people one community. Sharing a direction does. And the verse says <b class="ar">مِّنكُمْ</b>, "from among you". This is not someone else's job. It has to grow from inside.</p>
+</section>
+
+<!-- 4 · THE ORDER -->
+<section data-w="دعوة" style="--c:var(--leaf)">
+  <span class="tag">Three verbs · one order</span>
+  <h2>Invite first. <em>Correct later.</em></h2>
+  <div class="steps">
+    <article style="--c:var(--gold)"><span class="ar">يَدْعُونَ</span><h3>1 · Invite</h3><p>Open the door to all that is good. An invitation is warm. Nobody is dragged to a feast.</p></article>
+    <article style="--c:var(--jade)"><span class="ar">يَأْمُرُونَ</span><h3>2 · Urge</h3><p>Encourage what every healthy heart already knows is right.</p></article>
+    <article style="--c:var(--rose)"><span class="ar">يَنْهَوْنَ</span><h3>3 · Warn</h3><p>Only then, speak against the wrong. With care, never cruelty.</p></article>
+  </div>
+  <p>Many people start with "don't". This verse starts with an invitation. All three verbs are in the present tense: <b>they keep inviting, keep urging, keep warning.</b> It is a way of life, not a one-time speech.</p>
+  <p>Everyone has a share. The Prophet ﷺ taught: change a wrong with your hand. If you can't, then with your words. If you can't, then at least hate it in your heart. <b>(Muslim)</b></p>
+</section>
+
+<!-- 5 · KNOWN vs STRANGE -->
+<section data-w="معروف" style="--c:var(--rose)">
+  <span class="tag">The known &amp; the strange</span>
+  <h2>What happens when <em>everyone stays quiet?</em></h2>
+  <svg id="ks" viewBox="0 0 400 210">
+    <filter id="j" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence baseFrequency=".03" numOctaves="2"><animate attributeName="baseFrequency" values=".03;.05;.03" dur="5s" repeatCount="indefinite"/></feTurbulence>
+      <feDisplacementMap id="dm" in="SourceGraphic" scale="60"/>
+    </filter>
+    <circle cx="110" cy="95" r="58" style="fill:var(--jade)"/>
+    <circle id="bad" cx="290" cy="95" r="58" filter="url(#j)"/>
+    <text x="110" y="200">KNOWN</text><text x="290" y="200" id="bt">STRANGE</text>
+  </svg>
+  <label>Voices <input type="range" id="s" value="0"> Silence</label>
+  <output id="msg"></output>
+  <p>The word for right, <b class="ar">ٱلْمَعْرُوف</b>, means <b>"the known"</b>: the good every healthy heart recognizes, like honesty, mercy and fairness. The word for wrong, <b class="ar">ٱلْمُنكَر</b>, means <b>"the unrecognized"</b>: what feels strange to a clean conscience. Both roots meet in the story of Prophet Yusuf: <b>"he recognized them, but they did not recognize him"</b> (12:58). When no one speaks, the strange slowly starts to look normal. This community keeps the good familiar and the wrong strange.</p>
+</section>
+
+<!-- 6 · THE FARMER'S SUCCESS -->
+<section data-w="فلاح" style="--c:var(--leaf)">
+  <span class="tag">The truly successful</span>
+  <h2>Success, <em>the farmer's way</em></h2>
+  <canvas id="farm" class="box"></canvas>
+  <b id="fh">Press and hold the soil to plant a seed</b>
+  <p>The word <b class="ar">ٱلْمُفْلِحُونَ</b> comes from a root meaning <b>to split the soil</b>. It is the same root as the Arabic word for farmer. A farmer plows, plants and waters, but cannot force one seed to grow. That belongs to Allah. Your part is to invite, urge and warn. <b>Success is the sincere effort, not the number of people who listen.</b></p>
+  <p><b class="ar">أُو۟لَـٰٓئِكَ</b> "those" is a pointer for something far away, as if lifting them to a high rank. <b class="ar">هُمُ</b> "they" adds focus: it is <b>they</b> who truly succeed.</p>
+</section>
+
+<!-- 7 · RIPPLES -->
+<section id="end" data-w="خير">
+  <span class="tag">Your turn</span>
+  <h2>Tap anywhere. <em>One call travels far.</em></h2>
+  <p>"Whoever calls to guidance gets a reward like those who follow it, without their reward being reduced at all." <b>The Prophet Muhammad ﷺ (Muslim)</b></p>
+  <output id="rc">Tap to begin</output>
+  <p class="ar big">وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ</p>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:4rem 1.5rem 3rem;text-align:center;border-top:1px solid var(--line);background:radial-gradient(ellipse at bottom, oklch(22% .04 265), transparent 70%);position:relative;z-index:2">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:.7rem">
+    <div><a href="https://iqra.nurulquran.com/#/surah/3?ayah=104" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:500;font-size:1.05rem">3:104 · Sūrah Āl ʿImrān ↗</a></div>
+    <div style="display:flex;gap:1.5rem;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">
+      <a href="index.html" style="color:var(--gold);text-decoration:none">← NurulQuran Showcase</a>
+      <a href="#hero" style="color:var(--dim);text-decoration:none">Return to Top ↑</a>
+    </div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.77 (updated 2026-10-26 11:45)</div>
+  </div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s),R=Math.random,TAU=Math.PI*2,M={x:-999,y:-999},
+  cv=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim(),
+  [gold,jade,leaf]=['--gold','--jade','--leaf'].map(cv),gold0=gold.replace(')',' / 0)'),
+  on=c=>{const r=c.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight},
+  rel=c=>{const r=c.getBoundingClientRect();return[M.x-r.left,M.y-r.top]},
+  fit=c=>{const d=devicePixelRatio||1,x=c.getContext('2d');c.width=c.clientWidth*d;c.height=c.clientHeight*d;x.setTransform(d,0,0,d,0,0);return x};
+for(const t of['pointermove','pointerdown'])addEventListener(t,e=>{M.x=e.clientX;M.y=e.clientY});
+
+/* WORDS */
+const W=[
+ ['وَلْتَكُن','And let there be','Not a wish. A command: make this happen.'],
+ ['مِّنكُمْ','from among you','Not from outside. It must rise from within you.'],
+ ['أُمَّةٌ','a community','From a root meaning "to aim". People joined by one direction.','gold'],
+ ['يَدْعُونَ','who invite','They keep inviting. An invitation is gentle. It can never be forced.','gold'],
+ ['إِلَى ٱلْخَيْرِ','to all that is good','The widest door: faith, kindness, knowledge, mercy.','gold'],
+ ['وَيَأْمُرُونَ','and urge','They don\'t just wait. They actively encourage.','jade'],
+ ['بِٱلْمَعْرُوفِ','what is right','Literally "the known": good that every sound heart recognizes.','jade'],
+ ['وَيَنْهَوْنَ','and forbid','They speak up to hold back what harms.','rose'],
+ ['عَنِ ٱلْمُنكَرِ','what is wrong','Literally "the unrecognized": what feels strange to a clean conscience.','rose'],
+ ['وَأُو۟لَـٰٓئِكَ','and those','A pointer for the far, lifting them to a high rank.','leaf'],
+ ['هُمُ','they','Adds focus: it is they, truly.','leaf'],
+ ['ٱلْمُفْلِحُونَ','are the successful','From "splitting the soil", like a farmer. Success grown by patient work.','leaf']];
+const V=$('#verse'),pop=$('#pop');
+V.innerHTML=W.map((w,i)=>`<button style="--i:${i};--c:var(--${w[3]||'ink'})">${w[0]}</button>`).join('');
+V.onclick=e=>{const b=e.target.closest('button');if(!b)return;const[a,en,note]=W[[...V.children].indexOf(b)];
+  $('.on')?.classList.remove('on');b.classList.add('on');pop.style.cssText=b.style.cssText;
+  pop.innerHTML=`<b class="ar">${a}</b><i>${en}</i><p>${note}</p>`;pop.matches(':popover-open')||pop.showPopover()};
+
+/* HERO: light gathering into an 8-point star */
+const S=$('#sky'),P=Array.from({length:1400},()=>({x:R()*innerWidth,y:R()*innerHeight,t:R(),o:R()*TAU,s:R()<.68?0:R()<.6?1:2,hx:R(),hy:R(),c:R()<.85?gold:jade}));
+function sky(t){const w=S.clientWidth,h=S.clientHeight,cx=w/2,cy=h/2,r0=Math.min(w,h)*.44,rot=t/3e4,[mx,my]=rel(S);sx.clearRect(0,0,w,h);
+ for(const p of P){let tx,ty;
+  if(!p.s){const k=p.t*16,i=k|0,f=k-i,v=j=>{const a=j*TAU/16+rot,r=j%2?r0*.765:r0;return[Math.cos(a)*r,Math.sin(a)*r]},[a,b]=v(i),[c,d]=v(i+1);tx=cx+a+(c-a)*f;ty=cy+b+(d-b)*f}
+  else if(p.s<2){const a=p.t*TAU-rot*2;tx=cx+Math.cos(a)*r0*1.15;ty=cy+Math.sin(a)*r0*1.15}
+  else{tx=p.hx*w+Math.sin(t/2e3+p.o)*20;ty=p.hy*h+Math.cos(t/2500+p.o)*20}
+  p.x+=(tx-p.x)*.025;p.y+=(ty-p.y)*.025;
+  const dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy)+.1;if(d<120){p.x+=dx/d*(120-d)*.2;p.y+=dy/d*(120-d)*.2}
+  sx.globalAlpha=.3+.7*Math.abs(Math.sin(t/800+p.o));sx.fillStyle=p.c;sx.fillRect(p.x,p.y,1.7,1.7)}}
+
+/* COMMUNITY: arrows find one direction */
+const D=$('#dir');let A=[],al=false,Lx=0,Ly=0;
+const initDir=()=>{const w=D.clientWidth,h=D.clientHeight;Lx=w/2;Ly=h/2;A=[];for(let x=22;x<w;x+=36)for(let y=22;y<h;y+=36)A.push({x:x+R()*12-6,y:y+R()*12-6,a:R()*TAU,w:R()*TAU,k:0})};
+function dir(){const w=D.clientWidth,h=D.clientHeight,[mx,my]=rel(D);
+ if(mx>0&&my>0&&mx<w&&my<h){Lx+=(mx-Lx)*.08;Ly+=(my-Ly)*.08}
+ const g=dx.createRadialGradient(Lx,Ly,0,Lx,Ly,al?220:120);g.addColorStop(0,gold);g.addColorStop(1,gold0);
+ dx.clearRect(0,0,w,h);dx.globalAlpha=al?.55:.25;dx.fillStyle=g;dx.fillRect(0,0,w,h);dx.globalAlpha=1;dx.lineWidth=2;dx.lineCap='round';
+ for(const p of A){p.w+=(R()-.5)*.2;const ta=al?Math.atan2(Ly-p.y,Lx-p.x):p.w,df=((ta-p.a+Math.PI)%TAU+TAU)%TAU-Math.PI;p.a+=df*.07;p.k+=(al-p.k)*.04;
+  const c=Math.cos(p.a)*8,s=Math.sin(p.a)*8,hx=p.x+c,hy=p.y+s;dx.strokeStyle=`oklch(${50+34*p.k}% ${.03+.12*p.k} 85)`;
+  dx.beginPath();dx.moveTo(p.x-c,p.y-s);dx.lineTo(hx,hy);for(const o of[-.6,.6]){dx.moveTo(hx,hy);dx.lineTo(hx-Math.cos(p.a+o)*6,hy-Math.sin(p.a+o)*6)}dx.stroke()}}
+$('#align').onclick=e=>{const f=()=>{al=!al;e.target.textContent=al?'Let them scatter':'Give them one direction'};document.startViewTransition?document.startViewTransition(f):f()};
+
+/* KNOWN vs STRANGE */
+const sl=$('#s');sl.oninput=()=>{const v=+sl.value;$('#dm').setAttribute('scale',60*(1-v/100));
+ $('#bad').style.fill=`color-mix(in oklch,var(--rose),var(--jade) ${v}%)`;$('#bt').textContent=v>80?'NORMAL?':'STRANGE';
+ $('#msg').textContent=v<30?'Voices are raised. The wrong still looks wrong.':v<75?'Fewer voices. Its sharp edges begin to soften.':'Silence. The strange now looks normal.'};sl.oninput();
+
+/* FARMER: press & hold to grow */
+const F=$('#farm');let g=0,hold=false,msg='';
+F.onpointerdown=()=>{if(g>=1)g=0;hold=true};onpointerup=onpointercancel=()=>hold=false;F.oncontextmenu=e=>e.preventDefault();
+function br(x,y,l,a,d,t,n){const k=Math.min(1,Math.max(0,g*10-d));if(!k)return;const X=x+Math.cos(a)*l*k,Y=y+Math.sin(a)*l*k;
+ fx.strokeStyle=d<4?'oklch(52% .06 60)':leaf;fx.lineWidth=Math.max(.7,8-d);fx.beginPath();fx.moveTo(x,y);fx.lineTo(X,Y);fx.stroke();if(k<1)return;
+ if(d>8){fx.fillStyle=n%4?leaf:gold;fx.beginPath();fx.arc(X,Y,2.5+Math.sin(t/400+n),0,TAU);fx.fill();return}
+ const s=Math.sin(t/1300+d*.6)*.05;br(X,Y,l*.76,a-.37+s,d+1,t,n*2);br(X,Y,l*.76,a+.33+s,d+1,t,n*2+1)}
+function farm(t,dt){if(hold)g=Math.min(1,g+dt/6000);const w=F.clientWidth,h=F.clientHeight,gy=h*.86;
+ fx.clearRect(0,0,w,h);fx.fillStyle='oklch(24% .04 55)';fx.fillRect(0,gy,w,h-gy);
+ if(g){fx.fillStyle='oklch(10% .02 55)';fx.beginPath();fx.ellipse(w/2,gy+3,Math.min(1,g*8)*70,4,0,0,TAU);fx.fill()}
+ fx.lineCap='round';br(w/2,gy,h*.2,-Math.PI/2,0,t,1);
+ const m=g>=1?'Your part is done. The growth is from Allah. (Press to plant again)':hold?'Keep going. The effort is yours.':g?'Don\'t stop now…':'Press and hold the soil to plant a seed';
+ if(m!==msg)$('#fh').textContent=msg=m}
+
+/* RIPPLES: one call spreads */
+const E=$('#end');let n=0;
+const rip=(x,y,d)=>{const s=document.createElement('i');s.className='rip';s.style.cssText=`left:${x}px;top:${y}px;--rc:${[gold,jade,leaf][d]}`;
+ E.append(s);s.onanimationend=()=>s.remove();$('#rc').textContent=`${++n} ripples of good`;
+ d<2&&setTimeout(()=>{for(let k=0;k<3;k++){const a=R()*TAU,m=90+R()*90;rip(x+Math.cos(a)*m,y+Math.sin(a)*m,d+1)}},450)};
+E.onclick=e=>{const r=E.getBoundingClientRect();rip(e.clientX-r.left,e.clientY-r.top,0)};
+
+/* CIRCULAR AUDIO PLAYER (3:104 · Sheikh Nasser Al-Qatami) */
+const btn = document.querySelector('#btn-audio-play');
+const ring = document.querySelector('#audio-ring-fill');
+const CIRCUMFERENCE = 113.097;
+const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/003104.mp3');
+
+function updateButtonUI() {
+  const isPlaying = !audio.paused && !audio.ended;
+  btn.classList.toggle('is-playing', isPlaying);
+  btn.setAttribute('aria-pressed', String(isPlaying));
+  btn.setAttribute('aria-label', isPlaying ? 'Pause audio' : 'Play recitation of 3:104');
+
+  if (!isPlaying && (audio.ended || audio.currentTime === 0)) {
+    ring.style.strokeDashoffset = CIRCUMFERENCE;
+  }
+}
+
+btn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(err => console.warn('Playback error:', err));
+  } else {
+    audio.pause();
+  }
+});
+
+audio.addEventListener('play', updateButtonUI);
+audio.addEventListener('pause', updateButtonUI);
+
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const pct = audio.currentTime / audio.duration;
+    ring.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+  }
+});
+
+audio.addEventListener('ended', () => {
+  ring.style.strokeDashoffset = CIRCUMFERENCE;
+  updateButtonUI();
+});
+
+/* LOOP */
+let sx,dx,fx,lw,last=0;
+const size=()=>{sx=fit(S);dx=fit(D);fx=fit(F);if(innerWidth!==lw){lw=innerWidth;initDir()}};
+size();addEventListener('resize',size);
+(function loop(t){const dt=Math.min(t-last,50);last=t;on(S)&&sky(t);on(D)&&dir();on(F)&&farm(t,dt);requestAnimationFrame(loop)})(0);
+</script>
+</body>
+</html>

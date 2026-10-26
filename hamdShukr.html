@@ -857,6 +857,79 @@ html, body {
   font-family: 'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'KFGQPC Uthman Taha Naskh', 'Amiri Quran', 'Amiri', serif !important;
 }
 
+
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+
 </style>
 </head>
 
@@ -1172,7 +1245,7 @@ html, body {
       All data stays in your browser.
     </p>
     <div class="footer-version-tag" style="margin-top:1.5rem;font-size:0.75rem;opacity:0.6;font-family:monospace">
-      v1.0.76 (updated 2026-10-26 08:35)
+      v1.0.77 (updated 2026-10-26 11:45)
     </div>
   </div>
 </footer>
@@ -1447,9 +1520,20 @@ function ayahCard(v, i){
     const surahPad = String(m[1]).padStart(3, '0');
     const ayahPad = String(m[2]).padStart(3, '0');
     const audioUrl = `https://everyayah.com/data/Nasser_Alqatami_128kbps/${surahPad}${ayahPad}.mp3`;
-    audioHtml = `<button class="tool nq-play-btn" data-act="recite" data-audio="${audioUrl}" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami">
-      <svg class="play-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="pause-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    audioHtml = `<button type="button" class="btn-audio-ring tool nq-play-btn" data-act="recite" data-audio="${audioUrl}" aria-label="Listen to recitation" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+      <span class="audio-ring-icon" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <polygon points="7 4 21 12 7 20 7 4" />
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="5" y="4" width="4" height="16" rx="1" />
+          <rect x="15" y="4" width="4" height="16" rx="1" />
+        </svg>
+      </span>
     </button>`;
   }
   const card = el('article', { className:'glass ayah-card rv' + (v.feature ? ' feature' : '') });
@@ -1989,6 +2073,8 @@ addEventListener('keydown', e => {
 /* Audio Recitation Engine */
 let activeAudio = null;
 let activeAudioBtn = null;
+let activeRing = null;
+const CIRCUMFERENCE = 113.097;
 
 function playRecitation(btn) {
   const url = btn.dataset.audio;
@@ -1997,32 +2083,52 @@ function playRecitation(btn) {
   if (activeAudioBtn === btn && activeAudio) {
     if (!activeAudio.paused) {
       activeAudio.pause();
-      btn.classList.remove('playing');
+      btn.classList.remove('playing', 'is-playing');
+      btn.setAttribute('aria-pressed', 'false');
     } else {
       activeAudio.play();
-      btn.classList.add('playing');
+      btn.classList.add('playing', 'is-playing');
+      btn.setAttribute('aria-pressed', 'true');
     }
     return;
   }
 
   if (activeAudio) {
     activeAudio.pause();
-    if (activeAudioBtn) activeAudioBtn.classList.remove('playing');
+    if (activeAudioBtn) {
+      activeAudioBtn.classList.remove('playing', 'is-playing');
+      activeAudioBtn.setAttribute('aria-pressed', 'false');
+    }
+    if (activeRing) activeRing.style.strokeDashoffset = CIRCUMFERENCE;
   }
 
   activeAudioBtn = btn;
+  activeRing = btn.querySelector('.audio-ring-fill');
   activeAudio = new Audio(url);
   activeAudio.play().then(() => {
-    btn.classList.add('playing');
+    btn.classList.add('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'true');
   }).catch(err => {
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
+    if (activeRing) activeRing.style.strokeDashoffset = CIRCUMFERENCE;
     console.warn('Playback blocked/failed:', err);
   });
 
+  activeAudio.addEventListener('timeupdate', () => {
+    if (activeAudio && activeAudio.duration && activeRing) {
+      const pct = activeAudio.currentTime / activeAudio.duration;
+      activeRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+    }
+  });
+
   activeAudio.onended = () => {
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
+    if (activeRing) activeRing.style.strokeDashoffset = CIRCUMFERENCE;
     activeAudio = null;
     activeAudioBtn = null;
+    activeRing = null;
   };
 }
 

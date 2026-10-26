@@ -121,56 +121,89 @@
   letter-spacing: 0.02em;
 }
 
-/* Quran Ayah Audio Button */
-.nq-play-btn {
+/* Circular Audio Ring Button */
+.btn-audio-ring {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(245, 201, 123, 0.12);
-  border: 1px solid rgba(245, 201, 123, 0.35);
-  color: var(--gold-2);
-  border-radius: 50%;
   width: 32px;
   height: 32px;
   min-width: 32px;
-  padding: 0;
+  min-height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.25s ease;
-  vertical-align: middle;
-  user-select: none;
-}
-.nq-play-btn:hover {
-  background: rgba(245, 201, 123, 0.28);
-  color: #fff;
-  border-color: var(--gold-2);
-  transform: translateY(-1px) scale(1.08);
-  box-shadow: 0 0 14px rgba(245, 201, 123, 0.35);
-}
-.nq-play-btn svg {
-  width: 14px;
-  height: 14px;
+  padding: 0;
   flex-shrink: 0;
-  margin-left: 1px;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
 }
-.nq-play-btn .pause-icon {
-  display: none;
-  margin-left: 0;
+.btn-audio-ring:hover {
+  transform: scale(1.08);
 }
-.nq-play-btn.playing {
-  background: rgba(45, 212, 191, 0.25);
-  border-color: var(--teal-2);
-  color: var(--teal-2);
-  box-shadow: 0 0 14px rgba(45, 212, 191, 0.3);
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 2px;
 }
-.nq-play-btn.playing .play-icon {
-  display: none;
-}
-.nq-play-btn.playing .pause-icon {
-  display: block;
-}
-.nq-play-btn.loading {
-  opacity: 0.65;
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
   pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935;
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047;
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+
+.hero-ayah-play {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+.card-ayah-play {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
 }
 
 [data-theme="light"] {
@@ -1923,6 +1956,10 @@ html, body {
           </div>
           <div class="dropdown-grid-scroll">
             <div class="dropdown-items-grid" id="islamDropdownGrid">
+              <a href="successful-nation-imran.html" class="dropdown-item" data-keywords="successful nation imran 3:104 khayr ummah community call to good urge right forbid wrong muflihoon">
+                <span class="item-badge">Āl ʿImrān</span>
+                <span class="item-title">أُمَّةٌ يَدْعُونَ · Those Who Call to Good (3:104)</span>
+              </a>
               <a href="surah32.html" class="dropdown-item" data-keywords="surah sajdah prostration 32:1-30 32:15 nouman ali khan qatami">
                 <span class="item-badge">Sajdah</span>
                 <span class="item-title">سُورَةُ السَّجْدَة · Sajdah (32:1–30)</span>
@@ -2042,10 +2079,21 @@ html, body {
       “We will show them Our signs in the universe and within themselves until it becomes clear to them that this is the truth. Is it not enough that your Lord is a Witness over all things?”
       <span class="hero-inline-meta">
         <span class="hero-ayat-ref"><bdi>41:53</bdi></span>
-        <button class="nq-play-btn hero-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/041053.mp3" aria-label="Listen to Surah Fuṣṣilat Ayah 41:53" title="Listen · Qari Nasser Al-Qatami (41:53)">
-          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-        </button>
+        <button type="button" class="btn-audio-ring nq-play-btn hero-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/041053.mp3" aria-label="Listen to Surah Fuṣṣilat Ayah 41:53" title="Listen · Qari Nasser Al-Qatami (41:53)" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
+          </button>
       </span>
     </h1>
   </div>
@@ -2076,6 +2124,54 @@ html, body {
 <main class="showcase-grid-wrap">
   <div class="showcase-grid" id="cardsGrid">
     
+    <!-- CARD 1: THOSE WHO CALL TO GOOD · 3:104 -->
+    <article class="card-item" data-category="quran" data-keywords="successful nation imran 3:104 khayr ummah community call to good urge right forbid wrong muflihoon farmer 8 point star rope">
+      <a href="successful-nation-imran.html" class="card-snapshot-link" aria-label="Explore Those Who Call to Good (3:104)">
+        <div class="card-snapshot-wrap">
+          <img src="assets/snapshots/successful-nation-imran.webp" alt="Those Who Call to Good Snapshot · 3:104" class="card-snapshot-img" loading="lazy" width="800" height="450">
+          <div class="snapshot-badge-overlay">
+            <span>Open Study ↗</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-top-row">
+        <span class="card-category-badge cat-quran">Surah Reflection</span>
+        <span class="card-arabic-motif">سُورَةُ آلِ عِمْرَان</span>
+      </div>
+      <h2 class="card-title">Those Who Call to Good</h2>
+      <div class="card-ayah-flow">
+        <div class="ayah-arabic-text" lang="ar" dir="rtl">وَلْتَكُن مِّنكُمْ أُمَّةٌ۬ يَدْعُونَ إِلَى ٱلْخَيْرِ وَيَأْمُرُونَ بِٱلْمَعْرُوفِ وَيَنْهَوْنَ عَنِ ٱلْمُنكَرِ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ</div>
+        <p class="ayah-trans-text">“Let there be among you a community that invites to all that is good, urges what is right, and forbids what is wrong. They are the truly successful.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:104</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003104.mp3" aria-label="Listen to Ayah 3:104" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
+          </button></span></p>
+      </div>
+      <p class="card-desc">An interactive visual journey through Surah Ali 'Imran 3:104: the 8-point star of light, the rope of community, inviting before warning, the known vs strange conscience, and the farmer's measure of true success.</p>
+      <div class="card-actions-row">
+        <a href="successful-nation-imran.html" class="btn-launch">
+          <span>Reflect</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+        <button class="btn-share-card" onclick="shareExhibit('successful-nation-imran.html', 'Those Who Call to Good · 3:104')" title="Share Exhibit" aria-label="Share Exhibit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+        </button>
+        <button class="btn-preview-modal" onclick="openPreview('successful-nation-imran.html', 'Those Who Call to Good · 3:104')" title="Quick Preview" aria-label="Quick Preview">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </article>
+    
     <!-- CARD 1: SAJDAH (32) -->
     <article class="card-item" data-category="quran" data-keywords="sajdah as-sajdah prostration 32:15 night prayer tahajjud clay creation cosmos revelation qatami alafasy 32:1 32:16 nouman ali khan">
       <a href="surah32.html" class="card-snapshot-link" aria-label="Explore Sajdah (32:1–30)">
@@ -2093,9 +2189,20 @@ html, body {
       <h2 class="card-title">Sajdah</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُواْ بِهَا خَرُّواْ سُجَّدٗا وَسَبَّحُواْ بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ۩</div>
-        <p class="ayah-trans-text">“Only those believe in Our verses who, when they are reminded of them, fall down in prostration and hymn the praise of their Lord, and they are not arrogant.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>32:15</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/032015.mp3" aria-label="Listen to Ayah 32:15" title="Listen · Qari Nasser Al-Qatami">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Only those believe in Our verses who, when they are reminded of them, fall down in prostration and hymn the praise of their Lord, and they are not arrogant.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>32:15</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/032015.mp3" aria-label="Listen to Ayah 32:15" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Read and listen through the thirty verses of Surah As-Sajdah—the chapter the Prophet ﷺ recited every night before sleep.</p>
@@ -2130,9 +2237,20 @@ html, body {
       <h2 class="card-title">Muddaththir</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">يَـٰٓأَيُّهَا الْمُدَّثِّرُ ۝ قُمْ فَأَنذِرْ ۝ وَرَبَّكَ فَكَبِّرْ ۝ ... ۝ كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ</div>
-        <p class="ayah-trans-text">“O you who covers himself! Arise and warn! And your Lord glorify!... Every soul, for what it has earned, is held in pledge.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>74:1–56</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/074001.mp3" aria-label="Listen to Surah Al-Muddaththir" title="Listen · Sheikh Nasser Al-Qatami">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“O you who covers himself! Arise and warn! And your Lord glorify!... Every soul, for what it has earned, is held in pledge.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>74:1–56</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/074001.mp3" aria-label="Listen to Surah Al-Muddaththir" title="Listen · Sheikh Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Complete 56-ayah interactive cosmic calligraphy experience of Surah Al-Muddaththir. Featuring word-by-word gold particle assembly, radiant teal Noor full-verse reveals, instant Ayah dropdown navigator, and recitation by Sheikh Nasser Al-Qatami.</p>
@@ -2167,9 +2285,20 @@ html, body {
       <h2 class="card-title">Miracles of the Quran</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">سَنُرِيهِمْ ءَايَٰتِنَا فِى ٱلْءَافَاقِ وَفِىٓ أَنفُسِهِمْ حَتَّىٰ يَتَبَيَّنَ لَهُمْ أَنَّهُ ٱلْحَقُّ </div>
-        <p class="ayah-trans-text">“We will show them Our signs in the horizons and within themselves until it becomes clear to them that it is the truth.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>41:53</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/041053.mp3" aria-label="Listen to Ayah 41:53" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“We will show them Our signs in the horizons and within themselves until it becomes clear to them that it is the truth.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>41:53</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/041053.mp3" aria-label="Listen to Ayah 41:53" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Twelve living signs across history, nature, and human psychology that point straight to the Creator.</p>
@@ -2204,9 +2333,20 @@ html, body {
       <h2 class="card-title">Prophet's Proof</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَمَا يَنطِقُ عَنِ ٱلْهَوَىٰٓ · إِنْ هُوَ إِلَّا وَحْىٌ يُوحَىٰ</div>
-        <p class="ayah-trans-text">“Nor does he speak from his own inclination. It is not but a revelation revealed.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>53:3-4</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/053003.mp3" aria-label="Listen to Ayah 53:3" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Nor does he speak from his own inclination. It is not but a revelation revealed.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>53:3-4</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/053003.mp3" aria-label="Listen to Ayah 53:3" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Ten clear, honest arguments from history, logic, and character showing why Muhammad ﷺ spoke the truth.</p>
@@ -2241,9 +2381,20 @@ html, body {
       <h2 class="card-title">جَهُولًا · Jahūlā — The Deeply Unknowing</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَحَمَلَهَا ٱلْإِنسَٰنُ إِنَّهُۥ كَانَ ظَلُومًا جَهُولًا</div>
-        <p class="ayah-trans-text">“And man undertook to bear the trust. Indeed, he was unjust and deeply unknowing (jahūlā).” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>33:72</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/033072.mp3" aria-label="Listen to Ayah 33:72" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“And man undertook to bear the trust. Indeed, he was unjust and deeply unknowing (jahūlā).” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>33:72</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/033072.mp3" aria-label="Listen to Ayah 33:72" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Why does the Qur’an describe us as "deeply unknowing"? A close look at one word that holds a mirror up to all of us.</p>
@@ -2278,9 +2429,20 @@ html, body {
       <h2 class="card-title">Short Arabic Verbs</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">فَسَيَكْفِيكَهُمُ ٱللَّهُ وَهُوَ ٱلسَّمِيعُ ٱلْعَلِيمُ</div>
-        <p class="ayah-trans-text">“So Allah will suffice you against them. And He is the Hearing, the Knowing.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:137</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002137.mp3" aria-label="Listen to Ayah 2:137" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“So Allah will suffice you against them. And He is the Hearing, the Knowing.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:137</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002137.mp3" aria-label="Listen to Ayah 2:137" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Five short sentences that teach you how Arabic verbs work and why every single letter change matters.</p>
@@ -2315,9 +2477,20 @@ html, body {
       <h2 class="card-title">Sleep Timing</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَجَعَلْنَا نَوْمَكُمْ سُبَاتًا · وَجَعَلْنَا ٱلَّيْلَ لِبَاسًا</div>
-        <p class="ayah-trans-text">“And We made your sleep a means for rest, and We made the night as a garment.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>78:9-10</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/078009.mp3" aria-label="Listen to Ayah 78:9" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“And We made your sleep a means for rest, and We made the night as a garment.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>78:9-10</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/078009.mp3" aria-label="Listen to Ayah 78:9" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">What modern sleep science and prophetic habit teach about when to sleep, when to wake up, and how your body really recharges.</p>
@@ -2352,9 +2525,20 @@ html, body {
       <h2 class="card-title">Allah Loves Those Who Control Anger</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَٱلْكَٰظِمِينَ ٱلْغَيْظَ وَٱلْعَافِينَ عَنِ ٱلنَّاسِ وَٱللَّهُ يُحِبُّ ٱلْمُحْسِنِينَ</div>
-        <p class="ayah-trans-text">“And who restrain anger and who pardon the people — and Allah loves the doers of good.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:134</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003134.mp3" aria-label="Listen to Ayah 3:134" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“And who restrain anger and who pardon the people — and Allah loves the doers of good.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:134</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003134.mp3" aria-label="Listen to Ayah 3:134" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Practical, step-by-step tools for what to do the second anger hits you, and why holding back is real strength.</p>
@@ -2389,9 +2573,20 @@ html, body {
       <h2 class="card-title">Arabic Roots</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">كَلِمَةً طَيِّبَةً كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِى ٱلسَّمَآءِ</div>
-        <p class="ayah-trans-text">“A good word is like a good tree, whose root is firmly fixed and its branches high in the sky.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>14:24</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014024.mp3" aria-label="Listen to Ayah 14:24" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“A good word is like a good tree, whose root is firmly fixed and its branches high in the sky.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>14:24</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014024.mp3" aria-label="Listen to Ayah 14:24" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">See how 300 to 500 root word families unlock over 80% of the Qur’an—and watch one root branch into dozens of meanings.</p>
@@ -2426,9 +2621,20 @@ html, body {
       <h2 class="card-title">Fasting&nbsp;</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
-        <p class="ayah-trans-text">“O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:183</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002183.mp3" aria-label="Listen to Ayah 2:183" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:183</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002183.mp3" aria-label="Listen to Ayah 2:183" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Fasting is more than an empty stomach. Explore the mindset, the daily timings, and the spiritual reset behind every fast.</p>
@@ -2463,9 +2669,20 @@ html, body {
       <h2 class="card-title">Ḥamd &amp; Shukr · Praise &amp; Gratitude</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ </div>
-        <p class="ayah-trans-text">“And when your Lord proclaimed: If you are grateful, I will surely increase you in favor.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>14:7</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014007.mp3" aria-label="Listen to Ayah 14:7" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“And when your Lord proclaimed: If you are grateful, I will surely increase you in favor.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>14:7</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/014007.mp3" aria-label="Listen to Ayah 14:7" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">The difference between thanking someone for a gift (Shukr) and praising Allah for who He is (Ḥamd)—and how gratitude rewires your heart.</p>
@@ -2500,9 +2717,20 @@ html, body {
       <h2 class="card-title">Testimony — Qur'an 3:18</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">شَهِدَ ٱللَّهُ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا هُوَ وَٱلْمَلَٰٓئِكَةُ وَأُولُوا ٱلْعِلْمِ قَآئِمًا بِٱلْقِسْطِ</div>
-        <p class="ayah-trans-text">“Allah witnesses that there is no deity except Him, and so do the angels and those of knowledge — maintaining creation in justice.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:18</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003018.mp3" aria-label="Listen to Ayah 3:18" title="Listen · Qari Mishary Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Allah witnesses that there is no deity except Him, and so do the angels and those of knowledge — maintaining creation in justice.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:18</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003018.mp3" aria-label="Listen to Ayah 3:18" title="Listen · Qari Mishary Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">A close look at verse 3:18—why Allah pairs His own testimony of oneness with justice and the testimony of people of knowledge.</p>
@@ -2537,9 +2765,20 @@ html, body {
       <h2 class="card-title">Woe on that day to the deniers</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ</div>
-        <p class="ayah-trans-text">“Woe, that Day, to the deniers.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>77:15</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15" title="Listen · Qari Nasser Al-Qatami">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Woe, that Day, to the deniers.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>77:15</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">An interactive WebGL journey through the ten recurring echoes of Chapter 77—weighing each cosmic proof until the final prostration.</p>
@@ -2574,9 +2813,20 @@ html, body {
       <h2 class="card-title">Salah · Five Anchors for Your Day</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">وَأَقِمِ ٱلصَّلَوٰةَ لِذِكْرِى</div>
-        <p class="ayah-trans-text">“And establish prayer for My remembrance.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>20:14</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/020014.mp3" aria-label="Listen to Ayah 20:14" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“And establish prayer for My remembrance.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>20:14</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/020014.mp3" aria-label="Listen to Ayah 20:14" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Five times a day the world pauses so you can speak to Allah. Not just a chore on your to-do list, but the anchor your whole day hangs on.</p>
@@ -2611,9 +2861,20 @@ html, body {
       <h2 class="card-title">&nbsp;Sadaqah &amp; Comprehensive Zakat&nbsp;</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">مَّثَلُ ٱلَّذِينَ يُنفِقُونَ أَمْوَٰلَهُمْ فِى سَبِيلِ ٱللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ</div>
-        <p class="ayah-trans-text">“The likeness of those who spend their wealth in the way of Allah is as a grain that grows seven ears...” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:261</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002261.mp3" aria-label="Listen to Ayah 2:261" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“The likeness of those who spend their wealth in the way of Allah is as a grain that grows seven ears...” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:261</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002261.mp3" aria-label="Listen to Ayah 2:261" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">See the real-world ripple of your charity, and calculate your annual Zakat clearly with zero guesswork.</p>
@@ -2648,9 +2909,20 @@ html, body {
       <h2 class="card-title">&nbsp;· Sūrat Al-Anʿām 6:162</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">قُلْ إِنَّ صَلَاتِى وَنُسُكِى وَمَحْيَاىَ وَمَمَاتِى لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ</div>
-        <p class="ayah-trans-text">“Say, 'Indeed, my prayer, my rites of sacrifice, my living and my dying are for Allah, Lord of the worlds.'” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>6:162</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/006162.mp3" aria-label="Listen to Ayah 6:162" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Say, 'Indeed, my prayer, my rites of sacrifice, my living and my dying are for Allah, Lord of the worlds.'” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>6:162</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/006162.mp3" aria-label="Listen to Ayah 6:162" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Six powerful verses from Surah Al-Anʿām that move from the arithmetic of Allah's mercy to dedicating your whole life to Him.</p>
@@ -2685,9 +2957,20 @@ html, body {
       <h2 class="card-title">Taqwā · The Shield of the Heart</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱتَّقُواْ ٱللَّهَ حَقَّ تُقَاتِهِۦ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُسْلِمُونَ</div>
-        <p class="ayah-trans-text">“O you who have believed, fear Allah as He should be feared and do not die except as Muslims.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:102</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003102.mp3" aria-label="Listen to Ayah 3:102" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“O you who have believed, fear Allah as He should be feared and do not die except as Muslims.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:102</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/003102.mp3" aria-label="Listen to Ayah 3:102" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">What does Taqwā really mean? Not living in constant panic, but walking mindfully like you're navigating a thorny path in clean clothes.</p>
@@ -2722,9 +3005,20 @@ html, body {
       <h2 class="card-title">The Gatherer</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">رَبَّنَآ إِنَّكَ جَامِعُ ٱلنَّاسِ لِيَوْمٍ لَّا رَيْبَ فِيهِ إِنَّ ٱللَّهَ لَا يُخْلِفُ ٱلْمِيعَادَ</div>
-        <p class="ayah-trans-text">“Our Lord, You will surely gather all people for a Day with no doubt in it. Allah never breaks His appointment.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:9</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003009.mp3" aria-label="Listen to Ayah 3:9" title="Listen · Qari Nasser Al-Qatami">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Our Lord, You will surely gather all people for a Day with no doubt in it. Allah never breaks His appointment.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>3:9</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/003009.mp3" aria-label="Listen to Ayah 3:9" title="Listen · Qari Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">An interactive particle contemplation on Surah Ali 'Imran 3:9—tracing how every scattered soul is gathered for the Day with no doubt.</p>
@@ -2759,9 +3053,20 @@ html, body {
       <h2 class="card-title">Clothing for One Another · Marriage&nbsp;</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">هُنَّ لِبَاسٌ لَّكُمْ وَأَنتُمْ لِبَاسٌ لَّهُنَّ</div>
-        <p class="ayah-trans-text">“They are clothing for you, and you are clothing for them.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:187</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Listen to Ayah 2:187" title="Listen to Ayah 2:187">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“They are clothing for you, and you are clothing for them.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>2:187</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/002187.mp3" aria-label="Listen to Ayah 2:187" title="Listen to Ayah 2:187" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Spouses as clothing for one another: finding comfort, protecting each other’s flaws, and building a peaceful home together (English &amp; Norsk).</p>
@@ -2796,9 +3101,20 @@ html, body {
       <h2 class="card-title">Al-Insān · The Unmentioned (76:1)</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">هَلْ أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ لَمْ يَكُن شَيْئًا مَّذْكُورًا</div>
-        <p class="ayah-trans-text">“Has there come upon man a period of time when he was not a thing mentioned?” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>76:1</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/076001.mp3" aria-label="Listen to Ayah 76:1" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Has there come upon man a period of time when he was not a thing mentioned?” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>76:1</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/076001.mp3" aria-label="Listen to Ayah 76:1" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Think about the ages before we existed, why we were given ears and eyes, and the daily choice between gratitude and denial.</p>
@@ -2833,9 +3149,20 @@ html, body {
       <h2 class="card-title">Names of Allah</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ لَهُ ٱلْأَسْمَآءُ ٱلْحُسْنَىٰ</div>
-        <p class="ayah-trans-text">“Allah—there is no deity except Him. To Him belong the best names.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>20:8</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/020008.mp3" aria-label="Listen to Ayah 20:8" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“Allah—there is no deity except Him. To Him belong the best names.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>20:8</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/020008.mp3" aria-label="Listen to Ayah 20:8" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Get to know Allah through His 99 Names: what each name means for your daily life, flashcards, a quiz, and relatable duʿās.</p>
@@ -2870,9 +3197,20 @@ html, body {
       <h2 class="card-title">Al-Fātiḥa · Complete Grammar&nbsp;</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ۝ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ</div>
-        <p class="ayah-trans-text">“In the name of Allah, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allah, Lord of the worlds.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>1:1–2</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/001001.mp3" aria-label="Listen to Surah Al-Fatiha" title="Listen · Sheikh Mishary Rashid Alafasy">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“In the name of Allah, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allah, Lord of the worlds.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>1:1–2</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Alafasy_128kbps/001001.mp3" aria-label="Listen to Surah Al-Fatiha" title="Listen · Sheikh Mishary Rashid Alafasy" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Explore all 30 words of Surah Al-Fatiha: roots, grammar breakdowns, hidden pronouns, verb conjugations, and linguistic gems.</p>
@@ -2907,9 +3245,20 @@ html, body {
       <h2 class="card-title">Az-Zumar · Complete Grammar&nbsp;</h2>
       <div class="card-ayah-flow">
         <div class="ayah-arabic-text" lang="ar" dir="rtl">تَنزِيلُ ٱلْكِتَـٰبِ مِنَ ٱللَّهِ ٱلْعَزِيزِ ٱلْحَكِيمِ ۝ إِنَّآ أَنزَلْنَآ إِلَيْكَ ٱلْكِتَـٰبَ بِٱلْحَقِّ فَٱعْبُدِ ٱللَّهَ مُخْلِصًا لَّهُ ٱلدِّينَ</div>
-        <p class="ayah-trans-text">“The revelation of the Book is from Allah, the Exalted in Might, the Wise. Indeed, We have sent down to you the Book in truth, so worship Allah, being sincere to Him in religion.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>39:1–2</bdi></span><button class="nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/039001.mp3" aria-label="Listen to Surah Az-Zumar" title="Listen · Sheikh Nasser Al-Qatami">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        <p class="ayah-trans-text">“The revelation of the Book is from Allah, the Exalted in Might, the Wise. Indeed, We have sent down to you the Book in truth, so worship Allah, being sincere to Him in religion.” <span class="ayah-inline-meta"><span class="ayah-ref"><bdi>39:1–2</bdi></span><button type="button" class="btn-audio-ring nq-play-btn card-ayah-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/039001.mp3" aria-label="Listen to Surah Az-Zumar" title="Listen · Sheikh Nasser Al-Qatami" aria-pressed="false">
+            <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+              <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+            </svg>
+            <span class="audio-ring-icon" aria-hidden="true">
+              <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <polygon points="7 4 21 12 7 20 7 4" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <rect x="5" y="4" width="4" height="16" rx="1" />
+                <rect x="15" y="4" width="4" height="16" rx="1" />
+              </svg>
+            </span>
           </button></span></p>
       </div>
       <p class="card-desc">Interactive word-by-word grammar, morphological root breakdown, reflection questions, theme connections, and self-quizzes across all 75 ayat of Surah Az-Zumar.</p>
@@ -2977,6 +3326,7 @@ html, body {
     <div>
       <h3 class="footer-col-title">Exhibits</h3>
       <ul class="footer-links-list">
+        <li><a href="successful-nation-imran.html">أُمَّةٌ يَدْعُونَ إِلَى ٱلْخَيْرِ · Those Who Call to Good — Āl ʿImrān 3:104</a></li>
         <li><a href="surah32.html">سُورَةُ السَّجْدَة · Sajdah (32:1–30)</a></li>
         <li><a href="everysoulpledge.html">سُورَةُ المُدَّثِّر · Complete Surah Al-Muddaththir (74:1–56)</a></li>
         <li><a href="rootwords.html">شَجَرَةُ الجُذُور · The Root Tree</a></li>
@@ -3018,7 +3368,7 @@ html, body {
     <div>
       <span>© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</span>
     </div>
-    <div class="footer-version-tag">v1.0.76 (updated 2026-10-26 08:35)</div>
+    <div class="footer-version-tag">v1.0.77 (updated 2026-10-26 11:45)</div>
   </div>
 </footer>
 
@@ -3304,49 +3654,87 @@ function showShareToast(message) {
   if (btn) btn.onclick = () => applyScale(curIdx + 1);
 })();
 
-/* Quran Ayah Audio Player (EveryAyah - Nasser Al-Qatami) */
+/* Quran Ayah Audio Player Engine (Circular Progress Ring) */
 (function initAyahAudioPlayer(){
-  let activeAudio=null, activeBtn=null;
-  document.addEventListener('click',(e)=>{
-    const btn=e.target.closest('.nq-play-btn');
-    if(!btn) return;
-    const url=btn.dataset.audio;
-    if(!url) return;
+  const CIRCUMFERENCE = 113.097;
+  let activeAudio = null, activeBtn = null, activeRing = null;
 
-    if(activeBtn===btn && activeAudio){
-      if(activeAudio.paused){
-        activeAudio.play();
-        btn.classList.add('playing');
+  function resetActiveAudioBtn() {
+    if (activeBtn) {
+      activeBtn.classList.remove('is-playing', 'playing', 'loading');
+      activeBtn.setAttribute('aria-pressed', 'false');
+    }
+    if (activeRing) {
+      activeRing.style.strokeDashoffset = CIRCUMFERENCE;
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-audio-ring, .nq-play-btn');
+    if (!btn) return;
+    const url = btn.dataset.audio;
+    if (!url) return;
+
+    if (activeBtn === btn && activeAudio) {
+      if (activeAudio.paused) {
+        activeAudio.play().then(() => {
+          btn.classList.add('is-playing', 'playing');
+          btn.setAttribute('aria-pressed', 'true');
+        }).catch(() => {});
       } else {
         activeAudio.pause();
-        btn.classList.remove('playing');
+        btn.classList.remove('is-playing', 'playing');
+        btn.setAttribute('aria-pressed', 'false');
       }
       return;
     }
 
-    if(activeAudio){
+    if (activeAudio) {
       activeAudio.pause();
-      if(activeBtn){
-        activeBtn.classList.remove('playing','loading');
-      }
+      resetActiveAudioBtn();
     }
 
-    activeBtn=btn;
-    btn.classList.add('loading');
-    activeAudio=new Audio(url);
-    activeAudio.play().then(()=>{
-      btn.classList.remove('loading');
-      btn.classList.add('playing');
-    }).catch(err=>{
-      btn.classList.remove('loading','playing');
-      console.warn('Audio playback error:', err);
+    activeBtn = btn;
+    activeRing = btn.querySelector('.audio-ring-fill');
+    activeAudio = new Audio(url);
+    btn.classList.add('is-playing', 'playing');
+    btn.setAttribute('aria-pressed', 'true');
+
+    activeAudio.play().catch(err => {
+      console.warn('Playback error:', err);
+      resetActiveAudioBtn();
+      activeAudio = null;
+      activeBtn = null;
+      activeRing = null;
     });
 
-    activeAudio.onended=()=>{
-      btn.classList.remove('playing','loading');
-      activeAudio=null;
-      activeBtn=null;
-    };
+    activeAudio.addEventListener('timeupdate', () => {
+      if (activeAudio && activeAudio.duration && activeRing) {
+        const pct = activeAudio.currentTime / activeAudio.duration;
+        activeRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+      }
+    });
+
+    activeAudio.addEventListener('ended', () => {
+      resetActiveAudioBtn();
+      activeAudio = null;
+      activeBtn = null;
+      activeRing = null;
+    });
+
+    activeAudio.addEventListener('pause', () => {
+      if (activeBtn) {
+        activeBtn.classList.remove('is-playing', 'playing');
+        activeBtn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    activeAudio.addEventListener('play', () => {
+      if (activeBtn) {
+        activeBtn.classList.add('is-playing', 'playing');
+        activeBtn.setAttribute('aria-pressed', 'true');
+      }
+    });
   });
 })();
 </script>

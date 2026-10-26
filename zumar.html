@@ -941,6 +941,74 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; scroll-behavior: auto !important; }
     }
+    /* Circular Audio Ring Player */
+    .btn-audio-ring {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .btn-audio-ring:hover {
+      transform: scale(1.08);
+    }
+    .btn-audio-ring:focus-visible {
+      outline: 2px solid #43a047;
+      outline-offset: 3px;
+    }
+    .audio-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+    .audio-ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.2);
+      stroke-width: 3;
+    }
+    .audio-ring-fill {
+      fill: none;
+      stroke: #e53935;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 113.097;
+      stroke-dashoffset: 113.097;
+      transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+    }
+    .btn-audio-ring.is-playing .audio-ring-fill,
+    .btn-audio-ring.playing .audio-ring-fill {
+      stroke: #43a047;
+    }
+    .audio-ring-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e53935;
+      transition: color 0.25s ease;
+    }
+    .btn-audio-ring.is-playing .audio-ring-icon,
+    .btn-audio-ring.playing .audio-ring-icon {
+      color: #43a047;
+    }
+    .audio-ring-icon .icon-play { display: block; }
+    .audio-ring-icon .icon-pause { display: none; }
+    .btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+    .btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+    .btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+    .btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
   </style>
 </head>
 <body>
@@ -14877,7 +14945,7 @@ const QUIZ = [
       </div>`;
 
     let currentAyah = 1;
-    let currentAudio = null;
+    let currentAudio = null, audioRing = null, CIRCUMFERENCE = 113.097;
     let currentPlayingAyah = null;
 
     function stopAudio() {
@@ -14888,7 +14956,9 @@ const QUIZ = [
       currentPlayingAyah = null;
       const btn = document.getElementById('btn-ayah-audio');
       if (btn) {
-        btn.classList.remove('playing');
+        btn.classList.remove('playing', 'is-playing');
+        btn.setAttribute('aria-pressed', 'false');
+        if (audioRing) audioRing.style.strokeDashoffset = CIRCUMFERENCE;
         const label = btn.querySelector('.audio-btn-label');
         if (label) label.textContent = 'Listen';
       }
@@ -14905,10 +14975,18 @@ const QUIZ = [
       const audio = new Audio(url);
       currentAudio = audio;
       currentPlayingAyah = n;
-      btn.classList.add('playing');
+      btn.classList.add('playing', 'is-playing');
+      btn.setAttribute('aria-pressed', 'true');
+      audioRing = btn.querySelector('#audio-ring-fill');
       const label = btn.querySelector('.audio-btn-label');
-      if (label) label.textContent = 'Playing...';
+      if (label) label.textContent = 'Pause';
 
+      audio.addEventListener('timeupdate', () => {
+        if (audio.duration && audioRing) {
+          const pct = audio.currentTime / audio.duration;
+          audioRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+        }
+      });
       audio.addEventListener('ended', () => {
         stopAudio();
       });
@@ -14985,9 +15063,20 @@ const QUIZ = [
               <p class="eyebrow">Ayah ${n} of ${AYAT.length} · 39:${n}</p>
               <h1 class="ayah-title">${A.title}</h1>
             </div>
-            <button type="button" class="ayah-audio-btn" id="btn-ayah-audio" aria-label="Listen to Ayah ${n}" title="Listen to Ayah ${n} · Qari Nasser Al-Qatami">
-              <svg class="audio-play-icon" viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M8 5v14l11-7z"/></svg>
-              <svg class="audio-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <button type="button" class="btn-audio-ring ayah-audio-btn" id="btn-ayah-audio" aria-label="Listen to Ayah ${n}" title="Listen to Ayah ${n} · Qari Nasser Al-Qatami" aria-pressed="false">
+              <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+                <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+                <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
+              </svg>
+              <span class="audio-ring-icon" aria-hidden="true">
+                <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <polygon points="7 4 21 12 7 20 7 4" />
+                </svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <rect x="5" y="4" width="4" height="16" rx="1" />
+                  <rect x="15" y="4" width="4" height="16" rx="1" />
+                </svg>
+              </span>
               <span class="audio-btn-label">Listen</span>
             </button>
           </div>
@@ -15418,7 +15507,7 @@ let quizInterval = null;
       <a href="https://github.com/islamwell/zumar" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">GitHub Repo ↗</a>
     </div>
     <p style="margin-bottom:8px;">© 2026 NurulQuran Institute · All Knowledge &amp; Reflections for the Sake of Allah</p>
-    <div class="nq-version-tag" style="font-size:0.75rem;letter-spacing:0.08em;opacity:0.65;font-family:monospace">v1.0.76 (updated 2026-10-26 08:35)</div>
+    <div class="nq-version-tag" style="font-size:0.75rem;letter-spacing:0.08em;opacity:0.65;font-family:monospace">v1.0.77 (updated 2026-10-26 11:45)</div>
   </footer>
 </body>
 </html>

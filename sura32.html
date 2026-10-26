@@ -255,6 +255,74 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
   .en{font-size:clamp(17px,4.5vw,26px);line-height:1.2}
   .note{font-size:clamp(12px,3.2vw,15px);margin-top:12px}
 }
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
 </style>
 </head>
 <body>
@@ -268,7 +336,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
     <span>NURULQURAN PORTAL</span>
   </a>
   <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.76 (updated 2026-10-26 08:35)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.77 (updated 2026-10-26 11:45)</div>
 </div>
 
 <!-- TOP RIGHT HUD -->
@@ -279,7 +347,7 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">v1.0.76 (updated 2026-10-26 08:35)</div>
+  <div class="footer-version-tag">v1.0.77 (updated 2026-10-26 11:45)</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -291,8 +359,20 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 </div>
 <div class="cursor" id="cursor"></div>
 <div class="actions" aria-label="Verse controls">
-  <button class="iconbtn" id="audioBtn" type="button" aria-label="Play from current āyah and continue" aria-pressed="false" title="Play from this āyah and continue (A)">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5z"/><path d="M17 8.5a5 5 0 0 1 0 7"/><path d="M19.5 6a8.5 8.5 0 0 1 0 12"/></svg>
+  <button class="btn-audio-ring iconbtn" id="audioBtn" type="button" aria-label="Play from current āyah and continue" aria-pressed="false" title="Play from this āyah and continue (A)">
+    <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+      <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+      <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
+    </svg>
+    <span class="audio-ring-icon" aria-hidden="true">
+      <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <polygon points="7 4 21 12 7 20 7 4" />
+      </svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <rect x="5" y="4" width="4" height="16" rx="1" />
+        <rect x="15" y="4" width="4" height="16" rx="1" />
+      </svg>
+    </span>
   </button>
   <button class="iconbtn" id="pauseBtn" type="button" aria-label="Pause autoplay" aria-pressed="false" title="Play / pause autoplay (P)">
     <svg id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
@@ -387,7 +467,7 @@ const scenes=V.map((v,i)=>{
 /* ─────────── timeline ─────────── */
 let T=0.0001, N=V.length, last=performance.now(), auto=true, idle=0;
 let userPaused=false, lastPointerX=null, simTime=0;
-const audio=document.getElementById("ayahAudio"), audioBtn=document.getElementById("audioBtn");
+const audio=document.getElementById("ayahAudio"), audioBtn=document.getElementById("audioBtn"), audioRing=document.getElementById("audio-ring-fill"), CIRCUMFERENCE=113.097;
 const pauseBtn=document.getElementById("pauseBtn"), pauseIcon=document.getElementById("pauseIcon");
 const shareBtn=document.getElementById("shareBtn"), toast=document.getElementById("toast");
 const audioUrls=[
@@ -448,6 +528,8 @@ function stopAudio(){
   audioWasPlaying=false;
   audio.pause(); audio.currentTime=0;
   audioBtn.setAttribute("aria-pressed","false");
+  audioBtn.classList.remove("is-playing","playing");
+  if(audioRing) audioRing.style.strokeDashoffset=CIRCUMFERENCE;
 }
 function playCurrentAudio(){
   const i=currentIndex();
@@ -456,7 +538,10 @@ function playCurrentAudio(){
   audioWasPlaying=false;
   audio.volume=LOW_VOLUME;
   audio.src=audioUrls[i];
-  audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>showToast("Audio could not start"));
+  audio.play().then(()=>{
+    audioBtn.setAttribute("aria-pressed","true");
+    audioBtn.classList.add("is-playing","playing");
+  }).catch(()=>showToast("Audio could not start"));
 }
 async function copyText(text){
   try{ if(navigator.clipboard && location.protocol!=="file:"){ await navigator.clipboard.writeText(text); return true; } }catch(_){}
@@ -472,13 +557,24 @@ async function copyText(text){
 }
 audio.addEventListener("ended",()=>{
   audioBtn.setAttribute("aria-pressed","false");
+  audioBtn.classList.remove("is-playing","playing");
+  if(audioRing) audioRing.style.strokeDashoffset=CIRCUMFERENCE;
   if(!audioSequence) return;
   const i=currentIndex();
   if(i>=N-1){audioSequence=false;return;}
   T=i+1+.001; setScrubFromT();
   audio.volume=LOW_VOLUME;
   audio.src=audioUrls[currentIndex()];
-  audio.play().then(()=>audioBtn.setAttribute("aria-pressed","true")).catch(()=>{audioSequence=false;});
+  audio.play().then(()=>{
+    audioBtn.setAttribute("aria-pressed","true");
+    audioBtn.classList.add("is-playing","playing");
+  }).catch(()=>{audioSequence=false;});
+});
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration && audioRing) {
+    const pct = audio.currentTime / audio.duration;
+    audioRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+  }
 });
 audioBtn.addEventListener("click",playCurrentAudio);
 pauseBtn.addEventListener("click",()=>{

@@ -114,6 +114,79 @@ footer{padding:4rem 2rem;text-align:center;font-size:.7rem;letter-spacing:.2em;o
 
 /* End section audio row */
 .end-ref-row{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;margin-bottom:.3rem}
+
+/* Circular Audio Ring Player */
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+.btn-audio-ring:hover {
+  transform: scale(1.08);
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid #43a047;
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935; /* Red when stopped/paused */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097; /* 100% hidden at start */
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill,
+.btn-audio-ring.playing .audio-ring-fill {
+  stroke: #43a047; /* Green when playing */
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935; /* Red icon when paused */
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon,
+.btn-audio-ring.playing .audio-ring-icon {
+  color: #43a047; /* Green icon when playing */
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
+.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
+.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+
 </style></head><body>
 <canvas></canvas><div class="bar"></div>
 
@@ -130,10 +203,21 @@ footer{padding:4rem 2rem;text-align:center;font-size:.7rem;letter-spacing:.2em;o
 <h1 class="ar"><span style="--d:0">وَيْلٌ</span> <span style="--d:1">يَوْمَئِذٍ</span> <span style="--d:2">لِّلْمُكَذِّبِينَ</span></h1>
 <p class="s big en">Woe, that Day, to the deniers.</p>
 <div class="hero-audio">
-  <button class="nq-play-btn hero-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15 recited by Nasser Al-Qatami" title="Listen 77:15 · Qari Nasser Al-Qatami">
-    <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-    <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-  </button>
+  <button type="button" class="btn-audio-ring nq-play-btn hero-play" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077015.mp3" aria-label="Listen to Ayah 77:15 recited by Nasser Al-Qatami" title="Listen 77:15 · Qari Nasser Al-Qatami" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button>
   <div class="hero-audio-meta">
     <span class="audio-reciter">Nasser Al-Qatami</span>
     <span class="audio-ref">77:15</span>
@@ -167,10 +251,21 @@ footer{padding:4rem 2rem;text-align:center;font-size:.7rem;letter-spacing:.2em;o
 <div class="stage">
 <div class="end-ref-row">
   <small>77 : 50</small>
-  <button class="nq-play-btn sm" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077050.mp3" aria-label="Listen to Ayah 77:50 recited by Nasser Al-Qatami" title="Listen 77:50 · Qari Nasser Al-Qatami">
-    <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-    <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-  </button>
+  <button type="button" class="btn-audio-ring nq-play-btn sm" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077050.mp3" aria-label="Listen to Ayah 77:50 recited by Nasser Al-Qatami" title="Listen 77:50 · Qari Nasser Al-Qatami" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button>
 </div>
 <p class="ar q">فَبِأَيِّ حَدِيثٍ بَعْدَهُ يُؤْمِنُونَ</p>
 <p class="s big">After this, what will they ever believe?</p>
@@ -182,7 +277,7 @@ footer{padding:4rem 2rem;text-align:center;font-size:.7rem;letter-spacing:.2em;o
 
 <footer>
   <p>IT ECHOES IN VERSES 15 · 19 · 24 · 28 · 34 · 37 · 40 · 45 · 47 · 49</p>
-  <div class="nq-version-tag" style="margin-top:10px;font-size:0.7rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.76 (updated 2026-10-26 08:35)</div>
+  <div class="nq-version-tag" style="margin-top:10px;font-size:0.7rem;letter-spacing:0.08em;opacity:0.6;font-family:monospace">v1.0.77 (updated 2026-10-26 11:45)</div>
 </footer>
 <aside class="hud"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" pathLength="10"/><circle cx="50" cy="50" r="46" pathLength="10"/></svg><b id="ct">0</b>OF 10</aside>
 
@@ -238,10 +333,21 @@ $('#E').innerHTML=E.map(([v,t,d,x],i)=>{
       <b class="ar">وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ</b>
       <div class="ref-row">
         <span>Woe, that Day, to the deniers · ${V[i]}</span>
-        <button class="nq-play-btn sm" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077${numPad}.mp3" aria-label="Listen to 77:${V[i]} recited by Nasser Al-Qatami" title="Listen 77:${V[i]} · Qari Nasser Al-Qatami">
-          <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
+        <button type="button" class="btn-audio-ring nq-play-btn sm" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/077${numPad}.mp3" aria-label="Listen to 77:${V[i]} recited by Nasser Al-Qatami" title="Listen 77:${V[i]} · Qari Nasser Al-Qatami" aria-pressed="false">
+  <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+    <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+    <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+  </svg>
+  <span class="audio-ring-icon" aria-hidden="true">
+    <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <polygon points="7 4 21 12 7 20 7 4" />
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <rect x="5" y="4" width="4" height="16" rx="1" />
+      <rect x="15" y="4" width="4" height="16" rx="1" />
+    </svg>
+  </span>
+</button>
       </div>
     </div>
   </article>`;
@@ -259,44 +365,71 @@ if(!document.startViewTransition)return go();
 document.startViewTransition(go).ready.then(()=>document.documentElement.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${Math.hypot(innerWidth,innerHeight)}px at ${x}px ${y}px)`]},{duration:1800,easing:'cubic-bezier(.7,0,.2,1)',pseudoElement:'::view-transition-new(root)'}))};
 
 /* ---------- AUDIO: Nasser Al-Qatami ---------- */
-let curAudio=null, curBtn=null;
+let curAudio=null, curBtn=null, curRing=null;
+const CIRCUMFERENCE = 113.097;
+
 function playAyahAudio(btn){
   const url=btn.dataset.audio;
   if(!url) return;
   if(curBtn===btn && curAudio){
     if(!curAudio.paused){
       curAudio.pause();
-      btn.classList.remove('playing');
+      btn.classList.remove('playing', 'is-playing');
+      btn.setAttribute('aria-pressed', 'false');
       return;
     }else{
-      curAudio.play().then(()=>btn.classList.add('playing')).catch(()=>{});
+      curAudio.play().then(()=>{
+        btn.classList.add('playing', 'is-playing');
+        btn.setAttribute('aria-pressed', 'true');
+      }).catch(()=>{});
       return;
     }
   }
   if(curAudio){
     curAudio.pause();
-    if(curBtn) curBtn.classList.remove('playing');
+    if(curBtn){
+      curBtn.classList.remove('playing', 'is-playing');
+      curBtn.setAttribute('aria-pressed', 'false');
+    }
+    if(curRing) curRing.style.strokeDashoffset = CIRCUMFERENCE;
   }
   curBtn=btn;
+  curRing=btn.querySelector('.audio-ring-fill');
   curAudio=new Audio(url);
   curAudio.volume=0.85;
-  btn.classList.add('playing');
+  btn.classList.add('playing', 'is-playing');
+  btn.setAttribute('aria-pressed', 'true');
   curAudio.play().catch(e=>{
     console.warn("Audio play error:", e);
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
+    if(curRing) curRing.style.strokeDashoffset = CIRCUMFERENCE;
+  });
+  curAudio.addEventListener('timeupdate', () => {
+    if(curAudio && curAudio.duration && curRing){
+      const pct = curAudio.currentTime / curAudio.duration;
+      curRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+    }
   });
   curAudio.addEventListener('ended',()=>{
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
+    if(curRing) curRing.style.strokeDashoffset = CIRCUMFERENCE;
     curAudio=null;
     curBtn=null;
+    curRing=null;
   });
   curAudio.addEventListener('pause',()=>{
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
   });
   curAudio.addEventListener('error',()=>{
-    btn.classList.remove('playing');
+    btn.classList.remove('playing', 'is-playing');
+    btn.setAttribute('aria-pressed', 'false');
+    if(curRing) curRing.style.strokeDashoffset = CIRCUMFERENCE;
     curAudio=null;
     curBtn=null;
+    curRing=null;
   });
 }
 document.addEventListener('click',e=>{
