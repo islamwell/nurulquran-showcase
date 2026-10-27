@@ -104,7 +104,7 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
 .hud{position:fixed;z-index:20;display:flex;align-items:center;gap:.6rem;padding:1rem 1.2rem;pointer-events:none}
 .hud>*{pointer-events:auto}
 .hud.tl{top:0;left:0}
-.hud.tr{top:0;right:0}
+.hud.tr-corner{top:0;right:0}
 .portal-back-btn{
   display:inline-flex;align-items:center;gap:7px;
   color:var(--gold);text-decoration:none;
@@ -248,6 +248,9 @@ html[lang="ur"] #pop p {
 .audio-ring-icon .icon-pause { display: none; }
 .btn-audio-ring.is-playing .audio-ring-icon .icon-play { display: none; }
 .btn-audio-ring.is-playing .audio-ring-icon .icon-pause { display: block; }
+.btn-audio-ring.is-error { animation: audioShake .35s ease; }
+.btn-audio-ring.is-error .audio-ring-fill { stroke: var(--rose); }
+@keyframes audioShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
 
 /* SCROLL-DRIVEN */
 @supports (animation-timeline:view()){
@@ -261,7 +264,9 @@ html[lang="ur"] #pop p {
 @keyframes drift{from{translate:0 15%}to{translate:0 -15%}}
 @keyframes grow{from{scale:0 1}}
 @keyframes draw{from{stroke-dashoffset:1}}
-@media (prefers-reduced-motion:reduce){:not(.rip),::before{animation:none!important}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
@@ -275,8 +280,8 @@ html[lang="ur"] #pop p {
 </head>
 <body>
 
-<!-- SVG Flag Symbols (Reusable) -->
-<svg style="display:none" aria-hidden="true">
+<!-- SVG Flag Symbols (Reusable, offscreen rather than display:none to prevent WebKit clipPath issues) -->
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none" aria-hidden="true">
   <defs>
     <!-- US / English Flag -->
     <g id="flag-en">
@@ -335,7 +340,7 @@ html[lang="ur"] #pop p {
   </a>
 </div>
 
-<div class="hud tr">
+<div class="hud tr-corner">
   <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
     <button type="button" class="nq-lang-btn active-lang" data-lang="en" role="radio" aria-checked="true" title="English">
       <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-en"></use></svg>
@@ -499,7 +504,7 @@ html[lang="ur"] #pop p {
       <a href="index.html" style="color:var(--gold);text-decoration:none" id="footerShowcaseLink">← NurulQuran Showcase</a>
       <a href="#hero" style="color:var(--dim);text-decoration:none" id="footerTopLink">Return to Top ↑</a>
     </div>
-    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.80 (updated 2026-10-27 08:06)</div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.81 (updated 2026-10-27 08:20)</div>
   </div>
 </footer>
 
@@ -535,12 +540,30 @@ function updateButtonUI() {
   }
 }
 
+function setAudioError(msg) {
+  audioBtn.classList.add('is-error');
+  audioBtn.setAttribute('title', msg || 'Audio unavailable');
+  setTimeout(() => {
+    audioBtn.classList.remove('is-error');
+    if (window.I18N && window.CUR_LANG) {
+      audioBtn.setAttribute('title', I18N[CUR_LANG].audioTitle);
+    }
+  }, 3000);
+}
+
 audioBtn.addEventListener('click', () => {
   if (audio.paused) {
-    audio.play().catch(err => console.warn('Playback error:', err));
+    audio.play().catch(err => {
+      console.warn('Playback error:', err);
+      setAudioError('Playback failed');
+    });
   } else {
     audio.pause();
   }
+});
+audio.addEventListener('error', e => {
+  console.warn('Audio resource error:', e);
+  setAudioError('Audio unavailable');
 });
 audio.addEventListener('play', updateButtonUI);
 audio.addEventListener('pause', updateButtonUI);
@@ -997,7 +1020,7 @@ const I18N = {
     "btnScatter": "La dem spre seg",
     "sec3P": "Ordet <b class=\"ar\">أُمَّةٌ</b> stammer fra en rot som betyr <b>å sikte mot, å gå i en retning</b>. Samme rot gir <b class=\"ar\">أُمّ</b> (mor), den familien samler seg rundt, og <b class=\"ar\">إِمَام</b> (imam), den som står foran og leder. Å være på samme sted gjør ikke folk til et fellesskap — felles retning gjør det. Og verset sier <b class=\"ar\">مِّنكُمْ</b>, «blant dere». Dette er ikke noen andres oppgave; det må vokse frem innenfra.",
     "sec4Tag": "Tre handlinger · én rekkefølge",
-    "sec4H2": "Inviter først. <em>Veiled etterpå.</em>",
+    "sec4H2": "Inviter først. <em>Rett opp etterpå.</em>",
     "step1H3": "1 · Inviter",
     "step1P": "Åpne døren til alt som er godt. En invitasjon er hjertevarm; ingen dras motvillig til et festmåltid.",
     "step2H3": "2 · Oppmuntre",
@@ -1087,7 +1110,7 @@ const I18N = {
     "sec7H2": "Touchez n'importe où. <em>Un seul appel rayonne au loin.</em>",
     "sec7Quote": "« Quiconque appelle à une bonne voie aura une récompense égale à celle de ceux qui la suivent, sans que leurs récompenses n'en soient diminuées en rien. » <b>Le Prophète Muhammad ﷺ (Muslim)</b>",
     "ripStart": "Touchez pour commencer",
-    "footerSurah": "3:104 · Sourate Âl 'Imrân ↗",
+    "footerSurah": "3:104 · Sourate Âl ’Imrân ↗",
     "footerShowcase": "← Portail NurulQuran",
     "footerTop": "Haut de page ↑",
     "langHeading": "Langue · Language · زبان · Språk"
@@ -1110,7 +1133,7 @@ let activeWordIdx = -1;
 const V = $('#verse'), pop = $('#pop');
 
 // Render words
-V.innerHTML = W_DATA.en.map((w, i) => `<button style="--i:${i};--c:var(--${w[3] || 'ink'})">${w[0]}</button>`).join('');
+V.innerHTML = W_DATA.en.map((w, i) => `<button style="--i:${i};--c:var(--${w[3] || 'ink'})" aria-label="${w[0]} (${w[1]})">${w[0]}</button>`).join('');
 
 function updatePopoverPosition(b) {
   if (!b || !pop) return;
@@ -1210,6 +1233,13 @@ document.addEventListener('pointerdown', e => {
   }
 });
 
+// Keyboard Escape to dismiss popover
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && activeWordIdx >= 0) {
+    closePopover();
+  }
+});
+
 // Reposition on window resize & scroll
 window.addEventListener('resize', () => {
   if (activeWordIdx >= 0 && V.children[activeWordIdx]) {
@@ -1223,9 +1253,19 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* =====================================================================
-   4. HERO SKY CANVAS
+   4. CANVASES & CONTEXTS
 ===================================================================== */
-const S=$('#sky'),P=Array.from({length:1400},()=>({x:R()*innerWidth,y:R()*innerHeight,t:R(),o:R()*TAU,s:R()<.68?0:R()<.6?1:2,hx:R(),hy:R(),c:R()<.85?gold:jade}));
+const S=$('#sky'), D=$('#dir'), F=$('#farm');
+let sx, dx, fx, lw, last = 0;
+const size = () => {
+  sx = fit(S);
+  dx = fit(D);
+  fx = fit(F);
+  if (innerWidth !== lw) { lw = innerWidth; initDir(); }
+};
+
+/* 4.1 HERO SKY CANVAS */
+const P=Array.from({length:1400},()=>({x:R()*innerWidth,y:R()*innerHeight,t:R(),o:R()*TAU,s:R()<.68?0:R()<.6?1:2,hx:R(),hy:R(),c:R()<.85?gold:jade}));
 function sky(t){const w=S.clientWidth,h=S.clientHeight,cx=w/2,cy=h/2,r0=Math.min(w,h)*.44,rot=t/3e4,[mx,my]=rel(S);sx.clearRect(0,0,w,h);
  for(const p of P){let tx,ty;
   if(!p.s){const k=p.t*16,i=k|0,f=k-i,v=j=>{const a=j*TAU/16+rot,r=j%2?r0*.765:r0;return[Math.cos(a)*r,Math.sin(a)*r]},[a,b]=v(i),[c,d]=v(i+1);tx=cx+a+(c-a)*f;ty=cy+b+(d-b)*f}
@@ -1238,7 +1278,7 @@ function sky(t){const w=S.clientWidth,h=S.clientHeight,cx=w/2,cy=h/2,r0=Math.min
 /* =====================================================================
    5. COMMUNITY DIRECTION CANVAS
 ===================================================================== */
-const D=$('#dir');let A=[],al=false,Lx=0,Ly=0;
+let A=[],al=false,Lx=0,Ly=0;
 const initDir=()=>{const w=D.clientWidth,h=D.clientHeight;Lx=w/2;Ly=h/2;A=[];for(let x=22;x<w;x+=36)for(let y=22;y<h;y+=36)A.push({x:x+R()*12-6,y:y+R()*12-6,a:R()*TAU,w:R()*TAU,k:0})};
 function dir(){const w=D.clientWidth,h=D.clientHeight,[mx,my]=rel(D);
  if(mx>0&&my>0&&mx<w&&my<h){Lx+=(mx-Lx)*.08;Ly+=(my-Ly)*.08}
@@ -1262,8 +1302,11 @@ sl.oninput();
 /* =====================================================================
    7. FARMER CANVAS
 ===================================================================== */
-const F=$('#farm');let g=0,hold=false,msg='';
-F.onpointerdown=()=>{if(g>=1)g=0;hold=true};onpointerup=onpointercancel=()=>hold=false;F.oncontextmenu=e=>e.preventDefault();
+let g=0,hold=false,msg='';
+F.addEventListener('pointerdown', () => { if (g >= 1) g = 0; hold = true; });
+window.addEventListener('pointerup', () => hold = false);
+window.addEventListener('pointercancel', () => hold = false);
+F.addEventListener('contextmenu', e => e.preventDefault());
 function br(x,y,l,a,d,t,n){const k=Math.min(1,Math.max(0,g*10-d));if(!k)return;const X=x+Math.cos(a)*l*k,Y=y+Math.sin(a)*l*k;
  fx.strokeStyle=d<4?'oklch(52% .06 60)':leaf;fx.lineWidth=Math.max(.7,8-d);fx.beginPath();fx.moveTo(x,y);fx.lineTo(X,Y);fx.stroke();if(k<1)return;
  if(d>8){fx.fillStyle=n%4?leaf:gold;fx.beginPath();fx.arc(X,Y,2.5+Math.sin(t/400+n),0,TAU);fx.fill();return}
@@ -1366,6 +1409,13 @@ function setLang(lang) {
   $('#footerTopLink').textContent = t.footerTop;
   $('#footerLangHeading').textContent = t.langHeading;
 
+  // Update accessible word labels
+  $$('#verse button').forEach((b, i) => {
+    if (W_DATA[lang] && W_DATA[lang][i]) {
+      b.setAttribute('aria-label', `${W_DATA[lang][i][0]} (${W_DATA[lang][i][1]})`);
+    }
+  });
+
   // Popover update if currently open
   if (activeWordIdx >= 0 && (pop.matches?.(':popover-open') || pop.getAttribute('data-open') === 'true')) {
     updatePopover();
@@ -1383,8 +1433,6 @@ document.addEventListener('click', e => {
 /* =====================================================================
    10. RENDER LOOP
 ===================================================================== */
-let sx,dx,fx,lw,last=0;
-const size=()=>{sx=fit(S);dx=fit(D);fx=fit(F);if(innerWidth!==lw){lw=innerWidth;initDir()}};
 size();addEventListener('resize',size);
 (function loop(t){const dt=Math.min(t-last,50);last=t;on(S)&&sky(t);on(D)&&dir();on(F)&&farm(t,dt);requestAnimationFrame(loop)})(0);
 
