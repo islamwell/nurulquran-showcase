@@ -30,18 +30,39 @@ p .ar{color:var(--c);font-size:1.35em}
 #sky{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
 #verse{font-size:clamp(2rem,1rem + 4.4vw,4.6rem);line-height:2.1;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.4em;text-shadow:0 0 .6em var(--bg)}
 #verse button{all:unset;cursor:pointer;color:var(--c);transition:scale .3s,text-shadow .3s;animation:in 1.4s calc(var(--i)*.15s + .3s) backwards}
-#verse button:is(:hover,:focus-visible,.on){scale:1.12;text-shadow:0 0 .5em var(--c)}
+#verse button:is(:hover,:focus-visible,.word-active){scale:1.15;text-shadow:0 0 .6em var(--c)}
 .tr{font-size:clamp(1.1rem,.9rem + 1vw,1.6rem);color:var(--ink);max-width:44ch;animation:in 1.6s 2.4s backwards}
 .hint{color:var(--dim);animation:in 1s 3.4s backwards,bob 2s 4.4s infinite}
 @keyframes in{from{opacity:0;filter:blur(14px);translate:0 .4em}}
 @keyframes bob{50%{translate:0 6px}}
 
-/* WORD POPOVER (anchor positioning) */
-.on{anchor-name:--w}
-#pop{inset:auto;margin:.6rem 0;position-anchor:--w;position-area:bottom;position-try-fallbacks:flip-block;width:min(22rem,90vw);padding:1.2rem 1.5rem;border-radius:1.4rem;border:1px solid var(--c);background:oklch(18% .03 265/.85);backdrop-filter:blur(18px) saturate(1.4);color:var(--ink);text-align:center;box-shadow:0 20px 60px -20px var(--c);opacity:0;translate:0 12px;transition:opacity .35s,translate .35s,display .35s allow-discrete,overlay .35s allow-discrete}
-#pop:popover-open{opacity:1;translate:0}
-@starting-style{#pop:popover-open{opacity:0;translate:0 12px}}
-@supports not (position-area:bottom){#pop{inset:0;margin:auto;height:fit-content}}
+/* WORD POPOVER (Positioned directly and reliably across all browsers) */
+#pop{
+  position:fixed;
+  z-index:100;
+  margin:0;
+  inset:auto;
+  width:min(22rem,90vw);
+  padding:1.2rem 1.5rem;
+  border-radius:1.4rem;
+  border:1px solid var(--c);
+  background:oklch(18% .03 265/.94);
+  backdrop-filter:blur(20px) saturate(1.4);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  color:var(--ink);
+  text-align:center;
+  box-shadow:0 24px 60px -15px var(--c), 0 0 0 1px oklch(100% 0 0/.08);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:opacity .25s ease, transform .25s ease;
+}
+#pop:popover-open,
+#pop[data-open="true"]{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
 #pop b{display:block;font-size:2.2rem;line-height:1.8;color:var(--c)}
 #pop i{display:block;font-style:normal;font-weight:600;font-size:1.05rem;color:var(--ink);margin-top:.2rem}
 #pop p{font-size:.95rem;margin-top:.4rem}
@@ -99,7 +120,7 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
   transform:translateX(-2px);box-shadow:0 0 20px -5px var(--gold);
 }
 
-/* Multilingual Switcher */
+/* Multilingual Switcher (uses active-lang, never generic .on) */
 .nq-lang-group{
   display:inline-flex;align-items:center;
   background:oklch(15% .02 265/.85);
@@ -118,7 +139,7 @@ p.big{font-size:clamp(2.2rem,1rem + 5vw,5rem);color:var(--gold);max-width:none;l
   user-select:none;
 }
 .nq-lang-btn:hover{color:var(--ink);background:oklch(100% 0 0/.08)}
-.nq-lang-btn.on{
+.nq-lang-btn.active-lang{
   color:#04140a;background:var(--gold);border-color:var(--gold);
   font-weight:700;box-shadow:0 0 14px color-mix(in oklch,var(--gold) 45%,transparent);
 }
@@ -316,7 +337,7 @@ html[lang="ur"] #pop p {
 
 <div class="hud tr">
   <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
-    <button type="button" class="nq-lang-btn on" data-lang="en" role="radio" aria-checked="true" title="English">
+    <button type="button" class="nq-lang-btn active-lang" data-lang="en" role="radio" aria-checked="true" title="English">
       <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-en"></use></svg>
       <span>EN</span>
     </button>
@@ -336,7 +357,7 @@ html[lang="ur"] #pop p {
 </div>
 
 <div id="bar"></div>
-<div id="pop" popover></div>
+<div id="pop" popover="auto"></div>
 
 <!-- 1 · HERO -->
 <section id="hero">
@@ -455,7 +476,7 @@ html[lang="ur"] #pop p {
     <div class="nq-lang-selector-wrap">
       <div id="footerLangHeading" style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--dim);text-transform:uppercase">Language · زبان · Språk · Langue</div>
       <div class="nq-lang-group" role="radiogroup" aria-label="Language selection">
-        <button type="button" class="nq-lang-btn on" data-lang="en" role="radio" aria-checked="true" title="English">
+        <button type="button" class="nq-lang-btn active-lang" data-lang="en" role="radio" aria-checked="true" title="English">
           <svg class="round-flag" viewBox="0 0 36 36" aria-hidden="true"><use href="#flag-en"></use></svg>
           <span>English</span>
         </button>
@@ -478,7 +499,7 @@ html[lang="ur"] #pop p {
       <a href="index.html" style="color:var(--gold);text-decoration:none" id="footerShowcaseLink">← NurulQuran Showcase</a>
       <a href="#hero" style="color:var(--dim);text-decoration:none" id="footerTopLink">Return to Top ↑</a>
     </div>
-    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.78 (updated 2026-10-26 20:46)</div>
+    <div class="footer-version-tag" style="margin-top:.4rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.80 (updated 2026-10-27 08:06)</div>
   </div>
 </footer>
 
@@ -547,7 +568,6 @@ if (paramLang && ['en', 'ur', 'no', 'fr'].includes(paramLang)) {
   if (saved && ['en', 'ur', 'no', 'fr'].includes(saved)) CUR_LANG = saved;
 }
 window.CUR_LANG = CUR_LANG;
-
 const W_DATA = {
   "en": [
     [
@@ -1062,7 +1082,7 @@ const I18N = {
     "farmMid": "Ne vous arrêtez pas en si bon chemin…",
     "farmDone": "Votre part est faite. La croissance vient d'Allah. (Touchez pour semer à nouveau)",
     "sec6P1": "Le mot <b class=\"ar\">ٱلْمُفْلِحُونَ</b> vient d'une racine qui signifie <b>fendre la terre</b>. C'est la même racine que le mot arabe désignant le paysan. Le cultivateur laboure, sème et arrose, mais il ne peut forcer aucune graine à germer ; cela appartient à Allah. Votre rôle est d'inviter, d'encourager et de conseiller. <b>La vraie réussite réside dans la sincérité de l'effort, non dans le nombre de ceux qui écoutent.</b>",
-    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> (« ceux-là ») est un pronom d'éloignement, comme pour les élever à un rang noble. <b class=\"ar\">هُمُ</b> (« eux seuls ») insiste : ce sont <b>eux</b> qui réussissent vraiment.",
+    "sec6P2": "<b class=\"ar\">أُو۟لَـٰٓئِكَ</b> (« ceux-là ») est un pronom d'éloignement, comme pour les élever à un rang noble. هُمُ (« eux seuls ») insiste : ce sont <b>eux</b> qui réussissent vraiment.",
     "sec7Tag": "À vous de jouer",
     "sec7H2": "Touchez n'importe où. <em>Un seul appel rayonne au loin.</em>",
     "sec7Quote": "« Quiconque appelle à une bonne voie aura une récompense égale à celle de ceux qui la suivent, sans que leurs récompenses n'en soient diminuées en rien. » <b>Le Prophète Muhammad ﷺ (Muslim)</b>",
@@ -1084,30 +1104,123 @@ function getRipText(lang, count) {
 }
 
 /* =====================================================================
-   3. WORDS & POPOVER
+   3. WORDS & POPOVER (Cross-browser, robust positioning)
 ===================================================================== */
 let activeWordIdx = -1;
-const V=$('#verse'),pop=$('#pop');
-V.innerHTML=W_DATA.en.map((w,i)=>`<button style="--i:${i};--c:var(--${w[3]||'ink'})">${w[0]}</button>`).join('');
+const V = $('#verse'), pop = $('#pop');
 
-V.onclick=e=>{
-  const b=e.target.closest('button');
-  if(!b)return;
-  activeWordIdx=[...V.children].indexOf(b);
-  updatePopover();
-  pop.matches(':popover-open')||pop.showPopover();
-};
+// Render words
+V.innerHTML = W_DATA.en.map((w, i) => `<button style="--i:${i};--c:var(--${w[3] || 'ink'})">${w[0]}</button>`).join('');
 
-function updatePopover(){
-  if(activeWordIdx < 0) return;
-  const b = V.children[activeWordIdx];
-  if(!b) return;
-  const [a, tr, note] = W_DATA[CUR_LANG][activeWordIdx];
-  $('.on')?.classList.remove('on');
-  b.classList.add('on');
-  pop.style.cssText = b.style.cssText;
-  pop.innerHTML = `<b class="ar">${a}</b><i>${tr}</i><p>${note}</p>`;
+function updatePopoverPosition(b) {
+  if (!b || !pop) return;
+  const r = b.getBoundingClientRect();
+  const popWidth = Math.min(352, window.innerWidth * 0.9);
+  let left = r.left + (r.width / 2) - (popWidth / 2);
+  left = Math.max(14, Math.min(left, window.innerWidth - popWidth - 14));
+
+  // Determine top: place right below the clicked word
+  let top = r.bottom + 12;
+  // If too close to bottom of screen, position right above the word
+  if (top + 180 > window.innerHeight && r.top > 190) {
+    top = Math.max(14, r.top - 180);
+  }
+
+  pop.style.margin = '0';
+  pop.style.right = 'auto';
+  pop.style.bottom = 'auto';
+  pop.style.left = `${Math.round(left)}px`;
+  pop.style.top = `${Math.round(top)}px`;
 }
+
+function openPopover() {
+  if (typeof pop.showPopover === 'function') {
+    try {
+      if (!pop.matches(':popover-open')) pop.showPopover();
+    } catch(err) {
+      pop.setAttribute('data-open', 'true');
+    }
+  } else {
+    pop.setAttribute('data-open', 'true');
+  }
+}
+
+function closePopover() {
+  if (typeof pop.hidePopover === 'function') {
+    try {
+      if (pop.matches(':popover-open')) pop.hidePopover();
+    } catch(err) {
+      pop.removeAttribute('data-open');
+    }
+  } else {
+    pop.removeAttribute('data-open');
+  }
+  $('#verse .word-active')?.classList.remove('word-active');
+  activeWordIdx = -1;
+}
+
+function updatePopover() {
+  if (activeWordIdx < 0) return;
+  const b = V.children[activeWordIdx];
+  if (!b) return;
+  const [a, tr, note] = W_DATA[CUR_LANG][activeWordIdx];
+  
+  // Highlight active word
+  $('#verse .word-active')?.classList.remove('word-active');
+  b.classList.add('word-active');
+
+  // Apply colors cleanly without clearing positioning
+  const color = b.style.getPropertyValue('--c') || 'var(--ink)';
+  pop.style.setProperty('--c', color);
+
+  pop.innerHTML = `<b class="ar">${a}</b><i>${tr}</i><p>${note}</p>`;
+  updatePopoverPosition(b);
+}
+
+V.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  const idx = [...V.children].indexOf(b);
+  if (activeWordIdx === idx && (pop.matches?.(':popover-open') || pop.getAttribute('data-open') === 'true')) {
+    closePopover();
+    return;
+  }
+  activeWordIdx = idx;
+  updatePopover();
+  openPopover();
+  updatePopoverPosition(b);
+});
+
+// Handle popover toggle / close
+if (typeof pop.addEventListener === 'function') {
+  pop.addEventListener('toggle', e => {
+    if (e.newState === 'closed') {
+      $('#verse .word-active')?.classList.remove('word-active');
+      activeWordIdx = -1;
+    }
+  });
+}
+
+// Fallback click outside to close popover when Popover API is absent
+document.addEventListener('pointerdown', e => {
+  if (activeWordIdx >= 0) {
+    if (!pop.contains(e.target) && !V.contains(e.target)) {
+      closePopover();
+    }
+  }
+});
+
+// Reposition on window resize & scroll
+window.addEventListener('resize', () => {
+  if (activeWordIdx >= 0 && V.children[activeWordIdx]) {
+    updatePopoverPosition(V.children[activeWordIdx]);
+  }
+});
+window.addEventListener('scroll', () => {
+  if (activeWordIdx >= 0 && V.children[activeWordIdx]) {
+    updatePopoverPosition(V.children[activeWordIdx]);
+  }
+}, { passive: true });
 
 /* =====================================================================
    4. HERO SKY CANVAS
@@ -1182,10 +1295,10 @@ function setLang(lang) {
   localStorage.setItem('nq-nation-lang', lang);
   document.documentElement.setAttribute('lang', lang);
 
-  // Sync all radio buttons in both HUD and footer
+  // Sync all radio buttons in both HUD and footer using active-lang (NOT .on)
   $$('.nq-lang-btn').forEach(b => {
     const isCur = b.dataset.lang === lang;
-    b.classList.toggle('on', isCur);
+    b.classList.toggle('active-lang', isCur);
     b.setAttribute('aria-checked', String(isCur));
   });
 
@@ -1253,8 +1366,10 @@ function setLang(lang) {
   $('#footerTopLink').textContent = t.footerTop;
   $('#footerLangHeading').textContent = t.langHeading;
 
-  // Popover update if open
-  updatePopover();
+  // Popover update if currently open
+  if (activeWordIdx >= 0 && (pop.matches?.(':popover-open') || pop.getAttribute('data-open') === 'true')) {
+    updatePopover();
+  }
 }
 
 // Bind language switcher buttons
