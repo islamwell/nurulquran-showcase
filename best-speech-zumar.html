@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Best Speech · Quran 39:23</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap">
+<style>
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@property --x{syntax:'<length-percentage>';inherits:true;initial-value:50%}
+@property --y{syntax:'<length-percentage>';inherits:true;initial-value:50%}
+:root{--ink:oklch(.14 .03 270);--gold:oklch(.85 .14 85);--teal:oklch(.8 .12 185);--crim:oklch(.64 .22 20);--glass:oklch(1 0 0/.05);--line:oklch(1 0 0/.1);color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:oklch(.93 .02 260);font:1.1rem/1.7 system-ui,sans-serif;overflow-x:clip}
+body::before{content:'';position:fixed;inset:-25%;z-index:-2;background:conic-gradient(from var(--a) at 50% 45%,oklch(.32 .12 285),oklch(.26 .09 200),oklch(.34 .1 70),oklch(.32 .12 285));filter:blur(100px);opacity:.45;animation:spin 40s linear infinite}
+@keyframes spin{to{--a:360deg}}
+canvas{display:block}
+#rain{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#bar{position:fixed;inset:0 0 auto;height:3px;z-index:9;background:linear-gradient(90deg,var(--crim),var(--gold),var(--teal));transform-origin:left;animation:gx linear both;animation-timeline:scroll()}
+@keyframes gx{from{scale:0 1}}
+h1,h2,h3{font:300 clamp(2.2rem,7vw,4.8rem)/1.05 Fraunces,serif;letter-spacing:-.02em;text-wrap:balance}
+em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ar{font-family:'Amiri Quran',serif;direction:rtl;letter-spacing:0}
+header,section{min-height:100svh;display:grid;align-content:center;justify-items:center;gap:1.5rem;padding:12vh 6vw;text-align:center;position:relative}
+p{max-width:60ch;text-wrap:pretty}
+.k{font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--teal)}
+.r{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+@keyframes rise{from{opacity:0;translate:0 3rem;filter:blur(10px)}}
+
+/* HUD & PORTAL BACK */
+.hud{position:fixed;z-index:20;display:flex;align-items:center;gap:.6rem;padding:1rem 1.2rem;pointer-events:none}
+.hud>*{pointer-events:auto}
+.hud.tl{top:0;left:0}
+.portal-back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--gold);text-decoration:none;
+  font:500 11.5px/1 system-ui,sans-serif;letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:8px 14px;border-radius:999px;
+  border:1px solid oklch(100% 0 0/.18);
+  background:oklch(15% .02 265/.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:all .25s ease;
+}
+.portal-back-btn:hover{
+  border-color:var(--gold);background:oklch(22% .05 265/.9);
+  transform:translateX(-2px);box-shadow:0 0 20px -5px var(--gold);
+}
+
+/* CIRCULAR AUDIO RING PLAYER */
+.hero-header-row{
+  display:inline-flex;align-items:center;justify-content:center;gap:1.1rem;flex-wrap:wrap;z-index:2;
+}
+.hero-header-row a.k:hover{
+  border-color:var(--gold);color:var(--gold);
+}
+.btn-audio-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.btn-audio-ring:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.audio-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.audio-ring-bg {
+  fill: none;
+  stroke: oklch(100% 0 0 / .12);
+  stroke-width: 3;
+}
+.audio-ring-fill {
+  fill: none;
+  stroke: #e53935;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 113.097;
+  stroke-dashoffset: 113.097;
+  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-fill {
+  stroke: var(--teal, #43a047);
+}
+.audio-ring-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e53935;
+  transition: color 0.25s ease;
+}
+.btn-audio-ring.is-playing .audio-ring-icon {
+  color: var(--teal, #43a047);
+}
+.audio-ring-icon .icon-play { display: block; }
+.audio-ring-icon .icon-pause { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause { display: block; }
+.btn-audio-ring.is-error { animation: audioShake .35s ease; }
+.btn-audio-ring.is-error .audio-ring-fill { stroke: var(--crim); }
+@keyframes audioShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+
+/* Hero */
+header h1{font-size:clamp(2rem,5vw,3.4rem)}
+#verse{
+  width:min(1080px,100%);
+  font-size:clamp(2rem,1.4rem + 3.6vw,4.2rem);
+  line-height:2.3;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  column-gap:.45em;
+  row-gap:.25em;
+  text-shadow:0 0 .5em oklch(14% .03 270/.9);
+}
+#verse button{
+  all:unset;
+  cursor:pointer;
+  border-radius:.4em;
+  padding:0 .15em;
+  transition:.3s;
+  animation:drop 1.4s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay:calc(var(--i)*.08s);
+}
+#verse button:is(:hover,:focus-visible,.on){
+  color:var(--gold);
+  transform:scale(1.08);
+  text-shadow:0 0 .7em oklch(.85 .14 85/.85);
+}
+#verse span.ayah-num{
+  font-size:.8em;
+  color:var(--teal);
+  opacity:.9;
+  user-select:none;
+}
+@keyframes drop{from{opacity:0;translate:0 -2em;filter:blur(12px)}}
+.en{opacity:.8;font-size:clamp(1.05rem,.95rem + .3vw,1.35rem);line-height:1.8;max-width:54ch}
+.note{view-transition-name:note;width:min(580px,100%);display:grid;gap:.4rem;padding:1.3rem 1.8rem;border-radius:1.5rem;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(16px)}
+.note b{font:2.4rem/1.8 'Amiri Quran',serif;color:var(--gold);direction:rtl}
+.note strong{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+::view-transition-new(note){animation:vt .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes vt{from{opacity:0;filter:blur(10px);scale:.95}}
+
+/* Context */
+.ctx::before{content:'نَزَّلَ';position:absolute;inset:0;z-index:-1;display:grid;place-items:center;font:34vw 'Amiri Quran',serif;color:var(--gold);opacity:.05}
+.line{width:min(720px,100%);display:flex;gap:1.2rem;align-items:baseline;text-align:start;font:300 clamp(1.3rem,3vw,2rem)/1.4 Fraunces,serif}
+.line span{flex:none;font:600 .75rem system-ui;color:var(--teal);border:1px solid;border-radius:99px;padding:.3em .8em}
+.line:not(.hi){opacity:.65}
+
+/* Book */
+.duo{width:min(1100px,100%);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:2rem;text-align:start}
+.duo>div{display:grid;gap:1rem;align-content:start;padding:2rem;border-radius:2rem;background:var(--glass);border:1px solid var(--line)}
+.t{font-size:2.6rem;line-height:1.5;color:var(--gold)}
+#grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+#grid i{aspect-ratio:1;background:#ffffff14;clip-path:polygon(50% 0,64.6% 14.6%,85.4% 14.6%,85.4% 35.4%,100% 50%,85.4% 64.6%,85.4% 85.4%,64.6% 85.4%,50% 100%,35.4% 85.4%,14.6% 85.4%,14.6% 64.6%,0 50%,14.6% 35.4%,14.6% 14.6%,35.4% 14.6%)}
+#pairs{display:grid;gap:.6rem}
+.pc{all:unset;cursor:pointer;display:grid;perspective:800px;text-align:center}
+.pc span{grid-area:1/1;padding:.8rem;border-radius:1rem;font:1.25rem Fraunces,serif;backface-visibility:hidden;rotate:y 0deg;transition:rotate .9s cubic-bezier(.3,1.4,.4,1);background:oklch(.64 .22 20/.15);border:1px solid oklch(.64 .22 20/.4)}
+.pc span+span{rotate:y 180deg;color:var(--gold);background:oklch(.85 .14 85/.12);border-color:oklch(.85 .14 85/.4)}
+.pc.flip span{rotate:y -180deg}
+.pc.flip span+span{rotate:y 0deg}
+
+/* Skin field */
+.skin{padding:0;overflow:hidden;background:oklch(.1 .02 270/.6);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;--c:color-mix(in oklch,var(--gold) calc(var(--soft,0)*100%),var(--crim))}
+.skin::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,var(--c),transparent 65%);opacity:.2}
+#field{position:absolute;inset:0;width:100%;height:100%;mask:radial-gradient(ellipse,#000 35%,transparent 75%)}
+.ov{position:relative;display:grid;justify-items:center;gap:1rem;padding:6vw;pointer-events:none}
+#tx{display:grid;justify-items:center;gap:.6rem}
+#sw{font-size:clamp(4rem,13vw,8.5rem);line-height:1.4;color:var(--c);text-shadow:0 0 50px var(--c)}
+#hold{all:unset;pointer-events:auto;touch-action:none;cursor:pointer;display:flex;align-items:center;gap:.8rem;padding:.6rem 1.4rem .6rem .6rem;border-radius:99px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px)}
+#hold i{width:2.2rem;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--soft,0)*360deg),#fff2 0);mask:radial-gradient(closest-side,transparent 70%,#000 72%)}
+
+/* Steps */
+.steps{list-style:none;width:min(640px,100%);padding:0 0 0 2.6rem;display:grid;gap:3.5rem;text-align:start;position:relative}
+.steps::before{content:'';position:absolute;left:.5rem;inset-block:0;width:2px;background:linear-gradient(var(--crim),var(--gold),var(--teal));transform-origin:top;animation:gy linear both;animation-timeline:view();animation-range:entry 20% cover 60%}
+@keyframes gy{from{scale:1 0}}
+.steps li{position:relative}
+.steps li::before{content:'';position:absolute;left:-2.5rem;top:.8rem;width:.9rem;aspect-ratio:1;border-radius:50%;background:var(--gold);box-shadow:0 0 20px var(--gold)}
+.steps h3{font-size:clamp(1.8rem,4vw,2.6rem)}
+.steps .ar{color:var(--gold)}
+
+/* Lamp */
+.lamp{padding:0;background:oklch(.08 .02 270);overflow:hidden;cursor:crosshair;transition:--x .4s ease-out,--y .4s ease-out}
+.lamp::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 240px at var(--x) var(--y),oklch(.85 .14 85/.2),transparent)}
+.in{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:1.2rem;padding:6vw;mask:radial-gradient(circle 280px at var(--x) var(--y),#000 45%,#0002)}
+.lg{font-size:clamp(2.6rem,9vw,6rem);line-height:1.5;color:var(--gold)}
+.dim{opacity:.7;font-size:.95rem}
+
+/* WhatsApp Share Button */
+.whatsapp-share-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.75rem;
+  padding:1rem 2.2rem;border-radius:999px;
+  background:#25D366;color:#052e16;
+  font-family:system-ui,sans-serif;font-size:clamp(1.05rem,1rem+.4vw,1.25rem);font-weight:700;letter-spacing:.02em;
+  text-decoration:none;box-shadow:0 12px 32px rgba(37,211,102,.32);
+  transition:all .25s ease;
+  cursor:pointer;border:none;margin-top:.8rem;
+}
+.whatsapp-share-btn:hover{
+  background:#2fe671;transform:translateY(-3px) scale(1.03);
+  box-shadow:0 16px 40px rgba(37,211,102,.45);
+}
+.whatsapp-share-btn svg{width:24px;height:24px;fill:currentColor;flex-shrink:0}
+
+/* Footer */
+footer{display:grid;justify-items:center;gap:1.4rem;padding:12vh 6vw 4rem;text-align:center;border-top:1px solid var(--line);background:radial-gradient(ellipse at bottom, oklch(20% .04 270), transparent 70%);position:relative;z-index:2}
+footer a{color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:.6rem 1.5rem;transition:border-color .2s}
+footer a:hover{border-color:var(--gold)}
+
+@supports not (animation-timeline:view()){.r,#bar,.steps::before{animation:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media (max-width: 600px) {
+  .hud { padding: .7rem .8rem; }
+  .portal-back-btn span { display: none; }
+  .portal-back-btn::after { content: 'PORTAL'; font-size: 10px; letter-spacing: .12em; }
+}
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas><div id="bar"></div>
+
+<!-- Top Portal Navigation -->
+<div class="hud tl">
+  <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    <span>NURULQURAN PORTAL</span>
+  </a>
+</div>
+
+<header id="top">
+  <div class="hero-header-row">
+    <a href="https://iqra.nurulquran.com/#/surah/39?ayah=23" target="_blank" rel="noopener" class="k" style="text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--line);padding:.35rem .9rem;border-radius:999px;background:var(--glass)" title="Open 39:23 in Iqra Reader">39:23 · Az-Zumar ↗</a>
+    <!-- Circular Audio Ring Player Button -->
+    <button type="button" class="btn-audio-ring" id="btn-audio-play" aria-label="Play recitation of 39:23" aria-pressed="false" title="Recitation · Sheikh Nasser Al-Qatami">
+      <!-- Progress Ring (SVG) -->
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+      <!-- Play / Pause Icon -->
+      <span class="audio-ring-icon" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <polygon points="7 4 21 12 7 20 7 4" />
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="5" y="4" width="4" height="16" rx="1" />
+          <rect x="15" y="4" width="4" height="16" rx="1" />
+        </svg>
+      </span>
+    </button>
+  </div>
+  <h1>The <em>Best</em> Speech</h1>
+  <p class="ar" id="verse" lang="ar" aria-label="Surah Az-Zumar 39:23"></p>
+  <p class="en">Allah has sent down the best speech: a Book perfectly consistent, its lessons in pairs, returning again and again. The skin of those in awe of their Lord shivers from it — then their skins and hearts soften toward the remembrance of Allah. That is Allah's guidance; He guides with it whom He wills. And whoever Allah leaves astray has no guide.</p>
+  <div class="note" id="note"><strong>Tap any word ✦</strong><span>Every word here carries something. Open it.</span></div>
+</header>
+
+<section class="ctx">
+  <p class="k r">Read it where it lives</p>
+  <div class="line r"><span>21</span><p>Rain comes down from the sky, sinks into the earth, and brings up crops of many colours.</p></div>
+  <div class="line r"><span>22</span><p>Some hearts are opened to light. Others have turned hard against Allah's remembrance.</p></div>
+  <div class="line hi r"><span>23</span><p>Then something else is <em>sent down</em> — the best speech. It does to hard hearts what rain does to dry earth.</p></div>
+</section>
+
+<section>
+  <h2 class="r">One fabric, <em>folded in pairs</em></h2>
+  <div class="duo">
+    <div class="r"><div id="grid"></div><p class="ar t">مُّتَشَٰبِهًا</p><p><b>Touch any star.</b> Every part answers the others. Each piece of this Book matches the rest in beauty and truth. There's no weak page, and one verse explains another.</p></div>
+    <div class="r"><div id="pairs"></div><p class="ar t">مَّثَانِيَ</p><p><b>Tap a card to fold it.</b> The root means to fold, to double. Warnings come with good news, fear with hope. Its lessons return again and again, each time from a fresh angle.</p></div>
+  </div>
+</section>
+
+<section class="skin" id="skin">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="ov">
+    <div id="tx"><p class="ar" id="sw"></p><h2 id="st"></h2><p id="sc"></p></div>
+    <button id="hold" type="button" aria-label="Press and hold to soften"><i></i><span id="hl"></span></button>
+  </div>
+</section>
+
+<section>
+  <h2 class="r">Watch the <em>order</em></h2>
+  <ol class="steps">
+    <li class="r"><h3>Skin first</h3><p>The words reach the body before the mind catches up. That's why even people who don't know Arabic have felt a shiver hearing it.</p></li>
+    <li class="r"><h3><span class="ar">ثُمَّ</span> then…</h3><p>A pause. Awe is the doorway, not the destination. The verse never leaves you stuck in fear.</p></li>
+    <li class="r"><h3>Skins <em>and</em> hearts</h3><p>The softening goes deeper than the shiver ever did. It reaches the heart and turns it toward Allah.</p></li>
+  </ol>
+</section>
+
+<section class="lamp" id="lamp">
+  <div class="in">
+    <p class="k">Move your light</p>
+    <p class="ar lg">ذَٰلِكَ هُدَى ٱللَّهِ</p>
+    <h2>That is <em>guidance</em></h2>
+    <p>If a verse ever made your skin shiver and then your heart grow soft, that wasn't random. That moment was guidance, a gift from Allah placed in your hands.</p>
+    <p class="dim">Guard it. Hearts that drift from His remembrance slowly harden again. And whoever Allah leaves astray has no one else to guide him.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Come back to it. It was made to be returned to — <span class="ar">مَثَانِيَ</span>.</p>
+
+  <!-- Large WhatsApp Share Button -->
+  <a class="whatsapp-share-btn" href="https://api.whatsapp.com/send?text=%E2%80%9CAllah%20has%20sent%20down%20the%20best%20speech%3A%20a%20Book%20perfectly%20consistent%2C%20its%20lessons%20in%20pairs%2C%20returning%20again%20and%20again...%E2%80%9D%20(Qur%27an%2039%3A23)%0Ahttps%3A%2F%2Fsigns.nurulquran.com%2Fbest-speech-zumar.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span>Share on WhatsApp</span>
+  </a>
+
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;margin-top:.4rem">
+    <a href="https://iqra.nurulquran.com/#/surah/39?ayah=23" target="_blank" rel="noopener" style="color:var(--gold)" id="footerSurahLink">39:23 · Sūrah Az-Zumar ↗</a>
+    <a href="index.html" style="color:var(--teal)">← NurulQuran Showcase</a>
+    <a href="#top" style="color:oklch(.93 .02 260)">↺ Read the verse again</a>
+  </div>
+
+  <div class="footer-version-tag" style="margin-top:.6rem;font-family:monospace;letter-spacing:.08em;color:var(--gold);font-size:.72rem">v1.0.82 (updated 2026-11-01 22:57)</div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s),dpr=Math.min(devicePixelRatio,2),calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* Circular Audio Player */
+const audioBtn = $('#btn-audio-play');
+const ring = $('#audio-ring-fill');
+const CIRCUMFERENCE = 113.097; // 2 * Math.PI * 18
+const audio = new Audio('https://everyayah.com/data/Nasser_Alqatami_128kbps/039023.mp3');
+
+function updateButtonUI() {
+  const isPlaying = !audio.paused && !audio.ended;
+  audioBtn.classList.toggle('is-playing', isPlaying);
+  audioBtn.setAttribute('aria-pressed', String(isPlaying));
+  audioBtn.setAttribute('aria-label', isPlaying ? 'Pause recitation' : 'Play recitation of 39:23');
+
+  if (!isPlaying && (audio.ended || audio.currentTime === 0)) {
+    ring.style.strokeDashoffset = CIRCUMFERENCE;
+  }
+}
+
+function setAudioError(msg) {
+  audioBtn.classList.add('is-error');
+  audioBtn.setAttribute('title', msg || 'Audio unavailable');
+  setTimeout(() => {
+    audioBtn.classList.remove('is-error');
+    audioBtn.setAttribute('title', 'Recitation · Sheikh Nasser Al-Qatami');
+  }, 3000);
+}
+
+audioBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().catch(err => {
+      console.warn('Playback error:', err);
+      setAudioError('Playback failed');
+    });
+  } else {
+    audio.pause();
+  }
+});
+
+audio.addEventListener('play', updateButtonUI);
+audio.addEventListener('pause', updateButtonUI);
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const pct = audio.currentTime / audio.duration;
+    ring.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+  }
+});
+audio.addEventListener('ended', () => {
+  ring.style.strokeDashoffset = CIRCUMFERENCE;
+  updateButtonUI();
+});
+audio.addEventListener('error', e => {
+  console.warn('Audio resource error:', e);
+  setAudioError('Audio unavailable');
+});
+
+/* Word explorer */
+const W=[
+['ٱللَّهُ','Allah','His name comes first, before anything else. Before you hear what was sent, you are told Who sent it.'],
+['نَزَّلَ','sent down, piece by piece','This form of the verb means in parts, again and again. Like rain, drop by drop, over 23 years — each piece arriving right when hearts needed it.'],
+['أَحْسَنَ ٱلْحَدِيثِ','the best speech','The Arabic word for speech here carries a sense of something fresh, the talk everyone is talking about. It never goes stale. Five verses back, believers "listen, then follow the best of it." Here is the best.'],
+['كِتَٰبًا','a Book','It was just called speech — something spoken. Now it is a Book — something written. Alive like a conversation, lasting like a record.'],
+['مُّتَشَٰبِهًا','consistent, alike','Every part matches every other in beauty and truth. No weak page, no filler. One verse explains another.'],
+['مَّثَانِيَ','folded in pairs, repeated','Its root means to fold, to double. Fear is paired with hope, the Fire with the Garden. Lessons come back, each time from a new angle.'],
+['تَقْشَعِرُّ','shivers','A rare, heavy word: skin tightening, hair standing on end. Even the sound of it feels like a shudder.'],
+['مِنْهُ جُلُودُ','the skins, from it','The first reaction is in the body. Before the mind has finished thinking, the skin already knows.'],
+['ٱلَّذِينَ يَخْشَوْنَ رَبَّهُمْ','those in awe of their Lord','Not fear of the unknown, but fear that comes from knowing. The more you know His greatness, the deeper the awe.'],
+['ثُمَّ','then','A small word with a gap inside it. The shiver is not the end of the story. Something comes after.'],
+['تَلِينُ','soften','Like dry, hard clay after rain. What was tight and tense becomes gentle.'],
+['جُلُودُهُمْ وَقُلُوبُهُمْ','their skins and their hearts','At first only the skin moved. Now the heart joins in. The Quran starts at the surface and works its way in.'],
+['إِلَىٰ ذِكْرِ ٱللَّهِ ۚ','toward the remembrance of Allah','"Toward" — not just calming down, but leaning in. The awe does not push them away. It pulls them closer.'],
+['ذَٰلِكَ هُدَى ٱللَّهِ','that is Allah\'s guidance','That feeling itself is guidance. If a verse has ever moved you like this, it was a gift.'],
+['يَهْدِي بِهِۦ مَن يَشَآءُ ۚ','He guides with it whom He wills','The same words reach everyone. Allah opens hearts with them as He wills — and He knows who is truly searching.'],
+['وَمَن يُضْلِلِ ٱللَّهُ فَمَا لَهُۥ مِنْ هَادٍ','whoever Allah leaves astray has no guide','One verse earlier: woe to hearts that harden against His remembrance. Turn from the only true Guide, and who is left?']];
+
+const V=$('#verse'),N=$('#note');
+V.innerHTML=W.map((w,i)=>`<button style="--i:${i}" data-i="${i}" aria-label="${w[0]} (${w[1]})">${w[0]}</button>`).join(' ')+' <span class="ayah-num">٢٣</span>';
+V.onclick=e=>{
+  const btn=e.target.closest('button');
+  if(!btn)return;
+  const i=btn.dataset.i;
+  if(i==null)return;
+  const go=()=>{
+    const[a,b,c]=W[i];
+    N.innerHTML=`<b>${a}</b><strong>${b}</strong><span>${c}</span>`;
+    V.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.i==i));
+  };
+  document.startViewTransition?document.startViewTransition(go):go();
+};
+
+/* Consistent: star ripple */
+const G=$('#grid');G.innerHTML='<i></i>'.repeat(60);const tiles=[...G.children];let lt=0;
+const rip=i=>tiles.forEach((k,j)=>{
+  const d=Math.hypot(j%10-i%10,(j/10|0)-(i/10|0));
+  k.animate({scale:[1,1.4,1],rotate:['0deg','45deg','0deg'],backgroundColor:['#ffffff14',Math.round(d)%2?'oklch(.8 .12 185)':'oklch(.85 .14 85)','#ffffff14']},{duration:900,delay:d*70,easing:'ease-out'});
+});
+G.onpointerover=e=>{const i=tiles.indexOf(e.target);if(i<0||e.timeStamp-lt<150)return;lt=e.timeStamp;rip(i)};
+new IntersectionObserver(([e],o)=>{if(e.isIntersecting){rip(34);o.disconnect()}},{threshold:.6}).observe(G);
+
+/* Pairs: flip cards */
+const P=[['A warning','Good news'],['The Fire','The Garden'],['Fear','Hope'],['Those who deny','Those who believe'],['Hard hearts','Soft hearts']];
+$('#pairs').innerHTML=P.map(([a,b])=>`<button class="pc" type="button" aria-label="${a} pairs with ${b}"><span>${a}</span><span>${b}</span></button>`).join('');
+$('#pairs').onclick=e=>e.target.closest('.pc')?.classList.toggle('flip');
+
+/* Shiver → soften field */
+const R=$('#rain'),rc=R.getContext('2d'),F=$('#field'),fc=F.getContext('2d'),S=$('#skin'),hl=$('#hl'),H=$('#hold');
+const fit=()=>[R,F].forEach(c=>{c.width=c.clientWidth*dpr;c.height=c.clientHeight*dpr});fit();addEventListener('resize',fit);
+const T=[['تَقْشَعِرُّ','The skin <em>shivers</em>','A rare, heavy word: skin tightening, hair standing on end. Even its sound shudders. This is the first touch of the Quran — awe.'],
+         ['تَلِينُ','Then hearts <em>soften</em>','Now skins and hearts soften together, toward the remembrance of Allah. Not just calmer. Closer.']];
+let soft=0,held=0,state=-1,vis=0,mx=-1e4,my=-1e4;
+const set=s=>{state=s;$('#sw').textContent=T[s][0];$('#st').innerHTML=T[s][1];$('#sc').textContent=T[s][2];
+  $('#tx').animate([{opacity:0,filter:'blur(10px)'},{opacity:1,filter:'blur(0)'}],700)};set(0);
+S.onpointerdown=()=>held=1;
+['pointerup','pointercancel','blur'].forEach(t=>window.addEventListener(t,()=>held=0));
+S.onpointermove=e=>{const r=F.getBoundingClientRect();mx=(e.clientX-r.left)*dpr;my=(e.clientY-r.top)*dpr};
+S.onpointerleave=()=>mx=my=-1e4;
+S.oncontextmenu=e=>e.preventDefault();
+H.onkeydown=e=>{if(e.key==' '||e.key=='Enter'){e.preventDefault();held=1}};H.onkeyup=()=>held=0;
+new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(S);
+
+/* Lamp */
+const L=$('#lamp');L.onpointermove=L.onpointerdown=e=>{const r=L.getBoundingClientRect();
+  L.style.setProperty('--x',e.clientX-r.left+'px');L.style.setProperty('--y',e.clientY-r.top+'px')};
+
+/* Rain of light + field loop */
+const drops=Array.from({length:calm?0:130},()=>({x:Math.random(),y:Math.random(),v:2e-4+Math.random()*1e-3,l:.02+Math.random()*.08,h:Math.random()<.75?45:175}));
+(function loop(t){
+  const w=R.width,h=R.height;rc.clearRect(0,0,w,h);rc.lineWidth=dpr;
+  for(const d of drops){
+    if((d.y+=d.v)>1.1){d.y=-.1;d.x=Math.random()}
+    const x=d.x*w,y=d.y*h,g=rc.createLinearGradient(x,y-d.l*h,x,y);
+    g.addColorStop(0,`hsla(${d.h},90%,70%,0)`);g.addColorStop(1,`hsla(${d.h},90%,75%,.5)`);
+    rc.strokeStyle=g;rc.beginPath();rc.moveTo(x,y-d.l*h);rc.lineTo(x,y);rc.stroke();
+  }
+  if(vis){
+    soft+=(held-soft)*(held?.018:.004);
+    S.style.setProperty('--soft',soft.toFixed(3));
+    if(soft>.6&&!state)set(1);else if(soft<.3&&state)set(0);
+    const msg=held?'Remembering…':soft>.15?'It\'s fading — hold again':'Press & hold to remember';
+    if(hl.textContent!=msg)hl.textContent=msg;
+    const fw=F.width,fh=F.height,rows=26,cols=72,k=1-soft,s2=2*(110*dpr)**2;
+    fc.clearRect(0,0,fw,fh);fc.lineWidth=1.3*dpr;
+    for(let r=0;r<rows;r++){
+      const y0=(r+.5)/rows*fh;fc.beginPath();
+      for(let c=0;c<cols;c++){
+        const x=c/(cols-1)*fw,dy=y0-my,p=Math.exp(-((x-mx)**2+dy*dy)/s2)*50*dpr*(dy<0?-1:1);
+        const y=y0+p+dpr*(k*((Math.random()-.5)*18+(c%2?5:-5))+soft*16*Math.sin(c*.17+r*.4+t*.0016));
+        c?fc.lineTo(x,y):fc.moveTo(x,y);
+      }
+      fc.strokeStyle=`hsla(${-10+soft*(55+r*5)},${85-soft*20}%,${55+soft*15}%,${.2+.6*r/rows})`;fc.stroke();
+    }
+  }
+  requestAnimationFrame(loop);
+})(0);
+</script>
+</body>
+</html>
