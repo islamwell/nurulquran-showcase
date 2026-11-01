@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>By the Sun · 91:1</title>
+<meta name="description" content="By the sun and its brightness (Surah Ash-Shams 91:1–10) — an interactive reflection on the cosmic oaths, the dawn, the feminine pronouns, and the light of the soul.">
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,300..500&display=swap">
+<style>
+@property --s{syntax:'<number>';inherits:true;initial-value:.6}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{--acc:oklch(85% .15 calc(35 + var(--s)*50));interpolate-size:allow-keywords;color-scheme:dark}
+*{margin:0;box-sizing:border-box}
+body{background:#05040c;color:#f5efe4;font:clamp(1rem,.92rem + .35vw,1.18rem)/1.7 system-ui,sans-serif;overflow-x:clip}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at 50% calc(90% - var(--s)*55%),#fff 0 1.2%,#ffd37a 2.5%,#ff8a3d40 10%,#0000 30%),linear-gradient(oklch(calc(14% + var(--s)*38%) .13 260),oklch(calc(28% + var(--s)*45%) .12 calc(40 + var(--s)*190)))}
+#bar{position:fixed;inset:0 0 auto;height:3px;z-index:9;background:linear-gradient(90deg,#ff5a2a,var(--acc),#fff);transform-origin:0;animation:grow linear both;animation-timeline:scroll()}
+section{min-height:100svh;display:grid;place-content:center;justify-items:center;gap:1.8rem;padding:14vh 6vw;text-align:center;position:relative;text-shadow:0 2px 24px #000c}
+section:not(#hero)::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(closest-side,#05040cb0,#0000)}
+.ar{font-family:'Amiri Quran',serif;direction:rtl;line-height:1.9;font-weight:400}
+.big{font-size:clamp(2.6rem,8vw,6rem)}
+h2,.en,strong,small,.dial{font-family:Fraunces,serif;font-weight:300}
+h2{font-size:clamp(2.2rem,5.5vw,4.4rem);line-height:1.05;letter-spacing:-.03em;text-wrap:balance}
+em,.acc{color:var(--acc);font-style:italic}
+p{max-width:58ch;text-wrap:pretty;opacity:.9}
+.card{background:color-mix(in oklch,#06040f 55%,#0000);backdrop-filter:blur(18px) saturate(1.6);border:1px solid #ffffff1c;border-radius:2.5rem;corner-shape:squircle;padding:clamp(1.3rem,4vw,2.6rem)}
+.r{animation:in both;animation-timeline:view();animation-range:entry 0% cover 35%}
+@keyframes in{from{opacity:0;translate:0 3rem;filter:blur(12px)}}
+@keyframes grow{from{scale:0 1}}
+@keyframes spin{to{--a:360deg}}
+@keyframes pulse{50%{opacity:.3}}
+
+/* Progressive fallback for non-scroll-timeline browsers */
+@supports not (animation-timeline: view()){
+  .r{opacity:1;transform:none;filter:none}
+}
+
+/* Nav back bar */
+.top-nav{position:fixed;top:1rem;left:1.5rem;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.35rem .9rem;border-radius:2rem;background:#05040ca0;border:1px solid #ffffff18;backdrop-filter:blur(12px);text-decoration:none;color:#f5efe4cc;font:300 .82rem Fraunces,serif;letter-spacing:.05em;transition:all .3s}
+.top-nav:hover{color:var(--acc);border-color:color-mix(in oklch,var(--acc) 40%,#fff2)}
+
+/* hero */
+#hero{place-content:end center;padding-bottom:7vh;background:linear-gradient(#0000 45%,#05040cd0)}
+#hero h1{font-size:clamp(3.6rem,14vw,10.5rem);line-height:1.7;color:#0000;text-shadow:none;background:linear-gradient(100deg,#fff4d6 25%,var(--acc) 45%,#fff 50%,var(--acc) 55%,#fff4d6 75%) 0/300%;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 2.5rem oklch(78% .17 60 / .55));animation:write 3s cubic-bezier(.7,0,.2,1) both,shine 6s ease-in-out infinite alternate}
+@keyframes write{from{clip-path:inset(0 0 0 100%)}}
+@keyframes shine{to{background-position:100%}}
+#hero .en{font-size:clamp(1.3rem,3vw,2.2rem);margin-top:-2rem;animation:in 1.5s 1.8s both}
+.tag{position:absolute;top:2rem;inset-inline:0;letter-spacing:.4em;text-transform:uppercase;font-size:.75rem;opacity:.75}
+.ph{display:block;padding:.4rem 1.3rem;border-radius:2rem;background:#0008;border:1px solid #fff2;backdrop-filter:blur(10px);font:300 1rem Fraunces,serif}
+.ph strong{color:var(--acc);font-weight:500;margin-right:.5rem}
+.hint{opacity:.65;animation:pulse 2.4s ease-in-out infinite}
+
+/* Hero audio pill */
+.hero-audio{display:inline-flex;align-items:center;gap:.65rem;padding:.32rem .9rem .32rem .45rem;border-radius:999px;background:#0008;border:1px solid #ffffff24;backdrop-filter:blur(10px);margin-top:.2rem}
+.hero-audio-meta{display:flex;align-items:center;gap:.5rem;font:300 .75rem Fraunces,serif}
+.audio-reciter{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:500}
+.audio-ref{font-size:.7rem;letter-spacing:.08em;opacity:.75}
+
+/* Circular audio ring player */
+.btn-audio-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;vertical-align:middle;transition:transform .2s ease}
+.btn-audio-ring:hover{transform:scale(1.08)}
+.btn-audio-ring:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.audio-ring-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);pointer-events:none}
+.audio-ring-bg{fill:none;stroke:#ffffff2b;stroke-width:3}
+.audio-ring-fill{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;stroke-dasharray:113.097;stroke-dashoffset:113.097;transition:stroke-dashoffset .15s linear}
+.audio-ring-icon{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;color:var(--acc)}
+.audio-ring-icon .icon-play{display:block}
+.audio-ring-icon .icon-pause{display:none}
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play{display:none}
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause{display:block}
+
+/* word tiles */
+#ay span{color:#ffffff70;transition:color .4s,text-shadow .4s}
+#ay .on{color:var(--acc);text-shadow:0 0 2rem var(--acc)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:1rem;width:min(100%,72rem);direction:rtl;align-items:start}
+.t{direction:ltr;text-align:left;cursor:pointer;position:relative;padding:1.4rem 1.5rem;outline:0;animation:in both;animation-timeline:view();animation-range:entry 0% cover 30%;animation-range:entry 0% cover calc(10% + sibling-index()*5%)}
+.t::before{content:'';position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;padding:1.5px;background:conic-gradient(from var(--a),#0000 65%,var(--acc));mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transition:opacity .4s;animation:spin 3s linear infinite}
+.t:is(:hover,:focus)::before{opacity:1}
+.t .ar{display:block;text-align:right;font-size:2.6rem;line-height:1.5;color:var(--acc)}
+.t strong{display:block;font-size:1.35rem}
+.t p{height:0;opacity:0;overflow:hidden;font-size:.95rem;transition:height .5s,opacity .5s}
+.t:is(:hover,:focus) p{height:auto;opacity:.9}
+@media(hover:none){.t p{height:auto;opacity:.9}}
+
+/* dial */
+.dial{display:grid;justify-items:center;font-size:1.1rem}
+input[type=range]{appearance:none;width:min(76vw,34rem);height:.55rem;border-radius:1rem;margin:1.4rem 0;cursor:grab;background:linear-gradient(90deg,#0b0a26,#3a1850 18%,#ff5a2a 30%,#ffd27a 50%,#fff6e0 84%,#fff)}
+input::-webkit-slider-thumb{appearance:none;width:2.4rem;height:2.4rem;border-radius:50%;background:radial-gradient(#fff,#ffd36b 45%,#ff8a2a);box-shadow:0 0 2rem .5rem #ffb34a}
+input::-moz-range-thumb{width:2.4rem;height:2.4rem;border:0;border-radius:50%;background:radial-gradient(#fff,#ffd36b 45%,#ff8a2a);box-shadow:0 0 2rem .5rem #ffb34a}
+
+/* her */
+.her{list-style:none;display:grid;gap:.2rem;width:min(100%,42rem);padding:1rem}
+.her li{display:grid;padding:.5rem 1rem 1rem;border-radius:1.6rem;cursor:pointer;transition:background .4s}
+.her li:is(:hover,.on){background:#ffffff12}
+.her .ar{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+.her em{font-style:normal;text-shadow:0 0 1.2rem var(--acc)}
+.her small{opacity:.78;font-style:italic}
+
+/* witnesses */
+.wit{display:flex;flex-wrap:wrap;justify-content:center;gap:1.4rem 2.2rem;list-style:none;padding:0;max-width:56rem}
+.wit li{display:grid;justify-items:center;gap:.7rem;font:300 1.05rem Fraunces,serif;animation:lit linear both;animation-timeline:view();animation-range:cover 10% cover 45%;animation-range:cover calc(sibling-index()*4% + 5%) cover calc(sibling-index()*4% + 28%)}
+.wit li::before{content:'';width:clamp(3.2rem,8vw,5rem);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,oklch(80% .15 var(--h)) 30%,oklch(30% .12 var(--h)));box-shadow:0 0 2.5rem oklch(75% .18 var(--h) / .55)}
+.wit li:last-child::before{animation:glow 2s ease-in-out infinite}
+@keyframes lit{from{opacity:.08;scale:.4;filter:blur(8px)}}
+@keyframes glow{50%{box-shadow:0 0 5rem 1.2rem oklch(85% .17 90 / .8)}}
+
+/* soul */
+.orb{width:min(80vw,26rem);aspect-ratio:1;position:relative;border-radius:50%;background:radial-gradient(closest-side,#fff 0 22%,#ffe08a 40%,#ff9a3a 60%,#ff5a2a33 80%,#0000);animation:breathe 4s ease-in-out infinite;transition:box-shadow 2s}
+.orb canvas{position:absolute;inset:16%;width:68%;height:68%;border-radius:50%;filter:blur(8px);touch-action:none;cursor:crosshair}
+@keyframes breathe{50%{scale:1.035}}
+.verdict{display:none;opacity:0;translate:0 2rem;transition:1.2s allow-discrete;max-width:44rem}
+.verdict p{margin-inline:auto}
+.won .verdict{display:block;opacity:1;translate:0;@starting-style{opacity:0;translate:0 2rem}}
+.won .orb{box-shadow:0 0 9rem 2rem #ffb84a66}
+.won .hint{display:none}
+
+/* Footer & return */
+footer{padding:5rem 2rem 4rem;text-align:center;font-size:.78rem;position:relative;z-index:2;background:linear-gradient(#0000,#05040ce0 40%,#05040c)}
+.footer-nav{display:flex;justify-content:center;align-items:center;gap:1.8rem;margin-bottom:1.2rem;letter-spacing:.12em;text-transform:uppercase;font-size:.75rem}
+.footer-nav a{color:var(--acc);text-decoration:none;transition:opacity .2s}
+.footer-nav a:hover{opacity:.75}
+.footer-nav a.top{color:#f5efe499}
+.footer-version-tag{font-family:monospace;letter-spacing:.08em;color:var(--acc);opacity:.75;font-size:.72rem}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="top-nav" aria-label="Return to Showcase">← NurulQuran</a>
+
+<canvas id=sky></canvas><div id=bar></div>
+
+<section id=hero data-s=.62>
+  <small class=tag>The Sun · 91 : 1</small>
+  <h1 class=ar>وَٱلشَّمْسِ وَضُحَىٰهَا</h1>
+  <p class=en>By the sun and its brightness</p>
+  <div class="hero-audio">
+    <button type="button" class="btn-audio-ring nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/091001.mp3" aria-label="Listen to Ayah 91:1 recited by Nasser Al-Qatami" title="Listen 91:1 · Qari Nasser Al-Qatami" aria-pressed="false">
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+      <span class="audio-ring-icon" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <polygon points="7 4 21 12 7 20 7 4" />
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <rect x="5" y="4" width="4" height="16" rx="1" />
+          <rect x="15" y="4" width="4" height="16" rx="1" />
+        </svg>
+      </span>
+    </button>
+    <div class="hero-audio-meta">
+      <span class="audio-reciter">Nasser Al-Qatami</span>
+      <span class="audio-ref">91:1</span>
+    </div>
+  </div>
+  <output class=ph></output>
+  <small class=hint>Move your cursor to raise the sun · scroll to begin ↓</small>
+</section>
+
+<section data-s=.62>
+  <h2 class=r>One verse, <em>five pieces</em></h2>
+  <div class="ar big r" id=ay><span>وَ</span><span>ٱلشَّمْسِ</span> <span>وَ</span><span>ضُحَىٰ&zwj;</span><span>&zwj;هَا</span></div>
+  <div class=tiles>
+    <div class="card t" tabindex=0><b class=ar>وَ</b><strong>By…</strong><p>An oath. Allah calls something forward as a witness. Something big is about to be said.</p></div>
+    <div class="card t" tabindex=0><b class=ar>ٱلشَّمْسِ</b><strong>the sun</strong><p>The first witness: the brightest thing in your sky. In Arabic, the sun is a “she”.</p></div>
+    <div class="card t" tabindex=0><b class=ar>وَ</b><strong>and by…</strong><p>A second oath. Not “the bright sun”, but the sun, and then its light on its own. Two signs, not one.</p></div>
+    <div class="card t" tabindex=0><b class=ar>ضُحَىٰ</b><strong>its full morning light</strong><p>Not the first glow of dawn. Not the burn of noon. The hour the light finally reaches everywhere.</p></div>
+    <div class="card t" tabindex=0><b class=ar>هَا</b><strong>her</strong><p>A tiny word pointing back to the sun. Watch it echo through the next three verses.</p></div>
+  </div>
+</section>
+
+<section data-s=.62>
+  <h2 class=r>The hour called <span class="ar acc">ضُحَىٰ</span></h2>
+  <p class=r>Dawn is a promise. Noon is a furnace. In between is an hour when the sun has climbed just high enough for its light to spill into every valley and corner. Nothing hides from it. No one can deny it.</p>
+  <p class=r>The word comes from a root meaning <em>to come out into the open</em>. This is the light Allah chose to swear by: clear, warm, and everywhere.</p>
+  <label class="card r dial">Slide through the day<input id=dial type=range min=-25 max=100 value=62><output class=ph></output></label>
+</section>
+
+<section data-s=.5>
+  <h2 class=r>It’s all about <em>her</em></h2>
+  <p class=r>The sun is feminine in Arabic. That small <b class="ar acc">هَا</b> means <em>her</em>, and every one of the first four verses ends on it. Light and dark take turns, but every line keeps its eyes on her. Tap a line to see it in the sky.</p>
+  <ol class="card r her">
+    <li data-v=.62><span class=ar>وَٱلشَّمْسِ وَضُحَىٰ&zwj;<em>&zwj;هَا</em></span><small>By the sun and her brightness</small></li>
+    <li data-v=.02><span class=ar>وَٱلْقَمَرِ إِذَا تَلَىٰ&zwj;<em>&zwj;هَا</em></span><small>And the moon when it follows her, step by step, like a young one behind its mother</small></li>
+    <li data-v=.9><span class=ar>وَٱلنَّهَارِ إِذَا جَلَّىٰ&zwj;<em>&zwj;هَا</em></span><small>And the day when it shows her off in full glory</small></li>
+    <li data-v=-.3><span class=ar>وَٱلَّيْلِ إِذَا يَغْشَىٰ&zwj;<em>&zwj;هَا</em></span><small>And the night when it covers her. Covered, never put out.</small></li>
+  </ol>
+</section>
+
+<section data-s=.75>
+  <h2 class=r>Seven witnesses, <em>one verdict</em></h2>
+  <p class=r>We swear only by Allah. Allah swears by whatever He wills, and whatever He swears by, He wants you to look at closely. Like witnesses called before a ruling, this surah calls seven, one after another:</p>
+  <ul class=wit>
+    <li style="--h:75">Sun</li><li style="--h:260">Moon</li><li style="--h:220">Day</li><li style="--h:285">Night</li><li style="--h:200">Sky</li><li style="--h:40">Earth</li><li style="--h:95">Soul</li>
+  </ul>
+  <p class=r>Six are out there, in the sky and on the earth. The seventh is inside you. The whole case has been about you.</p>
+</section>
+
+<section data-s=-.3 id=soul>
+  <h2 class=r>You carry <em>a sun</em> too</h2>
+  <p class=r>After the sky and the earth, the oaths turn inward, to the soul and the One who shaped it with the same care. Your soul was made with its own light. Sins don’t destroy it. They cover it, the way night covers the sun. The light is still there.</p>
+  <div class=orb><canvas id=fog width=420 height=420></canvas></div>
+  <small class=hint>Rub the darkness away. Stop, and watch it creep back.</small>
+  <div class="card verdict">
+    <p class="ar big">قَدْ أَفْلَحَ مَن زَكَّىٰهَا</p>
+    <p class=en>Whoever purifies it has succeeded, <em>and whoever buries it has failed.</em> (91:9–10)</p><br>
+    <p>And the moon? It glows at night only because it reflects the sun. A cleaned soul does the same: its light reaches others, even in the darkest hours. Keep polishing. The night always returns.</p>
+  </div>
+</section>
+
+<section data-s=.5>
+  <h2 class=r>Tomorrow, <em>look up</em></h2>
+  <p class=r>When the sun clears the rooftops and its light fills every street, that is <span class="ar acc">ضُحَىٰ</span>. Allah swore by that moment. Let it remind you of the light He placed in you, and keep it uncovered.</p>
+</section>
+
+<footer>
+  <div class="footer-nav">
+    <a href="index.html">← NurulQuran Showcase</a>
+    <a href="#hero" class="top">Return to Top ↑</a>
+  </div>
+  <div class="footer-version-tag">v1.0.83 (updated 2026-11-01 23:03)</div>
+</footer>
+
+<script type=text/wgsl id=wgsl>
+struct U{r:vec2f,t:f32,s:f32,x:f32}
+@group(0) @binding(0) var<uniform> u:U;
+@vertex fn vs(@builtin(vertex_index) i:u32)->@builtin(position) vec4f{return vec4f(vec2f(f32((i<<1u)&2u),f32(i&2u))*2.-1.,0.,1.);}
+fn h(p:vec2f)->f32{return fract(sin(dot(p,vec2f(127.1,311.7)))*43758.5);}
+fn n(p:vec2f)->f32{let i=floor(p);let f=fract(p);let w=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2f(1.,0.)),w.x),mix(h(i+vec2f(0.,1.)),h(i+vec2f(1.,1.)),w.x),w.y);}
+fn fbm(p:vec2f)->f32{var v=0.;var a=.5;var q=p;for(var i=0;i<5;i++){v+=a*n(q);q=q*2.1+1.7;a*=.5;}return v;}
+fn dune(x:f32,k:f32)->f32{return -.05-k*.1+.045*sin(x*(1.8+k)+k*2.3)+.02*sin(x*4.7-k*3.);}
+fn slope(x:f32,k:f32)->f32{return .045*(1.8+k)*cos(x*(1.8+k)+k*2.3)+.094*cos(x*4.7-k*3.);}
+@fragment fn fs(@builtin(position) c:vec4f)->@location(0) vec4f{
+  let ar=u.r.x/u.r.y; let p=(vec2f(c.x,u.r.y-c.y)-.5*u.r)/u.r.y; let s=u.s; let t=u.t;
+  let day=smoothstep(.15,.6,s); let dawn=smoothstep(-.12,.15,s)*(1.-smoothstep(.3,.65,s)); let noon=smoothstep(.75,1.,s);
+  // sky
+  let hor=mix(mix(vec3f(.04,.03,.1),vec3f(1.,.38,.15),dawn),vec3f(.62,.8,1.),day);
+  let top=mix(mix(vec3f(.005,.005,.03),vec3f(.2,.07,.32),dawn),vec3f(.05,.3,.8),day);
+  var col=mix(mix(hor,top,sqrt(clamp(p.y+.05,0.,.6)/.6)),vec3f(1.,.97,.9),noon*.35);
+  // stars
+  let g=floor(p*180.);
+  col+=step(.995,h(g))*max(0.,1.-3.*length(fract(p*180.)-.5))*(1.-day)*(.6+.4*sin(t*2.+h(g+vec2f(3.,3.))*50.));
+  // full moon, following the sun
+  let mp=vec2f(-ar*.3,.36-.9*smoothstep(-.2,.35,s)); let md=length(p-mp);
+  if(md<.04){col=mix(col,vec3f(.95,.93,.86)*(.75+.3*fbm(p*70.)),(1.-smoothstep(.034,.037,md))*(1.-day));}
+  col+=vec3f(.45,.5,.8)*.003/max(md,.03)*(1.-day);
+  // sun
+  let sp=vec2f(u.x*ar*.5,-.38+.72*s); let q=p-sp; let d=length(q); let dir=q/max(d,1e-4);
+  let warm=mix(vec3f(1.,.42,.12),vec3f(1.,.93,.78),day);
+  let rays=fbm(dir*3.+vec2f(t*.03,0.))*fbm(dir*6.-vec2f(0.,t*.05));
+  var disk=0.; if(d<.07){disk=(1.-smoothstep(.062,.066,d))*(.9+.4*fbm(q*45.+t*.2));}
+  col+=warm*(disk*2.+.012/max(d,.01)*(1.+day)+exp(-d*7.)*.4+rays*exp(-d*3.)*(.5+day));
+  // dunes: valleys stay dark at dawn, light reaches everywhere at duha
+  let x=p.x+sin(p.y*90.+t*6.)*.003*noon;
+  for(var i=0;i<3;i++){
+    let k=f32(i); let yd=dune(x,k);
+    if(p.y<yd){
+      let dp=yd-p.y;
+      let shade=.6-.4*clamp(slope(x,k)*clamp((sp.x-x)*3.,-1.,1.)*4.,-1.,1.);
+      let lit=mix(.035,1.,smoothstep(-.1,.55,s));
+      let sand=mix(vec3f(.8,.38,.18),vec3f(.93,.72,.48),day)*(1.-k*.15);
+      col=sand*lit*mix(shade,1.,day*.4)*(.2+.8*mix(exp(-dp*10.),1.,smoothstep(.3,.6,s)));
+      col+=vec3f(1.,.5,.2)*dawn*exp(-dp*50.)*.7+vec3f(.02,.03,.07)*(1.-day);
+      col=mix(col,hor*lit,.45-k*.18);
+    }
+  }
+  col+=warm*exp(-d*5.)*.25;
+  col*=1.-.35*dot(p,p);
+  col=1.-exp(-col*1.6);
+  return vec4f(col+(h(c.xy*.01+fract(t)*7.)-.5)*.03,1.);
+}
+</script>
+
+<script type=module>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const cv=$('#sky'),hero=$('#hero'),soul=$('#soul'),out=$$('.ph'),R=document.documentElement.style;
+let S=-.3,T=.62,X=0,ov=null,cur=hero,lp,ls=9,won=0,fr=0,pt=performance.now(),draw=()=>{};
+const P=[[.05,'Night','The sun is hidden, not gone.'],[.38,'Dawn','Soft light, long shadows, dark valleys.'],[.8,'<b class=ar>ضُحَىٰ</b>','High enough to reach every valley. Undeniable.'],[9,'Noon','Blazing. Too harsh to bear.']];
+
+// each section sets the time of day
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cur=e.target;T=+(cur.dataset.s??.62);ov=null}}),{rootMargin:'-49% 0px'});
+$$('section').forEach(s=>io.observe(s));
+
+// interactions
+hero.onpointermove=e=>e.pointerType=='mouse'&&(ov=1.05-e.clientY/innerHeight*1.3);
+$('#dial').oninput=e=>ov=e.target.value/100;
+const sp=$$('#ay span');$$('.t').forEach((t,i)=>t.onpointerenter=t.onfocus=()=>sp.forEach((s,j)=>s.classList.toggle('on',i==j)));
+const lis=$$('.her li');lis.forEach(l=>l.onclick=()=>{ov=+l.dataset.v;lis.forEach(m=>m.classList.toggle('on',m==l))});
+
+// Audio recitation
+let curAudio=null;
+const audioBtn=$('.hero-audio .btn-audio-ring'),ringFill=audioBtn?.querySelector('.audio-ring-fill');
+const CIRCUMFERENCE=113.097;
+if(audioBtn){
+  audioBtn.onclick=()=>{
+    const url=audioBtn.dataset.audio;
+    if(!url)return;
+    if(curAudio){
+      if(!curAudio.paused){
+        curAudio.pause();
+        audioBtn.classList.remove('is-playing');
+        audioBtn.setAttribute('aria-pressed','false');
+        return;
+      }
+      curAudio.play();
+      audioBtn.classList.add('is-playing');
+      audioBtn.setAttribute('aria-pressed','true');
+      return;
+    }
+    curAudio=new Audio(url);
+    curAudio.volume=.85;
+    audioBtn.classList.add('is-playing');
+    audioBtn.setAttribute('aria-pressed','true');
+    curAudio.ontimeupdate=()=>{
+      if(ringFill&&curAudio.duration){
+        const offset=CIRCUMFERENCE*(1-curAudio.currentTime/curAudio.duration);
+        ringFill.style.strokeDashoffset=offset;
+      }
+    };
+    curAudio.onended=()=>{
+      audioBtn.classList.remove('is-playing');
+      audioBtn.setAttribute('aria-pressed','false');
+      if(ringFill)ringFill.style.strokeDashoffset=CIRCUMFERENCE;
+    };
+    curAudio.play().catch(()=>{
+      audioBtn.classList.remove('is-playing');
+      audioBtn.setAttribute('aria-pressed','false');
+    });
+  };
+}
+
+// the soul: rub away the night
+const fog=$('#fog'),fx=fog.getContext('2d',{willReadFrequently:true});
+fx.fillStyle='#07051a';fx.fillRect(0,0,420,420);
+const rubSpot=(x,y)=>{
+  fx.globalCompositeOperation='destination-out';
+  const g=fx.createRadialGradient(x,y,0,x,y,46);
+  g.addColorStop(0,'#000');g.addColorStop(1,'#0000');
+  fx.fillStyle=g;fx.fillRect(x-46,y-46,92,92);
+  fx.globalCompositeOperation='source-over';
+};
+fog.onpointerdown=e=>{
+  fog.setPointerCapture?.(e.pointerId);
+  const r=fog.getBoundingClientRect(),k=420/(r.width||420);
+  rubSpot((e.clientX-r.left)*k,(e.clientY-r.top)*k);
+};
+fog.onpointermove=e=>{
+  if(e.buttons===0&&e.pointerType!=='mouse')return;
+  const r=fog.getBoundingClientRect(),k=420/(r.width||420);
+  for(const v of e.getCoalescedEvents?.()??[e]){
+    rubSpot((v.clientX-r.left)*k,(v.clientY-r.top)*k);
+  }
+};
+const fogTick=()=>{
+  if(++fr%6)return;
+  fx.fillStyle='#07051a09';fx.fillRect(0,0,420,420);
+  if(fr%30||cur!=soul||won)return;
+  const D=fx.getImageData(0,0,420,420).data;let a=0,n=0;
+  for(let y=10;y<420;y+=20)for(let x=10;x<420;x+=20)if((x-210)**2+(y-210)**2<4e4)n++,a+=D[(y*420+x)*4+3];
+  const c=1-a/n/255;ov=c*.9-.3;
+  if(c>.72){won=1;ov=.62;soul.classList.add('won')}
+};
+
+// render loop
+const fit=()=>{const k=Math.min(devicePixelRatio,1.5)*.85;cv.width=Math.max(1,innerWidth*k|0);cv.height=Math.max(1,innerHeight*k|0)};fit();onresize=fit;
+const loop=t=>{
+  const k=1-Math.exp(-Math.min(Math.max(t-pt,0),100)/700);pt=t;
+  S+=((ov??T)-S)*k;X+=((cur==hero?0:.62)-X)*k;
+  if(Math.abs(S-ls)>.004){ls=S;R.setProperty('--s',S.toFixed(3))}
+  const idx=P.findIndex(p=>S<p[0]);
+  const i=idx===-1?P.length-1:idx;
+  if(i!=lp){lp=i;out.forEach(o=>o.innerHTML=`<strong>${P[i][1]}</strong>${P[i][2]}`)}
+  draw(t);fogTick();requestAnimationFrame(loop)};
+requestAnimationFrame(loop);
+
+// WebGPU sky (falls back to the CSS sky)
+try{
+  const dev=await (await navigator.gpu?.requestAdapter())?.requestDevice();
+  if(dev){
+    const m=dev.createShaderModule({code:$('#wgsl').textContent});
+    if((await m.getCompilationInfo()).messages.some(x=>x.type=='error'))throw 0;
+    const ctx=cv.getContext('webgpu'),fmt=navigator.gpu.getPreferredCanvasFormat();
+    ctx.configure({device:dev,format:fmt,alphaMode:'premultiplied'});
+    const pl=dev.createRenderPipeline({layout:'auto',vertex:{module:m,entryPoint:'vs'},fragment:{module:m,entryPoint:'fs',targets:[{format:fmt}]}}),
+      ub=dev.createBuffer({size:32,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST}),
+      bg=dev.createBindGroup({layout:pl.getBindGroupLayout(0),entries:[{binding:0,resource:{buffer:ub}}]});
+    const uData=new Float32Array(8);
+    draw=t=>{
+      uData[0]=cv.width;uData[1]=cv.height;uData[2]=t/1e3;uData[3]=S;uData[4]=X;
+      dev.queue.writeBuffer(ub,0,uData);
+      const e=dev.createCommandEncoder(),r=e.beginRenderPass({colorAttachments:[{view:ctx.getCurrentTexture().createView(),loadOp:'clear',clearValue:{r:0,g:0,b:0,a:1},storeOp:'store'}]});
+      r.setPipeline(pl);r.setBindGroup(0,bg);r.draw(3);r.end();dev.queue.submit([e.finish()])};
+  }
+}catch{}
+</script>
+</body>
+</html>
