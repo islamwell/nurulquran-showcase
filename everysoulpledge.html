@@ -131,7 +131,7 @@ body.snap-mode .exhibit-footer {
   pointer-events: none;
 }
 
-.top-nav-bar svg {
+.top-nav-bar svg:not(.audio-ring-svg):not(.icon-play):not(.icon-pause) {
   position: static !important;
   transform: none !important;
   display: inline-block;
@@ -422,13 +422,14 @@ body.snap-mode .exhibit-footer {
   outline: 2px solid #43a047;
   outline-offset: 3px;
 }
-.audio-ring-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  pointer-events: none;
+.btn-audio-ring .audio-ring-svg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: rotate(-90deg) !important;
+  pointer-events: none !important;
+  display: block !important;
 }
 .audio-ring-bg {
   fill: none;
@@ -448,25 +449,43 @@ body.snap-mode .exhibit-footer {
 .btn-audio-ring.playing .audio-ring-fill {
   stroke: #43a047; /* Green when playing */
 }
-.audio-ring-icon {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.btn-audio-ring .audio-ring-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
   color: #e53935; /* Red icon when paused */
   transition: color 0.25s ease;
+}
+.btn-audio-ring .audio-ring-icon svg {
+  position: static !important;
+  transform: none !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 .btn-audio-ring.is-playing .audio-ring-icon,
 .btn-audio-ring.playing .audio-ring-icon {
   color: #43a047; /* Green icon when playing */
 }
-.audio-ring-icon .icon-play { display: block; }
-.audio-ring-icon .icon-pause { display: none; }
+.audio-ring-icon .icon-play {
+  display: block !important;
+  margin-left: 2px;
+}
+.audio-ring-icon .icon-pause {
+  display: none !important;
+}
 .btn-audio-ring.is-playing .audio-ring-icon .icon-play,
-.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
+.btn-audio-ring.playing .audio-ring-icon .icon-play {
+  display: none !important;
+}
 .btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
-.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
+.btn-audio-ring.playing .audio-ring-icon .icon-pause {
+  display: block !important;
+  margin-left: 0;
+}
 
 /* ───────── Minimal Bottom Footer ───────── */
 .exhibit-footer {
@@ -526,7 +545,8 @@ body.snap-mode .exhibit-footer {
   }
   .btn-full-ayah { padding: 4px 7px; }
   .audio-play-btn { width: 28px; height: 28px; }
-  .audio-play-btn svg { width: 12px; height: 12px; }
+  .audio-play-btn .audio-ring-svg { width: 100% !important; height: 100% !important; }
+  .audio-play-btn .audio-ring-icon svg { width: 12px !important; height: 12px !important; }
   #hint { bottom: 36px; font-size: 9px; letter-spacing: .22em; padding: 0 10px; }
   .ayah-dropdown-panel {
     width: min(92vw, 320px);
@@ -624,7 +644,7 @@ body.snap-mode .exhibit-footer {
 <p id="hint">HOLD TO PULL · TAP TO SCATTER · EACH RETURNS TO WHAT IT EARNED</p>
 
 <footer class="exhibit-footer">
-  <div class="nq-version-tag">v1.0.83 (updated 2026-11-01 23:03)</div>
+  <div class="nq-version-tag">v1.0.84 (updated 2026-11-05 14:05)</div>
 </footer>
 
 <script>
@@ -934,10 +954,12 @@ function displayStage(ayahIdx, stageIdx, instant = false) {
   }
 
   const n = Math.min(q.length, P.length);
+  const leftEdge = W / 2 - tw / 2;
   P.forEach((p, j) => {
     if (p.on = j < n) {
       [p.tx, p.ty] = q[j];
-      p.at = instant ? 0 : (now + ((G[0] - p.tx) / tw + (L.length > 1 && p.ty > H / 2)) * 1000 + Math.random() * 300);
+      const progX = !isFull ? (p.tx - leftEdge) / tw : (G[0] - p.tx) / tw;
+      p.at = instant ? 0 : (now + (progX + (L.length > 1 && p.ty > H / 2)) * 1000 + Math.random() * 300);
       if (instant) {
         p.x = p.tx;
         p.y = p.ty;
@@ -945,8 +967,13 @@ function displayStage(ayahIdx, stageIdx, instant = false) {
       }
     }
     if (!instant) {
-      p.vx += (p.y - H / 2) * .025;
-      p.vy -= (p.x - W / 2) * .025;
+      if (!isFull) {
+        p.vx -= (p.y - H / 2) * .025;
+        p.vy += (p.x - W / 2) * .025;
+      } else {
+        p.vx += (p.y - H / 2) * .025;
+        p.vy -= (p.x - W / 2) * .025;
+      }
     }
   });
 
@@ -973,9 +1000,11 @@ function boom(X, Y, w = 1, isFull = false) {
 function tick(t) {
   requestAnimationFrame(tick);
   now = t;
-  const cx = W / 2, cy = H / 2, hold = M.p && t - M.t > 180, sx = G[0] + 200 - (t - T0) * .45 % (G[1] + 1400);
-
   const isFull = currentStageIdx >= (AYAHS[currentAyahIdx]?.words.length || 0);
+  const cx = W / 2, cy = H / 2, hold = M.p && t - M.t > 180;
+  const sx = !isFull
+    ? ((W / 2 - G[1] / 2) - 200 + ((t - T0) * .45) % (G[1] + 1400))
+    : (G[0] + 200 - (t - T0) * .45 % (G[1] + 1400));
 
   // Audio & Timer Sync (Skipped when animation is paused)
   if (!isAnimPaused && isAudioPlaying && currentAudio) {
@@ -1035,7 +1064,7 @@ function tick(t) {
     const on = currentStageIdx >= 0 && p.on && (isAnimPaused || t > p.at);
     let tx = p.tx, ty = p.ty;
     if (!on) {
-      p.a -= p.w * (isFull ? .1 : 1);
+      p.a += (isFull ? -p.w * .1 : p.w);
       const r = currentStageIdx < 0 ? p.s * (6 + 2 * Math.sin(t * .006)) : R * p.r * (1 + .02 * Math.sin(t * .001 + p.a * 3));
       tx = cx + Math.cos(p.a) * r;
       ty = cy + Math.sin(p.a) * r;
