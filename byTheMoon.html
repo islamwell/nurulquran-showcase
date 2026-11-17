@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>By the Moon · 91:2</title>
+<meta name="description" content="And by the moon when it follows her (91:2) — an interactive 3D lunar reflection and Qur'anic reflection on borrowed light and faithful following.">
+<link rel="icon" type="image/svg+xml" href="assets/nurulquran-logo.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,300..500&display=swap">
+<style>
+@property --p{syntax:'<number>';inherits:true;initial-value:.72}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  --acc:oklch(calc(76% + var(--p)*14%) calc(.06 + var(--p)*.08) calc(255 - var(--p)*175));
+  --sil:oklch(92% .03 245);
+  --gld:oklch(86% .14 78);
+  interpolate-size:allow-keywords;
+  color-scheme:dark;
+}
+*{margin:0;box-sizing:border-box}
+body{background:#040610;color:#eef2fc;font:clamp(1rem,.92rem + .35vw,1.18rem)/1.7 system-ui,sans-serif;overflow-x:clip}
+#cosmos{position:fixed;inset:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at calc(50% + var(--p)*28%) 38%,oklch(86% .12 75 / calc(.12 + var(--p)*.28)),#0000 35%),radial-gradient(circle at 50% 42%,#e8effe22 0 14%,#4b6cb718 28%,#040610 70%)}
+#bar{position:fixed;inset:0 0 auto;height:3px;z-index:9;background:linear-gradient(90deg,#3b5bdb,var(--sil),var(--gld));transform-origin:0;animation:grow linear both;animation-timeline:scroll()}
+section{min-height:100svh;display:grid;place-content:center;justify-items:center;gap:1.8rem;padding:14vh 6vw;text-align:center;position:relative;text-shadow:0 2px 26px #000d}
+section:not(#hero)::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(closest-side,#040610d8 28%,#0000)}
+.ar{font-family:'Amiri Quran',serif;direction:rtl;line-height:2;padding-block:.08em;font-weight:400}
+.big{font-size:clamp(2.5rem,7.5vw,5.4rem)}
+h2,.en,strong,small,.pill{font-family:Fraunces,serif;font-weight:300}
+h2{font-size:clamp(2.2rem,5.5vw,4.3rem);line-height:1.06;letter-spacing:-.03em;text-wrap:balance}
+em,.acc{color:var(--acc);font-style:italic}
+p{max-width:58ch;text-wrap:pretty;opacity:.92}
+.card{background:color-mix(in oklch,#050919 60%,#0000);backdrop-filter:blur(18px) saturate(1.5);border:1px solid #ffffff1c;border-radius:2.4rem;corner-shape:squircle;padding:clamp(1.3rem,4vw,2.5rem)}
+.r{animation:in both;animation-timeline:view();animation-range:entry 0% cover 35%}
+@keyframes in{from{opacity:0;translate:0 3rem;filter:blur(12px)}}
+@keyframes grow{from{scale:0 1}}
+@keyframes spin{to{--a:360deg}}
+@keyframes pulse{50%{opacity:.32}}
+@supports not (animation-timeline:view()){.r{opacity:1;transform:none;filter:none}}
+
+/* Top navigation */
+.top-nav{position:fixed;top:1rem;left:1.5rem;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.35rem .9rem;border-radius:2rem;background:#040610b0;border:1px solid #ffffff1c;backdrop-filter:blur(12px);text-decoration:none;color:#eef2fccc;font:300 .82rem Fraunces,serif;letter-spacing:.05em;transition:all .3s}
+.top-nav:hover{color:var(--acc);border-color:color-mix(in oklch,var(--acc) 45%,#fff2)}
+
+/* Hero */
+#hero{place-content:end center;padding-bottom:6vh;background:linear-gradient(#0000 32%,#040610e2 82%)}
+#hero h1{font-size:clamp(3.3rem,12.5vw,9.4rem);line-height:1.85;padding:.15em .06em .3em;color:#0000;text-shadow:none;background:linear-gradient(100deg,#dbe7ff 20%,var(--sil) 42%,#fff 50%,var(--gld) 60%,#dbe7ff 82%) 0/300%;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 4px 24px #020512cc) drop-shadow(0 0 2.2rem oklch(78% .11 240 / .5));animation:write 2.8s cubic-bezier(.7,0,.2,1) both,shine 7s ease-in-out infinite alternate}
+@keyframes write{from{clip-path:inset(0 0 0 100%)}}
+@keyframes shine{to{background-position:100%}}
+#hero .en{font-size:clamp(1.15rem,2.8vw,2.1rem);margin-top:-.9rem;animation:in 1.4s 1.6s both}
+.tag{position:absolute;top:2rem;inset-inline:0;letter-spacing:.4em;text-transform:uppercase;font-size:.75rem;opacity:.75}
+@media(max-width:640px){.top-nav{top:.75rem;left:.75rem}.tag{top:3.8rem}}
+.ph{display:block;padding:.45rem 1.3rem;border-radius:2rem;background:#040817b0;border:1px solid #fff2;backdrop-filter:blur(10px);font:300 1rem Fraunces,serif}
+.ph strong{color:var(--acc);font-weight:500;margin-right:.5rem}
+.hint{opacity:.68;animation:pulse 2.4s ease-in-out infinite}
+
+/* Circular audio ring player */
+.btn-audio-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:0;margin-left:.45rem;flex-shrink:0;vertical-align:middle;transition:transform .2s ease}
+.btn-audio-ring:hover{transform:scale(1.08)}
+.btn-audio-ring:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.audio-ring-svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);pointer-events:none}
+.audio-ring-bg{fill:none;stroke:#ffffff2b;stroke-width:3}
+.audio-ring-fill{fill:none;stroke:var(--acc);stroke-width:3;stroke-linecap:round;stroke-dasharray:113.097;stroke-dashoffset:113.097;transition:stroke-dashoffset .15s linear}
+.audio-ring-icon{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;color:var(--acc)}
+.audio-ring-icon .icon-play{display:block;margin-left:1.5px}
+.audio-ring-icon .icon-pause{display:none}
+.btn-audio-ring.is-playing .audio-ring-icon .icon-play{display:none}
+.btn-audio-ring.is-playing .audio-ring-icon .icon-pause{display:block}
+
+/* Word tiles with single-trace outline */
+#ay span{color:#ffffff70;transition:color .4s,text-shadow .4s}
+#ay .on{color:var(--acc);text-shadow:0 0 2rem var(--acc)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(11.5rem,1fr));gap:1rem;width:min(100%,68rem);direction:rtl;align-items:start}
+.t{direction:ltr;text-align:left;cursor:pointer;position:relative;padding:1.4rem 1.5rem;outline:0;animation:in both;animation-timeline:view();animation-range:entry 0% cover calc(10% + sibling-index()*6%)}
+.t::before{content:'';position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;padding:1.5px;background:conic-gradient(from var(--a),#0000 65%,var(--acc));mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transition:opacity .35s}
+.t:is(:hover,:focus)::before{opacity:1;animation:spin 1.15s cubic-bezier(.22,1,.36,1) 1 forwards}
+.t .ar{display:block;text-align:right;font-size:2.6rem;line-height:1.5;color:var(--acc)}
+.t strong{display:block;font-size:1.3rem}
+.t p{height:0;opacity:0;overflow:hidden;font-size:.95rem;transition:height .5s,opacity .5s}
+.t:is(:hover,:focus) p{height:auto;opacity:.9}
+@media(hover:none){.t p{height:auto;opacity:.9}}
+
+/* Phase slider */
+.dial{display:grid;justify-items:center;gap:.5rem;width:min(92vw,38rem)}
+input[type=range]{appearance:none;width:min(76vw,32rem);height:.55rem;border-radius:1rem;margin:1rem 0;cursor:grab;background:linear-gradient(90deg,#080c1c,#2d3d73 25%,#9fb7e8 55%,#fff8e3 85%,#ffd27a)}
+input::-webkit-slider-thumb{appearance:none;width:2.3rem;height:2.3rem;border-radius:50%;background:radial-gradient(#fff,#dbe6ff 55%,#7f9ee0);box-shadow:0 0 1.8rem .4rem #bcd1ff88}
+input::-moz-range-thumb{width:2.3rem;height:2.3rem;border:0;border-radius:50%;background:radial-gradient(#fff,#dbe6ff 55%,#7f9ee0);box-shadow:0 0 1.8rem .4rem #bcd1ff88}
+
+/* Interactive follow-close orbit canvas */
+.orbit-box{width:min(88vw,28rem);display:grid;gap:1.2rem;justify-items:center}
+#follow{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#0b132b80,#040610d0);border:1px solid #ffffff1a;touch-action:none;cursor:grab;box-shadow:inset 0 0 3rem #1e3a8a33,0 0 4rem #0008}
+.seg-btns{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center}
+.pill-btn{padding:.55rem 1.25rem;border-radius:999px;border:1px solid #ffffff28;background:#0a1026b0;color:#eef2fc;font:400 .95rem Fraunces,serif;cursor:pointer;transition:all .3s}
+.pill-btn:hover,.pill-btn.on{border-color:var(--acc);color:var(--acc);background:color-mix(in oklch,var(--acc) 14%,#060918);box-shadow:0 0 1.2rem color-mix(in oklch,var(--acc) 25%,#0000)}
+
+/* Reveal card */
+.insight{display:none;opacity:0;translate:0 1.5rem;transition:.9s allow-discrete;max-width:44rem}
+.aligned .insight{display:block;opacity:1;translate:0;@starting-style{opacity:0;translate:0 1.5rem}}
+
+/* Comparison cards */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.2rem;width:min(100%,54rem)}
+.pair .card{text-align:left;cursor:pointer;transition:border-color .35s,transform .35s}
+.pair .card.on{border-color:var(--acc);transform:translateY(-3px)}
+.pair .ar{font-size:2rem;color:var(--acc);display:block;text-align:right}
+.pair h3{font:400 1.35rem Fraunces,serif;margin:.3rem 0 .5rem}
+
+/* Footer */
+footer{padding:5rem 2rem 4rem;text-align:center;font-size:.78rem;position:relative;z-index:2;background:linear-gradient(#0000,#040610e6 40%,#040610)}
+.footer-nav{display:flex;justify-content:center;align-items:center;gap:1.8rem;margin-bottom:1.2rem;letter-spacing:.12em;text-transform:uppercase;font-size:.75rem}
+.footer-nav a{color:#eef2fc99;text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:var(--acc)}
+.footer-version-tag{font-family:monospace;letter-spacing:.08em;color:var(--acc);opacity:.75;font-size:.72rem}
+</style>
+</head>
+<body>
+
+<a href="index.html" class="top-nav" aria-label="Return to NurulQuran">← NurulQuran</a>
+
+<canvas id=cosmos></canvas><div id=bar></div>
+
+<section id=hero data-p=.78>
+  <small class=tag>The Moon · 91 : 2</small>
+  <h1 class=ar>وَٱلْقَمَرِ إِذَا تَلَىٰهَا</h1>
+  <p class=en>And by the moon when it follows her <button type="button" class="btn-audio-ring nq-play-btn" data-audio="https://everyayah.com/data/Nasser_Alqatami_128kbps/091002.mp3" aria-label="Listen to verse 91:2" title="Listen" aria-pressed="false">
+      <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
+        <circle class="audio-ring-fill" cx="23" cy="23" r="18" />
+      </svg>
+      <span class="audio-ring-icon" aria-hidden="true">
+        <svg class="icon-play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><polygon points="7 4 21 12 7 20 7 4"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
+      </span>
+    </button></p>
+  <output class=ph></output>
+  <small class=hint>Move across the sky to turn the sun’s angle · scroll to explore ↓</small>
+</section>
+
+<section data-p=.82>
+  <h2 class=r>Four pieces, <em>one borrowed light</em></h2>
+  <div class="ar big r" id=ay><span>وَ</span><span>ٱلْقَمَرِ</span> <span>إِذَا</span> <span>تَلَىٰ&zwj;هَا</span></div>
+  <div class=tiles>
+    <div class="card t" tabindex=0><b class=ar>وَ</b><strong>And by…</strong><p>Right after swearing by the sun, Allah calls a second witness forward — not a rival to the sun, but her closest follower.</p></div>
+    <div class="card t" tabindex=0><b class=ar>ٱلْقَمَرِ</b><strong>the moon</strong><p>Cold rock hanging in blackness. It creates zero fire of its own. Notice it does not get a second oath for its brightness — because the brightness is not its own.</p></div>
+    <div class="card t" tabindex=0><b class=ar>إِذَا</b><strong>when…</strong><p>A condition. Not at all times — only when it stays lined up toward her. Drift out of position, and darkness takes back the surface.</p></div>
+    <div class="card t" tabindex=0><b class=ar>تَلَىٰهَا</b><strong>it follows her step by step</strong><p>Used in Arabic for a young one walking directly in its mother’s tracks — and the exact same Arabic word used for reciting the Qur’an faithfully, word after word.</p></div>
+  </div>
+</section>
+
+<section data-p=.45>
+  <h2 class=r>Not a drop of light <em>is its own</em></h2>
+  <p class=r>The sun owns two witnesses in the opening verse: itself and its own morning light. The moon owns neither. Turn it toward the unseen sun and its dark surface floods with silver. Turn it away, and all that remains is shadow.</p>
+  <label class="card r dial">Sweep the moon’s alignment<input id=dial type=range min=0 max=100 value=72><output class=ph></output></label>
+</section>
+
+<section data-p=.9 id=followSec>
+  <h2 class=r>Walking in her <em>tracks</em></h2>
+  <p class=r>The Arabic word <b class="ar acc">تَلَىٰ</b> describes walking closely behind someone without overtaking or drifting away — and it is the very word for reciting revelation. True recitation is not noise on the tongue; it is keeping your face turned toward Allah’s light.</p>
+  <div class="orbit-box r">
+    <canvas id=follow width=560 height=560></canvas>
+    <div class=seg-btns>
+      <button type=button class="pill-btn on" id=btnSync>Follow Close</button>
+      <button type=button class=pill-btn id=btnDrift>Let It Drift Away</button>
+    </div>
+    <output class=ph id=orbitOut><strong>Aligned</strong>Receiving &amp; reflecting light into the night.</output>
+  </div>
+  <div class="card insight">
+    <p class="ar big" style="font-size:clamp(1.8rem,4vw,2.8rem)">إِذَا تَلَىٰهَا</p>
+    <p>When night blankets the sky, the sun has not vanished — it is simply out of view. The moon takes over the night shift, softening that blinding fire into peaceful silver so travelers can still see the road home.</p>
+  </div>
+</section>
+
+<section data-p=.95>
+  <h2 class=r>One light, <em>two roles</em></h2>
+  <p class=r>Every believer is asked to act like the moon: you never invent the light — you receive revelation, stay aligned with it, and softly shine it into dark places. Tap a card to shift the sky.</p>
+  <div class="pair r">
+    <div class="card on" data-mode=.95>
+      <span class=ar>وَٱلشَّمْسِ وَضُحَىٰهَا</span>
+      <h3>91:1 · The Source</h3>
+      <p>Two oaths: the sun <em>and</em> its own radiant morning. Self-luminous, filling every valley. Like revelation itself — clear, warm, and needing nothing added to it.</p>
+    </div>
+    <div class="card" data-mode=.42>
+      <span class=ar>وَٱلْقَمَرِ إِذَا تَلَىٰهَا</span>
+      <h3>91:2 · The Follower</h3>
+      <p>One oath tied to a condition: <em>when</em> it follows her. Borrowed glow, gentle on the eyes, faithful even when darkness settles over the earth.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-nav">
+    <a href="byTheSun.html">← Previous · 91:1 The Sun</a>
+    <a href="#hero">Return to Top ↑</a>
+  </div>
+  <div class="footer-version-tag">v1.0.86 (updated 2026-11-17 05:27)</div>
+</footer>
+
+<script type=text/wgsl id=wgsl>
+struct U{r:vec2f,t:f32,p:f32}
+@group(0) @binding(0) var<uniform> u:U;
+@vertex fn vs(@builtin(vertex_index) i:u32)->@builtin(position) vec4f{return vec4f(vec2f(f32((i<<1u)&2u),f32(i&2u))*2.-1.,0.,1.);}
+fn h(p:vec2f)->f32{return fract(sin(dot(p,vec2f(127.1,311.7)))*43758.5);}
+fn n(p:vec2f)->f32{let i=floor(p);let f=fract(p);let w=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2f(1.,0.)),w.x),mix(h(i+vec2f(0.,1.)),h(i+vec2f(1.,1.)),w.x),w.y);}
+fn fbm(p:vec2f)->f32{var v=0.;var a=.5;var q=p;for(var i=0;i<5;i++){v+=a*n(q);q=q*2.05+1.3;a*=.5;}return v;}
+@fragment fn fs(@builtin(position) c:vec4f)->@location(0) vec4f{
+  let p=(vec2f(c.x,u.r.y-c.y)-.5*u.r)/u.r.y;
+  let ang=(1.-u.p)*3.14159265;
+  let sunDir=normalize(vec3f(sin(ang),.22,cos(ang)));
+  // deep starfield sky
+  var col=mix(vec3f(.012,.018,.055),vec3f(.045,.07,.16),clamp(.5-p.y,0.,1.));
+  let sg=floor(p*210.);
+  let star=step(.994,h(sg))*max(0.,1.-3.2*length(fract(p*210.)-vec2f(.5)))*(.55+.45*sin(u.t*2.+h(sg+7.)*40.));
+  col+=vec3f(.78,.86,1.)*star;
+  // subtle solar glow in the direction of "her"
+  let sunHint=normalize(vec2f(sin(ang),.28));
+  let corona=pow(max(0.,dot(normalize(p+vec2f(1e-4)),sunHint)),5.)*(.12+.22*u.p);
+  col+=vec3f(1.,.74,.38)*corona;
+  // 3D ray-cast lunar sphere
+  let mp=p-vec2f(0.,.14);
+  let r=.25;
+  let d2=dot(mp,mp);
+  if(d2<r*r){
+    let z=sqrt(r*r-d2);
+    let N0=normalize(vec3f(mp/r,z/r));
+    let sp=vec2f(atan2(N0.x,N0.z)*2.2+u.t*.02,asin(N0.y)*3.2);
+    let mare=fbm(sp*2.4);
+    let craters=fbm(sp*14.)*.45+fbm(sp*28.)*.2;
+    let N=normalize(N0+vec3f(craters-.35,fbm(sp*18.+3.)-.5,0.)*.22);
+    let alb=mix(vec3f(.38,.43,.54),vec3f(.88,.91,.96),smoothstep(.35,.72,mare)-craters*.18);
+    let lit=smoothstep(-.04,.85,dot(N,sunDir));
+    let rim=pow(1.-N0.z,3.2)*max(0.,dot(N0,sunDir)+.25);
+    let earthshine=vec3f(.05,.09,.2)*.42*(1.-lit);
+    let moon=alb*(lit*(1.25+.2*u.p))+earthshine+vec3f(1.,.88,.68)*rim*.45;
+    let edge=smoothstep(r,r-.005,sqrt(d2));
+    col=mix(col,moon,edge);
+  }else{
+    let gd=max(length(mp)-r,.004);
+    col+=mix(vec3f(.3,.45,.85),vec3f(1.,.86,.62),u.p)*(.018/gd)*(.25+.75*u.p)*.28;
+  }
+  col=1.-exp(-col*1.45);
+  return vec4f(col,1.);
+}
+</script>
+
+<script type=module>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const cv=$('#cosmos'),hero=$('#hero'),dial=$('#dial'),out=$$('#hero .ph, .dial .ph'),R=document.documentElement.style;
+let P=.72,T=.78,ov=null,lp=-1,pt=performance.now(),draw=null;
+const PH=[
+  [.15,'Turned Away','Zero fire of its own — only hidden stone in the dark.'],
+  [.4,'Thin Crescent','Facing her at the edge — the first faint silver returns.'],
+  [.72,'Half Illuminated','Half facing her light, half left to shadow.'],
+  [2,'Full Reflection','Facing her completely — turning night into calm silver.']
+];
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.target.dataset.p){T=+e.target.dataset.p;ov=null}}),{rootMargin:'-48% 0px'});
+$$('section').forEach(s=>io.observe(s));
+
+hero.onpointermove=e=>e.pointerType=='mouse'&&(ov=Math.min(1,Math.max(0,e.clientX/innerWidth)));
+dial.oninput=e=>ov=e.target.value/100;
+
+const aySp=$$('#ay span');
+$$('.t').forEach((el,i)=>el.onpointerenter=el.onfocus=()=>aySp.forEach((s,j)=>s.classList.toggle('on',i==j)));
+
+// Audio player
+let curAudio=null;
+const audioBtn=$('#hero .btn-audio-ring'),ringFill=audioBtn?.querySelector('.audio-ring-fill'),CIRC=113.097;
+if(audioBtn){
+  audioBtn.onclick=()=>{
+    const url=audioBtn.dataset.audio;if(!url)return;
+    if(curAudio){
+      if(!curAudio.paused){curAudio.pause();audioBtn.classList.remove('is-playing');audioBtn.setAttribute('aria-pressed','false');return}
+      curAudio.play();audioBtn.classList.add('is-playing');audioBtn.setAttribute('aria-pressed','true');return;
+    }
+    curAudio=new Audio(url);curAudio.volume=.85;audioBtn.classList.add('is-playing');audioBtn.setAttribute('aria-pressed','true');
+    curAudio.ontimeupdate=()=>{if(ringFill&&curAudio.duration)ringFill.style.strokeDashoffset=CIRC*(1-curAudio.currentTime/curAudio.duration)};
+    curAudio.onended=()=>{audioBtn.classList.remove('is-playing');audioBtn.setAttribute('aria-pressed','false');if(ringFill)ringFill.style.strokeDashoffset=CIRC};
+    curAudio.play().catch(()=>{audioBtn.classList.remove('is-playing');audioBtn.setAttribute('aria-pressed','false')});
+  };
+}
+
+// Orbit alignment simulation ("Follow Close" vs "Drift Away")
+const fCv=$('#follow'),fx=fCv.getContext('2d'),fSec=$('#followSec'),fOut=$('#orbitOut');
+let driftMode=0,sunAng=0,moonAng=0.22,dragMoon=0,alignedTimer=0;
+const syncBtn=$('#btnSync'),driftBtn=$('#btnDrift');
+syncBtn.onclick=()=>{driftMode=0;syncBtn.classList.add('on');driftBtn.classList.remove('on')};
+driftBtn.onclick=()=>{driftMode=1;driftBtn.classList.add('on');syncBtn.classList.remove('on')};
+fCv.onpointerdown=e=>{dragMoon=1;fCv.setPointerCapture?.(e.pointerId)};
+fCv.onpointerup=()=>dragMoon=0;
+fCv.onpointermove=e=>{
+  if(!dragMoon)return;
+  const r=fCv.getBoundingClientRect(),ang=Math.atan2(e.clientY-r.top-r.height/2,e.clientX-r.left-r.width/2);
+  moonAng=ang;
+};
+const drawOrbit=dt=>{
+  sunAng+=dt*.55;
+  if(!dragMoon){
+    const target=driftMode?sunAng+1.9:sunAng-.28;
+    let diff=((target-moonAng+Math.PI*3)%(Math.PI*2))-Math.PI;
+    moonAng+=diff*Math.min(1,dt*3.2);
+  }
+  const gap=Math.abs(((sunAng-.28-moonAng+Math.PI*3)%(Math.PI*2))-Math.PI);
+  const align=Math.max(0,1-gap/1.4);
+  if(align>.82){alignedTimer+=dt;if(alignedTimer>.6)fSec.classList.add('aligned')}
+  fOut.innerHTML=align>.75?'<strong>Following Close</strong>Facing her track — full light streams into the dark.':'<strong>Drifted Out of Line</strong>When it wanders from her path, the glow dims to shadow.';
+
+  const W=560,cx=280,cy=280,R0=182;
+  fx.clearRect(0,0,W,W);
+  // orbit ring
+  fx.strokeStyle='rgba(255,255,255,.13)';fx.lineWidth=1.5;fx.setLineDash([5,7]);
+  fx.beginPath();fx.arc(cx,cy,R0,0,Math.PI*2);fx.stroke();fx.setLineDash([]);
+  // golden footprints/trail behind the sun
+  for(let i=0;i<10;i++){
+    const a=sunAng-i*.09,rx=cx+Math.cos(a)*R0,ry=cy+Math.sin(a)*R0;
+    fx.fillStyle=`rgba(255,205,110,${(1-i/10)*.32})`;
+    fx.beginPath();fx.arc(rx,ry,4*(1-i/12),0,Math.PI*2);fx.fill();
+  }
+  const sx=cx+Math.cos(sunAng)*R0,sy=cy+Math.sin(sunAng)*R0;
+  const mx=cx+Math.cos(moonAng)*R0,my=cy+Math.sin(moonAng)*R0;
+  // light tether beam
+  const lg=fx.createLinearGradient(sx,sy,mx,my);
+  lg.addColorStop(0,`rgba(255,212,120,${.15+align*.65})`);
+  lg.addColorStop(1,`rgba(180,210,255,${.08+align*.55})`);
+  fx.strokeStyle=lg;fx.lineWidth=1.5+align*2.5;
+  fx.beginPath();fx.moveTo(sx,sy);fx.lineTo(mx,my);fx.stroke();
+  // sun node ("Her")
+  const sg=fx.createRadialGradient(sx,sy,2,sx,sy,46);
+  sg.addColorStop(0,'#fff');sg.addColorStop(.3,'#ffd37a');sg.addColorStop(1,'#ff8a3d00');
+  fx.fillStyle=sg;fx.beginPath();fx.arc(sx,sy,46,0,Math.PI*2);fx.fill();
+  // moon node ("Follower")
+  const mg=fx.createRadialGradient(mx,my,4,mx,my,40);
+  mg.addColorStop(0,`rgba(245,248,255,${.3+align*.7})`);
+  mg.addColorStop(.45,`rgba(170,200,255,${.2+align*.5})`);
+  mg.addColorStop(1,'#0000');
+  fx.fillStyle=mg;fx.beginPath();fx.arc(mx,my,40,0,Math.PI*2);fx.fill();
+  fx.fillStyle=`rgba(230,240,255,${.25+align*.75})`;
+  fx.beginPath();fx.arc(mx,my,16,0,Math.PI*2);fx.fill();
+};
+
+// Role cards comparison
+$$('.pair .card').forEach(c=>c.onclick=()=>{
+  $$('.pair .card').forEach(x=>x.classList.remove('on'));c.classList.add('on');ov=+c.dataset.mode;
+});
+
+// Canvas 2D Moon fallback (if WebGPU unavailable)
+const fit=()=>{const k=Math.min(devicePixelRatio,1.5);cv.width=Math.max(1,innerWidth*k|0);cv.height=Math.max(1,innerHeight*k|0)};fit();onresize=fit;
+const fallbackDraw=t=>{
+  const x=cv.getContext('2d');if(!x)return;
+  const W=cv.width,H=cv.height,cx=W/2,cy=H*.34,r=Math.min(W,H)*.21;
+  x.clearRect(0,0,W,H);
+  const bg=x.createRadialGradient(cx+r*(P-.5)*2.4,cy*.9,r*.1,cx,cy,Math.max(W,H)*.75);
+  bg.addColorStop(0,`rgba(255,205,130,${.09+P*.2})`);
+  bg.addColorStop(.4,'rgba(22,34,74,.68)');
+  bg.addColorStop(1,'#040610');
+  x.fillStyle=bg;x.fillRect(0,0,W,H);
+  for(let i=0;i<70;i++){
+    const sx=((Math.sin(i*78.233)*.5+.5)*W),sy=((Math.sin(i*37.719)*.5+.5)*H);
+    x.fillStyle=`rgba(220,235,255,${.22+.38*Math.sin(t/700+i)})`;
+    x.fillRect(sx,sy,2,2);
+  }
+  const mg=x.createRadialGradient(cx,cy,r*.75,cx,cy,r*2);
+  mg.addColorStop(0,`rgba(185,210,255,${.14+P*.32})`);mg.addColorStop(1,'#0000');
+  x.fillStyle=mg;x.beginPath();x.arc(cx,cy,r*2,0,Math.PI*2);x.fill();
+  x.save();x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.clip();
+  x.fillStyle='#090f24';x.fillRect(cx-r,cy-r,r*2,r*2);
+  const litG=x.createRadialGradient(cx+r*(P-.3),cy-r*.2,r*.1,cx,cy,r*1.2);
+  litG.addColorStop(0,'#fff');litG.addColorStop(.55,'#d4e1ff');litG.addColorStop(1,'#3e4f7a');
+  x.fillStyle=litG;
+  x.beginPath();
+  x.arc(cx,cy,r,-Math.PI/2,Math.PI/2,false);
+  const rx=r*(1-2*P);
+  x.ellipse(cx,cy,Math.abs(rx),r,0,Math.PI/2,-Math.PI/2,rx>=0);
+  x.fill();
+  // soft lunar seas & micro-craters
+  [[.24,-.18,.26],[-.18,.15,.32],[.08,.34,.18],[-.32,-.22,.2]].forEach(([dx,dy,sr])=>{
+    const cg=x.createRadialGradient(cx+dx*r,cy+dy*r,0,cx+dx*r,cy+dy*r,sr*r);
+    cg.addColorStop(0,'rgba(24,36,68,.18)');cg.addColorStop(1,'rgba(24,36,68,0)');
+    x.fillStyle=cg;x.beginPath();x.arc(cx+dx*r,cy+dy*r,sr*r,0,Math.PI*2);x.fill();
+  });
+  x.restore();
+};
+
+// WebGPU 3D Lunar Shader (initialized before starting fallback loop)
+try{
+  const dev=await (await navigator.gpu?.requestAdapter())?.requestDevice();
+  if(dev){
+    const m=dev.createShaderModule({code:$('#wgsl').textContent});
+    if((await m.getCompilationInfo()).messages.some(x=>x.type=='error'))throw 0;
+    const ctx=cv.getContext('webgpu'),fmt=navigator.gpu.getPreferredCanvasFormat();
+    ctx.configure({device:dev,format:fmt,alphaMode:'premultiplied'});
+    const pl=dev.createRenderPipeline({layout:'auto',vertex:{module:m,entryPoint:'vs'},fragment:{module:m,entryPoint:'fs',targets:[{format:fmt}]}}),
+      ub=dev.createBuffer({size:16,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST}),
+      bg=dev.createBindGroup({layout:pl.getBindGroupLayout(0),entries:[{binding:0,resource:{buffer:ub}}]});
+    const uData=new Float32Array(4);
+    draw=t=>{
+      uData[0]=cv.width;uData[1]=cv.height;uData[2]=t/1e3;uData[3]=P;
+      dev.queue.writeBuffer(ub,0,uData);
+      const e=dev.createCommandEncoder(),r=e.beginRenderPass({colorAttachments:[{view:ctx.getCurrentTexture().createView(),loadOp:'clear',clearValue:{r:0,g:0,b:0,a:1},storeOp:'store'}]});
+      r.setPipeline(pl);r.setBindGroup(0,bg);r.draw(3);r.end();dev.queue.submit([e.finish()]);
+    };
+  }
+}catch{}
+
+const loop=t=>{
+  const dt=Math.min(Math.max(t-pt,0),100)/1e3;pt=t;
+  const k=1-Math.exp(-dt*1.8);
+  P+=((ov??T)-P)*k;
+  R.setProperty('--p',P.toFixed(3));
+  const idx=PH.findIndex(v=>P<v[0]),i=idx===-1?PH.length-1:idx;
+  if(i!=lp){lp=i;out.forEach(o=>o.innerHTML=`<strong>${PH[i][1]}</strong>${PH[i][2]}`)}
+  (draw||fallbackDraw)(t);
+  drawOrbit(dt);
+  requestAnimationFrame(loop);
+};
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
