@@ -146,37 +146,62 @@ body{font-family:var(--f-en);cursor:none;-webkit-font-smoothing:antialiased;-moz
 }
 
 .scrub-wrap{
-  position:fixed;z-index:6;left:50%;bottom:25px;transform:translateX(-50%);
-  width:min(620px,68vw);display:flex;flex-direction:column;align-items:center;gap:8px
+  position:fixed;z-index:6;left:50%;bottom:20px;transform:translateX(-50%);
+  width:min(640px,76vw);display:flex;flex-direction:column;align-items:center;gap:6px
 }
-.ayah-bottom{
-  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.34em;
-  color:var(--gold);text-transform:uppercase;opacity:.92;pointer-events:none
+.nav-controls{
+  display:inline-flex;align-items:center;gap:14px;pointer-events:auto;
+}
+.nav-arrow,.repeat-btn{
+  display:inline-grid;place-items:center;
+  width:36px;height:36px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid rgba(56,232,255,.35);
+  background:rgba(6,6,10,.68);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#F3ECE1;transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.nav-arrow:hover,.nav-arrow:focus-visible,
+.repeat-btn:hover,.repeat-btn:focus-visible{
+  border-color:#38e8ff;color:#38e8ff;background:rgba(56,232,255,.14);transform:translateY(-1px);outline:none;
+}
+.nav-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.repeat-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.repeat-btn[aria-pressed="true"],
+.repeat-btn.is-active{
+  color:#38e8ff;border-color:#38e8ff;background:rgba(56,232,255,.2);
+  box-shadow:0 0 16px rgba(56,232,255,.42),inset 0 0 8px rgba(56,232,255,.22);
+}
+.scrub-row{
+  display:flex;align-items:center;gap:10px;width:100%;
 }
 .scrub{
   --progress:0%;
-  width:100%;height:22px;margin:0;appearance:none;-webkit-appearance:none;
+  flex:1;min-width:0;height:22px;margin:0;appearance:none;-webkit-appearance:none;
   background:transparent;cursor:pointer;touch-action:none
 }
 .scrub::-webkit-slider-runnable-track{
-  height:2px;border-radius:99px;
-  background:linear-gradient(90deg,var(--gold) 0 var(--progress),rgba(243,236,225,.18) var(--progress) 100%);
-  box-shadow:0 0 10px rgba(227,192,137,.10)
+  height:3px;border-radius:99px;
+  background:linear-gradient(90deg,#38e8ff 0 var(--progress),rgba(56,232,255,.24) var(--progress) 100%);
+  box-shadow:0 0 10px rgba(56,232,255,.22)
 }
 .scrub::-webkit-slider-thumb{
   -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
-  margin-top:-6px;background:var(--gold);border:2px solid rgba(6,6,10,.9);
-  box-shadow:0 0 14px rgba(227,192,137,.55)
+  margin-top:-5.5px;background:#38e8ff;border:2px solid #06060a;
+  box-shadow:0 0 14px rgba(56,232,255,.8)
 }
 .scrub::-moz-range-track{
-  height:2px;border-radius:99px;background:rgba(243,236,225,.18)
+  height:3px;border-radius:99px;background:rgba(56,232,255,.24)
 }
 .scrub::-moz-range-progress{
-  height:2px;border-radius:99px;background:var(--gold)
+  height:3px;border-radius:99px;background:#38e8ff
 }
 .scrub::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;background:var(--gold);
-  border:2px solid rgba(6,6,10,.9);box-shadow:0 0 14px rgba(227,192,137,.55)
+  width:14px;height:14px;border-radius:50%;background:#38e8ff;
+  border:2px solid #06060a;box-shadow:0 0 14px rgba(56,232,255,.8)
+}
+.audio-time{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;
+  color:#38e8ff;white-space:nowrap;flex-shrink:0;text-shadow:0 1px 4px rgba(0,0,0,.9);
+  font-variant-numeric:tabular-nums;
 }
 
 .cursor{position:fixed;z-index:9999;top:0;left:0;width:32px;height:32px;margin:-16px 0 0 -16px;
@@ -198,6 +223,114 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 .iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .iconbtn[aria-pressed="true"]{background:rgba(227,192,137,.18);border-color:rgba(227,192,137,.75)}
 .iconbtn .playfill{fill:currentColor;stroke:none}
+#shareBtn{
+  color:#38e8ff;
+  border-color:rgba(56,232,255,.72);
+  background:rgba(56,232,255,.16);
+  box-shadow:0 0 18px rgba(56,232,255,.35),inset 0 0 8px rgba(56,232,255,.18);
+}
+#shareBtn:hover,#shareBtn:focus-visible{
+  color:#9ef4ff;
+  border-color:#38e8ff;
+  background:rgba(56,232,255,.28);
+  box-shadow:0 0 24px rgba(56,232,255,.6),inset 0 0 10px rgba(56,232,255,.28);
+}
+.shortcuts-btn{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600}
+@media (hover:none),(pointer:coarse),(max-width:680px){.shortcuts-btn{display:none}}
+dialog:modal{
+  overscroll-behavior:contain;
+  margin:auto;
+  max-width:min(540px,92vw);
+  max-height:86dvh;
+  overflow-y:auto;
+  padding:clamp(20px,3.2vw,28px);
+  border-radius:20px;
+  border:1px solid rgba(227,192,137,.35);
+  background:rgba(10,11,18,.96);
+  color:var(--bone);
+  box-shadow:0 24px 64px rgba(0,0,0,.78),0 0 36px rgba(56,232,255,.10);
+  font-family:var(--f-en);
+  cursor:auto;
+}
+dialog[open]{display:block}
+dialog::backdrop{
+  background:rgba(3,4,8,.76);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  overflow:hidden;
+  overscroll-behavior:contain;
+}
+.dlg-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;
+}
+.dlg-kicker{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:#38e8ff;
+}
+.dlg-title{
+  font-size:1.22rem;font-weight:600;color:#FFFBF2;line-height:1.3;margin-top:4px;
+}
+.dlg-close{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(243,236,225,.25);
+  background:rgba(255,255,255,.05);color:var(--bone);cursor:pointer;
+  display:grid;place-items:center;font-size:18px;line-height:1;flex-shrink:0;
+  transition:border-color .2s,background .2s,color .2s;
+}
+.dlg-close:hover,.dlg-close:focus-visible{
+  border-color:#38e8ff;color:#38e8ff;background:rgba(56,232,255,.12);outline:none;
+}
+.shortcut-list{
+  display:grid;gap:8px;margin-top:8px;
+}
+.shortcut-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(243,236,225,.08);font-size:0.92rem;
+}
+.shortcut-key{
+  font-family:"IBM Plex Mono",monospace;font-size:0.78rem;font-weight:500;
+  color:#38e8ff;background:rgba(56,232,255,.12);border:1px solid rgba(56,232,255,.32);
+  padding:3px 8px;border-radius:6px;white-space:nowrap;
+}
+.quiz-prompt{
+  font-size:1.05rem;line-height:1.5;color:#FFFBF2;margin-bottom:14px;font-weight:500;
+}
+.quiz-options{
+  display:grid;gap:9px;
+}
+.quiz-opt{
+  width:100%;text-align:left;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(243,236,225,.2);background:rgba(255,255,255,.04);
+  color:var(--bone);font-family:var(--f-en);font-size:0.95rem;line-height:1.45;
+  cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .15s;
+}
+.quiz-opt:hover:not(:disabled),.quiz-opt:focus-visible:not(:disabled){
+  border-color:#38e8ff;background:rgba(56,232,255,.10);outline:none;transform:translateY(-1px);
+}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.is-correct{
+  border-color:#74e19a;background:rgba(116,225,154,.18);color:#d7ffea;
+}
+.quiz-opt.is-wrong{
+  border-color:#ff6b63;background:rgba(255,107,99,.18);color:#ffd6d4;
+}
+.quiz-feedback{
+  margin-top:14px;padding:12px 14px;border-radius:12px;
+  background:rgba(227,192,137,.10);border:1px solid rgba(227,192,137,.28);
+  font-size:0.9rem;line-height:1.5;color:rgba(255,251,242,.92);display:none;
+}
+.quiz-feedback.show{display:block}
+.quiz-actions{
+  display:flex;justify-content:flex-end;margin-top:16px;gap:10px;
+}
+.quiz-continue{
+  padding:10px 18px;border-radius:999px;border:1px solid rgba(56,232,255,.72);
+  background:rgba(56,232,255,.18);color:#38e8ff;font-family:"IBM Plex Mono",monospace;
+  font-size:0.8rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.quiz-continue:hover,.quiz-continue:focus-visible{
+  background:rgba(56,232,255,.3);border-color:#38e8ff;color:#fff;outline:none;
+}
 .kw-red{color:#ff6b63 !important;text-shadow:0 0 18px rgba(255,107,99,.28) !important}
 .kw-green{color:#74e19a !important;text-shadow:0 0 18px rgba(116,225,154,.28) !important}
 .scene{
@@ -247,12 +380,15 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 @media (pointer:coarse){.cursor{display:none}}
 @media (max-width:680px){
   .hud.tl{top:12px;left:14px;max-width:calc(100vw - 28px)}
+  .surah-subtitle{display:none}
   .hud.bl{display:none}
   .hud-mob-ver{display:block !important}
-  .actions{right:12px;bottom:54px;gap:6px}
+  .actions{right:12px;bottom:86px;gap:6px}
   .iconbtn{width:38px;height:38px}
   .iconbtn svg{width:16px;height:16px}
-  .scrub-wrap{bottom:14px;width:min(500px,82vw)}
+  .scrub-wrap{bottom:12px;width:min(520px,90vw);gap:4px}
+  .nav-arrow,.repeat-btn{width:34px;height:34px}
+  .audio-time{font-size:9px}
   .ar{font-size:clamp(22px,6.2vw,38px);line-height:1.85;margin-bottom:14px}
   .en{font-size:clamp(1.05rem, 3.8vw, 1.35rem);line-height:1.42}
   .note{font-size:clamp(0.88rem, 3.3vw, 1rem);line-height:1.55;margin-top:12px}
@@ -274,72 +410,143 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
       <svg id="muteIcon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
     </button>
   </div>
-  <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">V1.82</div>
+  <div class="surah-subtitle" style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">V1.83</div>
 </div>
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">V1.82</div>
+  <div class="footer-version-tag">V1.83</div>
 </div>
 
 <div class="stage" id="stage"></div>
 
 <div class="scrub-wrap">
-  <div class="ayah-bottom" id="ayahBottom">32 : 1</div>
-  <input class="scrub" id="scrub" type="range" min="0" max="29.999" step="0.001" value="0.001"
-         aria-label="Scrub through Surah As-Sajdah verses 1 to 30">
+  <div class="nav-controls" aria-label="Ayat navigation">
+    <button class="nav-arrow" id="prevAyahBtn" type="button" aria-label="Previous ayat" title="Previous ayat (Left Arrow)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="repeat-btn" id="repeatBtn" type="button" aria-label="Repeat current ayat" aria-pressed="false" title="Toggle repeat ayat (R)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+    </button>
+    <button class="nav-arrow" id="nextAyahBtn" type="button" aria-label="Next ayat" title="Next ayat (Right Arrow)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+  <div class="scrub-row">
+    <input class="scrub" id="scrub" type="range" min="0" max="29.999" step="0.001" value="0.001"
+           aria-label="Scrub through Surah As-Sajdah verses 1 to 30">
+    <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+  </div>
 </div>
 <div class="cursor" id="cursor"></div>
 <div class="actions" aria-label="Verse controls">
+  <button class="iconbtn shortcuts-btn" id="shortcutsBtn" type="button" aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)">?</button>
   <button class="iconbtn" id="shareBtn" type="button" aria-label="Share current verse" title="Share current verse (S)">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.9l7.6-4.7M8.2 13.1l7.6 4.7"/></svg>
   </button>
 </div>
+<dialog id="shortcutsDialog" closedby="any" aria-labelledby="shortcutsTitle">
+  <div class="dlg-head">
+    <div>
+      <div class="dlg-kicker">Desktop Controls</div>
+      <h2 class="dlg-title" id="shortcutsTitle">Keyboard Shortcuts</h2>
+    </div>
+    <button class="dlg-close" type="button" id="shortcutsCloseBtn" aria-label="Close shortcuts" autofocus>&times;</button>
+  </div>
+  <div class="shortcut-list">
+    <div class="shortcut-row"><span>Next / Previous Ayat</span><span class="shortcut-key">&rarr; / &larr; / Space</span></div>
+    <div class="shortcut-row"><span>Pause / Resume</span><span class="shortcut-key">P or Tap</span></div>
+    <div class="shortcut-row"><span>Repeat Current Ayat</span><span class="shortcut-key">R</span></div>
+    <div class="shortcut-row"><span>Mute / Unmute Audio</span><span class="shortcut-key">M</span></div>
+    <div class="shortcut-row"><span>Share Current Ayat</span><span class="shortcut-key">S</span></div>
+    <div class="shortcut-row"><span>Jump to Ayat 1–9</span><span class="shortcut-key">1 – 9</span></div>
+    <div class="shortcut-row"><span>First / Last Ayat</span><span class="shortcut-key">Home / End</span></div>
+    <div class="shortcut-row"><span>Toggle Shortcuts Help</span><span class="shortcut-key">?</span></div>
+    <div class="shortcut-row"><span>Close Dialog / Pause</span><span class="shortcut-key">Esc</span></div>
+  </div>
+</dialog>
+<dialog id="quizDialog" closedby="any" aria-labelledby="quizTitle">
+  <div class="dlg-head">
+    <div>
+      <div class="dlg-kicker" id="quizKicker">Reflection Check</div>
+      <h2 class="dlg-title" id="quizTitle">Ponder the Ayat</h2>
+    </div>
+    <button class="dlg-close" type="button" id="quizCloseBtn" aria-label="Close reflection check">&times;</button>
+  </div>
+  <p class="quiz-prompt" id="quizPrompt"></p>
+  <div class="quiz-options" id="quizOptions"></div>
+  <div class="quiz-feedback" id="quizFeedback"></div>
+  <div class="quiz-actions">
+    <button class="quiz-continue" type="button" id="quizContinueBtn">Continue &rarr;</button>
+  </div>
+</dialog>
 <audio id="ayahAudio" preload="none"></audio>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* ─────────── content ─────────── */
 const V=[
- {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"Notice how Allah begins: three distinct Arabic letters that leave human intellect completely humbled. Right at the doorstep, the Qur’an reminds us that real knowledge starts by admitting what we don’t know.","theme":"letters"},
- {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"Allah doesn’t say “Muhammad wrote this”—He calls it Tanzīl, an intentional descent straight from the Master of all worlds. When you understand who the sender is, doubts naturally dissolve.","theme":"book"},
- {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the <g>truth</g> from your Lord, so you can warn a people who had no warner before you, so they may find <g>guidance</g>.","note":"They accuse the Prophet of making it up, but look at the compassion in the response: this warning isn’t harshness; it’s an urgent act of mercy to wake up people who never had a guide before.","theme":"warning"},
- {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The very same Lord who engineered galaxies and planets across cosmic epochs is your only real guardian. If the Creator of the universe is on your side, who else could you possibly need?","theme":"cosmos"},
- {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"We only catch isolated snapshots of our lives, getting stressed over today, but Allah is steering every single affair across cosmic timelines. His plan is always in motion.","theme":"ascent"},
- {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <g>Merciful</g>.","note":"He pairs Al-Azīz (the All-Powerful) with Ar-Rahīm (the Always-Merciful). His absolute power never makes Him tyrannical, and His tender mercy is never out of helplessness.","theme":"seen"},
- {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He <g>made excellent</g> everything He created, and He began the creation of the human being from clay.","note":"Look closely at everything around you—every leaf, every cell is designed with intentional beauty and precision. And your own origin started from basic, unpretentious clay.","theme":"clay"},
- {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Whenever ego or arrogance starts creeping in, remember where we all physically began: from a humble, despised drop of fluid. Humility is our true baseline.","theme":"drop"},
- {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you <g>give thanks</g>.","note":"You were given ears to hear the truth, eyes to recognize beauty and purpose, and a heart to feel empathy. Gratitude isn’t just saying thanks; it’s using these gifts for what they were made for.","theme":"senses"},
- {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"Notice their excuse: “When we vanish into dust, can we be recreated?” Deep down, it’s not intellectual skepticism about biology—it’s an emotional refusal to stand accountable before their Maker.","theme":"dust"},
- {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be returned to your Lord.","note":"The word yatawaffā means to receive in full. Death isn’t your annihilation or turning into nothingness; it’s a transfer of custody back to the One who gave you life.","theme":"death"},
- {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the <r>guilty</r> with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"Picture this chilling scene: those who walked the earth with their heads held high in arrogance now standing before Allah with heads bowed in deep shame, desperately begging for one more chance.","theme":"bowed"},
- {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its guidance, but My word will be fulfilled: <r>Hell</r> will be filled from jinn and people together.","note":"Allah could have pre-programmed every soul to obey like robots, but He honored humanity with genuine choice. Because your choices matter, your actions carry real moral weight.","theme":"choice"},
- {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <r>punishment</r> for what you kept doing.","note":"“Forgetting” that day doesn’t mean a memory slip; it means living your day-to-day life as if standing before Allah simply doesn’t matter. Indifference has real consequences.","theme":"forgotten"},
- {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in <g>prostration</g>, glorify their Lord with praise, and do not act arrogantly.","note":"When true believers hear Allah’s words, their immediate reaction isn’t debate or stubborn pride—they drop into prostration, glorifying Him without an ounce of arrogance.","theme":"prostration","sajdah":true},
- {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with fear and hope, and they spend from what We have provided them.","note":"Look at the beauty of this phrasing: their sides literally detach and pull away from warm, cozy beds. Longing, love, and awe of Allah pull them into the quiet night prayer.","theme":"night"},
- {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Just like they hid their good deeds in the darkness of the night, Allah hides a reward for them—a coolness for their eyes that no human imagination could ever picture.","theme":"hidden"},
- {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <g>believer</g> be the same as someone who <r>defiantly breaks away</r>? They are not equal.","note":"Can someone who lived with consciousness of Allah and someone who lived in blatant defiance end up the same? True divine justice guarantees they never will.","theme":"contrast"},
- {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who believed and lived righteously, the Gardens of <g>Refuge</g> will welcome them because of what they used to do.","note":"Notice the word Ma’wā—it’s not just a paradise garden, it’s a sanctuary, a refuge, a true welcoming home where the weary traveler finally rests forever.","theme":"garden"},
- {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <r>Fire</r> as their refuge. Whenever they try to leave it, they will be returned and told: “Taste the <r>punishment</r> of the <r>Fire</r> you used to deny.”","note":"Every time they try to claw their way out of despair, they are returned to it. Living life burning down moral boundaries leads to the exact environment one prepared for themselves.","theme":"fire"},
- {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <r>punishment</r> before the greater <r>punishment</r>, so that perhaps they may <g>return</g>.","note":"Even when life gives you setbacks, trials, or losses in this world, look at the mercy behind it: it’s a wake-up call to turn back before you reach the ultimate loss.","theme":"warning2"},
- {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then <r>turns away</r> from them? We will certainly bring the <r>criminals</r> to <r>account</r>.","note":"Who does greater wrong than someone who is lovingly reminded of their Lord’s guidance with crystal-clear signs, and then simply shrugs their shoulders and walks away?","theme":"turnaway"},
- {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <g>guidance</g> for the Children of Israel.","note":"The Prophet is reminded that he is not alone; this journey of revelation connects him directly with Moses and the messengers of old. Truth has an unbroken lineage.","theme":"scripture"},
- {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who guided by Our command when they showed <g>patience</g> and had <g>certainty</g> in Our signs.","note":"Real spiritual leadership isn’t about status or charisma. Allah grants leadership to those with relentless patience under hardship and unshakable conviction in His words.","theme":"leadership"},
- {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Don’t burn yourself out trying to settle every ideological battle or dispute today. Allah Himself will deliver the final, flawless verdict on the Day of Judgment.","theme":"judgment"},
- {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"When you travel and walk through historical ruins, don’t just admire the stonework like tourists—open your ears and listen to what those fallen civilizations are telling you.","theme":"ruins"},
- {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Watch how Allah brings dead, cracked desert soil back to vibrant life with rain. If He can revive a barren wasteland before your eyes, reviving your soul and body is effortless for Him.","theme":"water"},
- {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Skeptics always mockingly ask, “When is this judgment coming?” They confuse Allah’s divine patience and delay with permission to stay careless.","theme":"challenge"},
- {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who <r>rejected</r> will no longer benefit them, nor will they be given more time.","note":"When the exam papers are collected, saying “now I know the answers” is too late. The beauty of faith is trusting and choosing good while the test is still ongoing.","theme":"deadline"},
- {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah ends with quiet, serene dignity: turn away from their ridicule and wait with peace in your heart. You fulfill your responsibility, and let Allah take care of the rest.","theme":"wait"}
+ {"n":"32 : 1","ar":"الٓمٓ","en":"<g>Alif, Lam, Meem</g>.","note":"Notice how Allah begins: three distinct Arabic letters that leave human intellect completely humbled. Right at the doorstep, the Qur’an reminds us that real knowledge starts by admitting what we don’t know.","theme":"letters"},
+ {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"[This is] the <g>revelation</g> of the Book about which there is no doubt from the Lord of the worlds.","note":"Allah doesn’t say “Muhammad wrote this”—He calls it Tanzīl, an intentional descent straight from the Master of all worlds. When you understand who the sender is, doubts naturally dissolve.","theme":"book"},
+ {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Or do they say, “He invented it”? Rather, it is the <g>truth</g> from your Lord, [O Muhammad], that you may warn a people to whom no warner has come before you [so] perhaps they will be <g>guided</g>.","note":"They accuse the Prophet of making it up, but look at the compassion in the response: this warning isn’t harshness; it’s an urgent act of mercy to wake up people who never had a guide before.","theme":"warning"},
+ {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"It is Allah who created the heavens and the earth and whatever is between them in six days; then He established Himself above the <g>Throne</g>. You have not besides Him any protector or any intercessor; so will you not be reminded?","note":"The very same Lord who engineered galaxies and planets across cosmic epochs is your only real guardian. If the Creator of the universe is on your side, who else could you possibly need?","theme":"cosmos"},
+ {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He <g>arranges</g> [each] matter from the heaven to the earth; then it will ascend to Him in a Day, the extent of which is a thousand years of those which you count.","note":"We only catch isolated snapshots of our lives, getting stressed over today, but Allah is steering every single affair across cosmic timelines. His plan is always in motion.","theme":"ascent"},
+ {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of the unseen and the witnessed, the Exalted in Might, the <g>Merciful</g>,","note":"He pairs Al-Azīz (the All-Powerful) with Ar-Rahīm (the Always-Merciful). His absolute power never makes Him tyrannical, and His tender mercy is never out of helplessness.","theme":"seen"},
+ {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"Who <g>perfected</g> everything which He created and began the creation of man from clay.","note":"Look closely at everything around you—every leaf, every cell is designed with intentional beauty and precision. And your own origin started from basic, unpretentious clay.","theme":"clay"},
+ {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He made his posterity out of the extract of a liquid <r>disdained</r>.","note":"Whenever ego or arrogance starts creeping in, remember where we all physically began: from a humble, despised drop of fluid. Humility is our true baseline.","theme":"drop"},
+ {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He proportioned him and breathed into him from His [created] soul and made for you hearing and vision and hearts; little are you <g>grateful</g>.","note":"You were given ears to hear the truth, eyes to recognize beauty and purpose, and a heart to feel empathy. Gratitude isn’t just saying thanks; it’s using these gifts for what they were made for.","theme":"senses"},
+ {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"And they say, “When we are lost within the earth, will we indeed be [recreated] in a new creation?” Rather, they are, in [the matter of] the meeting with their Lord, <r>disbelievers</r>.","note":"Notice their excuse: “When we vanish into dust, can we be recreated?” Deep down, it’s not intellectual skepticism about biology—it’s an emotional refusal to stand accountable before their Maker.","theme":"dust"},
+ {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say, “The angel of <r>death</r> will take you who has been entrusted with you. Then to your Lord you will be returned.”","note":"The word yatawaffā means to receive in full. Death isn’t your annihilation or turning into nothingness; it’s a transfer of custody back to the One who gave you life.","theme":"death"},
+ {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If you could but see when the <r>criminals</r> are hanging their heads before their Lord, [saying], “Our Lord, we have seen and heard, so return us [to the world]; we will work righteousness. Indeed, we are [now] certain.”","note":"Picture this chilling scene: those who walked the earth with their heads held high in arrogance now standing before Allah with heads bowed in deep shame, desperately begging for one more chance.","theme":"bowed"},
+ {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"And if We had willed, We could have given every soul its guidance, but the word from Me will come into effect [that] “I will surely fill <r>Hell</r> with jinn and people all together.”","note":"Allah could have pre-programmed every soul to obey like robots, but He honored humanity with genuine choice. Because your choices matter, your actions carry real moral weight.","theme":"choice"},
+ {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste [punishment] because you forgot the meeting of this, your Day; indeed, We have [accordingly] forgotten you. And taste the <r>punishment</r> of eternity for what you used to do.","note":"“Forgetting” that day doesn’t mean a memory slip; it means living your day-to-day life as if standing before Allah simply doesn’t matter. Indifference has real consequences.","theme":"forgotten"},
+ {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"Only those believe in Our verses who, when they are reminded by them, fall down in <g>prostration</g> and exalt [Allah] with praise of their Lord, and they are not arrogant.","note":"When true believers hear Allah’s words, their immediate reaction isn’t debate or stubborn pride—they drop into prostration, glorifying Him without an ounce of arrogance.","theme":"prostration","sajdah":true},
+ {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"They arise from [their] beds; they supplicate their Lord in <r>fear</r> and <g>aspiration</g>, and from what We have provided them, they spend.","note":"Look at the beauty of this phrasing: their sides literally detach and pull away from warm, cozy beds. Longing, love, and awe of Allah pull them into the quiet night prayer.","theme":"night"},
+ {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"And no soul knows what has been hidden for them of <g>comfort</g> for eyes as reward for what they used to do.","note":"Just like they hid their good deeds in the darkness of the night, Allah hides a reward for them—a coolness for their eyes that no human imagination could ever picture.","theme":"hidden"},
+ {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Then is one who was a <g>believer</g> like one who was <r>defiantly disobedient</r>? They are not equal.","note":"Can someone who lived with consciousness of Allah and someone who lived in blatant defiance end up the same? True divine justice guarantees they never will.","theme":"contrast"},
+ {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who believed and did righteous deeds, for them will be the Gardens of <g>Refuge</g> as accommodation for what they used to do.","note":"Notice the word Ma’wā—it’s not just a paradise garden, it’s a sanctuary, a refuge, a true welcoming home where the weary traveler finally rests forever.","theme":"garden"},
+ {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But as for those who defiantly disobeyed, their refuge is the <r>Fire</r>. Every time they wish to emerge from it, they will be returned to it while it is said to them, “Taste the <r>punishment</r> of the <r>Fire</r> which you used to deny.”","note":"Every time they try to claw their way out of despair, they are returned to it. Living life burning down moral boundaries leads to the exact environment one prepared for themselves.","theme":"fire"},
+ {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"And we will surely let them taste the nearer <r>punishment</r> short of the greater <r>punishment</r> that perhaps they will <g>repent</g>.","note":"Even when life gives you setbacks, trials, or losses in this world, look at the mercy behind it: it’s a wake-up call to turn back before you reach the ultimate loss.","theme":"warning2"},
+ {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"And who is more unjust than one who is reminded of the verses of his Lord; then he <r>turns away</r> from them? Indeed We, from the <r>criminals</r>, will take <r>retribution</r>.","note":"Who does greater wrong than someone who is lovingly reminded of their Lord’s guidance with crystal-clear signs, and then simply shrugs their shoulders and walks away?","theme":"turnaway"},
+ {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"And We certainly gave Moses the Scripture, so do not be in doubt over his meeting. And We made the Torah <g>guidance</g> for the Children of Israel.","note":"The Prophet is reminded that he is not alone; this journey of revelation connects him directly with Moses and the messengers of old. Truth has an unbroken lineage.","theme":"scripture"},
+ {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"And We made from among them leaders guiding by Our command when they were <g>patient</g> and [when] they were <g>certain</g> of Our signs.","note":"Real spiritual leadership isn’t about status or charisma. Allah grants leadership to those with relentless patience under hardship and unshakable conviction in His words.","theme":"leadership"},
+ {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Indeed, your Lord will <g>judge</g> between them on the Day of Resurrection concerning that over which they used to differ.","note":"Don’t burn yourself out trying to settle every ideological battle or dispute today. Allah Himself will deliver the final, flawless verdict on the Day of Judgment.","theme":"judgment"},
+ {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not become clear to them how many generations We <r>destroyed</r> before them, [as] they walk among their dwellings? Indeed in that are signs; then do they not hear?","note":"When you travel and walk through historical ruins, don’t just admire the stonework like tourists—open your ears and listen to what those fallen civilizations are telling you.","theme":"ruins"},
+ {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen that We drive the water [in clouds] to barren land and bring forth thereby <g>crops</g> from which their livestock eat and [they] themselves? Then do they not see?","note":"Watch how Allah brings dead, cracked desert soil back to vibrant life with rain. If He can revive a barren wasteland before your eyes, reviving your soul and body is effortless for Him.","theme":"water"},
+ {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"And they say, “When will be this conquest, if you should be <g>truthful</g>?”","note":"Skeptics always mockingly ask, “When is this judgment coming?” They confuse Allah’s divine patience and delay with permission to stay careless.","theme":"challenge"},
+ {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say, [O Muhammad], “On the Day of Conquest the belief of those who had <r>disbelieved</r> will not benefit them, nor will they be reprieved.”","note":"When the exam papers are collected, saying “now I know the answers” is too late. The beauty of faith is trusting and choosing good while the test is still ongoing.","theme":"deadline"},
+ {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and <g>wait</g>. Indeed, they are waiting.","note":"The sūrah ends with quiet, serene dignity: turn away from their ridicule and wait with peace in your heart. You fulfill your responsibility, and let Allah take care of the rest.","theme":"wait"}
 ];
+const QUIZ_POOL=[
+  {block:0,q:"Why does Surah As-Sajdah open with the disconnected letters Alif, Lam, Meem?",opts:["To humble the human intellect at the threshold and show that true knowledge begins with humility","As a hidden calendar predicting the exact date of the Hour","To create a rhyme with the closing words of the surah","Because early scribes abbreviated a longer greeting"],ans:0,explain:"Beginning with Alif, Lam, Meem humbles human intellect right at the doorstep so we receive revelation with humility rather than arrogance."},
+  {block:0,q:"What does calling the Qur'an a 'Tanzil' (sending down) from the Lord of all worlds emphasize?",opts:["That it evolved slowly from ancient poetry","That it was intentionally sent down by the Creator Himself, leaving no room for doubt","That it was meant exclusively for scholars of grammar","That it came as an abstract philosophy detached from daily life"],ans:1,explain:"Recognizing who sent down the Book dissolves doubt and transforms how attentively we listen."},
+  {block:0,q:"Why does Allah pair His name Al-Aziz (Exalted in Might) with Ar-Rahim (the Merciful)?",opts:["To imply mercy replaces strength only in the afterlife","To separate worldly power from spiritual life","To show that His absolute power is never tyrannical and His mercy never comes from weakness","To contrast two unrelated attributes"],ans:2,explain:"Allah's unmatched authority is always wedded to constant, tender mercy—His might never oppresses and His mercy is never helpless."},
+  {block:1,q:"Why does the surah trace human origin back to clay and a humble, disdained fluid?",opts:["To argue that human bodies have no spiritual worth","To uproot arrogance by reminding us of our humble physical baseline","To claim that humans have no free will","To suggest physical life is an illusion"],ans:1,explain:"Whenever ego creeps in, remembering our humble beginning restores true humility before our Maker."},
+  {block:1,q:"After breathing spirit into humanity and granting hearing, sight, and hearts, what failing does the surah highlight?",opts:["How little gratitude people actually show with those gifts","How slowly people build cities across the earth","How rarely people travel by sea","How few people study astronomy"],ans:0,explain:"True gratitude means using the ears, eyes, and heart for the purpose Allah placed them within us."},
+  {block:1,q:"What is the deeper meaning of the Angel of Death 'taking you in full' (yatawaffa)?",opts:["Death erases the soul into permanent nonexistence","The soul remains trapped underground forever","Death is not annihilation, but a complete transfer of custody back to your Lord","Only messengers return directly to Allah"],ans:2,explain:"Yatawaffa means receiving in full—death returns you whole to the One who created you."},
+  {block:2,q:"Why did Allah not compel every soul to follow guidance even though He could have?",opts:["Because real moral weight and honor require genuine human choice","Because guidance is impossible for human minds to grasp","Because earthly deeds carry no real consequence","Because angels were forbidden from conveying warnings"],ans:0,explain:"Allah honored humanity with free choice so that sincerity, faith, and obedience have real moral weight."},
+  {block:2,q:"What does 'forgetting the meeting of this Day' actually mean in this passage?",opts:["Struggling to recall past dates and names","Living day-to-day as though standing accountable before Allah does not matter","Forgetting childhood memories in old age","Oversleeping past sunrise occasionally"],ans:1,explain:"It is not a memory lapse; it is willful neglect—living carelessly as if accountability will never arrive."},
+  {block:2,q:"What inner balance characterizes believers whose sides rise from their beds at night?",opts:["Pride in their devotion and distance from others","Both reverent fear of Allah and hopeful aspiration for His mercy","Curiosity about unseen futures and desire for status","Exhaustion from debating skeptics"],ans:1,explain:"Love, awe, fear, and bright hope pull them away from warm beds into quiet night prayer."},
+  {block:3,q:"What nuance is captured by describing Paradise as Gardens of 'Refuge' (al-Ma'wa)?",opts:["A temporary campsite for travelers","A palace reserved solely for ancient kings","A welcoming sanctuary and eternal home where the weary believer finally rests","A walled desert garden open only in spring"],ans:2,explain:"Ma'wa conveys sanctuary, shelter, and belonging—the true home the soul longs for."},
+  {block:3,q:"How are 'nearer punishments'—hardships and trials in this world—framed by the surah?",opts:["As merciful wake-up calls inviting people to repent and return before the greater reckoning","As proof that prayers go unheard","As meaningless accidents with no moral lesson","As rewards for ignoring revelation"],ans:0,explain:"Worldly setbacks are mercy in disguise if they wake the heart up before it is too late."},
+  {block:3,q:"Which two qualities qualified leaders from among the Children of Israel to guide by Allah's command?",opts:["Royal lineage and military strength","Wealth and eloquent rhetoric","Patient endurance under hardship and unshakable certainty in Allah's signs","Total isolation from their communities"],ans:2,explain:"Spiritual leadership is earned through sabr (patient perseverance) and yaqin (deep conviction in revelation)."},
+  {block:4,q:"When people walk among the ruined dwellings of past nations, what are they urged to do?",opts:["Only admire the architecture and stonework","Listen attentively to the warning preserved in those fallen civilizations","Erase every trace of ancient history","Copy their monuments without reflection"],ans:1,explain:"Ruins are silent sermons; walking past them without hearing their moral lesson misses the sign."},
+  {block:4,q:"Why does the surah point to rain reviving barren, lifeless soil into living crops?",opts:["To explain seasonal farming techniques","To show that reviving dead life is effortless for the One who revives dead earth before your eyes","To prove deserts never support life","To suggest only farmers witness Allah's signs"],ans:1,explain:"Resurrection feels distant only until you watch Allah bring cracked, lifeless dirt back to vibrant life with water."},
+  {block:4,q:"When skeptics mockingly ask when the decisive Day of Conquest will arrive, what will happen then?",opts:["Delayed faith declared after the Day arrives will no longer benefit those who disbelieved","Everyone receives a second earthly lifetime","Debates reopen until all sides agree","Past rejection is automatically forgiven"],ans:0,explain:"Faith is meaningful while the test is still open; once the curtain falls and the verdict arrives, regret comes too late."}
+];
+const drawnQuizzes=[0,1,2,3,4].map(b=>{
+  const pool=QUIZ_POOL.filter(q=>q.block===b);
+  return pool[Math.floor(Math.random()*pool.length)];
+});
+const completedQuizBlocks=new Set();
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ─────────── build scenes ─────────── */
-const stage=document.getElementById("stage"), scrub=document.getElementById("scrub"), ayahBottom=document.getElementById("ayahBottom");
+const stage=document.getElementById("stage"), scrub=document.getElementById("scrub"), audioTimeEl=document.getElementById("audioTime");
 const stripArabic=t=>t.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,"").replace(/ٱ/g,"ا").replace(/ـ/g,"");
-const arRed=new Set(["كافرون","المجرمون","المجرمين","جهنم","عذاب","العذاب","النار","فاسقا","أعرض","منتقمون","كفروا"]);
-const arGreen=new Set(["الحق","يهتدون","الرحيم","أحسن","تشكرون","مؤمنا","آمنوا","الصالحات","جنات","المأوى","طمعا","يرجعون","هدى","صبروا","يوقنون","سجدا"]);
+const arRed=new Set(["كافرون","كفرون","المجرمون","المجرمين","جهنم","عذاب","العذاب","النار","فاسقا","أعرض","منتقمون","كفروا","مهين","الموت","خوفا","أهلكنا"]);
+const arGreen=new Set(["الم","تنزيل","العرش","يدبر","الحق","يهتدون","الرحيم","أحسن","تشكرون","وطمعا","قرة","مؤمنا","آمنوا","الصالحات","جنات","المأوى","طمعا","يرجعون","هدى","صبروا","يوقنون","سجدا","يفصل","زرعا","صدقين","وانتظر"]);
 const wrapEn=str=>{
   let color="";
   return str.split(/\s+/).map(tok=>{
@@ -392,7 +599,11 @@ const scenes=V.map((v,i)=>{
 let T=0.0001, N=V.length, last=performance.now(), auto=true, idle=0;
 let userPaused=false, lastPointerX=null, simTime=0;
 const audio=document.getElementById("ayahAudio"), muteBtn=document.getElementById("muteBtn"), muteIcon=document.getElementById("muteIcon");
-const shareBtn=document.getElementById("shareBtn"), toast=document.getElementById("toast");
+const shareBtn=document.getElementById("shareBtn"), shortcutsBtn=document.getElementById("shortcutsBtn"), toast=document.getElementById("toast");
+const prevAyahBtn=document.getElementById("prevAyahBtn"), repeatBtn=document.getElementById("repeatBtn"), nextAyahBtn=document.getElementById("nextAyahBtn");
+const shortcutsDialog=document.getElementById("shortcutsDialog"), shortcutsCloseBtn=document.getElementById("shortcutsCloseBtn");
+const quizDialog=document.getElementById("quizDialog"), quizCloseBtn=document.getElementById("quizCloseBtn"), quizKicker=document.getElementById("quizKicker");
+const quizPrompt=document.getElementById("quizPrompt"), quizOptions=document.getElementById("quizOptions"), quizFeedback=document.getElementById("quizFeedback"), quizContinueBtn=document.getElementById("quizContinueBtn");
 const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032001.mp3",
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032002.mp3",
@@ -425,9 +636,37 @@ const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032029.mp3",
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032030.mp3"
 ];
-const AUDIO_VOLUME=0.85;
-let isMuted=false, audioState="loading", audioLoadedIdx=-1, postAudioRemaining=0, playToken=0;
+const AUDIO_VOLUME=0.85, AUDIO_CACHE_NAME="surah32-audio-v1";
+const blobCache=new Map();
+let isMuted=false, isRepeat=false, audioState="loading", audioLoadedIdx=-1, postAudioRemaining=0, postAudioTotal=0, playToken=0;
+let wasPausedBeforeModal=false, pendingQuizNextIdx=null;
 function currentIndex(){return ((Math.floor(T)%N)+N)%N}
+function readingPauseFor(idx){
+  const v=V[idx];
+  const enPlain=v.en.replace(/<[^>]+>/g,"").trim();
+  const enWords=enPlain?enPlain.split(/\s+/).length:0;
+  const noteWords=v.note?v.note.trim().split(/\s+/).length:0;
+  return Math.max(4,Math.ceil((enWords+noteWords)/2.5));
+}
+function formatSec(sec){
+  if(!isFinite(sec)||sec<0) return "0:00";
+  const s=Math.floor(sec), m=Math.floor(s/60), r=s%60;
+  return `${m}:${r<10?"0":""}${r}`;
+}
+let lastAudioTimeStr="";
+function updateAudioTime(){
+  if(!audioTimeEl) return;
+  const hasDur=audio.duration>0&&!isNaN(audio.duration);
+  const tot=hasDur?audio.duration:0;
+  const curT=hasDur?audio.currentTime:0;
+  const next=(audioState==="waiting"&&postAudioRemaining>0)
+    ? `${formatSec(tot)} / ${formatSec(tot)} · ${Math.ceil(postAudioRemaining)}s`
+    : `${formatSec(curT)} / ${formatSec(tot)}`;
+  if(next!==lastAudioTimeStr){
+    lastAudioTimeStr=next;
+    audioTimeEl.textContent=next;
+  }
+}
 function showToast(msg){
   toast.textContent=msg;
   toast.classList.add("show");
@@ -442,15 +681,50 @@ function syncMuteButton(){
     ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
     : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
 }
+function syncRepeatButton(){
+  repeatBtn.setAttribute("aria-pressed",String(isRepeat));
+  repeatBtn.classList.toggle("is-active",isRepeat);
+}
+async function cacheSingleAudio(idx){
+  const url=audioUrls[idx];
+  try{
+    if(typeof caches!=="undefined"){
+      const cache=await caches.open(AUDIO_CACHE_NAME);
+      let res=await cache.match(url);
+      if(!res){
+        res=await fetch(url,{mode:"cors",credentials:"omit"});
+        if(res&&res.ok) await cache.put(url,res.clone());
+      }
+      if(res&&res.ok&&!blobCache.has(idx)){
+        const blob=await res.blob();
+        blobCache.set(idx,URL.createObjectURL(blob));
+      }
+    }
+  }catch(_){}
+}
+async function prefetchAllAudio(startIdx){
+  const order=[];
+  for(let k=0;k<N;k++) order.push((startIdx+k)%N);
+  let cursor=0;
+  async function worker(){
+    while(cursor<order.length){
+      const idx=order[cursor++];
+      await cacheSingleAudio(idx);
+    }
+  }
+  await Promise.all([worker(),worker()]);
+}
 function playAyah(idx){
   idx=((idx%N)+N)%N;
   const tok=++playToken;
   audioLoadedIdx=idx;
+  postAudioTotal=0;
   postAudioRemaining=0;
   audioState="loading";
-  audio.src=audioUrls[idx];
+  audio.src=blobCache.get(idx)||audioUrls[idx];
   audio.volume=AUDIO_VOLUME;
   audio.muted=isMuted;
+  updateAudioTime();
   const p=audio.play();
   if(p!==undefined){
     p.then(()=>{
@@ -467,6 +741,27 @@ function playAyah(idx){
   }else{
     audioState="playing";
   }
+  if(!blobCache.has(idx)) cacheSingleAudio(idx);
+}
+function resumeAudioAfterModal(){
+  const idx=currentIndex();
+  if(audioState==="waiting"&&audioLoadedIdx===idx){
+    // postAudioRemaining countdown resumes in frame loop
+  }else if(audioLoadedIdx===idx&&audio.src&&!audio.ended&&audioState!=="blocked"&&audioState!=="error"){
+    audio.volume=AUDIO_VOLUME;
+    audio.muted=isMuted;
+    const tok=++playToken;
+    const p=audio.play();
+    if(p!==undefined){
+      p.then(()=>{if(tok===playToken) audioState="playing";}).catch(err=>{
+        if(tok!==playToken) return;
+        if(err&&err.name==="NotAllowedError") audioState="blocked";
+        else playAyah(idx);
+      });
+    }
+  }else{
+    playAyah(idx);
+  }
 }
 function togglePause(){
   userPaused=!userPaused;
@@ -477,27 +772,115 @@ function togglePause(){
   }else{
     auto=true;
     idle=0;
-    const idx=currentIndex();
-    if(audioState==="waiting"&&audioLoadedIdx===idx){
-      // postAudioRemaining countdown resumes in frame loop
-    }else if(audioLoadedIdx===idx&&audio.src&&!audio.ended&&audioState!=="blocked"&&audioState!=="error"){
-      audio.volume=AUDIO_VOLUME;
-      audio.muted=isMuted;
-      const tok=++playToken;
-      const p=audio.play();
-      if(p!==undefined){
-        p.then(()=>{if(tok===playToken) audioState="playing";}).catch(err=>{
-          if(tok!==playToken) return;
-          if(err&&err.name==="NotAllowedError") audioState="blocked";
-          else playAyah(idx);
-        });
-      }
-    }else{
-      playAyah(idx);
-    }
+    resumeAudioAfterModal();
     showToast("Playing");
   }
 }
+function jumpToAyah(targetIdx){
+  const next=((targetIdx%N)+N)%N;
+  T=next+0.001;
+  postAudioRemaining=0;
+  postAudioTotal=0;
+  idle=0;
+  setScrubFromT();
+  if(!userPaused){
+    auto=true;
+    playAyah(next);
+  }else{
+    audioState="loading";
+    if(!audio.paused) audio.pause();
+    updateAudioTime();
+  }
+}
+function openShortcuts(){
+  if(quizDialog.open||shortcutsDialog.open) return;
+  wasPausedBeforeModal=userPaused;
+  if(!userPaused){
+    userPaused=true;
+    auto=false;
+    if(!audio.paused) audio.pause();
+  }
+  shortcutsDialog.showModal();
+}
+function openQuizForBlock(block,nextIdx){
+  const qData=drawnQuizzes[block];
+  if(!qData){
+    T=nextIdx+0.001;
+    playAyah(nextIdx);
+    return;
+  }
+  completedQuizBlocks.add(block);
+  wasPausedBeforeModal=userPaused;
+  if(!userPaused){
+    userPaused=true;
+    auto=false;
+    if(!audio.paused) audio.pause();
+  }
+  pendingQuizNextIdx=nextIdx;
+  const startAyah=block*6+1, endAyah=block*6+6;
+  quizKicker.textContent=`Reflection Check · Ayats ${startAyah}–${endAyah}`;
+  quizPrompt.textContent=qData.q;
+  quizFeedback.textContent="";
+  quizFeedback.classList.remove("show");
+  quizOptions.innerHTML="";
+  qData.opts.forEach((optText,optIdx)=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="quiz-opt";
+    btn.textContent=optText;
+    btn.addEventListener("click",()=>{
+      const allBtns=[...quizOptions.querySelectorAll(".quiz-opt")];
+      allBtns.forEach((b,bi)=>{
+        b.disabled=true;
+        if(bi===qData.ans) b.classList.add("is-correct");
+        else if(bi===optIdx) b.classList.add("is-wrong");
+      });
+      quizFeedback.textContent=(optIdx===qData.ans?"Correct. ":"Reflection: ")+qData.explain;
+      quizFeedback.classList.add("show");
+      quizContinueBtn.focus();
+    });
+    quizOptions.appendChild(btn);
+  });
+  quizDialog.showModal();
+}
+if(!("closedBy" in HTMLDialogElement.prototype)){
+  const outside=(e,dlg)=>{
+    const r=dlg.getBoundingClientRect();
+    return e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom;
+  };
+  for(const dlg of document.querySelectorAll('dialog[closedby="any"]')){
+    let pressedOutside=false;
+    dlg.addEventListener("pointerdown",e=>{pressedOutside=outside(e,dlg);});
+    dlg.addEventListener("pointerup",e=>{if(pressedOutside&&outside(e,dlg)) dlg.close();});
+  }
+}
+shortcutsCloseBtn.addEventListener("click",()=>shortcutsDialog.close());
+shortcutsDialog.addEventListener("close",()=>{
+  shortcutsDialog.returnValue="";
+  userPaused=wasPausedBeforeModal;
+  if(!userPaused){
+    auto=true;
+    idle=0;
+    resumeAudioAfterModal();
+  }
+});
+quizCloseBtn.addEventListener("click",()=>quizDialog.close());
+quizContinueBtn.addEventListener("click",()=>quizDialog.close());
+quizDialog.addEventListener("close",()=>{
+  quizDialog.returnValue="";
+  const target=pendingQuizNextIdx;
+  pendingQuizNextIdx=null;
+  userPaused=wasPausedBeforeModal;
+  if(target!==null){
+    T=target+0.001;
+    setScrubFromT();
+  }
+  if(!userPaused){
+    auto=true;
+    idle=0;
+    playAyah(currentIndex());
+  }
+});
 async function copyText(text){
   try{ if(navigator.clipboard && location.protocol!=="file:"){ await navigator.clipboard.writeText(text); return true; } }catch(_){}
   try{
@@ -510,10 +893,15 @@ async function copyText(text){
   }catch(_){}
   return false;
 }
+audio.addEventListener("loadedmetadata",updateAudioTime);
+audio.addEventListener("timeupdate",updateAudioTime);
 audio.addEventListener("ended",()=>{
-  if(audioLoadedIdx!==currentIndex()) return;
+  const idx=currentIndex();
+  if(audioLoadedIdx!==idx) return;
   audioState="waiting";
-  postAudioRemaining=1.0;
+  postAudioTotal=isRepeat?1.5:readingPauseFor(idx);
+  postAudioRemaining=postAudioTotal;
+  updateAudioTime();
 });
 audio.addEventListener("error",()=>{
   if(audioLoadedIdx!==currentIndex()) return;
@@ -529,6 +917,18 @@ muteBtn.addEventListener("click",e=>{
     auto=true;
     playAyah(currentIndex());
   }
+});
+prevAyahBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();jumpToAyah(currentIndex()-1);});
+nextAyahBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();jumpToAyah(currentIndex()+1);});
+repeatBtn.addEventListener("click",e=>{
+  e.preventDefault(); e.stopPropagation();
+  isRepeat=!isRepeat;
+  syncRepeatButton();
+  showToast(isRepeat?"Repeat Ayah: ON":"Repeat Ayah: OFF");
+});
+shortcutsBtn.addEventListener("click",e=>{
+  e.preventDefault(); e.stopPropagation();
+  openShortcuts();
 });
 shareBtn.addEventListener("click",async(e)=>{
   e.preventDefault(); e.stopPropagation();
@@ -548,13 +948,13 @@ shareBtn.addEventListener("click",async(e)=>{
   else { window.prompt("Copy and share this text:", bodyText); showToast("Copy text shown"); }
 });
 syncMuteButton();
+syncRepeatButton();
 
 let scrubbing=false;
 function setScrubFromT(){
   const value=Math.max(0,Math.min(29.999,T));
   scrub.value=value.toFixed(3);
   scrub.style.setProperty("--progress",`${(value/29.999)*100}%`);
-  ayahBottom.textContent=`32 : ${1+Math.floor(value)}`;
 }
 scrub.addEventListener("pointerdown",e=>{
   e.stopPropagation();scrubbing=true;auto=false;idle=0;postAudioRemaining=0;
@@ -586,7 +986,7 @@ let downX=0, downY=0, wasDragged=false, wheelTimer=null;
 addEventListener("pointermove",e=>{
   M.x=e.clientX; M.y=e.clientY;
   if(cur){
-    cur.style.opacity="1";
+    cur.style.opacity=(shortcutsDialog.open||quizDialog.open)?"0":"1";
     cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
   }
   if(M.down&&lastPointerX!==null){
@@ -606,15 +1006,16 @@ addEventListener("pointermove",e=>{
 },{passive:true});
 
 document.addEventListener("mouseleave",()=>{if(cur)cur.style.opacity="0";});
-document.addEventListener("mouseenter",()=>{if(cur)cur.style.opacity="1";});
+document.addEventListener("mouseenter",()=>{if(cur&&!shortcutsDialog.open&&!quizDialog.open)cur.style.opacity="1";});
 
-document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .mute-btn, .scrub").forEach(el=>{
+document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .mute-btn, .nav-arrow, .repeat-btn, .scrub").forEach(el=>{
   el.addEventListener("pointerenter",()=>document.body.classList.add("hovering"));
   el.addEventListener("pointerleave",()=>document.body.classList.remove("hovering"));
 });
 
 addEventListener("pointerdown",e=>{
-  if(e.target.closest("a, button, input, .scrub-wrap")) return;
+  if(shortcutsDialog.open||quizDialog.open) return;
+  if(e.target.closest("a, button, input, .scrub-wrap, dialog")) return;
   M.down=true;downX=e.clientX;downY=e.clientY;lastPointerX=e.clientX;wasDragged=false;
   document.body.classList.add("press");idle=0;
 });
@@ -639,6 +1040,7 @@ addEventListener("pointerup",()=>{
 });
 addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
 addEventListener("wheel",e=>{
+  if(shortcutsDialog.open||quizDialog.open) return;
   T=(((T+e.deltaY*0.00075)%N)+N)%N;
   idle=0;postAudioRemaining=0;
   if(currentIndex()!==audioLoadedIdx){
@@ -651,16 +1053,19 @@ addEventListener("wheel",e=>{
   },250);
 },{passive:true});
 addEventListener("keydown",e=>{
+  if(shortcutsDialog.open||quizDialog.open) return;
   const k=e.key;
   if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
-  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
-  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
-  else if(k==="Home"){T=0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
-  else if(k==="End"){T=N-1+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
-  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  if(k==="ArrowRight"||k===" "){jumpToAyah(currentIndex()+1);}
+  else if(k==="ArrowLeft"){jumpToAyah(currentIndex()-1);}
+  else if(k==="Home"){jumpToAyah(0);}
+  else if(k==="End"){jumpToAyah(N-1);}
+  else if(/^[1-9]$/.test(k)){jumpToAyah(+k-1);}
   else if(k.toLowerCase()==="p"||k==="Escape"){togglePause();}
+  else if(k.toLowerCase()==="r"){repeatBtn.click();}
   else if(k.toLowerCase()==="m"){muteBtn.click();}
   else if(k.toLowerCase()==="s"){shareBtn.click();}
+  else if(k==="?"||k==="/"){if(innerWidth>680) openShortcuts();}
 });
 
 /* ─────────── canvas ─────────── */
@@ -824,9 +1229,19 @@ function frame(now){
       postAudioRemaining -= dt;
       if (postAudioRemaining <= 0) {
         postAudioRemaining = 0;
-        const nextIdx = (idx + 1) % N;
-        T = nextIdx + 0.001;
-        playAyah(nextIdx);
+        if (isRepeat) {
+          T = idx + 0.001;
+          playAyah(idx);
+        } else {
+          const nextIdx = (idx + 1) % N;
+          const block = Math.floor(idx / 6);
+          if ((idx + 1) % 6 === 0 && !completedQuizBlocks.has(block)) {
+            openQuizForBlock(block, nextIdx);
+          } else {
+            T = nextIdx + 0.001;
+            playAyah(nextIdx);
+          }
+        }
       } else if (postAudioRemaining > 0.45) {
         T = idx + 0.85;
       } else {
@@ -839,12 +1254,14 @@ function frame(now){
       if (nextP >= 0.85) {
         T = idx + 0.85;
         audioState = "waiting";
-        postAudioRemaining = 1.0;
+        postAudioTotal = isRepeat ? 1.5 : readingPauseFor(idx);
+        postAudioRemaining = postAudioTotal;
       } else {
         T = idx + nextP;
       }
     }
   }
+  updateAudioTime();
 
   /* ── background ── */
   g.globalCompositeOperation="source-over";
@@ -906,7 +1323,6 @@ function frame(now){
   if(!scrubbing) setScrubFromT();
   if(idx!==lastHash){
     lastHash=idx;
-    ayahBottom.textContent=`32 : ${1+idx}`;
     history.replaceState(null,"",`#${1+idx}`);
   }
   requestAnimationFrame(frame);
@@ -921,7 +1337,11 @@ if(!isNaN(hashVerse)&&hashVerse>=1&&hashVerse<=30){
 setScrubFromT();
 let lastHash=-1;
 
+if("serviceWorker" in navigator && location.protocol!=="file:"){
+  navigator.serviceWorker.register("./sw.js").catch(()=>{});
+}
 playAyah(currentIndex());
+prefetchAllAudio(currentIndex());
 
 requestAnimationFrame(frame);
 </script>
