@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#06060a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Amiri:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Amiri:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Authentic King Fahd Glorious Quran Printing Complex font */
 @font-face {
@@ -39,10 +39,11 @@
 :root{
   --ink:#06060a; --bone:#F3ECE1; --gold:#E3C089; --amber:#C98F45; --mute:rgba(243,236,225,.52);
   --f-ar:'KFGQPC Uthmanic Script HAFS', 'UthmanicHafs', 'Amiri Quran', 'Amiri', serif;
+  --f-en:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--bone)}
-body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:none}
+body{font-family:var(--f-en);cursor:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;touch-action:none}
 
 #field{position:fixed;inset:0;display:block;z-index:0}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
@@ -70,32 +71,29 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
   -moz-osx-font-smoothing:grayscale;
   font-smooth:always}
 .scene.short .ar{font-size:clamp(56px,9vw,110px);line-height:1.75;margin-bottom:clamp(26px,4vw,56px)}
-.scene.short .en{font-size:clamp(28px,4.8vw,66px)}
-.en{font-size:clamp(24px,4.2vw,58px);font-weight:300;line-height:1.15;letter-spacing:-.015em;
+.scene.short .en{font-size:clamp(1.35rem, 1rem + 2.4vw, 3rem)}
+.en{font-size:clamp(1.15rem, 0.9rem + 1.8vw, 2.35rem);font-weight:400;line-height:1.38;letter-spacing:-0.01em;text-wrap:balance;
   color:#FBF6EE;text-shadow:0 2px 6px rgba(0,0,0,.7), 0 0 30px rgba(227,192,137,.18)}
-.en em{font-style:italic;color:var(--gold)}
 .w{display:inline-block;will-change:transform,opacity;transform-origin:50% 60%;
   padding:.02em .11em; text-shadow:0 0 44px rgba(227,192,137,.16); box-decoration-break:clone; -webkit-box-decoration-break:clone}
 .note{
-  max-width:920px;
+  max-width:62ch;
   margin:clamp(16px,2.4vw,28px) auto 0;
-  font-size:clamp(15px,1.6vw,22px);
-  line-height:1.52;
-  color:#FFFBF2;
-  font-weight:600;
+  font-size:clamp(0.92rem, 0.85rem + 0.45vw, 1.18rem);
+  line-height:1.55;
+  color:rgba(255, 251, 242, 0.9);
+  font-weight:400;
+  text-wrap:pretty;
   text-shadow:0 2px 6px rgba(0,0,0,.92), 0 0 16px rgba(0,0,0,.6);
   letter-spacing:0.01em;
 }
-.note::before{
-  content:"REFLECTION · USTADH NOUMAN ALI KHAN";
-  display:block;
-  font-family:"IBM Plex Mono",monospace;
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:.26em;
+.note-ref{
   color:var(--gold);
-  margin-bottom:8px;
-  text-shadow:0 0 12px rgba(227,192,137,.35);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:0.85em;
+  letter-spacing:0.06em;
+  margin-left:4px;
+  white-space:nowrap;
 }
 .sajdah-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:3px 10px;border-radius:999px;background:rgba(227,192,137,.15);border:1px solid rgba(227,192,137,.45);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
 .hairline{display:none}
@@ -103,13 +101,15 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
 .hud{position:fixed;z-index:5;font-family:"IBM Plex Mono",monospace;font-size:10px;
   letter-spacing:.25em;text-transform:uppercase;color:var(--mute);pointer-events:none}
 .hud.tl{top:24px;left:26px;line-height:1.8}
-.hud.tr{top:24px;right:26px;text-align:right;line-height:1.8}
 .hud.bl{bottom:24px;left:26px}
 .hud .g{color:var(--gold)}
 
+.top-controls{
+  display:inline-flex;align-items:center;gap:8px;
+}
 .portal-back-btn{
   display:inline-flex;align-items:center;gap:7px;
-  color:var(--gold);text-decoration:none;
+  color:var(--gold);text-decoration:none;text-transform:none;
   font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;
   padding:6px 12px;border-radius:20px;
   border:1px solid rgba(227,192,137,.32);
@@ -122,6 +122,28 @@ body{font-family:"Cormorant Garamond",Georgia,serif;cursor:none;-webkit-font-smo
   transform:translateX(-2px);
 }
 .portal-back-btn svg{width:12px;height:12px;stroke-width:2.5}
+.mute-btn{
+  display:inline-grid;place-items:center;
+  width:32px;height:32px;border-radius:50%;
+  color:var(--gold);cursor:pointer;padding:0;
+  border:1px solid rgba(227,192,137,.32);
+  background:rgba(6,6,10,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:all .22s ease;pointer-events:auto;
+}
+.mute-btn:hover,.mute-btn:focus-visible{
+  border-color:rgba(227,192,137,.85);
+  background:rgba(227,192,137,.15);
+  outline:none;
+}
+.mute-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.mute-btn.is-muted{
+  color:#ff6b63;
+  border-color:rgba(255,107,99,.55);
+}
+.mute-btn.is-muted:hover,.mute-btn.is-muted:focus-visible{
+  border-color:rgba(255,107,99,.9);
+  background:rgba(255,107,99,.15);
+}
 
 .scrub-wrap{
   position:fixed;z-index:6;left:50%;bottom:25px;transform:translateX(-50%);
@@ -176,25 +198,6 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 .iconbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .iconbtn[aria-pressed="true"]{background:rgba(227,192,137,.18);border-color:rgba(227,192,137,.75)}
 .iconbtn .playfill{fill:currentColor;stroke:none}
-#pauseBtn[aria-pressed="true"],
-#pauseBtn.is-paused{
-  color:#74e19a;
-  border-color:rgba(116,225,154,.75);
-  background:rgba(116,225,154,.18);
-  box-shadow:0 0 16px rgba(116,225,154,.4), inset 0 0 8px rgba(116,225,154,.2);
-}
-#pauseBtn[aria-pressed="true"]:hover,
-#pauseBtn[aria-pressed="true"]:focus-visible,
-#pauseBtn.is-paused:hover,
-#pauseBtn.is-paused:focus-visible{
-  color:#86efac;
-  border-color:#86efac;
-  background:rgba(116,225,154,.28);
-  box-shadow:0 0 24px rgba(116,225,154,.6), inset 0 0 10px rgba(116,225,154,.3);
-}
-
-.en em.fear{color:#ff625c;text-shadow:0 0 22px rgba(255,98,92,.22)}
-.en em.hope{color:#6fdc91;text-shadow:0 0 22px rgba(111,220,145,.22)}
 .kw-red{color:#ff6b63 !important;text-shadow:0 0 18px rgba(255,107,99,.28) !important}
 .kw-green{color:#74e19a !important;text-shadow:0 0 18px rgba(116,225,154,.28) !important}
 .scene{
@@ -231,20 +234,19 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .scene.long .ar{font-size:clamp(21px,2.85vw,42px);line-height:1.72;margin-bottom:clamp(14px,2.2vw,28px)}
-.scene.long .en{font-size:clamp(19px,2.85vw,42px);line-height:1.12}
+.scene.long .en{font-size:clamp(1.05rem, 0.85rem + 1.4vw, 1.95rem);line-height:1.35}
 
 @media (max-height:720px){
   .scene{padding-top:14px;padding-bottom:14px}
   .ar{font-size:clamp(24px,3.3vw,44px);line-height:1.7;margin-bottom:18px}
-  .en{font-size:clamp(22px,3.5vw,46px)}
+  .en{font-size:clamp(1.1rem, 0.85rem + 1.5vw, 2rem)}
   .ref{display:none}
-  .note{max-width:900px;margin:clamp(14px,2vw,22px) auto 0;font-size:clamp(14px,1.4vw,19px);line-height:1.38}
+  .note{max-width:62ch;margin:clamp(14px,2vw,22px) auto 0;font-size:clamp(0.88rem, 0.82rem + 0.4vw, 1.05rem);line-height:1.45}
 }
 
 @media (pointer:coarse){.cursor{display:none}}
 @media (max-width:680px){
   .hud.tl{top:12px;left:14px;max-width:calc(100vw - 28px)}
-  .hud.tr{display:none}
   .hud.bl{display:none}
   .hud-mob-ver{display:block !important}
   .actions{right:12px;bottom:54px;gap:6px}
@@ -252,77 +254,9 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
   .iconbtn svg{width:16px;height:16px}
   .scrub-wrap{bottom:14px;width:min(500px,82vw)}
   .ar{font-size:clamp(22px,6.2vw,38px);line-height:1.85;margin-bottom:14px}
-  .en{font-size:clamp(17px,4.5vw,26px);line-height:1.2}
-  .note{font-size:clamp(12px,3.2vw,15px);margin-top:12px}
+  .en{font-size:clamp(1.05rem, 3.8vw, 1.35rem);line-height:1.42}
+  .note{font-size:clamp(0.88rem, 3.3vw, 1rem);line-height:1.55;margin-top:12px}
 }
-/* Circular Audio Ring Player */
-.btn-audio-ring {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-.btn-audio-ring:hover {
-  transform: scale(1.08);
-}
-.btn-audio-ring:focus-visible {
-  outline: 2px solid #43a047;
-  outline-offset: 3px;
-}
-.audio-ring-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  pointer-events: none;
-}
-.audio-ring-bg {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.2);
-  stroke-width: 3;
-}
-.audio-ring-fill {
-  fill: none;
-  stroke: #e53935; /* Red when stopped/paused */
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 113.097;
-  stroke-dashoffset: 113.097; /* 100% hidden at start */
-  transition: stroke-dashoffset 0.15s linear, stroke 0.25s ease;
-}
-.btn-audio-ring.is-playing .audio-ring-fill,
-.btn-audio-ring.playing .audio-ring-fill {
-  stroke: #43a047; /* Green when playing */
-}
-.audio-ring-icon {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e53935; /* Red icon when paused */
-  transition: color 0.25s ease;
-}
-.btn-audio-ring.is-playing .audio-ring-icon,
-.btn-audio-ring.playing .audio-ring-icon {
-  color: #43a047; /* Green icon when playing */
-}
-.audio-ring-icon .icon-play { display: block; }
-.audio-ring-icon .icon-pause { display: none; }
-.btn-audio-ring.is-playing .audio-ring-icon .icon-play,
-.btn-audio-ring.playing .audio-ring-icon .icon-play { display: none; }
-.btn-audio-ring.is-playing .audio-ring-icon .icon-pause,
-.btn-audio-ring.playing .audio-ring-icon .icon-pause { display: block; }
 </style>
 </head>
 <body>
@@ -331,23 +265,22 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 
 <!-- TOP LEFT HUD WITH BACK LINK -->
 <div class="hud tl" style="pointer-events:auto">
-  <a href="index.html" class="portal-back-btn" title="Return to NurulQuran Portal">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    <span>NURULQURAN PORTAL</span>
-  </a>
+  <div class="top-controls">
+    <a href="index.html" class="portal-back-btn" title="Return to Signs">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <span>Signs</span>
+    </a>
+    <button class="mute-btn" id="muteBtn" type="button" aria-label="Mute audio" aria-pressed="false" title="Mute / Unmute audio (M)">
+      <svg id="muteIcon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    </button>
+  </div>
   <div style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">v1.0.86 (updated 2026-11-17 05:27)</div>
-</div>
-
-<!-- TOP RIGHT HUD -->
-<div class="hud tr">
-  <div>RECITER: <span class="g">NASSER AL-QATAMI</span></div>
-  <div>AUTOPLAY: <span class="g" id="hudAutoplay">ACTIVE</span></div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">V1.82</div>
 </div>
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">v1.0.86 (updated 2026-11-17 05:27)</div>
+  <div class="footer-version-tag">V1.82</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -359,24 +292,6 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 </div>
 <div class="cursor" id="cursor"></div>
 <div class="actions" aria-label="Verse controls">
-  <button class="btn-audio-ring iconbtn" id="audioBtn" type="button" aria-label="Play from current āyah and continue" aria-pressed="false" title="Play from this āyah and continue (A)">
-    <svg class="audio-ring-svg" viewBox="0 0 46 46" aria-hidden="true">
-      <circle class="audio-ring-bg" cx="23" cy="23" r="18" />
-      <circle class="audio-ring-fill" id="audio-ring-fill" cx="23" cy="23" r="18" />
-    </svg>
-    <span class="audio-ring-icon" aria-hidden="true">
-      <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <polygon points="7 4 21 12 7 20 7 4" />
-      </svg>
-      <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-        <rect x="5" y="4" width="4" height="16" rx="1" />
-        <rect x="15" y="4" width="4" height="16" rx="1" />
-      </svg>
-    </span>
-  </button>
-  <button class="iconbtn" id="pauseBtn" type="button" aria-label="Pause autoplay" aria-pressed="false" title="Play / pause autoplay (P)">
-    <svg id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
-  </button>
   <button class="iconbtn" id="shareBtn" type="button" aria-label="Share current verse" title="Share current verse (S)">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.9l7.6-4.7M8.2 13.1l7.6 4.7"/></svg>
   </button>
@@ -389,50 +304,69 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 const V=[
  {"n":"32 : 1","ar":"الٓمٓ","en":"Alif. Lām. Mīm.","note":"Notice how Allah begins: three distinct Arabic letters that leave human intellect completely humbled. Right at the doorstep, the Qur’an reminds us that real knowledge starts by admitting what we don’t know.","theme":"letters"},
  {"n":"32 : 2","ar":"تَنزِيلُ ٱلْكِتَـٰبِ لَا رَيْبَ فِيهِ مِن رَّبِّ ٱلْعَـٰلَمِينَ","en":"This Book has been sent down—there is no doubt about it—from the Lord of all worlds.","note":"Allah doesn’t say “Muhammad wrote this”—He calls it Tanzīl, an intentional descent straight from the Master of all worlds. When you understand who the sender is, doubts naturally dissolve.","theme":"book"},
- {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the truth from your Lord, so you can warn a people who had no warner before you, so they may find <em>guidance</em>.","note":"They accuse the Prophet of making it up, but look at the compassion in the response: this warning isn’t harshness; it’s an urgent act of mercy to wake up people who never had a guide before.","theme":"warning"},
+ {"n":"32 : 3","ar":"أَمْ يَقُولُونَ ٱفْتَرَىٰهُ بَلْ هُوَ ٱلْحَقُّ مِن رَّبِّكَ لِتُنذِرَ قَوْمًا مَّآ أَتَىٰهُم مِّن نَّذِيرٍ مِّن قَبْلِكَ لَعَلَّهُمْ يَهْتَدُونَ","en":"Do they say, “He made it up”? No—it is the <g>truth</g> from your Lord, so you can warn a people who had no warner before you, so they may find <g>guidance</g>.","note":"They accuse the Prophet of making it up, but look at the compassion in the response: this warning isn’t harshness; it’s an urgent act of mercy to wake up people who never had a guide before.","theme":"warning"},
  {"n":"32 : 4","ar":"ٱللَّهُ ٱلَّذِى خَلَقَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَا فِى سِتَّةِ أَيَّامٍ ثُمَّ ٱسْتَوَىٰ عَلَى ٱلْعَرْشِ مَا لَكُم مِّن دُونِهِۦ مِن وَلِىٍّ وَلَا شَفِيعٍ أَفَلَا تَتَذَكَّرُونَ","en":"Allah created the heavens, the earth, and everything between them in six days, then established Himself over the Throne. Besides Him you have no true protector and no intercessor. Will you not remember?","note":"The very same Lord who engineered galaxies and planets across cosmic epochs is your only real guardian. If the Creator of the universe is on your side, who else could you possibly need?","theme":"cosmos"},
  {"n":"32 : 5","ar":"يُدَبِّرُ ٱلْأَمْرَ مِنَ ٱلسَّمَآءِ إِلَى ٱلْأَرْضِ ثُمَّ يَعْرُجُ إِلَيْهِ فِى يَوْمٍ كَانَ مِقْدَارُهُۥٓ أَلْفَ سَنَةٍ مِّمَّا تَعُدُّونَ","en":"He directs every affair from heaven to earth; then it rises back to Him in a day whose measure is a thousand years by your counting.","note":"We only catch isolated snapshots of our lives, getting stressed over today, but Allah is steering every single affair across cosmic timelines. His plan is always in motion.","theme":"ascent"},
- {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <em>Merciful</em>.","note":"He pairs Al-Azīz (the All-Powerful) with Ar-Rahīm (the Always-Merciful). His absolute power never makes Him tyrannical, and His tender mercy is never out of helplessness.","theme":"seen"},
- {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He made excellent everything He created, and He began the creation of the human being from clay.","note":"Look closely at everything around you—every leaf, every cell is designed with intentional beauty and precision. And your own origin started from basic, unpretentious clay.","theme":"clay"},
+ {"n":"32 : 6","ar":"ذَٰلِكَ عَـٰلِمُ ٱلْغَيْبِ وَٱلشَّهَـٰدَةِ ٱلْعَزِيزُ ٱلرَّحِيمُ","en":"That is the Knower of what is hidden and what is seen—the Almighty, the constantly <g>Merciful</g>.","note":"He pairs Al-Azīz (the All-Powerful) with Ar-Rahīm (the Always-Merciful). His absolute power never makes Him tyrannical, and His tender mercy is never out of helplessness.","theme":"seen"},
+ {"n":"32 : 7","ar":"ٱلَّذِىٓ أَحْسَنَ كُلَّ شَىْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ ٱلْإِنسَـٰنِ مِن طِينٍ","en":"He <g>made excellent</g> everything He created, and He began the creation of the human being from clay.","note":"Look closely at everything around you—every leaf, every cell is designed with intentional beauty and precision. And your own origin started from basic, unpretentious clay.","theme":"clay"},
  {"n":"32 : 8","ar":"ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَـٰلَةٍ مِّن مَّآءٍ مَّهِينٍ","en":"Then He continued human descendants from an extract of a humble fluid.","note":"Whenever ego or arrogance starts creeping in, remember where we all physically began: from a humble, despised drop of fluid. Humility is our true baseline.","theme":"drop"},
- {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you give thanks.","note":"You were given ears to hear the truth, eyes to recognize beauty and purpose, and a heart to feel empathy. Gratitude isn’t just saying thanks; it’s using these gifts for what they were made for.","theme":"senses"},
+ {"n":"32 : 9","ar":"ثُمَّ سَوَّىٰهُ وَنَفَخَ فِيهِ مِن رُّوحِهِۦ وَجَعَلَ لَكُمُ ٱلسَّمْعَ وَٱلْأَبْصَـٰرَ وَٱلْأَفْـِٔدَةَ قَلِيلًا مَّا تَشْكُرُونَ","en":"Then He formed the human being, breathed into him of the spirit He created, and gave you hearing, sight, and hearts. Yet how little you <g>give thanks</g>.","note":"You were given ears to hear the truth, eyes to recognize beauty and purpose, and a heart to feel empathy. Gratitude isn’t just saying thanks; it’s using these gifts for what they were made for.","theme":"senses"},
  {"n":"32 : 10","ar":"وَقَالُوٓا أَءِذَا ضَلَلْنَا فِى ٱلْأَرْضِ أَءِنَّا لَفِى خَلْقٍ جَدِيدٍ بَلْ هُم بِلِقَآءِ رَبِّهِمْ كَـٰفِرُونَ","en":"They say, “Once we have disappeared into the earth, will we really be created again?” In reality, they reject the meeting with their Lord.","note":"Notice their excuse: “When we vanish into dust, can we be recreated?” Deep down, it’s not intellectual skepticism about biology—it’s an emotional refusal to stand accountable before their Maker.","theme":"dust"},
- {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be <em>return</em>ed to your Lord.","note":"The word yatawaffā means to receive in full. Death isn’t your annihilation or turning into nothingness; it’s a transfer of custody back to the One who gave you life.","theme":"death"},
- {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the guilty with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"Picture this chilling scene: those who walked the earth with their heads held high in arrogance now standing before Allah with heads bowed in deep shame, desperately begging for one more chance.","theme":"bowed"},
- {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its <em>guidance</em>, but My word will be fulfilled: Hell will be filled from jinn and people together.","note":"Allah could have pre-programmed every soul to obey like robots, but He honored humanity with genuine choice. Because your choices matter, your actions carry real moral weight.","theme":"choice"},
- {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <em>punishment</em> for what you kept doing.","note":"“Forgetting” that day doesn’t mean a memory slip; it means living your day-to-day life as if standing before Allah simply doesn’t matter. Indifference has real consequences.","theme":"forgotten"},
- {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in prostration, glorify their Lord with praise, and do not act arrogantly.","note":"When true believers hear Allah’s words, their immediate reaction isn’t debate or stubborn pride—they drop into prostration, glorifying Him without an ounce of arrogance.","theme":"prostration","sajdah":true},
- {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with <em>fear</em> and <em>hope</em>, and they spend from what We have provided them.","note":"Look at the beauty of this phrasing: their sides literally detach and pull away from warm, cozy beds. Longing, love, and awe of Allah pull them into the quiet night prayer.","theme":"night"},
+ {"n":"32 : 11","ar":"قُلْ يَتَوَفَّىٰكُم مَّلَكُ ٱلْمَوْتِ ٱلَّذِى وُكِّلَ بِكُمْ ثُمَّ إِلَىٰ رَبِّكُمْ تُرْجَعُونَ","en":"Say: the Angel of Death assigned to you will take you completely; then you will be returned to your Lord.","note":"The word yatawaffā means to receive in full. Death isn’t your annihilation or turning into nothingness; it’s a transfer of custody back to the One who gave you life.","theme":"death"},
+ {"n":"32 : 12","ar":"وَلَوْ تَرَىٰٓ إِذِ ٱلْمُجْرِمُونَ نَاكِسُوا رُءُوسِهِمْ عِندَ رَبِّهِمْ رَبَّنَآ أَبْصَرْنَا وَسَمِعْنَا فَٱرْجِعْنَا نَعْمَلْ صَـٰلِحًا إِنَّا مُوقِنُونَ","en":"If only you could see the <r>guilty</r> with their heads lowered before their Lord: “Our Lord, now we see and hear. Send us back and we will do what is right. Now we are certain.”","note":"Picture this chilling scene: those who walked the earth with their heads held high in arrogance now standing before Allah with heads bowed in deep shame, desperately begging for one more chance.","theme":"bowed"},
+ {"n":"32 : 13","ar":"وَلَوْ شِئْنَا لَـَٔاتَيْنَا كُلَّ نَفْسٍ هُدَىٰهَا وَلَـٰكِنْ حَقَّ ٱلْقَوْلُ مِنِّى لَأَمْلَأَنَّ جَهَنَّمَ مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ أَجْمَعِينَ","en":"Had We willed, We could have given every soul its guidance, but My word will be fulfilled: <r>Hell</r> will be filled from jinn and people together.","note":"Allah could have pre-programmed every soul to obey like robots, but He honored humanity with genuine choice. Because your choices matter, your actions carry real moral weight.","theme":"choice"},
+ {"n":"32 : 14","ar":"فَذُوقُوا بِمَا نَسِيتُمْ لِقَآءَ يَوْمِكُمْ هَـٰذَآ إِنَّا نَسِينَـٰكُمْ وَذُوقُوا عَذَابَ ٱلْخُلْدِ بِمَا كُنتُمْ تَعْمَلُونَ","en":"So taste the consequence because you lived as though you would never meet this Day. Today you are left to what you chose. Taste the lasting <r>punishment</r> for what you kept doing.","note":"“Forgetting” that day doesn’t mean a memory slip; it means living your day-to-day life as if standing before Allah simply doesn’t matter. Indifference has real consequences.","theme":"forgotten"},
+ {"n":"32 : 15","ar":"إِنَّمَا يُؤْمِنُ بِـَٔايَـٰتِنَا ٱلَّذِينَ إِذَا ذُكِّرُوا بِهَا خَرُّوا سُجَّدًا وَسَبَّحُوا بِحَمْدِ رَبِّهِمْ وَهُمْ لَا يَسْتَكْبِرُونَ ","en":"The people who truly believe in Our signs are those who, when reminded by them, fall in <g>prostration</g>, glorify their Lord with praise, and do not act arrogantly.","note":"When true believers hear Allah’s words, their immediate reaction isn’t debate or stubborn pride—they drop into prostration, glorifying Him without an ounce of arrogance.","theme":"prostration","sajdah":true},
+ {"n":"32 : 16","ar":"تَتَجَافَىٰ جُنُوبُهُمْ عَنِ ٱلْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ","en":"Their sides pull away from their beds. They call on their Lord with fear and hope, and they spend from what We have provided them.","note":"Look at the beauty of this phrasing: their sides literally detach and pull away from warm, cozy beds. Longing, love, and awe of Allah pull them into the quiet night prayer.","theme":"night"},
  {"n":"32 : 17","ar":"فَلَا تَعْلَمُ نَفْسٌ مَّآ أُخْفِىَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَآءً بِمَا كَانُوا يَعْمَلُونَ","en":"No soul can know what delight has been kept hidden for them—joy prepared as a reward for what they used to do.","note":"Just like they hid their good deeds in the darkness of the night, Allah hides a reward for them—a coolness for their eyes that no human imagination could ever picture.","theme":"hidden"},
- {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <em>believer</em> be the same as someone who defiantly breaks away? They are not equal.","note":"Can someone who lived with consciousness of Allah and someone who lived in blatant defiance end up the same? True divine justice guarantees they never will.","theme":"contrast"},
- {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who <em>believed</em> and lived righteously, the <em>Gardens</em> of Refuge will welcome them because of what they used to do.","note":"Notice the word Ma’wā—it’s not just a paradise garden, it’s a sanctuary, a refuge, a true welcoming home where the weary traveler finally rests forever.","theme":"garden"},
- {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <em>Fire</em> as their refuge. Whenever they try to leave it, they will be <em>return</em>ed and told: “Taste the <em>punishment</em> of the <em>Fire</em> you used to deny.”","note":"Every time they try to claw their way out of despair, they are returned to it. Living life burning down moral boundaries leads to the exact environment one prepared for themselves.","theme":"fire"},
- {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <em>punishment</em> before the greater <em>punishment</em>, so that perhaps they may <em>return</em>.","note":"Even when life gives you setbacks, trials, or losses in this world, look at the mercy behind it: it’s a wake-up call to turn back before you reach the ultimate loss.","theme":"warning2"},
- {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then turns away from them? We will certainly bring the criminals to account.","note":"Who does greater wrong than someone who is lovingly reminded of their Lord’s guidance with crystal-clear signs, and then simply shrugs their shoulders and walks away?","theme":"turnaway"},
- {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <em>guidance</em> for the Children of Israel.","note":"The Prophet is reminded that he is not alone; this journey of revelation connects him directly with Moses and the messengers of old. Truth has an unbroken lineage.","theme":"scripture"},
- {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who <em>guided</em> by Our command when they showed <em>patience</em> and had <em>certainty</em> in Our signs.","note":"Real spiritual leadership isn’t about status or charisma. Allah grants leadership to those with relentless patience under hardship and unshakable conviction in His words.","theme":"leadership"},
+ {"n":"32 : 18","ar":"أَفَمَن كَانَ مُؤْمِنًا كَمَن كَانَ فَاسِقًا لَّا يَسْتَوُۥنَ","en":"Can a <g>believer</g> be the same as someone who <r>defiantly breaks away</r>? They are not equal.","note":"Can someone who lived with consciousness of Allah and someone who lived in blatant defiance end up the same? True divine justice guarantees they never will.","theme":"contrast"},
+ {"n":"32 : 19","ar":"أَمَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّـٰلِحَـٰتِ فَلَهُمْ جَنَّـٰتُ ٱلْمَأْوَىٰ نُزُلًا بِمَا كَانُوا يَعْمَلُونَ","en":"As for those who believed and lived righteously, the Gardens of <g>Refuge</g> will welcome them because of what they used to do.","note":"Notice the word Ma’wā—it’s not just a paradise garden, it’s a sanctuary, a refuge, a true welcoming home where the weary traveler finally rests forever.","theme":"garden"},
+ {"n":"32 : 20","ar":"وَأَمَّا ٱلَّذِينَ فَسَقُوا فَمَأْوَىٰهُمُ ٱلنَّارُ كُلَّمَآ أَرَادُوٓا أَن يَخْرُجُوا مِنْهَآ أُعِيدُوا فِيهَا وَقِيلَ لَهُمْ ذُوقُوا عَذَابَ ٱلنَّارِ ٱلَّذِى كُنتُم بِهِۦ تُكَذِّبُونَ","en":"But those who defiantly rebelled will have the <r>Fire</r> as their refuge. Whenever they try to leave it, they will be returned and told: “Taste the <r>punishment</r> of the <r>Fire</r> you used to deny.”","note":"Every time they try to claw their way out of despair, they are returned to it. Living life burning down moral boundaries leads to the exact environment one prepared for themselves.","theme":"fire"},
+ {"n":"32 : 21","ar":"وَلَنُذِيقَنَّهُم مِّنَ ٱلْعَذَابِ ٱلْأَدْنَىٰ دُونَ ٱلْعَذَابِ ٱلْأَكْبَرِ لَعَلَّهُمْ يَرْجِعُونَ","en":"We will certainly let them taste a nearer <r>punishment</r> before the greater <r>punishment</r>, so that perhaps they may <g>return</g>.","note":"Even when life gives you setbacks, trials, or losses in this world, look at the mercy behind it: it’s a wake-up call to turn back before you reach the ultimate loss.","theme":"warning2"},
+ {"n":"32 : 22","ar":"وَمَنْ أَظْلَمُ مِمَّن ذُكِّرَ بِـَٔايَـٰتِ رَبِّهِۦ ثُمَّ أَعْرَضَ عَنْهَآ إِنَّا مِنَ ٱلْمُجْرِمِينَ مُنتَقِمُونَ","en":"Who could be more unjust than someone reminded of his Lord’s signs who then <r>turns away</r> from them? We will certainly bring the <r>criminals</r> to <r>account</r>.","note":"Who does greater wrong than someone who is lovingly reminded of their Lord’s guidance with crystal-clear signs, and then simply shrugs their shoulders and walks away?","theme":"turnaway"},
+ {"n":"32 : 23","ar":"وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ فَلَا تَكُن فِى مِرْيَةٍ مِّن لِّقَآئِهِۦ وَجَعَلْنَـٰهُ هُدًى لِّبَنِىٓ إِسْرَٰٓءِيلَ","en":"We certainly gave Moses the Scripture, so do not be in doubt about receiving revelation. We made it <g>guidance</g> for the Children of Israel.","note":"The Prophet is reminded that he is not alone; this journey of revelation connects him directly with Moses and the messengers of old. Truth has an unbroken lineage.","theme":"scripture"},
+ {"n":"32 : 24","ar":"وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا وَكَانُوا بِـَٔايَـٰتِنَا يُوقِنُونَ","en":"We raised leaders from among them who guided by Our command when they showed <g>patience</g> and had <g>certainty</g> in Our signs.","note":"Real spiritual leadership isn’t about status or charisma. Allah grants leadership to those with relentless patience under hardship and unshakable conviction in His words.","theme":"leadership"},
  {"n":"32 : 25","ar":"إِنَّ رَبَّكَ هُوَ يَفْصِلُ بَيْنَهُمْ يَوْمَ ٱلْقِيَـٰمَةِ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ","en":"Your Lord will decide between them on the Day of Resurrection concerning everything over which they used to differ.","note":"Don’t burn yourself out trying to settle every ideological battle or dispute today. Allah Himself will deliver the final, flawless verdict on the Day of Judgment.","theme":"judgment"},
  {"n":"32 : 26","ar":"أَوَلَمْ يَهْدِ لَهُمْ كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ ٱلْقُرُونِ يَمْشُونَ فِى مَسَـٰكِنِهِمْ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ أَفَلَا يَسْمَعُونَ","en":"Has it not shown them how many generations We destroyed before them, while they now walk through the places where those people once lived? There are signs in that. Will they not listen?","note":"When you travel and walk through historical ruins, don’t just admire the stonework like tourists—open your ears and listen to what those fallen civilizations are telling you.","theme":"ruins"},
  {"n":"32 : 27","ar":"أَوَلَمْ يَرَوْا أَنَّا نَسُوقُ ٱلْمَآءَ إِلَى ٱلْأَرْضِ ٱلْجُرُزِ فَنُخْرِجُ بِهِۦ زَرْعًا تَأْكُلُ مِنْهُ أَنْعَـٰمُهُمْ وَأَنفُسُهُمْ أَفَلَا يُبْصِرُونَ","en":"Have they not seen how We drive water to barren land and bring out crops from it, feeding their animals and themselves? Will they not see?","note":"Watch how Allah brings dead, cracked desert soil back to vibrant life with rain. If He can revive a barren wasteland before your eyes, reviving your soul and body is effortless for Him.","theme":"water"},
  {"n":"32 : 28","ar":"وَيَقُولُونَ مَتَىٰ هَـٰذَا ٱلْفَتْحُ إِن كُنتُمْ صَـٰدِقِينَ","en":"They say, “When will this decisive judgment come, if you are truthful?”","note":"Skeptics always mockingly ask, “When is this judgment coming?” They confuse Allah’s divine patience and delay with permission to stay careless.","theme":"challenge"},
- {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who rejected will no longer benefit them, nor will they be given more time.","note":"When the exam papers are collected, saying “now I know the answers” is too late. The beauty of faith is trusting and choosing good while the test is still ongoing.","theme":"deadline"},
+ {"n":"32 : 29","ar":"قُلْ يَوْمَ ٱلْفَتْحِ لَا يَنفَعُ ٱلَّذِينَ كَفَرُوٓا إِيمَـٰنُهُمْ وَلَا هُمْ يُنظَرُونَ","en":"Say: on the day of decisive judgment, the faith of those who <r>rejected</r> will no longer benefit them, nor will they be given more time.","note":"When the exam papers are collected, saying “now I know the answers” is too late. The beauty of faith is trusting and choosing good while the test is still ongoing.","theme":"deadline"},
  {"n":"32 : 30","ar":"فَأَعْرِضْ عَنْهُمْ وَٱنتَظِرْ إِنَّهُم مُّنتَظِرُونَ","en":"So turn away from them and wait. They too are waiting.","note":"The sūrah ends with quiet, serene dignity: turn away from their ridicule and wait with peace in your heart. You fulfill your responsibility, and let Allah take care of the rest.","theme":"wait"}
 ];
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ─────────── build scenes ─────────── */
 const stage=document.getElementById("stage"), scrub=document.getElementById("scrub"), ayahBottom=document.getElementById("ayahBottom");
-const hudAutoplay=document.getElementById("hudAutoplay");
 const stripArabic=t=>t.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,"").replace(/ٱ/g,"ا").replace(/ـ/g,"");
-const stripEnglish=t=>t.toLowerCase().replace(/[^a-z]/g,"");
 const arRed=new Set(["كافرون","المجرمون","المجرمين","جهنم","عذاب","العذاب","النار","فاسقا","أعرض","منتقمون","كفروا"]);
 const arGreen=new Set(["الحق","يهتدون","الرحيم","أحسن","تشكرون","مؤمنا","آمنوا","الصالحات","جنات","المأوى","طمعا","يرجعون","هدى","صبروا","يوقنون","سجدا"]);
-const enRed=new Set(["fear","fire","punishment","reject","rejected","denial","guilty","hell","criminals","rebellion","rebelled","unjust","death"]);
-const enGreen=new Set(["hope","truth","guidance","guided","merciful","believer","believed","gardens","return","patience","certainty","righteous"]);
+const wrapEn=str=>{
+  let color="";
+  return str.split(/\s+/).map(tok=>{
+    let out="", idx=0, m;
+    const re=/<(\/?[gr])>/g;
+    while((m=re.exec(tok))!==null){
+      if(m.index>idx){
+        const part=tok.slice(idx,m.index);
+        out+=color?`<span class="${color}">${part}</span>`:part;
+      }
+      if(m[1]==="g") color="kw-green";
+      else if(m[1]==="r") color="kw-red";
+      else color="";
+      idx=re.lastIndex;
+    }
+    if(idx<tok.length){
+      const part=tok.slice(idx);
+      out+=color?`<span class="${color}">${part}</span>`:part;
+    }
+    return `<span class="w">${out}</span>`;
+  }).join(" ");
+};
 
 const scenes=V.map((v,i)=>{
   const s=document.createElement("div");s.className="scene";
-  if(v.en.length>145)s.classList.add("long");
+  const enPlain=v.en.replace(/<[^>]+>/g,"");
+  if(enPlain.length>145)s.classList.add("long");
   if(v.ar.split(/\s+/).length<=3)s.classList.add("short");
   s.dataset.off="1";
   const wrap=t=>t.split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ");
@@ -440,35 +374,24 @@ const scenes=V.map((v,i)=>{
   s.innerHTML=`${sajdahHtml}
     <div class="ref">${v.n}</div>
     <div class="ar">${wrap(v.ar)}</div>
-    <div class="en">${v.en.replace(/(<em>|<\/em>)/g,"\u0001$1\u0001").split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ").replace(/\u0001/g,"")}</div>
-    <div class="note">${v.note}</div>
+    <div class="en">${wrapEn(v.en)}</div>
+    <div class="note">${v.note} <span class="note-ref">${v.n.replace(/\s+/g,"")}</span></div>
     <div class="hairline"></div>`;
-  s.querySelectorAll(".en em").forEach(em=>{
-    const word=stripEnglish(em.textContent.trim());
-    if(word==="fear") em.classList.add("fear");
-    if(word==="hope") em.classList.add("hope");
-  });
   s.querySelectorAll(".ar .w").forEach(w=>{
     const word=stripArabic(w.textContent.trim());
     if(arRed.has(word)) w.classList.add("kw-red");
     if(arGreen.has(word)) w.classList.add("kw-green");
   });
-  s.querySelectorAll(".en .w").forEach(w=>{
-    const word=stripEnglish(w.textContent.trim());
-    if(enRed.has(word)) w.classList.add("kw-red");
-    if(enGreen.has(word)) w.classList.add("kw-green");
-  });
   stage.appendChild(s);
   return {el:s,words:[...s.querySelectorAll(".w")],ref:s.querySelector(".ref"),
           line:s.querySelector(".hairline"),
-          seed:v.en.length%7, dur:8.5+v.en.split(" ").length*0.30};
+          seed:enPlain.length%7, dur:8.5+enPlain.split(" ").length*0.30};
 });
 
 /* ─────────── timeline ─────────── */
 let T=0.0001, N=V.length, last=performance.now(), auto=true, idle=0;
 let userPaused=false, lastPointerX=null, simTime=0;
-const audio=document.getElementById("ayahAudio"), audioBtn=document.getElementById("audioBtn"), audioRing=document.getElementById("audio-ring-fill"), CIRCUMFERENCE=113.097;
-const pauseBtn=document.getElementById("pauseBtn"), pauseIcon=document.getElementById("pauseIcon");
+const audio=document.getElementById("ayahAudio"), muteBtn=document.getElementById("muteBtn"), muteIcon=document.getElementById("muteIcon");
 const shareBtn=document.getElementById("shareBtn"), toast=document.getElementById("toast");
 const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032001.mp3",
@@ -502,6 +425,8 @@ const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032029.mp3",
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032030.mp3"
 ];
+const AUDIO_VOLUME=0.85;
+let isMuted=false, audioState="loading", audioLoadedIdx=-1, postAudioRemaining=0, playToken=0;
 function currentIndex(){return ((Math.floor(T)%N)+N)%N}
 function showToast(msg){
   toast.textContent=msg;
@@ -509,39 +434,69 @@ function showToast(msg){
   clearTimeout(showToast._t);
   showToast._t=setTimeout(()=>toast.classList.remove("show"),1700);
 }
-function syncPauseButton(){
-  pauseBtn.setAttribute("aria-pressed",String(userPaused));
-  pauseBtn.classList.toggle("is-paused",userPaused);
-  pauseBtn.setAttribute("aria-label",userPaused?"Resume motion":"Pause motion");
-  pauseIcon.innerHTML=userPaused
-    ? '<path class="playfill" d="M8 5l11 7-11 7z"/>'
-    : '<path d="M9 6v12M15 6v12"/>';
-  if(hudAutoplay){
-    hudAutoplay.textContent=userPaused?"PAUSED":"ACTIVE";
-    hudAutoplay.style.color=userPaused?"#74e19a":"var(--gold)";
+function syncMuteButton(){
+  muteBtn.setAttribute("aria-pressed",String(isMuted));
+  muteBtn.classList.toggle("is-muted",isMuted);
+  muteBtn.setAttribute("aria-label",isMuted?"Unmute audio":"Mute audio");
+  muteIcon.innerHTML=isMuted
+    ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
+    : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+}
+function playAyah(idx){
+  idx=((idx%N)+N)%N;
+  const tok=++playToken;
+  audioLoadedIdx=idx;
+  postAudioRemaining=0;
+  audioState="loading";
+  audio.src=audioUrls[idx];
+  audio.volume=AUDIO_VOLUME;
+  audio.muted=isMuted;
+  const p=audio.play();
+  if(p!==undefined){
+    p.then(()=>{
+      if(tok===playToken) audioState="playing";
+    }).catch(err=>{
+      if(tok!==playToken) return;
+      if(err&&err.name==="NotAllowedError"){
+        audioState="blocked";
+        showToast("Tap anywhere to start audio");
+      }else if(!err||err.name!=="AbortError"){
+        audioState="error";
+      }
+    });
+  }else{
+    audioState="playing";
   }
 }
-let audioSequence=false, audioWasPlaying=false;
-const LOW_VOLUME = 0.30;
-function stopAudio(){
-  audioSequence=false;
-  audioWasPlaying=false;
-  audio.pause(); audio.currentTime=0;
-  audioBtn.setAttribute("aria-pressed","false");
-  audioBtn.classList.remove("is-playing","playing");
-  if(audioRing) audioRing.style.strokeDashoffset=CIRCUMFERENCE;
-}
-function playCurrentAudio(){
-  const i=currentIndex();
-  if(!audio.paused){stopAudio();return;}
-  audioSequence=true;
-  audioWasPlaying=false;
-  audio.volume=LOW_VOLUME;
-  audio.src=audioUrls[i];
-  audio.play().then(()=>{
-    audioBtn.setAttribute("aria-pressed","true");
-    audioBtn.classList.add("is-playing","playing");
-  }).catch(()=>showToast("Audio could not start"));
+function togglePause(){
+  userPaused=!userPaused;
+  if(userPaused){
+    auto=false;
+    if(!audio.paused) audio.pause();
+    showToast("Paused");
+  }else{
+    auto=true;
+    idle=0;
+    const idx=currentIndex();
+    if(audioState==="waiting"&&audioLoadedIdx===idx){
+      // postAudioRemaining countdown resumes in frame loop
+    }else if(audioLoadedIdx===idx&&audio.src&&!audio.ended&&audioState!=="blocked"&&audioState!=="error"){
+      audio.volume=AUDIO_VOLUME;
+      audio.muted=isMuted;
+      const tok=++playToken;
+      const p=audio.play();
+      if(p!==undefined){
+        p.then(()=>{if(tok===playToken) audioState="playing";}).catch(err=>{
+          if(tok!==playToken) return;
+          if(err&&err.name==="NotAllowedError") audioState="blocked";
+          else playAyah(idx);
+        });
+      }
+    }else{
+      playAyah(idx);
+    }
+    showToast("Playing");
+  }
 }
 async function copyText(text){
   try{ if(navigator.clipboard && location.protocol!=="file:"){ await navigator.clipboard.writeText(text); return true; } }catch(_){}
@@ -556,45 +511,24 @@ async function copyText(text){
   return false;
 }
 audio.addEventListener("ended",()=>{
-  audioBtn.setAttribute("aria-pressed","false");
-  audioBtn.classList.remove("is-playing","playing");
-  if(audioRing) audioRing.style.strokeDashoffset=CIRCUMFERENCE;
-  if(!audioSequence) return;
-  const i=currentIndex();
-  if(i>=N-1){audioSequence=false;return;}
-  T=i+1+.001; setScrubFromT();
-  audio.volume=LOW_VOLUME;
-  audio.src=audioUrls[currentIndex()];
-  audio.play().then(()=>{
-    audioBtn.setAttribute("aria-pressed","true");
-    audioBtn.classList.add("is-playing","playing");
-  }).catch(()=>{audioSequence=false;});
+  if(audioLoadedIdx!==currentIndex()) return;
+  audioState="waiting";
+  postAudioRemaining=1.0;
 });
-audio.addEventListener("timeupdate", () => {
-  if (audio.duration && audioRing) {
-    const pct = audio.currentTime / audio.duration;
-    audioRing.style.strokeDashoffset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
-  }
+audio.addEventListener("error",()=>{
+  if(audioLoadedIdx!==currentIndex()) return;
+  audioState="error";
 });
-audioBtn.addEventListener("click",playCurrentAudio);
-pauseBtn.addEventListener("click",()=>{
-  userPaused=!userPaused;
-  if(userPaused){
-    auto=false;
-    if(!audio.paused){
-      audioWasPlaying=true;
-      audio.pause();
-    }
-  } else {
+muteBtn.addEventListener("click",e=>{
+  e.preventDefault(); e.stopPropagation();
+  isMuted=!isMuted;
+  audio.muted=isMuted;
+  syncMuteButton();
+  showToast(isMuted?"Muted":"Unmuted");
+  if(audioState==="blocked"&&!userPaused){
     auto=true;
-    if(audioWasPlaying){
-      audioWasPlaying=false;
-      audio.volume=LOW_VOLUME;
-      audio.play().catch(()=>{});
-    }
+    playAyah(currentIndex());
   }
-  idle=0;
-  syncPauseButton();
 });
 shareBtn.addEventListener("click",async(e)=>{
   e.preventDefault(); e.stopPropagation();
@@ -613,7 +547,7 @@ shareBtn.addEventListener("click",async(e)=>{
   if(await copyText(bodyText)) showToast("Share text copied");
   else { window.prompt("Copy and share this text:", bodyText); showToast("Copy text shown"); }
 });
-syncPauseButton();
+syncMuteButton();
 
 let scrubbing=false;
 function setScrubFromT(){
@@ -623,16 +557,23 @@ function setScrubFromT(){
   ayahBottom.textContent=`32 : ${1+Math.floor(value)}`;
 }
 scrub.addEventListener("pointerdown",e=>{
-  e.stopPropagation();scrubbing=true;auto=false;idle=0;stopAudio();
+  e.stopPropagation();scrubbing=true;auto=false;idle=0;postAudioRemaining=0;
+  if(!audio.paused) audio.pause();
 });
 scrub.addEventListener("input",e=>{
   T=Math.max(0,Math.min(29.999,Number(scrub.value)));
   idle=0;setScrubFromT();
 });
 scrub.addEventListener("pointerup",e=>{
-  e.stopPropagation();scrubbing=false;if(!userPaused) auto=true;idle=0;
+  e.stopPropagation();scrubbing=false;idle=0;
+  if(!userPaused){auto=true;playAyah(currentIndex());}
+  else audioState="loading";
 });
-scrub.addEventListener("pointercancel",()=>{scrubbing=false;if(!userPaused) auto=true;});
+scrub.addEventListener("pointercancel",()=>{
+  scrubbing=false;
+  if(!userPaused){auto=true;playAyah(currentIndex());}
+  else audioState="loading";
+});
 const clamp=(a,b,c)=>Math.max(b,Math.min(c,a));
 const eo=t=>1-Math.pow(1-t,4), ei=t=>t*t*t;
 
@@ -640,6 +581,7 @@ const eo=t=>1-Math.pow(1-t,4), ei=t=>t*t*t;
 const M={x:innerWidth/2,y:innerHeight/2,lx:innerWidth/2,ly:innerHeight/2,press:0,down:false};
 const cur=document.getElementById("cursor");
 if(cur) cur.style.transform=`translate(${M.x}px,${M.y}px)`;
+let downX=0, downY=0, wasDragged=false, wheelTimer=null;
 
 addEventListener("pointermove",e=>{
   M.x=e.clientX; M.y=e.clientY;
@@ -648,46 +590,77 @@ addEventListener("pointermove",e=>{
     cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
   }
   if(M.down&&lastPointerX!==null){
-    const dx=e.clientX-lastPointerX;
-    T=(((T-dx*0.0018)%N)+N)%N;
+    if(!wasDragged&&Math.hypot(e.clientX-downX,e.clientY-downY)>10){
+      wasDragged=true;
+      auto=false;
+      postAudioRemaining=0;
+      if(!audio.paused) audio.pause();
+    }
+    if(wasDragged){
+      const dx=e.clientX-lastPointerX;
+      T=(((T-dx*0.0018)%N)+N)%N;
+      idle=0;
+    }
     lastPointerX=e.clientX;
-    idle=0;
-    stopAudio();
   }
 },{passive:true});
 
 document.addEventListener("mouseleave",()=>{if(cur)cur.style.opacity="0";});
 document.addEventListener("mouseenter",()=>{if(cur)cur.style.opacity="1";});
 
-document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .scrub").forEach(el=>{
+document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .mute-btn, .scrub").forEach(el=>{
   el.addEventListener("pointerenter",()=>document.body.classList.add("hovering"));
   el.addEventListener("pointerleave",()=>document.body.classList.remove("hovering"));
 });
 
 addEventListener("pointerdown",e=>{
-  if(e.target.closest("a, button, input")) return;
-  M.down=true;lastPointerX=e.clientX;document.body.classList.add("press");idle=0;
+  if(e.target.closest("a, button, input, .scrub-wrap")) return;
+  M.down=true;downX=e.clientX;downY=e.clientY;lastPointerX=e.clientX;wasDragged=false;
+  document.body.classList.add("press");idle=0;
 });
-addEventListener("pointerup",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
+addEventListener("pointerup",()=>{
+  if(!M.down) return;
+  M.down=false;lastPointerX=null;document.body.classList.remove("press");
+  if(!wasDragged){
+    if(audioState==="blocked"&&!userPaused){
+      auto=true;
+      playAyah(currentIndex());
+    }else{
+      togglePause();
+    }
+  }else{
+    if(!userPaused){
+      auto=true;
+      playAyah(currentIndex());
+    }else{
+      audioState="loading";
+    }
+  }
+});
 addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
 addEventListener("wheel",e=>{
   T=(((T+e.deltaY*0.00075)%N)+N)%N;
-  if(!userPaused) auto=true;
-  idle=0;
-  stopAudio();
+  idle=0;postAudioRemaining=0;
+  if(currentIndex()!==audioLoadedIdx){
+    if(!audio.paused) audio.pause();
+    audioState="loading";
+  }
+  clearTimeout(wheelTimer);
+  wheelTimer=setTimeout(()=>{
+    if(!userPaused){auto=true;playAyah(currentIndex());}
+  },250);
 },{passive:true});
 addEventListener("keydown",e=>{
   const k=e.key;
   if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
-  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
-  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
-  else if(k==="Home"){T=0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
-  else if(k==="End"){T=N-1+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
-  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;if(!userPaused) auto=true;idle=0;stopAudio();}
-  else if(k.toLowerCase()==="p"){pauseBtn.click();}
-  else if(k.toLowerCase()==="a"){playCurrentAudio();}
+  if(k==="ArrowRight"||k===" "){T=(((Math.floor(T)+1)%N+N)%N)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  else if(k==="ArrowLeft"){T=(((Math.floor(T)-1+N)%N+N)%N)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  else if(k==="Home"){T=0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  else if(k==="End"){T=N-1+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  else if(/^[1-9]$/.test(k)){T=(+k-1)+0.001;postAudioRemaining=0;idle=0;if(!userPaused){auto=true;playAyah(currentIndex());}else audioState="loading";}
+  else if(k.toLowerCase()==="p"||k==="Escape"){togglePause();}
+  else if(k.toLowerCase()==="m"){muteBtn.click();}
   else if(k.toLowerCase()==="s"){shareBtn.click();}
-  else if(k==="Escape"){if(!userPaused) pauseBtn.click();}
 });
 
 /* ─────────── canvas ─────────── */
@@ -722,16 +695,28 @@ function geom(t,scale,alpha){
   const cx=innerWidth/2+(M.lx-innerWidth/2)*.03, cy=innerHeight/2+(M.ly-innerHeight/2)*.03;
   const R=Math.min(innerWidth,innerHeight)*0.42*scale;
   g.save();g.translate(cx,cy);g.globalCompositeOperation="lighter";
+  g.lineJoin="round";g.lineCap="round";
   for(let ring=0;ring<4;ring++){
-    const k=[1,.74,.5,.29][ring], dir=ring%2?-1:1, pts=[16,16,12,8][ring];
+    const k=[1,.74,.5,.29][ring], dir=ring%2?-1:1, pts=[16,16,12,8][ring], step=[7,5,5,3][ring];
+    const theta=(step/pts)*Math.PI*2, f=0.065;
+    const rCtrl=(R*k)/(1-0.5*f*(1-Math.cos(theta)));
+    const verts=[];
+    for(let m=0;m<pts;m++){
+      const a=((m*step)%pts)/pts*Math.PI*2;
+      verts.push({x:Math.cos(a)*rCtrl,y:Math.sin(a)*rCtrl});
+    }
     g.save();g.rotate(t*0.006*dir+ring*0.31);
     g.strokeStyle=`rgba(227,192,137,${alpha*[.16,.20,.13,.26][ring]})`;
     g.lineWidth=ring===3?.9:.55;
     g.beginPath();
-    for(let i=0;i<pts;i++){const step=[7,5,5,3][ring];
-      const a1=i/pts*Math.PI*2, a2=((i+step)%pts)/pts*Math.PI*2;
-      g.moveTo(Math.cos(a1)*R*k,Math.sin(a1)*R*k);
-      g.lineTo(Math.cos(a2)*R*k,Math.sin(a2)*R*k);}
+    for(let m=0;m<pts;m++){
+      const prev=verts[(m-1+pts)%pts], curr=verts[m], next=verts[(m+1)%pts];
+      const ax=curr.x+(prev.x-curr.x)*f, ay=curr.y+(prev.y-curr.y)*f;
+      const bx=curr.x+(next.x-curr.x)*f, by=curr.y+(next.y-curr.y)*f;
+      if(m===0) g.moveTo(ax,ay); else g.lineTo(ax,ay);
+      g.quadraticCurveTo(curr.x,curr.y,bx,by);
+    }
+    g.closePath();
     g.stroke();
     g.beginPath();g.arc(0,0,R*k,0,Math.PI*2);
     g.strokeStyle=`rgba(227,192,137,${alpha*.09})`;g.lineWidth=.5;g.stroke();
@@ -813,10 +798,10 @@ function frame(now){
   if(!userPaused){
     M.lx+=(M.x-M.lx)*.08; M.ly+=(M.y-M.ly)*.08;
     M.press+=((M.down?1:0)-M.press)*.09;
-    idle+=dt; if(!M.down&&idle>4) auto=true;
+    idle+=dt; if(!M.down&&!scrubbing&&idle>4) auto=true;
     simTime+=dt;
   }
-  cur.style.transform=`translate(${M.x}px,${M.y}px)`;
+  if(cur) cur.style.transform=`translate(${M.x}px,${M.y}px)`;
   const t=simTime;
 
   /* advance */
@@ -825,11 +810,40 @@ function frame(now){
   const sc = scenes[idx] || scenes[0];
   const p = Math.max(0, Math.min(0.9999, T - Math.floor(T)));
   const theme = THEMES[idx] || THEMES[0];
-  if (auto && !M.down && !userPaused) {
-    const dur = (audioSequence && !audio.paused && audio.duration && !isNaN(audio.duration) && audio.duration > 1)
-      ? audio.duration
-      : (sc.dur || 8.5);
-    T = ((T + dt / dur) % N + N) % N;
+  if (auto && !M.down && !scrubbing && !userPaused) {
+    if (audioState === "playing" && audioLoadedIdx === idx) {
+      if (audio.duration > 0 && !isNaN(audio.duration)) {
+        const nextP = clamp(0.001 + (audio.currentTime / audio.duration) * 0.849, 0.001, 0.85);
+        T = idx + nextP;
+      }
+    } else if (audioState === "loading" || audioState === "blocked") {
+      const dur = sc.dur || 8.5;
+      const nextP = Math.min(0.75, p + dt / dur);
+      T = idx + nextP;
+    } else if (audioState === "waiting") {
+      postAudioRemaining -= dt;
+      if (postAudioRemaining <= 0) {
+        postAudioRemaining = 0;
+        const nextIdx = (idx + 1) % N;
+        T = nextIdx + 0.001;
+        playAyah(nextIdx);
+      } else if (postAudioRemaining > 0.45) {
+        T = idx + 0.85;
+      } else {
+        const exitProg = clamp((0.45 - postAudioRemaining) / 0.45, 0, 1);
+        T = idx + 0.85 + exitProg * 0.149;
+      }
+    } else if (audioState === "error") {
+      const dur = sc.dur || 8.5;
+      const nextP = p + dt / dur;
+      if (nextP >= 0.85) {
+        T = idx + 0.85;
+        audioState = "waiting";
+        postAudioRemaining = 1.0;
+      } else {
+        T = idx + nextP;
+      }
+    }
   }
 
   /* ── background ── */
@@ -907,36 +921,7 @@ if(!isNaN(hashVerse)&&hashVerse>=1&&hashVerse<=30){
 setScrubFromT();
 let lastHash=-1;
 
-function startLowVolumeAudio(){
-  if(userPaused || !audio.paused) return;
-  audio.volume = LOW_VOLUME;
-  audioSequence = true;
-  audio.src = audioUrls[currentIndex()];
-  const playPromise = audio.play();
-  if(playPromise !== undefined){
-    playPromise.then(()=>{
-      audioBtn.setAttribute("aria-pressed","true");
-    }).catch(()=>{
-      const onFirstGesture = ()=>{
-        if(!userPaused && audio.paused){
-          audio.volume = LOW_VOLUME;
-          audioSequence = true;
-          audio.src = audioUrls[currentIndex()];
-          audio.play().then(()=>{
-            audioBtn.setAttribute("aria-pressed","true");
-          }).catch(()=>{});
-        }
-        window.removeEventListener("pointerdown", onFirstGesture);
-        window.removeEventListener("keydown", onFirstGesture);
-        window.removeEventListener("touchstart", onFirstGesture);
-      };
-      window.addEventListener("pointerdown", onFirstGesture, {once:true});
-      window.addEventListener("keydown", onFirstGesture, {once:true});
-      window.addEventListener("touchstart", onFirstGesture, {once:true});
-    });
-  }
-}
-startLowVolumeAudio();
+playAyah(currentIndex());
 
 requestAnimationFrame(frame);
 </script>
