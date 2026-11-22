@@ -224,16 +224,17 @@ body.hovering .cursor{width:44px;height:44px;margin:-22px 0 0 -22px;border-color
 .iconbtn[aria-pressed="true"]{background:rgba(227,192,137,.18);border-color:rgba(227,192,137,.75)}
 .iconbtn .playfill{fill:currentColor;stroke:none}
 #shareBtn{
-  color:#38e8ff;
-  border-color:rgba(56,232,255,.72);
-  background:rgba(56,232,255,.16);
-  box-shadow:0 0 18px rgba(56,232,255,.35),inset 0 0 8px rgba(56,232,255,.18);
+  background:#38e8ff;
+  color:#06060a;
+  border:2px solid #b6f8ff;
+  box-shadow:0 4px 20px rgba(56,232,255,.55),0 0 0 3px rgba(6,6,10,.75);
 }
+#shareBtn svg{stroke-width:2.3}
 #shareBtn:hover,#shareBtn:focus-visible{
-  color:#9ef4ff;
-  border-color:#38e8ff;
-  background:rgba(56,232,255,.28);
-  box-shadow:0 0 24px rgba(56,232,255,.6),inset 0 0 10px rgba(56,232,255,.28);
+  background:#7cf2ff;
+  color:#06060a;
+  border-color:#ffffff;
+  box-shadow:0 6px 26px rgba(56,232,255,.8),0 0 0 3px rgba(6,6,10,.85);
 }
 .shortcuts-btn{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600}
 @media (hover:none),(pointer:coarse),(max-width:680px){.shortcuts-btn{display:none}}
@@ -315,10 +316,57 @@ dialog::backdrop{
 }
 .quiz-feedback{
   margin-top:14px;padding:12px 14px;border-radius:12px;
-  background:rgba(227,192,137,.10);border:1px solid rgba(227,192,137,.28);
-  font-size:0.9rem;line-height:1.5;color:rgba(255,251,242,.92);display:none;
+  border:1px solid rgba(227,192,137,.28);
+  font-size:0.96rem;font-weight:700;line-height:1.5;display:none;
+  align-items:flex-start;gap:10px;
 }
-.quiz-feedback.show{display:block}
+.quiz-feedback.show{display:flex}
+.quiz-feedback.is-correct{
+  color:#74e19a;border-color:rgba(116,225,154,.55);background:rgba(116,225,154,.14);
+}
+.quiz-feedback.is-wrong{
+  color:#ff6b63;border-color:rgba(255,107,99,.55);background:rgba(255,107,99,.14);
+}
+.quiz-fb-icon{
+  width:20px;height:20px;flex-shrink:0;margin-top:2px;
+  fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+}
+.results-score{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:999px;margin-bottom:14px;
+  font-family:"IBM Plex Mono",monospace;font-size:0.86rem;font-weight:600;
+  color:#38e8ff;background:rgba(56,232,255,.14);border:1px solid rgba(56,232,255,.45);
+}
+.results-list{display:grid;gap:10px}
+.result-row{
+  display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:12px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(243,236,225,.12);
+}
+.result-row.is-correct{border-color:rgba(116,225,154,.45);background:rgba(116,225,154,.08)}
+.result-row.is-wrong{border-color:rgba(255,107,99,.45);background:rgba(255,107,99,.08)}
+.result-icon{
+  width:18px;height:18px;flex-shrink:0;margin-top:2px;
+  fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+}
+.result-row.is-correct .result-icon{color:#74e19a}
+.result-row.is-wrong .result-icon{color:#ff6b63}
+.result-row.is-skipped .result-icon{color:rgba(243,236,225,.45)}
+.result-block{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:3px;
+}
+.result-takeaway{
+  font-size:0.9rem;line-height:1.45;color:rgba(255,251,242,.92);font-weight:500;
+}
+.results-restart{
+  padding:10px 18px;border-radius:999px;border:1px solid rgba(227,192,137,.55);
+  background:rgba(227,192,137,.16);color:var(--gold);font-family:"IBM Plex Mono",monospace;
+  font-size:0.8rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.results-restart:hover,.results-restart:focus-visible{
+  background:rgba(227,192,137,.28);border-color:var(--gold);color:#fff;outline:none;
+}
 .quiz-actions{
   display:flex;justify-content:flex-end;margin-top:16px;gap:10px;
 }
@@ -379,6 +427,8 @@ dialog::backdrop{
 
 @media (pointer:coarse){.cursor{display:none}}
 @media (max-width:680px){
+  .stage{padding:54px 10px 104px}
+  .scene{width:96vw;padding:8px 6px}
   .hud.tl{top:12px;left:14px;max-width:calc(100vw - 28px)}
   .surah-subtitle{display:none}
   .hud.bl{display:none}
@@ -389,7 +439,10 @@ dialog::backdrop{
   .scrub-wrap{bottom:12px;width:min(520px,90vw);gap:4px}
   .nav-arrow,.repeat-btn{width:34px;height:34px}
   .audio-time{font-size:9px}
-  .ar{font-size:clamp(22px,6.2vw,38px);line-height:1.85;margin-bottom:14px}
+  .ar{font-size:clamp(2.15rem,8.6vw,3.05rem);line-height:1.7;margin-bottom:14px}
+  .scene.compact .ar{font-size:clamp(2.5rem,10.5vw,3.6rem);line-height:1.72;margin-bottom:16px}
+  .scene.short .ar{font-size:clamp(4.2rem,18vw,6rem);line-height:1.5;margin-bottom:18px}
+  .scene.long .ar{font-size:clamp(1.75rem,6.8vw,2.35rem);line-height:1.62;margin-bottom:12px}
   .en{font-size:clamp(1.05rem, 3.8vw, 1.35rem);line-height:1.42}
   .note{font-size:clamp(0.88rem, 3.3vw, 1rem);line-height:1.55;margin-top:12px}
 }
@@ -411,12 +464,12 @@ dialog::backdrop{
     </button>
   </div>
   <div class="surah-subtitle" style="margin-top:6px;color:rgba(243,236,225,.55);font-size:9px;letter-spacing:.2em">سُورَةُ السَّجْدَة · AS-SAJDAH (32:1–30)</div>
-  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">V1.83</div>
+  <div class="hud-mob-ver" style="display:none;margin-top:3px;color:rgba(243,236,225,.38);font-size:8px;letter-spacing:.12em">V1.84</div>
 </div>
 
 <!-- BOTTOM LEFT VERSION HUD -->
 <div class="hud bl">
-  <div class="footer-version-tag">V1.83</div>
+  <div class="footer-version-tag">V1.84</div>
 </div>
 
 <div class="stage" id="stage"></div>
@@ -481,6 +534,21 @@ dialog::backdrop{
     <button class="quiz-continue" type="button" id="quizContinueBtn">Continue &rarr;</button>
   </div>
 </dialog>
+<dialog id="resultsDialog" closedby="any" aria-labelledby="resultsTitle">
+  <div class="dlg-head">
+    <div>
+      <div class="dlg-kicker">Surah As-Sajdah Complete</div>
+      <h2 class="dlg-title" id="resultsTitle">Your Reflection Summary</h2>
+    </div>
+    <button class="dlg-close" type="button" id="resultsCloseBtn" aria-label="Close summary">&times;</button>
+  </div>
+  <div class="results-score" id="resultsScore"></div>
+  <div class="results-list" id="resultsList"></div>
+  <div class="quiz-actions">
+    <button class="results-restart" type="button" id="resultsRestartBtn">Restart Surah</button>
+    <button class="quiz-continue" type="button" id="resultsDoneBtn">Close</button>
+  </div>
+</dialog>
 <audio id="ayahAudio" preload="none"></audio>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -540,6 +608,7 @@ const drawnQuizzes=[0,1,2,3,4].map(b=>{
   return pool[Math.floor(Math.random()*pool.length)];
 });
 const completedQuizBlocks=new Set();
+const quizAnswers=new Map();
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ─────────── build scenes ─────────── */
@@ -573,8 +642,10 @@ const wrapEn=str=>{
 const scenes=V.map((v,i)=>{
   const s=document.createElement("div");s.className="scene";
   const enPlain=v.en.replace(/<[^>]+>/g,"");
-  if(enPlain.length>145)s.classList.add("long");
-  if(v.ar.split(/\s+/).length<=3)s.classList.add("short");
+  const arWords=v.ar.trim().split(/\s+/).length;
+  if(enPlain.length>145||arWords>16)s.classList.add("long");
+  else if(arWords<=3)s.classList.add("short");
+  else if(arWords<=9)s.classList.add("compact");
   s.dataset.off="1";
   const wrap=t=>t.split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(" ");
   const sajdahHtml=v.sajdah?`<div class="sajdah-badge"><span>۩</span> <span>Āyah of Sajdah · Prostration</span></div>`:'';
@@ -604,6 +675,7 @@ const prevAyahBtn=document.getElementById("prevAyahBtn"), repeatBtn=document.get
 const shortcutsDialog=document.getElementById("shortcutsDialog"), shortcutsCloseBtn=document.getElementById("shortcutsCloseBtn");
 const quizDialog=document.getElementById("quizDialog"), quizCloseBtn=document.getElementById("quizCloseBtn"), quizKicker=document.getElementById("quizKicker");
 const quizPrompt=document.getElementById("quizPrompt"), quizOptions=document.getElementById("quizOptions"), quizFeedback=document.getElementById("quizFeedback"), quizContinueBtn=document.getElementById("quizContinueBtn");
+const resultsDialog=document.getElementById("resultsDialog"), resultsCloseBtn=document.getElementById("resultsCloseBtn"), resultsScore=document.getElementById("resultsScore"), resultsList=document.getElementById("resultsList"), resultsRestartBtn=document.getElementById("resultsRestartBtn"), resultsDoneBtn=document.getElementById("resultsDoneBtn");
 const audioUrls=[
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032001.mp3",
   "https://everyayah.com/data/Nasser_Alqatami_128kbps/032002.mp3",
@@ -639,7 +711,8 @@ const audioUrls=[
 const AUDIO_VOLUME=0.85, AUDIO_CACHE_NAME="surah32-audio-v1";
 const blobCache=new Map();
 let isMuted=false, isRepeat=false, audioState="loading", audioLoadedIdx=-1, postAudioRemaining=0, postAudioTotal=0, playToken=0;
-let wasPausedBeforeModal=false, pendingQuizNextIdx=null;
+let wasPausedBeforeModal=false, pendingQuizNextIdx=null, pendingShowResults=false, pendingRestart=false;
+const anyDialogOpen=()=>shortcutsDialog.open||quizDialog.open||resultsDialog.open;
 function currentIndex(){return ((Math.floor(T)%N)+N)%N}
 function readingPauseFor(idx){
   const v=V[idx];
@@ -792,8 +865,20 @@ function jumpToAyah(targetIdx){
     updateAudioTime();
   }
 }
+function advanceNext(){
+  const idx=currentIndex();
+  const nextIdx=(idx+1)%N;
+  const block=Math.floor(idx/6);
+  if((idx+1)%6===0&&!completedQuizBlocks.has(block)){
+    openQuizForBlock(block,nextIdx);
+  }else if(idx===N-1){
+    openResultsModal(false);
+  }else{
+    jumpToAyah(nextIdx);
+  }
+}
 function openShortcuts(){
-  if(quizDialog.open||shortcutsDialog.open) return;
+  if(anyDialogOpen()) return;
   wasPausedBeforeModal=userPaused;
   if(!userPaused){
     userPaused=true;
@@ -805,8 +890,8 @@ function openShortcuts(){
 function openQuizForBlock(block,nextIdx){
   const qData=drawnQuizzes[block];
   if(!qData){
-    T=nextIdx+0.001;
-    playAyah(nextIdx);
+    if(block===4) openResultsModal(false);
+    else jumpToAyah(nextIdx);
     return;
   }
   completedQuizBlocks.add(block);
@@ -817,11 +902,13 @@ function openQuizForBlock(block,nextIdx){
     if(!audio.paused) audio.pause();
   }
   pendingQuizNextIdx=nextIdx;
+  pendingShowResults=(block===4);
+  quizContinueBtn.textContent=pendingShowResults?"See Results \u2192":"Continue \u2192";
   const startAyah=block*6+1, endAyah=block*6+6;
-  quizKicker.textContent=`Reflection Check · Ayats ${startAyah}–${endAyah}`;
+  quizKicker.textContent=`Reflection Check \u00b7 Ayats ${startAyah}\u2013${endAyah}`;
   quizPrompt.textContent=qData.q;
-  quizFeedback.textContent="";
-  quizFeedback.classList.remove("show");
+  quizFeedback.innerHTML="";
+  quizFeedback.classList.remove("show","is-correct","is-wrong");
   quizOptions.innerHTML="";
   qData.opts.forEach((optText,optIdx)=>{
     const btn=document.createElement("button");
@@ -829,19 +916,73 @@ function openQuizForBlock(block,nextIdx){
     btn.className="quiz-opt";
     btn.textContent=optText;
     btn.addEventListener("click",()=>{
+      const isRight=(optIdx===qData.ans);
+      quizAnswers.set(block,{correct:isRight,qData});
       const allBtns=[...quizOptions.querySelectorAll(".quiz-opt")];
       allBtns.forEach((b,bi)=>{
         b.disabled=true;
         if(bi===qData.ans) b.classList.add("is-correct");
         else if(bi===optIdx) b.classList.add("is-wrong");
       });
-      quizFeedback.textContent=(optIdx===qData.ans?"Correct. ":"Reflection: ")+qData.explain;
-      quizFeedback.classList.add("show");
+      const iconSvg=isRight
+        ? '<svg class="quiz-fb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+        : '<svg class="quiz-fb-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      const span=document.createElement("span");
+      span.textContent=qData.explain;
+      quizFeedback.innerHTML=iconSvg;
+      quizFeedback.appendChild(span);
+      quizFeedback.classList.remove("is-correct","is-wrong");
+      quizFeedback.classList.add("show",isRight?"is-correct":"is-wrong");
       quizContinueBtn.focus();
     });
     quizOptions.appendChild(btn);
   });
   quizDialog.showModal();
+}
+function openResultsModal(preserveWasPaused=false){
+  if(!preserveWasPaused){
+    wasPausedBeforeModal=userPaused;
+  }
+  if(!userPaused){
+    userPaused=true;
+    auto=false;
+    if(!audio.paused) audio.pause();
+  }
+  let correctCount=0;
+  resultsList.innerHTML="";
+  for(let b=0;b<5;b++){
+    const entry=quizAnswers.get(b);
+    const qData=entry?entry.qData:drawnQuizzes[b];
+    const row=document.createElement("div");
+    let cls="is-skipped";
+    let iconSvg='<svg class="result-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+    if(entry){
+      if(entry.correct){
+        correctCount++;
+        cls="is-correct";
+        iconSvg='<svg class="result-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      }else{
+        cls="is-wrong";
+        iconSvg='<svg class="result-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      }
+    }
+    row.className=`result-row ${cls}`;
+    const startAyah=b*6+1, endAyah=b*6+6;
+    const body=document.createElement("div");
+    const blk=document.createElement("div");
+    blk.className="result-block";
+    blk.textContent=`Ayats ${startAyah}\u2013${endAyah}`;
+    const takeaway=document.createElement("div");
+    takeaway.className="result-takeaway";
+    takeaway.textContent=qData?qData.explain:"";
+    body.appendChild(blk);
+    body.appendChild(takeaway);
+    row.innerHTML=iconSvg;
+    row.appendChild(body);
+    resultsList.appendChild(row);
+  }
+  resultsScore.textContent=`${correctCount} / 5 Correct`;
+  resultsDialog.showModal();
 }
 if(!("closedBy" in HTMLDialogElement.prototype)){
   const outside=(e,dlg)=>{
@@ -870,6 +1011,11 @@ quizDialog.addEventListener("close",()=>{
   quizDialog.returnValue="";
   const target=pendingQuizNextIdx;
   pendingQuizNextIdx=null;
+  if(pendingShowResults){
+    pendingShowResults=false;
+    openResultsModal(true);
+    return;
+  }
   userPaused=wasPausedBeforeModal;
   if(target!==null){
     T=target+0.001;
@@ -879,6 +1025,39 @@ quizDialog.addEventListener("close",()=>{
     auto=true;
     idle=0;
     playAyah(currentIndex());
+  }else{
+    audioState="loading";
+    updateAudioTime();
+  }
+});
+resultsCloseBtn.addEventListener("click",()=>resultsDialog.close());
+resultsDoneBtn.addEventListener("click",()=>resultsDialog.close());
+resultsRestartBtn.addEventListener("click",()=>{
+  completedQuizBlocks.clear();
+  quizAnswers.clear();
+  for(let b=0;b<5;b++){
+    const pool=QUIZ_POOL.filter(q=>q.block===b);
+    drawnQuizzes[b]=pool[Math.floor(Math.random()*pool.length)];
+  }
+  pendingRestart=true;
+  resultsDialog.close();
+});
+resultsDialog.addEventListener("close",()=>{
+  resultsDialog.returnValue="";
+  userPaused=pendingRestart?false:wasPausedBeforeModal;
+  pendingRestart=false;
+  T=0.001;
+  postAudioRemaining=0;
+  postAudioTotal=0;
+  setScrubFromT();
+  if(!userPaused){
+    auto=true;
+    idle=0;
+    playAyah(0);
+  }else{
+    audioState="loading";
+    if(!audio.paused) audio.pause();
+    updateAudioTime();
   }
 });
 async function copyText(text){
@@ -919,7 +1098,7 @@ muteBtn.addEventListener("click",e=>{
   }
 });
 prevAyahBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();jumpToAyah(currentIndex()-1);});
-nextAyahBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();jumpToAyah(currentIndex()+1);});
+nextAyahBtn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();advanceNext();});
 repeatBtn.addEventListener("click",e=>{
   e.preventDefault(); e.stopPropagation();
   isRepeat=!isRepeat;
@@ -986,7 +1165,7 @@ let downX=0, downY=0, wasDragged=false, wheelTimer=null;
 addEventListener("pointermove",e=>{
   M.x=e.clientX; M.y=e.clientY;
   if(cur){
-    cur.style.opacity=(shortcutsDialog.open||quizDialog.open)?"0":"1";
+    cur.style.opacity=anyDialogOpen()?"0":"1";
     cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
   }
   if(M.down&&lastPointerX!==null){
@@ -1006,7 +1185,7 @@ addEventListener("pointermove",e=>{
 },{passive:true});
 
 document.addEventListener("mouseleave",()=>{if(cur)cur.style.opacity="0";});
-document.addEventListener("mouseenter",()=>{if(cur&&!shortcutsDialog.open&&!quizDialog.open)cur.style.opacity="1";});
+document.addEventListener("mouseenter",()=>{if(cur&&!anyDialogOpen())cur.style.opacity="1";});
 
 document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .mute-btn, .nav-arrow, .repeat-btn, .scrub").forEach(el=>{
   el.addEventListener("pointerenter",()=>document.body.classList.add("hovering"));
@@ -1014,7 +1193,7 @@ document.querySelectorAll("a, button, input, .iconbtn, .portal-back-btn, .mute-b
 });
 
 addEventListener("pointerdown",e=>{
-  if(shortcutsDialog.open||quizDialog.open) return;
+  if(anyDialogOpen()) return;
   if(e.target.closest("a, button, input, .scrub-wrap, dialog")) return;
   M.down=true;downX=e.clientX;downY=e.clientY;lastPointerX=e.clientX;wasDragged=false;
   document.body.classList.add("press");idle=0;
@@ -1040,7 +1219,7 @@ addEventListener("pointerup",()=>{
 });
 addEventListener("pointercancel",()=>{M.down=false;lastPointerX=null;document.body.classList.remove("press");if(!userPaused) auto=true;});
 addEventListener("wheel",e=>{
-  if(shortcutsDialog.open||quizDialog.open) return;
+  if(anyDialogOpen()) return;
   T=(((T+e.deltaY*0.00075)%N)+N)%N;
   idle=0;postAudioRemaining=0;
   if(currentIndex()!==audioLoadedIdx){
@@ -1053,10 +1232,10 @@ addEventListener("wheel",e=>{
   },250);
 },{passive:true});
 addEventListener("keydown",e=>{
-  if(shortcutsDialog.open||quizDialog.open) return;
+  if(anyDialogOpen()) return;
   const k=e.key;
   if(["ArrowRight","ArrowLeft"," ","Home","End"].includes(k)) e.preventDefault();
-  if(k==="ArrowRight"||k===" "){jumpToAyah(currentIndex()+1);}
+  if(k==="ArrowRight"||k===" "){advanceNext();}
   else if(k==="ArrowLeft"){jumpToAyah(currentIndex()-1);}
   else if(k==="Home"){jumpToAyah(0);}
   else if(k==="End"){jumpToAyah(N-1);}
@@ -1233,14 +1412,7 @@ function frame(now){
           T = idx + 0.001;
           playAyah(idx);
         } else {
-          const nextIdx = (idx + 1) % N;
-          const block = Math.floor(idx / 6);
-          if ((idx + 1) % 6 === 0 && !completedQuizBlocks.has(block)) {
-            openQuizForBlock(block, nextIdx);
-          } else {
-            T = nextIdx + 0.001;
-            playAyah(nextIdx);
-          }
+          advanceNext();
         }
       } else if (postAudioRemaining > 0.45) {
         T = idx + 0.85;
@@ -1302,7 +1474,7 @@ function frame(now){
     delete s.el.dataset.off;
     s.el.classList.toggle("readable", p > Math.min(.34, 3/sc.dur));
     const ex=clamp((p-.855)/.145,0,1), enter=clamp(p/.10,0,1);
-    const gs=0.855+p*0.30+ex*0.55, drift=Math.sin(t*.28)*0.5;
+    const gs=innerWidth<=680?(0.93+p*0.08+ex*0.16):(0.855+p*0.30+ex*0.55), drift=Math.sin(t*.28)*0.5;
     const px=(M.lx-innerWidth/2)*.014, py=(M.ly-innerHeight/2)*.014;
     s.el.style.opacity=(1-ex)*(0.15+0.85*eo(enter));
     s.el.style.transform=`translate(${px}px,${py-ex*70}px) scale(${gs})`;

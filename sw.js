@@ -1,4 +1,4 @@
-const SHELL_CACHE = "surah32-shell-v1.83";
+const SHELL_CACHE = "surah32-shell-v1.84";
 const FONT_CACHE = "surah32-fonts-v1";
 const AUDIO_CACHE = "surah32-audio-v1";
 
